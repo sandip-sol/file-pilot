@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
 import { convertImagesToPDF, downloadBlob } from '../utils/pdfHelpers';
 import type { ImageItem } from '../utils/pdfHelpers';
-import { Image as ImageIcon, Loader2, Download, X, RotateCw, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Image as ImageIcon, Loader2, Download, X, RotateCw, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 
 export const ImagesToPdf = () => {
     const [items, setItems] = useState<ImageItem[]>([]);
@@ -10,6 +10,7 @@ export const ImagesToPdf = () => {
     const [pageSize, setPageSize] = useState<'A4' | 'Letter'>('A4');
     const [orientation, setOrientation] = useState<'portrait' | 'landscape'>('portrait');
     const [margin, setMargin] = useState<'none' | 'small' | 'medium'>('small');
+    const [success, setSuccess] = useState(false);
 
     const handleFilesSelected = (files: File[]) => {
         const newItems: ImageItem[] = files.map(file => ({
@@ -18,6 +19,7 @@ export const ImagesToPdf = () => {
             rotation: 0
         }));
         setItems(prev => [...prev, ...newItems]);
+        setSuccess(false);
     };
 
     const removeItem = (id: string) => {
@@ -52,6 +54,8 @@ export const ImagesToPdf = () => {
         try {
             const pdfBytes = await convertImagesToPDF(items, { pageSize, orientation, margin });
             downloadBlob(pdfBytes, 'images.pdf', 'application/pdf');
+            setSuccess(true);
+            setTimeout(() => setSuccess(false), 3000);
         } catch (error) {
             console.error(error);
             alert('Failed to generate PDF');
@@ -61,122 +65,136 @@ export const ImagesToPdf = () => {
     };
 
     return (
-        <div className="container py-12 max-w-5xl">
-            <div className="text-center mb-10">
-                <h1 className="text-3xl font-bold mb-4">Images to PDF</h1>
-                <p className="text-[var(--text-muted)]">Convert your images into a single PDF file.</p>
+        <div className="min-h-[calc(100vh-200px)]">
+            <div className="page-header">
+                <div className="container">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-600 text-white flex items-center justify-center shadow-lg">
+                            <ImageIcon className="w-6 h-6" />
+                        </div>
+                    </div>
+                    <h1>Images to PDF</h1>
+                    <p>Convert your images into a single PDF file with custom settings.</p>
+                </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Left: Settings */}
-                <div className="lg:col-span-1 space-y-6">
-                    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 shadow-sm">
-                        <h3 className="font-semibold mb-4">Page Settings</h3>
+            <div className="container pb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    {/* Left: Settings */}
+                    <div className="lg:col-span-1">
+                        <div className="bg-white border border-[var(--border)] rounded-2xl p-6 shadow-sm sticky top-24">
+                            <h3 className="font-bold text-lg mb-6">Page Settings</h3>
 
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium mb-2">Page Size</label>
-                            <select
-                                value={pageSize}
-                                onChange={(e) => setPageSize(e.target.value as 'A4' | 'Letter')}
-                                className="w-full p-2 border border-[var(--border)] rounded"
-                            >
-                                <option value="A4">A4</option>
-                                <option value="Letter">Letter</option>
-                            </select>
-                        </div>
+                            <div className="space-y-5">
+                                <div>
+                                    <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Page Size</label>
+                                    <select
+                                        value={pageSize}
+                                        onChange={(e) => setPageSize(e.target.value as 'A4' | 'Letter')}
+                                    >
+                                        <option value="A4">A4 (210 × 297 mm)</option>
+                                        <option value="Letter">Letter (8.5 × 11 in)</option>
+                                    </select>
+                                </div>
 
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium mb-2">Orientation</label>
-                            <select
-                                value={orientation}
-                                onChange={(e) => setOrientation(e.target.value as 'portrait' | 'landscape')}
-                                className="w-full p-2 border border-[var(--border)] rounded"
-                            >
-                                <option value="portrait">Portrait</option>
-                                <option value="landscape">Landscape</option>
-                            </select>
-                        </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Orientation</label>
+                                    <select
+                                        value={orientation}
+                                        onChange={(e) => setOrientation(e.target.value as 'portrait' | 'landscape')}
+                                    >
+                                        <option value="portrait">Portrait</option>
+                                        <option value="landscape">Landscape</option>
+                                    </select>
+                                </div>
 
-                        <div className="mb-6">
-                            <label className="block text-sm font-medium mb-2">Margins</label>
-                            <select
-                                value={margin}
-                                onChange={(e) => setMargin(e.target.value as 'none' | 'small' | 'medium')}
-                                className="w-full p-2 border border-[var(--border)] rounded"
-                            >
-                                <option value="none">None</option>
-                                <option value="small">Small</option>
-                                <option value="medium">Medium</option>
-                            </select>
-                        </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Margins</label>
+                                    <select
+                                        value={margin}
+                                        onChange={(e) => setMargin(e.target.value as 'none' | 'small' | 'medium')}
+                                    >
+                                        <option value="none">None</option>
+                                        <option value="small">Small</option>
+                                        <option value="medium">Medium</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                        <button
-                            onClick={handleConvert}
-                            disabled={isProcessing || items.length === 0}
-                            className={`btn btn-primary w-full py-3 ${isProcessing ? 'cursor-wait' : ''}`}
-                        >
-                            {isProcessing ? (
-                                <>
-                                    <Loader2 className="w-5 h-5 animate-spin" />
-                                    Converting...
-                                </>
-                            ) : (
-                                <>
-                                    <Download className="w-5 h-5" />
-                                    Convert to PDF
-                                </>
+                            {success && (
+                                <div className="bg-[var(--success-light)] text-[var(--success)] p-3 rounded-xl mt-6 text-sm font-medium flex items-center gap-2">
+                                    <CheckCircle className="w-4 h-4" />
+                                    PDF created!
+                                </div>
                             )}
-                        </button>
+
+                            <button
+                                onClick={handleConvert}
+                                disabled={isProcessing || items.length === 0}
+                                className={`btn btn-primary w-full py-4 mt-6 ${isProcessing ? 'opacity-75 cursor-wait' : ''}`}
+                            >
+                                {isProcessing ? (
+                                    <>
+                                        <Loader2 className="w-5 h-5 animate-spin" />
+                                        Converting...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Download className="w-5 h-5" />
+                                        Convert to PDF
+                                    </>
+                                )}
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                {/* Right: Images */}
-                <div className="lg:col-span-2">
-                    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 shadow-sm min-h-[500px]">
-                        <FileUploader
-                            onFilesSelected={handleFilesSelected}
-                            multiple={true}
-                            accept="image/*"
-                            description="Drop images here (JPG, PNG, WebP)"
-                        />
+                    {/* Right: Images */}
+                    <div className="lg:col-span-2">
+                        <div className="bg-white border border-[var(--border)] rounded-2xl p-6 shadow-sm">
+                            <FileUploader
+                                onFilesSelected={handleFilesSelected}
+                                multiple={true}
+                                accept="image/*"
+                                description="Drop images here"
+                            />
 
-                        {items.length > 0 && (
-                            <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 animate-fade-in">
-                                {items.map((item, index) => (
-                                    <div key={item.id} className="relative group bg-gray-50 border border-[var(--border)] rounded-lg p-2 flex flex-col items-center">
-                                        <div className="relative w-full aspect-[3/4] mb-2 bg-white rounded overflow-hidden flex items-center justify-center">
-                                            <img
-                                                src={URL.createObjectURL(item.file)}
-                                                alt="preview"
-                                                className="max-w-full max-h-full object-contain"
-                                                style={{ transform: `rotate(${item.rotation}deg)` }}
-                                            />
-                                        </div>
-
-                                        <div className="w-full flex items-center justify-between text-gray-500">
-                                            <button onClick={() => moveItem(index, 'left')} disabled={index === 0} className="hover:text-[var(--primary)] disabled:opacity-30"><ArrowLeft className="w-4 h-4" /></button>
-
-                                            <button onClick={() => rotateItem(item.id)} className="hover:text-[var(--primary)]" title="Rotate">
-                                                <RotateCw className="w-4 h-4" />
-                                            </button>
-
-                                            <button onClick={() => removeItem(item.id)} className="hover:text-red-500" title="Remove">
-                                                <X className="w-4 h-4" />
-                                            </button>
-
-                                            <button onClick={() => moveItem(index, 'right')} disabled={index === items.length - 1} className="hover:text-[var(--primary)] disabled:opacity-30"><ArrowRight className="w-4 h-4" /></button>
-                                        </div>
+                            {items.length > 0 && (
+                                <div className="mt-8">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h3 className="font-semibold">Images ({items.length})</h3>
+                                        <button onClick={() => setItems([])} className="text-sm text-[var(--error)] hover:underline">Clear All</button>
                                     </div>
-                                ))}
-                            </div>
-                        )}
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 animate-fade-in">
+                                        {items.map((item, index) => (
+                                            <div key={item.id} className="relative group bg-[var(--background)] border border-[var(--border)] rounded-xl p-2 hover:border-[var(--primary)] transition-colors">
+                                                <div className="relative w-full aspect-[3/4] mb-2 bg-white rounded-lg overflow-hidden flex items-center justify-center">
+                                                    <img
+                                                        src={URL.createObjectURL(item.file)}
+                                                        alt="preview"
+                                                        className="max-w-full max-h-full object-contain transition-transform"
+                                                        style={{ transform: `rotate(${item.rotation}deg)` }}
+                                                    />
+                                                </div>
 
-                        {items.length === 0 && (
-                            <div className="mt-12 text-center text-gray-400">
-                                <ImageIcon className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                                <p>No images selected yet.</p>
-                            </div>
-                        )}
+                                                <div className="flex items-center justify-between text-[var(--text-muted)]">
+                                                    <button onClick={() => moveItem(index, 'left')} disabled={index === 0} className="p-1 hover:text-[var(--primary)] disabled:opacity-30"><ArrowLeft className="w-4 h-4" /></button>
+                                                    <button onClick={() => rotateItem(item.id)} className="p-1 hover:text-[var(--primary)]" title="Rotate"><RotateCw className="w-4 h-4" /></button>
+                                                    <button onClick={() => removeItem(item.id)} className="p-1 hover:text-[var(--error)]" title="Remove"><X className="w-4 h-4" /></button>
+                                                    <button onClick={() => moveItem(index, 'right')} disabled={index === items.length - 1} className="p-1 hover:text-[var(--primary)] disabled:opacity-30"><ArrowRight className="w-4 h-4" /></button>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {items.length === 0 && (
+                                <div className="mt-12 text-center text-[var(--text-muted)]">
+                                    <ImageIcon className="w-16 h-16 mx-auto mb-4 opacity-30" />
+                                    <p>No images selected yet.</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

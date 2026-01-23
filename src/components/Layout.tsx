@@ -11,7 +11,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <div className="min-h-screen flex flex-col">
             <div className="privacy-banner">
                 <ShieldCheck className="w-4 h-4" />
-                <span className="font-medium">Files are processed locally in your browser. Nothing is uploaded.</span>
+                <span>Your files are processed locally. Nothing is uploaded to any server.</span>
             </div>
             <Navbar />
             <main className="flex-1">

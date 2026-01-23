@@ -2,7 +2,7 @@ import { useState } from 'react';
 import JSZip from 'jszip';
 import { FileUploader } from '../components/FileUploader';
 import { countPDFPages, splitPDFRange, splitPDFSeparate, downloadBlob } from '../utils/pdfHelpers';
-import { FileText, Loader2, Scissors, Download, RefreshCw } from 'lucide-react';
+import { FileText, Loader2, Scissors, Download, RefreshCw, CheckCircle } from 'lucide-react';
 
 export const Split = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -11,12 +11,14 @@ export const Split = () => {
     const [separatePages, setSeparatePages] = useState(false);
     const [range, setRange] = useState({ start: 1, end: 1 });
     const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState(false);
 
     const handleFileSelected = async (files: File[]) => {
         if (files.length > 0) {
             const selectedFile = files[0];
             setFile(selectedFile);
             setError(null);
+            setSuccess(false);
 
             try {
                 const count = await countPDFPages(selectedFile);
@@ -55,7 +57,6 @@ export const Split = () => {
                 document.body.removeChild(link);
                 URL.revokeObjectURL(url);
             } else {
-                // Range validation
                 if (range.start < 1 || range.end > pageCount || range.start > range.end) {
                     setError(`Invalid page range. Must be between 1 and ${pageCount}.`);
                     setIsProcessing(false);
@@ -63,8 +64,10 @@ export const Split = () => {
                 }
 
                 const bytes = await splitPDFRange(file, range.start, range.end);
-                downloadBlob(bytes, `${file.name.replace('.pdf', '')}_split_${range.start}-${range.end}.pdf`, 'application/pdf');
+                downloadBlob(bytes, `${file.name.replace('.pdf', '')}_pages_${range.start}-${range.end}.pdf`, 'application/pdf');
             }
+            setSuccess(true);
+            setTimeout(() => setSuccess(false), 3000);
         } catch (err) {
             console.error(err);
             setError('Failed to split PDF. Please try again.');
@@ -74,107 +77,129 @@ export const Split = () => {
     };
 
     return (
-        <div className="container py-12 max-w-4xl">
-            <div className="text-center mb-10">
-                <h1 className="text-3xl font-bold mb-4">Split PDF File</h1>
-                <p className="text-[var(--text-muted)]">Extract pages or split your document into separate files.</p>
+        <div className="min-h-[calc(100vh-200px)]">
+            <div className="page-header">
+                <div className="container">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-rose-600 text-white flex items-center justify-center shadow-lg">
+                            <Scissors className="w-6 h-6" />
+                        </div>
+                    </div>
+                    <h1>Split PDF File</h1>
+                    <p>Extract pages or split your document into separate files.</p>
+                </div>
             </div>
 
-            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-sm">
-                {!file ? (
-                    <FileUploader
-                        onFilesSelected={handleFileSelected}
-                        multiple={false}
-                        accept=".pdf"
-                        description="Drop a PDF file here to split"
-                    />
-                ) : (
-                    <div className="animate-fade-in">
-                        <div className="flex items-center justify-between bg-indigo-50 p-4 rounded-lg border border-indigo-100 mb-8">
-                            <div className="flex items-center gap-3">
-                                <FileText className="w-8 h-8 text-[var(--primary)]" />
-                                <div>
-                                    <p className="font-semibold text-[var(--text)]">{file.name}</p>
-                                    <p className="text-sm text-[var(--text-muted)]">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
-                                </div>
-                            </div>
-                            <button
-                                onClick={() => { setFile(null); setPageCount(0); }}
-                                className="p-2 hover:bg-white rounded-full transition-colors text-[var(--text-muted)] hover:text-red-500"
-                                title="Change File"
-                            >
-                                <RefreshCw className="w-5 h-5" />
-                            </button>
-                        </div>
-
-                        <div className="space-y-6 mb-8">
-                            <div className="flex items-start gap-3">
-                                <input
-                                    type="checkbox"
-                                    id="separate"
-                                    checked={separatePages}
-                                    onChange={(e) => setSeparatePages(e.target.checked)}
-                                    className="mt-1 w-4 h-4 text-[var(--primary)] rounded border-[var(--border)]"
-                                />
-                                <label htmlFor="separate" className="cursor-pointer">
-                                    <p className="font-medium text-[var(--text)]">Extract every page into separate files</p>
-                                    <p className="text-sm text-[var(--text-muted)]">Download a ZIP file containing each page as a separate PDF.</p>
-                                </label>
-                            </div>
-
-                            {!separatePages && (
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-medium mb-1">From Page</label>
-                                        <input
-                                            type="number"
-                                            min="1"
-                                            max={pageCount}
-                                            value={range.start}
-                                            onChange={(e) => setRange(prev => ({ ...prev, start: parseInt(e.target.value) || 1 }))}
-                                            className="w-full p-2 border border-[var(--border)] rounded focus:ring-2 focus:ring-[var(--primary)] focus:outline-none"
-                                        />
+            <div className="container pb-12">
+                <div className="max-w-3xl mx-auto">
+                    <div className="bg-white border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-sm">
+                        {!file ? (
+                            <FileUploader
+                                onFilesSelected={handleFileSelected}
+                                multiple={false}
+                                accept=".pdf"
+                                description="Drop a PDF file here to split"
+                            />
+                        ) : (
+                            <div className="animate-fade-in">
+                                <div className="flex items-center justify-between bg-gradient-to-r from-orange-50 to-rose-50 p-4 rounded-xl border border-orange-100 mb-8">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-rose-600 text-white flex items-center justify-center">
+                                            <FileText className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <p className="font-semibold text-[var(--text)]">{file.name}</p>
+                                            <p className="text-sm text-[var(--text-muted)]">
+                                                <span className="font-medium text-orange-600">{pageCount} pages</span> • {(file.size / 1024 / 1024).toFixed(2)} MB
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <label className="block text-sm font-medium mb-1">To Page</label>
-                                        <input
-                                            type="number"
-                                            min="1"
-                                            max={pageCount}
-                                            value={range.end}
-                                            onChange={(e) => setRange(prev => ({ ...prev, end: parseInt(e.target.value) || 1 }))}
-                                            className="w-full p-2 border border-[var(--border)] rounded focus:ring-2 focus:ring-[var(--primary)] focus:outline-none"
-                                        />
-                                    </div>
+                                    <button
+                                        onClick={() => { setFile(null); setPageCount(0); setSuccess(false); }}
+                                        className="p-2 hover:bg-white rounded-full transition-colors text-[var(--text-muted)] hover:text-[var(--error)]"
+                                        title="Change File"
+                                    >
+                                        <RefreshCw className="w-5 h-5" />
+                                    </button>
                                 </div>
-                            )}
-                        </div>
 
-                        {error && (
-                            <div className="bg-red-50 text-red-700 p-4 rounded-lg mb-6 text-sm">
-                                {error}
+                                <div className="space-y-6 mb-8">
+                                    <label className="flex items-start gap-4 p-4 border-2 border-[var(--border)] rounded-xl cursor-pointer hover:border-[var(--primary)] transition-colors has-[:checked]:border-[var(--primary)] has-[:checked]:bg-[var(--primary-light)]">
+                                        <input
+                                            type="checkbox"
+                                            checked={separatePages}
+                                            onChange={(e) => setSeparatePages(e.target.checked)}
+                                            className="mt-1"
+                                        />
+                                        <div>
+                                            <p className="font-semibold text-[var(--text)]">Extract every page into separate files</p>
+                                            <p className="text-sm text-[var(--text-muted)]">Download a ZIP file containing each page as a separate PDF.</p>
+                                        </div>
+                                    </label>
+
+                                    {!separatePages && (
+                                        <div className="bg-[var(--background)] p-6 rounded-xl">
+                                            <p className="font-medium mb-4">Select page range</p>
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">From Page</label>
+                                                    <input
+                                                        type="number"
+                                                        min="1"
+                                                        max={pageCount}
+                                                        value={range.start}
+                                                        onChange={(e) => setRange(prev => ({ ...prev, start: parseInt(e.target.value) || 1 }))}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">To Page</label>
+                                                    <input
+                                                        type="number"
+                                                        min="1"
+                                                        max={pageCount}
+                                                        value={range.end}
+                                                        onChange={(e) => setRange(prev => ({ ...prev, end: parseInt(e.target.value) || 1 }))}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {error && (
+                                    <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl mb-6 text-sm font-medium">
+                                        {error}
+                                    </div>
+                                )}
+
+                                {success && (
+                                    <div className="bg-[var(--success-light)] text-[var(--success)] p-4 rounded-xl mb-6 text-sm font-medium flex items-center gap-2">
+                                        <CheckCircle className="w-5 h-5" />
+                                        PDF split successfully! Check your downloads.
+                                    </div>
+                                )}
+
+                                <button
+                                    onClick={handleSplit}
+                                    disabled={isProcessing}
+                                    className={`btn btn-primary w-full py-4 text-lg ${isProcessing ? 'opacity-75 cursor-wait' : ''}`}
+                                >
+                                    {isProcessing ? (
+                                        <>
+                                            <Loader2 className="w-6 h-6 animate-spin" />
+                                            Processing...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Download className="w-6 h-6" />
+                                            {separatePages ? 'Download All Pages' : 'Split & Download'}
+                                        </>
+                                    )}
+                                </button>
                             </div>
                         )}
-
-                        <button
-                            onClick={handleSplit}
-                            disabled={isProcessing}
-                            className={`btn btn-primary w-full py-4 text-lg ${isProcessing ? 'opacity-75 cursor-wait' : ''}`}
-                        >
-                            {isProcessing ? (
-                                <>
-                                    <Loader2 className="w-6 h-6 animate-spin" />
-                                    Processing...
-                                </>
-                            ) : (
-                                <>
-                                    {separatePages ? <Download className="w-6 h-6" /> : <Scissors className="w-6 h-6" />}
-                                    {separatePages ? 'Download All Pages' : 'Split PDF'}
-                                </>
-                            )}
-                        </button>
                     </div>
-                )}
+                </div>
             </div>
         </div>
     );
