@@ -31,8 +31,8 @@ PDFBuddy is a frontend-only PDF toolkit that runs 100% in the browser. All proce
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
-cd zero_project
+git clone https://github.com/sandip-sol/pdfbuddy-web.git
+cd pdfbuddy-web
 
 # Install dependencies
 npm install
