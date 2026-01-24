@@ -22,7 +22,7 @@ export const Footer = () => {
                     <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
                         <span>Made with</span>
                         <Heart className="w-4 h-4 text-rose-500 fill-rose-500" />
-                        <span>for privacy</span>
+                        <span>for Privacy</span>
                     </div>
                 </div>
 
