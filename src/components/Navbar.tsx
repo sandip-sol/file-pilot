@@ -9,7 +9,7 @@ export const Navbar = () => {
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[var(--border)]">
             <div className="container h-14 flex items-center justify-between">
                 <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-                    <img src="/logo.png" alt="PDFBuddy" className="h-8" />
+                    <img src="/logo.png" alt="PDF Solver" className="h-10 w-auto object-contain" />
                 </Link>
 
                 {/* Desktop Nav */}

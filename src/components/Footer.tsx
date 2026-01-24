@@ -7,13 +7,13 @@ export const Footer = () => {
             <div className="container">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-3">
-                        <img src="/logo.png" alt="PDFBuddy" className="h-8" />
+                        <img src="/logo.png" alt="PDF Solver" className="h-8" />
                     </div>
 
                     <div className="flex items-center gap-8 text-sm text-[var(--text-secondary)]">
                         <Link to="/privacy" className="hover:text-[var(--primary)] transition-colors">Privacy</Link>
                         <Link to="/terms" className="hover:text-[var(--primary)] transition-colors">Terms</Link>
-                        <a href="https://github.com/sandip-sol/pdfbuddy-web" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary)] transition-colors flex items-center gap-1">
+                        <a href="https://github.com/sandip-sol/pdf-solver" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary)] transition-colors flex items-center gap-1">
                             <Github className="w-4 h-4" />
                             GitHub
                         </a>
@@ -27,7 +27,7 @@ export const Footer = () => {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-[var(--border-light)] text-center text-sm text-[var(--text-muted)]">
-                    <p>&copy; {new Date().getFullYear()} PDFBuddy. All processing happens in your browser.</p>
+                    <p>&copy; {new Date().getFullYear()} PDF Solver. All processing happens in your browser.</p>
                 </div>
             </div>
         </footer>
