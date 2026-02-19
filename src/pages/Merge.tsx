@@ -70,7 +70,7 @@ export const Merge = () => {
 
             <div className="container pb-12">
                 <div className="max-w-3xl mx-auto">
-                    <div className="bg-white border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-sm">
+                    <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
                         <FileUploader
                             onFilesSelected={handleFilesSelected}
                             multiple={true}
@@ -107,7 +107,7 @@ export const Merge = () => {
                                                 <button
                                                     onClick={() => moveFile(index, 'up')}
                                                     disabled={index === 0}
-                                                    className="p-2 hover:bg-[var(--background)] rounded-lg disabled:opacity-30 transition-colors"
+                                                    className="p-2 hover:bg-muted rounded-lg disabled:opacity-30 transition-colors"
                                                     title="Move Up"
                                                 >
                                                     <ArrowUp className="w-4 h-4" />
@@ -115,7 +115,7 @@ export const Merge = () => {
                                                 <button
                                                     onClick={() => moveFile(index, 'down')}
                                                     disabled={index === files.length - 1}
-                                                    className="p-2 hover:bg-[var(--background)] rounded-lg disabled:opacity-30 transition-colors"
+                                                    className="p-2 hover:bg-muted rounded-lg disabled:opacity-30 transition-colors"
                                                     title="Move Down"
                                                 >
                                                     <ArrowDown className="w-4 h-4" />

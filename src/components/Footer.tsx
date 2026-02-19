@@ -3,17 +3,17 @@ import { Github, Heart } from 'lucide-react';
 
 export const Footer = () => {
     return (
-        <footer className="border-t border-[var(--border)] bg-white py-12 mt-auto">
+        <footer className="border-t border-border bg-background py-12 mt-auto">
             <div className="container">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-3">
                         <img src="/logo.png" alt="PDF Solver" className="h-8" />
                     </div>
 
-                    <div className="flex items-center gap-8 text-sm text-[var(--text-secondary)]">
-                        <Link to="/privacy" className="hover:text-[var(--primary)] transition-colors">Privacy</Link>
-                        <Link to="/terms" className="hover:text-[var(--primary)] transition-colors">Terms</Link>
-                        <a href="https://github.com/sandip-sol/pdf-solver" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--primary)] transition-colors flex items-center gap-1">
+                    <div className="flex items-center gap-8 text-sm text-muted-foreground">
+                        <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+                        <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+                        <a href="https://github.com/sandip-sol/pdf-solver" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors flex items-center gap-1">
                             <Github className="w-4 h-4" />
                             GitHub
                         </a>
@@ -26,7 +26,7 @@ export const Footer = () => {
                     </div>
                 </div>
 
-                <div className="mt-8 pt-8 border-t border-[var(--border-light)] text-center text-sm text-[var(--text-muted)]">
+                <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
                     <p>&copy; {new Date().getFullYear()} PDF Solver. All processing happens in your browser.</p>
                 </div>
             </div>

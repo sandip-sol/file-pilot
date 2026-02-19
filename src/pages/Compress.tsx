@@ -64,7 +64,7 @@ export const Compress = () => {
 
             <div className="container pb-12">
                 <div className="max-w-3xl mx-auto">
-                    <div className="bg-white border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-sm">
+                    <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
                         {!file ? (
                             <FileUploader
                                 onFilesSelected={handleFileSelected}
@@ -110,8 +110,8 @@ export const Compress = () => {
                                                 key={level}
                                                 onClick={() => setCompressionLevel(level)}
                                                 className={`flex-1 py-3 px-4 rounded-xl border-2 capitalize font-semibold transition-all ${compressionLevel === level
-                                                        ? 'border-[var(--primary)] bg-[var(--primary-light)] text-[var(--primary)]'
-                                                        : 'border-[var(--border)] hover:border-[var(--text-muted)] text-[var(--text-secondary)]'
+                                                        ? 'border-foreground bg-muted text-foreground'
+                                                        : 'border-border hover:border-muted-foreground text-muted-foreground'
                                                     }`}
                                             >
                                                 {level}

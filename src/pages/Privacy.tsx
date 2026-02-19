@@ -27,21 +27,21 @@ export const Privacy = () => {
 
                     {/* Features Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        <div className="bg-white border border-[var(--border)] rounded-xl p-6 text-center">
+                        <div className="bg-card border border-border rounded-xl p-6 text-center">
                             <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mx-auto mb-4">
                                 <Lock className="w-6 h-6" />
                             </div>
                             <h3 className="font-bold mb-2">Local Processing</h3>
                             <p className="text-sm text-[var(--text-muted)]">Files are processed entirely in your browser</p>
                         </div>
-                        <div className="bg-white border border-[var(--border)] rounded-xl p-6 text-center">
+                        <div className="bg-card border border-border rounded-xl p-6 text-center">
                             <div className="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-4">
                                 <Eye className="w-6 h-6" />
                             </div>
                             <h3 className="font-bold mb-2">No Tracking</h3>
                             <p className="text-sm text-[var(--text-muted)]">We don't track, store, or analyze your usage</p>
                         </div>
-                        <div className="bg-white border border-[var(--border)] rounded-xl p-6 text-center">
+                        <div className="bg-card border border-border rounded-xl p-6 text-center">
                             <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto mb-4">
                                 <Server className="w-6 h-6" />
                             </div>
@@ -51,7 +51,7 @@ export const Privacy = () => {
                     </div>
 
                     {/* Detailed Sections */}
-                    <div className="bg-white border border-[var(--border)] rounded-2xl p-8 space-y-8">
+                    <div className="bg-card border border-border rounded-2xl p-8 space-y-8">
                         <section>
                             <h3 className="text-xl font-bold text-[var(--text)] mb-3">1. How It Works</h3>
                             <p className="text-[var(--text-secondary)] leading-relaxed">

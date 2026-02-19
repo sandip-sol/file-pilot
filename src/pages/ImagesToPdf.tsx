@@ -82,7 +82,7 @@ export const ImagesToPdf = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     {/* Left: Settings */}
                     <div className="lg:col-span-1">
-                        <div className="bg-white border border-[var(--border)] rounded-2xl p-6 shadow-sm sticky top-24">
+                        <div className="bg-card border border-border rounded-2xl p-6 shadow-sm sticky top-24">
                             <h3 className="font-bold text-lg mb-6">Page Settings</h3>
 
                             <div className="space-y-5">
@@ -150,7 +150,7 @@ export const ImagesToPdf = () => {
 
                     {/* Right: Images */}
                     <div className="lg:col-span-2">
-                        <div className="bg-white border border-[var(--border)] rounded-2xl p-6 shadow-sm">
+                        <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
                             <FileUploader
                                 onFilesSelected={handleFilesSelected}
                                 multiple={true}
@@ -166,7 +166,7 @@ export const ImagesToPdf = () => {
                                     </div>
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 animate-fade-in">
                                         {items.map((item, index) => (
-                                            <div key={item.id} className="relative group bg-[var(--background)] border border-[var(--border)] rounded-xl p-2 hover:border-[var(--primary)] transition-colors">
+                                            <div key={item.id} className="relative group bg-background border border-border rounded-xl p-2 hover:border-foreground transition-colors">
                                                 <div className="relative w-full aspect-[3/4] mb-2 bg-white rounded-lg overflow-hidden flex items-center justify-center">
                                                     <img
                                                         src={URL.createObjectURL(item.file)}
@@ -177,10 +177,10 @@ export const ImagesToPdf = () => {
                                                 </div>
 
                                                 <div className="flex items-center justify-between text-[var(--text-muted)]">
-                                                    <button onClick={() => moveItem(index, 'left')} disabled={index === 0} className="p-1 hover:text-[var(--primary)] disabled:opacity-30"><ArrowLeft className="w-4 h-4" /></button>
-                                                    <button onClick={() => rotateItem(item.id)} className="p-1 hover:text-[var(--primary)]" title="Rotate"><RotateCw className="w-4 h-4" /></button>
+                                                    <button onClick={() => moveItem(index, 'left')} disabled={index === 0} className="p-1 hover:text-foreground disabled:opacity-30"><ArrowLeft className="w-4 h-4" /></button>
+                                                    <button onClick={() => rotateItem(item.id)} className="p-1 hover:text-foreground" title="Rotate"><RotateCw className="w-4 h-4" /></button>
                                                     <button onClick={() => removeItem(item.id)} className="p-1 hover:text-[var(--error)]" title="Remove"><X className="w-4 h-4" /></button>
-                                                    <button onClick={() => moveItem(index, 'right')} disabled={index === items.length - 1} className="p-1 hover:text-[var(--primary)] disabled:opacity-30"><ArrowRight className="w-4 h-4" /></button>
+                                                    <button onClick={() => moveItem(index, 'right')} disabled={index === items.length - 1} className="p-1 hover:text-foreground disabled:opacity-30"><ArrowRight className="w-4 h-4" /></button>
                                                 </div>
                                             </div>
                                         ))}
