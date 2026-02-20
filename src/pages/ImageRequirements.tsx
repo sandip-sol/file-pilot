@@ -23,7 +23,6 @@ import {
     X,
 
     LayoutTemplate,
-    HelpCircle,
     ChevronDown,
     ChevronUp,
 } from 'lucide-react';
