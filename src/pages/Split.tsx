@@ -3,6 +3,7 @@ import JSZip from 'jszip';
 import { FileUploader } from '../components/FileUploader';
 import { countPDFPages, splitPDFRange, splitPDFSeparate, downloadBlob } from '../utils/pdfHelpers';
 import { FileText, Loader2, Scissors, Download, RefreshCw, CheckCircle } from 'lucide-react';
+import { PageSeo } from '../components/PageSeo';
 
 export const Split = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -78,6 +79,10 @@ export const Split = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
+            <PageSeo
+                title="Split PDF Online – Extract Pages Free"
+                description="Split PDF documents or extract specific pages. Fast, free, and secure browser-based tool."
+            />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -92,7 +97,7 @@ export const Split = () => {
 
             <div className="container pb-12">
                 <div className="max-w-3xl mx-auto">
-                    <div className="bg-white border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-sm">
+                    <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
                         {!file ? (
                             <FileUploader
                                 onFilesSelected={handleFileSelected}
@@ -124,7 +129,7 @@ export const Split = () => {
                                 </div>
 
                                 <div className="space-y-6 mb-8">
-                                    <label className="flex items-start gap-4 p-4 border-2 border-[var(--border)] rounded-xl cursor-pointer hover:border-[var(--primary)] transition-colors has-[:checked]:border-[var(--primary)] has-[:checked]:bg-[var(--primary-light)]">
+                                    <label className="flex items-start gap-4 p-4 border-2 border-border rounded-xl cursor-pointer hover:border-foreground transition-colors has-[:checked]:border-foreground has-[:checked]:bg-muted">
                                         <input
                                             type="checkbox"
                                             checked={separatePages}
@@ -138,7 +143,7 @@ export const Split = () => {
                                     </label>
 
                                     {!separatePages && (
-                                        <div className="bg-[var(--background)] p-6 rounded-xl">
+                                        <div className="bg-background p-6 rounded-xl">
                                             <p className="font-medium mb-4">Select page range</p>
                                             <div className="grid grid-cols-2 gap-4">
                                                 <div>

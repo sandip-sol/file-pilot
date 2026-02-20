@@ -14,7 +14,7 @@ export const Terms = () => {
                 <div className="max-w-3xl mx-auto">
                     {/* Quick Summary */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-                        <div className="bg-white border border-[var(--border)] rounded-xl p-5 flex items-start gap-4">
+                        <div className="bg-card border border-border rounded-xl p-5 flex items-start gap-4">
                             <div className="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
                                 <FileText className="w-5 h-5" />
                             </div>
@@ -23,7 +23,7 @@ export const Terms = () => {
                                 <p className="text-sm text-[var(--text-muted)]">Use our tools for any personal or commercial purpose</p>
                             </div>
                         </div>
-                        <div className="bg-white border border-[var(--border)] rounded-xl p-5 flex items-start gap-4">
+                        <div className="bg-card border border-border rounded-xl p-5 flex items-start gap-4">
                             <div className="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
                                 <Shield className="w-5 h-5" />
                             </div>
@@ -35,10 +35,10 @@ export const Terms = () => {
                     </div>
 
                     {/* Detailed Sections */}
-                    <div className="bg-white border border-[var(--border)] rounded-2xl p-8 space-y-8">
+                    <div className="bg-card border border-border rounded-2xl p-8 space-y-8">
                         <section>
                             <div className="flex items-center gap-3 mb-3">
-                                <Scale className="w-5 h-5 text-[var(--primary)]" />
+                                <Scale className="w-5 h-5 text-foreground" />
                                 <h3 className="text-xl font-bold text-[var(--text)]">1. Acceptance of Terms</h3>
                             </div>
                             <p className="text-[var(--text-secondary)] leading-relaxed">
@@ -48,7 +48,7 @@ export const Terms = () => {
 
                         <section>
                             <div className="flex items-center gap-3 mb-3">
-                                <FileText className="w-5 h-5 text-[var(--primary)]" />
+                                <FileText className="w-5 h-5 text-foreground" />
                                 <h3 className="text-xl font-bold text-[var(--text)]">2. Use of Service</h3>
                             </div>
                             <p className="text-[var(--text-secondary)] leading-relaxed">
@@ -58,7 +58,7 @@ export const Terms = () => {
 
                         <section>
                             <div className="flex items-center gap-3 mb-3">
-                                <Shield className="w-5 h-5 text-[var(--primary)]" />
+                                <Shield className="w-5 h-5 text-foreground" />
                                 <h3 className="text-xl font-bold text-[var(--text)]">3. Limitation of Liability</h3>
                             </div>
                             <p className="text-[var(--text-secondary)] leading-relaxed">
@@ -68,7 +68,7 @@ export const Terms = () => {
 
                         <section>
                             <div className="flex items-center gap-3 mb-3">
-                                <Copyright className="w-5 h-5 text-[var(--primary)]" />
+                                <Copyright className="w-5 h-5 text-foreground" />
                                 <h3 className="text-xl font-bold text-[var(--text)]">4. Intellectual Property</h3>
                             </div>
                             <p className="text-[var(--text-secondary)] leading-relaxed">

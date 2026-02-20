@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
 import { mergePDFs, downloadBlob } from '../utils/pdfHelpers';
 import { ArrowUp, ArrowDown, X, FileText, Loader2, Download, CheckCircle, Files } from 'lucide-react';
+import { PageSeo } from '../components/PageSeo';
 
 export const Merge = () => {
+
     const [files, setFiles] = useState<File[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -55,6 +57,10 @@ export const Merge = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
+            <PageSeo
+                title="Merge PDF Files Online – Free & Private"
+                description="Combine multiple PDF files into one document. 100% free, secure, and client-side only."
+            />
             {/* Page Header */}
             <div className="page-header">
                 <div className="container">
@@ -70,7 +76,7 @@ export const Merge = () => {
 
             <div className="container pb-12">
                 <div className="max-w-3xl mx-auto">
-                    <div className="bg-white border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-sm">
+                    <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
                         <FileUploader
                             onFilesSelected={handleFilesSelected}
                             multiple={true}
@@ -107,7 +113,7 @@ export const Merge = () => {
                                                 <button
                                                     onClick={() => moveFile(index, 'up')}
                                                     disabled={index === 0}
-                                                    className="p-2 hover:bg-[var(--background)] rounded-lg disabled:opacity-30 transition-colors"
+                                                    className="p-2 hover:bg-muted rounded-lg disabled:opacity-30 transition-colors"
                                                     title="Move Up"
                                                 >
                                                     <ArrowUp className="w-4 h-4" />
@@ -115,7 +121,7 @@ export const Merge = () => {
                                                 <button
                                                     onClick={() => moveFile(index, 'down')}
                                                     disabled={index === files.length - 1}
-                                                    className="p-2 hover:bg-[var(--background)] rounded-lg disabled:opacity-30 transition-colors"
+                                                    className="p-2 hover:bg-muted rounded-lg disabled:opacity-30 transition-colors"
                                                     title="Move Down"
                                                 >
                                                     <ArrowDown className="w-4 h-4" />

@@ -2,21 +2,36 @@
 
 > Document Solutions Simplified
 
-PDF Solver is a frontend-only PDF toolkit that runs 100% in the browser. All processing happens locally using WebAssembly and JavaScript - no servers, no uploads, complete privacy.
+PDF Solver is a frontend-only PDF and Image toolkit that runs 100% in the browser. All processing happens locally using WebAssembly and JavaScript - no servers, no uploads, complete privacy.
 
 ## Features
 
+### PDF Tools
 - **Merge PDFs** - Combine multiple PDF files into one
 - **Split PDF** - Extract pages or split into separate files
-- **Images to PDF** - Convert JPG, PNG, WebP images to PDF
 - **Compress PDF** - Reduce file size while maintaining quality
+- **Images to PDF** - Convert JPG, PNG, WebP images to a single PDF
+
+### Image Tools
+- **Image Formatter** - Resize, compress, and convert images
+  - **Resize**: Exact pixel dimensions with Cover/Contain modes
+  - **Compress**: Enforce maximum file size (e.g., under 100KB)
+  - **Convert**: Switch between JPG, PNG, and WebP
+  - **Presets**: Ready-made templates for Passports, Visas, Social Media, and E-commerce
+
+## SEO & Performance
+- **Optimized Meta Tags**: Custom `PageSeo` component for dynamic titles and descriptions
+- **Structured Data**: JSON-LD schemas for `WebApplication` and `FAQPage`
+- **Sitemap & Robots**: Auto-generated for better crawlability
+- **Fast**: Zero-layout shift, client-side routing
 
 ## Tech Stack
 
-- React + TypeScript + Vite
-- pdf-lib for PDF manipulation
-- JSZip for file compression
-- Lucide React for icons
+- **Framework**: React + TypeScript + Vite
+- **Styling**: TailwindCSS + Lucide React
+- **PDF Processing**: `pdf-lib` + `jszip`
+- **Image Processing**: Canvas API (Client-side)
+- **Notifications**: `sonner`
 
 ## Getting Started
 
@@ -58,7 +73,8 @@ The `_redirects` file is already configured for SPA routing.
 
 ## Privacy
 
-All file processing happens in your browser. Files are never uploaded to any server.
+**Your files never leave your device.**
+All file processing (merging, splitting, resizing, compressing) happens entirely within your browser's memory. We do not have a backend server to store or view your files.
 
 ## License
 

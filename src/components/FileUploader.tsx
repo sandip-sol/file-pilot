@@ -80,10 +80,10 @@ export const FileUploader = ({
                 <div>
                     <h3 className="text-lg font-semibold mb-1 text-[var(--text)]">{description}</h3>
                     <p className="text-sm text-[var(--text-muted)]">
-                        or <span className="text-[var(--primary)] font-medium">browse files</span> {multiple ? '(multiple allowed)' : ''}
+                        or <span className="text-foreground font-medium">browse files</span> {multiple ? '(multiple allowed)' : ''}
                     </p>
                 </div>
-                <div className="text-xs text-[var(--text-muted)] mt-2 bg-[var(--background)] px-3 py-1 rounded-full">
+                <div className="text-xs text-[var(--text-muted)] mt-2 bg-muted px-3 py-1 rounded-full">
                     {accept === '.pdf' ? 'PDF files only' : accept === 'image/*' ? 'JPG, PNG, WebP' : accept}
                 </div>
             </div>
