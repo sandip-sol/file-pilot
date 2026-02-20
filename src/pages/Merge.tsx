@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
 import { mergePDFs, downloadBlob } from '../utils/pdfHelpers';
 import { ArrowUp, ArrowDown, X, FileText, Loader2, Download, CheckCircle, Files } from 'lucide-react';
+import { PageSeo } from '../components/PageSeo';
 
 export const Merge = () => {
+
     const [files, setFiles] = useState<File[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -55,6 +57,10 @@ export const Merge = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
+            <PageSeo
+                title="Merge PDF Files Online – Free & Private"
+                description="Combine multiple PDF files into one document. 100% free, secure, and client-side only."
+            />
             {/* Page Header */}
             <div className="page-header">
                 <div className="container">

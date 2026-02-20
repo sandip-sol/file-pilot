@@ -275,6 +275,13 @@
   .file-icon {
     @apply flex h-10 w-10 items-center justify-center rounded-lg bg-foreground text-background;
   }
+
+  .preset-card {
+    @apply cursor-pointer;
+  }
+  .preset-card:hover {
+    transform: translateY(-2px);
+  }
 }
 
 @keyframes fadeIn {

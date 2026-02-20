@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
-import { Files, Scissors, Image, Minimize2, ArrowRight, ShieldCheck, Sparkles, Zap, Lock } from 'lucide-react';
+import { Files, Scissors, Image, Minimize2, ArrowRight, ShieldCheck, Sparkles, SlidersHorizontal, Lock, Zap } from 'lucide-react';
+import { PageSeo } from '../components/PageSeo';
 
 export const Home = () => {
     return (
         <div className="hero-pattern">
+            <PageSeo
+                title="PDF & Image Tools – Free, Private, Browser-Based"
+                description="Free online PDF & image tools. Resize, compress, convert — 100% in your browser. No uploads, no tracking."
+            />
             {/* Hero Section */}
             <div className="container py-16 md:py-24">
                 <div className="text-center max-w-4xl mx-auto animate-fade-in-up">
@@ -13,12 +18,12 @@ export const Home = () => {
                     </div>
 
                     <h1 className="text-3xl md:text-6xl font-extrabold tracking-tight text-[var(--text)] mb-6 leading-tight">
-                        PDF Tools That
+                        PDF & Image Tools That
                         <span className="gradient-text"> Respect Your Privacy</span>
                     </h1>
 
                     <p className="text-lg md:text-xl text-[var(--text-secondary)] mb-10 max-w-2xl mx-auto">
-                        Fast, secure PDF editing right in your browser. No uploads, no servers, no tracking.
+                        Fast, secure PDF and image editing right in your browser. Resize, compress, and convert files without uploads.
                         Your files never leave your device.
                     </p>
 
@@ -53,11 +58,11 @@ export const Home = () => {
             {/* Tools Section */}
             <div className="container pb-16 md:pb-20" id="tools">
                 <div className="text-center mb-8 md:mb-12">
-                    <h2 className="text-2xl md:text-4xl font-bold mb-4">Powerful PDF Tools</h2>
-                    <p className="text-[var(--text-secondary)] text-base md:text-lg">Everything you need to work with PDFs</p>
+                    <h2 className="text-2xl md:text-4xl font-bold mb-4">Powerful PDF & Image Tools</h2>
+                    <p className="text-[var(--text-secondary)] text-base md:text-lg">Everything you need to work with PDFs and images</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     <Link to="/merge" className="card group animate-fade-in delay-100" style={{ animationFillMode: 'backwards' }}>
                         <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition-transform shadow-lg">
                             <Files className="w-6 h-6 md:w-7 md:h-7" />
@@ -97,6 +102,17 @@ export const Home = () => {
                         </div>
                         <h3 className="text-lg md:text-xl font-bold mb-2">Compress PDF</h3>
                         <p className="text-[var(--text-muted)] text-sm leading-relaxed">Reduce file size while maintaining quality.</p>
+                        <div className="mt-4 text-foreground font-medium text-sm flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            Try now <ArrowRight className="w-4 h-4" />
+                        </div>
+                    </Link>
+
+                    <Link to="/image-requirements" className="card group animate-fade-in delay-400" style={{ animationFillMode: 'backwards' }}>
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition-transform shadow-lg">
+                            <SlidersHorizontal className="w-6 h-6 md:w-7 md:h-7" />
+                        </div>
+                        <h3 className="text-lg md:text-xl font-bold mb-2">Image Formatter</h3>
+                        <p className="text-[var(--text-muted)] text-sm leading-relaxed">Resize image to exact pixels, reduce file size to KB limit, and convert format.</p>
                         <div className="mt-4 text-foreground font-medium text-sm flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                             Try now <ArrowRight className="w-4 h-4" />
                         </div>

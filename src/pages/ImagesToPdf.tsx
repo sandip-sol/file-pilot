@@ -3,6 +3,7 @@ import { FileUploader } from '../components/FileUploader';
 import { convertImagesToPDF, downloadBlob } from '../utils/pdfHelpers';
 import type { ImageItem } from '../utils/pdfHelpers';
 import { Image as ImageIcon, Loader2, Download, X, RotateCw, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
+import { PageSeo } from '../components/PageSeo';
 
 export const ImagesToPdf = () => {
     const [items, setItems] = useState<ImageItem[]>([]);
@@ -66,6 +67,10 @@ export const ImagesToPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
+            <PageSeo
+                title="Convert Images to PDF – JPG, PNG, WebP to PDF"
+                description="Convert JPG, PNG, and WebP images to a single PDF. Customize page size, orientation, and margins. Free & private."
+            />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">

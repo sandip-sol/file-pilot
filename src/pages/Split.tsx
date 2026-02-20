@@ -3,6 +3,7 @@ import JSZip from 'jszip';
 import { FileUploader } from '../components/FileUploader';
 import { countPDFPages, splitPDFRange, splitPDFSeparate, downloadBlob } from '../utils/pdfHelpers';
 import { FileText, Loader2, Scissors, Download, RefreshCw, CheckCircle } from 'lucide-react';
+import { PageSeo } from '../components/PageSeo';
 
 export const Split = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -78,6 +79,10 @@ export const Split = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
+            <PageSeo
+                title="Split PDF Online – Extract Pages Free"
+                description="Split PDF documents or extract specific pages. Fast, free, and secure browser-based tool."
+            />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
