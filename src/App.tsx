@@ -1,27 +1,33 @@
+import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
-import { Home } from './pages/Home';
-import { Merge } from './pages/Merge';
-import { Split } from './pages/Split';
-import { ImagesToPdf } from './pages/ImagesToPdf';
-import { Compress } from './pages/Compress';
-import { ImageRequirements } from './pages/ImageRequirements';
-import { Privacy } from './pages/Privacy';
-import { Terms } from './pages/Terms';
+
+const Home = lazy(() => import('./pages/Home').then((module) => ({ default: module.Home })));
+const Merge = lazy(() => import('./pages/Merge').then((module) => ({ default: module.Merge })));
+const Split = lazy(() => import('./pages/Split').then((module) => ({ default: module.Split })));
+const ImagesToPdf = lazy(() => import('./pages/ImagesToPdf').then((module) => ({ default: module.ImagesToPdf })));
+const Compress = lazy(() => import('./pages/Compress').then((module) => ({ default: module.Compress })));
+const ImageRequirements = lazy(() =>
+  import('./pages/ImageRequirements').then((module) => ({ default: module.ImageRequirements })),
+);
+const Privacy = lazy(() => import('./pages/Privacy').then((module) => ({ default: module.Privacy })));
+const Terms = lazy(() => import('./pages/Terms').then((module) => ({ default: module.Terms })));
 
 function App() {
   return (
     <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/merge" element={<Merge />} />
-        <Route path="/split" element={<Split />} />
-        <Route path="/images-to-pdf" element={<ImagesToPdf />} />
-        <Route path="/compress" element={<Compress />} />
-        <Route path="/image-requirements" element={<ImageRequirements />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/terms" element={<Terms />} />
-      </Routes>
+      <Suspense fallback={<main className="container py-16 text-center text-muted-foreground">Loading...</main>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/merge" element={<Merge />} />
+          <Route path="/split" element={<Split />} />
+          <Route path="/images-to-pdf" element={<ImagesToPdf />} />
+          <Route path="/compress" element={<Compress />} />
+          <Route path="/image-requirements" element={<ImageRequirements />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+        </Routes>
+      </Suspense>
     </Layout>
   );
 }

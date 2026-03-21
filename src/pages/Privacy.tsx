@@ -1,8 +1,13 @@
 import { ShieldCheck, Lock, Eye, Server } from 'lucide-react';
+import { PageSeo } from '../components/PageSeo';
 
 export const Privacy = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
+            <PageSeo
+                title="Privacy Policy – PDF Solver"
+                description="Learn how PDF Solver protects your files with 100% browser-based processing and no server uploads."
+            />
             <div className="page-header">
                 <div className="container">
                     <h1>Privacy Policy</h1>

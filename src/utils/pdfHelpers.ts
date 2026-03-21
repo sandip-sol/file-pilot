@@ -98,14 +98,21 @@ const getMargin = (margin: 'none' | 'small' | 'medium') => {
 const convertImageToPng = (file: File): Promise<Uint8Array> => {
     return new Promise((resolve, reject) => {
         const img = new Image();
+        const objectUrl = URL.createObjectURL(file);
+
         img.onload = () => {
             const canvas = document.createElement('canvas');
             canvas.width = img.width;
             canvas.height = img.height;
             const ctx = canvas.getContext('2d');
-            if (!ctx) { reject(new Error('Canvas context not available')); return; }
+            if (!ctx) {
+                URL.revokeObjectURL(objectUrl);
+                reject(new Error('Canvas context not available'));
+                return;
+            }
             ctx.drawImage(img, 0, 0);
             canvas.toBlob((blob) => {
+                URL.revokeObjectURL(objectUrl);
                 if (blob) {
                     blob.arrayBuffer().then((buf) => resolve(new Uint8Array(buf)));
                 } else {
@@ -113,8 +120,11 @@ const convertImageToPng = (file: File): Promise<Uint8Array> => {
                 }
             }, 'image/png');
         };
-        img.onerror = reject;
-        img.src = URL.createObjectURL(file);
+        img.onerror = () => {
+            URL.revokeObjectURL(objectUrl);
+            reject(new Error('Image failed to load'));
+        };
+        img.src = objectUrl;
     });
 };
 
@@ -122,6 +132,7 @@ export interface ImageItem {
     id: string;
     file: File;
     rotation: number;
+    previewUrl: string;
 }
 
 export const convertImagesToPDF = async (items: ImageItem[], options: ImageToPdfOptions): Promise<Uint8Array> => {

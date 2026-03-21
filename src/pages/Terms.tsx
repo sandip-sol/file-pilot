@@ -1,8 +1,13 @@
 import { FileText, Scale, Shield, Copyright } from 'lucide-react';
+import { PageSeo } from '../components/PageSeo';
 
 export const Terms = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
+            <PageSeo
+                title="Terms of Service – PDF Solver"
+                description="Read the terms for using PDF Solver's free browser-based PDF and image tools."
+            />
             <div className="page-header">
                 <div className="container">
                     <h1>Terms of Service</h1>

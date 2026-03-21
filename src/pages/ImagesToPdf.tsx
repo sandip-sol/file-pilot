@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
 import { convertImagesToPDF, downloadBlob } from '../utils/pdfHelpers';
 import type { ImageItem } from '../utils/pdfHelpers';
@@ -12,19 +12,35 @@ export const ImagesToPdf = () => {
     const [orientation, setOrientation] = useState<'portrait' | 'landscape'>('portrait');
     const [margin, setMargin] = useState<'none' | 'small' | 'medium'>('small');
     const [success, setSuccess] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        return () => {
+            items.forEach((item) => URL.revokeObjectURL(item.previewUrl));
+        };
+    }, [items]);
 
     const handleFilesSelected = (files: File[]) => {
         const newItems: ImageItem[] = files.map(file => ({
-            id: Math.random().toString(36).substr(2, 9),
+            id: crypto.randomUUID(),
             file,
-            rotation: 0
+            rotation: 0,
+            previewUrl: URL.createObjectURL(file),
         }));
         setItems(prev => [...prev, ...newItems]);
         setSuccess(false);
+        setError(null);
     };
 
     const removeItem = (id: string) => {
-        setItems(prev => prev.filter(item => item.id !== id));
+        setItems(prev => {
+            const itemToRemove = prev.find((item) => item.id === id);
+            if (itemToRemove) {
+                URL.revokeObjectURL(itemToRemove.previewUrl);
+            }
+
+            return prev.filter(item => item.id !== id);
+        });
     };
 
     const rotateItem = (id: string) => {
@@ -51,6 +67,7 @@ export const ImagesToPdf = () => {
     const handleConvert = async () => {
         if (items.length === 0) return;
         setIsProcessing(true);
+        setError(null);
 
         try {
             const pdfBytes = await convertImagesToPDF(items, { pageSize, orientation, margin });
@@ -59,7 +76,7 @@ export const ImagesToPdf = () => {
             setTimeout(() => setSuccess(false), 3000);
         } catch (error) {
             console.error(error);
-            alert('Failed to generate PDF');
+            setError('Failed to generate PDF. One or more images may be unsupported or corrupted.');
         } finally {
             setIsProcessing(false);
         }
@@ -133,6 +150,12 @@ export const ImagesToPdf = () => {
                                 </div>
                             )}
 
+                            {error && (
+                                <div className="bg-[var(--error-light)] text-[var(--error)] p-3 rounded-xl mt-6 text-sm font-medium">
+                                    {error}
+                                </div>
+                            )}
+
                             <button
                                 onClick={handleConvert}
                                 disabled={isProcessing || items.length === 0}
@@ -174,8 +197,8 @@ export const ImagesToPdf = () => {
                                             <div key={item.id} className="relative group bg-background border border-border rounded-xl p-2 hover:border-foreground transition-colors">
                                                 <div className="relative w-full aspect-[3/4] mb-2 bg-white rounded-lg overflow-hidden flex items-center justify-center">
                                                     <img
-                                                        src={URL.createObjectURL(item.file)}
-                                                        alt="preview"
+                                                        src={item.previewUrl}
+                                                        alt={item.file.name}
                                                         className="max-w-full max-h-full object-contain transition-transform"
                                                         style={{ transform: `rotate(${item.rotation}deg)` }}
                                                     />
