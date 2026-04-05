@@ -1,29 +1,47 @@
-// indexnow.js
-const KEY = 'cb65241777f64e4981abd5cc4a8702be';
+import { readFile } from 'node:fs/promises';
 
-fetch('https://api.indexnow.org/indexnow', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json; charset=utf-8' },
-  body: JSON.stringify({
-    host: 'pdfsolver.app',
-    key: KEY,
-    keyLocation: `https://pdfsolver.app/${KEY}.txt`,
-    urlList: [
-      'https://pdfsolver.app/',
-      'https://pdfsolver.app/image-requirements',
-      'https://pdfsolver.app/merge',
-      'https://pdfsolver.app/split',
-      'https://pdfsolver.app/images-to-pdf',
-      'https://pdfsolver.app/compress',
-      'https://pdfsolver.app/privacy',
-      'https://pdfsolver.app/terms',
-    ]
-  })
-})
-.then(r => {
-  console.log('Status:', r.status);
-  // 200 = success, 202 = accepted, 400 = bad request, 403 = forbidden (key file missing)
-  return r.text();
-})
-.then(body => console.log('Response:', body || '(empty - this is normal on success)'))
-.catch(err => console.error('Error:', err));
+const SITE_URL = 'https://pdfsolver.app';
+const KEY = '43ba63aba5734768ba941ad72f08ead1';
+const KEY_LOCATION = `${SITE_URL}/${KEY}.txt`;
+const SITEMAP_PATH = new URL('./public/sitemap.xml', import.meta.url);
+
+async function loadUrlList() {
+  const sitemap = await readFile(SITEMAP_PATH, 'utf8');
+  const matches = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)];
+
+  if (matches.length === 0) {
+    throw new Error('No <loc> entries found in public/sitemap.xml');
+  }
+
+  return matches.map(([, url]) => url.trim());
+}
+
+async function submitToIndexNow() {
+  const urlList = await loadUrlList();
+
+  const response = await fetch('https://api.indexnow.org/indexnow', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    body: JSON.stringify({
+      host: new URL(SITE_URL).hostname,
+      key: KEY,
+      keyLocation: KEY_LOCATION,
+      urlList,
+    }),
+  });
+
+  const body = await response.text();
+
+  console.log(`Submitted ${urlList.length} URLs to IndexNow.`);
+  console.log(`Status: ${response.status}`);
+  console.log(`Response: ${body || '(empty - this is normal on success)'}`);
+
+  if (!response.ok) {
+    process.exitCode = 1;
+  }
+}
+
+submitToIndexNow().catch((error) => {
+  console.error('IndexNow submission failed:', error);
+  process.exitCode = 1;
+});

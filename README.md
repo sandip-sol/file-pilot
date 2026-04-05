@@ -23,6 +23,7 @@ PDF Solver is a frontend-only PDF and Image toolkit that runs 100% in the browse
 - **Optimized Meta Tags**: Custom `PageSeo` component for dynamic titles and descriptions
 - **Structured Data**: JSON-LD schemas for `WebApplication` and `FAQPage`
 - **Sitemap & Robots**: Auto-generated for better crawlability
+- **Bing IndexNow**: Submit all sitemap URLs using `npm run indexnow`
 - **Fast**: Zero-layout shift, client-side routing
 
 ## Tech Stack
