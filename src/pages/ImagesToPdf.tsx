@@ -4,6 +4,7 @@ import { convertImagesToPDF, downloadBlob } from '../utils/pdfHelpers';
 import type { ImageItem } from '../utils/pdfHelpers';
 import { Image as ImageIcon, Loader2, Download, X, RotateCw, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
+import { FAQSection } from '../components/FAQSection';
 
 export const ImagesToPdf = () => {
     const [items, setItems] = useState<ImageItem[]>([]);
@@ -87,6 +88,12 @@ export const ImagesToPdf = () => {
             <PageSeo
                 title="Convert Images to PDF – JPG, PNG, WebP to PDF"
                 description="Convert JPG, PNG, and WebP images to a single PDF. Customize page size, orientation, and margins. Free & private."
+                faqItems={[
+                    { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
+                    { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, and WebP images are supported. You can mix different formats in a single PDF." },
+                    { question: "Can I choose the page size and orientation?", answer: "Yes. You can select A4 or Letter page size and choose portrait or landscape orientation before converting." },
+                    { question: "Can I reorder or rotate images before converting?", answer: "Yes. Use the arrow buttons to reorder and the rotate button to adjust each image before generating the PDF." },
+                ]}
             />
             <div className="page-header">
                 <div className="container">
@@ -95,8 +102,8 @@ export const ImagesToPdf = () => {
                             <ImageIcon className="w-6 h-6" />
                         </div>
                     </div>
-                    <h1>Images to PDF</h1>
-                    <p>Convert your images into a single PDF file with custom settings.</p>
+                    <h1>Convert Images to PDF – JPG, PNG, WebP to PDF</h1>
+                    <p>Convert JPG, PNG, and WebP images to a single PDF with custom page size and orientation.</p>
                 </div>
             </div>
 
@@ -226,6 +233,13 @@ export const ImagesToPdf = () => {
                     </div>
                 </div>
             </div>
+
+            <FAQSection items={[
+                { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
+                { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, and WebP images are supported. You can mix different formats in a single PDF." },
+                { question: "Can I choose the page size and orientation?", answer: "Yes. You can select A4 or Letter page size and choose portrait or landscape orientation before converting." },
+                { question: "Can I reorder or rotate images before converting?", answer: "Yes. Use the arrow buttons to reorder and the rotate button to adjust each image before generating the PDF." },
+            ]} />
         </div>
     );
 };

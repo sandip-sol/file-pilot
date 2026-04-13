@@ -6,8 +6,8 @@ export const Home = () => {
     return (
         <div className="hero-pattern">
             <PageSeo
-                title="PDF & Image Tools – Free, Private, Browser-Based"
-                description="Free online PDF & image tools. Resize, compress, convert — 100% in your browser. No uploads, no tracking."
+                title="PDF & Image Tools – Resize, Compress & Convert Free Online"
+                description="Free online tools to resize images to exact pixels & KB, compress PDFs, convert formats. 100% private — files never leave your browser."
             />
             {/* Hero Section */}
             <div className="container py-16 md:py-24">

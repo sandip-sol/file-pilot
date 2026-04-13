@@ -3,6 +3,7 @@ import { FileUploader } from '../components/FileUploader';
 import { mergePDFs, downloadBlob } from '../utils/pdfHelpers';
 import { ArrowUp, ArrowDown, X, FileText, Loader2, Download, CheckCircle, Files } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
+import { FAQSection } from '../components/FAQSection';
 
 export const Merge = () => {
 
@@ -60,6 +61,12 @@ export const Merge = () => {
             <PageSeo
                 title="Merge PDF Files Online – Free & Private"
                 description="Combine multiple PDF files into one document. 100% free, secure, and client-side only."
+                faqItems={[
+                    { question: "Does merging PDFs upload my files to a server?", answer: "No. All merging is done locally in your browser. Your files never leave your device." },
+                    { question: "How many PDF files can I merge at once?", answer: "There is no fixed limit. You can combine as many PDFs as your browser's memory allows — typically dozens of files without issue." },
+                    { question: "Can I reorder the files before merging?", answer: "Yes. After uploading, use the arrow buttons to drag files up or down into your preferred order before merging." },
+                    { question: "Will merging PDFs reduce quality?", answer: "No. The tool copies pages as-is without re-encoding, so quality remains identical to the originals." },
+                ]}
             />
             {/* Page Header */}
             <div className="page-header">
@@ -69,8 +76,8 @@ export const Merge = () => {
                             <Files className="w-6 h-6" />
                         </div>
                     </div>
-                    <h1>Merge PDF Files</h1>
-                    <p>Combine multiple PDFs into one document in your preferred order.</p>
+                    <h1>Merge PDF Files Online – Combine PDFs Free</h1>
+                    <p>Combine multiple PDF files into one document. Reorder pages, 100% private in your browser.</p>
                 </div>
             </div>
 
@@ -173,6 +180,13 @@ export const Merge = () => {
                     </div>
                 </div>
             </div>
+
+            <FAQSection items={[
+                { question: "Does merging PDFs upload my files to a server?", answer: "No. All merging is done locally in your browser. Your files never leave your device." },
+                { question: "How many PDF files can I merge at once?", answer: "There is no fixed limit. You can combine as many PDFs as your browser's memory allows — typically dozens of files without issue." },
+                { question: "Can I reorder the files before merging?", answer: "Yes. After uploading, use the arrow buttons to drag files up or down into your preferred order before merging." },
+                { question: "Will merging PDFs reduce quality?", answer: "No. The tool copies pages as-is without re-encoding, so quality remains identical to the originals." },
+            ]} />
         </div>
     );
 };
