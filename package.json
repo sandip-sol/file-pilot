@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node prerender.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "indexnow": "node indexnow.js"
@@ -58,8 +58,7 @@
     "sonner": "^1.7.4",
     "tailwind-merge": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
-    "vaul": "^1.1.2",
-    "vite-plugin-prerender": "^1.0.8"
+    "vaul": "^1.1.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
