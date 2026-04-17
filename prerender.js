@@ -28,6 +28,7 @@ const ROUTES = [
   '/merge',
   '/split',
   '/images-to-pdf',
+  '/extract-text',
   '/compress',
   '/image-requirements',
   '/privacy',

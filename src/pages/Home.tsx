@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Files, Scissors, Image, Minimize2, ArrowRight, ShieldCheck, Sparkles, SlidersHorizontal, Lock, Zap } from 'lucide-react';
+import { Files, Scissors, Image, Minimize2, ArrowRight, ShieldCheck, Sparkles, SlidersHorizontal, Lock, Zap, ScanText } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 
 export const Home = () => {
@@ -7,7 +7,7 @@ export const Home = () => {
         <div className="hero-pattern">
             <PageSeo
                 title="PDF & Image Tools – Resize, Compress & Convert Free Online"
-                description="Free online tools to resize images to exact pixels & KB, compress PDFs, convert formats. 100% private — files never leave your browser."
+                description="Free online tools to resize images to exact pixels & KB, compress PDFs, extract text from PDFs and images, and change formats. 100% private — files never leave your browser."
             />
             {/* Hero Section */}
             <div className="container py-16 md:py-24">
@@ -23,7 +23,7 @@ export const Home = () => {
                     </h1>
 
                     <p className="text-lg md:text-xl text-[var(--text-secondary)] mb-10 max-w-2xl mx-auto">
-                        Fast, secure PDF and image editing right in your browser. Resize, compress, and convert files without uploads.
+                        Fast, secure PDF and image editing right in your browser. Resize, compress, convert, and extract text from PDFs or images without uploads.
                         Your files never leave your device.
                     </p>
 
@@ -96,7 +96,18 @@ export const Home = () => {
                         </div>
                     </Link>
 
-                    <Link to="/compress" className="card group animate-fade-in delay-400" style={{ animationFillMode: 'backwards' }}>
+                    <Link to="/extract-text" className="card group animate-fade-in delay-400" style={{ animationFillMode: 'backwards' }}>
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition-transform shadow-lg">
+                            <ScanText className="w-6 h-6 md:w-7 md:h-7" />
+                        </div>
+                        <h3 className="text-lg md:text-xl font-bold mb-2">Extract Text</h3>
+                        <p className="text-[var(--text-muted)] text-sm leading-relaxed">Extract text from PDFs, scanned PDFs, and images with private in-browser OCR.</p>
+                        <div className="mt-4 text-foreground font-medium text-sm flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            Try now <ArrowRight className="w-4 h-4" />
+                        </div>
+                    </Link>
+
+                    <Link to="/compress" className="card group animate-fade-in delay-500" style={{ animationFillMode: 'backwards' }}>
                         <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition-transform shadow-lg">
                             <Minimize2 className="w-6 h-6 md:w-7 md:h-7" />
                         </div>
@@ -107,7 +118,7 @@ export const Home = () => {
                         </div>
                     </Link>
 
-                    <Link to="/image-requirements" className="card group animate-fade-in delay-400" style={{ animationFillMode: 'backwards' }}>
+                    <Link to="/image-requirements" className="card group animate-fade-in delay-600" style={{ animationFillMode: 'backwards' }}>
                         <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition-transform shadow-lg">
                             <SlidersHorizontal className="w-6 h-6 md:w-7 md:h-7" />
                         </div>

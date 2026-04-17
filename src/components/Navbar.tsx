@@ -17,6 +17,7 @@ export const Navbar = () => {
                     <Link to="/merge" className="hover:text-foreground transition-colors">Merge</Link>
                     <Link to="/split" className="hover:text-foreground transition-colors">Split</Link>
                     <Link to="/images-to-pdf" className="hover:text-foreground transition-colors">Images to PDF</Link>
+                    <Link to="/extract-text" className="hover:text-foreground transition-colors">Extract Text</Link>
                     <Link to="/compress" className="hover:text-foreground transition-colors">Compress</Link>
                     <Link to="/image-requirements" className="hover:text-foreground transition-colors">Image Formatter</Link>
                 </div>
@@ -38,6 +39,7 @@ export const Navbar = () => {
                         <Link to="/merge" onClick={() => setIsMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-muted text-muted-foreground font-medium">Merge PDFs</Link>
                         <Link to="/split" onClick={() => setIsMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-muted text-muted-foreground font-medium">Split PDF</Link>
                         <Link to="/images-to-pdf" onClick={() => setIsMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-muted text-muted-foreground font-medium">Images to PDF</Link>
+                        <Link to="/extract-text" onClick={() => setIsMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-muted text-muted-foreground font-medium">Extract Text</Link>
                         <Link to="/compress" onClick={() => setIsMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-muted text-muted-foreground font-medium">Compress PDF</Link>
                         <Link to="/image-requirements" onClick={() => setIsMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-muted text-muted-foreground font-medium">Image Formatter</Link>
                     </div>

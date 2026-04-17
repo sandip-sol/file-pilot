@@ -17,6 +17,30 @@ export const FileUploader = ({
     const [isDragging, setIsDragging] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
+    const isAcceptedFile = (file: File) => {
+        if (accept === '*') return true;
+
+        return accept.split(',').some((entry) => {
+            const rule = entry.trim().toLowerCase();
+            if (!rule) return false;
+
+            if (rule === 'image/*') {
+                return file.type.startsWith('image/');
+            }
+
+            if (rule.endsWith('/*')) {
+                const prefix = rule.slice(0, -1);
+                return file.type.toLowerCase().startsWith(prefix);
+            }
+
+            if (rule.startsWith('.')) {
+                return file.name.toLowerCase().endsWith(rule);
+            }
+
+            return file.type.toLowerCase() === rule;
+        });
+    };
+
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault();
         setIsDragging(true);
@@ -32,10 +56,7 @@ export const FileUploader = ({
 
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
             const files = Array.from(e.dataTransfer.files);
-            const validFiles = files.filter(file => {
-                if (accept === '*' || accept === 'image/*') return true;
-                return accept.split(',').some(ext => file.name.toLowerCase().endsWith(ext.trim()) || file.type === ext.trim());
-            });
+            const validFiles = files.filter(isAcceptedFile);
 
             if (validFiles.length > 0) {
                 onFilesSelected(validFiles);
