@@ -6,13 +6,15 @@ interface FileUploaderProps {
     accept?: string;
     multiple?: boolean;
     description?: string;
+    hint?: string;
 }
 
 export const FileUploader = ({
     onFilesSelected,
     accept = '.pdf',
     multiple = false,
-    description = "Drag & drop your files here"
+    description = "Drag & drop your files here",
+    hint
 }: FileUploaderProps) => {
     const [isDragging, setIsDragging] = useState(false);
     const [validationMessage, setValidationMessage] = useState<string | null>(null);
@@ -144,6 +146,15 @@ export const FileUploader = ({
                             <LockKeyhole className="h-3.5 w-3.5" />
                             No upload
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div className="rounded-lg border border-border bg-background px-4 py-3 text-sm text-muted-foreground">
+                <div className="flex items-start gap-3">
+                    <LockKeyhole className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+                    <div>
+                        <p className="font-medium text-foreground">Processed locally in your browser. No upload.</p>
+                        {hint ? <p className="mt-1">{hint}</p> : null}
                     </div>
                 </div>
             </div>

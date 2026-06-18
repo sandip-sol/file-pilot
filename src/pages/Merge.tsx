@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
 import { FileReadinessPanel } from '../components/pdf/FileReadinessPanel';
+import { ToolStateMessage } from '../components/ToolStateMessage';
 import { mergePDFs, downloadBlob } from '../utils/pdfHelpers';
 import { getPdfRecoveryMessage } from '../utils/pdf/errorMessages';
-import { ArrowUp, ArrowDown, X, FileText, Loader2, Download, CheckCircle, Files } from 'lucide-react';
+import { ArrowUp, ArrowDown, X, FileText, Loader2, Download, Files } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 
@@ -91,6 +92,7 @@ export const Merge = () => {
                             multiple={true}
                             accept=".pdf"
                             description="Drop PDF files here to merge"
+                            hint="Add files, confirm the order, then download one combined PDF."
                         />
 
                         {files.length > 0 && (
@@ -152,16 +154,15 @@ export const Merge = () => {
                                 </div>
 
                                 {error && (
-                                    <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl mb-6 text-sm font-medium">
+                                    <ToolStateMessage state="error" title="Merge failed" className="mb-6">
                                         {error}
-                                    </div>
+                                    </ToolStateMessage>
                                 )}
 
                                 {success && (
-                                    <div className="bg-[var(--success-light)] text-[var(--success)] p-4 rounded-xl mb-6 text-sm font-medium flex items-center gap-2">
-                                        <CheckCircle className="w-5 h-5" />
+                                    <ToolStateMessage state="success" title="PDF ready" className="mb-6">
                                         PDF merged successfully! Check your downloads.
-                                    </div>
+                                    </ToolStateMessage>
                                 )}
 
                                 <button

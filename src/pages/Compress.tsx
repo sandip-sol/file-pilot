@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
 import { FileReadinessPanel } from '../components/pdf/FileReadinessPanel';
+import { ToolStateMessage } from '../components/ToolStateMessage';
 import { PDFDocument } from 'pdf-lib';
 import { downloadBlob } from '../utils/pdfHelpers';
 import { getPdfRecoveryMessage } from '../utils/pdf/errorMessages';
-import { Loader2, Download, RefreshCw, FileText, Info, Minimize2, CheckCircle } from 'lucide-react';
+import { Loader2, Download, RefreshCw, FileText, Info, Minimize2 } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 
@@ -85,6 +86,7 @@ export const Compress = () => {
                                 multiple={false}
                                 accept=".pdf"
                                 description="Drop a PDF file here to compress"
+                                hint="Best for PDFs with extra metadata or inefficient structure. Very large scanned files may need splitting first."
                             />
                         ) : (
                             <div className="animate-fade-in">
@@ -139,16 +141,15 @@ export const Compress = () => {
                                 </div>
 
                                 {error && (
-                                    <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl mb-6 text-sm font-medium">
+                                    <ToolStateMessage state="error" title="Compression failed" className="mb-6">
                                         {error}
-                                    </div>
+                                    </ToolStateMessage>
                                 )}
 
                                 {success && (
-                                    <div className="bg-[var(--success-light)] text-[var(--success)] p-4 rounded-xl mb-6 text-sm font-medium flex items-center gap-2">
-                                        <CheckCircle className="w-5 h-5" />
+                                    <ToolStateMessage state="success" title="PDF ready" className="mb-6">
                                         PDF compressed successfully! Check your downloads.
-                                    </div>
+                                    </ToolStateMessage>
                                 )}
 
                                 <button

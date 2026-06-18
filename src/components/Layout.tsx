@@ -1,6 +1,8 @@
 import { ShieldCheck } from 'lucide-react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { RelatedTools } from './RelatedTools';
+import { ToolUsageTracker } from './ToolUsageTracker';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -15,7 +17,9 @@ export const Layout = ({ children }: LayoutProps) => {
             </div>
             <Navbar />
             <main className="flex-1">
+                <ToolUsageTracker />
                 {children}
+                <RelatedTools />
             </main>
             <Footer />
         </div>

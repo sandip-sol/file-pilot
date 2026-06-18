@@ -15,6 +15,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
+import { RecentlyUsedTools } from '../components/RecentlyUsedTools';
 import { discoverableTools, getToolStatus, plannedTools, type ToolDefinition } from '../data/toolRegistry';
 
 const POPULAR_SLUGS = [
@@ -282,6 +283,7 @@ export const Home = () => {
               </div>
             </div>
           </div>
+          <RecentlyUsedTools />
           <div className="mt-8">
             <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
