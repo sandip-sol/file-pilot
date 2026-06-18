@@ -21,7 +21,7 @@ async function detectAndRemoveBlankPages(file: File, threshold = 98): Promise<Ui
         const canvas = document.createElement('canvas');
         canvas.width = vp.width; canvas.height = vp.height;
         const ctx = canvas.getContext('2d')!;
-        await page.render({ canvasContext: ctx as unknown as CanvasRenderingContext2D, viewport: vp }).promise;
+        await page.render({ canvasContext: ctx as unknown as CanvasRenderingContext2D, viewport: vp, canvas }).promise;
         const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
         let whitePixels = 0;
         for (let j = 0; j < data.length; j += 4) {

@@ -130,7 +130,7 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'organize-manage',
   },
   {
-    slug: '/view-metadata', title: 'View Metadata', shortTitle: 'Metadata',
+    slug: '/pdf-metadata', title: 'PDF Metadata', shortTitle: 'Metadata',
     description: 'Inspect PDF metadata: title, author, dates, page count.',
     icon: Info, gradientClassName: 'from-sky-400 to-blue-600',
     category: 'organize-manage',
@@ -246,7 +246,7 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'edit-annotate',
   },
   {
-    slug: '/add-stamps', title: 'Add Stamps', shortTitle: 'Stamps',
+    slug: '/add-stamp', title: 'Add Stamp', shortTitle: 'Stamp',
     description: 'Add "DRAFT", "CONFIDENTIAL", or custom text stamps to pages.',
     icon: Stamp, gradientClassName: 'from-orange-500 to-amber-700',
     category: 'edit-annotate',
@@ -326,7 +326,7 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'convert-to-pdf',
   },
   {
-    slug: '/txt-to-pdf', title: 'Text to PDF', shortTitle: 'TXT→PDF',
+    slug: '/text-to-pdf', title: 'Text to PDF', shortTitle: 'TXT→PDF',
     description: 'Convert plain text files into formatted PDF documents.',
     icon: FileText, gradientClassName: 'from-amber-500 to-yellow-600',
     category: 'convert-to-pdf',

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
-import { flattenPDF, removeMetadata, downloadBytes } from '../utils/pdf/pdfOperations';
+import { flattenPDF, downloadBytes } from '../utils/pdf/pdfOperations';
 import { Eraser, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
