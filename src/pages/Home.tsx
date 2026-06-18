@@ -16,7 +16,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
-import { discoverableTools, getToolStatus, plannedTools, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
+import { discoverableTools, getToolStatus, plannedTools, type ToolDefinition } from '../data/toolRegistry';
 
 const POPULAR_SLUGS = [
   '/merge',
@@ -29,57 +29,117 @@ const POPULAR_SLUGS = [
   '/redact-pdf',
 ];
 
-const CATEGORY_INFO: Record<ToolCategory, { label: string; intent: string; icon: LucideIcon }> = {
-  'organize-manage': {
+type WorkflowId =
+  | 'organize-pdfs'
+  | 'convert-files'
+  | 'edit-annotate'
+  | 'extract-content'
+  | 'optimize-repair'
+  | 'protect-clean';
+
+const WORKFLOWS: Record<WorkflowId, { label: string; intent: string; icon: LucideIcon; keywords: string }> = {
+  'organize-pdfs': {
     label: 'Organize PDFs',
     intent: 'Merge, split, reorder, rotate, extract, and prepare pages.',
     icon: Layers3,
+    keywords: 'pages merge split reorder rotate delete organize booklet n-up overlay',
+  },
+  'convert-files': {
+    label: 'Convert Files',
+    intent: 'Create PDFs from images and documents, or export PDFs into image formats.',
+    icon: FileText,
+    keywords: 'convert jpg jpeg png webp svg bmp heic tiff image text json markdown pdf',
   },
   'edit-annotate': {
-    label: 'Edit and Mark Up',
+    label: 'Edit & Annotate',
     intent: 'Add text, stamps, watermarks, signatures, forms, and redactions.',
     icon: PenLine,
+    keywords: 'edit annotate sign signature watermark redact stamp form fill crop header footer text color',
   },
-  'convert-to-pdf': {
-    label: 'Create PDFs',
-    intent: 'Turn images, text, JSON, and Markdown into clean PDF files.',
-    icon: FileText,
-  },
-  'convert-from-pdf': {
-    label: 'Export From PDF',
-    intent: 'Extract text, images, pages, JSON, Markdown, and raster outputs.',
+  'extract-content': {
+    label: 'Extract Content',
+    intent: 'Pull out text, images, metadata, JSON, Markdown, and reusable page content.',
     icon: ImageIcon,
+    keywords: 'extract text ocr images metadata json markdown word excel sheets slides docx pptx xlsx content',
   },
   'optimize-repair': {
-    label: 'Optimize and Inspect',
+    label: 'Optimize & Repair',
     intent: 'Compress, check dimensions, resize pages, and improve scans.',
     icon: Wrench,
+    keywords: 'compress smaller reduce optimize repair fix size dimensions deskew scan private',
   },
-  'secure-pdf': {
-    label: 'Clean and Protect',
+  'protect-clean': {
+    label: 'Protect & Clean',
     intent: 'Remove metadata, flatten forms, sanitize, and redact sensitive text.',
     icon: ShieldCheck,
+    keywords: 'protect clean private security sanitize flatten redact remove metadata safe sensitive',
   },
 };
 
 const QUICK_INTENTS = [
   { label: 'Combine files', query: 'merge' },
-  { label: 'Split pages', query: 'split extract pages' },
+  { label: 'Split pages', query: 'pages split' },
   { label: 'Make smaller', query: 'compress' },
+  { label: 'JPG tools', query: 'jpg' },
+  { label: 'Word text', query: 'word' },
+  { label: 'Signature', query: 'signature' },
   { label: 'Images to PDF', query: 'images to pdf' },
   { label: 'PDF to images', query: 'pdf images' },
-  { label: 'Extract text', query: 'extract text ocr' },
+  { label: 'Extract text', query: 'extract text' },
   { label: 'Add watermark', query: 'watermark' },
-  { label: 'Hide sensitive text', query: 'redact' },
+  { label: 'Private cleanup', query: 'private' },
 ];
+
+const TOOL_ALIASES: Record<string, string> = {
+  '/merge': 'combine join append bundle files',
+  '/split': 'separate pages page ranges extract',
+  '/compress': 'smaller reduce filesize size optimize private',
+  '/pdf-to-images': 'jpg jpeg png export convert pages image',
+  '/images-to-pdf': 'jpg jpeg png webp photo image combine convert',
+  '/extract-text': 'ocr copy words scanned private',
+  '/watermark-pdf': 'brand stamp draft confidential overlay',
+  '/redact-pdf': 'hide sensitive private black out remove',
+  '/sign-pdf': 'signature signing draw initials',
+  '/pdf-to-docx': 'word doc docx text extract copy',
+  '/pdf-to-excel': 'excel sheets xlsx table text extract',
+  '/pdf-to-pptx': 'powerpoint slides pptx text extract',
+  '/page-dimensions': 'size inspect measure width height',
+  '/remove-metadata': 'private privacy clean author title hidden data',
+  '/sanitize-pdf': 'private privacy clean hidden data scripts',
+};
+
+const getWorkflowId = (tool: ToolDefinition): WorkflowId => {
+  if (tool.category === 'organize-manage') return 'organize-pdfs';
+  if (tool.category === 'edit-annotate') return 'edit-annotate';
+  if (tool.category === 'optimize-repair') return 'optimize-repair';
+  if (tool.category === 'secure-pdf') return 'protect-clean';
+  if (tool.category === 'convert-to-pdf') return 'convert-files';
+
+  if ([
+    '/extract-text',
+    '/extract-images',
+    '/pdf-to-json',
+    '/pdf-to-markdown',
+    '/pdf-to-docx',
+    '/pdf-to-excel',
+    '/pdf-to-pptx',
+  ].includes(tool.slug)) {
+    return 'extract-content';
+  }
+
+  return 'convert-files';
+};
 
 const getToolSearchText = (tool: ToolDefinition) =>
   [
     tool.title,
     tool.shortTitle,
     tool.description,
-    CATEGORY_INFO[tool.category].label,
-    CATEGORY_INFO[tool.category].intent,
+    WORKFLOWS[getWorkflowId(tool)].label,
+    WORKFLOWS[getWorkflowId(tool)].intent,
+    WORKFLOWS[getWorkflowId(tool)].keywords,
+    TOOL_ALIASES[tool.slug] ?? '',
+    'private local browser no upload secure',
   ]
     .join(' ')
     .toLowerCase();
@@ -121,7 +181,7 @@ const ToolCard = ({ tool, compact = false }: { tool: ToolDefinition; compact?: b
 
 export const Home = () => {
   const [search, setSearch] = useState('');
-  const [activeCategory, setActiveCategory] = useState<ToolCategory | 'all'>('all');
+  const [activeWorkflow, setActiveWorkflow] = useState<WorkflowId | 'all'>('all');
 
   const tools = useMemo(() => discoverableTools, []);
   const popularTools = POPULAR_SLUGS
@@ -129,24 +189,24 @@ export const Home = () => {
     .filter((tool): tool is ToolDefinition => Boolean(tool));
 
   const filteredTools = tools.filter((tool) => {
-    const categoryMatches = activeCategory === 'all' || tool.category === activeCategory;
+    const workflowMatches = activeWorkflow === 'all' || getWorkflowId(tool) === activeWorkflow;
     const terms = search
       .toLowerCase()
       .split(/\s+/)
       .map((term) => term.trim())
       .filter(Boolean);
 
-    if (!categoryMatches) return false;
+    if (!workflowMatches) return false;
     if (terms.length === 0) return true;
 
     const haystack = getToolSearchText(tool);
     return terms.every((term) => haystack.includes(term));
   });
 
-  const groupedTools = (Object.keys(CATEGORY_INFO) as ToolCategory[])
-    .map((category) => ({
-      category,
-      tools: tools.filter((tool) => tool.category === category),
+  const groupedTools = (Object.keys(WORKFLOWS) as WorkflowId[])
+    .map((workflow) => ({
+      workflow,
+      tools: tools.filter((tool) => getWorkflowId(tool) === workflow),
     }))
     .filter((group) => group.tools.length > 0);
 
@@ -198,7 +258,7 @@ export const Home = () => {
               <input
                 id="tool-search"
                 type="search"
-                placeholder="Try merge, compress, extract text, watermark, redact..."
+                placeholder="Try jpg, word, signature, pages, compress, private, extract..."
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
                 className="w-full rounded-lg border border-border bg-card py-4 pl-12 pr-4 text-base text-foreground outline-none transition focus:ring-2 focus:ring-foreground/20"
@@ -211,7 +271,7 @@ export const Home = () => {
                   type="button"
                   onClick={() => {
                     setSearch(intent.query);
-                    setActiveCategory('all');
+                    setActiveWorkflow('all');
                   }}
                   className="rounded-full border border-border bg-card px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 >
@@ -220,23 +280,22 @@ export const Home = () => {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="container py-8 md:py-10">
-        <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-sm font-semibold uppercase text-muted-foreground">Popular</p>
-            <h2 className="text-2xl font-bold text-foreground">Start with a common task</h2>
+          <div className="mt-8">
+            <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-sm font-semibold uppercase text-muted-foreground">Popular tools</p>
+                <h2 className="text-2xl font-bold text-foreground">Start with a common task</h2>
+              </div>
+              <p className="max-w-xl text-sm text-muted-foreground">
+                Highest-confidence tools stay above the fold.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {popularTools.map((tool) => (
+                <ToolCard key={tool.slug} tool={tool} compact />
+              ))}
+            </div>
           </div>
-          <p className="max-w-xl text-sm text-muted-foreground">
-            These are the clearest, most useful workflows to keep near the top.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {popularTools.map((tool) => (
-            <ToolCard key={tool.slug} tool={tool} compact />
-          ))}
         </div>
       </section>
 
@@ -249,7 +308,7 @@ export const Home = () => {
             </div>
             <button
               type="button"
-              onClick={() => setActiveCategory('all')}
+              onClick={() => setActiveWorkflow('all')}
               className="self-start rounded-lg border border-border bg-background px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted md:self-auto"
             >
               Show all
@@ -257,17 +316,17 @@ export const Home = () => {
           </div>
 
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {(Object.keys(CATEGORY_INFO) as ToolCategory[]).map((category) => {
-              const info = CATEGORY_INFO[category];
+            {(Object.keys(WORKFLOWS) as WorkflowId[]).map((workflow) => {
+              const info = WORKFLOWS[workflow];
               const Icon = info.icon;
-              const count = tools.filter((tool) => tool.category === category).length;
-              const isActive = activeCategory === category;
+              const count = tools.filter((tool) => getWorkflowId(tool) === workflow).length;
+              const isActive = activeWorkflow === workflow;
 
               return (
                 <button
-                  key={category}
+                  key={workflow}
                   type="button"
-                  onClick={() => setActiveCategory(isActive ? 'all' : category)}
+                  onClick={() => setActiveWorkflow(isActive ? 'all' : workflow)}
                   className={`rounded-lg border p-4 text-left transition-colors ${isActive ? 'border-foreground bg-background' : 'border-border bg-background hover:bg-muted'}`}
                 >
                   <div className="mb-3 flex items-center justify-between gap-3">
@@ -293,18 +352,18 @@ export const Home = () => {
         <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase text-muted-foreground">
-              {search || activeCategory !== 'all' ? 'Results' : 'Ready tools'}
+              {search || activeWorkflow !== 'all' ? 'Results' : 'Ready tools'}
             </p>
             <h2 className="text-2xl font-bold text-foreground">
               {filteredTools.length} tool{filteredTools.length === 1 ? '' : 's'} available
             </h2>
           </div>
-          {(search || activeCategory !== 'all') ? (
+          {(search || activeWorkflow !== 'all') ? (
             <button
               type="button"
               onClick={() => {
                 setSearch('');
-                setActiveCategory('all');
+                setActiveWorkflow('all');
               }}
               className="self-start rounded-lg border border-border bg-card px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted md:self-auto"
             >
@@ -321,7 +380,7 @@ export const Home = () => {
               Try a simpler action like compress, split, image, text, watermark, or redact.
             </p>
           </div>
-        ) : search || activeCategory !== 'all' ? (
+        ) : search || activeWorkflow !== 'all' ? (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
             {filteredTools.map((tool) => (
               <ToolCard key={tool.slug} tool={tool} />
@@ -329,12 +388,12 @@ export const Home = () => {
           </div>
         ) : (
           <div className="space-y-10">
-            {groupedTools.map(({ category, tools: categoryTools }) => {
-              const info = CATEGORY_INFO[category];
+            {groupedTools.map(({ workflow, tools: workflowTools }) => {
+              const info = WORKFLOWS[workflow];
               const Icon = info.icon;
 
               return (
-                <div key={category}>
+                <div key={workflow}>
                   <div className="mb-4 flex items-center gap-3">
                     <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-background">
                       <Icon className="h-4 w-4" />
@@ -345,7 +404,7 @@ export const Home = () => {
                     </div>
                   </div>
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-                    {categoryTools.map((tool) => (
+                    {workflowTools.map((tool) => (
                       <ToolCard key={tool.slug} tool={tool} compact />
                     ))}
                   </div>

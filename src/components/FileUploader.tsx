@@ -150,9 +150,18 @@ export const FileUploader = ({
             <div className="rounded-lg border border-border bg-background px-4 py-3 text-sm text-muted-foreground">
                 <div className="flex items-start gap-3">
                     <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                    <p>
-                        Your file is processed in this browser tab. Review the settings and results, then download the output when you are ready.
-                    </p>
+                    <div className="min-w-0">
+                        <p>
+                            Your file is processed in this browser tab. Review the settings and results, then download the output when you are ready.
+                        </p>
+                        <div className="mt-3 grid grid-cols-2 gap-2 text-xs md:grid-cols-4">
+                            {['1. Upload', '2. Settings', '3. Review', '4. Download'].map((step) => (
+                                <div key={step} className="rounded-md border border-border bg-card px-2.5 py-2 text-center font-medium text-muted-foreground">
+                                    {step}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
             {validationMessage ? (
