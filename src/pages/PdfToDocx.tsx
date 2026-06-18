@@ -26,16 +26,16 @@ export const PdfToDocx = () => {
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo title="PDF to Word (DOCX) Online – Free & Private" description="Convert PDF content to PDF to Word (DOCX). Browser-based text extraction." faqItems={[{question:'Does the output look exactly like the PDF?',answer:'Text content is extracted; precise formatting requires a desktop converter like LibreOffice.'},{question:'Is my file uploaded?',answer:'No. All processing is local in your browser.'}]} />
+      <PageSeo title="Extract PDF Text for Word – Free & Private" description="Extract PDF text into a plain text file you can open or paste into Word. Browser-based and private." faqItems={[{question:'Does this create a DOCX file?',answer:'No. This extracts text into a plain text file. Editable DOCX conversion is not published yet.'},{question:'Is my file uploaded?',answer:'No. All processing is local in your browser.'}]} />
       <div className="page-header"><div className="container">
         <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 text-white flex items-center justify-center shadow-lg"><FileText className="w-6 h-6" /></div></div>
-        <h1>PDF to Word (DOCX) Online</h1><p>Extract text content from your PDF. Browser-based, private.</p>
+        <h1>Extract PDF Text for Word</h1><p>Extract readable text from your PDF as a plain text file. Browser-based, private.</p>
       </div></div>
       <div className="container pb-12"><div className="max-w-2xl mx-auto">
         <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
           <div className="flex items-start gap-2 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-3 text-sm text-blue-700 dark:text-blue-300 mb-5">
             <Info className="w-4 h-4 mt-0.5 shrink-0" />
-            <span>Browser-based extraction preserves text content. For pixel-perfect formatting, use a desktop app like LibreOffice.</span>
+            <span>This tool extracts text only. It does not create an editable DOCX file.</span>
           </div>
           <FileUploader onFilesSelected={f => { setFile(f[0]); setError(null); setSuccess(false); }} multiple={false} accept=".pdf" description="Drop a PDF file here" />
           {file && (
@@ -50,7 +50,7 @@ export const PdfToDocx = () => {
           )}
         </div>
       </div></div>
-      <FAQSection items={[{question:'Does the output look exactly like the PDF?',answer:'Text content is extracted. For pixel-perfect output use a desktop converter.'},{question:'Is my file uploaded?',answer:'No. Everything happens in the browser.'}]} />
+      <FAQSection items={[{question:'Does this create a DOCX file?',answer:'No. It downloads extracted text as a .txt file.'},{question:'Is my file uploaded?',answer:'No. Everything happens in the browser.'}]} />
     </div>
   );
 };

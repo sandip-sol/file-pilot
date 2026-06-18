@@ -20,6 +20,8 @@ export type ToolCategory =
   | 'optimize-repair'
   | 'secure-pdf';
 
+export type ToolStatus = 'ready' | 'beta' | 'coming-soon' | 'hidden';
+
 export interface ToolDefinition {
   slug: string;
   title: string;
@@ -460,20 +462,20 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'convert-from-pdf',
   },
   {
-    slug: '/pdf-to-docx', title: 'PDF to Word', shortTitle: 'PDF→DOCX',
-    description: 'Convert PDF files to editable Word DOCX documents.',
+    slug: '/pdf-to-docx', title: 'Extract PDF Text for Word', shortTitle: 'PDF Text',
+    description: 'Extract PDF text as a plain text document you can paste into Word.',
     icon: FileText, gradientClassName: 'from-blue-600 to-blue-800',
     category: 'convert-from-pdf',
   },
   {
-    slug: '/pdf-to-pptx', title: 'PDF to PowerPoint', shortTitle: 'PDF→PPTX',
-    description: 'Convert PDF pages to editable PowerPoint slides.',
+    slug: '/pdf-to-pptx', title: 'Extract PDF Text for Slides', shortTitle: 'PDF Text',
+    description: 'Extract PDF text as a plain text document you can use in slides.',
     icon: GanttChart, gradientClassName: 'from-red-500 to-orange-700',
     category: 'convert-from-pdf',
   },
   {
-    slug: '/pdf-to-excel', title: 'PDF to Excel', shortTitle: 'PDF→Excel',
-    description: 'Extract tables from PDFs into editable Excel spreadsheets.',
+    slug: '/pdf-to-excel', title: 'Extract PDF Text for Sheets', shortTitle: 'PDF Text',
+    description: 'Extract PDF text as a plain text document you can review in a spreadsheet.',
     icon: FileSpreadsheet, gradientClassName: 'from-green-600 to-green-800',
     category: 'convert-from-pdf',
   },
@@ -629,7 +631,62 @@ export const toolRegistry: ToolDefinition[] = [
   },
 ];
 
-export const primaryNavTools = toolRegistry.filter((t) => t.featured);
-
 export const toolsByCategory = (cat: ToolCategory) =>
   toolRegistry.filter((t) => t.category === cat);
+
+const betaToolSlugs = new Set([
+  '/remove-blank-pages',
+  '/heic-to-pdf',
+  '/tiff-to-pdf',
+  '/repair-pdf',
+  '/deskew-pdf',
+]);
+
+const comingSoonToolSlugs = new Set([
+  '/add-attachments',
+  '/extract-attachments',
+  '/ocr-pdf',
+  '/invert-colors',
+  '/word-to-pdf',
+  '/excel-to-pdf',
+  '/pptx-to-pdf',
+  '/epub-to-pdf',
+  '/mobi-to-pdf',
+  '/rtf-to-pdf',
+  '/xps-to-pdf',
+  '/djvu-to-pdf',
+  '/fb2-to-pdf',
+  '/email-to-pdf',
+  '/cbz-to-pdf',
+  '/digital-sign-pdf',
+  '/validate-signature',
+]);
+
+const hiddenToolSlugs = new Set([
+  '/edit-metadata',
+  '/linearize-pdf',
+  '/remove-restrictions',
+  '/encrypt-pdf',
+  '/decrypt-pdf',
+  '/change-permissions',
+  '/timestamp-pdf',
+]);
+
+export const getToolStatus = (tool: ToolDefinition): ToolStatus => {
+  if (hiddenToolSlugs.has(tool.slug)) return 'hidden';
+  if (comingSoonToolSlugs.has(tool.slug)) return 'coming-soon';
+  if (betaToolSlugs.has(tool.slug)) return 'beta';
+  return 'ready';
+};
+
+export const discoverableTools = toolRegistry.filter((tool) => {
+  const status = getToolStatus(tool);
+  return status === 'ready' || status === 'beta';
+});
+
+export const plannedTools = toolRegistry.filter((tool) => getToolStatus(tool) === 'coming-soon');
+
+export const primaryNavTools = discoverableTools.filter((tool) => tool.featured);
+
+export const discoverableToolsByCategory = (cat: ToolCategory) =>
+  discoverableTools.filter((tool) => tool.category === cat);

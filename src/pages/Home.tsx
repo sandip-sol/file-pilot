@@ -16,82 +16,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
-import { toolRegistry, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
-
-const READY_TOOL_SLUGS = new Set([
-  '/merge',
-  '/split',
-  '/organize-pdf',
-  '/rotate-pdf',
-  '/delete-pages',
-  '/extract-pages',
-  '/reverse-pdf',
-  '/add-blank-page',
-  '/alternate-merge',
-  '/n-up-pdf',
-  '/overlay-pdf',
-  '/divide-pages',
-  '/combine-single-page',
-  '/grid-combine',
-  '/posterize-pdf',
-  '/add-page-labels',
-  '/pdf-metadata',
-  '/pdf-to-zip',
-  '/compare-pdf',
-  '/pdf-booklet',
-  '/annotate-pdf',
-  '/watermark-pdf',
-  '/redact-pdf',
-  '/sign-pdf',
-  '/crop-pdf',
-  '/bookmark',
-  '/table-of-contents',
-  '/page-numbers',
-  '/header-footer',
-  '/background-color',
-  '/add-stamp',
-  '/remove-annotations',
-  '/form-filler',
-  '/form-creator',
-  '/images-to-pdf',
-  '/jpg-to-pdf',
-  '/png-to-pdf',
-  '/webp-to-pdf',
-  '/svg-to-pdf',
-  '/bmp-to-pdf',
-  '/text-to-pdf',
-  '/json-to-pdf',
-  '/markdown-to-pdf',
-  '/pdf-to-images',
-  '/pdf-to-jpg',
-  '/pdf-to-png',
-  '/pdf-to-webp',
-  '/pdf-to-tiff',
-  '/pdf-to-svg',
-  '/pdf-to-greyscale',
-  '/pdf-to-json',
-  '/pdf-to-markdown',
-  '/extract-text',
-  '/extract-images',
-  '/pdf-to-cbz',
-  '/rasterize-pdf',
-  '/compress',
-  '/fix-page-size',
-  '/page-dimensions',
-  '/sanitize-pdf',
-  '/find-and-redact',
-  '/flatten-pdf',
-  '/remove-metadata',
-  '/image-requirements',
-]);
-
-const BETA_TOOL_SLUGS = new Set([
-  '/remove-blank-pages',
-  '/heic-to-pdf',
-  '/tiff-to-pdf',
-  '/repair-pdf',
-  '/deskew-pdf',
-]);
+import { discoverableTools, getToolStatus, plannedTools, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
 
 const POPULAR_SLUGS = [
   '/merge',
@@ -148,9 +73,6 @@ const QUICK_INTENTS = [
   { label: 'Hide sensitive text', query: 'redact' },
 ];
 
-const getDiscoverableTools = () =>
-  toolRegistry.filter((tool) => READY_TOOL_SLUGS.has(tool.slug) || BETA_TOOL_SLUGS.has(tool.slug));
-
 const getToolSearchText = (tool: ToolDefinition) =>
   [
     tool.title,
@@ -162,11 +84,16 @@ const getToolSearchText = (tool: ToolDefinition) =>
     .join(' ')
     .toLowerCase();
 
-const getStatus = (tool: ToolDefinition) => (BETA_TOOL_SLUGS.has(tool.slug) ? 'Beta' : 'Ready');
+const getStatusLabel = (tool: ToolDefinition) => {
+  const status = getToolStatus(tool);
+  if (status === 'coming-soon') return 'Coming soon';
+  if (status === 'beta') return 'Beta';
+  return 'Ready';
+};
 
 const ToolCard = ({ tool, compact = false }: { tool: ToolDefinition; compact?: boolean }) => {
   const Icon = tool.icon;
-  const status = getStatus(tool);
+  const status = getStatusLabel(tool);
 
   return (
     <Link
@@ -177,7 +104,7 @@ const ToolCard = ({ tool, compact = false }: { tool: ToolDefinition; compact?: b
         <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.gradientClassName} text-white`}>
           <Icon className="h-5 w-5" />
         </div>
-        <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${status === 'Ready' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}`}>
+        <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${status === 'Ready' ? 'bg-emerald-50 text-emerald-700' : status === 'Beta' ? 'bg-amber-50 text-amber-700' : 'bg-slate-100 text-slate-700'}`}>
           {status}
         </span>
       </div>
@@ -196,7 +123,7 @@ export const Home = () => {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<ToolCategory | 'all'>('all');
 
-  const tools = useMemo(() => getDiscoverableTools(), []);
+  const tools = useMemo(() => discoverableTools, []);
   const popularTools = POPULAR_SLUGS
     .map((slug) => tools.find((tool) => tool.slug === slug))
     .filter((tool): tool is ToolDefinition => Boolean(tool));
@@ -236,7 +163,7 @@ export const Home = () => {
             <div>
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-sm text-muted-foreground">
                 <Sparkles className="h-4 w-4 text-foreground" />
-                Fast local tools, shown by readiness
+                {tools.length} ready or beta tools. {plannedTools.length} planned tools hidden until reliable.
               </div>
               <h1 className="max-w-3xl text-3xl font-bold leading-tight text-foreground md:text-5xl">
                 Find the right PDF tool in seconds.

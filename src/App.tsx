@@ -7,6 +7,7 @@ const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })))
 const Privacy = lazy(() => import('./pages/Privacy').then(m => ({ default: m.Privacy })));
 const Terms = lazy(() => import('./pages/Terms').then(m => ({ default: m.Terms })));
 const ImageRequirements = lazy(() => import('./pages/ImageRequirements').then(m => ({ default: m.ImageRequirements })));
+const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 
 // ─── Organize & Manage ───────────────────────────────────────────────────────
 const Merge = lazy(() => import('./pages/Merge').then(m => ({ default: m.Merge })));
@@ -102,7 +103,6 @@ const RemoveRestrictions = lazy(() => import('./pages/SecureOptimizePages').then
 
 // ─── Secure PDF ─────────────────────────────────────────────────────────────
 const PdfSecurity = lazy(() => import('./pages/PdfSecurity').then(m => ({ default: m.PdfSecurity })));
-const EncryptDecryptPdf = lazy(() => import('./pages/EncryptDecryptPdf').then(m => ({ default: m.EncryptDecryptPdf })));
 const SanitizePdf = lazy(() => import('./pages/SanitizePdf').then(m => ({ default: m.SanitizePdf })));
 const FindAndRedact = lazy(() => import('./pages/FindAndRedact').then(m => ({ default: m.FindAndRedactPage })));
 const FlattenPdf = lazy(() => import('./pages/FlattenPdf').then(m => ({ default: m.FlattenPdf })));
@@ -225,7 +225,7 @@ function App() {
 
           {/* Secure PDF */}
           <Route path="/pdf-security" element={<PdfSecurity />} />
-          <Route path="/encrypt-decrypt-pdf" element={<EncryptDecryptPdf />} />
+          <Route path="/encrypt-decrypt-pdf" element={<PdfSecurity />} />
           <Route path="/sanitize-pdf" element={<SanitizePdf />} />
           <Route path="/find-and-redact" element={<FindAndRedact />} />
           <Route path="/flatten-pdf" element={<FlattenPdf />} />
@@ -234,6 +234,7 @@ function App() {
           <Route path="/digital-sign-pdf" element={<DigitalSignPdf />} />
           <Route path="/validate-signature" element={<ValidateSignature />} />
           <Route path="/timestamp-pdf" element={<TimestampPdf />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </Layout>
