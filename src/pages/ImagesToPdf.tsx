@@ -5,6 +5,7 @@ import type { ImageItem } from '../utils/pdfHelpers';
 import { Image as ImageIcon, Loader2, Download, X, RotateCw, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { Link } from 'react-router-dom';
 
 export const ImagesToPdf = () => {
     const [items, setItems] = useState<ImageItem[]>([]);
@@ -181,6 +182,13 @@ export const ImagesToPdf = () => {
                                     </>
                                 )}
                             </button>
+
+                            <div className="mt-6 rounded-2xl border border-border bg-background p-4 text-sm text-muted-foreground">
+                                <p>Need the reverse workflow?</p>
+                                <Link to="/pdf-to-images" className="mt-2 inline-flex items-center gap-2 font-medium text-foreground hover:underline">
+                                    Open PDF to Images
+                                </Link>
+                            </div>
                         </div>
                     </div>
 

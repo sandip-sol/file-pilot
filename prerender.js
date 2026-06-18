@@ -27,8 +27,15 @@ const ROUTES = [
   '/',
   '/merge',
   '/split',
+  '/organize-pdf',
+  '/watermark-pdf',
+  '/pdf-security',
+  '/redact-pdf',
   '/images-to-pdf',
+  '/pdf-to-images',
   '/extract-text',
+  '/compare-pdf',
+  '/annotate-pdf',
   '/compress',
   '/image-requirements',
   '/privacy',
@@ -69,8 +76,9 @@ function startServer() {
     }
   });
 
-  return new Promise((resolve) => {
-    server.listen(PORT, () => resolve(server));
+  return new Promise((resolve, reject) => {
+    server.once('error', reject);
+    server.listen(PORT, '127.0.0.1', () => resolve(server));
   });
 }
 
@@ -113,7 +121,7 @@ async function prerender() {
 prerender().catch((err) => {
   console.error('⚠ Prerender skipped:', err.message);
   console.error('  The build output in dist/ is still valid but will not have prerendered HTML.');
-  console.error('  Install Chrome/Chromium system dependencies to enable prerendering.');
+  console.error('  Install Chrome/Chromium system dependencies and allow the local preview port to enable prerendering.');
   // Exit 0 so the build doesn't fail — prerender is an enhancement, not a requirement.
   process.exit(0);
 });

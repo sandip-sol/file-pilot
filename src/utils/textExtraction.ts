@@ -1,8 +1,6 @@
-import { GlobalWorkerOptions, getDocument } from 'pdfjs-dist';
-import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
-import { recognizeImageText } from './ocrHelpers';
-
-GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
+import { recognizeImageText, toOcrPageResult } from './ocrHelpers';
+import type { ExtractedDocumentResult, OcrPageResult } from './pdf/types';
+import { getPdfPageText, openPdfDocument, renderPdfPageToCanvas } from './pdf/rendering';
 
 interface ExtractionProgress {
     fileIndex: number;
@@ -19,10 +17,9 @@ export interface ExtractedTextResult {
 const isPdfFile = (file: File) =>
     file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
 
-const readPdfTextLayer = async (file: File, onProgress?: (progress: ExtractionProgress) => void) => {
-    const arrayBuffer = await file.arrayBuffer();
-    const pdf = await getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
-    const pages: string[] = [];
+const readPdfPages = async (file: File, onProgress?: (progress: ExtractionProgress) => void): Promise<OcrPageResult[]> => {
+    const { pdf } = await openPdfDocument(file);
+    const pages: OcrPageResult[] = [];
 
     for (let pageIndex = 1; pageIndex <= pdf.numPages; pageIndex += 1) {
         onProgress?.({
@@ -32,19 +29,22 @@ const readPdfTextLayer = async (file: File, onProgress?: (progress: ExtractionPr
             stage: `Reading PDF page ${pageIndex}/${pdf.numPages}`,
         });
 
-        const page = await pdf.getPage(pageIndex);
-        const textContent = await page.getTextContent();
-        const pageText = textContent.items
-            .map((item) => {
-                if (!('str' in item)) return '';
-                return typeof item.str === 'string' ? item.str : '';
-            })
-            .join(' ')
-            .replace(/\s+/g, ' ')
-            .trim();
+        const pageText = await getPdfPageText(pdf, pageIndex);
 
         if (pageText) {
-            pages.push(pageText);
+            const canvas = await renderPdfPageToCanvas(pdf, pageIndex, 1.2);
+            const previewUrl = canvas.toDataURL('image/png');
+            pages.push({
+                pageNumber: pageIndex,
+                width: canvas.width,
+                height: canvas.height,
+                text: pageText,
+                averageConfidence: 100,
+                blocks: [],
+                lines: [],
+                words: [],
+                previewUrl,
+            });
             continue;
         }
 
@@ -55,28 +55,15 @@ const readPdfTextLayer = async (file: File, onProgress?: (progress: ExtractionPr
             stage: `Running OCR on PDF page ${pageIndex}/${pdf.numPages}`,
         });
 
-        const viewport = page.getViewport({ scale: 2 });
-        const canvas = document.createElement('canvas');
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        const context = canvas.getContext('2d');
-
-        if (!context) {
-            throw new Error('Canvas context not available');
-        }
-
-        await page.render({ canvasContext: context, viewport, canvas }).promise;
+        const canvas = await renderPdfPageToCanvas(pdf, pageIndex, 2);
         const ocrResult = await recognizeImageText(canvas);
-        pages.push(ocrResult.text.replace(/\s+/g, ' ').trim());
+        pages.push(toOcrPageResult(pageIndex, canvas.width, canvas.height, ocrResult, canvas.toDataURL('image/png')));
     }
 
-    return pages
-        .map((pageText, index) => pageText ? `Page ${index + 1}\n${pageText}` : '')
-        .filter(Boolean)
-        .join('\n\n');
+    return pages;
 };
 
-const readImageText = async (file: File) => {
+const readImagePages = async (file: File): Promise<OcrPageResult[]> => {
     const canvas = document.createElement('canvas');
     const bitmap = await createImageBitmap(file);
     canvas.width = bitmap.width;
@@ -90,14 +77,14 @@ const readImageText = async (file: File) => {
     context.drawImage(bitmap, 0, 0);
     const result = await recognizeImageText(canvas);
     bitmap.close();
-    return result.text.replace(/\s+/g, ' ').trim();
+    return [toOcrPageResult(1, canvas.width, canvas.height, result, canvas.toDataURL('image/png'))];
 };
 
-export const extractTextFromFiles = async (
+export const extractRichTextFromFiles = async (
     files: File[],
     onProgress?: (progress: ExtractionProgress) => void,
-): Promise<ExtractedTextResult[]> => {
-    const results: ExtractedTextResult[] = [];
+): Promise<ExtractedDocumentResult[]> => {
+    const results: ExtractedDocumentResult[] = [];
 
     for (const [index, file] of files.entries()) {
         onProgress?.({
@@ -107,21 +94,39 @@ export const extractTextFromFiles = async (
             stage: isPdfFile(file) ? 'Opening PDF' : 'Running OCR on image',
         });
 
-        const text = isPdfFile(file)
-            ? await readPdfTextLayer(file, (progress) =>
+        const pages = isPdfFile(file)
+            ? await readPdfPages(file, (progress) =>
                 onProgress?.({
                     fileIndex: index + 1,
                     totalFiles: files.length,
                     fileName: file.name,
                     stage: progress.stage,
                 }))
-            : await readImageText(file);
+            : await readImagePages(file);
+
+        const text = pages
+            .map((page) => page.text?.trim() ? `Page ${page.pageNumber}\n${page.text.trim()}` : '')
+            .filter(Boolean)
+            .join('\n\n');
 
         results.push({
             fileName: file.name,
             text,
+            pages,
+            sourceType: isPdfFile(file) ? 'pdf' : 'image',
         });
     }
 
     return results;
+};
+
+export const extractTextFromFiles = async (
+    files: File[],
+    onProgress?: (progress: ExtractionProgress) => void,
+): Promise<ExtractedTextResult[]> => {
+    const richResults = await extractRichTextFromFiles(files, onProgress);
+    return richResults.map((item) => ({
+        fileName: item.fileName,
+        text: item.text,
+    }));
 };
