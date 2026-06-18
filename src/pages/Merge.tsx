@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
+import { FileReadinessPanel } from '../components/pdf/FileReadinessPanel';
 import { mergePDFs, downloadBlob } from '../utils/pdfHelpers';
+import { getPdfRecoveryMessage } from '../utils/pdf/errorMessages';
 import { ArrowUp, ArrowDown, X, FileText, Loader2, Download, CheckCircle, Files } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
@@ -50,7 +52,7 @@ export const Merge = () => {
             setTimeout(() => setSuccess(false), 3000);
         } catch (err) {
             console.error(err);
-            setError('Failed to merge PDFs. One of the files might be corrupted or encrypted.');
+            setError(getPdfRecoveryMessage(err, 'merge'));
         } finally {
             setIsProcessing(false);
         }
@@ -103,6 +105,10 @@ export const Merge = () => {
                                     >
                                         Clear All
                                     </button>
+                                </div>
+
+                                <div className="mb-8">
+                                    <FileReadinessPanel files={files} showPreview maxPreviewFiles={1} />
                                 </div>
 
                                 <div className="space-y-3 mb-8">

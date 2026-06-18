@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
+import { FileReadinessPanel } from '../components/pdf/FileReadinessPanel';
 import { PDFDocument } from 'pdf-lib';
 import { downloadBlob } from '../utils/pdfHelpers';
+import { getPdfRecoveryMessage } from '../utils/pdf/errorMessages';
 import { Loader2, Download, RefreshCw, FileText, Info, Minimize2, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
@@ -44,7 +46,7 @@ export const Compress = () => {
             setTimeout(() => setSuccess(false), 3000);
         } catch (err) {
             console.error(err);
-            setError('Failed to compress PDF.');
+            setError(getPdfRecoveryMessage(err, 'compress'));
         } finally {
             setIsProcessing(false);
         }
@@ -105,6 +107,10 @@ export const Compress = () => {
                                     >
                                         <RefreshCw className="w-5 h-5" />
                                     </button>
+                                </div>
+
+                                <div className="mb-8">
+                                    <FileReadinessPanel files={[file]} showPreview />
                                 </div>
 
                                 <div className="mb-8 p-4 bg-blue-50 text-blue-700 rounded-xl flex items-start gap-3 text-sm border border-blue-100">

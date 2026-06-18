@@ -224,7 +224,7 @@
   }
 
   .card {
-    @apply rounded-2xl border border-border bg-card p-7 transition-transform hover:-translate-y-1;
+    @apply rounded-lg border border-border bg-card p-5 transition-colors hover:bg-muted/40;
     box-shadow: var(--shadow-sm);
   }
 
@@ -243,8 +243,7 @@
   }
 
   .page-header {
-    background: linear-gradient(180deg, hsl(var(--secondary)) 0%, hsl(var(--background)) 100%);
-    @apply py-12 pb-8 mb-8 text-center;
+    @apply mb-8 border-b border-border bg-card/40 py-10 text-center;
   }
   .page-header h1 {
     @apply text-3xl font-bold mb-3;
@@ -254,7 +253,7 @@
   }
 
   .dropzone {
-    @apply cursor-pointer rounded-2xl border-2 border-dashed border-border bg-card/60 px-8 py-12 text-center transition-colors;
+    @apply cursor-pointer rounded-lg border-2 border-dashed border-border bg-card/60 px-8 py-10 text-center transition-colors;
   }
   .dropzone:hover {
     @apply bg-muted;
@@ -267,7 +266,7 @@
   }
 
   .file-item {
-    @apply flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-4;
+    @apply flex items-center gap-4 rounded-lg border border-border bg-card px-4 py-3;
   }
   .file-item:hover {
     box-shadow: var(--shadow-sm);

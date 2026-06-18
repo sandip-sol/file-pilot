@@ -7,6 +7,7 @@ import { Textarea } from '../components/ui/textarea';
 import { terminateOcrWorker } from '../utils/ocrHelpers';
 import { buildCombinedText, buildPerPageTextEntries, exportSearchablePdfFromOcr } from '../utils/pdf/ocrExport';
 import { downloadBytes, downloadTextFile, downloadZipFromEntries } from '../utils/pdf/export';
+import { getPdfRecoveryMessage } from '../utils/pdf/errorMessages';
 import type { ExtractedDocumentResult, OcrPageResult } from '../utils/pdf/types';
 import { extractRichTextFromFiles } from '../utils/textExtraction';
 
@@ -41,7 +42,7 @@ export const ExtractText = () => {
       setStatus(`Extracted text from ${extracted.length} file${extracted.length === 1 ? '' : 's'}.`);
     } catch (caughtError) {
       console.error(caughtError);
-      setError('Failed to extract text from one or more files. Some PDFs may be image-only or use unsupported features.');
+      setError(getPdfRecoveryMessage(caughtError, 'extract-text'));
       setStatus(null);
     } finally {
       setIsProcessing(false);

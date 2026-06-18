@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import JSZip from 'jszip';
 import { FileUploader } from '../components/FileUploader';
+import { FileReadinessPanel } from '../components/pdf/FileReadinessPanel';
 import { countPDFPages, splitPDFRange, splitPDFSeparate, downloadBlob } from '../utils/pdfHelpers';
+import { getPdfRecoveryMessage } from '../utils/pdf/errorMessages';
 import { FileText, Loader2, Scissors, Download, RefreshCw, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
@@ -28,7 +30,7 @@ export const Split = () => {
                 setRange({ start: 1, end: count });
             } catch (err) {
                 console.error(err);
-                setError('Failed to load PDF. It might be encrypted or corrupted.');
+                setError(getPdfRecoveryMessage(err, 'load'));
                 setFile(null);
             }
         }
@@ -72,7 +74,7 @@ export const Split = () => {
             setTimeout(() => setSuccess(false), 3000);
         } catch (err) {
             console.error(err);
-            setError('Failed to split PDF. Please try again.');
+            setError(getPdfRecoveryMessage(err, 'split'));
         } finally {
             setIsProcessing(false);
         }
@@ -133,6 +135,10 @@ export const Split = () => {
                                     >
                                         <RefreshCw className="w-5 h-5" />
                                     </button>
+                                </div>
+
+                                <div className="mb-8">
+                                    <FileReadinessPanel files={[file]} showPreview />
                                 </div>
 
                                 <div className="space-y-6 mb-8">

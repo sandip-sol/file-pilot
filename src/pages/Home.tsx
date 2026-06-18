@@ -11,7 +11,6 @@ import {
   Search,
   ShieldCheck,
   SlidersHorizontal,
-  Sparkles,
   Wrench,
   type LucideIcon,
 } from 'lucide-react';
@@ -154,26 +153,29 @@ const getStatusLabel = (tool: ToolDefinition) => {
 const ToolCard = ({ tool, compact = false }: { tool: ToolDefinition; compact?: boolean }) => {
   const Icon = tool.icon;
   const status = getStatusLabel(tool);
+  const showStatus = status !== 'Ready';
 
   return (
     <Link
       to={tool.slug}
-      className="group flex h-full flex-col rounded-lg border border-border bg-card p-4 transition-colors hover:bg-muted/70"
+      className={`group flex h-full min-h-[150px] flex-col rounded-lg border border-border bg-card p-3.5 transition-colors hover:border-foreground/40 hover:bg-muted/60 ${compact ? 'md:min-h-[140px]' : ''}`}
     >
       <div className="mb-3 flex items-start justify-between gap-3">
-        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.gradientClassName} text-white`}>
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-background text-foreground">
           <Icon className="h-5 w-5" />
         </div>
-        <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${status === 'Ready' ? 'bg-emerald-50 text-emerald-700' : status === 'Beta' ? 'bg-amber-50 text-amber-700' : 'bg-slate-100 text-slate-700'}`}>
-          {status}
-        </span>
+        {showStatus ? (
+          <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${status === 'Beta' ? 'bg-amber-50 text-amber-700' : 'bg-slate-100 text-slate-700'}`}>
+            {status}
+          </span>
+        ) : null}
       </div>
-      <h3 className="text-base font-bold text-foreground">{tool.title}</h3>
-      <p className={`mt-1 text-sm leading-relaxed text-muted-foreground ${compact ? 'line-clamp-2' : ''}`}>
+      <h3 className="line-clamp-1 text-sm font-bold text-foreground md:text-base">{tool.title}</h3>
+      <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
         {tool.description}
       </p>
-      <div className="mt-auto flex items-center gap-1 pt-4 text-sm font-semibold text-foreground">
-        Open tool <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+      <div className="mt-auto flex items-center gap-1 pt-3 text-sm font-semibold text-foreground">
+        Open <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
       </div>
     </Link>
   );
@@ -222,7 +224,7 @@ export const Home = () => {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
             <div>
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-sm text-muted-foreground">
-                <Sparkles className="h-4 w-4 text-foreground" />
+                <CheckCircle2 className="h-4 w-4 text-emerald-600" />
                 {tools.length} ready or beta tools. {plannedTools.length} planned tools hidden until reliable.
               </div>
               <h1 className="max-w-3xl text-3xl font-bold leading-tight text-foreground md:text-5xl">
@@ -231,6 +233,38 @@ export const Home = () => {
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
                 Search by what you want to do, then open a focused tool with local processing, clear settings, and a download you control.
               </p>
+
+              <div id="tools" className="mt-6 rounded-lg border border-border bg-background p-4 shadow-sm md:p-5">
+                <label htmlFor="tool-search" className="mb-2 block text-sm font-semibold text-foreground">
+                  What do you need to do?
+                </label>
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                  <input
+                    id="tool-search"
+                    type="search"
+                    placeholder="Try jpg, word, signature, pages, compress, private, extract..."
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
+                    className="w-full rounded-lg border border-border bg-card py-4 pl-12 pr-4 text-base text-foreground outline-none transition focus:ring-2 focus:ring-foreground/20"
+                  />
+                </div>
+                <div className="-mx-1 mt-4 flex gap-2 overflow-x-auto px-1 pb-1 md:flex-wrap md:overflow-visible md:pb-0">
+                  {QUICK_INTENTS.map((intent) => (
+                    <button
+                      key={intent.label}
+                      type="button"
+                      onClick={() => {
+                        setSearch(intent.query);
+                        setActiveWorkflow('all');
+                      }}
+                      className="shrink-0 rounded-full border border-border bg-card px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    >
+                      {intent.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
 
             <div className="grid gap-3 rounded-lg border border-border bg-background p-4">
@@ -248,38 +282,6 @@ export const Home = () => {
               </div>
             </div>
           </div>
-
-          <div id="tools" className="mt-8 rounded-lg border border-border bg-background p-4 shadow-sm md:p-5">
-            <label htmlFor="tool-search" className="mb-2 block text-sm font-semibold text-foreground">
-              What do you need to do?
-            </label>
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-              <input
-                id="tool-search"
-                type="search"
-                placeholder="Try jpg, word, signature, pages, compress, private, extract..."
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                className="w-full rounded-lg border border-border bg-card py-4 pl-12 pr-4 text-base text-foreground outline-none transition focus:ring-2 focus:ring-foreground/20"
-              />
-            </div>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {QUICK_INTENTS.map((intent) => (
-                <button
-                  key={intent.label}
-                  type="button"
-                  onClick={() => {
-                    setSearch(intent.query);
-                    setActiveWorkflow('all');
-                  }}
-                  className="rounded-full border border-border bg-card px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                >
-                  {intent.label}
-                </button>
-              ))}
-            </div>
-          </div>
           <div className="mt-8">
             <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
@@ -290,7 +292,7 @@ export const Home = () => {
                 Highest-confidence tools stay above the fold.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
               {popularTools.map((tool) => (
                 <ToolCard key={tool.slug} tool={tool} compact />
               ))}
@@ -315,7 +317,7 @@ export const Home = () => {
             </button>
           </div>
 
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-1 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 md:pb-0 xl:grid-cols-3">
             {(Object.keys(WORKFLOWS) as WorkflowId[]).map((workflow) => {
               const info = WORKFLOWS[workflow];
               const Icon = info.icon;
@@ -327,20 +329,20 @@ export const Home = () => {
                   key={workflow}
                   type="button"
                   onClick={() => setActiveWorkflow(isActive ? 'all' : workflow)}
-                  className={`rounded-lg border p-4 text-left transition-colors ${isActive ? 'border-foreground bg-background' : 'border-border bg-background hover:bg-muted'}`}
+                  className={`min-w-[230px] rounded-lg border p-3 text-left transition-colors md:min-w-0 ${isActive ? 'border-foreground bg-background' : 'border-border bg-background hover:bg-muted'}`}
                 >
-                  <div className="mb-3 flex items-center justify-between gap-3">
+                  <div className="mb-2 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-background">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card text-foreground">
                         <Icon className="h-4 w-4" />
                       </div>
-                      <span className="font-bold text-foreground">{info.label}</span>
+                      <span className="text-sm font-bold text-foreground">{info.label}</span>
                     </div>
                     <span className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
                       {count}
                     </span>
                   </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{info.intent}</p>
+                  <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">{info.intent}</p>
                 </button>
               );
             })}
@@ -381,7 +383,7 @@ export const Home = () => {
             </p>
           </div>
         ) : search || activeWorkflow !== 'all' ? (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
             {filteredTools.map((tool) => (
               <ToolCard key={tool.slug} tool={tool} />
             ))}
@@ -393,9 +395,9 @@ export const Home = () => {
               const Icon = info.icon;
 
               return (
-                <div key={workflow}>
+                <div key={workflow} className="border-t border-border pt-6 first:border-t-0 first:pt-0">
                   <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-background">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-foreground">
                       <Icon className="h-4 w-4" />
                     </div>
                     <div>
@@ -403,7 +405,7 @@ export const Home = () => {
                       <p className="text-sm text-muted-foreground">{info.intent}</p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
                     {workflowTools.map((tool) => (
                       <ToolCard key={tool.slug} tool={tool} compact />
                     ))}
