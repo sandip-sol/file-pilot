@@ -11,7 +11,7 @@ export const Terms = () => {
             <div className="page-header">
                 <div className="container">
                     <h1>Terms of Service</h1>
-                    <p>Simple terms for a simple tool</p>
+                    <p>Clear terms for using PDF Solver</p>
                 </div>
             </div>
 
@@ -82,7 +82,7 @@ export const Terms = () => {
                         </section>
 
                         <div className="pt-6 border-t border-[var(--border-light)] text-sm text-[var(--text-muted)]">
-                            <p>Last updated: {new Date().toLocaleDateString()}</p>
+                            <p>Last updated: June 19, 2026</p>
                         </div>
                     </div>
                 </div>

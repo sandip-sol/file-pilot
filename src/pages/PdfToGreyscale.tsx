@@ -28,7 +28,7 @@ export const PdfToGreyscale = () => {
             setTimeout(() => setSuccess(false), 4000);
         } catch (err) {
             console.error(err);
-            setError('Could not convert this PDF to greyscale. Please try again.');
+            setError('Could not convert this PDF to grayscale. Please try again.');
         } finally {
             setIsProcessing(false);
         }
@@ -37,10 +37,10 @@ export const PdfToGreyscale = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
             <PageSeo
-                title="PDF to Greyscale – Convert Colored PDF to Black & White"
-                description="Convert a color PDF to greyscale/black and white in your browser. Save ink and create printer-friendly docs. 100% private."
+                title="PDF to Grayscale - Convert Color PDF to Black & White"
+                description="Convert a color PDF to grayscale or black and white in your browser. Save ink and create printer-friendly documents. 100% private."
                 faqItems={[
-                    { question: 'How does greyscale conversion work?', answer: 'Each page is rendered to a canvas, converted to greyscale pixel-by-pixel, and repacked into a new PDF. No server involved.' },
+                    { question: 'How does grayscale conversion work?', answer: 'Each page is rendered to a canvas, converted to grayscale pixel by pixel, and repacked into a new PDF. No server involved.' },
                     { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
                 ]}
             />
@@ -51,8 +51,8 @@ export const PdfToGreyscale = () => {
                             <Moon className="w-6 h-6" />
                         </div>
                     </div>
-                    <h1>PDF to Greyscale</h1>
-                    <p>Convert any colored PDF to greyscale / black & white for printing and archiving.</p>
+                    <h1>PDF to Grayscale</h1>
+                    <p>Convert any color PDF to grayscale or black and white for printing and archiving.</p>
                 </div>
             </div>
 
@@ -60,7 +60,7 @@ export const PdfToGreyscale = () => {
                 <div className="max-w-3xl mx-auto">
                     <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
                         {!file ? (
-                            <FileUploader onFilesSelected={handleFileSelected} multiple={false} accept=".pdf" description="Drop a PDF to convert to greyscale" />
+                            <FileUploader onFilesSelected={handleFileSelected} multiple={false} accept=".pdf" description="Drop a PDF to convert to grayscale" />
                         ) : (
                             <div className="animate-fade-in space-y-6">
                                 <div className="flex items-center justify-between bg-gradient-to-r from-slate-50 to-zinc-50 p-4 rounded-xl border border-slate-100">
@@ -93,12 +93,12 @@ export const PdfToGreyscale = () => {
                                 {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl text-sm font-medium">{error}</div>}
                                 {success && (
                                     <div className="bg-[var(--success-light)] text-[var(--success)] p-4 rounded-xl text-sm font-medium flex items-center gap-2">
-                                        <CheckCircle className="w-5 h-5" /> Greyscale PDF downloaded!
+                                        <CheckCircle className="w-5 h-5" /> Grayscale PDF downloaded!
                                     </div>
                                 )}
 
                                 <button onClick={handleProcess} disabled={isProcessing} className={`btn btn-primary w-full py-4 text-lg ${isProcessing ? 'opacity-75 cursor-wait' : ''}`}>
-                                    {isProcessing ? (<><Loader2 className="w-6 h-6 animate-spin" />Converting...</>) : (<><Download className="w-6 h-6" />Convert to Greyscale</>)}
+                                    {isProcessing ? (<><Loader2 className="w-6 h-6 animate-spin" />Converting...</>) : (<><Download className="w-6 h-6" />Convert to Grayscale</>)}
                                 </button>
                             </div>
                         )}
@@ -107,7 +107,7 @@ export const PdfToGreyscale = () => {
             </div>
 
             <FAQSection items={[
-                { question: 'How does greyscale conversion work?', answer: 'Each page is rendered to a canvas, converted to greyscale pixel-by-pixel, and repacked into a new PDF. No server involved.' },
+                { question: 'How does grayscale conversion work?', answer: 'Each page is rendered to a canvas, converted to grayscale pixel by pixel, and repacked into a new PDF. No server involved.' },
                 { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
             ]} />
         </div>

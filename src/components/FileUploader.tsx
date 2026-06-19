@@ -163,7 +163,7 @@ export const FileUploader = ({
                     <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
                     <div className="min-w-0">
                         <p>
-                            Your file is processed in this browser tab. Review the settings and results, then download the output when you are ready.
+                            Your file stays on your device. Review the settings and results, then download the output when you are ready.
                         </p>
                         <div className="mt-3 grid grid-cols-2 gap-2 text-xs md:grid-cols-4">
                             {['1. Upload', '2. Settings', '3. Review', '4. Download'].map((step) => (

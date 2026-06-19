@@ -11,7 +11,7 @@ export const Privacy = () => {
             <div className="page-header">
                 <div className="container">
                     <h1>Privacy Policy</h1>
-                    <p>How we protect your data (spoiler: we never see it)</p>
+                    <p>How PDF Solver keeps your files on your device</p>
                 </div>
             </div>
 
@@ -24,7 +24,7 @@ export const Privacy = () => {
                             <div>
                                 <h2 className="text-2xl font-bold mb-2">Our Core Promise</h2>
                                 <p className="text-white/90 text-lg">
-                                    Your files never leave your device. All processing happens locally in your browser using secure technology. We have no servers that store or view your documents.
+                                    Your files never leave your device. Processing happens locally in your browser, so we cannot store, view, or analyze your documents.
                                 </p>
                             </div>
                         </div>
@@ -44,7 +44,7 @@ export const Privacy = () => {
                                 <Eye className="w-6 h-6" />
                             </div>
                             <h3 className="font-bold mb-2">No Tracking</h3>
-                            <p className="text-sm text-[var(--text-muted)]">We don't track, store, or analyze your usage</p>
+                            <p className="text-sm text-[var(--text-muted)]">We do not track, store, or analyze your usage</p>
                         </div>
                         <div className="bg-card border border-border rounded-xl p-6 text-center">
                             <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto mb-4">
@@ -74,12 +74,12 @@ export const Privacy = () => {
                         <section>
                             <h3 className="text-xl font-bold text-[var(--text)] mb-3">3. Third Parties</h3>
                             <p className="text-[var(--text-secondary)] leading-relaxed">
-                                We do not share any data with third parties because we don't collect any data to share.
+                                We do not share any data with third parties because we do not collect any data to share.
                             </p>
                         </section>
 
                         <div className="pt-6 border-t border-[var(--border-light)] text-sm text-[var(--text-muted)]">
-                            <p>Last updated: {new Date().toLocaleDateString()}</p>
+                            <p>Last updated: June 19, 2026</p>
                         </div>
                     </div>
                 </div>

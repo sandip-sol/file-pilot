@@ -15,9 +15,9 @@ interface PageSeoProps {
 }
 
 const SITE_URL = 'https://pdfsolver.app';
-const DEFAULT_TITLE = 'PDF & Image Tools – Resize, Compress & Convert Free Online';
+const DEFAULT_TITLE = 'PDF Solver - Free Private PDF & Image Tools';
 const DEFAULT_DESCRIPTION =
-    'Free online tools to resize images to exact pixels & KB, compress PDFs, convert formats. 100% private — files never leave your browser.';
+    'Free browser-based tools to merge, split, compress, convert, extract, watermark, and redact PDFs. Files stay on your device.';
 const DEFAULT_IMAGE = `${SITE_URL}/og-banner.png`;
 
 const upsertMeta = (selector: string, attributes: Record<string, string>) => {
@@ -49,7 +49,6 @@ export const PageSeo = ({ title, description, image = DEFAULT_IMAGE, canonicalPa
     useEffect(() => {
         const pathname = canonicalPath ?? location.pathname;
         const url = new URL(pathname, SITE_URL).toString();
-        // In PageSeo.tsx, add inside useEffect:
         const schema = {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",

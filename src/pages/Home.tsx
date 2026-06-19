@@ -216,8 +216,8 @@ export const Home = () => {
   return (
     <div>
       <PageSeo
-        title="Find the Right PDF Tool - Private Browser Tools"
-        description="Quickly find trusted browser-based PDF and image tools for merging, splitting, compressing, converting, extracting, watermarking, and redacting files."
+        title="PDF Solver - Private Browser-Based PDF Tools"
+        description="Merge, split, compress, convert, extract, watermark, and redact PDFs with private browser-based tools. Your files stay on your device."
       />
 
       <section className="border-b border-border bg-card/20">
@@ -226,13 +226,13 @@ export const Home = () => {
             <div>
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm text-muted-foreground">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                {tools.length} ready or beta tools. {plannedTools.length} planned tools hidden until reliable.
+                {tools.length} usable tools. {plannedTools.length} planned tools are hidden until reliable.
               </div>
               <h1 className="max-w-3xl text-3xl font-bold leading-tight text-foreground md:text-5xl">
-                Find the right PDF tool in seconds.
+                Work with PDFs without uploading your files.
               </h1>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                Search by what you want to do, then open a focused tool with local processing, clear settings, and a download you control.
+                Choose a focused tool for merging, splitting, compressing, converting, extracting, signing, or cleaning up PDFs. Everything runs locally in your browser.
               </p>
 
               <div id="tools" className="mt-6 rounded-lg border border-border bg-background/70 backdrop-blur-sm p-4 shadow-sm md:p-5">
@@ -244,7 +244,7 @@ export const Home = () => {
                   <input
                     id="tool-search"
                     type="search"
-                    placeholder="Try jpg, word, signature, pages, compress, private, extract..."
+                    placeholder="Try merge, split, compress, JPG, signature, pages, private, extract..."
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
                     className="w-full rounded-lg border border-border bg-card py-4 pl-12 pr-4 text-base text-foreground outline-none transition focus:ring-2 focus:ring-foreground/20"
@@ -274,7 +274,7 @@ export const Home = () => {
                 <div className="mt-4 grid gap-3">
                   <div className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Lock className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                    <span>Files stay in your browser tab</span>
+                    <span>Files stay on your device</span>
                   </div>
                   <div className="flex items-start gap-3 text-sm text-muted-foreground">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
@@ -282,7 +282,7 @@ export const Home = () => {
                   </div>
                   <div className="flex items-start gap-3 text-sm text-muted-foreground">
                     <SlidersHorizontal className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                    <span>Tool pages show settings before download</span>
+                    <span>Review settings before downloading results</span>
                   </div>
                 </div>
               </div>
@@ -327,7 +327,7 @@ export const Home = () => {
                 <h2 className="text-2xl font-bold text-foreground">Start with a common task</h2>
               </div>
               <p className="max-w-xl text-sm text-muted-foreground">
-                Highest-confidence tools stay above the fold.
+                Quick access to the tasks people use most.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -459,9 +459,9 @@ export const Home = () => {
         <div className="rounded-lg border border-border bg-card/60 backdrop-blur-sm p-5 md:p-6">
           <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
             <div>
-              <h2 className="text-xl font-bold text-foreground">Confidence before download</h2>
+              <h2 className="text-xl font-bold text-foreground">Private by default</h2>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                Tool pages now lead with local-processing cues at upload time. The next UX pass should add richer previews and file details to each high-traffic tool.
+                PDF Solver processes files in your browser, shows the relevant settings up front, and lets you download only when the result is ready.
               </p>
             </div>
             <Link to="/privacy" className="btn btn-outline">

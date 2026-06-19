@@ -115,7 +115,7 @@ export const FileReadinessPanel = ({
               console.error(error);
               previewWarning = {
                 limitation: 'Preview unavailable',
-                recovery: 'The file opened, but the first page could not be previewed in this browser tab.',
+                recovery: 'The file opened, but the first page could not be previewed in this browser.',
               };
             }
           }

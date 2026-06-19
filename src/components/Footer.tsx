@@ -23,7 +23,7 @@ export const Footer = () => {
 
                 {/* Internal Links for SEO */}
                 <div className="border-t border-border py-8">
-                    <p className="text-sm font-semibold text-foreground mb-4 text-center md:text-left">PDf Tools</p>
+                    <p className="text-sm font-semibold text-foreground mb-4 text-center md:text-left">PDF Tools</p>
                     <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
                         <Link to="/merge" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Merge PDF</Link>
                         <Link to="/split" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Split PDF</Link>
@@ -40,7 +40,7 @@ export const Footer = () => {
                     <div className="flex items-center gap-2 text-[var(--text-muted)]">
                         <span>Made with</span>
                         <Heart className="w-4 h-4 text-rose-500 fill-rose-500" />
-                        <span>for Privacy</span>
+                        <span>for privacy</span>
                     </div>
                 </div>
             </div>

@@ -195,7 +195,7 @@ export const toolRegistry: ToolDefinition[] = [
   },
   {
     slug: '/redact-pdf', title: 'Redact PDF', shortTitle: 'Redact',
-    description: 'Permanently black-out sensitive content from your PDF.',
+    description: 'Permanently cover sensitive content in your PDF.',
     icon: Eraser, gradientClassName: 'from-zinc-700 to-black',
     category: 'edit-annotate', featured: true,
   },
@@ -462,8 +462,8 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'convert-from-pdf',
   },
   {
-    slug: '/pdf-to-greyscale', title: 'PDF to Greyscale', shortTitle: 'Greyscale',
-    description: 'Convert a colour PDF to black-and-white greyscale.',
+    slug: '/pdf-to-greyscale', title: 'PDF to Grayscale', shortTitle: 'Grayscale',
+    description: 'Convert a color PDF to black-and-white grayscale.',
     icon: Contrast, gradientClassName: 'from-gray-500 to-gray-800',
     category: 'convert-from-pdf',
   },
@@ -637,7 +637,7 @@ export const toolRegistry: ToolDefinition[] = [
   // ── EXTRA (existing tool) ───────────────────────────────────────────────────
   {
     slug: '/image-requirements', title: 'Image Formatter', shortTitle: 'Image Format',
-    description: 'Resize images to exact pixels, reduce KBs, and convert formats.',
+    description: 'Resize images to exact dimensions, reduce file size, and convert formats.',
     icon: SlidersHorizontal, gradientClassName: 'from-cyan-500 to-blue-600',
     category: 'optimize-repair', featured: true,
   },
