@@ -1,12 +1,13 @@
 // src/hooks/use-toast.ts
+import type { ReactNode } from "react";
 import { useCallback, useState } from "react";
 
 export interface Toast {
   id: string;
   title?: string;
   description?: string;
-  action?: React.ReactNode;
-  [key: string]: any;
+  action?: ReactNode;
+  [key: string]: unknown;
 }
 
 export function useToast() {
@@ -15,7 +16,7 @@ export function useToast() {
   const addToast = useCallback((toast: Omit<Toast, "id">) => {
     setToasts((prev) => [
       ...prev,
-      { ...toast, id: Math.random().toString(36).substr(2, 9) },
+      { ...toast, id: crypto.randomUUID() },
     ]);
   }, []);
 

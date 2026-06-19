@@ -159,7 +159,6 @@ export async function compressPDF(file: File): Promise<Uint8Array> {
  * This creates a copy with metadata stripped as a lightweight "sanitize".
  * True 128/256-bit AES encryption requires qpdf or PDF.js advanced libraries.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function encryptPDF(file: File, userPassword: string, ownerPassword?: string): Promise<Uint8Array> {
     void userPassword; void ownerPassword;
     const ab = await file.arrayBuffer();

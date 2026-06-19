@@ -72,21 +72,27 @@ export const FileReadinessPanel = ({
   maxPreviewFiles = 1,
   onDiagnostics,
 }: FileReadinessPanelProps) => {
-  const [items, setItems] = useState<FileDiagnostic[]>([]);
   const filesKey = useMemo(() => files.map((file, index) => getFileId(file, index)).join('|'), [files]);
+  const initialItems = useMemo<FileDiagnostic[]>(
+    () =>
+      files.map((file, index) => ({
+        id: getFileId(file, index),
+        fileName: file.name,
+        sizeLabel: formatFileSize(file.size),
+        sizeBytes: file.size,
+        status: 'checking',
+      })),
+    [files],
+  );
+  const [diagnostics, setDiagnostics] = useState<{ filesKey: string; items: FileDiagnostic[] }>(() => ({
+    filesKey,
+    items: initialItems,
+  }));
+  const items = diagnostics.filesKey === filesKey ? diagnostics.items : initialItems;
 
   useEffect(() => {
     let cancelled = false;
     const previewUrls: string[] = [];
-    const initialItems = files.map((file, index) => ({
-      id: getFileId(file, index),
-      fileName: file.name,
-      sizeLabel: formatFileSize(file.size),
-      sizeBytes: file.size,
-      status: 'checking' as const,
-    }));
-
-    setItems(initialItems);
 
     const inspectFiles = async () => {
       const nextItems: FileDiagnostic[] = [];
@@ -157,7 +163,7 @@ export const FileReadinessPanel = ({
         }
 
         if (!cancelled) {
-          setItems([...nextItems, ...initialItems.slice(index + 1)]);
+          setDiagnostics({ filesKey, items: [...nextItems, ...initialItems.slice(index + 1)] });
         }
       }
 
@@ -174,7 +180,7 @@ export const FileReadinessPanel = ({
       cancelled = true;
       previewUrls.forEach((url) => URL.revokeObjectURL(url));
     };
-  }, [files, filesKey, maxPreviewFiles, onDiagnostics, showPreview]);
+  }, [files, filesKey, initialItems, maxPreviewFiles, onDiagnostics, showPreview]);
 
   if (files.length === 0) return null;
 
