@@ -3,6 +3,7 @@ import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { RelatedTools } from './RelatedTools';
 import { ToolUsageTracker } from './ToolUsageTracker';
+import { DotGrid } from './DotGrid';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -10,7 +11,9 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
     return (
-        <div className="min-h-screen flex flex-col">
+        <>
+        <DotGrid />
+        <div className="min-h-screen flex flex-col relative z-[1]">
             <div className="privacy-banner">
                 <ShieldCheck className="w-4 h-4" />
                 <span>Your files are processed locally. Nothing is uploaded to any server.</span>
@@ -23,5 +26,6 @@ export const Layout = ({ children }: LayoutProps) => {
             </main>
             <Footer />
         </div>
+        </>
     );
 };

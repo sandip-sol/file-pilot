@@ -6,6 +6,7 @@
 
 import { PDFDocument, degrees, rgb, StandardFonts, PageSizes } from 'pdf-lib';
 import JSZip from 'jszip';
+import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
 export { downloadBlob } from '../pdfHelpers';
 
@@ -620,33 +621,66 @@ export async function sanitizePDF(file: File): Promise<Uint8Array> {
 // ─── FIND AND REDACT ──────────────────────────────────────────────────────────
 
 export async function findAndRedact(file: File, searchText: string): Promise<Uint8Array> {
+    const needle = searchText.trim().toLowerCase();
+    if (!needle) throw new Error('Search text is required');
+
     const pdfjsLib = await import('pdfjs-dist');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
-    const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
-    const pdfJs = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
-    const numPages = doc.getPageCount();
-    for (let i = 0; i < numPages; i++) {
-        const page = doc.getPage(i);
-        const jsPage = await pdfJs.getPage(i + 1);
+    const pdfJs = await pdfjsLib.getDocument({
+        data: new Uint8Array(ab),
+        useWorkerFetch: false,
+        isEvalSupported: false,
+    }).promise;
+    const result = await PDFDocument.create();
+    const renderScale = 2;
+    const padding = 4;
+
+    for (let i = 1; i <= pdfJs.numPages; i++) {
+        const jsPage = await pdfJs.getPage(i);
+        const viewport = jsPage.getViewport({ scale: renderScale });
+        const pdfSize = jsPage.getViewport({ scale: 1 });
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.ceil(viewport.width);
+        canvas.height = Math.ceil(viewport.height);
+        const context = canvas.getContext('2d');
+
+        if (!context) throw new Error('Canvas context not available');
+
+        await jsPage.render({ canvasContext: context, viewport, canvas }).promise;
+
         const content = await jsPage.getTextContent();
-        const { height } = page.getSize();
         for (const item of content.items) {
-            if ('str' in item && item.str.toLowerCase().includes(searchText.toLowerCase())) {
-                const t = item.transform;
-                const x = t[4];
-                const y = height - t[5] - (item.height || 12);
-                page.drawRectangle({
-                    x: x - 2,
-                    y: y - 2,
-                    width: item.width + 4,
-                    height: (item.height || 12) + 4,
-                    color: rgb(0, 0, 0),
-                });
-            }
+            if (!('str' in item) || !item.str.toLowerCase().includes(needle)) continue;
+
+            const transform = pdfjsLib.Util.transform(viewport.transform, item.transform);
+            const fontHeight = Math.max(Math.hypot(transform[2], transform[3]), item.height * renderScale, 12);
+            const width = Math.max(item.width * renderScale, fontHeight);
+            const x = Math.max(0, transform[4] - padding);
+            const y = Math.max(0, transform[5] - fontHeight - padding);
+
+            context.fillStyle = '#000000';
+            context.fillRect(
+                x,
+                y,
+                Math.min(width + padding * 2, canvas.width - x),
+                Math.min(fontHeight + padding * 2, canvas.height - y),
+            );
         }
+
+        const imageBlob = await new Promise<Blob>((resolve, reject) => {
+            canvas.toBlob((blob) => {
+                if (!blob) reject(new Error('Failed to render redacted page'));
+                else resolve(blob);
+            }, 'image/png');
+        });
+        const imageBytes = await imageBlob.arrayBuffer();
+        const image = await result.embedPng(imageBytes);
+        const page = result.addPage([pdfSize.width, pdfSize.height]);
+        page.drawImage(image, { x: 0, y: 0, width: pdfSize.width, height: pdfSize.height });
     }
-    return doc.save();
+
+    return result.save();
 }
 
 // ─── STAMP ────────────────────────────────────────────────────────────────────

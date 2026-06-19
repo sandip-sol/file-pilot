@@ -41,9 +41,9 @@ export const FindAndRedactPage = () => {
         <div className="min-h-[calc(100vh-200px)]">
             <PageSeo
                 title="Find & Redact PDF Text – Free Privacy Tool"
-                description="Search for sensitive text in your PDF and redact it with black boxes. Burn redactions permanently into the PDF. 100% private — processed locally."
+                description="Search for sensitive text in your PDF and export an image-only redacted copy with redactions burned into the page pixels. 100% private — processed locally."
                 faqItems={[
-                    { question: 'Are redactions permanent?', answer: 'Yes. The tool draws black rectangles over matching text and burns them into the PDF output.' },
+                    { question: 'Are redactions permanent?', answer: 'Yes. Matching pages are rendered to images with redactions burned in, so the exported PDF no longer contains the original selectable text layer.' },
                     { question: 'Is searching case-sensitive?', answer: 'No. The search is case-insensitive by default.' },
                     { question: 'Will my file be uploaded?', answer: 'No. Everything runs locally in your browser.' },
                 ]}
@@ -56,7 +56,7 @@ export const FindAndRedactPage = () => {
                         </div>
                     </div>
                     <h1>Find &amp; Redact PDF Text</h1>
-                    <p>Search for sensitive words and permanently black them out. 100% private.</p>
+                    <p>Search for sensitive words and export a redacted image-only PDF. 100% private.</p>
                 </div>
             </div>
 
@@ -84,7 +84,7 @@ export const FindAndRedactPage = () => {
 
                                 <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-xl flex items-start gap-3 text-sm text-yellow-800">
                                     <ShieldAlert className="w-5 h-5 shrink-0 mt-0.5" />
-                                    <p><strong>Permanent action:</strong> Redacted text cannot be recovered. Only text-layer content is matched — scanned image PDFs may require OCR first.</p>
+                                    <p><strong>Permanent action:</strong> The export is rebuilt as image-only pages with redactions burned into the pixels. Only existing text-layer content is matched — scanned image PDFs may require OCR first.</p>
                                 </div>
 
                                 <div>
@@ -97,7 +97,7 @@ export const FindAndRedactPage = () => {
                                         placeholder="e.g. John Doe, SSN, confidential"
                                         className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-zinc-400"
                                     />
-                                    <p className="mt-1.5 text-xs text-[var(--text-muted)]">Case-insensitive search. All matching text will be covered with black boxes.</p>
+                                    <p className="mt-1.5 text-xs text-[var(--text-muted)]">Case-insensitive search. Matching text items are covered and exported without the original text layer.</p>
                                 </div>
 
                                 {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl text-sm font-medium">{error}</div>}
@@ -117,7 +117,7 @@ export const FindAndRedactPage = () => {
             </div>
 
             <FAQSection items={[
-                { question: 'Are redactions permanent?', answer: 'Yes. The tool draws black rectangles over matching text and burns them into the PDF output.' },
+                { question: 'Are redactions permanent?', answer: 'Yes. The exported PDF is rebuilt from rendered page images after redactions are applied, so the original text layer is not preserved.' },
                 { question: 'Is searching case-sensitive?', answer: 'No. The search is case-insensitive by default.' },
                 { question: 'Will my file be uploaded?', answer: 'No. Everything runs locally in your browser.' },
             ]} />
