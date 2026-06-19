@@ -2,15 +2,16 @@ import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { primaryNavTools } from '../data/toolRegistry';
+import pdfSolverLogo from '../assets/pdfsolver_logo_theme_matched.svg';
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
         <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-            <div className="container h-14 flex items-center justify-between">
+            <div className="container h-16 flex items-center justify-between">
                 <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-                    <img src="/logo.png" alt="PDF Solver" className="h-10 w-auto object-contain" />
+                    <img src={pdfSolverLogo} alt="PDF Solver" className="h-14 w-auto max-w-[280px] object-contain" />
                 </Link>
 
                 {/* Desktop Nav */}

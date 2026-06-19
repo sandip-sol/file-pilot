@@ -159,7 +159,7 @@ const ToolCard = ({ tool, compact = false }: { tool: ToolDefinition; compact?: b
   return (
     <Link
       to={tool.slug}
-      className={`group flex h-full min-h-[150px] flex-col rounded-lg border border-border bg-card p-3.5 transition-colors hover:border-foreground/40 hover:bg-muted/60 ${compact ? 'md:min-h-[140px]' : ''}`}
+      className={`group flex h-full min-h-[150px] flex-col rounded-lg border border-border bg-card/60 backdrop-blur-sm p-3.5 transition-colors hover:border-foreground/40 hover:bg-muted/60 ${compact ? 'md:min-h-[140px]' : ''}`}
     >
       <div className="mb-3 flex items-start justify-between gap-3">
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-background text-foreground">
@@ -214,17 +214,17 @@ export const Home = () => {
     .filter((group) => group.tools.length > 0);
 
   return (
-    <div className="bg-background">
+    <div>
       <PageSeo
         title="Find the Right PDF Tool - Private Browser Tools"
         description="Quickly find trusted browser-based PDF and image tools for merging, splitting, compressing, converting, extracting, watermarking, and redacting files."
       />
 
-      <section className="border-b border-border bg-card/40">
+      <section className="border-b border-border bg-card/20">
         <div className="container py-10 md:py-14">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
             <div>
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-sm text-muted-foreground">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm text-muted-foreground">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600" />
                 {tools.length} ready or beta tools. {plannedTools.length} planned tools hidden until reliable.
               </div>
@@ -235,7 +235,7 @@ export const Home = () => {
                 Search by what you want to do, then open a focused tool with local processing, clear settings, and a download you control.
               </p>
 
-              <div id="tools" className="mt-6 rounded-lg border border-border bg-background p-4 shadow-sm md:p-5">
+              <div id="tools" className="mt-6 rounded-lg border border-border bg-background/70 backdrop-blur-sm p-4 shadow-sm md:p-5">
                 <label htmlFor="tool-search" className="mb-2 block text-sm font-semibold text-foreground">
                   What do you need to do?
                 </label>
@@ -259,7 +259,7 @@ export const Home = () => {
                         setSearch(intent.query);
                         setActiveWorkflow('all');
                       }}
-                      className="shrink-0 rounded-full border border-border bg-card px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                      className="shrink-0 rounded-full border border-border bg-card/60 px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
                     >
                       {intent.label}
                     </button>
@@ -268,7 +268,7 @@ export const Home = () => {
               </div>
             </div>
 
-            <div className="grid gap-3 rounded-lg border border-border bg-background p-4">
+            <div className="grid gap-3 rounded-lg border border-border bg-background/70 backdrop-blur-sm p-4">
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Lock className="h-4 w-4 text-emerald-600" />
                 Files stay in your browser tab
@@ -303,7 +303,7 @@ export const Home = () => {
         </div>
       </section>
 
-      <section className="border-y border-border bg-card/40">
+      <section className="border-y border-border bg-card/20">
         <div className="container py-8 md:py-10">
           <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
@@ -313,7 +313,7 @@ export const Home = () => {
             <button
               type="button"
               onClick={() => setActiveWorkflow('all')}
-              className="self-start rounded-lg border border-border bg-background px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted md:self-auto"
+              className="self-start rounded-lg border border-border bg-background/70 px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted/60 md:self-auto"
             >
               Show all
             </button>
@@ -331,7 +331,7 @@ export const Home = () => {
                   key={workflow}
                   type="button"
                   onClick={() => setActiveWorkflow(isActive ? 'all' : workflow)}
-                  className={`min-w-[230px] rounded-lg border p-3 text-left transition-colors md:min-w-0 ${isActive ? 'border-foreground bg-background' : 'border-border bg-background hover:bg-muted'}`}
+                  className={`min-w-[230px] rounded-lg border p-3 text-left transition-colors md:min-w-0 ${isActive ? 'border-foreground bg-background/70 backdrop-blur-sm' : 'border-border bg-background/50 hover:bg-muted/60'}`}
                 >
                   <div className="mb-2 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
@@ -369,7 +369,7 @@ export const Home = () => {
                 setSearch('');
                 setActiveWorkflow('all');
               }}
-              className="self-start rounded-lg border border-border bg-card px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted md:self-auto"
+              className="self-start rounded-lg border border-border bg-card/60 px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted/60 md:self-auto"
             >
               Clear filters
             </button>
@@ -377,7 +377,7 @@ export const Home = () => {
         </div>
 
         {filteredTools.length === 0 ? (
-          <div className="rounded-lg border border-border bg-card p-8 text-center">
+          <div className="rounded-lg border border-border bg-card/60 backdrop-blur-sm p-8 text-center">
             <Search className="mx-auto mb-3 h-10 w-10 text-muted-foreground" />
             <h3 className="text-lg font-bold text-foreground">No matching ready tool</h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
@@ -420,7 +420,7 @@ export const Home = () => {
       </section>
 
       <section className="container pb-12 md:pb-16">
-        <div className="rounded-lg border border-border bg-card p-5 md:p-6">
+        <div className="rounded-lg border border-border bg-card/60 backdrop-blur-sm p-5 md:p-6">
           <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
             <div>
               <h2 className="text-xl font-bold text-foreground">Confidence before download</h2>

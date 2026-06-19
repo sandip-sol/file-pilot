@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="650" height="150" viewBox="0 0 650 150" role="img" aria-labelledby="title desc">
+  <title id="title">PDF Solver logo</title>
+  <desc id="desc">PDF Solver logo with blue document folder icon, green solving arrow, and tagline Document Solutions Simplified.</desc>
+
+  <defs>
+    <linearGradient id="blueGradient" x1="14" y1="24" x2="116" y2="126" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#178FC4"/>
+      <stop offset="0.45" stop-color="#126AA0"/>
+      <stop offset="1" stop-color="#163F73"/>
+    </linearGradient>
+
+    <linearGradient id="greenGradient" x1="70" y1="25" x2="113" y2="86" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9DCA3B"/>
+      <stop offset="1" stop-color="#6FAF3F"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(18 22)" filter="url(#softShadow)">
+    <path d="M7 10 C7 5.6 10.6 2 15 2 H45 C49.2 2 52.2 5.5 54.4 9 L59 16 H103 C108 16 112 20 112 25 V94 C112 99 108 103 103 103 H15 C10.6 103 7 99.4 7 95 Z" fill="url(#blueGradient)"/>
+
+    <path d="M25 31 H96 V84 H25 Z" fill="#ffffff" opacity="0.96"/>
+
+    <path d="M86 21 L113 21 L113 48 L103 39 C94 49 81 55 63 55 H43 C35 55 30 59 30 65 C30 71 35 75 43 75 H83 C88 75 92 79 92 84 C92 89 88 93 83 93 H41 C23 93 11 82 11 66 C11 50 24 39 43 39 H63 C74 39 82 36 88 30 Z" fill="url(#greenGradient)"/>
+
+    <path d="M30 51 C35 47 40 45 48 45 H66 C78 45 88 41 96 34 L101 39 C91 50 79 56 64 56 H45 C36 56 30 60 30 66 C30 72 36 76 45 76 H78 C81 76 83 78 83 81 C83 84 81 86 78 86 H42 C27 86 18 78 18 66 C18 59 22 54 30 51Z" fill="#ffffff" opacity="0.92"/>
+
+    <path d="M96 18 L116 6 L112 30 Z" fill="#8BC53F"/>
+  </g>
+
+  <g transform="translate(152 44)">
+    <text x="0" y="46" font-family="Inter, Arial, Helvetica, sans-serif" font-size="54" font-weight="800" letter-spacing="-1.8" fill="#153B66">PDF</text>
+    <text x="113" y="46" font-family="Inter, Arial, Helvetica, sans-serif" font-size="54" font-weight="700" letter-spacing="-2" fill="#84BD3B">Solver</text>
+    <text x="1" y="78" font-family="Inter, Arial, Helvetica, sans-serif" font-size="18" font-weight="500" fill="#404040">Document Solutions Simplified</text>
+  </g>
+</svg>

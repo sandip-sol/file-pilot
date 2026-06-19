@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Github, Heart } from 'lucide-react';
+import pdfSolverLogo from '../assets/pdfsolver_logo_theme_matched.svg';
 
 export const Footer = () => {
     return (
-        <footer className="border-t border-border bg-background py-12 mt-auto">
+        <footer className="border-t border-border bg-background/80 backdrop-blur-sm py-12 mt-auto">
             <div className="container">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
                     <div className="flex items-center gap-3">
-                        <img src="/logo.png" alt="PDF Solver" className="h-8" />
-                        <span className="font-bold text-xl tracking-tight hidden md:block">PDF Solver</span>
+                        <img src={pdfSolverLogo} alt="PDF Solver" className="h-16 w-auto max-w-[320px] object-contain" />
                     </div>
 
                     <div className="flex items-center gap-8 text-sm text-muted-foreground">
