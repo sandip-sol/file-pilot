@@ -222,7 +222,7 @@ export const Home = () => {
 
       <section className="border-b border-border bg-card/20">
         <div className="container py-10 md:py-14">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)] lg:items-start xl:grid-cols-[minmax(0,1fr)_minmax(320px,400px)] xl:gap-8">
             <div>
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm text-muted-foreground">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600" />
@@ -268,20 +268,56 @@ export const Home = () => {
               </div>
             </div>
 
-            <div className="grid gap-3 rounded-lg border border-border bg-background/70 backdrop-blur-sm p-4">
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Lock className="h-4 w-4 text-emerald-600" />
-                Files stay in your browser tab
+            <aside className="grid min-w-0 max-w-full gap-3">
+              <div className="min-w-0 overflow-hidden rounded-lg border border-border bg-background/70 p-4 backdrop-blur-sm shadow-sm">
+                <p className="text-sm font-semibold text-foreground">Private by design</p>
+                <div className="mt-4 grid gap-3">
+                  <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <Lock className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+                    <span>Files stay in your browser tab</span>
+                  </div>
+                  <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+                    <span>Ready tools are separated from beta tools</span>
+                  </div>
+                  <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <SlidersHorizontal className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+                    <span>Tool pages show settings before download</span>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                Working tools are separated from beta tools
+
+              <div className="min-w-0 overflow-hidden rounded-lg border border-border bg-background/70 p-4 backdrop-blur-sm shadow-sm">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-semibold text-foreground">Popular now</p>
+                  <span className="shrink-0 rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
+                    Quick access
+                  </span>
+                </div>
+                <div className="mt-3 grid gap-2">
+                  {popularTools.slice(0, 5).map((tool) => {
+                    const Icon = tool.icon;
+
+                    return (
+                      <Link
+                        key={tool.slug}
+                        to={tool.slug}
+                        className="group flex min-w-0 items-center gap-3 overflow-hidden rounded-lg border border-border bg-card/50 p-3 text-sm transition-colors hover:bg-muted/60"
+                      >
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border bg-background text-foreground">
+                          <Icon className="h-4 w-4" />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate font-semibold text-foreground">{tool.title}</span>
+                          <span className="block truncate text-xs text-muted-foreground">{tool.description}</span>
+                        </span>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <SlidersHorizontal className="h-4 w-4 text-emerald-600" />
-                Tool pages show settings before download
-              </div>
-            </div>
+            </aside>
           </div>
           <RecentlyUsedTools />
           <div className="mt-8">
