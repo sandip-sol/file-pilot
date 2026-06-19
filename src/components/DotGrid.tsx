@@ -7,7 +7,7 @@ const MAX_RADIUS = 3.4;
 const MAX_OPACITY = 1;
 const EFFECT_RADIUS = 140;
 const TRAIL_LENGTH = 8;
-const CURSOR_SIZE = 6;
+const CURSOR_SIZE = 8;
 
 const EFFECT_RADIUS_SQ = EFFECT_RADIUS * EFFECT_RADIUS;
 
