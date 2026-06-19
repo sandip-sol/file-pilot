@@ -10,6 +10,7 @@ import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { getSeoRoutes } from './seoRoutes.js';
 
 let puppeteer;
 try {
@@ -23,24 +24,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
 const PORT = 4173;
 
-const ROUTES = [
-  '/',
-  '/merge',
-  '/split',
-  '/organize-pdf',
-  '/watermark-pdf',
-  '/pdf-security',
-  '/redact-pdf',
-  '/images-to-pdf',
-  '/pdf-to-images',
-  '/extract-text',
-  '/compare-pdf',
-  '/annotate-pdf',
-  '/compress',
-  '/image-requirements',
-  '/privacy',
-  '/terms',
-];
+const ROUTES = getSeoRoutes();
 
 /** Tiny static file server that falls back to index.html (SPA behaviour). */
 function startServer() {

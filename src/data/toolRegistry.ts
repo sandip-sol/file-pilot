@@ -248,6 +248,12 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'edit-annotate',
   },
   {
+    slug: '/text-color', title: 'Change Text Color', shortTitle: 'Text Color',
+    description: 'Recolor editable PDF text while preserving the document layout.',
+    icon: Palette, gradientClassName: 'from-fuchsia-500 to-purple-700',
+    category: 'edit-annotate',
+  },
+  {
     slug: '/add-stamp', title: 'Add Stamp', shortTitle: 'Stamp',
     description: 'Add "DRAFT", "CONFIDENTIAL", or custom text stamps to pages.',
     icon: Stamp, gradientClassName: 'from-orange-500 to-amber-700',
@@ -438,6 +444,12 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'convert-from-pdf',
   },
   {
+    slug: '/pdf-to-bmp', title: 'PDF to BMP', shortTitle: 'PDF→BMP',
+    description: 'Export PDF pages as lossless image files packaged in a ZIP.',
+    icon: FileImage, gradientClassName: 'from-orange-500 to-red-600',
+    category: 'convert-from-pdf',
+  },
+  {
     slug: '/pdf-to-tiff', title: 'PDF to TIFF', shortTitle: 'PDF→TIFF',
     description: 'Export PDF pages as multi-page TIFF images.',
     icon: FileImage, gradientClassName: 'from-purple-500 to-violet-700',
@@ -525,7 +537,7 @@ export const toolRegistry: ToolDefinition[] = [
   },
   {
     slug: '/linearize-pdf', title: 'Linearize PDF', shortTitle: 'Linearize',
-    description: 'Optimize PDF for fast web viewing (incremental load).',
+    description: 'Planned support for verified Fast Web View PDF output.',
     icon: Gauge, gradientClassName: 'from-cyan-500 to-sky-700',
     category: 'optimize-repair',
   },
@@ -599,7 +611,7 @@ export const toolRegistry: ToolDefinition[] = [
   },
   {
     slug: '/change-permissions', title: 'Change Permissions', shortTitle: 'Permissions',
-    description: 'Control print, copy, and edit permissions on a PDF.',
+    description: 'Planned support for verified PDF permission flags.',
     icon: ShieldCheck, gradientClassName: 'from-blue-700 to-indigo-900',
     category: 'secure-pdf',
   },
@@ -617,7 +629,7 @@ export const toolRegistry: ToolDefinition[] = [
   },
   {
     slug: '/timestamp-pdf', title: 'Timestamp PDF', shortTitle: 'Timestamp',
-    description: 'Embed a trusted RFC 3161 timestamp in a PDF for audit trails.',
+    description: 'Planned support for trusted PDF timestamp signatures.',
     icon: Clock, gradientClassName: 'from-sky-600 to-blue-900',
     category: 'secure-pdf',
   },
@@ -647,6 +659,7 @@ const comingSoonToolSlugs = new Set([
   '/extract-attachments',
   '/ocr-pdf',
   '/invert-colors',
+  '/text-color',
   '/word-to-pdf',
   '/excel-to-pdf',
   '/pptx-to-pdf',

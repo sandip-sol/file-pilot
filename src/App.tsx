@@ -42,7 +42,6 @@ const TableOfContents = lazy(() => import('./pages/TableOfContents').then(m => (
 const PageNumbers = lazy(() => import('./pages/PageNumbers').then(m => ({ default: m.PageNumbers })));
 const HeaderFooter = lazy(() => import('./pages/HeaderFooter').then(m => ({ default: m.HeaderFooter })));
 const BackgroundColor = lazy(() => import('./pages/BackgroundColor').then(m => ({ default: m.BackgroundColor })));
-const TextColor = lazy(() => import('./pages/TextColor').then(m => ({ default: m.TextColor })));
 const AddStamp = lazy(() => import('./pages/AddStamp').then(m => ({ default: m.AddStamp })));
 const RemoveAnnotations = lazy(() => import('./pages/RemoveAnnotations').then(m => ({ default: m.RemoveAnnotations })));
 const FormFiller = lazy(() => import('./pages/FormFiller').then(m => ({ default: m.FormFiller })));
@@ -62,17 +61,6 @@ const TiffToPdf = lazy(() => import('./pages/TiffToPdf').then(m => ({ default: m
 const TextToPdf = lazy(() => import('./pages/TextToPdf').then(m => ({ default: m.TextToPdf })));
 const JsonToPdf = lazy(() => import('./pages/JsonToPdf').then(m => ({ default: m.JsonToPdf })));
 const MarkdownToPdf = lazy(() => import('./pages/MarkdownToPdf').then(m => ({ default: m.MarkdownToPdf })));
-const WordToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.WordToPdf })));
-const ExcelToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.ExcelToPdf })));
-const PptxToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.PptxToPdf })));
-const EpubToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.EpubToPdf })));
-const MobiToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.MobiToPdf })));
-const RtfToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.RtfToPdf })));
-const XpsToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.XpsToPdf })));
-const DjvuToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.DjvuToPdf })));
-const Fb2ToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.Fb2ToPdf })));
-const EmailToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.EmailToPdf })));
-const CbzToPdf = lazy(() => import('./pages/ConvertToPdfPages').then(m => ({ default: m.CbzToPdf })));
 
 // ─── Convert FROM PDF ────────────────────────────────────────────────────────
 const PdfToImages = lazy(() => import('./pages/PdfToImages').then(m => ({ default: m.PdfToImages })));
@@ -98,8 +86,6 @@ const Compress = lazy(() => import('./pages/Compress').then(m => ({ default: m.C
 const RepairPdf = lazy(() => import('./pages/RepairPdf').then(m => ({ default: m.RepairPdf })));
 const FixPageSize = lazy(() => import('./pages/FixPageSize').then(m => ({ default: m.FixPageSize })));
 const DeskewPdf = lazy(() => import('./pages/DeskewPdf').then(m => ({ default: m.DeskewPdf })));
-const LinearizePdf = lazy(() => import('./pages/SecureOptimizePages').then(m => ({ default: m.LinearizePdf })));
-const RemoveRestrictions = lazy(() => import('./pages/SecureOptimizePages').then(m => ({ default: m.RemoveRestrictions })));
 
 // ─── Secure PDF ─────────────────────────────────────────────────────────────
 const PdfSecurity = lazy(() => import('./pages/PdfSecurity').then(m => ({ default: m.PdfSecurity })));
@@ -107,10 +93,6 @@ const SanitizePdf = lazy(() => import('./pages/SanitizePdf').then(m => ({ defaul
 const FindAndRedact = lazy(() => import('./pages/FindAndRedact').then(m => ({ default: m.FindAndRedactPage })));
 const FlattenPdf = lazy(() => import('./pages/FlattenPdf').then(m => ({ default: m.FlattenPdf })));
 const PdfMeta = lazy(() => import('./pages/PdfMetadata').then(m => ({ default: m.PdfMetadata })));
-const ChangePermissions = lazy(() => import('./pages/SecureOptimizePages').then(m => ({ default: m.ChangePermissions })));
-const DigitalSignPdf = lazy(() => import('./pages/SecureOptimizePages').then(m => ({ default: m.DigitalSignPdf })));
-const ValidateSignature = lazy(() => import('./pages/SecureOptimizePages').then(m => ({ default: m.ValidateSignature })));
-const TimestampPdf = lazy(() => import('./pages/SecureOptimizePages').then(m => ({ default: m.TimestampPdf })));
 
 // ─── Loading fallback ────────────────────────────────────────────────────────
 const Loader = () => (
@@ -164,7 +146,6 @@ function App() {
           <Route path="/page-numbers" element={<PageNumbers />} />
           <Route path="/header-footer" element={<HeaderFooter />} />
           <Route path="/background-color" element={<BackgroundColor />} />
-          <Route path="/text-color" element={<TextColor />} />
           <Route path="/add-stamp" element={<AddStamp />} />
           <Route path="/remove-annotations" element={<RemoveAnnotations />} />
           <Route path="/form-filler" element={<FormFiller />} />
@@ -184,17 +165,6 @@ function App() {
           <Route path="/text-to-pdf" element={<TextToPdf />} />
           <Route path="/json-to-pdf" element={<JsonToPdf />} />
           <Route path="/markdown-to-pdf" element={<MarkdownToPdf />} />
-          <Route path="/word-to-pdf" element={<WordToPdf />} />
-          <Route path="/excel-to-pdf" element={<ExcelToPdf />} />
-          <Route path="/pptx-to-pdf" element={<PptxToPdf />} />
-          <Route path="/epub-to-pdf" element={<EpubToPdf />} />
-          <Route path="/mobi-to-pdf" element={<MobiToPdf />} />
-          <Route path="/rtf-to-pdf" element={<RtfToPdf />} />
-          <Route path="/xps-to-pdf" element={<XpsToPdf />} />
-          <Route path="/djvu-to-pdf" element={<DjvuToPdf />} />
-          <Route path="/fb2-to-pdf" element={<Fb2ToPdf />} />
-          <Route path="/email-to-pdf" element={<EmailToPdf />} />
-          <Route path="/cbz-to-pdf" element={<CbzToPdf />} />
 
           {/* Convert FROM PDF */}
           <Route path="/pdf-to-images" element={<PdfToImages />} />
@@ -220,8 +190,6 @@ function App() {
           <Route path="/repair-pdf" element={<RepairPdf />} />
           <Route path="/fix-page-size" element={<FixPageSize />} />
           <Route path="/deskew-pdf" element={<DeskewPdf />} />
-          <Route path="/linearize-pdf" element={<LinearizePdf />} />
-          <Route path="/remove-restrictions" element={<RemoveRestrictions />} />
 
           {/* Secure PDF */}
           <Route path="/pdf-security" element={<PdfSecurity />} />
@@ -230,10 +198,6 @@ function App() {
           <Route path="/find-and-redact" element={<FindAndRedact />} />
           <Route path="/flatten-pdf" element={<FlattenPdf />} />
           <Route path="/remove-metadata" element={<PdfMeta />} />
-          <Route path="/change-permissions" element={<ChangePermissions />} />
-          <Route path="/digital-sign-pdf" element={<DigitalSignPdf />} />
-          <Route path="/validate-signature" element={<ValidateSignature />} />
-          <Route path="/timestamp-pdf" element={<TimestampPdf />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

@@ -7,50 +7,22 @@ import { FAQSection } from '../components/FAQSection';
 import { PDFDocument } from 'pdf-lib';
 
 // ─── LinearizePdf ───────────────────────────────────────────────────────────
-export const LinearizePdf = () => {
-    const [file, setFile] = useState<File | null>(null);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState(false);
-
-    const handleProcess = async () => {
-        if (!file) return;
-        setIsProcessing(true); setError(null);
-        try {
-            // pdf-lib doesn't support linearization, but re-saving optimises cross-ref tables
-            const ab = await file.arrayBuffer();
-            const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
-            const bytes = await doc.save({ useObjectStreams: true });
-            downloadBytes(bytes, file.name.replace('.pdf', '_linearized.pdf'));
-            setSuccess(true); setTimeout(() => setSuccess(false), 3000);
-        } catch (e) { setError('Failed: ' + (e instanceof Error ? e.message : '')); }
-        finally { setIsProcessing(false); }
-    };
-
-    return (
-        <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Linearize PDF Online – Optimize for Web" description="Linearize (Fast Web View) your PDF for quicker loading in browsers. Browser-based." faqItems={[{ question: 'What is linearization?', answer: 'Linearization restructures a PDF so early pages load before the full file downloads.' }, { question: 'Will file size increase?', answer: 'Linearization may slightly increase file size but significantly improves web viewing.' }]} />
-            <div className="page-header"><div className="container">
-                <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-700 text-white flex items-center justify-center shadow-lg"><Zap className="w-6 h-6" /></div></div>
-                <h1>Linearize PDF</h1><p>Optimise your PDF for fast web viewing (Fast Web View). All in the browser.</p>
-            </div></div>
-            <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
-                <FileUploader onFilesSelected={f => { setFile(f[0]); setError(null); setSuccess(false); }} multiple={false} accept=".pdf" description="Drop a PDF file here" />
-                {file && (
-                    <div className="mt-6 space-y-4">
-                        <p className="text-sm"><strong>{file.name}</strong></p>
-                        {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl text-sm">{error}</div>}
-                        {success && <div className="bg-[var(--success-light)] text-[var(--success)] p-4 rounded-xl text-sm flex items-center gap-2"><CheckCircle className="w-5 h-5" />Optimised PDF downloaded!</div>}
-                        <button onClick={handleProcess} disabled={isProcessing} className="btn btn-primary w-full py-4 text-lg disabled:opacity-50">
-                            {isProcessing ? <><Loader2 className="w-5 h-5 animate-spin" />Optimising…</> : <><Download className="w-5 h-5" />Linearize &amp; Download</>}
-                        </button>
-                    </div>
-                )}
-            </div></div></div>
-            <FAQSection items={[{ question: 'What is linearization?', answer: 'Restructures the PDF so pages load progressively — no waiting for the full download.' }, { question: 'Will size increase?', answer: 'Slightly, but web viewing speed improves significantly.' }]} />
-        </div>
-    );
-};
+export const LinearizePdf = () => (
+    <div className="min-h-[calc(100vh-200px)]">
+        <PageSeo title="Linearize PDF - Not Available" description="True PDF linearization is not currently available in the browser tool." faqItems={[{ question: 'Why is this unavailable?', answer: 'Fast Web View requires rewriting the PDF file structure for byte-range loading. A normal browser-side re-save does not guarantee that.' }, { question: 'What should I use instead?', answer: 'Use a PDF engine that explicitly supports linearization, such as qpdf or a professional desktop PDF tool.' }]} />
+        <div className="page-header"><div className="container">
+            <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-700 text-white flex items-center justify-center shadow-lg"><Zap className="w-6 h-6" /></div></div>
+            <h1>Linearize PDF</h1><p>This tool is not available yet.</p>
+        </div></div>
+        <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
+            <div className="flex items-start gap-2 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 text-sm text-amber-800 dark:text-amber-300">
+                <Info className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>True linearization requires rewriting the PDF for byte-range loading. Re-saving with pdf-lib is not enough, so this route does not offer a download.</span>
+            </div>
+        </div></div></div>
+        <FAQSection items={[{ question: 'Is this the same as optimizing object streams?', answer: 'No. Object stream optimization can reduce structure overhead, but it does not make a PDF Fast Web View compatible.' }, { question: 'When should this return?', answer: 'Only after the implementation can verify that the output is actually linearized.' }]} />
+    </div>
+);
 
 // ─── RemoveRestrictions ─────────────────────────────────────────────────────
 export const RemoveRestrictions = () => {
@@ -99,64 +71,22 @@ export const RemoveRestrictions = () => {
 };
 
 // ─── ChangePermissions ──────────────────────────────────────────────────────
-export const ChangePermissions = () => {
-    const [file, setFile] = useState<File | null>(null);
-    const [allowPrint, setAllowPrint] = useState(true);
-    const [allowCopy, setAllowCopy] = useState(true);
-    const [allowEdit, setAllowEdit] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState(false);
-
-    const handleProcess = async () => {
-        if (!file) return;
-        setIsProcessing(true); setError(null);
-        try {
-            const ab = await file.arrayBuffer();
-            const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
-            const bytes = await doc.save();
-            downloadBytes(bytes, file.name.replace('.pdf', '_permissions.pdf'));
-            setSuccess(true); setTimeout(() => setSuccess(false), 3000);
-        } catch (e) { setError('Failed: ' + (e instanceof Error ? e.message : '')); }
-        finally { setIsProcessing(false); }
-    };
-
-    const Toggle = ({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) => (
-        <button onClick={() => onChange(!checked)} className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl border transition-colors ${checked ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20' : 'border-border hover:bg-muted'}`}>
-            <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${checked ? 'bg-indigo-600 border-indigo-600' : 'border-gray-400'}`}>{checked && <CheckCircle className="w-3 h-3 text-white" />}</div>
-            <span className="text-sm font-medium">{label}</span>
-        </button>
-    );
-
-    return (
-        <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Change PDF Permissions Online – Free & Private" description="Set print, copy, and edit permissions on a PDF document. Browser-based." faqItems={[{ question: 'Do permissions require a password?', answer: 'PDF permissions work best with an owner password. Without encryption, viewers may ignore flags.' }, { question: 'Will all PDF readers respect this?', answer: 'Most professional PDF readers honour permission flags.' }]} />
-            <div className="page-header"><div className="container">
-                <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-700 text-white flex items-center justify-center shadow-lg"><Shield className="w-6 h-6" /></div></div>
-                <h1>Change PDF Permissions</h1><p>Set print, copy, and edit permissions on your PDF.</p>
-            </div></div>
-            <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
-                <FileUploader onFilesSelected={f => { setFile(f[0]); setError(null); setSuccess(false); }} multiple={false} accept=".pdf" description="Drop a PDF file here" />
-                {file && (
-                    <div className="mt-6 space-y-4">
-                        <p className="text-sm"><strong>{file.name}</strong></p>
-                        <div className="space-y-2">
-                            <Toggle label="Allow Printing" checked={allowPrint} onChange={setAllowPrint} />
-                            <Toggle label="Allow Copying Text" checked={allowCopy} onChange={setAllowCopy} />
-                            <Toggle label="Allow Editing" checked={allowEdit} onChange={setAllowEdit} />
-                        </div>
-                        {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl text-sm">{error}</div>}
-                        {success && <div className="bg-[var(--success-light)] text-[var(--success)] p-4 rounded-xl text-sm flex items-center gap-2"><CheckCircle className="w-5 h-5" />PDF with new permissions downloaded!</div>}
-                        <button onClick={handleProcess} disabled={isProcessing} className="btn btn-primary w-full py-4 text-lg disabled:opacity-50">
-                            {isProcessing ? <><Loader2 className="w-5 h-5 animate-spin" />Applying permissions…</> : <><Download className="w-5 h-5" />Apply &amp; Download</>}
-                        </button>
-                    </div>
-                )}
-            </div></div></div>
-            <FAQSection items={[{ question: 'Do permissions need a password?', answer: 'PDF permissions work best combined with an owner password (use Encrypt PDF).' }, { question: 'Will readers respect these flags?', answer: 'Most professional PDF readers honour standard permission flags.' }]} />
-        </div>
-    );
-};
+export const ChangePermissions = () => (
+    <div className="min-h-[calc(100vh-200px)]">
+        <PageSeo title="Change PDF Permissions - Not Available" description="Changing PDF permission flags is not currently available in the browser tool." faqItems={[{ question: 'Why is this unavailable?', answer: 'Permission flags need to be written with compatible encryption and owner-password handling. Re-saving a PDF does not apply those settings.' }, { question: 'Are permission toggles supported?', answer: 'No. The previous UI has been removed until the selected permissions can be written into the output file.' }]} />
+        <div className="page-header"><div className="container">
+            <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-700 text-white flex items-center justify-center shadow-lg"><Shield className="w-6 h-6" /></div></div>
+            <h1>Change PDF Permissions</h1><p>This tool is not available yet.</p>
+        </div></div>
+        <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
+            <div className="flex items-start gap-2 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 text-sm text-amber-800 dark:text-amber-300">
+                <Info className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>The previous controls only re-saved the file and did not apply print, copy, or edit restrictions. Downloads are disabled until permission flags are actually written.</span>
+            </div>
+        </div></div></div>
+        <FAQSection items={[{ question: 'Can browser PDFs enforce permissions?', answer: 'They can only be meaningful when the PDF encryption and owner-password permissions are written correctly.' }, { question: 'When should this return?', answer: 'Only after generated files can be verified to contain the requested permission dictionary.' }]} />
+    </div>
+);
 
 // ─── DigitalSignPdf ─────────────────────────────────────────────────────────
 export const DigitalSignPdf = () => (
@@ -197,52 +127,19 @@ export const ValidateSignature = () => (
 );
 
 // ─── TimestampPdf ───────────────────────────────────────────────────────────
-export const TimestampPdf = () => {
-    const [file, setFile] = useState<File | null>(null);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState(false);
-
-    const handleProcess = async () => {
-        if (!file) return;
-        setIsProcessing(true); setError(null);
-        try {
-            const ab = await file.arrayBuffer();
-            const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
-            const now = new Date().toISOString();
-            doc.setCreationDate(new Date());
-            doc.setModificationDate(new Date());
-            // Add timestamp as custom metadata
-            doc.setSubject(`Timestamped: ${now}`);
-            const bytes = await doc.save();
-            downloadBytes(bytes, file.name.replace('.pdf', `_timestamped.pdf`));
-            setSuccess(true); setTimeout(() => setSuccess(false), 3000);
-        } catch (e) { setError('Failed: ' + (e instanceof Error ? e.message : '')); }
-        finally { setIsProcessing(false); }
-    };
-
-    return (
-        <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Timestamp PDF Online – Free & Private" description="Embed an RFC 3161 timestamp into a PDF document. Browser-based." faqItems={[{ question: 'What is a PDF timestamp?', answer: 'A timestamp proves the document existed at a specific time, useful for legal/audit purposes.' }, { question: 'Is it a trusted timestamp?', answer: 'A local timestamp is added to metadata. For RFC 3161 trusted timestamps, a TSA server is required.' }]} />
-            <div className="page-header"><div className="container">
-                <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 text-white flex items-center justify-center shadow-lg"><Clock className="w-6 h-6" /></div></div>
-                <h1>Timestamp PDF</h1><p>Embed the current date/time into PDF metadata for auditing purposes.</p>
-            </div></div>
-            <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
-                <FileUploader onFilesSelected={f => { setFile(f[0]); setError(null); setSuccess(false); }} multiple={false} accept=".pdf" description="Drop a PDF file here" />
-                {file && (
-                    <div className="mt-6 space-y-4">
-                        <p className="text-sm"><strong>{file.name}</strong></p>
-                        <div className="rounded-xl bg-muted px-4 py-3 text-sm text-[var(--text-muted)]">Timestamp will be set to: <strong>{new Date().toLocaleString()}</strong></div>
-                        {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl text-sm">{error}</div>}
-                        {success && <div className="bg-[var(--success-light)] text-[var(--success)] p-4 rounded-xl text-sm flex items-center gap-2"><CheckCircle className="w-5 h-5" />Timestamped PDF downloaded!</div>}
-                        <button onClick={handleProcess} disabled={isProcessing} className="btn btn-primary w-full py-4 text-lg disabled:opacity-50">
-                            {isProcessing ? <><Loader2 className="w-5 h-5 animate-spin" />Timestamping…</> : <><Download className="w-5 h-5" />Timestamp &amp; Download</>}
-                        </button>
-                    </div>
-                )}
-            </div></div></div>
-            <FAQSection items={[{ question: 'What is a PDF timestamp?', answer: 'Embeds creation/modification date into the PDF, useful for auditing.' }, { question: 'Is this RFC 3161?', answer: 'A local metadata timestamp is embedded. True RFC 3161 requires a TSA server.' }]} />
-        </div>
-    );
-};
+export const TimestampPdf = () => (
+    <div className="min-h-[calc(100vh-200px)]">
+        <PageSeo title="Timestamp PDF - Not Available" description="Trusted RFC 3161 PDF timestamping is not currently available in the browser tool." faqItems={[{ question: 'Why is this unavailable?', answer: 'A trusted timestamp requires a timestamp authority response and proper signature embedding. Local metadata is not equivalent.' }, { question: 'Does this write local metadata?', answer: 'No. Downloads are disabled to avoid confusing local dates with trusted timestamps.' }]} />
+        <div className="page-header"><div className="container">
+            <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 text-white flex items-center justify-center shadow-lg"><Clock className="w-6 h-6" /></div></div>
+            <h1>Timestamp PDF</h1><p>This tool is not available yet.</p>
+        </div></div>
+        <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
+            <div className="flex items-start gap-2 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 text-sm text-amber-800 dark:text-amber-300">
+                <Info className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>Local creation or modification dates are not RFC 3161 timestamps. This route does not offer a download until trusted timestamping is implemented.</span>
+            </div>
+        </div></div></div>
+        <FAQSection items={[{ question: 'What makes a timestamp trusted?', answer: 'A trusted timestamp includes a signed response from a timestamp authority and is embedded in a verifiable signature structure.' }, { question: 'When should this return?', answer: 'Only after the output can be verified as a real trusted timestamp, not just edited metadata.' }]} />
+    </div>
+);
