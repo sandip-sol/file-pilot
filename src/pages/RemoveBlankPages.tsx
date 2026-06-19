@@ -5,10 +5,11 @@ import { FileMinus2, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 import { PDFDocument } from 'pdf-lib';
+import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
 async function detectAndRemoveBlankPages(file: File, threshold = 98): Promise<Uint8Array> {
     const pdfjsLib = await import('pdfjs-dist');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfJs = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
     const src = await PDFDocument.load(ab, { ignoreEncryption: true });

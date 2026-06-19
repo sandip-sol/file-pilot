@@ -386,7 +386,7 @@ export async function jsonToPDF(jsonStr: string): Promise<Uint8Array> {
 
 export async function pdfPagesToGreyscale(file: File, onProgress?: (pct: number) => void): Promise<Uint8Array> {
     const pdfjsLib = await import('pdfjs-dist');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
     const numPages = pdfDoc.numPages;
@@ -422,7 +422,7 @@ export async function pdfPagesToGreyscale(file: File, onProgress?: (pct: number)
 
 export async function pdfToSVGPages(file: File, onProgress?: (pct: number) => void): Promise<{ filename: string; data: string }[]> {
     const pdfjsLib = await import('pdfjs-dist');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
     const numPages = pdfDoc.numPages;
@@ -449,7 +449,7 @@ export async function pdfToSVGPages(file: File, onProgress?: (pct: number) => vo
 
 export async function pdfToJSON(file: File): Promise<object> {
     const pdfjsLib = await import('pdfjs-dist');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
     const meta = await pdfDoc.getMetadata();
@@ -468,7 +468,7 @@ export async function pdfToJSON(file: File): Promise<object> {
 
 export async function pdfToMarkdown(file: File): Promise<string> {
     const pdfjsLib = await import('pdfjs-dist');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
     let md = `# ${nameWithout(file.name)}\n\n`;
@@ -485,7 +485,7 @@ export async function pdfToMarkdown(file: File): Promise<string> {
 
 export async function extractImagesFromPDF(file: File, onProgress?: (pct: number) => void): Promise<Blob> {
     const pdfjsLib = await import('pdfjs-dist');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
     const zip = new JSZip();
@@ -517,7 +517,7 @@ export async function rasterizePDF(
     onProgress?: (pct: number) => void
 ): Promise<Blob> {
     const pdfjsLib = await import('pdfjs-dist');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
     const zip = new JSZip();
@@ -856,7 +856,7 @@ export async function packagePDFsToZip(files: File[]): Promise<Blob> {
 export async function deskewPDF(file: File, onProgress?: (pct: number) => void): Promise<Uint8Array> {
     // True deskew requires image analysis. This applies a light canvas-based straighten.
     const pdfjsLib = await import('pdfjs-dist');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfJs = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
     const result = await PDFDocument.create();
