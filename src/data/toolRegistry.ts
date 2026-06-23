@@ -659,6 +659,36 @@ export const toolRegistry: ToolDefinition[] = [
 
   // ── AI TOOLS ───────────────────────────────────────────────────────────────
   {
+    slug: '/remove-background', title: 'Remove Background', shortTitle: 'Remove BG',
+    description: 'Automatically detect and remove image backgrounds using AI, locally in your browser.',
+    icon: CircleOff, gradientClassName: 'from-pink-500 to-rose-600',
+    category: 'ai-tools', featured: true,
+  },
+  {
+    slug: '/change-background', title: 'Change Background', shortTitle: 'Change BG',
+    description: 'Replace image backgrounds with colours, gradients, blur, or custom images using AI.',
+    icon: Replace, gradientClassName: 'from-violet-500 to-indigo-600',
+    category: 'ai-tools',
+  },
+  {
+    slug: '/upscale-image', title: 'Upscale Image', shortTitle: 'Upscale',
+    description: 'Enlarge images using AI super-resolution to increase resolution while preserving detail.',
+    icon: ImagePlus, gradientClassName: 'from-indigo-500 to-violet-600',
+    category: 'ai-tools',
+  },
+  {
+    slug: '/ai-enhance-image', title: 'AI Enhance Image', shortTitle: 'Enhance',
+    description: 'Improve image quality with smart exposure, contrast, colour, and sharpness adjustments.',
+    icon: Sparkles, gradientClassName: 'from-amber-500 to-orange-600',
+    category: 'ai-tools',
+  },
+  {
+    slug: '/object-remover', title: 'Object Remover', shortTitle: 'Remove Object',
+    description: 'Paint over unwanted objects and remove them using content-aware inpainting.',
+    icon: Eraser, gradientClassName: 'from-red-500 to-rose-600',
+    category: 'ai-tools',
+  },
+  {
     slug: '/ai-summarize', title: 'AI Summarizer', shortTitle: 'Summarize',
     description: 'Generate concise summaries from PDF documents using AI.',
     icon: NotebookPen, gradientClassName: 'from-violet-600 to-purple-800',
@@ -751,18 +781,6 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'image-tools',
   },
   {
-    slug: '/upscale-image', title: 'Upscale Image', shortTitle: 'Upscale',
-    description: 'Enlarge images to higher resolution while maintaining visual quality.',
-    icon: ImagePlus, gradientClassName: 'from-indigo-500 to-violet-600',
-    category: 'image-tools',
-  },
-  {
-    slug: '/remove-background', title: 'Remove Background', shortTitle: 'Remove BG',
-    description: 'Automatically detect and remove image backgrounds.',
-    icon: CircleOff, gradientClassName: 'from-pink-500 to-rose-600',
-    category: 'image-tools',
-  },
-  {
     slug: '/watermark-image', title: 'Watermark Image', shortTitle: 'Watermark',
     description: 'Add text or image watermarks to photos with adjustable transparency.',
     icon: Droplets, gradientClassName: 'from-fuchsia-500 to-pink-600',
@@ -840,8 +858,6 @@ const comingSoonToolSlugs = new Set([
   '/ai-rewrite',
   '/convert-to-jpg',
   '/convert-from-jpg',
-  '/upscale-image',
-  '/remove-background',
   '/html-to-image',
   '/meme-generator',
 ]);

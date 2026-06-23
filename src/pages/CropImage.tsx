@@ -3,7 +3,7 @@ import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
 import { toast } from 'sonner';
 import { loadImageFile, revokeImageUrls } from '../utils/image/processing';
-import { getSupportedExportFormats, formatFileSize, getFormatExtension } from '../utils/image/support';
+import { getSupportedExportFormats, formatFileSize } from '../utils/image/support';
 import { cropAndResizeCanvas, exportCanvas, generateOutputFilename } from '../utils/image/canvas';
 import { downloadBlobFile } from '../utils/pdf/export';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';

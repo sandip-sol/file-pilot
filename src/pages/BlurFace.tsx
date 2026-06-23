@@ -3,7 +3,7 @@ import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
 import { toast } from 'sonner';
 import { loadImageFile, revokeImageUrls } from '../utils/image/processing';
-import { getSupportedExportFormats, formatFileSize } from '../utils/image/support';
+import { getSupportedExportFormats } from '../utils/image/support';
 import {
   renderBitmapToCanvas, exportCanvas, generateOutputFilename,
   applyBlurRegions, hasFaceDetectorSupport, detectFaces,
@@ -29,7 +29,7 @@ export const BlurFace = () => {
   const [supportedFormats, setSupportedFormats] = useState<Record<ImageFormat, boolean> | null>(null);
   const [outputFormat, setOutputFormat] = useState<ImageFormat>('image/jpeg');
   const [quality, setQuality] = useState(0.92);
-  const [bgColor, setBgColor] = useState('#ffffff');
+  const [bgColor] = useState('#ffffff');
 
   const [regions, setRegions] = useState<BlurRegion[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);

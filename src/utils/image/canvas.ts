@@ -558,7 +558,7 @@ export function addTextOverlay(
 }
 
 export function hasFaceDetectorSupport(): boolean {
-  return typeof (window as Record<string, unknown>).FaceDetector === 'function';
+  return typeof (window as unknown as Record<string, unknown>).FaceDetector === 'function';
 }
 
 export async function detectFaces(
@@ -566,7 +566,7 @@ export async function detectFaces(
 ): Promise<Array<{ x: number; y: number; width: number; height: number }>> {
   if (!hasFaceDetectorSupport()) return [];
   try {
-    const FaceDetector = (window as Record<string, unknown>).FaceDetector as new () => {
+    const FaceDetector = (window as unknown as Record<string, unknown>).FaceDetector as new () => {
       detect(source: ImageBitmap): Promise<Array<{ boundingBox: DOMRectReadOnly }>>;
     };
     const detector = new FaceDetector();

@@ -205,7 +205,7 @@ export const FILTER_PRESETS: FilterPreset[] = [
 ];
 
 export function applyPreset(
-  current: ImageAdjustments,
+  _current: ImageAdjustments,
   preset: FilterPreset,
 ): ImageAdjustments {
   const def = getDefaultAdjustments();

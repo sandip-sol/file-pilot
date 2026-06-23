@@ -7,7 +7,7 @@ import { getSupportedExportFormats, formatFileSize } from '../utils/image/suppor
 import {
   renderBitmapToCanvas, exportCanvas, generateOutputFilename,
   applyTextWatermark, applyImageWatermark,
-  type WatermarkPosition, type WatermarkTextOptions, type WatermarkImageOptions,
+  type WatermarkPosition,
 } from '../utils/image/canvas';
 import { downloadBlobFile, downloadZipFromEntries } from '../utils/pdf/export';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
@@ -40,7 +40,7 @@ export const WatermarkImage = () => {
   const [supportedFormats, setSupportedFormats] = useState<Record<ImageFormat, boolean> | null>(null);
   const [outputFormat, setOutputFormat] = useState<ImageFormat>('image/jpeg');
   const [quality, setQuality] = useState(0.92);
-  const [bgColor, setBgColor] = useState('#ffffff');
+  const [bgColor] = useState('#ffffff');
 
   const [wmType, setWmType] = useState<WatermarkType>('text');
 

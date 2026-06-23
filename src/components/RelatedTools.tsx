@@ -22,6 +22,11 @@ const relatedToolSlugs: Record<string, string[]> = {
   '/photo-editor': ['/crop-image', '/watermark-image', '/remove-image-metadata'],
   '/remove-image-metadata': ['/compress-image', '/blur-face', '/photo-editor'],
   '/blur-face': ['/remove-image-metadata', '/watermark-image', '/crop-image'],
+  '/remove-background': ['/change-background', '/object-remover', '/crop-image'],
+  '/change-background': ['/remove-background', '/ai-enhance-image', '/photo-editor'],
+  '/upscale-image': ['/ai-enhance-image', '/resize-image', '/compress-image'],
+  '/ai-enhance-image': ['/upscale-image', '/photo-editor', '/remove-background'],
+  '/object-remover': ['/remove-background', '/blur-face', '/crop-image'],
 };
 
 const getRelatedTools = (currentTool: ToolDefinition) => {

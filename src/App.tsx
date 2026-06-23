@@ -109,6 +109,13 @@ const PhotoEditor = lazy(() => import('./pages/PhotoEditor').then(m => ({ defaul
 const RemoveImageMetadata = lazy(() => import('./pages/RemoveImageMetadata').then(m => ({ default: m.RemoveImageMetadata })));
 const BlurFace = lazy(() => import('./pages/BlurFace').then(m => ({ default: m.BlurFace })));
 
+// ─── AI Image Tools ─────────────────────────────────────────────────────────
+const RemoveBackground = lazy(() => import('./pages/RemoveBackground').then(m => ({ default: m.RemoveBackground })));
+const ChangeBackground = lazy(() => import('./pages/ChangeBackground').then(m => ({ default: m.ChangeBackground })));
+const UpscaleImage = lazy(() => import('./pages/UpscaleImage').then(m => ({ default: m.UpscaleImage })));
+const AiEnhanceImage = lazy(() => import('./pages/AiEnhanceImage').then(m => ({ default: m.AiEnhanceImage })));
+const ObjectRemover = lazy(() => import('./pages/ObjectRemover').then(m => ({ default: m.ObjectRemover })));
+
 // ─── Loading fallback ────────────────────────────────────────────────────────
 const Loader = () => (
   <main className="container py-16 text-center text-muted-foreground">
@@ -228,6 +235,13 @@ function App() {
           <Route path="/photo-editor" element={<PhotoEditor />} />
           <Route path="/remove-image-metadata" element={<RemoveImageMetadata />} />
           <Route path="/blur-face" element={<BlurFace />} />
+
+          {/* AI Image Tools */}
+          <Route path="/remove-background" element={<RemoveBackground />} />
+          <Route path="/change-background" element={<ChangeBackground />} />
+          <Route path="/upscale-image" element={<UpscaleImage />} />
+          <Route path="/ai-enhance-image" element={<AiEnhanceImage />} />
+          <Route path="/object-remover" element={<ObjectRemover />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
