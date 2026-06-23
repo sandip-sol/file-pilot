@@ -12,6 +12,7 @@ import {
   Paperclip, Ungroup, GanttChart, FileCode2,
   ImageMinus, ImagePlus, Replace, RotateCcw, CircleOff, Scaling, Sparkles, Type,
   Globe, Camera, FileCheck, BrainCircuit, Languages, NotebookPen, MessageSquareText, FileSearch,
+  BarChart3,
 } from 'lucide-react';
 
 export type ToolCategory =
@@ -708,6 +709,24 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'image-tools',
   },
   {
+    slug: '/convert-image', title: 'Convert Image', shortTitle: 'Convert',
+    description: 'Convert images between JPEG, PNG, WebP, and AVIF formats instantly.',
+    icon: Replace, gradientClassName: 'from-violet-500 to-purple-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/website-image-optimiser', title: 'Website Image Optimiser', shortTitle: 'Web Optimise',
+    description: 'Generate responsive, web-ready image variants with srcset and picture snippets.',
+    icon: Globe, gradientClassName: 'from-teal-500 to-cyan-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/image-quality-analyzer', title: 'Image Quality Analyzer', shortTitle: 'Analyze',
+    description: 'Inspect image properties and get actionable quality recommendations.',
+    icon: BarChart3, gradientClassName: 'from-amber-500 to-orange-600',
+    category: 'image-tools',
+  },
+  {
     slug: '/crop-image', title: 'Crop Image', shortTitle: 'Crop',
     description: 'Select and extract a rectangular area from JPG, PNG, or WebP images.',
     icon: Crop, gradientClassName: 'from-amber-500 to-orange-600',
@@ -813,8 +832,6 @@ const comingSoonToolSlugs = new Set([
   '/ai-chat',
   '/ai-extract',
   '/ai-rewrite',
-  '/compress-image',
-  '/resize-image',
   '/crop-image',
   '/rotate-image',
   '/convert-to-jpg',

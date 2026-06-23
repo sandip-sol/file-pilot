@@ -94,6 +94,13 @@ const FindAndRedact = lazy(() => import('./pages/FindAndRedact').then(m => ({ de
 const FlattenPdf = lazy(() => import('./pages/FlattenPdf').then(m => ({ default: m.FlattenPdf })));
 const PdfMeta = lazy(() => import('./pages/PdfMetadata').then(m => ({ default: m.PdfMetadata })));
 
+// ─── Image Optimise Tools ────────────────────────────────────────────────────
+const CompressImage = lazy(() => import('./pages/CompressImage').then(m => ({ default: m.CompressImage })));
+const ResizeImage = lazy(() => import('./pages/ResizeImage').then(m => ({ default: m.ResizeImage })));
+const ConvertImage = lazy(() => import('./pages/ConvertImage').then(m => ({ default: m.ConvertImage })));
+const WebsiteImageOptimiser = lazy(() => import('./pages/WebsiteImageOptimiser').then(m => ({ default: m.WebsiteImageOptimiser })));
+const ImageQualityAnalyzer = lazy(() => import('./pages/ImageQualityAnalyzer').then(m => ({ default: m.ImageQualityAnalyzer })));
+
 // ─── Loading fallback ────────────────────────────────────────────────────────
 const Loader = () => (
   <main className="container py-16 text-center text-muted-foreground">
@@ -198,6 +205,13 @@ function App() {
           <Route path="/find-and-redact" element={<FindAndRedact />} />
           <Route path="/flatten-pdf" element={<FlattenPdf />} />
           <Route path="/remove-metadata" element={<PdfMeta />} />
+
+          {/* Image Optimise Tools */}
+          <Route path="/compress-image" element={<CompressImage />} />
+          <Route path="/resize-image" element={<ResizeImage />} />
+          <Route path="/convert-image" element={<ConvertImage />} />
+          <Route path="/website-image-optimiser" element={<WebsiteImageOptimiser />} />
+          <Route path="/image-quality-analyzer" element={<ImageQualityAnalyzer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

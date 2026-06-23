@@ -7,7 +7,12 @@
       "WebFetch(domain:www.ilovepdf.com)",
       "WebFetch(domain:www.iloveimg.com)",
       "Bash(npx vite *)",
-      "Bash(kill %1)"
+      "Bash(kill %1)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/compress-image)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/resize-image)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/convert-image)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/website-image-optimiser)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/image-quality-analyzer)"
     ]
   }
 }
