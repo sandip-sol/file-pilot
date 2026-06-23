@@ -15,7 +15,7 @@ const relatedToolSlugs: Record<string, string[]> = {
   '/sign-pdf': ['/annotate-pdf', '/watermark-pdf', '/flatten-pdf'],
   '/organize-pdf': ['/merge', '/split', '/rotate-pdf'],
   '/pdf-security': ['/sanitize-pdf', '/remove-metadata', '/redact-pdf'],
-  '/image-requirements': ['/compress', '/images-to-pdf', '/pdf-to-images'],
+  '/image-requirements': ['/compress-image', '/resize-image', '/crop-image'],
 };
 
 const getRelatedTools = (currentTool: ToolDefinition) => {

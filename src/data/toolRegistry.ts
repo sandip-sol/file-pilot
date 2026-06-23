@@ -10,6 +10,8 @@ import {
   SearchX, FileKey, Info, FileCog, StretchHorizontal,
   UnfoldVertical, TableColumnsSplit, NotepadTextDashed, Smartphone, Download,
   Paperclip, Ungroup, GanttChart, FileCode2,
+  ImageMinus, ImagePlus, Replace, RotateCcw, CircleOff, Scaling, Sparkles, Type,
+  Globe, Camera, FileCheck, BrainCircuit, Languages, NotebookPen, MessageSquareText, FileSearch,
 } from 'lucide-react';
 
 export type ToolCategory =
@@ -18,7 +20,9 @@ export type ToolCategory =
   | 'convert-to-pdf'
   | 'convert-from-pdf'
   | 'optimize-repair'
-  | 'secure-pdf';
+  | 'secure-pdf'
+  | 'image-tools'
+  | 'ai-tools';
 
 export type ToolStatus = 'ready' | 'beta' | 'coming-soon' | 'hidden';
 
@@ -417,6 +421,18 @@ export const toolRegistry: ToolDefinition[] = [
     icon: BookOpen, gradientClassName: 'from-yellow-500 to-amber-700',
     category: 'convert-to-pdf',
   },
+  {
+    slug: '/html-to-pdf', title: 'HTML to PDF', shortTitle: 'HTML→PDF',
+    description: 'Convert web pages and HTML files into PDF documents.',
+    icon: Globe, gradientClassName: 'from-cyan-500 to-blue-700',
+    category: 'convert-to-pdf',
+  },
+  {
+    slug: '/scan-to-pdf', title: 'Scan to PDF', shortTitle: 'Scan→PDF',
+    description: 'Capture documents with your camera and convert them to PDF.',
+    icon: Camera, gradientClassName: 'from-gray-500 to-slate-700',
+    category: 'convert-to-pdf',
+  },
 
   // ── CONVERT FROM PDF ───────────────────────────────────────────────────────
   {
@@ -519,6 +535,12 @@ export const toolRegistry: ToolDefinition[] = [
     slug: '/rasterize-pdf', title: 'Rasterize PDF', shortTitle: 'Rasterize',
     description: 'Rasterize PDF pages at custom DPI to PNG, JPEG, or WebP.',
     icon: Grid2x2, gradientClassName: 'from-pink-500 to-rose-700',
+    category: 'convert-from-pdf',
+  },
+  {
+    slug: '/pdf-to-pdfa', title: 'PDF to PDF/A', shortTitle: 'PDF→PDF/A',
+    description: 'Convert PDF to the ISO-standardized PDF/A archival format.',
+    icon: FileCheck, gradientClassName: 'from-emerald-600 to-green-800',
     category: 'convert-from-pdf',
   },
 
@@ -634,12 +656,122 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'secure-pdf',
   },
 
-  // ── EXTRA (existing tool) ───────────────────────────────────────────────────
+  // ── AI TOOLS ───────────────────────────────────────────────────────────────
+  {
+    slug: '/ai-summarize', title: 'AI Summarizer', shortTitle: 'Summarize',
+    description: 'Generate concise summaries from PDF documents using AI.',
+    icon: NotebookPen, gradientClassName: 'from-violet-600 to-purple-800',
+    category: 'ai-tools',
+  },
+  {
+    slug: '/ai-translate', title: 'Translate PDF', shortTitle: 'Translate',
+    description: 'Translate PDF content into any language powered by AI.',
+    icon: Languages, gradientClassName: 'from-sky-500 to-indigo-700',
+    category: 'ai-tools',
+  },
+  {
+    slug: '/ai-chat', title: 'Chat with PDF', shortTitle: 'Chat',
+    description: 'Ask questions about your PDF and get AI-powered answers.',
+    icon: MessageSquareText, gradientClassName: 'from-emerald-500 to-teal-700',
+    category: 'ai-tools',
+  },
+  {
+    slug: '/ai-extract', title: 'AI Data Extractor', shortTitle: 'AI Extract',
+    description: 'Extract structured data, tables, and key fields from PDFs using AI.',
+    icon: FileSearch, gradientClassName: 'from-amber-500 to-orange-700',
+    category: 'ai-tools',
+  },
+  {
+    slug: '/ai-rewrite', title: 'AI Rewrite PDF', shortTitle: 'Rewrite',
+    description: 'Rewrite or simplify PDF content while preserving the layout.',
+    icon: BrainCircuit, gradientClassName: 'from-pink-500 to-rose-700',
+    category: 'ai-tools',
+  },
+
+  // ── IMAGE TOOLS ────────────────────────────────────────────────────────────
   {
     slug: '/image-requirements', title: 'Image Formatter', shortTitle: 'Image Format',
     description: 'Resize images to exact dimensions, reduce file size, and convert formats.',
     icon: SlidersHorizontal, gradientClassName: 'from-cyan-500 to-blue-600',
-    category: 'optimize-repair', featured: true,
+    category: 'image-tools', featured: true,
+  },
+  {
+    slug: '/compress-image', title: 'Compress Image', shortTitle: 'Compress',
+    description: 'Reduce image file size while preserving quality for JPG, PNG, and WebP.',
+    icon: ImageMinus, gradientClassName: 'from-emerald-500 to-teal-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/resize-image', title: 'Resize Image', shortTitle: 'Resize',
+    description: 'Adjust image dimensions by pixels or percentage for any format.',
+    icon: Scaling, gradientClassName: 'from-blue-500 to-indigo-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/crop-image', title: 'Crop Image', shortTitle: 'Crop',
+    description: 'Select and extract a rectangular area from JPG, PNG, or WebP images.',
+    icon: Crop, gradientClassName: 'from-amber-500 to-orange-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/rotate-image', title: 'Rotate Image', shortTitle: 'Rotate',
+    description: 'Rotate or flip images by any angle in your browser.',
+    icon: RotateCcw, gradientClassName: 'from-violet-500 to-purple-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/convert-to-jpg', title: 'Convert to JPG', shortTitle: 'To JPG',
+    description: 'Convert PNG, WebP, GIF, BMP, TIFF, HEIC, and SVG images to JPG.',
+    icon: FileImage, gradientClassName: 'from-yellow-500 to-orange-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/convert-from-jpg', title: 'Convert from JPG', shortTitle: 'From JPG',
+    description: 'Convert JPG images to PNG, WebP, GIF, or BMP formats.',
+    icon: Replace, gradientClassName: 'from-sky-500 to-blue-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/upscale-image', title: 'Upscale Image', shortTitle: 'Upscale',
+    description: 'Enlarge images to higher resolution while maintaining visual quality.',
+    icon: ImagePlus, gradientClassName: 'from-indigo-500 to-violet-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/remove-background', title: 'Remove Background', shortTitle: 'Remove BG',
+    description: 'Automatically detect and remove image backgrounds.',
+    icon: CircleOff, gradientClassName: 'from-pink-500 to-rose-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/watermark-image', title: 'Watermark Image', shortTitle: 'Watermark',
+    description: 'Add text or image watermarks to photos with adjustable transparency.',
+    icon: Droplets, gradientClassName: 'from-fuchsia-500 to-pink-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/blur-face', title: 'Blur Face', shortTitle: 'Blur Face',
+    description: 'Blur faces, license plates, and sensitive areas in images.',
+    icon: Eraser, gradientClassName: 'from-slate-600 to-gray-800',
+    category: 'image-tools',
+  },
+  {
+    slug: '/html-to-image', title: 'HTML to Image', shortTitle: 'HTML→Image',
+    description: 'Convert web pages to JPG or PNG screenshots by URL.',
+    icon: FileCode, gradientClassName: 'from-orange-500 to-red-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/meme-generator', title: 'Meme Generator', shortTitle: 'Meme',
+    description: 'Create memes by adding captions and text to images.',
+    icon: Type, gradientClassName: 'from-lime-500 to-green-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/photo-editor', title: 'Photo Editor', shortTitle: 'Editor',
+    description: 'Edit photos with filters, effects, text, frames, and stickers.',
+    icon: Sparkles, gradientClassName: 'from-rose-500 to-pink-700',
+    category: 'image-tools',
   },
 ];
 
@@ -673,6 +805,27 @@ const comingSoonToolSlugs = new Set([
   '/cbz-to-pdf',
   '/digital-sign-pdf',
   '/validate-signature',
+  '/html-to-pdf',
+  '/scan-to-pdf',
+  '/pdf-to-pdfa',
+  '/ai-summarize',
+  '/ai-translate',
+  '/ai-chat',
+  '/ai-extract',
+  '/ai-rewrite',
+  '/compress-image',
+  '/resize-image',
+  '/crop-image',
+  '/rotate-image',
+  '/convert-to-jpg',
+  '/convert-from-jpg',
+  '/upscale-image',
+  '/remove-background',
+  '/watermark-image',
+  '/blur-face',
+  '/html-to-image',
+  '/meme-generator',
+  '/photo-editor',
 ]);
 
 const hiddenToolSlugs = new Set([

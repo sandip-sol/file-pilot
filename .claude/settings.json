@@ -3,7 +3,11 @@
     "allow": [
       "Bash(npx tsc *)",
       "Bash(npm run *)",
-      "Bash(curl -s http://localhost:5173)"
+      "Bash(curl -s http://localhost:5173)",
+      "WebFetch(domain:www.ilovepdf.com)",
+      "WebFetch(domain:www.iloveimg.com)",
+      "Bash(npx vite *)",
+      "Bash(kill %1)"
     ]
   }
 }

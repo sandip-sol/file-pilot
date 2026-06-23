@@ -49,6 +49,16 @@ const NAV_CATEGORIES: Array<{ category: ToolCategory; label: string; description
         label: 'Secure',
         description: 'Protect, sanitize, flatten, and redact files.',
     },
+    {
+        category: 'ai-tools',
+        label: 'AI Tools',
+        description: 'Summarize, translate, chat, and extract data with AI.',
+    },
+    {
+        category: 'image-tools',
+        label: 'Image Tools',
+        description: 'Compress, resize, crop, convert, and edit images.',
+    },
 ];
 
 const CategoryHeader = ({ label, description }: { label: string; description: string }) => (
@@ -116,12 +126,6 @@ export const Navbar = () => {
 
                 {/* Desktop Nav */}
                 <div className="hidden lg:flex min-w-0 flex-1 items-center justify-end gap-2 text-sm font-medium text-muted-foreground">
-                    <Link
-                        to="/"
-                        className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:outline-none"
-                    >
-                        All Tools
-                    </Link>
                     <NavigationMenu>
                         <NavigationMenuList className="space-x-0">
                             {NAV_CATEGORIES.map(({ category, label, description }) => {
@@ -165,13 +169,6 @@ export const Navbar = () => {
             {isMenuOpen && (
                 <div className="lg:hidden bg-background border-t border-border animate-fade-in">
                     <div className="container max-h-[calc(100vh-4rem)] overflow-y-auto py-4">
-                        <Link
-                            to="/"
-                            onClick={() => setIsMenuOpen(false)}
-                            className="mb-2 flex rounded-lg px-3 py-3 text-sm font-semibold text-foreground hover:bg-muted"
-                        >
-                            All Tools
-                        </Link>
                         <Accordion type="multiple" className="w-full">
                             {NAV_CATEGORIES.map(({ category, label, description }) => {
                                 const tools = discoverableToolsByCategory(category);
