@@ -94,6 +94,14 @@ const FindAndRedact = lazy(() => import('./pages/FindAndRedact').then(m => ({ de
 const FlattenPdf = lazy(() => import('./pages/FlattenPdf').then(m => ({ default: m.FlattenPdf })));
 const PdfMeta = lazy(() => import('./pages/PdfMetadata').then(m => ({ default: m.PdfMetadata })));
 
+// ─── Image Workflow Tools ────────────────────────────────────────────────────
+const ImageFormatter = lazy(() => import('./pages/ImageFormatter').then(m => ({ default: m.ImageFormatter })));
+const PassportPhotoValidator = lazy(() => import('./pages/PassportPhotoValidator').then(m => ({ default: m.PassportPhotoValidator })));
+const SocialMediaResizer = lazy(() => import('./pages/SocialMediaResizer').then(m => ({ default: m.SocialMediaResizer })));
+const EcommerceImageFormatter = lazy(() => import('./pages/EcommerceImageFormatter').then(m => ({ default: m.EcommerceImageFormatter })));
+const ScanImagesToPdf = lazy(() => import('./pages/ScanImagesToPdf').then(m => ({ default: m.ScanImagesToPdf })));
+const FaviconGenerator = lazy(() => import('./pages/FaviconGenerator').then(m => ({ default: m.FaviconGenerator })));
+
 // ─── Image Optimise Tools ────────────────────────────────────────────────────
 const CompressImage = lazy(() => import('./pages/CompressImage').then(m => ({ default: m.CompressImage })));
 const ResizeImage = lazy(() => import('./pages/ResizeImage').then(m => ({ default: m.ResizeImage })));
@@ -133,7 +141,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
-          <Route path="/image-requirements" element={<ImageRequirements />} />
 
           {/* Organize & Manage */}
           <Route path="/merge" element={<Merge />} />
@@ -220,6 +227,15 @@ function App() {
           <Route path="/find-and-redact" element={<FindAndRedact />} />
           <Route path="/flatten-pdf" element={<FlattenPdf />} />
           <Route path="/remove-metadata" element={<PdfMeta />} />
+
+          {/* Image Workflow Tools */}
+          <Route path="/image-formatter" element={<ImageFormatter />} />
+          <Route path="/image-requirements" element={<ImageFormatter />} />
+          <Route path="/passport-photo-validator" element={<PassportPhotoValidator />} />
+          <Route path="/social-media-resizer" element={<SocialMediaResizer />} />
+          <Route path="/ecommerce-image-formatter" element={<EcommerceImageFormatter />} />
+          <Route path="/scan-images-to-pdf" element={<ScanImagesToPdf />} />
+          <Route path="/favicon-generator" element={<FaviconGenerator />} />
 
           {/* Image Optimise Tools */}
           <Route path="/compress-image" element={<CompressImage />} />

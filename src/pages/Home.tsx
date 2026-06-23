@@ -38,7 +38,8 @@ type WorkflowId =
   | 'optimize-repair'
   | 'protect-clean'
   | 'ai-tools'
-  | 'image-tools';
+  | 'image-tools'
+  | 'workflows';
 
 const WORKFLOWS: Record<WorkflowId, { label: string; shortLabel: string; intent: string; icon: LucideIcon; keywords: string }> = {
   'organize-pdfs': {
@@ -97,6 +98,13 @@ const WORKFLOWS: Record<WorkflowId, { label: string; shortLabel: string; intent:
     icon: Images,
     keywords: 'image photo compress resize crop rotate convert jpg png webp upscale background watermark blur meme editor',
   },
+  'workflows': {
+    label: 'Image Workflows',
+    shortLabel: 'Workflows',
+    intent: 'Format images for passports, social media, e-commerce, scan documents to PDF, and generate favicons.',
+    icon: ImageIcon,
+    keywords: 'workflow passport photo social media resize ecommerce product scan pdf favicon icon formatter batch',
+  },
 };
 
 const QUICK_INTENTS = [
@@ -136,6 +144,7 @@ const getWorkflowId = (tool: ToolDefinition): WorkflowId => {
   if (tool.category === 'secure-pdf') return 'protect-clean';
   if (tool.category === 'ai-tools') return 'ai-tools';
   if (tool.category === 'image-tools') return 'image-tools';
+  if (tool.category === 'workflows') return 'workflows';
   if (tool.category === 'convert-to-pdf') return 'convert-files';
 
   if ([

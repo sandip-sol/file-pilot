@@ -12,7 +12,7 @@ import {
   Paperclip, Ungroup, GanttChart, FileCode2,
   ImageMinus, ImagePlus, Replace, RotateCcw, CircleOff, Scaling, Sparkles, Type,
   Globe, Camera, FileCheck, BrainCircuit, Languages, NotebookPen, MessageSquareText, FileSearch,
-  BarChart3, EyeOff,
+  BarChart3, EyeOff, AppWindow, UserCheck, Share2, ShoppingBag, ScanLine as ScanLineIcon, Gem,
 } from 'lucide-react';
 
 export type ToolCategory =
@@ -23,7 +23,8 @@ export type ToolCategory =
   | 'optimize-repair'
   | 'secure-pdf'
   | 'image-tools'
-  | 'ai-tools';
+  | 'ai-tools'
+  | 'workflows';
 
 export type ToolStatus = 'ready' | 'beta' | 'coming-soon' | 'hidden';
 
@@ -719,13 +720,45 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'ai-tools',
   },
 
-  // ── IMAGE TOOLS ────────────────────────────────────────────────────────────
+  // ── WORKFLOWS ──────────────────────────────────────────────────────────────
   {
-    slug: '/image-requirements', title: 'Image Formatter', shortTitle: 'Image Format',
-    description: 'Resize images to exact dimensions, reduce file size, and convert formats.',
+    slug: '/image-formatter', title: 'Image Formatter', shortTitle: 'Formatter',
+    description: 'Resize, convert, compress, and batch-export images to exact dimensions and formats.',
     icon: SlidersHorizontal, gradientClassName: 'from-cyan-500 to-blue-600',
-    category: 'image-tools', featured: true,
+    category: 'workflows', featured: true,
   },
+  {
+    slug: '/passport-photo-validator', title: 'Passport Photo Validator', shortTitle: 'Passport',
+    description: 'Check passport and ID photo technical requirements with crop and export tools.',
+    icon: UserCheck, gradientClassName: 'from-emerald-500 to-teal-600',
+    category: 'workflows',
+  },
+  {
+    slug: '/social-media-resizer', title: 'Social Media Resizer', shortTitle: 'Social Resize',
+    description: 'Resize images for Instagram, Facebook, LinkedIn, X, YouTube, and more in one step.',
+    icon: Share2, gradientClassName: 'from-pink-500 to-rose-600',
+    category: 'workflows',
+  },
+  {
+    slug: '/ecommerce-image-formatter', title: 'E-commerce Image Formatter', shortTitle: 'E-commerce',
+    description: 'Prepare product photos with clean backgrounds and marketplace-ready dimensions.',
+    icon: ShoppingBag, gradientClassName: 'from-amber-500 to-orange-600',
+    category: 'workflows',
+  },
+  {
+    slug: '/scan-images-to-pdf', title: 'Scan Images to PDF', shortTitle: 'Scan→PDF',
+    description: 'Turn photos of documents into a clean, ordered, downloadable PDF.',
+    icon: ScanLineIcon, gradientClassName: 'from-indigo-500 to-violet-600',
+    category: 'workflows',
+  },
+  {
+    slug: '/favicon-generator', title: 'Favicon Generator', shortTitle: 'Favicon',
+    description: 'Generate all website favicon and app icon assets from a single image.',
+    icon: Gem, gradientClassName: 'from-violet-500 to-purple-600',
+    category: 'workflows',
+  },
+
+  // ── IMAGE TOOLS ────────────────────────────────────────────────────────────
   {
     slug: '/compress-image', title: 'Compress Image', shortTitle: 'Compress',
     description: 'Reduce image file size while preserving quality for JPG, PNG, and WebP.',
