@@ -16,6 +16,12 @@ const relatedToolSlugs: Record<string, string[]> = {
   '/organize-pdf': ['/merge', '/split', '/rotate-pdf'],
   '/pdf-security': ['/sanitize-pdf', '/remove-metadata', '/redact-pdf'],
   '/image-requirements': ['/compress-image', '/resize-image', '/crop-image'],
+  '/crop-image': ['/resize-image', '/rotate-image', '/photo-editor'],
+  '/rotate-image': ['/crop-image', '/photo-editor', '/watermark-image'],
+  '/watermark-image': ['/photo-editor', '/crop-image', '/blur-face'],
+  '/photo-editor': ['/crop-image', '/watermark-image', '/remove-image-metadata'],
+  '/remove-image-metadata': ['/compress-image', '/blur-face', '/photo-editor'],
+  '/blur-face': ['/remove-image-metadata', '/watermark-image', '/crop-image'],
 };
 
 const getRelatedTools = (currentTool: ToolDefinition) => {

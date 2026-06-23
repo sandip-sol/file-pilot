@@ -101,6 +101,14 @@ const ConvertImage = lazy(() => import('./pages/ConvertImage').then(m => ({ defa
 const WebsiteImageOptimiser = lazy(() => import('./pages/WebsiteImageOptimiser').then(m => ({ default: m.WebsiteImageOptimiser })));
 const ImageQualityAnalyzer = lazy(() => import('./pages/ImageQualityAnalyzer').then(m => ({ default: m.ImageQualityAnalyzer })));
 
+// ─── Image Edit Tools ────────────────────────────────────────────────────────
+const CropImage = lazy(() => import('./pages/CropImage').then(m => ({ default: m.CropImage })));
+const RotateImage = lazy(() => import('./pages/RotateImage').then(m => ({ default: m.RotateImage })));
+const WatermarkImage = lazy(() => import('./pages/WatermarkImage').then(m => ({ default: m.WatermarkImage })));
+const PhotoEditor = lazy(() => import('./pages/PhotoEditor').then(m => ({ default: m.PhotoEditor })));
+const RemoveImageMetadata = lazy(() => import('./pages/RemoveImageMetadata').then(m => ({ default: m.RemoveImageMetadata })));
+const BlurFace = lazy(() => import('./pages/BlurFace').then(m => ({ default: m.BlurFace })));
+
 // ─── Loading fallback ────────────────────────────────────────────────────────
 const Loader = () => (
   <main className="container py-16 text-center text-muted-foreground">
@@ -212,6 +220,14 @@ function App() {
           <Route path="/convert-image" element={<ConvertImage />} />
           <Route path="/website-image-optimiser" element={<WebsiteImageOptimiser />} />
           <Route path="/image-quality-analyzer" element={<ImageQualityAnalyzer />} />
+
+          {/* Image Edit Tools */}
+          <Route path="/crop-image" element={<CropImage />} />
+          <Route path="/rotate-image" element={<RotateImage />} />
+          <Route path="/watermark-image" element={<WatermarkImage />} />
+          <Route path="/photo-editor" element={<PhotoEditor />} />
+          <Route path="/remove-image-metadata" element={<RemoveImageMetadata />} />
+          <Route path="/blur-face" element={<BlurFace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

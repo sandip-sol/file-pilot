@@ -12,7 +12,7 @@ import {
   Paperclip, Ungroup, GanttChart, FileCode2,
   ImageMinus, ImagePlus, Replace, RotateCcw, CircleOff, Scaling, Sparkles, Type,
   Globe, Camera, FileCheck, BrainCircuit, Languages, NotebookPen, MessageSquareText, FileSearch,
-  BarChart3,
+  BarChart3, EyeOff,
 } from 'lucide-react';
 
 export type ToolCategory =
@@ -769,6 +769,12 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'image-tools',
   },
   {
+    slug: '/remove-image-metadata', title: 'Metadata Remover', shortTitle: 'Remove Meta',
+    description: 'Inspect and remove EXIF, GPS, and camera metadata from images for privacy.',
+    icon: EyeOff, gradientClassName: 'from-gray-500 to-slate-700',
+    category: 'image-tools',
+  },
+  {
     slug: '/blur-face', title: 'Blur Face', shortTitle: 'Blur Face',
     description: 'Blur faces, license plates, and sensitive areas in images.',
     icon: Eraser, gradientClassName: 'from-slate-600 to-gray-800',
@@ -832,17 +838,12 @@ const comingSoonToolSlugs = new Set([
   '/ai-chat',
   '/ai-extract',
   '/ai-rewrite',
-  '/crop-image',
-  '/rotate-image',
   '/convert-to-jpg',
   '/convert-from-jpg',
   '/upscale-image',
   '/remove-background',
-  '/watermark-image',
-  '/blur-face',
   '/html-to-image',
   '/meme-generator',
-  '/photo-editor',
 ]);
 
 const hiddenToolSlugs = new Set([
