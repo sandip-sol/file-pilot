@@ -1,5 +1,5 @@
-import { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Layout } from './components/Layout';
 
 // ─── Core pages ─────────────────────────────────────────────────────────────
@@ -118,9 +118,26 @@ const Loader = () => (
   </main>
 );
 
+const ScrollToTop = () => {
+  const { pathname, search, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) return;
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    });
+  }, [pathname, search, hash]);
+
+  return null;
+};
+
 function App() {
   return (
     <Layout>
+      <ScrollToTop />
       <Suspense fallback={<Loader />}>
         <Routes>
           {/* Core */}
