@@ -1,4 +1,5 @@
 import { ShieldCheck } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { RelatedTools } from './RelatedTools';
@@ -26,6 +27,7 @@ export const Layout = ({ children }: LayoutProps) => {
             </main>
             <Footer />
         </div>
+        <Analytics />
         </>
     );
 };
