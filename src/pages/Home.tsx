@@ -18,6 +18,7 @@ import {
 import { PageSeo } from '../components/PageSeo';
 import { RecentlyUsedTools } from '../components/RecentlyUsedTools';
 import { discoverableTools, getToolStatus, plannedTools, type ToolDefinition } from '../data/toolRegistry';
+import heroImage from '../assets/hero.png';
 
 const POPULAR_SLUGS = [
   '/merge',
@@ -279,51 +280,62 @@ export const Home = () => {
       />
 
       {/* ── Hero ────────────────────────────────────────────────────── */}
-      <section className="border-b border-border bg-card/20">
+      <section className="relative overflow-hidden border-b border-border bg-card/20">
         <div className="container py-12 md:py-16">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm text-muted-foreground">
-              <Lock className="h-3.5 w-3.5 text-emerald-600" />
-              100% private — files never leave your device
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,520px)] xl:gap-14">
+            <div className="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm text-muted-foreground">
+                <Lock className="h-3.5 w-3.5 text-emerald-600" />
+                100% private — files never leave your device
+              </div>
+
+              <h1 className="text-2xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
+                All-in-one file tools
+              </h1>
+              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg lg:mx-0">
+                Smart tools for PDFs, images and files. {tools.length} ready tools, all processed locally in your browser.
+              </p>
+
+              <div className="mx-auto mt-8 max-w-2xl lg:mx-0">
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                  <input
+                    id="tool-search"
+                    type="search"
+                    placeholder="Search tools — merge, compress, JPG, signature, AI, image..."
+                    value={search}
+                    onChange={(event) => {
+                      setSearch(event.target.value);
+                      if (event.target.value) setActiveWorkflow('all');
+                    }}
+                    className="w-full rounded-xl border border-border bg-card py-4 pl-12 pr-4 text-base text-foreground shadow-sm outline-none transition focus:border-foreground/30 focus:ring-2 focus:ring-foreground/10"
+                  />
+                </div>
+                <div className="mt-3 flex flex-wrap justify-center gap-2 lg:justify-start">
+                  {QUICK_INTENTS.map((intent) => (
+                    <button
+                      key={intent.label}
+                      type="button"
+                      onClick={() => {
+                        setSearch(intent.query);
+                        setActiveWorkflow('all');
+                      }}
+                      className="rounded-full border border-border bg-card/60 px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
+                    >
+                      {intent.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            <h1 className="text-2xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
-              All-in-one file tools
-            </h1>
-            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Smart tools for PDFs, images and files. {tools.length} ready tools, all processed locally in your browser.
-            </p>
-
-            <div className="mx-auto mt-8 max-w-2xl">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  id="tool-search"
-                  type="search"
-                  placeholder="Search tools — merge, compress, JPG, signature, AI, image..."
-                  value={search}
-                  onChange={(event) => {
-                    setSearch(event.target.value);
-                    if (event.target.value) setActiveWorkflow('all');
-                  }}
-                  className="w-full rounded-xl border border-border bg-card py-4 pl-12 pr-4 text-base text-foreground shadow-sm outline-none transition focus:border-foreground/30 focus:ring-2 focus:ring-foreground/10"
-                />
-              </div>
-              <div className="mt-3 flex flex-wrap justify-center gap-2">
-                {QUICK_INTENTS.map((intent) => (
-                  <button
-                    key={intent.label}
-                    type="button"
-                    onClick={() => {
-                      setSearch(intent.query);
-                      setActiveWorkflow('all');
-                    }}
-                    className="rounded-full border border-border bg-card/60 px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
-                  >
-                    {intent.label}
-                  </button>
-                ))}
-              </div>
+            <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
+              <img
+                src={heroImage}
+                alt="FilePilot PDF, image and file tools preview"
+                className="h-auto w-full select-none object-contain"
+                loading="eager"
+              />
             </div>
           </div>
         </div>
