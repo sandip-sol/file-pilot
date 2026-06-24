@@ -57,7 +57,6 @@ import {
 
 import {
   type QRDesignOptions,
-  DEFAULT_QR_OPTIONS,
   generateQRCode,
   exportQRAsPNG,
   exportQRAsSVG,
@@ -158,7 +157,7 @@ export const QrGenerator = () => {
 
   // Preview ----------------------------------------------------------------
   const previewContainerRef = useRef<HTMLDivElement>(null);
-  const debounceTimerRef = useRef<ReturnType<typeof setTimeout>>();
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Build the data string from current content state
   const qrData = useMemo((): string => {

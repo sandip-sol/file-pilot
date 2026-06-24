@@ -21,10 +21,11 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './
 type NavCategoryGroup = {
     id: string;
     categories: ToolCategory[];
-    extraToolSlugs?: string[];
     label: string;
     description: string;
 };
+
+const DIRECT_NAV_TOOL_SLUGS = ['/qr-generator'];
 
 const NAV_CATEGORIES: NavCategoryGroup[] = [
     {
@@ -66,24 +67,17 @@ const NAV_CATEGORIES: NavCategoryGroup[] = [
     {
         id: 'image-tools',
         categories: ['image-tools'],
-        extraToolSlugs: ['/qr-generator'],
         label: 'Image Tools',
         description: 'Compress, resize, crop, convert, and edit images.',
     },
 ];
 
-const getNavCategoryTools = ({ categories, extraToolSlugs = [] }: NavCategoryGroup) => {
-    const tools = categories.flatMap((category) => discoverableToolsByCategory(category));
-    const extraTools = extraToolSlugs
-        .map((slug) => discoverableTools.find((tool) => tool.slug === slug))
-        .filter((tool): tool is ToolDefinition => Boolean(tool));
-    const existingSlugs = new Set(tools.map((tool) => tool.slug));
+const DIRECT_NAV_TOOLS = DIRECT_NAV_TOOL_SLUGS
+    .map((slug) => discoverableTools.find((tool) => tool.slug === slug))
+    .filter((tool): tool is ToolDefinition => Boolean(tool));
 
-    return [
-        ...tools,
-        ...extraTools.filter((tool) => !existingSlugs.has(tool.slug)),
-    ];
-};
+const getNavCategoryTools = ({ categories }: NavCategoryGroup) =>
+    categories.flatMap((category) => discoverableToolsByCategory(category));
 
 const CategoryHeader = ({ label, description }: { label: string; description: string }) => (
     <div className="border-b border-border px-4 py-3">
@@ -176,6 +170,18 @@ export const Navbar = () => {
                                     </NavigationMenuItem>
                                 );
                             })}
+                            {DIRECT_NAV_TOOLS.map((tool) => (
+                                <NavigationMenuItem key={tool.slug}>
+                                    <NavigationMenuLink asChild>
+                                        <Link
+                                            to={tool.slug}
+                                            className="flex h-9 items-center rounded-md bg-transparent px-2.5 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 xl:px-3"
+                                        >
+                                            {tool.shortTitle}
+                                        </Link>
+                                    </NavigationMenuLink>
+                                </NavigationMenuItem>
+                            ))}
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
@@ -194,6 +200,17 @@ export const Navbar = () => {
             {isMenuOpen && (
                 <div className="lg:hidden bg-background border-t border-border animate-fade-in">
                     <div className="container max-h-[calc(100vh-4rem)] overflow-y-auto py-4">
+                        {DIRECT_NAV_TOOLS.length > 0 && (
+                            <div className="mb-3 space-y-1">
+                                {DIRECT_NAV_TOOLS.map((tool) => (
+                                    <ToolMenuLink
+                                        key={tool.slug}
+                                        tool={tool}
+                                        onClick={() => setIsMenuOpen(false)}
+                                    />
+                                ))}
+                            </div>
+                        )}
                         <Accordion type="multiple" className="w-full">
                             {NAV_CATEGORIES.map((navCategory) => {
                                 const { id, label, description } = navCategory;

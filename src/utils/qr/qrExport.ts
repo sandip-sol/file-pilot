@@ -147,7 +147,13 @@ export const exportQRAsSVG = async (opts: QRDesignOptions): Promise<Blob> => {
   if (!raw) throw new Error('SVG export failed');
   // raw may be a Blob already or a Buffer in Node
   if (raw instanceof Blob) return raw;
-  return new Blob([raw], { type: 'image/svg+xml' });
+  if (typeof raw === 'string') return new Blob([raw], { type: 'image/svg+xml' });
+
+  const view = raw as ArrayBufferView<ArrayBufferLike>;
+  const bytes = new Uint8Array(view.byteLength);
+  bytes.set(new Uint8Array(view.buffer, view.byteOffset, view.byteLength));
+
+  return new Blob([bytes.buffer], { type: 'image/svg+xml' });
 };
 
 /** Export QR as JPEG Blob (requires solid background). */
