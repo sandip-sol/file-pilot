@@ -17,48 +17,60 @@ import {
 } from './ui/navigation-menu';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 
-const NAV_CATEGORIES: Array<{ category: ToolCategory; label: string; description: string }> = [
+type NavCategoryGroup = {
+    id: string;
+    categories: ToolCategory[];
+    label: string;
+    description: string;
+};
+
+const NAV_CATEGORIES: NavCategoryGroup[] = [
     {
-        category: 'organize-manage',
+        id: 'organize-manage',
+        categories: ['organize-manage'],
         label: 'Organize',
         description: 'Merge, split, reorder, and prepare pages.',
     },
     {
-        category: 'edit-annotate',
+        id: 'edit-annotate',
+        categories: ['edit-annotate'],
         label: 'Edit',
         description: 'Annotate, sign, stamp, and adjust PDF content.',
     },
     {
-        category: 'convert-to-pdf',
-        label: 'Convert to PDF',
-        description: 'Turn images, text, and documents into PDFs.',
+        id: 'convert-pdf',
+        categories: ['convert-to-pdf', 'convert-from-pdf'],
+        label: 'Convert PDF',
+        description: 'Convert files to PDF or export PDF pages, text, images, and data.',
     },
     {
-        category: 'convert-from-pdf',
-        label: 'Convert from PDF',
-        description: 'Export PDF pages, text, images, and data.',
-    },
-    {
-        category: 'optimize-repair',
+        id: 'optimize-repair',
+        categories: ['optimize-repair'],
         label: 'Optimize',
         description: 'Compress, inspect, repair, and clean PDFs.',
     },
     {
-        category: 'secure-pdf',
+        id: 'secure-pdf',
+        categories: ['secure-pdf'],
         label: 'Secure',
         description: 'Protect, sanitize, flatten, and redact files.',
     },
     {
-        category: 'ai-tools',
+        id: 'ai-tools',
+        categories: ['ai-tools'],
         label: 'AI Tools',
         description: 'Summarize, translate, chat, and extract data with AI.',
     },
     {
-        category: 'image-tools',
+        id: 'image-tools',
+        categories: ['image-tools'],
         label: 'Image Tools',
         description: 'Compress, resize, crop, convert, and edit images.',
     },
 ];
+
+const getNavCategoryTools = (categories: ToolCategory[]) =>
+    categories.flatMap((category) => discoverableToolsByCategory(category));
 
 const CategoryHeader = ({ label, description }: { label: string; description: string }) => (
     <div className="border-b border-border px-4 py-3">
@@ -127,11 +139,11 @@ export const Navbar = () => {
                 <div className="hidden lg:flex min-w-0 flex-1 items-center justify-end gap-2 text-sm font-medium text-muted-foreground">
                     <NavigationMenu>
                         <NavigationMenuList className="space-x-0">
-                            {NAV_CATEGORIES.map(({ category, label, description }) => {
-                                const tools = discoverableToolsByCategory(category);
+                            {NAV_CATEGORIES.map(({ id, categories, label, description }) => {
+                                const tools = getNavCategoryTools(categories);
 
                                 return (
-                                    <NavigationMenuItem key={category}>
+                                    <NavigationMenuItem key={id}>
                                         <NavigationMenuTrigger className="h-9 bg-transparent px-2.5 text-muted-foreground hover:text-foreground data-[state=open]:text-foreground xl:px-3">
                                             {label}
                                         </NavigationMenuTrigger>
@@ -169,11 +181,11 @@ export const Navbar = () => {
                 <div className="lg:hidden bg-background border-t border-border animate-fade-in">
                     <div className="container max-h-[calc(100vh-4rem)] overflow-y-auto py-4">
                         <Accordion type="multiple" className="w-full">
-                            {NAV_CATEGORIES.map(({ category, label, description }) => {
-                                const tools = discoverableToolsByCategory(category);
+                            {NAV_CATEGORIES.map(({ id, categories, label, description }) => {
+                                const tools = getNavCategoryTools(categories);
 
                                 return (
-                                    <AccordionItem key={category} value={category} className="border-border">
+                                    <AccordionItem key={id} value={id} className="border-border">
                                         <AccordionTrigger className="px-3 text-left hover:no-underline">
                                             <span>
                                                 <span className="block text-sm font-semibold text-foreground">{label}</span>
