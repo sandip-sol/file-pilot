@@ -290,10 +290,10 @@ export const Home = () => {
               </div>
 
               <h1 className="text-2xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
-                All-in-one file tools
+                Your complete workspace for PDFs, images, conversions and AI-powered file tasks.
               </h1>
               <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg lg:mx-0">
-                Smart tools for PDFs, images and files. {tools.length} ready tools, all processed locally in your browser.
+                One place for every file task — from PDFs and images to smart AI tools. Process everything securely and privately, right in your browser.
               </p>
 
               <div className="mx-auto mt-8 max-w-2xl lg:mx-0">
