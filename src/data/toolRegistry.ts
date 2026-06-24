@@ -13,6 +13,7 @@ import {
   ImageMinus, ImagePlus, Replace, RotateCcw, CircleOff, Scaling, Sparkles, Type,
   Globe, Camera, FileCheck, BrainCircuit, Languages, NotebookPen, MessageSquareText, FileSearch,
   BarChart3, EyeOff, UserCheck, Share2, ShoppingBag, ScanLine as ScanLineIcon, Gem,
+  Pipette, QrCode,
 } from 'lucide-react';
 
 export type ToolCategory =
@@ -848,6 +849,24 @@ export const toolRegistry: ToolDefinition[] = [
     description: 'Edit photos with filters, effects, text, frames, and stickers.',
     icon: Sparkles, gradientClassName: 'from-rose-500 to-pink-700',
     category: 'image-tools',
+  },
+  {
+    slug: '/image-to-svg', title: 'Image to SVG Converter', shortTitle: 'Image→SVG',
+    description: 'Convert simple logos, icons and illustrations into editable SVG vectors.',
+    icon: FileCode2, gradientClassName: 'from-emerald-500 to-teal-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/color-picker', title: 'Color Picker', shortTitle: 'Color Picker',
+    description: 'Pick colours from images and copy HEX, RGB, HSL and CSS values.',
+    icon: Pipette, gradientClassName: 'from-rose-500 to-pink-600',
+    category: 'image-tools',
+  },
+  {
+    slug: '/qr-generator', title: 'QR Code Generator', shortTitle: 'QR Code',
+    description: 'Create custom QR codes for links, Wi-Fi, contact details and more.',
+    icon: QrCode, gradientClassName: 'from-indigo-500 to-blue-600',
+    category: 'workflows',
   },
 ];
 

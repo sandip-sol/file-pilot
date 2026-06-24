@@ -577,6 +577,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://filepilot.app/image-to-svg</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://filepilot.app/color-picker</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://filepilot.app/qr-generator</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://filepilot.app/privacy</loc>
     <lastmod>2026-06-24</lastmod>
     <changefreq>yearly</changefreq>

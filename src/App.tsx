@@ -100,6 +100,9 @@ const SocialMediaResizer = lazy(() => import('./pages/SocialMediaResizer').then(
 const EcommerceImageFormatter = lazy(() => import('./pages/EcommerceImageFormatter').then(m => ({ default: m.EcommerceImageFormatter })));
 const ScanImagesToPdf = lazy(() => import('./pages/ScanImagesToPdf').then(m => ({ default: m.ScanImagesToPdf })));
 const FaviconGenerator = lazy(() => import('./pages/FaviconGenerator').then(m => ({ default: m.FaviconGenerator })));
+const ImageToSvg = lazy(() => import('./pages/ImageToSvg').then(m => ({ default: m.ImageToSvg })));
+const ColorPicker = lazy(() => import('./pages/ColorPicker').then(m => ({ default: m.ColorPicker })));
+const QrGenerator = lazy(() => import('./pages/QrGenerator').then(m => ({ default: m.QrGenerator })));
 
 // ─── Image Optimise Tools ────────────────────────────────────────────────────
 const CompressImage = lazy(() => import('./pages/CompressImage').then(m => ({ default: m.CompressImage })));
@@ -235,6 +238,9 @@ function App() {
           <Route path="/ecommerce-image-formatter" element={<EcommerceImageFormatter />} />
           <Route path="/scan-images-to-pdf" element={<ScanImagesToPdf />} />
           <Route path="/favicon-generator" element={<FaviconGenerator />} />
+          <Route path="/image-to-svg" element={<ImageToSvg />} />
+          <Route path="/color-picker" element={<ColorPicker />} />
+          <Route path="/qr-generator" element={<QrGenerator />} />
 
           {/* Image Optimise Tools */}
           <Route path="/compress-image" element={<CompressImage />} />

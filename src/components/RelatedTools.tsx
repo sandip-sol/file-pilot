@@ -33,6 +33,9 @@ const relatedToolSlugs: Record<string, string[]> = {
   '/upscale-image': ['/ai-enhance-image', '/resize-image', '/compress-image'],
   '/ai-enhance-image': ['/upscale-image', '/photo-editor', '/remove-background'],
   '/object-remover': ['/remove-background', '/blur-face', '/crop-image'],
+  '/image-to-svg': ['/convert-image', '/compress-image', '/crop-image'],
+  '/color-picker': ['/photo-editor', '/convert-image', '/image-formatter'],
+  '/qr-generator': ['/image-to-svg', '/favicon-generator', '/image-formatter'],
 };
 
 const getRelatedTools = (currentTool: ToolDefinition) => {
