@@ -344,31 +344,33 @@ export const Home = () => {
       {/* ── Category tabs ───────────────────────────────────────────── */}
       <section className="sticky top-16 z-40 border-b border-border bg-background/90 backdrop-blur-md">
         <div className="container">
-          <div className="-mx-4 flex items-center gap-1 overflow-x-auto px-4 py-2 md:mx-0 md:gap-1.5 md:px-0">
-            <button
-              type="button"
-              onClick={() => { setActiveWorkflow('all'); setSearch(''); }}
-              className={`shrink-0 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${activeWorkflow === 'all' && !search ? 'bg-foreground text-background' : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'}`}
-            >
-              All Tools
-            </button>
-            {(Object.keys(WORKFLOWS) as WorkflowId[]).map((workflow) => {
-              const info = WORKFLOWS[workflow];
-              const Icon = info.icon;
-              const isActive = activeWorkflow === workflow;
+          <div className="-mx-4 overflow-x-auto px-4 py-2 md:mx-0 md:px-0">
+            <div className="mx-auto flex w-max items-center gap-1 md:gap-1.5">
+              <button
+                type="button"
+                onClick={() => { setActiveWorkflow('all'); setSearch(''); }}
+                className={`shrink-0 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${activeWorkflow === 'all' && !search ? 'bg-foreground text-background' : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'}`}
+              >
+                All Tools
+              </button>
+              {(Object.keys(WORKFLOWS) as WorkflowId[]).map((workflow) => {
+                const info = WORKFLOWS[workflow];
+                const Icon = info.icon;
+                const isActive = activeWorkflow === workflow;
 
-              return (
-                <button
-                  key={workflow}
-                  type="button"
-                  onClick={() => { setActiveWorkflow(isActive ? 'all' : workflow); setSearch(''); }}
-                  className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${isActive ? 'bg-foreground text-background' : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'}`}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                  {info.shortLabel}
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={workflow}
+                    type="button"
+                    onClick={() => { setActiveWorkflow(isActive ? 'all' : workflow); setSearch(''); }}
+                    className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${isActive ? 'bg-foreground text-background' : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'}`}
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    {info.shortLabel}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
