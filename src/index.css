@@ -327,6 +327,37 @@
   animation: float 3s ease-in-out infinite;
 }
 
+/* Hero color-shift gradient text */
+@keyframes hero-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero-color-shift {
+  background: linear-gradient(
+    270deg,
+    hsl(var(--foreground)),
+    #6366f1,
+    #ec4899,
+    #f59e0b,
+    #10b981,
+    #6366f1,
+    hsl(var(--foreground))
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hero-gradient-shift 8s ease-in-out infinite;
+}
+
 .delay-100 {
   animation-delay: 100ms;
 }

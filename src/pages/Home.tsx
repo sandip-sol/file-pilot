@@ -289,7 +289,7 @@ export const Home = () => {
                 100% private — files never leave your device
               </div>
 
-              <h1 className="text-2xl font-bold leading-tight text-foreground md:text-4xl lg:text-[2.75rem]">
+              <h1 className="hero-color-shift text-2xl font-bold leading-tight md:text-4xl lg:text-[2.75rem]">
                 Your complete workspace for PDFs, images, conversions and AI-powered file tasks.
               </h1>
               <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base lg:mx-0">
