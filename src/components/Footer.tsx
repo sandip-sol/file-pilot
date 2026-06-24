@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Github, Heart } from 'lucide-react';
-import pdfSolverLogo from '../assets/pdfsolver_logo_theme_matched.svg';
 
 export const Footer = () => {
     return (
@@ -8,7 +7,7 @@ export const Footer = () => {
             <div className="container">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
                     <div className="flex items-center gap-3">
-                        <img src={pdfSolverLogo} alt="PDF Solver" className="h-16 w-auto max-w-[320px] object-contain" />
+                        <img src="/filepilot_logo.svg" alt="FilePilot" className="h-12 w-auto max-w-[240px] object-contain" />
                     </div>
 
                     <div className="flex items-center gap-8 text-sm text-muted-foreground">
