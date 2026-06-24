@@ -5,13 +5,13 @@ export const Terms = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
             <PageSeo
-                title="Terms of Service – PDF Solver"
-                description="Read the terms for using PDF Solver's free browser-based PDF and image tools."
+                title="Terms of Service – FilePilot"
+                description="Read the terms for using FilePilot's private browser-based PDF, image and file tools."
             />
             <div className="page-header">
                 <div className="container">
                     <h1>Terms of Service</h1>
-                    <p>Clear terms for using PDF Solver</p>
+                    <p>Clear terms for using FilePilot</p>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@ export const Terms = () => {
                             </div>
                             <div>
                                 <h3 className="font-bold mb-1">Your Files, Your Property</h3>
-                                <p className="text-sm text-[var(--text-muted)]">You own all files you process through PDF Solver</p>
+                                <p className="text-sm text-[var(--text-muted)]">You own all files you process through FilePilot</p>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@ export const Terms = () => {
                                 <h3 className="text-xl font-bold text-[var(--text)]">1. Acceptance of Terms</h3>
                             </div>
                             <p className="text-[var(--text-secondary)] leading-relaxed">
-                                By using PDF Solver, you agree to these Terms of Service. If you do not agree, please do not use the service.
+                                By using FilePilot, you agree to these Terms of Service. If you do not agree, please do not use the service.
                             </p>
                         </section>
 
@@ -77,7 +77,7 @@ export const Terms = () => {
                                 <h3 className="text-xl font-bold text-[var(--text)]">4. Intellectual Property</h3>
                             </div>
                             <p className="text-[var(--text-secondary)] leading-relaxed">
-                                The code and design of PDF Solver are protected by copyright. Files you process using our tools remain your property.
+                                The code and design of FilePilot are protected by copyright. Files you process using our tools remain your property.
                             </p>
                         </section>
 

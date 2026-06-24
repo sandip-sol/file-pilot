@@ -10,11 +10,11 @@ export const useRecentlyUsedTools = () => {
 
     syncRecentTools();
     window.addEventListener('storage', syncRecentTools);
-    window.addEventListener('pdf-solver:recent-tools-changed', syncRecentTools);
+    window.addEventListener('filepilot:recent-tools-changed', syncRecentTools);
 
     return () => {
       window.removeEventListener('storage', syncRecentTools);
-      window.removeEventListener('pdf-solver:recent-tools-changed', syncRecentTools);
+      window.removeEventListener('filepilot:recent-tools-changed', syncRecentTools);
     };
   }, []);
 

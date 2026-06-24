@@ -5,13 +5,13 @@ export const Privacy = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
             <PageSeo
-                title="Privacy Policy – PDF Solver"
-                description="Learn how PDF Solver protects your files with 100% browser-based processing and no server uploads."
+                title="Privacy Policy – FilePilot"
+                description="Learn how FilePilot protects your files with 100% browser-based processing and no server uploads."
             />
             <div className="page-header">
                 <div className="container">
                     <h1>Privacy Policy</h1>
-                    <p>How PDF Solver keeps your files on your device</p>
+                    <p>How FilePilot keeps your files on your device</p>
                 </div>
             </div>
 

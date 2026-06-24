@@ -147,8 +147,8 @@ export async function compressPDF(file: File): Promise<Uint8Array> {
     doc.setAuthor('');
     doc.setSubject('');
     doc.setKeywords([]);
-    doc.setCreator('pdf-solver');
-    doc.setProducer('pdf-solver');
+    doc.setCreator('filepilot');
+    doc.setProducer('filepilot');
     return doc.save({ useObjectStreams: true, addDefaultPage: false });
 }
 
@@ -610,8 +610,8 @@ export async function sanitizePDF(file: File): Promise<Uint8Array> {
     doc.setAuthor('');
     doc.setSubject('');
     doc.setKeywords([]);
-    doc.setCreator('pdf-solver');
-    doc.setProducer('pdf-solver');
+    doc.setCreator('filepilot');
+    doc.setProducer('filepilot');
     // Flatten forms (removes interactive elements)
     try { doc.getForm().flatten(); } catch { /* no forms */ }
     return doc.save({ useObjectStreams: true });

@@ -275,7 +275,7 @@ export const ChangeBackground = () => {
   return (
     <main className="container max-w-4xl py-8 px-4">
       <PageSeo
-        title="Change Background — AI Background Replacer | PDF Solver"
+        title="Change Background — AI Background Replacer | FilePilot"
         description="Replace image backgrounds with solid colours, gradients, blur, or custom images using AI — all in your browser."
       />
 

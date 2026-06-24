@@ -1,8 +1,8 @@
-# PDF Solver
+# FilePilot
 
-> Document Solutions Simplified
+> Smart tools for PDFs, images and files.
 
-PDF Solver is a frontend-only PDF and Image toolkit that runs 100% in the browser. All processing happens locally using WebAssembly and JavaScript - no servers, no uploads, complete privacy.
+FilePilot is a private, browser-based toolkit to edit, convert, optimise and organise PDFs, images and files. All processing happens locally using WebAssembly and JavaScript, so files stay on your device.
 
 ## Features
 
@@ -10,14 +10,14 @@ PDF Solver is a frontend-only PDF and Image toolkit that runs 100% in the browse
 - **Merge PDFs** - Combine multiple PDF files into one
 - **Split PDF** - Extract pages or split into separate files
 - **Compress PDF** - Reduce file size while maintaining quality
-- **Images to PDF** - Convert JPG, PNG, WebP images to a single PDF
+- **Images to PDF** - Convert JPG, PNG, and WebP images to a single PDF
 
 ### Image Tools
 - **Image Formatter** - Resize, compress, and convert images
   - **Resize**: Exact pixel dimensions with Cover/Contain modes
-  - **Compress**: Enforce maximum file size (e.g., under 100KB)
+  - **Compress**: Enforce maximum file size, such as under 100KB
   - **Convert**: Switch between JPG, PNG, and WebP
-  - **Presets**: Ready-made templates for Passports, Visas, Social Media, and E-commerce
+  - **Presets**: Ready-made templates for passports, visas, social media, and e-commerce
 
 ## SEO & Performance
 - **Optimized Meta Tags**: Custom `PageSeo` component for dynamic titles and descriptions
@@ -31,7 +31,7 @@ PDF Solver is a frontend-only PDF and Image toolkit that runs 100% in the browse
 - **Framework**: React + TypeScript + Vite
 - **Styling**: TailwindCSS + Lucide React
 - **PDF Processing**: `pdf-lib` + `jszip`
-- **Image Processing**: Canvas API (Client-side)
+- **Image Processing**: Canvas API, client-side
 - **Notifications**: `sonner`
 
 ## Getting Started
@@ -44,8 +44,8 @@ PDF Solver is a frontend-only PDF and Image toolkit that runs 100% in the browse
 ### Installation
 
 ```bash
-git clone https://github.com/sandip-sol/pdf-solver.git
-cd pdf-solver
+git clone https://github.com/sandip-sol/filepilot.git
+cd filepilot
 npm install
 ```
 
@@ -63,7 +63,7 @@ npm run build
 
 ## Deployment
 
-### Netlify (Recommended)
+### Netlify
 
 1. Push your code to GitHub
 2. Connect your repo to Netlify
@@ -75,7 +75,7 @@ The `_redirects` file is already configured for SPA routing.
 ## Privacy
 
 **Your files never leave your device.**
-All file processing (merging, splitting, resizing, compressing) happens entirely within your browser's memory. We do not have a backend server to store or view your files.
+All file processing happens entirely within your browser's memory. FilePilot does not need a backend server to store or view your files.
 
 ## License
 

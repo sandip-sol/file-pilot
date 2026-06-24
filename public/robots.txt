@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /assets/
 
-Sitemap: https://pdfsolver.app/sitemap.xml
+Sitemap: https://filepilot.app/sitemap.xml

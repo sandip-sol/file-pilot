@@ -442,7 +442,7 @@ export const SocialMediaResizer = () => {
   return (
     <div>
       <PageSeo
-        title="Social Media Resizer — PDF Solver"
+        title="Social Media Resizer — FilePilot"
         description="Resize images for Instagram, Facebook, LinkedIn, X/Twitter, YouTube, Pinterest, and TikTok. Free, private, browser-based."
       />
       <ToolUsageTracker />

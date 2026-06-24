@@ -136,7 +136,7 @@ export const FaviconGenerator = () => {
   return (
     <div>
       <PageSeo
-        title="Favicon Generator — PDF Solver"
+        title="Favicon Generator — FilePilot"
         description="Generate all website favicon and app icon assets from a single image. Creates PNG favicons, Apple touch icons, Android/PWA icons, and a web manifest."
       />
       <ToolUsageTracker />

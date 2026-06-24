@@ -84,7 +84,7 @@ export const ImageRequirements = () => {
                 {
                     "@type": "WebApplication",
                     "name": "Image Formatter",
-                    "url": "https://pdfsolver.app/image-requirements",
+                    "url": "https://filepilot.app/image-requirements",
                     "description": "Resize image to exact pixels, reduce file size to KB limit, and convert formats locally in browser.",
                     "applicationCategory": "ImageEditor",
                     "operatingSystem": "Any",

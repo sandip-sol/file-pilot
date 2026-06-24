@@ -75,8 +75,8 @@ export const NotFound = () => {
   return (
     <main className="bg-background">
       <PageSeo
-        title={isPlannedTool ? `${requestedTool.title} - Coming Soon` : 'Tool Not Found - PDF Solver'}
-        description="Find a reliable PDF Solver tool for merging, splitting, compressing, converting, extracting, watermarking, or redacting PDF files."
+        title={isPlannedTool ? `${requestedTool.title} - Coming Soon` : 'Tool Not Found - FilePilot'}
+        description="Find a reliable FilePilot tool for merging, splitting, compressing, converting, extracting, watermarking, or redacting PDF files."
         canonicalPath="/"
       />
 

@@ -273,8 +273,8 @@ export const Home = () => {
   return (
     <div>
       <PageSeo
-        title="PDF Solver - Private Browser-Based PDF & Image Tools"
-        description="Merge, split, compress, convert, extract, watermark, redact PDFs and edit images — all processed locally in your browser. Your files never leave your device."
+        title="FilePilot — PDF, Image and File Tools"
+        description="Edit, convert, compress, organise and optimise PDFs, images and files with FilePilot. Your files are processed privately in your browser."
       />
 
       {/* ── Hero ────────────────────────────────────────────────────── */}
@@ -287,10 +287,10 @@ export const Home = () => {
             </div>
 
             <h1 className="text-3xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
-              Every PDF & image tool you need
+              All-in-one file tools
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              {tools.length} ready tools for PDFs, images, and documents. All processed locally in your browser.
+              Smart tools for PDFs, images and files. {tools.length} ready tools, all processed locally in your browser.
             </p>
 
             <div className="mx-auto mt-8 max-w-2xl">
@@ -467,7 +467,7 @@ export const Home = () => {
             <div>
               <h2 className="text-xl font-bold text-foreground">Private by default</h2>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                PDF Solver processes everything in your browser. No uploads, no server-side processing, no data collection. Your files stay on your device from start to finish.
+                FilePilot is a private, browser-based toolkit to edit, convert, optimise and organise PDFs, images and files. No uploads, no server-side processing, no data collection.
               </p>
             </div>
             <Link

@@ -297,7 +297,7 @@ export const ObjectRemover = () => {
   return (
     <main className="container max-w-4xl py-8 px-4">
       <PageSeo
-        title="Object Remover — Content-Aware Object Removal | PDF Solver"
+        title="Object Remover — Content-Aware Object Removal | FilePilot"
         description="Remove unwanted objects from images using content-aware inpainting, entirely in your browser. No upload needed."
       />
 

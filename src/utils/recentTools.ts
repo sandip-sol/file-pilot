@@ -1,6 +1,6 @@
 import { discoverableTools, type ToolDefinition } from '../data/toolRegistry';
 
-const STORAGE_KEY = 'pdf-solver:recent-tools';
+const STORAGE_KEY = 'filepilot:recent-tools';
 const MAX_RECENT_TOOLS = 6;
 
 const isBrowser = () => typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
@@ -25,7 +25,7 @@ export const saveRecentTool = (slug: string) => {
 
   const next = [slug, ...getRecentToolSlugs().filter((item) => item !== slug)].slice(0, MAX_RECENT_TOOLS);
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-  window.dispatchEvent(new CustomEvent('pdf-solver:recent-tools-changed'));
+  window.dispatchEvent(new CustomEvent('filepilot:recent-tools-changed'));
   return next;
 };
 

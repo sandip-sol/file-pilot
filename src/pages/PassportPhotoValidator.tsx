@@ -511,7 +511,7 @@ export const PassportPhotoValidator = () => {
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
-        title="Passport Photo Validator - Check Photo Requirements | PDF Solver"
+        title="Passport Photo Validator - Check Photo Requirements | FilePilot"
         description="Validate passport photo dimensions, file size, and format against official requirements. Crop, resize, and export. Free, private, browser-based."
       />
 

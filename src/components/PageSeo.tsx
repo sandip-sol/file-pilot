@@ -14,10 +14,10 @@ interface PageSeoProps {
     faqItems?: FaqItem[];
 }
 
-const SITE_URL = 'https://pdfsolver.app';
-const DEFAULT_TITLE = 'PDF Solver - Free Private PDF & Image Tools';
+const SITE_URL = 'https://filepilot.app';
+const DEFAULT_TITLE = 'FilePilot — PDF, Image and File Tools';
 const DEFAULT_DESCRIPTION =
-    'Free browser-based tools to merge, split, compress, convert, extract, watermark, and redact PDFs. Files stay on your device.';
+    'Edit, convert, compress, organise and optimise PDFs, images and files with FilePilot. Your files are processed privately in your browser.';
 const DEFAULT_IMAGE = `${SITE_URL}/og-banner.png`;
 
 const upsertMeta = (selector: string, attributes: Record<string, string>) => {

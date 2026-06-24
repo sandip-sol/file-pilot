@@ -174,7 +174,7 @@ export const ScanImagesToPdf = () => {
   return (
     <div>
       <PageSeo
-        title="Scan Images to PDF — PDF Solver"
+        title="Scan Images to PDF — FilePilot"
         description="Turn photos of documents into a clean, ordered, downloadable PDF. All processing happens locally in your browser."
       />
       <ToolUsageTracker />

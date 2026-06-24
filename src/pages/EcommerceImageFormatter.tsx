@@ -217,7 +217,7 @@ export const EcommerceImageFormatter = () => {
   return (
     <div>
       <PageSeo
-        title="E-commerce Image Formatter — PDF Solver"
+        title="E-commerce Image Formatter — FilePilot"
         description="Prepare product photos with clean backgrounds, consistent dimensions, and marketplace-ready formats. All processing happens locally in your browser."
       />
       <ToolUsageTracker />

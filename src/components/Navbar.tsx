@@ -120,7 +120,7 @@ export const Navbar = () => {
         <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
             <div className="container h-16 flex items-center justify-between">
                 <Link to="/" className="flex shrink-0 items-center gap-2 font-bold text-lg">
-                    <img src="/filepilot_logo.svg" alt="FilePilot" className="h-10 w-auto max-w-[200px] object-contain" />
+                    <img src="/filepilot_logo.svg" alt="FilePilot logo" className="h-10 w-auto max-w-[200px] object-contain" />
                 </Link>
 
                 {/* Desktop Nav */}

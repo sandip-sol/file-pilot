@@ -131,7 +131,7 @@ export const AiEnhanceImage = () => {
   return (
     <main className="container max-w-4xl py-8 px-4">
       <PageSeo
-        title="AI Enhance Image — Smart Image Enhancement | PDF Solver"
+        title="AI Enhance Image — Smart Image Enhancement | FilePilot"
         description="Improve image quality with smart analysis-based enhancement. Fix exposure, reduce noise, sharpen details, and correct colours — all locally in your browser."
       />
 

@@ -130,7 +130,7 @@ export const UpscaleImage = () => {
   return (
     <main className="container max-w-4xl py-8 px-4">
       <PageSeo
-        title="Upscale Image — AI Super-Resolution | PDF Solver"
+        title="Upscale Image — AI Super-Resolution | FilePilot"
         description="Enlarge images using AI super-resolution directly in your browser. Increase resolution while preserving detail — no upload needed."
       />
 

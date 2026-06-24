@@ -173,7 +173,7 @@ export const RemoveBackground = () => {
   return (
     <main className="container max-w-4xl py-8 px-4">
       <PageSeo
-        title="Remove Background — Free AI Background Remover | PDF Solver"
+        title="Remove Background — Free AI Background Remover | FilePilot"
         description="Remove image backgrounds automatically using AI, directly in your browser. No upload needed — your images stay private."
       />
 

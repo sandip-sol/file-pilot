@@ -1,0 +1,24 @@
+{
+  "name": "FilePilot",
+  "short_name": "FilePilot",
+  "description": "Smart tools for PDFs, images and files.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f0f0f",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/filepilot_logo.svg",
+      "sizes": "1614x416",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -174,7 +174,7 @@ export const ConvertImage = () => {
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
-        title="Convert Image — JPEG, PNG, WebP, AVIF | PDF Solver"
+        title="Convert Image — JPEG, PNG, WebP, AVIF | FilePilot"
         description="Convert images between JPEG, PNG, WebP, and AVIF formats. Processed locally in your browser — no uploads, 100% private."
       />
 
