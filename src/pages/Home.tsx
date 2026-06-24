@@ -410,7 +410,9 @@ export const Home = () => {
               {isFiltering ? 'Results' : 'All tools'}
             </p>
             <h2 className="text-2xl font-bold text-foreground">
-              {filteredTools.length} tool{filteredTools.length === 1 ? '' : 's'}{isFiltering ? ' found' : ' available'}
+              {isFiltering
+                ? `${filteredTools.length} tool${filteredTools.length === 1 ? '' : 's'} found`
+                : 'Tools available'}
             </h2>
           </div>
           {isFiltering && (
