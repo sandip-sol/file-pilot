@@ -68,11 +68,16 @@ export const EcommerceImageFormatter = () => {
   const [quality, setQuality] = useState(0.85);
   const [filenameTemplate, setFilenameTemplate] = useState('{name}-{index}-{width}x{height}');
 
+  const sourcesRef = useRef<SourceImage[]>([]);
   const outputUrlsRef = useRef<string[]>([]);
 
   useEffect(() => {
+    sourcesRef.current = sources;
+  }, [sources]);
+
+  useEffect(() => {
     return () => {
-      sources.forEach(s => URL.revokeObjectURL(s.previewUrl));
+      sourcesRef.current.forEach(s => URL.revokeObjectURL(s.previewUrl));
       outputUrlsRef.current.forEach(u => URL.revokeObjectURL(u));
     };
   }, []);

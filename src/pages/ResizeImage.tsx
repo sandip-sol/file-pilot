@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
 import { toast } from 'sonner';
@@ -68,15 +68,25 @@ export const ResizeImage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [progressIndex, setProgressIndex] = useState(0);
   const [results, setResults] = useState<ProcessedImageResult[]>([]);
+  const filesRef = useRef<ImageFileInfo[]>([]);
+  const resultsRef = useRef<ProcessedImageResult[]>([]);
 
   useEffect(() => {
     getSupportedExportFormats().then(setSupportedFormats);
   }, []);
 
   useEffect(() => {
+    filesRef.current = files;
+  }, [files]);
+
+  useEffect(() => {
+    resultsRef.current = results;
+  }, [results]);
+
+  useEffect(() => {
     return () => {
-      revokeImageUrls(files);
-      revokeImageUrls(results);
+      revokeImageUrls(filesRef.current);
+      revokeImageUrls(resultsRef.current);
     };
   }, []);
 

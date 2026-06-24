@@ -34,6 +34,7 @@ export const RemoveBackground = () => {
   const [feather, setFeather] = useState(0);
   const [showOriginal, setShowOriginal] = useState(false);
   const [sliderPos, setSliderPos] = useState(50);
+  const [sliderWidth, setSliderWidth] = useState<number | null>(null);
 
   const [supportedFormats, setSupportedFormats] = useState<Record<ImageFormat, boolean> | null>(null);
   const [isCapable, setIsCapable] = useState<boolean | null>(null);
@@ -55,6 +56,18 @@ export const RemoveBackground = () => {
       if (resultUrl) URL.revokeObjectURL(resultUrl);
     };
   }, [file, resultUrl]);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const updateWidth = () => setSliderWidth(slider.offsetWidth);
+    updateWidth();
+
+    const observer = new ResizeObserver(updateWidth);
+    observer.observe(slider);
+    return () => observer.disconnect();
+  }, [resultUrl]);
 
   const handleFileSelected = useCallback(async (files: File[]) => {
     setError(null);
@@ -249,7 +262,7 @@ export const RemoveBackground = () => {
                     src={resultUrl}
                     alt="Background removed"
                     className="block h-full object-contain"
-                    style={{ maxHeight: 500, width: sliderRef.current?.offsetWidth ?? 'auto' }}
+                    style={{ maxHeight: 500, width: sliderWidth ?? 'auto' }}
                     draggable={false}
                   />
                 </div>

@@ -133,6 +133,7 @@ export const ChangeBackground = () => {
       case 'blur': {
         if (!file) return '#ffffff';
         const bitmap = await createImageBitmap(file.file);
+        // eslint-disable-next-line react-hooks/immutability
         ctx.filter = `blur(${blurIntensity}px)`;
         const scale = Math.max(w / bitmap.width, h / bitmap.height) * 1.1;
         const sw = bitmap.width * scale;

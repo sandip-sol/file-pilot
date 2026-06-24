@@ -51,10 +51,15 @@ export const ScanImagesToPdf = () => {
   const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
 
   const addMoreRef = useRef<HTMLInputElement>(null);
+  const pagesRef = useRef<PageItem[]>([]);
+
+  useEffect(() => {
+    pagesRef.current = pages;
+  }, [pages]);
 
   useEffect(() => {
     return () => {
-      pages.forEach(p => URL.revokeObjectURL(p.previewUrl));
+      pagesRef.current.forEach(p => URL.revokeObjectURL(p.previewUrl));
     };
   }, []);
 

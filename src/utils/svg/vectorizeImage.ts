@@ -202,7 +202,7 @@ function medianCut(data: Uint8ClampedArray, numColors: number): Array<[number, n
     return [[0, 0, 0]];
   }
 
-  let boxes: ColorBox[] = [computeBounds(allPixels)];
+  const boxes: ColorBox[] = [computeBounds(allPixels)];
 
   while (boxes.length < numColors) {
     // Find box with largest range
@@ -584,7 +584,6 @@ function buildSvg(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">`,
   );
 
-  let pathCount = 0;
   for (const layer of layers) {
     for (const d of layer.paths) {
       if (!d) continue;
@@ -595,7 +594,6 @@ function buildSvg(
       } else {
         lines.push(`<path d="${d}Z" fill="${layer.color}"/>`);
       }
-      pathCount++;
     }
   }
 

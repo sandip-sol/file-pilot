@@ -7,7 +7,6 @@ import { toast } from 'sonner';
 import {
   Pipette,
   Copy,
-  Trash2,
   Download,
   X,
   ChevronLeft,
@@ -19,7 +18,6 @@ import {
   Monitor,
 } from 'lucide-react';
 import { loadImageFile } from '../utils/image/processing';
-import { revokeImageUrls } from '../utils/image/processing';
 import { downloadBlobFile, downloadTextFile } from '../utils/pdf/export';
 import {
   rgbToHex,
@@ -206,10 +204,7 @@ export const ColorPicker = () => {
   const [activeTab, setActiveTab] = useState<TabId>('image');
 
   /* ---- Image state ---- */
-  const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
-  const [imageNaturalWidth, setImageNaturalWidth] = useState(0);
-  const [imageNaturalHeight, setImageNaturalHeight] = useState(0);
 
   /* ---- Canvas refs ---- */
   const displayCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -254,10 +249,7 @@ export const ColorPicker = () => {
 
     try {
       const info = await loadImageFile(file);
-      setImageFile(file);
       setImagePreviewUrl(info.previewUrl);
-      setImageNaturalWidth(info.width);
-      setImageNaturalHeight(info.height);
       setPickedColor(null);
       setExtractedPalette([]);
     } catch {

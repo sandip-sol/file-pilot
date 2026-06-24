@@ -35,11 +35,21 @@ export const FaviconGenerator = () => {
   const [copied, setCopied] = useState(false);
 
   const assetUrlsRef = useRef<string[]>([]);
+  const sourceBitmapRef = useRef<ImageBitmap | null>(null);
+  const sourcePreviewUrlRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    sourceBitmapRef.current = sourceBitmap;
+  }, [sourceBitmap]);
+
+  useEffect(() => {
+    sourcePreviewUrlRef.current = sourcePreviewUrl;
+  }, [sourcePreviewUrl]);
 
   useEffect(() => {
     return () => {
-      if (sourcePreviewUrl) URL.revokeObjectURL(sourcePreviewUrl);
-      sourceBitmap?.close();
+      if (sourcePreviewUrlRef.current) URL.revokeObjectURL(sourcePreviewUrlRef.current);
+      sourceBitmapRef.current?.close();
       assetUrlsRef.current.forEach(u => URL.revokeObjectURL(u));
     };
   }, []);
