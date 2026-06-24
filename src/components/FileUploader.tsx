@@ -162,13 +162,19 @@ export const FileUploader = ({
                 <div className="flex items-start gap-3">
                     <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
                     <div className="min-w-0">
-                        <p>
+                        <p className="leading-relaxed">
                             Your file stays on your device. Review the settings and results, then download the output when you are ready.
                         </p>
-                        <div className="mt-3 grid grid-cols-2 gap-2 text-xs md:grid-cols-4">
-                            {['1. Upload', '2. Settings', '3. Review', '4. Download'].map((step) => (
-                                <div key={step} className="rounded-md border border-border bg-card px-2.5 py-2 text-center font-medium text-muted-foreground">
-                                    {step}
+                        <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                            {[
+                                ['1.', 'Upload'],
+                                ['2.', 'Settings'],
+                                ['3.', 'Review'],
+                                ['4.', 'Download'],
+                            ].map(([number, label]) => (
+                                <div key={label} className="flex min-w-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-md border border-border bg-card px-2.5 py-2 text-center font-medium text-muted-foreground">
+                                    <span>{number}</span>
+                                    <span>{label}</span>
                                 </div>
                             ))}
                         </div>
