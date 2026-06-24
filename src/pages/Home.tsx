@@ -281,24 +281,24 @@ export const Home = () => {
 
       {/* ── Hero ────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-border bg-card/20">
-        <div className="container py-12 md:py-16">
-          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,520px)] xl:gap-14">
+        <div className="container py-6 md:py-8">
+          <div className="grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(300px,500px)] xl:gap-10">
             <div className="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm text-muted-foreground">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs text-muted-foreground md:text-sm">
                 <Lock className="h-3.5 w-3.5 text-emerald-600" />
                 100% private — files never leave your device
               </div>
 
-              <h1 className="text-2xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
+              <h1 className="text-2xl font-bold leading-tight text-foreground md:text-4xl lg:text-[2.75rem]">
                 Your complete workspace for PDFs, images, conversions and AI-powered file tasks.
               </h1>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg lg:mx-0">
+              <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base lg:mx-0">
                 One place for every file task — from PDFs and images to smart AI tools. Process everything securely and privately, right in your browser.
               </p>
 
-              <div className="mx-auto mt-8 max-w-2xl lg:mx-0">
+              <div className="mx-auto mt-5 max-w-2xl lg:mx-0">
                 <div className="relative">
-                  <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                  <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <input
                     id="tool-search"
                     type="search"
@@ -308,10 +308,10 @@ export const Home = () => {
                       setSearch(event.target.value);
                       if (event.target.value) setActiveWorkflow('all');
                     }}
-                    className="w-full rounded-xl border border-border bg-card py-4 pl-12 pr-4 text-base text-foreground shadow-sm outline-none transition focus:border-foreground/30 focus:ring-2 focus:ring-foreground/10"
+                    className="w-full rounded-xl border border-border bg-card py-3 pl-11 pr-4 text-sm text-foreground shadow-sm outline-none transition focus:border-foreground/30 focus:ring-2 focus:ring-foreground/10 md:text-base"
                   />
                 </div>
-                <div className="mt-3 flex flex-wrap justify-center gap-2 lg:justify-start">
+                <div className="mt-2 flex flex-wrap justify-center gap-1.5 lg:justify-start">
                   {QUICK_INTENTS.map((intent) => (
                     <button
                       key={intent.label}
@@ -320,7 +320,7 @@ export const Home = () => {
                         setSearch(intent.query);
                         setActiveWorkflow('all');
                       }}
-                      className="rounded-full border border-border bg-card/60 px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
+                      className="rounded-full border border-border bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground md:text-sm"
                     >
                       {intent.label}
                     </button>
@@ -329,11 +329,11 @@ export const Home = () => {
               </div>
             </div>
 
-            <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
+            <div className="mx-auto w-full max-w-[190px] sm:max-w-[260px] md:max-w-sm lg:mx-0 lg:max-w-none">
               <img
                 src={heroImage}
                 alt="FilePilot PDF, image and file tools preview"
-                className="h-auto w-full select-none object-contain"
+                className="h-auto max-h-[180px] w-full select-none object-contain sm:max-h-[240px] md:max-h-[390px]"
                 loading="eager"
               />
             </div>
