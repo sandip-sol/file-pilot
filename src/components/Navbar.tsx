@@ -17,6 +17,7 @@ import {
     NavigationMenuTrigger,
 } from './ui/navigation-menu';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
+import { ToolSearchDialog } from './ToolSearchDialog';
 
 type NavCategoryGroup = {
     id: string;
@@ -185,6 +186,8 @@ export const Navbar = () => {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
+
+                <ToolSearchDialog />
 
                 {/* Mobile Menu Button */}
                 <button
