@@ -8,7 +8,7 @@ export interface OrganizerPageState {
 }
 
 export interface PdfToImagesOptions {
-  format: 'png' | 'jpg';
+  format: 'png' | 'jpg' | 'webp';
   scale: number;
   quality: number;
 }
@@ -39,7 +39,7 @@ export const exportPdfPagesAsImages = async (
 
   for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
     const canvas = await renderPdfPageToCanvas(pdf, pageNumber, options.scale);
-    const mimeType = options.format === 'png' ? 'image/png' : 'image/jpeg';
+    const mimeType = options.format === 'png' ? 'image/png' : options.format === 'webp' ? 'image/webp' : 'image/jpeg';
     const blob = await canvasToBlob(canvas, mimeType, options.quality);
     items.push({
       pageNumber,

@@ -9,7 +9,7 @@ const relatedToolSlugs: Record<string, string[]> = {
   '/compress': ['/pdf-to-images', '/repair-pdf', '/page-dimensions'],
   '/pdf-to-images': ['/images-to-pdf', '/compress', '/extract-text'],
   '/images-to-pdf': ['/pdf-to-images', '/compress', '/merge'],
-  '/extract-text': ['/pdf-to-images', '/pdf-to-docx', '/pdf-to-json'],
+  '/extract-text': ['/pdf-to-images', '/pdf-to-markdown', '/pdf-to-json'],
   '/watermark-pdf': ['/redact-pdf', '/sign-pdf', '/add-stamp'],
   '/redact-pdf': ['/find-and-redact', '/sanitize-pdf', '/remove-metadata'],
   '/sign-pdf': ['/annotate-pdf', '/watermark-pdf', '/flatten-pdf'],
@@ -79,4 +79,3 @@ export const RelatedTools = () => {
     </section>
   );
 };
-

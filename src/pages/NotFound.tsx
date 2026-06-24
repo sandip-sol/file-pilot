@@ -64,7 +64,7 @@ export const NotFound = () => {
     if (terms.length === 0) return popularTools;
 
     return discoverableTools.filter((tool) => {
-      const haystack = `${tool.title} ${tool.shortTitle} ${tool.description}`.toLowerCase();
+      const haystack = `${tool.title} ${tool.shortTitle} ${tool.description} ${tool.searchAliases ?? ''}`.toLowerCase();
       return terms.every((term) => haystack.includes(term));
     });
   }, [popularTools, search]);

@@ -87,11 +87,12 @@ export const ImagesToPdf = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
             <PageSeo
-                title="Convert Images to PDF – JPG, PNG, WebP to PDF"
-                description="Convert JPG, PNG, and WebP images to a single PDF. Customize page size, orientation, and margins. Free & private."
+                title="Convert Images to PDF – JPG, PNG, WebP, SVG, BMP to PDF"
+                description="Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images to a single PDF with page size, orientation, and margin controls. Free & private."
+                canonicalPath="/images-to-pdf"
                 faqItems={[
                     { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
-                    { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, and WebP images are supported. You can mix different formats in a single PDF." },
+                    { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP are supported in modern browsers. HEIC/HEIF and TIFF support depends on whether your browser can decode the files." },
                     { question: "Can I choose the page size and orientation?", answer: "Yes. You can select A4 or Letter page size and choose portrait or landscape orientation before converting." },
                     { question: "Can I reorder or rotate images before converting?", answer: "Yes. Use the arrow buttons to reorder and the rotate button to adjust each image before generating the PDF." },
                 ]}
@@ -103,8 +104,8 @@ export const ImagesToPdf = () => {
                             <ImageIcon className="w-6 h-6" />
                         </div>
                     </div>
-                    <h1>Convert Images to PDF – JPG, PNG, WebP to PDF</h1>
-                    <p>Convert JPG, PNG, and WebP images to a single PDF with custom page size and orientation.</p>
+                    <h1>Convert Images to PDF</h1>
+                    <p>Convert JPG, PNG, WebP, SVG, BMP, and browser-supported HEIC or TIFF images to one PDF with custom page size and orientation.</p>
                 </div>
             </div>
 
@@ -198,7 +199,7 @@ export const ImagesToPdf = () => {
                             <FileUploader
                                 onFilesSelected={handleFilesSelected}
                                 multiple={true}
-                                accept="image/*"
+                                accept="image/*,.svg,.bmp,.heic,.heif,.tif,.tiff"
                                 description="Drop images here"
                             />
 
@@ -245,7 +246,7 @@ export const ImagesToPdf = () => {
 
             <FAQSection items={[
                 { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
-                { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, and WebP images are supported. You can mix different formats in a single PDF." },
+                { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP work in modern browsers. HEIC/HEIF and TIFF files are accepted when the browser can decode them." },
                 { question: "Can I choose the page size and orientation?", answer: "Yes. You can select A4 or Letter page size and choose portrait or landscape orientation before converting." },
                 { question: "Can I reorder or rotate images before converting?", answer: "Yes. Use the arrow buttons to reorder and the rotate button to adjust each image before generating the PDF." },
             ]} />

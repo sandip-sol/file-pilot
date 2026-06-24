@@ -28,6 +28,7 @@ export type ToolCategory =
   | 'workflows';
 
 export type ToolStatus = 'ready' | 'beta' | 'coming-soon' | 'hidden';
+export type ToolVisibility = 'listed' | 'alias';
 
 export interface ToolDefinition {
   slug: string;
@@ -38,6 +39,9 @@ export interface ToolDefinition {
   gradientClassName: string;
   category: ToolCategory;
   featured?: boolean;
+  visibility?: ToolVisibility;
+  canonicalSlug?: string;
+  searchAliases?: string;
 }
 
 export const toolRegistry: ToolDefinition[] = [
@@ -294,51 +298,59 @@ export const toolRegistry: ToolDefinition[] = [
   // ── CONVERT TO PDF ─────────────────────────────────────────────────────────
   {
     slug: '/images-to-pdf', title: 'Images to PDF', shortTitle: 'Images→PDF',
-    description: 'Convert JPG, PNG, and WebP images into a PDF document.',
+    description: 'Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images into one PDF document.',
     icon: Image, gradientClassName: 'from-violet-500 to-fuchsia-600',
     category: 'convert-to-pdf', featured: true,
+    searchAliases: 'jpg to pdf jpeg to pdf png to pdf webp to pdf svg to pdf bmp to pdf heic to pdf tiff to pdf image to pdf photos to pdf',
   },
   {
     slug: '/jpg-to-pdf', title: 'JPG to PDF', shortTitle: 'JPG→PDF',
     description: 'Convert JPEG photos to a PDF file in seconds.',
     icon: FileImage, gradientClassName: 'from-yellow-500 to-orange-600',
     category: 'convert-to-pdf',
+    visibility: 'alias', canonicalSlug: '/images-to-pdf',
   },
   {
     slug: '/png-to-pdf', title: 'PNG to PDF', shortTitle: 'PNG→PDF',
     description: 'Convert PNG images (with transparency) into a PDF.',
     icon: FileImage, gradientClassName: 'from-sky-500 to-blue-600',
     category: 'convert-to-pdf',
+    visibility: 'alias', canonicalSlug: '/images-to-pdf',
   },
   {
     slug: '/webp-to-pdf', title: 'WebP to PDF', shortTitle: 'WebP→PDF',
     description: 'Convert modern WebP images to PDF format.',
     icon: FileImage, gradientClassName: 'from-teal-500 to-cyan-600',
     category: 'convert-to-pdf',
+    visibility: 'alias', canonicalSlug: '/images-to-pdf',
   },
   {
     slug: '/svg-to-pdf', title: 'SVG to PDF', shortTitle: 'SVG→PDF',
     description: 'Convert vector SVG graphics to PDF at any size.',
     icon: FileCode, gradientClassName: 'from-indigo-500 to-blue-600',
     category: 'convert-to-pdf',
+    visibility: 'alias', canonicalSlug: '/images-to-pdf',
   },
   {
     slug: '/bmp-to-pdf', title: 'BMP to PDF', shortTitle: 'BMP→PDF',
     description: 'Convert BMP bitmap images to PDF.',
     icon: FileImage, gradientClassName: 'from-orange-400 to-red-500',
     category: 'convert-to-pdf',
+    visibility: 'alias', canonicalSlug: '/images-to-pdf',
   },
   {
     slug: '/heic-to-pdf', title: 'HEIC to PDF', shortTitle: 'HEIC→PDF',
     description: 'Convert iPhone HEIC/HEIF photos to PDF.',
     icon: Smartphone, gradientClassName: 'from-slate-500 to-gray-700',
     category: 'convert-to-pdf',
+    visibility: 'alias', canonicalSlug: '/images-to-pdf',
   },
   {
     slug: '/tiff-to-pdf', title: 'TIFF to PDF', shortTitle: 'TIFF→PDF',
     description: 'Convert multi-page TIFF images to a PDF document.',
     icon: Layers, gradientClassName: 'from-purple-500 to-violet-700',
     category: 'convert-to-pdf',
+    visibility: 'alias', canonicalSlug: '/images-to-pdf',
   },
   {
     slug: '/text-to-pdf', title: 'Text to PDF', shortTitle: 'TXT→PDF',
@@ -440,39 +452,45 @@ export const toolRegistry: ToolDefinition[] = [
   // ── CONVERT FROM PDF ───────────────────────────────────────────────────────
   {
     slug: '/pdf-to-images', title: 'PDF to Images', shortTitle: 'PDF→Images',
-    description: 'Export PDF pages as JPG or PNG images.',
+    description: 'Export PDF pages as PNG, JPG, or WebP images with custom resolution.',
     icon: Images, gradientClassName: 'from-emerald-500 to-teal-600',
     category: 'convert-from-pdf', featured: true,
+    searchAliases: 'pdf to jpg pdf to jpeg pdf to png pdf to webp pdf to bmp pdf to tiff rasterize pdf pdf pages to images high dpi',
   },
   {
     slug: '/pdf-to-jpg', title: 'PDF to JPG', shortTitle: 'PDF→JPG',
     description: 'Convert each PDF page to a JPG image.',
     icon: FileImage, gradientClassName: 'from-yellow-500 to-orange-600',
     category: 'convert-from-pdf',
+    visibility: 'alias', canonicalSlug: '/pdf-to-images',
   },
   {
     slug: '/pdf-to-png', title: 'PDF to PNG', shortTitle: 'PDF→PNG',
     description: 'Convert each PDF page to a transparent PNG image.',
     icon: FileImage, gradientClassName: 'from-sky-500 to-cyan-600',
     category: 'convert-from-pdf',
+    visibility: 'alias', canonicalSlug: '/pdf-to-images',
   },
   {
     slug: '/pdf-to-webp', title: 'PDF to WebP', shortTitle: 'PDF→WebP',
     description: 'Export PDF pages as modern compressed WebP images.',
     icon: FileImage, gradientClassName: 'from-teal-500 to-green-600',
     category: 'convert-from-pdf',
+    visibility: 'alias', canonicalSlug: '/pdf-to-images',
   },
   {
     slug: '/pdf-to-bmp', title: 'PDF to BMP', shortTitle: 'PDF→BMP',
     description: 'Export PDF pages as lossless image files packaged in a ZIP.',
     icon: FileImage, gradientClassName: 'from-orange-500 to-red-600',
     category: 'convert-from-pdf',
+    visibility: 'alias', canonicalSlug: '/pdf-to-images',
   },
   {
     slug: '/pdf-to-tiff', title: 'PDF to TIFF', shortTitle: 'PDF→TIFF',
     description: 'Export PDF pages as multi-page TIFF images.',
     icon: FileImage, gradientClassName: 'from-purple-500 to-violet-700',
     category: 'convert-from-pdf',
+    visibility: 'alias', canonicalSlug: '/pdf-to-images',
   },
   {
     slug: '/pdf-to-svg', title: 'PDF to SVG', shortTitle: 'PDF→SVG',
@@ -497,18 +515,21 @@ export const toolRegistry: ToolDefinition[] = [
     description: 'Extract PDF text as a plain text document you can paste into Word.',
     icon: FileText, gradientClassName: 'from-blue-600 to-blue-800',
     category: 'convert-from-pdf',
+    visibility: 'alias', canonicalSlug: '/extract-text',
   },
   {
     slug: '/pdf-to-pptx', title: 'Extract PDF Text for Slides', shortTitle: 'PDF Text',
     description: 'Extract PDF text as a plain text document you can use in slides.',
     icon: GanttChart, gradientClassName: 'from-red-500 to-orange-700',
     category: 'convert-from-pdf',
+    visibility: 'alias', canonicalSlug: '/extract-text',
   },
   {
     slug: '/pdf-to-excel', title: 'Extract PDF Text for Sheets', shortTitle: 'PDF Text',
     description: 'Extract PDF text as a plain text document you can review in a spreadsheet.',
     icon: FileSpreadsheet, gradientClassName: 'from-green-600 to-green-800',
     category: 'convert-from-pdf',
+    visibility: 'alias', canonicalSlug: '/extract-text',
   },
   {
     slug: '/pdf-to-markdown', title: 'PDF to Markdown', shortTitle: 'PDF→MD',
@@ -518,9 +539,10 @@ export const toolRegistry: ToolDefinition[] = [
   },
   {
     slug: '/extract-text', title: 'Extract Text', shortTitle: 'Extract Text',
-    description: 'Extract text from PDFs and scanned images with browser-side OCR.',
+    description: 'Extract text from PDFs and images for TXT, Word, Sheets, and Slides workflows.',
     icon: ScanText, gradientClassName: 'from-amber-500 to-orange-600',
     category: 'convert-from-pdf', featured: true,
+    searchAliases: 'pdf to word pdf to docx pdf to excel pdf to xlsx pdf to sheets pdf to powerpoint pdf to pptx pdf to slides extract pdf text ocr txt',
   },
   {
     slug: '/extract-images', title: 'Extract Images', shortTitle: 'Extract Images',
@@ -539,6 +561,7 @@ export const toolRegistry: ToolDefinition[] = [
     description: 'Rasterize PDF pages at custom DPI to PNG, JPEG, or WebP.',
     icon: Grid2x2, gradientClassName: 'from-pink-500 to-rose-700',
     category: 'convert-from-pdf',
+    visibility: 'alias', canonicalSlug: '/pdf-to-images',
   },
   {
     slug: '/pdf-to-pdfa', title: 'PDF to PDF/A', shortTitle: 'PDF→PDF/A',
@@ -933,10 +956,10 @@ export const getToolStatus = (tool: ToolDefinition): ToolStatus => {
 
 export const discoverableTools = toolRegistry.filter((tool) => {
   const status = getToolStatus(tool);
-  return status === 'ready' || status === 'beta';
+  return (status === 'ready' || status === 'beta') && tool.visibility !== 'alias';
 });
 
-export const plannedTools = toolRegistry.filter((tool) => getToolStatus(tool) === 'coming-soon');
+export const plannedTools = toolRegistry.filter((tool) => getToolStatus(tool) === 'coming-soon' && tool.visibility !== 'alias');
 
 export const primaryNavTools = discoverableTools.filter((tool) => tool.featured);
 

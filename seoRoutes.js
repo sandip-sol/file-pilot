@@ -12,6 +12,16 @@ const extractSet = (source, name) => {
   return new Set([...match[1].matchAll(/'([^']+)'/g)].map(([, slug]) => slug));
 };
 
+const extractAliasSlugs = (source) => {
+  const toolBlocks = source.match(/\{\s*slug: '[^']+'[\s\S]*?\n  \}/g) ?? [];
+  return new Set(
+    toolBlocks
+      .filter((block) => block.includes("visibility: 'alias'"))
+      .map((block) => block.match(/slug: '([^']+)'/)?.[1])
+      .filter(Boolean),
+  );
+};
+
 const uniqueRoutes = (routes) => [...new Set(routes)];
 
 export const getSeoRoutes = () => {
@@ -19,9 +29,10 @@ export const getSeoRoutes = () => {
   const toolSlugs = [...source.matchAll(/slug: '([^']+)'/g)].map(([, slug]) => slug);
   const hiddenSlugs = extractSet(source, 'hiddenToolSlugs');
   const comingSoonSlugs = extractSet(source, 'comingSoonToolSlugs');
+  const aliasSlugs = extractAliasSlugs(source);
 
   const discoverableToolSlugs = toolSlugs.filter(
-    (slug) => !hiddenSlugs.has(slug) && !comingSoonSlugs.has(slug),
+    (slug) => !hiddenSlugs.has(slug) && !comingSoonSlugs.has(slug) && !aliasSlugs.has(slug),
   );
 
   return uniqueRoutes(['/', ...discoverableToolSlugs, '/privacy', '/terms']);

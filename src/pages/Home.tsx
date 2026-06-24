@@ -167,6 +167,7 @@ const getToolSearchText = (tool: ToolDefinition) =>
     tool.title,
     tool.shortTitle,
     tool.description,
+    tool.searchAliases ?? '',
     WORKFLOWS[getWorkflowId(tool)].label,
     WORKFLOWS[getWorkflowId(tool)].intent,
     WORKFLOWS[getWorkflowId(tool)].keywords,

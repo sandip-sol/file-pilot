@@ -50,35 +50,19 @@ const CropPdf = lazy(() => import('./pages/CropPdf').then(m => ({ default: m.Cro
 
 // ─── Convert TO PDF ─────────────────────────────────────────────────────────
 const ImagesToPdf = lazy(() => import('./pages/ImagesToPdf').then(m => ({ default: m.ImagesToPdf })));
-const JpgToPdf = lazy(() => import('./pages/JpgToPdf').then(m => ({ default: m.JpgToPdf })));
-const PngToPdf = lazy(() => import('./pages/PngToPdf').then(m => ({ default: m.PngToPdf })));
-const WebpToPdf = lazy(() => import('./pages/WebpToPdf').then(m => ({ default: m.WebpToPdf })));
-const SvgToPdf = lazy(() => import('./pages/SvgToPdf').then(m => ({ default: m.SvgToPdf })));
-const BmpToPdf = lazy(() => import('./pages/BmpToPdf').then(m => ({ default: m.BmpToPdf })));
-const HeicToPdf = lazy(() => import('./pages/HeicToPdf').then(m => ({ default: m.HeicToPdf })));
-const TiffToPdf = lazy(() => import('./pages/TiffToPdf').then(m => ({ default: m.TiffToPdf })));
 const TextToPdf = lazy(() => import('./pages/TextToPdf').then(m => ({ default: m.TextToPdf })));
 const JsonToPdf = lazy(() => import('./pages/JsonToPdf').then(m => ({ default: m.JsonToPdf })));
 const MarkdownToPdf = lazy(() => import('./pages/MarkdownToPdf').then(m => ({ default: m.MarkdownToPdf })));
 
 // ─── Convert FROM PDF ────────────────────────────────────────────────────────
 const PdfToImages = lazy(() => import('./pages/PdfToImages').then(m => ({ default: m.PdfToImages })));
-const PdfToJpg = lazy(() => import('./pages/PdfToJpg').then(m => ({ default: m.PdfToJpg })));
-const PdfToPng = lazy(() => import('./pages/PdfToPng').then(m => ({ default: m.PdfToPng })));
-const PdfToWebp = lazy(() => import('./pages/PdfToWebp').then(m => ({ default: m.PdfToWebp })));
-const PdfToBmp = lazy(() => import('./pages/PdfToBmpSvg').then(m => ({ default: m.PdfToBmp })));
 const PdfToSvg = lazy(() => import('./pages/PdfToBmpSvg').then(m => ({ default: m.PdfToSvg })));
-const PdfToTiff = lazy(() => import('./pages/PdfToTiff').then(m => ({ default: m.PdfToTiff })));
 const PdfToCbz = lazy(() => import('./pages/PdfToCbz').then(m => ({ default: m.PdfToCbz })));
 const PdfToGreyscale = lazy(() => import('./pages/PdfToGreyscale').then(m => ({ default: m.PdfToGreyscale })));
 const PdfToJson = lazy(() => import('./pages/PdfToJson').then(m => ({ default: m.PdfToJson })));
 const PdfToMarkdown = lazy(() => import('./pages/PdfToMarkdown').then(m => ({ default: m.PdfToMarkdown })));
 const ExtractText = lazy(() => import('./pages/ExtractText').then(m => ({ default: m.ExtractText })));
 const ExtractImages = lazy(() => import('./pages/ExtractImages').then(m => ({ default: m.ExtractImages })));
-const RasterizePdf = lazy(() => import('./pages/RasterizePdf').then(m => ({ default: m.RasterizePdf })));
-const PdfToDocx = lazy(() => import('./pages/PdfToDocx').then(m => ({ default: m.PdfToDocx })));
-const PdfToPptx = lazy(() => import('./pages/PdfToPptx').then(m => ({ default: m.PdfToPptx })));
-const PdfToExcel = lazy(() => import('./pages/PdfToExcel').then(m => ({ default: m.PdfToExcel })));
 
 // ─── Optimize & Repair ───────────────────────────────────────────────────────
 const Compress = lazy(() => import('./pages/Compress').then(m => ({ default: m.Compress })));
@@ -186,35 +170,35 @@ function App() {
 
           {/* Convert TO PDF */}
           <Route path="/images-to-pdf" element={<ImagesToPdf />} />
-          <Route path="/jpg-to-pdf" element={<JpgToPdf />} />
-          <Route path="/png-to-pdf" element={<PngToPdf />} />
-          <Route path="/webp-to-pdf" element={<WebpToPdf />} />
-          <Route path="/svg-to-pdf" element={<SvgToPdf />} />
-          <Route path="/bmp-to-pdf" element={<BmpToPdf />} />
-          <Route path="/heic-to-pdf" element={<HeicToPdf />} />
-          <Route path="/tiff-to-pdf" element={<TiffToPdf />} />
+          <Route path="/jpg-to-pdf" element={<ImagesToPdf />} />
+          <Route path="/png-to-pdf" element={<ImagesToPdf />} />
+          <Route path="/webp-to-pdf" element={<ImagesToPdf />} />
+          <Route path="/svg-to-pdf" element={<ImagesToPdf />} />
+          <Route path="/bmp-to-pdf" element={<ImagesToPdf />} />
+          <Route path="/heic-to-pdf" element={<ImagesToPdf />} />
+          <Route path="/tiff-to-pdf" element={<ImagesToPdf />} />
           <Route path="/text-to-pdf" element={<TextToPdf />} />
           <Route path="/json-to-pdf" element={<JsonToPdf />} />
           <Route path="/markdown-to-pdf" element={<MarkdownToPdf />} />
 
           {/* Convert FROM PDF */}
           <Route path="/pdf-to-images" element={<PdfToImages />} />
-          <Route path="/pdf-to-jpg" element={<PdfToJpg />} />
-          <Route path="/pdf-to-png" element={<PdfToPng />} />
-          <Route path="/pdf-to-webp" element={<PdfToWebp />} />
-          <Route path="/pdf-to-bmp" element={<PdfToBmp />} />
+          <Route path="/pdf-to-jpg" element={<PdfToImages />} />
+          <Route path="/pdf-to-png" element={<PdfToImages />} />
+          <Route path="/pdf-to-webp" element={<PdfToImages />} />
+          <Route path="/pdf-to-bmp" element={<PdfToImages />} />
           <Route path="/pdf-to-svg" element={<PdfToSvg />} />
-          <Route path="/pdf-to-tiff" element={<PdfToTiff />} />
+          <Route path="/pdf-to-tiff" element={<PdfToImages />} />
           <Route path="/pdf-to-cbz" element={<PdfToCbz />} />
           <Route path="/pdf-to-greyscale" element={<PdfToGreyscale />} />
           <Route path="/pdf-to-json" element={<PdfToJson />} />
           <Route path="/pdf-to-markdown" element={<PdfToMarkdown />} />
           <Route path="/extract-text" element={<ExtractText />} />
           <Route path="/extract-images" element={<ExtractImages />} />
-          <Route path="/rasterize-pdf" element={<RasterizePdf />} />
-          <Route path="/pdf-to-docx" element={<PdfToDocx />} />
-          <Route path="/pdf-to-pptx" element={<PdfToPptx />} />
-          <Route path="/pdf-to-excel" element={<PdfToExcel />} />
+          <Route path="/rasterize-pdf" element={<PdfToImages />} />
+          <Route path="/pdf-to-docx" element={<ExtractText />} />
+          <Route path="/pdf-to-pptx" element={<ExtractText />} />
+          <Route path="/pdf-to-excel" element={<ExtractText />} />
 
           {/* Optimize & Repair */}
           <Route path="/compress" element={<Compress />} />
