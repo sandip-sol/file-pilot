@@ -287,7 +287,7 @@ export const Home = () => {
               100% private — files never leave your device
             </div>
 
-            <h1 className="text-3xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
+            <h1 className="text-2xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
               All-in-one file tools
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
