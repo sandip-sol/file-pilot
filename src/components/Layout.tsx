@@ -1,5 +1,6 @@
 import { ShieldCheck } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { RelatedTools } from './RelatedTools';
@@ -28,6 +29,7 @@ export const Layout = ({ children }: LayoutProps) => {
             <Footer />
         </div>
         <Analytics />
+        <SpeedInsights />
         </>
     );
 };
