@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { forwardRef, useState, type ComponentPropsWithoutRef, type MouseEventHandler } from 'react';
 import {
+    discoverableTools,
     discoverableToolsByCategory,
     getToolStatus,
     type ToolCategory,
@@ -20,6 +21,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './
 type NavCategoryGroup = {
     id: string;
     categories: ToolCategory[];
+    extraToolSlugs?: string[];
     label: string;
     description: string;
 };
@@ -64,13 +66,24 @@ const NAV_CATEGORIES: NavCategoryGroup[] = [
     {
         id: 'image-tools',
         categories: ['image-tools'],
+        extraToolSlugs: ['/qr-generator'],
         label: 'Image Tools',
         description: 'Compress, resize, crop, convert, and edit images.',
     },
 ];
 
-const getNavCategoryTools = (categories: ToolCategory[]) =>
-    categories.flatMap((category) => discoverableToolsByCategory(category));
+const getNavCategoryTools = ({ categories, extraToolSlugs = [] }: NavCategoryGroup) => {
+    const tools = categories.flatMap((category) => discoverableToolsByCategory(category));
+    const extraTools = extraToolSlugs
+        .map((slug) => discoverableTools.find((tool) => tool.slug === slug))
+        .filter((tool): tool is ToolDefinition => Boolean(tool));
+    const existingSlugs = new Set(tools.map((tool) => tool.slug));
+
+    return [
+        ...tools,
+        ...extraTools.filter((tool) => !existingSlugs.has(tool.slug)),
+    ];
+};
 
 const CategoryHeader = ({ label, description }: { label: string; description: string }) => (
     <div className="border-b border-border px-4 py-3">
@@ -139,8 +152,9 @@ export const Navbar = () => {
                 <div className="hidden lg:flex min-w-0 flex-1 items-center justify-end gap-2 text-sm font-medium text-muted-foreground">
                     <NavigationMenu>
                         <NavigationMenuList className="space-x-0">
-                            {NAV_CATEGORIES.map(({ id, categories, label, description }) => {
-                                const tools = getNavCategoryTools(categories);
+                            {NAV_CATEGORIES.map((navCategory) => {
+                                const { id, label, description } = navCategory;
+                                const tools = getNavCategoryTools(navCategory);
 
                                 return (
                                     <NavigationMenuItem key={id}>
@@ -181,8 +195,9 @@ export const Navbar = () => {
                 <div className="lg:hidden bg-background border-t border-border animate-fade-in">
                     <div className="container max-h-[calc(100vh-4rem)] overflow-y-auto py-4">
                         <Accordion type="multiple" className="w-full">
-                            {NAV_CATEGORIES.map(({ id, categories, label, description }) => {
-                                const tools = getNavCategoryTools(categories);
+                            {NAV_CATEGORIES.map((navCategory) => {
+                                const { id, label, description } = navCategory;
+                                const tools = getNavCategoryTools(navCategory);
 
                                 return (
                                     <AccordionItem key={id} value={id} className="border-border">
