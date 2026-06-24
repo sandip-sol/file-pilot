@@ -103,7 +103,8 @@ export const ResizeImage = () => {
     formatOption === 'image/jpeg' || formatOption === 'image/webp';
 
   const showBgColorPicker =
-    formatOption === 'image/jpeg' && files.some((f) => f.hasTransparency);
+    resizeMode === 'fit' ||
+    (formatOption === 'image/jpeg' && files.some((f) => f.hasTransparency));
 
   const firstFile = files[0] ?? null;
 
@@ -639,7 +640,10 @@ export const ResizeImage = () => {
                 {showBgColorPicker && (
                   <div className="animate-fade-in">
                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
-                      Background Color (replaces transparency)
+                      Background Color
+                      <span className="font-normal text-muted-foreground ml-1">
+                        — {resizeMode === 'fit' ? 'fills padding area in contain mode' : 'replaces transparency for JPEG'}
+                      </span>
                     </label>
                     <div className="flex items-center gap-3">
                       <input

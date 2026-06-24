@@ -3,7 +3,6 @@ import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
 import { ToolUsageTracker } from '../components/ToolUsageTracker';
 import { RelatedTools } from '../components/RelatedTools';
-import { ToolStateMessage } from '../components/ToolStateMessage';
 import { toast } from 'sonner';
 import {
   imageFormatterPresets,
@@ -20,6 +19,7 @@ import {
   formatFileSize,
 } from '../utils/image/batchExport';
 import { getFormatLabel } from '../utils/image/support';
+import { extractMetadata, type ImageMetadataInfo } from '../utils/image/metadata';
 import {
   Sparkles,
   Download,
@@ -35,6 +35,8 @@ import {
   SlidersHorizontal,
   X,
   Palette,
+  AlertTriangle,
+  ShieldAlert,
 } from 'lucide-react';
 
 /* ------------------------------------------------------------------ */
@@ -53,6 +55,7 @@ interface UploadedImage {
   width: number;
   height: number;
   previewUrl: string;
+  metadata: ImageMetadataInfo | null;
 }
 
 /* ------------------------------------------------------------------ */
@@ -68,6 +71,12 @@ function uid(): string {
 async function loadImageMeta(file: File): Promise<UploadedImage> {
   const bitmap = await createImageBitmap(file);
   const previewUrl = URL.createObjectURL(file);
+  let metadata: ImageMetadataInfo | null = null;
+  try {
+    metadata = await extractMetadata(file);
+  } catch {
+    // Metadata extraction is best-effort
+  }
   const item: UploadedImage = {
     id: uid(),
     file,
@@ -77,6 +86,7 @@ async function loadImageMeta(file: File): Promise<UploadedImage> {
     width: bitmap.width,
     height: bitmap.height,
     previewUrl,
+    metadata,
   };
   bitmap.close();
   return item;
@@ -116,6 +126,9 @@ export const ImageFormatter = () => {
 
   /* ── grayscale ── */
   const [grayscale, setGrayscale] = useState(false);
+
+  /* ── metadata removal ── */
+  const [removeMetadata, setRemoveMetadata] = useState(true);
 
   /* ── filename prefix/suffix ── */
   const [filenamePrefix, setFilenamePrefix] = useState('');
@@ -348,6 +361,7 @@ export const ImageFormatter = () => {
     setQuality(0.85);
     setTargetSizeKB('');
     setGrayscale(false);
+    setRemoveMetadata(true);
     setFilenamePrefix('');
     setFilenameSuffix('');
   }, [images, results]);
@@ -504,6 +518,48 @@ export const ImageFormatter = () => {
                     </button>
                   </div>
                 </div>
+
+                {/* ── Metadata warnings ── */}
+                {images.some((img) => img.metadata && (img.metadata.hasGps || img.metadata.hasExif || img.metadata.warnings.length > 0)) && (
+                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-3 animate-fade-in">
+                    <div className="flex items-start gap-2.5">
+                      <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                      <div className="space-y-2 min-w-0 flex-1">
+                        <p className="text-sm font-semibold text-amber-800">Metadata detected in uploaded images</p>
+                        <div className="space-y-1.5">
+                          {images.filter((img) => img.metadata?.hasGps).length > 0 && (
+                            <p className="text-xs text-amber-700 flex items-center gap-1.5">
+                              <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                              GPS / location data may be present in {images.filter((img) => img.metadata?.hasGps).length} file{images.filter((img) => img.metadata?.hasGps).length !== 1 ? 's' : ''}
+                            </p>
+                          )}
+                          {images.filter((img) => img.metadata?.cameraMake || img.metadata?.cameraModel).length > 0 && (
+                            <p className="text-xs text-amber-700 flex items-center gap-1.5">
+                              <Info className="w-3.5 h-3.5 shrink-0" />
+                              Camera / device information detected
+                            </p>
+                          )}
+                          {images.filter((img) => img.metadata?.dateTime).length > 0 && (
+                            <p className="text-xs text-amber-700 flex items-center gap-1.5">
+                              <Info className="w-3.5 h-3.5 shrink-0" />
+                              Creation date information detected
+                            </p>
+                          )}
+                          {images.filter((img) => img.metadata?.software).length > 0 && (
+                            <p className="text-xs text-amber-700 flex items-center gap-1.5">
+                              <Info className="w-3.5 h-3.5 shrink-0" />
+                              Software information detected
+                            </p>
+                          )}
+                        </div>
+                        <p className="text-xs text-amber-600 mt-2">
+                          A newly rendered image copy is created without the standard metadata commonly retained in the original file.
+                          Canvas-based export strips EXIF data by default.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* ── Dimension mode toggle ── */}
                 <div>
@@ -767,6 +823,24 @@ export const ImageFormatter = () => {
                   <span className="text-sm font-medium text-[var(--text-secondary)] group-hover:text-[var(--text)]">
                     Convert to grayscale
                   </span>
+                </label>
+
+                {/* ── Metadata removal toggle ── */}
+                <label className="flex items-center gap-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={removeMetadata}
+                    onChange={(e) => setRemoveMetadata(e.target.checked)}
+                    className="w-5 h-5 rounded border-border accent-foreground cursor-pointer"
+                  />
+                  <div>
+                    <span className="text-sm font-medium text-[var(--text-secondary)] group-hover:text-[var(--text)]">
+                      Remove metadata
+                    </span>
+                    <p className="text-xs text-muted-foreground">
+                      Re-exporting strips EXIF, GPS, and camera data by default
+                    </p>
+                  </div>
                 </label>
 
                 {/* ── Filename prefix / suffix ── */}

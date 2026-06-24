@@ -294,29 +294,6 @@ export const ConvertImage = () => {
                 </div>
               )}
 
-              {/* Dropdown fallback */}
-              <div>
-                <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
-                  Output Format (dropdown)
-                </label>
-                <select
-                  value={outputFormat}
-                  onChange={(e) => setOutputFormat(e.target.value as ImageFormat)}
-                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-foreground/20"
-                >
-                  {FORMAT_CARDS.map((card) => (
-                    <option
-                      key={card.format}
-                      value={card.format}
-                      disabled={formatSupport ? !formatSupport[card.format] : false}
-                    >
-                      {card.label}
-                      {formatSupport && !formatSupport[card.format] ? ' (not supported)' : ''}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
               {/* JPEG background color picker */}
               {showBgPicker && (
                 <div>

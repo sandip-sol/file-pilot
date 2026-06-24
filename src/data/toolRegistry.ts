@@ -12,7 +12,7 @@ import {
   Paperclip, Ungroup, GanttChart, FileCode2,
   ImageMinus, ImagePlus, Replace, RotateCcw, CircleOff, Scaling, Sparkles, Type,
   Globe, Camera, FileCheck, BrainCircuit, Languages, NotebookPen, MessageSquareText, FileSearch,
-  BarChart3, EyeOff, AppWindow, UserCheck, Share2, ShoppingBag, ScanLine as ScanLineIcon, Gem,
+  BarChart3, EyeOff, UserCheck, Share2, ShoppingBag, ScanLine as ScanLineIcon, Gem,
 } from 'lucide-react';
 
 export type ToolCategory =

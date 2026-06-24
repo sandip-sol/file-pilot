@@ -6,7 +6,8 @@ import { ToolUsageTracker } from '../components/ToolUsageTracker';
 import { toast } from 'sonner';
 import {
   Loader2, Download, RefreshCw, X, ShoppingBag, AlertTriangle,
-  ChevronDown, Image as ImageIcon,
+  Image as ImageIcon, Sparkles,
+  Info,
 } from 'lucide-react';
 import { ecommercePresets, type EcommercePreset } from '../data/ecommercePresets';
 import {
@@ -219,22 +220,39 @@ export const EcommerceImageFormatter = () => {
         title="E-commerce Image Formatter — PDF Solver"
         description="Prepare product photos with clean backgrounds, consistent dimensions, and marketplace-ready formats. All processing happens locally in your browser."
       />
-      <ToolUsageTracker toolSlug="/ecommerce-image-formatter" />
+      <ToolUsageTracker />
 
-      <div className="container py-8 max-w-6xl mx-auto">
-        <div className="flex items-center gap-3 mb-2">
-          <ShoppingBag className="h-8 w-8 text-amber-500" />
-          <h1 className="text-3xl font-bold">E-commerce Image Formatter</h1>
+      {/* Header */}
+      <div className="page-header">
+        <div className="container">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white flex items-center justify-center shadow-lg">
+              <ShoppingBag className="w-6 h-6" />
+            </div>
+          </div>
+          <h1>E-commerce Image Formatter</h1>
+          <p>Prepare product photos with clean backgrounds, consistent dimensions, and marketplace-ready formats.</p>
+          <p className="mt-2 text-sm flex items-center justify-center gap-1.5 text-muted-foreground">
+            <Sparkles className="w-4 h-4" />
+            Your files are processed locally in your browser and are not uploaded.
+          </p>
         </div>
-        <p className="text-muted-foreground mb-6">
-          Prepare product photos with clean backgrounds, suitable dimensions, and consistent formats for web stores and marketplaces.
-        </p>
+      </div>
 
-        <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 mb-6">
-          Your files are processed locally in your browser and are not uploaded.
+      <div className="container pb-12 max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
+
+        {/* Marketplace disclaimer */}
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3 text-sm text-amber-800 mb-6">
+          <Info className="w-5 h-5 shrink-0 mt-0.5 text-amber-600" />
+          <p>
+            Presets are recommended starting points. Marketplace image requirements may change.
+            Always verify the latest requirements from each platform before uploading.
+          </p>
         </div>
 
         {sources.length === 0 ? (
+          <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
           <FileUploader
             onFilesSelected={handleFiles}
             accept="image/*"
@@ -242,6 +260,7 @@ export const EcommerceImageFormatter = () => {
             description="Drop product images here"
             hint="Upload one or more product photos to format for e-commerce."
           />
+          </div>
         ) : (
           <div className="space-y-6">
             {/* Source images */}
@@ -477,6 +496,7 @@ export const EcommerceImageFormatter = () => {
             )}
           </div>
         )}
+        </div>
       </div>
 
       <RelatedTools />

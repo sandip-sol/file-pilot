@@ -5,8 +5,8 @@ import { RelatedTools } from '../components/RelatedTools';
 import { ToolUsageTracker } from '../components/ToolUsageTracker';
 import { toast } from 'sonner';
 import {
-  Loader2, Download, RefreshCw, X, RotateCw, RotateCcw, Trash2, Plus,
-  GripVertical, FileText, ChevronDown,
+  Loader2, Download, RefreshCw, RotateCw, RotateCcw, Trash2, Plus,
+  GripVertical, FileText, Sparkles, ScanLine,
 } from 'lucide-react';
 import {
   generatePdfFromImages,
@@ -146,7 +146,7 @@ export const ScanImagesToPdf = () => {
         setProgress({ current, total });
       });
 
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const blob = new Blob([pdfBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       setPdfBlob(blob);
       toast.success(`PDF created with ${pages.length} page${pages.length > 1 ? 's' : ''}`);
     } catch (err) {
@@ -177,22 +177,28 @@ export const ScanImagesToPdf = () => {
         title="Scan Images to PDF — PDF Solver"
         description="Turn photos of documents into a clean, ordered, downloadable PDF. All processing happens locally in your browser."
       />
-      <ToolUsageTracker toolSlug="/scan-images-to-pdf" />
+      <ToolUsageTracker />
 
-      <div className="container py-8 max-w-6xl mx-auto">
-        <div className="flex items-center gap-3 mb-2">
-          <FileText className="h-8 w-8 text-indigo-500" />
-          <h1 className="text-3xl font-bold">Scan Images to PDF</h1>
+      {/* Header */}
+      <div className="page-header">
+        <div className="container">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white flex items-center justify-center shadow-lg">
+              <ScanLine className="w-6 h-6" />
+            </div>
+          </div>
+          <h1>Scan Images to PDF</h1>
+          <p>Turn photos of documents into a clean, ordered, downloadable PDF.</p>
+          <p className="mt-2 text-sm flex items-center justify-center gap-1.5 text-muted-foreground">
+            <Sparkles className="w-4 h-4" />
+            Your files are processed locally in your browser and are not uploaded.
+          </p>
         </div>
-        <p className="text-muted-foreground mb-6">
-          Turn photos of documents into a clean, ordered, downloadable PDF.
-        </p>
+      </div>
 
-        <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 mb-6">
-          Your files are processed locally in your browser and are not uploaded.
-        </div>
-
+      <div className="container pb-12 max-w-6xl mx-auto">
         {pages.length === 0 ? (
+          <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
           <FileUploader
             onFilesSelected={loadPages}
             accept="image/*"
@@ -200,6 +206,7 @@ export const ScanImagesToPdf = () => {
             description="Drop scanned document images here"
             hint="Upload photos of documents. You can reorder, rotate, and enhance them before creating a PDF."
           />
+          </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Pages panel */}

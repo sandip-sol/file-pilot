@@ -5,9 +5,10 @@ import { RelatedTools } from '../components/RelatedTools';
 import { ToolUsageTracker } from '../components/ToolUsageTracker';
 import { toast } from 'sonner';
 import {
-  Loader2, Download, RefreshCw, Gem, Copy, Check, Image as ImageIcon,
+  Loader2, Download, RefreshCw, Gem, Copy, Check,
+  Sparkles,
 } from 'lucide-react';
-import { faviconSizes, generateHtmlSnippet, generateWebManifest } from '../data/faviconConfig';
+import { generateHtmlSnippet, generateWebManifest } from '../data/faviconConfig';
 import {
   generateFavicons,
   generateFaviconZip,
@@ -22,7 +23,6 @@ export const FaviconGenerator = () => {
   const [sourceBitmap, setSourceBitmap] = useState<ImageBitmap | null>(null);
   const [sourcePreviewUrl, setSourcePreviewUrl] = useState<string | null>(null);
 
-  const [bgColor, setBgColor] = useState<string | null>(null);
   const [useBg, setUseBg] = useState(false);
   const [bgColorValue, setBgColorValue] = useState('#ffffff');
   const [padding, setPadding] = useState(8);
@@ -139,22 +139,28 @@ export const FaviconGenerator = () => {
         title="Favicon Generator — PDF Solver"
         description="Generate all website favicon and app icon assets from a single image. Creates PNG favicons, Apple touch icons, Android/PWA icons, and a web manifest."
       />
-      <ToolUsageTracker toolSlug="/favicon-generator" />
+      <ToolUsageTracker />
 
-      <div className="container py-8 max-w-5xl mx-auto">
-        <div className="flex items-center gap-3 mb-2">
-          <Gem className="h-8 w-8 text-violet-500" />
-          <h1 className="text-3xl font-bold">Favicon Generator</h1>
+      {/* Header */}
+      <div className="page-header">
+        <div className="container">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 text-white flex items-center justify-center shadow-lg">
+              <Gem className="w-6 h-6" />
+            </div>
+          </div>
+          <h1>Favicon Generator</h1>
+          <p>Generate all website favicon and app icon assets from a single image.</p>
+          <p className="mt-2 text-sm flex items-center justify-center gap-1.5 text-muted-foreground">
+            <Sparkles className="w-4 h-4" />
+            Your files are processed locally in your browser and are not uploaded.
+          </p>
         </div>
-        <p className="text-muted-foreground mb-6">
-          Generate all website favicon and app icon assets from a single image.
-        </p>
+      </div>
 
-        <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 mb-6">
-          Your files are processed locally in your browser and are not uploaded.
-        </div>
-
+      <div className="container pb-12 max-w-5xl mx-auto">
         {!sourceFile ? (
+          <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
           <FileUploader
             onFilesSelected={handleFile}
             accept="image/png,image/jpeg,image/webp,image/svg+xml"
@@ -162,6 +168,7 @@ export const FaviconGenerator = () => {
             description="Drop your logo or icon image here"
             hint="Upload a PNG, JPEG, WebP, or SVG image. Square images work best."
           />
+          </div>
         ) : (
           <div className="space-y-6">
             {/* Source + Settings */}

@@ -6,7 +6,6 @@ import { Layout } from './components/Layout';
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
 const Privacy = lazy(() => import('./pages/Privacy').then(m => ({ default: m.Privacy })));
 const Terms = lazy(() => import('./pages/Terms').then(m => ({ default: m.Terms })));
-const ImageRequirements = lazy(() => import('./pages/ImageRequirements').then(m => ({ default: m.ImageRequirements })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 
 // ─── Organize & Manage ───────────────────────────────────────────────────────
