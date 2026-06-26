@@ -1,0 +1,95 @@
+# FilePilot
+
+> Free browser-based PDF, image, and file tools. Files are processed locally in the browser for supported tools.
+
+Canonical site: https://www.filepilot.space
+Sitemap: https://www.filepilot.space/sitemap.xml
+Robots: https://www.filepilot.space/robots.txt
+
+## Indexable Tools and Pages
+
+- [FilePilot](https://www.filepilot.space/): Free browser-based PDF, image, and file tools. Edit, convert, compress, organize, and optimize files privately without uploads.
+- [Merge PDFs](https://www.filepilot.space/merge): Combine multiple PDF files into one organized document.
+- [Split PDF](https://www.filepilot.space/split): Extract pages or split documents into separate files.
+- [Organize PDF Pages](https://www.filepilot.space/organize-pdf): Reorder, rotate, and delete pages with drag-and-drop thumbnails.
+- [Rotate PDF](https://www.filepilot.space/rotate-pdf): Rotate all or selected pages by 90°, 180°, or 270°.
+- [Delete Pages](https://www.filepilot.space/delete-pages): Remove specific pages from your PDF file.
+- [Extract Pages](https://www.filepilot.space/extract-pages): Pull out selected pages from a PDF into a new document.
+- [Reverse PDF](https://www.filepilot.space/reverse-pdf): Flip the page order of a PDF from last to first.
+- [Add Blank Page](https://www.filepilot.space/add-blank-page): Insert blank pages at any position in your PDF.
+- [Alternate Merge](https://www.filepilot.space/alternate-merge): Interleave pages from two PDFs alternately (ideal for double-sided scans).
+- [N-Up PDF](https://www.filepilot.space/n-up-pdf): Print 2, 4, or 9 pages per sheet to save paper.
+- [Overlay PDF](https://www.filepilot.space/overlay-pdf): Layer one PDF over another as an overlay or underlay.
+- [Divide Pages](https://www.filepilot.space/divide-pages): Split each page in half horizontally or vertically.
+- [Stitch Pages](https://www.filepilot.space/combine-single-page): Combine all pages into one long scrollable page.
+- [Grid Combine](https://www.filepilot.space/grid-combine): Arrange multiple PDFs in a grid layout on a single page.
+- [Posterize PDF](https://www.filepilot.space/posterize-pdf): Tile a large PDF page across multiple sheets for poster printing.
+- [Add Page Labels](https://www.filepilot.space/add-page-labels): Add custom labels (Roman numerals, prefixes) to PDF pages.
+- [PDF Metadata](https://www.filepilot.space/pdf-metadata): Inspect PDF metadata: title, author, dates, page count.
+- [PDF to ZIP](https://www.filepilot.space/pdf-to-zip): Bundle multiple PDF files into a single ZIP archive.
+- [Compare PDFs](https://www.filepilot.space/compare-pdf): Compare page counts and text differences between two PDFs.
+- [PDF Booklet](https://www.filepilot.space/pdf-booklet): Impose pages into a printable booklet (saddle-stitch) layout.
+- [Fill Forms / Annotate](https://www.filepilot.space/annotate-pdf): Add text, highlights, checkmarks, and signatures to PDFs.
+- [Watermark PDF](https://www.filepilot.space/watermark-pdf): Add text or image watermarks to all or selected pages.
+- [Redact PDF](https://www.filepilot.space/redact-pdf): Permanently cover sensitive content in your PDF.
+- [Sign PDF](https://www.filepilot.space/sign-pdf): Draw, type, or upload a signature and embed it in your PDF.
+- [Crop PDF](https://www.filepilot.space/crop-pdf): Trim margins or set a custom crop area on PDF pages.
+- [PDF Bookmarks](https://www.filepilot.space/bookmark): View, add, edit, or delete bookmarks in a PDF.
+- [Table of Contents](https://www.filepilot.space/table-of-contents): Automatically generate a table of contents from PDF bookmarks.
+- [Add Page Numbers](https://www.filepilot.space/page-numbers): Add customizable page numbers to any position on pages.
+- [Header & Footer](https://www.filepilot.space/header-footer): Add custom text headers and footers to every page.
+- [Background Color](https://www.filepilot.space/background-color): Add a solid background color to PDF pages.
+- [Add Stamp](https://www.filepilot.space/add-stamp): Add "DRAFT", "CONFIDENTIAL", or custom text stamps to pages.
+- [Remove Annotations](https://www.filepilot.space/remove-annotations): Strip all comments, highlights, and links from a PDF.
+- [Form Filler](https://www.filepilot.space/form-filler): Fill in PDF form fields and flatten the result.
+- [Form Creator](https://www.filepilot.space/form-creator): Build interactive PDF forms with text fields and checkboxes.
+- [Remove Blank Pages](https://www.filepilot.space/remove-blank-pages): Automatically detect and remove blank pages from a PDF.
+- [Images to PDF](https://www.filepilot.space/images-to-pdf): Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images into one PDF document.
+- [Text to PDF](https://www.filepilot.space/text-to-pdf): Convert plain text files into formatted PDF documents.
+- [JSON to PDF](https://www.filepilot.space/json-to-pdf): Render JSON data as a formatted, syntax-highlighted PDF.
+- [Markdown to PDF](https://www.filepilot.space/markdown-to-pdf): Convert Markdown documents to styled PDF files.
+- [PDF to Images](https://www.filepilot.space/pdf-to-images): Export PDF pages as PNG, JPG, or WebP images with custom resolution.
+- [PDF to SVG](https://www.filepilot.space/pdf-to-svg): Convert PDF pages to scalable SVG vector files.
+- [PDF to Grayscale](https://www.filepilot.space/pdf-to-greyscale): Convert a color PDF to black-and-white grayscale.
+- [PDF to JSON](https://www.filepilot.space/pdf-to-json): Extract PDF text and metadata as a structured JSON file.
+- [PDF to Markdown](https://www.filepilot.space/pdf-to-markdown): Extract PDF content as a clean Markdown document.
+- [Extract Text](https://www.filepilot.space/extract-text): Extract text from PDFs and images for TXT, Word, Sheets, and Slides workflows.
+- [Extract Images](https://www.filepilot.space/extract-images): Extract all images embedded in a PDF as a ZIP file.
+- [PDF to CBZ](https://www.filepilot.space/pdf-to-cbz): Convert a PDF into a comic book CBZ archive.
+- [Compress PDF](https://www.filepilot.space/compress): Reduce file size while maintaining quality.
+- [Fix Page Size](https://www.filepilot.space/fix-page-size): Standardize all pages to A4, Letter, or custom dimensions.
+- [Page Dimensions](https://www.filepilot.space/page-dimensions): Inspect the dimensions and orientation of every page.
+- [Repair PDF](https://www.filepilot.space/repair-pdf): Fix corrupted or damaged PDF files and recover content.
+- [Deskew PDF](https://www.filepilot.space/deskew-pdf): Automatically straighten skewed scanned document pages.
+- [Protect / Unlock PDF](https://www.filepilot.space/pdf-security): Unlock password-protected PDFs in your browser.
+- [Sanitize PDF](https://www.filepilot.space/sanitize-pdf): Strip metadata, scripts, and hidden data from a PDF.
+- [Find & Redact](https://www.filepilot.space/find-and-redact): Search text patterns and permanently redact them from a PDF.
+- [Flatten PDF](https://www.filepilot.space/flatten-pdf): Flatten forms and annotations into a non-editable PDF.
+- [Remove Metadata](https://www.filepilot.space/remove-metadata): Wipe all embedded metadata for maximum privacy.
+- [Remove Background](https://www.filepilot.space/remove-background): Automatically detect and remove image backgrounds using AI, locally in your browser.
+- [Change Background](https://www.filepilot.space/change-background): Replace image backgrounds with colours, gradients, blur, or custom images using AI.
+- [Upscale Image](https://www.filepilot.space/upscale-image): Enlarge images using AI super-resolution to increase resolution while preserving detail.
+- [AI Enhance Image](https://www.filepilot.space/ai-enhance-image): Improve image quality with smart exposure, contrast, colour, and sharpness adjustments.
+- [Object Remover](https://www.filepilot.space/object-remover): Paint over unwanted objects and remove them using content-aware inpainting.
+- [Image Formatter](https://www.filepilot.space/image-formatter): Resize, convert, compress, and batch-export images to exact dimensions and formats.
+- [Passport Photo Validator](https://www.filepilot.space/passport-photo-validator): Check passport and ID photo technical requirements with crop and export tools.
+- [Social Media Resizer](https://www.filepilot.space/social-media-resizer): Resize images for Instagram, Facebook, LinkedIn, X, YouTube, and more in one step.
+- [E-commerce Image Formatter](https://www.filepilot.space/ecommerce-image-formatter): Prepare product photos with clean backgrounds and marketplace-ready dimensions.
+- [Scan Images to PDF](https://www.filepilot.space/scan-images-to-pdf): Turn photos of documents into a clean, ordered, downloadable PDF.
+- [Favicon Generator](https://www.filepilot.space/favicon-generator): Generate all website favicon and app icon assets from a single image.
+- [Compress Image](https://www.filepilot.space/compress-image): Reduce image file size while preserving quality for JPG, PNG, and WebP.
+- [Resize Image](https://www.filepilot.space/resize-image): Adjust image dimensions by pixels or percentage for any format.
+- [Convert Image](https://www.filepilot.space/convert-image): Convert images between JPEG, PNG, WebP, and AVIF formats instantly.
+- [Website Image Optimiser](https://www.filepilot.space/website-image-optimiser): Generate responsive, web-ready image variants with srcset and picture snippets.
+- [Image Quality Analyzer](https://www.filepilot.space/image-quality-analyzer): Inspect image properties and get actionable quality recommendations.
+- [Crop Image](https://www.filepilot.space/crop-image): Select and extract a rectangular area from JPG, PNG, or WebP images.
+- [Rotate Image](https://www.filepilot.space/rotate-image): Rotate or flip images by any angle in your browser.
+- [Watermark Image](https://www.filepilot.space/watermark-image): Add text or image watermarks to photos with adjustable transparency.
+- [Metadata Remover](https://www.filepilot.space/remove-image-metadata): Inspect and remove EXIF, GPS, and camera metadata from images for privacy.
+- [Blur Face](https://www.filepilot.space/blur-face): Blur faces, license plates, and sensitive areas in images.
+- [Photo Editor](https://www.filepilot.space/photo-editor): Edit photos with filters, effects, text, frames, and stickers.
+- [Image to SVG Converter](https://www.filepilot.space/image-to-svg): Convert simple logos, icons and illustrations into editable SVG vectors.
+- [Color Picker](https://www.filepilot.space/color-picker): Pick colours from images and copy HEX, RGB, HSL and CSS values.
+- [QR Code Generator](https://www.filepilot.space/qr-generator): Create custom QR codes for links, Wi-Fi, contact details and more.
+- [Privacy Policy](https://www.filepilot.space/privacy): Learn how FilePilot protects files with browser-based processing and no server uploads for supported tools.
+- [Terms of Service](https://www.filepilot.space/terms): Read the terms for using FilePilot browser-based PDF, image, and file tools.

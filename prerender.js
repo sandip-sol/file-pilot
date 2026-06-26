@@ -10,7 +10,7 @@ import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { SITE_URL, getSeoRoutes } from './seoRoutes.js';
+import { SITE_URL, getRouteSeo, getSeoRoutes } from './seoRoutes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
@@ -22,20 +22,38 @@ function canonicalUrlForRoute(route) {
   return new URL(route, SITE_URL).toString();
 }
 
-function withRouteCanonical(html, route) {
-  const canonicalUrl = canonicalUrlForRoute(route);
-
-  return html
-    .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${canonicalUrl}">`)
-    .replace(/<meta property="og:url" content="[^"]*"\s*\/?>/, `<meta property="og:url" content="${canonicalUrl}">`);
+function escapeHtml(value) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
 }
 
-function writeCanonicalShells() {
+function withRouteSeo(html, route) {
+  const canonicalUrl = canonicalUrlForRoute(route);
+  const { title, description } = getRouteSeo(route);
+  const escapedTitle = escapeHtml(title);
+  const escapedDescription = escapeHtml(description);
+
+  return html
+    .replace(/<title>[^<]*<\/title>/, `<title>${escapedTitle}</title>`)
+    .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/, `<meta name="description" content="${escapedDescription}">`)
+    .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${canonicalUrl}">`)
+    .replace(/<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/, `<meta property="og:title" content="${escapedTitle}">`)
+    .replace(/<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/, `<meta property="og:description" content="${escapedDescription}">`)
+    .replace(/<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/, `<meta property="og:url" content="${canonicalUrl}">`)
+    .replace(/<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:title" content="${escapedTitle}">`)
+    .replace(/<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:description" content="${escapedDescription}">`);
+}
+
+function writeSeoShells() {
   const baseFile = join(DIST, 'index.html');
   const baseHtml = readFileSync(baseFile, 'utf8');
 
   for (const route of ROUTES) {
-    const html = withRouteCanonical(baseHtml, route);
+    const html = withRouteSeo(baseHtml, route);
     const outDir = route === '/' ? DIST : join(DIST, route);
     if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
 
@@ -43,15 +61,15 @@ function writeCanonicalShells() {
     writeFileSync(outFile, html, 'utf-8');
   }
 
-  console.log(`Wrote canonical HTML shells for ${ROUTES.length} routes.`);
+  console.log(`Wrote SEO HTML shells for ${ROUTES.length} routes.`);
 }
 
 let puppeteer;
 try {
   puppeteer = (await import('puppeteer')).default;
 } catch {
-  console.log('⚠ Puppeteer not installed. Writing canonical HTML shells instead.');
-  writeCanonicalShells();
+  console.log('⚠ Puppeteer not installed. Writing SEO HTML shells instead.');
+  writeSeoShells();
   process.exit(0);
 }
 
@@ -97,7 +115,7 @@ function startServer() {
 
 async function prerender() {
   console.log('Starting prerender...');
-  writeCanonicalShells();
+  writeSeoShells();
 
   const server = await startServer();
   const browser = await puppeteer.launch({
@@ -135,8 +153,8 @@ async function prerender() {
 
 prerender().catch((err) => {
   console.error('⚠ Prerender skipped:', err.message);
-  writeCanonicalShells();
-  console.error('  The build output in dist/ is still valid with self-referencing route canonicals.');
+  writeSeoShells();
+  console.error('  The build output in dist/ is still valid with route-specific title, description, and canonical tags.');
   console.error('  Install Chrome/Chromium system dependencies and allow the local preview port to enable prerendering.');
   // Exit 0 so the build doesn't fail — prerender is an enhancement, not a requirement.
   process.exit(0);
