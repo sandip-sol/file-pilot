@@ -89,7 +89,6 @@ export const ImagesToPdf = () => {
             <PageSeo
                 title="Convert Images to PDF – JPG, PNG, WebP, SVG, BMP to PDF"
                 description="Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images to a single PDF with page size, orientation, and margin controls. Free & private."
-                canonicalPath="/images-to-pdf"
                 faqItems={[
                     { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
                     { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP are supported in modern browsers. HEIC/HEIF and TIFF support depends on whether your browser can decode the files." },

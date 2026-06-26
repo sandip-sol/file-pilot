@@ -14,7 +14,7 @@ interface PageSeoProps {
     faqItems?: FaqItem[];
 }
 
-const SITE_URL = 'https://filepilot.app';
+const SITE_URL = 'https://filepilot.space';
 const DEFAULT_TITLE = 'FilePilot — PDF, Image and File Tools';
 const DEFAULT_DESCRIPTION =
     'Edit, convert, compress, organise and optimise PDFs, images and files with FilePilot. Your files are processed privately in your browser.';

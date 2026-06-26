@@ -60,7 +60,6 @@ export const PdfSecurity = () => {
       <PageSeo
         title="Protect or Unlock PDF – Browser-Only PDF Security"
         description="Unlock password-protected PDFs locally in your browser and manage browser-first PDF security workflows without server uploads."
-        canonicalPath="/pdf-security"
       />
 
       <div className="page-header">

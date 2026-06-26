@@ -74,7 +74,6 @@ export const ExtractText = () => {
       <PageSeo
         title="Extract Text from PDF or Images – TXT for Word, Sheets, and Slides"
         description="Extract text from PDFs, scanned PDFs, and images in your browser for TXT exports you can reuse in Word, Sheets, Slides, and other editors."
-        canonicalPath="/extract-text"
         faqItems={[
           { question: 'Can I extract text from both PDFs and images?', answer: 'Yes. Text PDFs are read directly, and scanned pages or images fall back to OCR in the browser.' },
           { question: 'Does this upload my files?', answer: 'No. Extraction, OCR, previews, and exports all stay on your device.' },

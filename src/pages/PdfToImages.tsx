@@ -70,7 +70,6 @@ export const PdfToImages = () => {
       <PageSeo
         title="PDF to Images – Export PDF Pages as PNG, JPG, or WebP"
         description="Convert each PDF page to PNG, JPG, or WebP locally in your browser with DPI and quality controls. Download individually or as ZIP."
-        canonicalPath="/pdf-to-images"
       />
 
       <div className="page-header">

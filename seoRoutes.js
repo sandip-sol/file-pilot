@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 
 const TOOL_REGISTRY_PATH = new URL('./src/data/toolRegistry.ts', import.meta.url);
 
-export const SITE_URL = 'https://filepilot.app';
+export const SITE_URL = 'https://filepilot.space';
 
 const CORE_ROUTES = ['/', '/privacy', '/terms'];
 

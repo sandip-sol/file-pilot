@@ -1,512 +1,512 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://filepilot.app/</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/merge</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/merge</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/split</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/split</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/organize-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/organize-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/rotate-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/rotate-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/delete-pages</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/delete-pages</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/extract-pages</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/extract-pages</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/reverse-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/reverse-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/add-blank-page</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/add-blank-page</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/alternate-merge</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/alternate-merge</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/n-up-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/n-up-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/overlay-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/overlay-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/divide-pages</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/divide-pages</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/combine-single-page</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/combine-single-page</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/grid-combine</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/grid-combine</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/posterize-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/posterize-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/add-page-labels</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/add-page-labels</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/pdf-metadata</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/pdf-metadata</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/pdf-to-zip</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/pdf-to-zip</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/compare-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/compare-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/pdf-booklet</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/pdf-booklet</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/annotate-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/annotate-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/watermark-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/watermark-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/redact-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/redact-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/sign-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/sign-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/crop-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/crop-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/bookmark</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/bookmark</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/table-of-contents</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/table-of-contents</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/page-numbers</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/page-numbers</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/header-footer</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/header-footer</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/background-color</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/background-color</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/add-stamp</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/add-stamp</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/remove-annotations</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/remove-annotations</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/form-filler</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/form-filler</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/form-creator</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/form-creator</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/remove-blank-pages</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/remove-blank-pages</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/images-to-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/images-to-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/text-to-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/text-to-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/json-to-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/json-to-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/markdown-to-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/markdown-to-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/pdf-to-images</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/pdf-to-images</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/pdf-to-svg</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/pdf-to-svg</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/pdf-to-greyscale</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/pdf-to-greyscale</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/pdf-to-json</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/pdf-to-json</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/pdf-to-markdown</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/pdf-to-markdown</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/extract-text</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/extract-text</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/extract-images</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/extract-images</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/pdf-to-cbz</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/pdf-to-cbz</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/compress</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/compress</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/fix-page-size</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/fix-page-size</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/page-dimensions</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/page-dimensions</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/repair-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/repair-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/deskew-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/deskew-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/pdf-security</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/pdf-security</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/sanitize-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/sanitize-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/find-and-redact</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/find-and-redact</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/flatten-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/flatten-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/remove-metadata</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/remove-metadata</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/remove-background</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/remove-background</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/change-background</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/change-background</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/upscale-image</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/upscale-image</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/ai-enhance-image</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/ai-enhance-image</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/object-remover</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/object-remover</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/image-formatter</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/image-formatter</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/passport-photo-validator</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/passport-photo-validator</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/social-media-resizer</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/social-media-resizer</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/ecommerce-image-formatter</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/ecommerce-image-formatter</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/scan-images-to-pdf</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/scan-images-to-pdf</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/favicon-generator</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/favicon-generator</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/compress-image</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/compress-image</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/resize-image</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/resize-image</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/convert-image</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/convert-image</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/website-image-optimiser</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/website-image-optimiser</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/image-quality-analyzer</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/image-quality-analyzer</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/crop-image</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/crop-image</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/rotate-image</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/rotate-image</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/watermark-image</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/watermark-image</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/remove-image-metadata</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/remove-image-metadata</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/blur-face</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/blur-face</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/photo-editor</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/photo-editor</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/image-to-svg</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/image-to-svg</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/color-picker</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/color-picker</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/qr-generator</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/qr-generator</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/privacy</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/privacy</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://filepilot.app/terms</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://filepilot.space/terms</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

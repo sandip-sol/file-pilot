@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 
-const SITE_URL = 'https://filepilot.app';
+const SITE_URL = 'https://filepilot.space';
 const KEY = '43ba63aba5734768ba941ad72f08ead1';
 const KEY_LOCATION = `${SITE_URL}/${KEY}.txt`;
 const SITEMAP_PATH = new URL('./public/sitemap.xml', import.meta.url);
