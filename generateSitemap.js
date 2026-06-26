@@ -1,5 +1,5 @@
 import { writeFileSync } from 'node:fs';
-import { SITE_URL, getSitemapEntries } from './seoRoutes.js';
+import { getSitemapEntries } from './seoRoutes.js';
 
 const SITEMAP_PATH = new URL('./public/sitemap.xml', import.meta.url);
 
@@ -14,16 +14,15 @@ const escapeXml = (value) =>
 const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...getSitemapEntries().map(({ route, lastmod, changefreq, priority }) => {
-    const loc = new URL(route, SITE_URL).toString();
+  ...getSitemapEntries().map(({ loc, lastmod, changefreq, priority }) => {
     return [
       '  <url>',
       `    <loc>${escapeXml(loc)}</loc>`,
-      `    <lastmod>${lastmod}</lastmod>`,
+      lastmod ? `    <lastmod>${lastmod}</lastmod>` : null,
       `    <changefreq>${changefreq}</changefreq>`,
       `    <priority>${priority}</priority>`,
       '  </url>',
-    ].join('\n');
+    ].filter(Boolean).join('\n');
   }),
   '</urlset>',
   '',

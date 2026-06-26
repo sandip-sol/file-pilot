@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Copy, Download, FileSearch2, Loader2, ScanText, Trash2 } from 'lucide-react';
 import { FileUploader } from '../components/FileUploader';
 import { FAQSection } from '../components/FAQSection';
@@ -12,6 +13,9 @@ import type { ExtractedDocumentResult, OcrPageResult } from '../utils/pdf/types'
 import { extractRichTextFromFiles } from '../utils/textExtraction';
 
 export const ExtractText = () => {
+  const { pathname } = useLocation();
+  const route = pathname.replace(/\/$/, '') || '/extract-text';
+  const isCanonicalRoute = route === '/extract-text';
   const [results, setResults] = useState<ExtractedDocumentResult[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
@@ -74,6 +78,8 @@ export const ExtractText = () => {
       <PageSeo
         title="Extract Text from PDF or Images – TXT for Word, Sheets, and Slides"
         description="Extract text from PDFs, scanned PDFs, and images in your browser for TXT exports you can reuse in Word, Sheets, Slides, and other editors."
+        canonicalPath="/extract-text"
+        robots={isCanonicalRoute ? 'index,follow' : 'noindex,follow'}
         faqItems={[
           { question: 'Can I extract text from both PDFs and images?', answer: 'Yes. Text PDFs are read directly, and scanned pages or images fall back to OCR in the browser.' },
           { question: 'Does this upload my files?', answer: 'No. Extraction, OCR, previews, and exports all stay on your device.' },

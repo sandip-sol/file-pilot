@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Download, Loader2, LockKeyhole, Shield, Unlock } from 'lucide-react';
 import { FAQSection } from '../components/FAQSection';
 import { FileUploader } from '../components/FileUploader';
@@ -7,6 +8,9 @@ import { downloadBytes } from '../utils/pdf/export';
 import { unlockPdfByRasterizing } from '../utils/pdf/pageTools';
 
 export const PdfSecurity = () => {
+  const { pathname } = useLocation();
+  const route = pathname.replace(/\/$/, '') || '/pdf-security';
+  const isCanonicalRoute = route === '/pdf-security';
   const [mode, setMode] = useState<'unlock' | 'protect'>('unlock');
   const [file, setFile] = useState<File | null>(null);
   const [password, setPassword] = useState('');
@@ -60,6 +64,8 @@ export const PdfSecurity = () => {
       <PageSeo
         title="Protect or Unlock PDF – Browser-Only PDF Security"
         description="Unlock password-protected PDFs locally in your browser and manage browser-first PDF security workflows without server uploads."
+        canonicalPath="/pdf-security"
+        robots={isCanonicalRoute ? 'index,follow' : 'noindex,follow'}
       />
 
       <div className="page-header">

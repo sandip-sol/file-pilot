@@ -2,94 +2,102 @@
 
 > Free browser-based PDF, image, and file tools. Files are processed locally in the browser for supported tools.
 
-Canonical site: https://www.filepilot.space
+Canonical site: https://www.filepilot.space/
 Sitemap: https://www.filepilot.space/sitemap.xml
 Robots: https://www.filepilot.space/robots.txt
 
 ## Indexable Tools and Pages
 
-- [FilePilot](https://www.filepilot.space/): Free browser-based PDF, image, and file tools. Edit, convert, compress, organize, and optimize files privately without uploads.
-- [Merge PDFs](https://www.filepilot.space/merge): Combine multiple PDF files into one organized document.
-- [Split PDF](https://www.filepilot.space/split): Extract pages or split documents into separate files.
-- [Organize PDF Pages](https://www.filepilot.space/organize-pdf): Reorder, rotate, and delete pages with drag-and-drop thumbnails.
-- [Rotate PDF](https://www.filepilot.space/rotate-pdf): Rotate all or selected pages by 90°, 180°, or 270°.
-- [Delete Pages](https://www.filepilot.space/delete-pages): Remove specific pages from your PDF file.
-- [Extract Pages](https://www.filepilot.space/extract-pages): Pull out selected pages from a PDF into a new document.
-- [Reverse PDF](https://www.filepilot.space/reverse-pdf): Flip the page order of a PDF from last to first.
-- [Add Blank Page](https://www.filepilot.space/add-blank-page): Insert blank pages at any position in your PDF.
-- [Alternate Merge](https://www.filepilot.space/alternate-merge): Interleave pages from two PDFs alternately (ideal for double-sided scans).
-- [N-Up PDF](https://www.filepilot.space/n-up-pdf): Print 2, 4, or 9 pages per sheet to save paper.
-- [Overlay PDF](https://www.filepilot.space/overlay-pdf): Layer one PDF over another as an overlay or underlay.
-- [Divide Pages](https://www.filepilot.space/divide-pages): Split each page in half horizontally or vertically.
-- [Stitch Pages](https://www.filepilot.space/combine-single-page): Combine all pages into one long scrollable page.
-- [Grid Combine](https://www.filepilot.space/grid-combine): Arrange multiple PDFs in a grid layout on a single page.
-- [Posterize PDF](https://www.filepilot.space/posterize-pdf): Tile a large PDF page across multiple sheets for poster printing.
-- [Add Page Labels](https://www.filepilot.space/add-page-labels): Add custom labels (Roman numerals, prefixes) to PDF pages.
-- [PDF Metadata](https://www.filepilot.space/pdf-metadata): Inspect PDF metadata: title, author, dates, page count.
-- [PDF to ZIP](https://www.filepilot.space/pdf-to-zip): Bundle multiple PDF files into a single ZIP archive.
-- [Compare PDFs](https://www.filepilot.space/compare-pdf): Compare page counts and text differences between two PDFs.
-- [PDF Booklet](https://www.filepilot.space/pdf-booklet): Impose pages into a printable booklet (saddle-stitch) layout.
-- [Fill Forms / Annotate](https://www.filepilot.space/annotate-pdf): Add text, highlights, checkmarks, and signatures to PDFs.
-- [Watermark PDF](https://www.filepilot.space/watermark-pdf): Add text or image watermarks to all or selected pages.
-- [Redact PDF](https://www.filepilot.space/redact-pdf): Permanently cover sensitive content in your PDF.
-- [Sign PDF](https://www.filepilot.space/sign-pdf): Draw, type, or upload a signature and embed it in your PDF.
-- [Crop PDF](https://www.filepilot.space/crop-pdf): Trim margins or set a custom crop area on PDF pages.
-- [PDF Bookmarks](https://www.filepilot.space/bookmark): View, add, edit, or delete bookmarks in a PDF.
-- [Table of Contents](https://www.filepilot.space/table-of-contents): Automatically generate a table of contents from PDF bookmarks.
-- [Add Page Numbers](https://www.filepilot.space/page-numbers): Add customizable page numbers to any position on pages.
-- [Header & Footer](https://www.filepilot.space/header-footer): Add custom text headers and footers to every page.
-- [Background Color](https://www.filepilot.space/background-color): Add a solid background color to PDF pages.
-- [Add Stamp](https://www.filepilot.space/add-stamp): Add "DRAFT", "CONFIDENTIAL", or custom text stamps to pages.
-- [Remove Annotations](https://www.filepilot.space/remove-annotations): Strip all comments, highlights, and links from a PDF.
-- [Form Filler](https://www.filepilot.space/form-filler): Fill in PDF form fields and flatten the result.
-- [Form Creator](https://www.filepilot.space/form-creator): Build interactive PDF forms with text fields and checkboxes.
-- [Remove Blank Pages](https://www.filepilot.space/remove-blank-pages): Automatically detect and remove blank pages from a PDF.
-- [Images to PDF](https://www.filepilot.space/images-to-pdf): Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images into one PDF document.
-- [Text to PDF](https://www.filepilot.space/text-to-pdf): Convert plain text files into formatted PDF documents.
-- [JSON to PDF](https://www.filepilot.space/json-to-pdf): Render JSON data as a formatted, syntax-highlighted PDF.
-- [Markdown to PDF](https://www.filepilot.space/markdown-to-pdf): Convert Markdown documents to styled PDF files.
-- [PDF to Images](https://www.filepilot.space/pdf-to-images): Export PDF pages as PNG, JPG, or WebP images with custom resolution.
-- [PDF to SVG](https://www.filepilot.space/pdf-to-svg): Convert PDF pages to scalable SVG vector files.
-- [PDF to Grayscale](https://www.filepilot.space/pdf-to-greyscale): Convert a color PDF to black-and-white grayscale.
-- [PDF to JSON](https://www.filepilot.space/pdf-to-json): Extract PDF text and metadata as a structured JSON file.
-- [PDF to Markdown](https://www.filepilot.space/pdf-to-markdown): Extract PDF content as a clean Markdown document.
-- [Extract Text](https://www.filepilot.space/extract-text): Extract text from PDFs and images for TXT, Word, Sheets, and Slides workflows.
-- [Extract Images](https://www.filepilot.space/extract-images): Extract all images embedded in a PDF as a ZIP file.
-- [PDF to CBZ](https://www.filepilot.space/pdf-to-cbz): Convert a PDF into a comic book CBZ archive.
-- [Compress PDF](https://www.filepilot.space/compress): Reduce file size while maintaining quality.
-- [Fix Page Size](https://www.filepilot.space/fix-page-size): Standardize all pages to A4, Letter, or custom dimensions.
-- [Page Dimensions](https://www.filepilot.space/page-dimensions): Inspect the dimensions and orientation of every page.
-- [Repair PDF](https://www.filepilot.space/repair-pdf): Fix corrupted or damaged PDF files and recover content.
-- [Deskew PDF](https://www.filepilot.space/deskew-pdf): Automatically straighten skewed scanned document pages.
-- [Protect / Unlock PDF](https://www.filepilot.space/pdf-security): Unlock password-protected PDFs in your browser.
-- [Sanitize PDF](https://www.filepilot.space/sanitize-pdf): Strip metadata, scripts, and hidden data from a PDF.
-- [Find & Redact](https://www.filepilot.space/find-and-redact): Search text patterns and permanently redact them from a PDF.
-- [Flatten PDF](https://www.filepilot.space/flatten-pdf): Flatten forms and annotations into a non-editable PDF.
-- [Remove Metadata](https://www.filepilot.space/remove-metadata): Wipe all embedded metadata for maximum privacy.
-- [Remove Background](https://www.filepilot.space/remove-background): Automatically detect and remove image backgrounds using AI, locally in your browser.
-- [Change Background](https://www.filepilot.space/change-background): Replace image backgrounds with colours, gradients, blur, or custom images using AI.
-- [Upscale Image](https://www.filepilot.space/upscale-image): Enlarge images using AI super-resolution to increase resolution while preserving detail.
-- [AI Enhance Image](https://www.filepilot.space/ai-enhance-image): Improve image quality with smart exposure, contrast, colour, and sharpness adjustments.
-- [Object Remover](https://www.filepilot.space/object-remover): Paint over unwanted objects and remove them using content-aware inpainting.
-- [Image Formatter](https://www.filepilot.space/image-formatter): Resize, convert, compress, and batch-export images to exact dimensions and formats.
-- [Passport Photo Validator](https://www.filepilot.space/passport-photo-validator): Check passport and ID photo technical requirements with crop and export tools.
-- [Social Media Resizer](https://www.filepilot.space/social-media-resizer): Resize images for Instagram, Facebook, LinkedIn, X, YouTube, and more in one step.
-- [E-commerce Image Formatter](https://www.filepilot.space/ecommerce-image-formatter): Prepare product photos with clean backgrounds and marketplace-ready dimensions.
-- [Scan Images to PDF](https://www.filepilot.space/scan-images-to-pdf): Turn photos of documents into a clean, ordered, downloadable PDF.
-- [Favicon Generator](https://www.filepilot.space/favicon-generator): Generate all website favicon and app icon assets from a single image.
-- [Compress Image](https://www.filepilot.space/compress-image): Reduce image file size while preserving quality for JPG, PNG, and WebP.
-- [Resize Image](https://www.filepilot.space/resize-image): Adjust image dimensions by pixels or percentage for any format.
-- [Convert Image](https://www.filepilot.space/convert-image): Convert images between JPEG, PNG, WebP, and AVIF formats instantly.
-- [Website Image Optimiser](https://www.filepilot.space/website-image-optimiser): Generate responsive, web-ready image variants with srcset and picture snippets.
-- [Image Quality Analyzer](https://www.filepilot.space/image-quality-analyzer): Inspect image properties and get actionable quality recommendations.
-- [Crop Image](https://www.filepilot.space/crop-image): Select and extract a rectangular area from JPG, PNG, or WebP images.
-- [Rotate Image](https://www.filepilot.space/rotate-image): Rotate or flip images by any angle in your browser.
-- [Watermark Image](https://www.filepilot.space/watermark-image): Add text or image watermarks to photos with adjustable transparency.
-- [Metadata Remover](https://www.filepilot.space/remove-image-metadata): Inspect and remove EXIF, GPS, and camera metadata from images for privacy.
-- [Blur Face](https://www.filepilot.space/blur-face): Blur faces, license plates, and sensitive areas in images.
-- [Photo Editor](https://www.filepilot.space/photo-editor): Edit photos with filters, effects, text, frames, and stickers.
-- [Image to SVG Converter](https://www.filepilot.space/image-to-svg): Convert simple logos, icons and illustrations into editable SVG vectors.
-- [Color Picker](https://www.filepilot.space/color-picker): Pick colours from images and copy HEX, RGB, HSL and CSS values.
-- [QR Code Generator](https://www.filepilot.space/qr-generator): Create custom QR codes for links, Wi-Fi, contact details and more.
-- [Privacy Policy](https://www.filepilot.space/privacy): Learn how FilePilot protects files with browser-based processing and no server uploads for supported tools.
-- [Terms of Service](https://www.filepilot.space/terms): Read the terms for using FilePilot browser-based PDF, image, and file tools.
+- [FilePilot - Free Private PDF, Image and File Tools](https://www.filepilot.space/): Free browser-based PDF, image, and file tools. Edit, convert, compress, organize, and optimize files privately without uploads.
+- [Free Online PDF Tools - Private Browser-Based Tools | FilePilot](https://www.filepilot.space/pdf-tools): Merge, split, compress, convert, annotate, redact, sign, and organize PDFs with free tools that run privately in your browser.
+- [Free Online Image Tools - Private Browser-Based Tools | FilePilot](https://www.filepilot.space/image-tools): Compress, resize, crop, convert, watermark, optimize, and edit images with free browser-based tools that do not upload your files.
+- [FilePilot Blog - Privacy, PDFs and Image Tools](https://www.filepilot.space/blog): Articles about privacy-first file processing, browser-based PDF tools, image tools, and why files should stay on your device.
+- [Privacy Policy | FilePilot](https://www.filepilot.space/privacy): Learn how FilePilot protects files with browser-based processing and no server uploads for supported tools.
+- [Terms of Service | FilePilot](https://www.filepilot.space/terms): Read the terms for using FilePilot browser-based PDF, image, and file tools.
+- [Merge PDF Online - Free and Private | FilePilot](https://www.filepilot.space/merge): Combine multiple PDF files into one organized document. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Split PDF Online - Free and Private | FilePilot](https://www.filepilot.space/split): Extract pages or split documents into separate files. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Organize PDF Pages Online - Free and Private | FilePilot](https://www.filepilot.space/organize-pdf): Reorder, rotate, and delete pages with drag-and-drop thumbnails. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Rotate PDF Online - Free and Private | FilePilot](https://www.filepilot.space/rotate-pdf): Rotate all or selected pages by 90°, 180°, or 270°. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Delete Pages Online - Free and Private | FilePilot](https://www.filepilot.space/delete-pages): Remove specific pages from your PDF file. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Extract Pages Online - Free and Private | FilePilot](https://www.filepilot.space/extract-pages): Pull out selected pages from a PDF into a new document. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Reverse PDF Online - Free and Private | FilePilot](https://www.filepilot.space/reverse-pdf): Flip the page order of a PDF from last to first. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Add Blank Page Online - Free and Private | FilePilot](https://www.filepilot.space/add-blank-page): Insert blank pages at any position in your PDF. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Alternate Merge Online - Free and Private | FilePilot](https://www.filepilot.space/alternate-merge): Interleave pages from two PDFs alternately (ideal for double-sided scans). Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [N-Up PDF Online - Free and Private | FilePilot](https://www.filepilot.space/n-up-pdf): Print 2, 4, or 9 pages per sheet to save paper. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Overlay PDF Online - Free and Private | FilePilot](https://www.filepilot.space/overlay-pdf): Layer one PDF over another as an overlay or underlay. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Divide Pages Online - Free and Private | FilePilot](https://www.filepilot.space/divide-pages): Split each page in half horizontally or vertically. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Stitch Pages Online - Free and Private | FilePilot](https://www.filepilot.space/combine-single-page): Combine all pages into one long scrollable page. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Grid Combine Online - Free and Private | FilePilot](https://www.filepilot.space/grid-combine): Arrange multiple PDFs in a grid layout on a single page. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Posterize PDF Online - Free and Private | FilePilot](https://www.filepilot.space/posterize-pdf): Tile a large PDF page across multiple sheets for poster printing. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Add Page Labels Online - Free and Private | FilePilot](https://www.filepilot.space/add-page-labels): Add custom labels (Roman numerals, prefixes) to PDF pages. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [PDF Metadata Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-metadata): Inspect PDF metadata: title, author, dates, page count. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [PDF to ZIP Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-to-zip): Bundle multiple PDF files into a single ZIP archive. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Compare PDF Online - Free and Private | FilePilot](https://www.filepilot.space/compare-pdf): Compare page counts and text differences between two PDFs. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [PDF Booklet Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-booklet): Impose pages into a printable booklet (saddle-stitch) layout. Use this free PDF organization tool in your browser with local processing and no file uploads.
+- [Fill Forms / Annotate Online - Free and Private | FilePilot](https://www.filepilot.space/annotate-pdf): Add text, highlights, checkmarks, and signatures to PDFs. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Watermark PDF Online - Free and Private | FilePilot](https://www.filepilot.space/watermark-pdf): Add text or image watermarks to all or selected pages. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Redact PDF Online - Free and Private | FilePilot](https://www.filepilot.space/redact-pdf): Permanently cover sensitive content in your PDF. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Sign PDF Online - Free and Private | FilePilot](https://www.filepilot.space/sign-pdf): Draw, type, or upload a signature and embed it in your PDF. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Crop PDF Online - Free and Private | FilePilot](https://www.filepilot.space/crop-pdf): Trim margins or set a custom crop area on PDF pages. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [PDF Bookmarks Online - Free and Private | FilePilot](https://www.filepilot.space/bookmark): View, add, edit, or delete bookmarks in a PDF. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Table of Contents Online - Free and Private | FilePilot](https://www.filepilot.space/table-of-contents): Automatically generate a table of contents from PDF bookmarks. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Add Page Numbers Online - Free and Private | FilePilot](https://www.filepilot.space/page-numbers): Add customizable page numbers to any position on pages. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Header & Footer Online - Free and Private | FilePilot](https://www.filepilot.space/header-footer): Add custom text headers and footers to every page. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Background Color Online - Free and Private | FilePilot](https://www.filepilot.space/background-color): Add a solid background color to PDF pages. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Add Stamp Online - Free and Private | FilePilot](https://www.filepilot.space/add-stamp): Add "DRAFT", "CONFIDENTIAL", or custom text stamps to pages. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Remove Annotations Online - Free and Private | FilePilot](https://www.filepilot.space/remove-annotations): Strip all comments, highlights, and links from a PDF. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Form Filler Online - Free and Private | FilePilot](https://www.filepilot.space/form-filler): Fill in PDF form fields and flatten the result. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Form Creator Online - Free and Private | FilePilot](https://www.filepilot.space/form-creator): Build interactive PDF forms with text fields and checkboxes. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Remove Blank Pages Online - Free and Private | FilePilot](https://www.filepilot.space/remove-blank-pages): Automatically detect and remove blank pages from a PDF. Use this free PDF editing tool in your browser with local processing and no file uploads.
+- [Image to PDF Online - Free and Private | FilePilot](https://www.filepilot.space/images-to-pdf): Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images into one PDF document. Use this free PDF conversion tool in your browser with local processing and no file uploads.
+- [JPG to PDF Online - Free and Private | FilePilot](https://www.filepilot.space/jpg-to-pdf): Convert JPG and JPEG photos into a PDF in your browser. Arrange images, choose page size, and download privately without uploads.
+- [Text to PDF Online - Free and Private | FilePilot](https://www.filepilot.space/text-to-pdf): Convert plain text files into formatted PDF documents. Use this free PDF conversion tool in your browser with local processing and no file uploads.
+- [JSON to PDF Online - Free and Private | FilePilot](https://www.filepilot.space/json-to-pdf): Render JSON data as a formatted, syntax-highlighted PDF. Use this free PDF conversion tool in your browser with local processing and no file uploads.
+- [Markdown to PDF Online - Free and Private | FilePilot](https://www.filepilot.space/markdown-to-pdf): Convert Markdown documents to styled PDF files. Use this free PDF conversion tool in your browser with local processing and no file uploads.
+- [PDF to Image Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-to-images): Export PDF pages as PNG, JPG, or WebP images with custom resolution. Use this free PDF export tool in your browser with local processing and no file uploads.
+- [PDF to JPG Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-to-jpg): Convert PDF pages to JPG images locally in your browser with DPI and quality controls. Download pages as a private ZIP file.
+- [PDF to SVG Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-to-svg): Convert PDF pages to scalable SVG vector files. Use this free PDF export tool in your browser with local processing and no file uploads.
+- [PDF to Grayscale Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-to-greyscale): Convert a color PDF to black-and-white grayscale. Use this free PDF export tool in your browser with local processing and no file uploads.
+- [PDF to JSON Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-to-json): Extract PDF text and metadata as a structured JSON file. Use this free PDF export tool in your browser with local processing and no file uploads.
+- [PDF to Markdown Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-to-markdown): Extract PDF content as a clean Markdown document. Use this free PDF export tool in your browser with local processing and no file uploads.
+- [Extract Text Online - Free and Private | FilePilot](https://www.filepilot.space/extract-text): Extract text from PDFs and images for TXT, Word, Sheets, and Slides workflows. Use this free PDF export tool in your browser with local processing and no file uploads.
+- [Extract Image Online - Free and Private | FilePilot](https://www.filepilot.space/extract-images): Extract all images embedded in a PDF as a ZIP file. Use this free PDF export tool in your browser with local processing and no file uploads.
+- [PDF to CBZ Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-to-cbz): Convert a PDF into a comic book CBZ archive. Use this free PDF export tool in your browser with local processing and no file uploads.
+- [Compress PDF Online - Free and Private | FilePilot](https://www.filepilot.space/compress): Reduce file size while maintaining quality. Use this free PDF optimization tool in your browser with local processing and no file uploads.
+- [Fix Page Size Online - Free and Private | FilePilot](https://www.filepilot.space/fix-page-size): Standardize all pages to A4, Letter, or custom dimensions. Use this free PDF optimization tool in your browser with local processing and no file uploads.
+- [Page Dimensions Online - Free and Private | FilePilot](https://www.filepilot.space/page-dimensions): Inspect the dimensions and orientation of every page. Use this free PDF optimization tool in your browser with local processing and no file uploads.
+- [Repair PDF Online - Free and Private | FilePilot](https://www.filepilot.space/repair-pdf): Fix corrupted or damaged PDF files and recover content. Use this free PDF optimization tool in your browser with local processing and no file uploads.
+- [Deskew PDF Online - Free and Private | FilePilot](https://www.filepilot.space/deskew-pdf): Automatically straighten skewed scanned document pages. Use this free PDF optimization tool in your browser with local processing and no file uploads.
+- [Protect / Unlock PDF Online - Free and Private | FilePilot](https://www.filepilot.space/pdf-security): Unlock password-protected PDFs in your browser. Use this free PDF privacy tool in your browser with local processing and no file uploads.
+- [Sanitize PDF Online - Free and Private | FilePilot](https://www.filepilot.space/sanitize-pdf): Strip metadata, scripts, and hidden data from a PDF. Use this free PDF privacy tool in your browser with local processing and no file uploads.
+- [Find & Redact Online - Free and Private | FilePilot](https://www.filepilot.space/find-and-redact): Search text patterns and permanently redact them from a PDF. Use this free PDF privacy tool in your browser with local processing and no file uploads.
+- [Flatten PDF Online - Free and Private | FilePilot](https://www.filepilot.space/flatten-pdf): Flatten forms and annotations into a non-editable PDF. Use this free PDF privacy tool in your browser with local processing and no file uploads.
+- [Remove Metadata Online - Free and Private | FilePilot](https://www.filepilot.space/remove-metadata): Wipe all embedded metadata for maximum privacy. Use this free PDF privacy tool in your browser with local processing and no file uploads.
+- [Remove Background Online - Free and Private | FilePilot](https://www.filepilot.space/remove-background): Automatically detect and remove image backgrounds using AI, locally in your browser. Use this free AI image tool in your browser with local processing and no file uploads.
+- [Change Background Online - Free and Private | FilePilot](https://www.filepilot.space/change-background): Replace image backgrounds with colours, gradients, blur, or custom images using AI. Use this free AI image tool in your browser with local processing and no file uploads.
+- [Upscale Image Online - Free and Private | FilePilot](https://www.filepilot.space/upscale-image): Enlarge images using AI super-resolution to increase resolution while preserving detail. Use this free AI image tool in your browser with local processing and no file uploads.
+- [AI Enhance Image Online - Free and Private | FilePilot](https://www.filepilot.space/ai-enhance-image): Improve image quality with smart exposure, contrast, colour, and sharpness adjustments. Use this free AI image tool in your browser with local processing and no file uploads.
+- [Object Remover Online - Free and Private | FilePilot](https://www.filepilot.space/object-remover): Paint over unwanted objects and remove them using content-aware inpainting. Use this free AI image tool in your browser with local processing and no file uploads.
+- [Image Formatter Online - Free and Private | FilePilot](https://www.filepilot.space/image-formatter): Resize, convert, compress, and batch-export images to exact dimensions and formats. Use this free image workflow tool in your browser with local processing and no file uploads.
+- [Passport Photo Validator Online - Free and Private | FilePilot](https://www.filepilot.space/passport-photo-validator): Check passport and ID photo technical requirements with crop and export tools. Use this free image workflow tool in your browser with local processing and no file uploads.
+- [Social Media Resizer Online - Free and Private | FilePilot](https://www.filepilot.space/social-media-resizer): Resize images for Instagram, Facebook, LinkedIn, X, YouTube, and more in one step. Use this free image workflow tool in your browser with local processing and no file uploads.
+- [E-commerce Image Formatter Online - Free and Private | FilePilot](https://www.filepilot.space/ecommerce-image-formatter): Prepare product photos with clean backgrounds and marketplace-ready dimensions. Use this free image workflow tool in your browser with local processing and no file uploads.
+- [Scan Image to PDF Online - Free and Private | FilePilot](https://www.filepilot.space/scan-images-to-pdf): Turn photos of documents into a clean, ordered, downloadable PDF. Use this free image workflow tool in your browser with local processing and no file uploads.
+- [Favicon Generator Online - Free and Private | FilePilot](https://www.filepilot.space/favicon-generator): Generate all website favicon and app icon assets from a single image. Use this free image workflow tool in your browser with local processing and no file uploads.
+- [Compress Image Online - Free and Private | FilePilot](https://www.filepilot.space/compress-image): Reduce image file size while preserving quality for JPG, PNG, and WebP. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Resize Image Online - Free and Private | FilePilot](https://www.filepilot.space/resize-image): Adjust image dimensions by pixels or percentage for any format. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Convert Image Online - Free and Private | FilePilot](https://www.filepilot.space/convert-image): Convert images between JPEG, PNG, WebP, and AVIF formats instantly. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Website Image Optimiser Online - Free and Private | FilePilot](https://www.filepilot.space/website-image-optimiser): Generate responsive, web-ready image variants with srcset and picture snippets. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Image Quality Analyzer Online - Free and Private | FilePilot](https://www.filepilot.space/image-quality-analyzer): Inspect image properties and get actionable quality recommendations. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Crop Image Online - Free and Private | FilePilot](https://www.filepilot.space/crop-image): Select and extract a rectangular area from JPG, PNG, or WebP images. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Rotate Image Online - Free and Private | FilePilot](https://www.filepilot.space/rotate-image): Rotate or flip images by any angle in your browser. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Watermark Image Online - Free and Private | FilePilot](https://www.filepilot.space/watermark-image): Add text or image watermarks to photos with adjustable transparency. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Metadata Remover Online - Free and Private | FilePilot](https://www.filepilot.space/remove-image-metadata): Inspect and remove EXIF, GPS, and camera metadata from images for privacy. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Blur Face Online - Free and Private | FilePilot](https://www.filepilot.space/blur-face): Blur faces, license plates, and sensitive areas in images. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Photo Editor Online - Free and Private | FilePilot](https://www.filepilot.space/photo-editor): Edit photos with filters, effects, text, frames, and stickers. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Image to SVG Converter Online - Free and Private | FilePilot](https://www.filepilot.space/image-to-svg): Convert simple logos, icons and illustrations into editable SVG vectors. Use this free image editing tool in your browser with local processing and no file uploads.
+- [Color Picker Online - Free and Private | FilePilot](https://www.filepilot.space/color-picker): Pick colours from images and copy HEX, RGB, HSL and CSS values. Use this free image editing tool in your browser with local processing and no file uploads.
+- [QR Code Generator Online - Free and Private | FilePilot](https://www.filepilot.space/qr-generator): Create custom QR codes for links, Wi-Fi, contact details and more. Use this free image workflow tool in your browser with local processing and no file uploads.
+- [Why Your Files Should Never Leave Your Browser | FilePilot](https://www.filepilot.space/blog/why-files-stay-in-browser): Learn why browser-based file processing avoids server uploads, reduces privacy risks, and keeps sensitive documents under your control.
+- [The Hidden Privacy Risks of Online PDF Tools | FilePilot](https://www.filepilot.space/blog/privacy-risks-online-pdf-tools): Understand the privacy risks of uploading PDFs to server-based tools and how local browser processing reduces exposure.
+- [How FilePilot Keeps Your Documents Private | FilePilot](https://www.filepilot.space/blog/how-filepilot-keeps-documents-private): A practical look at FilePilot privacy architecture: browser memory, WebAssembly, Canvas APIs, and zero document uploads.

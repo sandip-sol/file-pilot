@@ -1,5 +1,5 @@
-import { useLocation } from 'react-router-dom';
-import { discoverableTools } from '../data/toolRegistry';
+import { Link, useLocation } from 'react-router-dom';
+import { toolRegistry } from '../data/toolRegistry';
 import { toolContent } from '../data/toolContent';
 import { ShieldCheck, Zap, WifiOff, UserX } from 'lucide-react';
 
@@ -7,13 +7,35 @@ export const ToolContentSection = () => {
   const { pathname } = useLocation();
   const slug = pathname.replace(/\/$/, '') || '/';
   const content = toolContent[slug];
-  const tool = discoverableTools.find((t) => t.slug === slug);
+  const tool = toolRegistry.find((t) => t.slug === slug);
 
   if (!content || !tool) return null;
 
   return (
     <section className="border-t border-border bg-card/20">
       <div className="container max-w-4xl py-12 md:py-16">
+        <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+          <ol className="flex flex-wrap items-center gap-2">
+            <li>
+              <Link to="/" className="transition-colors hover:text-foreground">
+                FilePilot
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li>
+              <Link
+                to={tool.category === 'image-tools' || tool.category === 'workflows' || tool.category === 'ai-tools' ? '/image-tools' : '/pdf-tools'}
+                className="transition-colors hover:text-foreground"
+              >
+                {tool.category === 'image-tools' || tool.category === 'workflows' || tool.category === 'ai-tools' ? 'Image tools' : 'PDF tools'}
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li className="text-foreground" aria-current="page">
+              {tool.title}
+            </li>
+          </ol>
+        </nav>
 
         <h2 className="text-2xl font-bold text-foreground mb-4">
           What is {tool.title}?

@@ -587,6 +587,22 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create a PDF photo album from vacation or event pictures.',
     ],
   },
+  '/jpg-to-pdf': {
+    intro:
+      'JPG to PDF turns JPEG photos, scans, and screenshots into a clean PDF document. It is useful when you need to send several camera images as one file, archive receipts, or prepare photo-based documents for upload. You can reorder images, rotate them, choose A4 or Letter page size, and control margins before downloading. The conversion runs in your browser, so the original JPG files are not uploaded to FilePilot.',
+    action: 'convert JPG to PDF',
+    steps: [
+      'Select one or more JPG or JPEG images from your device.',
+      'Reorder or rotate the images and choose the page size, orientation, and margins.',
+      'Click "Convert & Download" to create a private PDF file.',
+    ],
+    useCases: [
+      'Combine phone photos of receipts into one expense PDF.',
+      'Turn scanned JPG document pages into a single file.',
+      'Create a PDF photo sheet for sharing or printing.',
+      'Upload JPEG images to services that require PDF documents.',
+    ],
+  },
   '/text-to-pdf': {
     intro:
       'Text to PDF converts plain text files or pasted text into formatted PDF documents. Choose a font, size, margins, and line spacing to create clean, professional-looking PDFs from raw text. Ideal for converting notes, logs, README files, or any text content into a portable document.',
@@ -651,6 +667,22 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Extract high-resolution page images for print production.',
       'Convert PDF presentations into image files for video editing.',
       'Generate thumbnail previews of PDF documents.',
+    ],
+  },
+  '/pdf-to-jpg': {
+    intro:
+      'PDF to JPG exports each PDF page as a JPEG image with adjustable resolution and quality. It is helpful for turning slides, forms, flyers, or document pages into images that can be used on websites, shared in messaging apps, or placed into design tools. Rendering happens locally in your browser, and the JPG files are packaged for download without uploading your PDF to a server.',
+    action: 'convert PDF to JPG',
+    steps: [
+      'Upload the PDF you want to export as JPG images.',
+      'Choose JPG output, then set the DPI and quality level.',
+      'Download every rendered page together as a ZIP file.',
+    ],
+    useCases: [
+      'Create JPG previews of PDF pages for a website or catalog.',
+      'Convert PDF slides into images for social media posts.',
+      'Extract document pages as shareable JPEG files.',
+      'Generate lightweight page images for review or annotation.',
     ],
   },
   '/pdf-to-svg': {

@@ -78,6 +78,7 @@ export const NotFound = () => {
         title={isPlannedTool ? `${requestedTool.title} - Coming Soon` : 'Tool Not Found - FilePilot'}
         description="Find a reliable FilePilot tool for merging, splitting, compressing, converting, extracting, watermarking, or redacting PDF files."
         canonicalPath="/"
+        robots="noindex,follow"
       />
 
       <section className="border-b border-border bg-card/40">

@@ -10,17 +10,17 @@ import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { SITE_URL, getRouteSeo, getSeoRoutes } from './seoRoutes.js';
+import { canonicalUrlForRoute, getRouteSeo, getSeoRoutes } from './seoRoutes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
 const PORT = 4173;
 
 const ROUTES = getSeoRoutes();
-
-function canonicalUrlForRoute(route) {
-  return new URL(route, SITE_URL).toString();
-}
+const INDEXABLE_ROBOTS = 'index,follow';
+const NOINDEX_ROBOTS = 'noindex,follow';
+const isNetlifyPreview =
+  process.env.NETLIFY === 'true' && process.env.CONTEXT && process.env.CONTEXT !== 'production';
 
 function escapeHtml(value) {
   return value
@@ -36,16 +36,151 @@ function withRouteSeo(html, route) {
   const { title, description } = getRouteSeo(route);
   const escapedTitle = escapeHtml(title);
   const escapedDescription = escapeHtml(description);
+  const robots = isNetlifyPreview ? NOINDEX_ROBOTS : INDEXABLE_ROBOTS;
 
   return html
     .replace(/<title>[^<]*<\/title>/, `<title>${escapedTitle}</title>`)
     .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/, `<meta name="description" content="${escapedDescription}">`)
+    .replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/, `<meta name="robots" content="${robots}">`)
     .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${canonicalUrl}">`)
     .replace(/<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/, `<meta property="og:title" content="${escapedTitle}">`)
     .replace(/<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/, `<meta property="og:description" content="${escapedDescription}">`)
     .replace(/<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/, `<meta property="og:url" content="${canonicalUrl}">`)
     .replace(/<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:title" content="${escapedTitle}">`)
-    .replace(/<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:description" content="${escapedDescription}">`);
+    .replace(/<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:description" content="${escapedDescription}">`)
+    .replace('<div id="root"></div>', `<div id="root">${buildStaticRouteContent(route)}</div>`);
+}
+
+function stripBrand(value) {
+  return value
+    .replace(/\s+\|\s+FilePilot$/i, '')
+    .replace(/\s+-\s+FilePilot$/i, '')
+    .trim();
+}
+
+function routeLabel(route) {
+  const seo = getRouteSeo(route);
+  return seo.h1 ?? stripBrand(seo.title);
+}
+
+function linkList(routes) {
+  return routes
+    .filter((route) => ROUTES.includes(route))
+    .slice(0, 5)
+    .map((route) => `<li><a href="${canonicalUrlForRoute(route)}">${escapeHtml(routeLabel(route))}</a></li>`)
+    .join('');
+}
+
+function buildJsonLd(route) {
+  const seo = getRouteSeo(route);
+  const url = canonicalUrlForRoute(route);
+  const graph = [];
+
+  if (route === '/') {
+    graph.push(
+      {
+        '@type': 'WebSite',
+        '@id': `${url}#website`,
+        url,
+        name: 'FilePilot',
+        description: seo.description,
+        inLanguage: 'en',
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${url}#organization`,
+        name: 'FilePilot',
+        url,
+        logo: 'https://www.filepilot.space/filepilot_logo.svg',
+      },
+      {
+        '@type': 'WebApplication',
+        '@id': `${url}#app`,
+        name: 'FilePilot',
+        url,
+        description: seo.description,
+        applicationCategory: 'UtilityApplication',
+        operatingSystem: 'Any',
+        isAccessibleForFree: true,
+      },
+    );
+  } else if (!route.startsWith('/blog') && !['/privacy', '/terms', '/pdf-tools', '/image-tools'].includes(route)) {
+    graph.push(
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
+          { '@type': 'ListItem', position: 2, name: routeLabel(route), item: url },
+        ],
+      },
+      {
+        '@type': 'WebApplication',
+        name: routeLabel(route),
+        url,
+        description: seo.description,
+        applicationCategory: 'UtilityApplication',
+        operatingSystem: 'Any',
+        isAccessibleForFree: true,
+      },
+    );
+  }
+
+  if (graph.length === 0) return '';
+
+  return `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
+}
+
+function buildStaticRouteContent(route) {
+  const seo = getRouteSeo(route);
+  const title = escapeHtml(routeLabel(route));
+  const description = escapeHtml(seo.description);
+  const relatedRoutes = route === '/'
+    ? ['/pdf-tools', '/image-tools', '/merge', '/split', '/compress']
+    : route === '/pdf-tools'
+      ? ['/merge', '/split', '/compress', '/pdf-to-jpg', '/jpg-to-pdf']
+      : route === '/image-tools'
+        ? ['/compress-image', '/resize-image', '/convert-image', '/crop-image', '/image-formatter']
+        : route.startsWith('/blog')
+          ? ['/blog', '/privacy', '/pdf-tools', '/image-tools']
+          : ['/merge', '/split', '/compress', '/pdf-to-jpg', '/jpg-to-pdf'];
+
+  const isToolRoute = !['/', '/pdf-tools', '/image-tools', '/blog', '/privacy', '/terms'].includes(route) && !route.startsWith('/blog/');
+  const body = isToolRoute
+    ? `
+      <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <span>${title}</span></nav>
+      <h1>${title}</h1>
+      <p>${description}</p>
+      <section>
+        <h2>How it works</h2>
+        <ol>
+          <li>Select your file or files from your device.</li>
+          <li>Choose the settings for this tool and preview the result where available.</li>
+          <li>Download the finished file. Processing happens in your browser, so files are not uploaded to FilePilot.</li>
+        </ol>
+      </section>
+      <section>
+        <h2>Common uses</h2>
+        <p>Use ${title} for everyday document and image workflows such as preparing files for email, organizing scanned pages, creating shareable downloads, reducing file size, or converting content into a format that is easier to archive and send.</p>
+      </section>
+      <section>
+        <h2>Related FilePilot tools</h2>
+        <ul>${linkList(relatedRoutes)}</ul>
+      </section>
+    `
+    : `
+      <h1>${title}</h1>
+      <p>${description}</p>
+      <section>
+        <h2>Private browser-based tools</h2>
+        <p>FilePilot keeps file processing local whenever a tool handles your documents or images. Your browser performs the work on your device, which avoids upload queues, reduces privacy exposure, and lets you keep control of sensitive files.</p>
+      </section>
+      <section>
+        <h2>Explore FilePilot</h2>
+        <ul>${linkList(relatedRoutes)}</ul>
+      </section>
+    `;
+
+  return `<div data-static-seo="true" class="static-seo">${body}${buildJsonLd(route)}</div>`;
 }
 
 function writeSeoShells() {
@@ -136,6 +271,7 @@ async function prerender() {
 
     // Clean up: remove extra data-* attrs Puppeteer may insert
     html = html.replace(/ data-reactroot=""/g, '');
+    html = withRouteSeo(html, route);
 
     // Write the rendered HTML
     const outDir = route === '/' ? DIST : join(DIST, route);

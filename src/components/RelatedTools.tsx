@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { discoverableTools, type ToolDefinition } from '../data/toolRegistry';
+import { discoverableTools, toolRegistry, type ToolDefinition } from '../data/toolRegistry';
 import { ToolLinkCard } from './ToolLinkCard';
 
 const relatedToolSlugs: Record<string, string[]> = {
@@ -8,7 +8,9 @@ const relatedToolSlugs: Record<string, string[]> = {
   '/split': ['/merge', '/extract-pages', '/delete-pages'],
   '/compress': ['/pdf-to-images', '/repair-pdf', '/page-dimensions'],
   '/pdf-to-images': ['/images-to-pdf', '/compress', '/extract-text'],
+  '/pdf-to-jpg': ['/pdf-to-images', '/compress-image', '/jpg-to-pdf'],
   '/images-to-pdf': ['/pdf-to-images', '/compress', '/merge'],
+  '/jpg-to-pdf': ['/images-to-pdf', '/pdf-to-jpg', '/compress-image'],
   '/extract-text': ['/pdf-to-images', '/pdf-to-markdown', '/pdf-to-json'],
   '/watermark-pdf': ['/redact-pdf', '/sign-pdf', '/add-stamp'],
   '/redact-pdf': ['/find-and-redact', '/sanitize-pdf', '/remove-metadata'],
@@ -57,7 +59,7 @@ const getRelatedTools = (currentTool: ToolDefinition) => {
 export const RelatedTools = () => {
   const location = useLocation();
   const slug = location.pathname.replace(/\/$/, '') || '/';
-  const currentTool = discoverableTools.find((tool) => tool.slug === slug);
+  const currentTool = toolRegistry.find((tool) => tool.slug === slug);
 
   const tools = useMemo(() => (currentTool ? getRelatedTools(currentTool) : []), [currentTool]);
 

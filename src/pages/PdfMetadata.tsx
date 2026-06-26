@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FileUploader } from '../components/FileUploader';
 import { downloadBlob } from '../utils/pdfHelpers';
 import { removeMetadata, editMetadata, extractMetadata } from '../utils/pdf/pdfOperations';
@@ -9,6 +10,22 @@ import { FAQSection } from '../components/FAQSection';
 type Mode = 'view' | 'edit' | 'remove';
 
 export const PdfMetadata = () => {
+    const { pathname } = useLocation();
+    const route = pathname.replace(/\/$/, '') || '/pdf-metadata';
+    const isRemoveMetadataRoute = route === '/remove-metadata';
+    const seo = isRemoveMetadataRoute
+        ? {
+            title: 'Remove PDF Metadata Online - Free and Private | FilePilot',
+            description: 'Remove embedded PDF metadata such as author, title, creator, keywords, and dates locally in your browser without uploads.',
+            h1: 'Remove PDF Metadata Online',
+            intro: 'Inspect and remove embedded PDF metadata, including title, author, creator, keywords, and dates. Processing stays private in your browser.',
+        }
+        : {
+            title: 'PDF Metadata Editor - View, Edit and Remove PDF Metadata',
+            description: 'View, edit, or remove all PDF metadata including title, author, keywords, and dates. 100% private, processed locally in your browser.',
+            h1: 'PDF Metadata Editor',
+            intro: 'View, edit, or remove PDF metadata. Title, author, keywords and more. 100% private.',
+        };
     const [file, setFile] = useState<File | null>(null);
     const [mode, setMode] = useState<Mode>('view');
     const [metadata, setMetadata] = useState<Record<string, string | null> | null>(null);
@@ -78,8 +95,9 @@ export const PdfMetadata = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
             <PageSeo
-                title="PDF Metadata Editor – View, Edit & Remove PDF Metadata"
-                description="View, edit, or remove all PDF metadata including title, author, keywords, and dates. 100% private — processed locally in your browser."
+                title={seo.title}
+                description={seo.description}
+                canonicalPath={route}
                 faqItems={[
                     { question: 'What metadata is stored in a PDF?', answer: 'PDFs can contain title, author, subject, keywords, creator, producer, and creation/modification dates.' },
                     { question: 'Will my file be uploaded?', answer: 'No. Everything runs locally in your browser.' },
@@ -93,8 +111,8 @@ export const PdfMetadata = () => {
                             <Tag className="w-6 h-6" />
                         </div>
                     </div>
-                    <h1>PDF Metadata Editor</h1>
-                    <p>View, edit, or remove PDF metadata. Title, author, keywords and more. 100% private.</p>
+                    <h1>{seo.h1}</h1>
+                    <p>{seo.intro}</p>
                 </div>
             </div>
 

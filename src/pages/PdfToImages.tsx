@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Download, Images, Link2, Loader2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FAQSection } from '../components/FAQSection';
 import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
@@ -17,11 +17,32 @@ interface ExportedImageItem {
 type PdfImageFormat = 'png' | 'jpg' | 'webp';
 
 const scaleFromDpi = (dpi: number) => dpi / 100;
+const INDEXABLE_PDF_TO_IMAGE_ROUTES = new Set(['/pdf-to-images', '/pdf-to-jpg']);
+
+const pdfToImageSeoByRoute: Record<string, { title: string; description: string; h1: string; intro: string; format?: PdfImageFormat }> = {
+  '/pdf-to-images': {
+    title: 'PDF to Images - Export PDF Pages as PNG, JPG, or WebP',
+    description: 'Convert each PDF page to PNG, JPG, or WebP locally in your browser with DPI and quality controls. Download individually or as ZIP.',
+    h1: 'PDF to Images',
+    intro: 'Export every PDF page as a private PNG, JPG, or WebP image with custom DPI and quality settings.',
+  },
+  '/pdf-to-jpg': {
+    title: 'PDF to JPG Online - Free and Private | FilePilot',
+    description: 'Convert PDF pages to JPG images locally in your browser with DPI and quality controls. Download pages as a private ZIP file.',
+    h1: 'PDF to JPG Online',
+    intro: 'Convert every PDF page to JPG images in your browser, then download the rendered pages together as a private ZIP file.',
+    format: 'jpg',
+  },
+};
 
 export const PdfToImages = () => {
+  const { pathname } = useLocation();
+  const route = pathname.replace(/\/$/, '') || '/pdf-to-images';
+  const seo = pdfToImageSeoByRoute[route] ?? pdfToImageSeoByRoute['/pdf-to-images'];
+  const isIndexableRoute = INDEXABLE_PDF_TO_IMAGE_ROUTES.has(route);
   const [file, setFile] = useState<File | null>(null);
   const [items, setItems] = useState<ExportedImageItem[]>([]);
-  const [format, setFormat] = useState<PdfImageFormat>('png');
+  const [format, setFormat] = useState<PdfImageFormat>(seo.format ?? 'png');
   const [dpi, setDpi] = useState(150);
   const [quality, setQuality] = useState(0.9);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -68,8 +89,10 @@ export const PdfToImages = () => {
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
-        title="PDF to Images – Export PDF Pages as PNG, JPG, or WebP"
-        description="Convert each PDF page to PNG, JPG, or WebP locally in your browser with DPI and quality controls. Download individually or as ZIP."
+        title={seo.title}
+        description={seo.description}
+        canonicalPath={isIndexableRoute ? route : '/pdf-to-images'}
+        robots={isIndexableRoute ? 'index,follow' : 'noindex,follow'}
       />
 
       <div className="page-header">
@@ -79,8 +102,8 @@ export const PdfToImages = () => {
               <Images className="h-6 w-6" />
             </div>
           </div>
-          <h1>PDF to Images</h1>
-          <p>Export every PDF page as a private PNG, JPG, or WebP image with custom DPI and quality settings.</p>
+          <h1>{seo.h1}</h1>
+          <p>{seo.intro}</p>
         </div>
       </div>
 
