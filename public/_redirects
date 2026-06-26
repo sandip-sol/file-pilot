@@ -1,1 +1,7 @@
-/* /index.html 200
+# Domain redirects (non-www to www, alternate domain to primary)
+https://filepilot.space/* https://www.filepilot.space/:splat 301!
+https://filepilot.app/* https://www.filepilot.space/:splat 301!
+https://www.filepilot.app/* https://www.filepilot.space/:splat 301!
+
+# SPA fallback — serve index.html for all routes not matching a static file
+/*    /index.html   200
