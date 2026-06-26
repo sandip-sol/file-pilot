@@ -2,6 +2,7 @@ import { ShieldCheck } from 'lucide-react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { RelatedTools } from './RelatedTools';
+import { ToolContentSection } from './ToolContentSection';
 import { ToolUsageTracker } from './ToolUsageTracker';
 import { DotGrid } from './DotGrid';
 
@@ -22,6 +23,7 @@ export const Layout = ({ children }: LayoutProps) => {
             <main className="flex-1">
                 <ToolUsageTracker />
                 {children}
+                <ToolContentSection />
                 <RelatedTools />
             </main>
             <Footer />

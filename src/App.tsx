@@ -8,6 +8,16 @@ const Privacy = lazy(() => import('./pages/Privacy').then(m => ({ default: m.Pri
 const Terms = lazy(() => import('./pages/Terms').then(m => ({ default: m.Terms })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 
+// ─── Hub pages ──────────────────────────────────────────────────────────────
+const PdfToolsHub = lazy(() => import('./pages/PdfToolsHub').then(m => ({ default: m.PdfToolsHub })));
+const ImageToolsHub = lazy(() => import('./pages/ImageToolsHub').then(m => ({ default: m.ImageToolsHub })));
+
+// ─── Blog ───────────────────────────────────────────────────────────────────
+const Blog = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
+const WhyFilesStayInBrowser = lazy(() => import('./pages/blog/WhyFilesStayInBrowser').then(m => ({ default: m.WhyFilesStayInBrowser })));
+const PrivacyRisksOnlinePdfTools = lazy(() => import('./pages/blog/PrivacyRisksOnlinePdfTools').then(m => ({ default: m.PrivacyRisksOnlinePdfTools })));
+const HowFilepilotKeepsDocumentsPrivate = lazy(() => import('./pages/blog/HowFilepilotKeepsDocumentsPrivate').then(m => ({ default: m.HowFilepilotKeepsDocumentsPrivate })));
+
 // ─── Organize & Manage ───────────────────────────────────────────────────────
 const Merge = lazy(() => import('./pages/Merge').then(m => ({ default: m.Merge })));
 const Split = lazy(() => import('./pages/Split').then(m => ({ default: m.Split })));
@@ -145,6 +155,16 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+
+          {/* Hub pages */}
+          <Route path="/pdf-tools" element={<PdfToolsHub />} />
+          <Route path="/image-tools" element={<ImageToolsHub />} />
+
+          {/* Blog */}
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/why-files-stay-in-browser" element={<WhyFilesStayInBrowser />} />
+          <Route path="/blog/privacy-risks-online-pdf-tools" element={<PrivacyRisksOnlinePdfTools />} />
+          <Route path="/blog/how-filepilot-keeps-documents-private" element={<HowFilepilotKeepsDocumentsPrivate />} />
 
           {/* Organize & Manage */}
           <Route path="/merge" element={<Merge />} />
