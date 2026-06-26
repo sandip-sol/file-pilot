@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /assets/
 
-Sitemap: https://filepilot.space/sitemap.xml
+Sitemap: https://www.filepilot.space/sitemap.xml

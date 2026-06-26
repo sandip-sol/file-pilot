@@ -14,7 +14,7 @@ interface PageSeoProps {
     faqItems?: FaqItem[];
 }
 
-const SITE_URL = 'https://filepilot.space';
+const SITE_URL = 'https://www.filepilot.space';
 const DEFAULT_TITLE = 'FilePilot — PDF, Image and File Tools';
 const DEFAULT_DESCRIPTION =
     'Edit, convert, compress, organise and optimise PDFs, images and files with FilePilot. Your files are processed privately in your browser.';
@@ -53,6 +53,7 @@ export const PageSeo = ({ title, description, image = DEFAULT_IMAGE, canonicalPa
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             "name": title,
+            "url": url,
             "description": description,
             "applicationCategory": "UtilityApplication",
             "operatingSystem": "Any",
