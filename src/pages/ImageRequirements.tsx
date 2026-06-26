@@ -294,6 +294,7 @@ export const ImageRequirements = () => {
             <PageSeo
                 title="Resize Image to Exact Size & KB – Free Online Tool"
                 description="Resize image to exact pixels, reduce file size to KB limit, convert to JPG/PNG/WebP. Free, private, browser-based."
+                canonicalPath="/image-requirements"
             />
             {/* ── Header ── */}
             <div className="page-header">

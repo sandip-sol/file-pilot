@@ -13,6 +13,9 @@ import {
   Search,
   ShieldCheck,
   Wrench,
+  Users,
+  Zap,
+  WifiOff,
   type LucideIcon,
 } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
@@ -336,6 +339,30 @@ export const Home = () => {
                 className="h-auto max-h-[180px] w-full select-none object-contain sm:max-h-[240px] md:max-h-[390px]"
                 loading="eager"
               />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Social proof bar ──────────────────────────────────────── */}
+      <section className="border-b border-border bg-muted/30">
+        <div className="container py-3">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground md:gap-x-10">
+            <div className="flex items-center gap-2">
+              <Zap className="h-4 w-4 text-amber-500" />
+              <span><strong className="text-foreground">{tools.length}+</strong> free tools</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Lock className="h-4 w-4 text-emerald-600" />
+              <span>100% private &mdash; no uploads</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="h-4 w-4 text-blue-500" />
+              <span>No sign-up required</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <WifiOff className="h-4 w-4 text-violet-500" />
+              <span>Works offline</span>
             </div>
           </div>
         </div>

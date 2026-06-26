@@ -84,6 +84,7 @@ const SocialMediaResizer = lazy(() => import('./pages/SocialMediaResizer').then(
 const EcommerceImageFormatter = lazy(() => import('./pages/EcommerceImageFormatter').then(m => ({ default: m.EcommerceImageFormatter })));
 const ScanImagesToPdf = lazy(() => import('./pages/ScanImagesToPdf').then(m => ({ default: m.ScanImagesToPdf })));
 const FaviconGenerator = lazy(() => import('./pages/FaviconGenerator').then(m => ({ default: m.FaviconGenerator })));
+const ImageRequirements = lazy(() => import('./pages/ImageRequirements').then(m => ({ default: m.ImageRequirements })));
 const ImageToSvg = lazy(() => import('./pages/ImageToSvg').then(m => ({ default: m.ImageToSvg })));
 const ColorPicker = lazy(() => import('./pages/ColorPicker').then(m => ({ default: m.ColorPicker })));
 const QrGenerator = lazy(() => import('./pages/QrGenerator').then(m => ({ default: m.QrGenerator })));
@@ -233,7 +234,7 @@ function App() {
 
           {/* Image Workflow Tools */}
           <Route path="/image-formatter" element={<ImageFormatter />} />
-          <Route path="/image-requirements" element={<ImageFormatter />} />
+          <Route path="/image-requirements" element={<ImageRequirements />} />
           <Route path="/passport-photo-validator" element={<PassportPhotoValidator />} />
           <Route path="/social-media-resizer" element={<SocialMediaResizer />} />
           <Route path="/ecommerce-image-formatter" element={<EcommerceImageFormatter />} />
