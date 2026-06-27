@@ -38,6 +38,12 @@
 
     --radius: 12px;
 
+    --dot-color: 0 0% 48%;
+    --dot-opacity-idle: 0.25;
+    --dot-opacity-hover: 0.37;
+    --dot-radius-idle: 1;
+    --dot-radius-hover: 2.2;
+
     --sidebar-background: 30 12% 85%;
     --sidebar-foreground: 0 0% 4%;
     --sidebar-primary: 0 0% 4%;
@@ -102,6 +108,12 @@
     --border: 0 0% 16%;
     --input: 0 0% 16%;
     --ring: 30 12% 87%;
+
+    --dot-color: 0 0% 55%;
+    --dot-opacity-idle: 0.25;
+    --dot-opacity-hover: 0.37;
+    --dot-radius-idle: 1;
+    --dot-radius-hover: 2.2;
 
     --sidebar-background: 0 0% 8%;
     --sidebar-foreground: 30 12% 87%;

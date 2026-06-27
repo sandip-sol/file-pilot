@@ -1,10 +1,6 @@
 import { useEffect, useRef } from 'react';
 
 const SPACING = 14;
-const REST_RADIUS = 1.1;
-const REST_OPACITY = 0.18;
-const MAX_RADIUS = 3.4;
-const MAX_OPACITY = 1;
 const EFFECT_RADIUS = 140;
 const TRAIL_LENGTH = 8;
 const CURSOR_SIZE = 8;
@@ -13,6 +9,17 @@ const EFFECT_RADIUS_SQ = EFFECT_RADIUS * EFFECT_RADIUS;
 
 function easeOut(t: number): number {
   return 1 - (1 - t) * (1 - t);
+}
+
+function getCssFloat(prop: string, fallback: number): number {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(prop).trim();
+  const n = parseFloat(v);
+  return Number.isFinite(n) ? n : fallback;
+}
+
+function getCssHsl(prop: string, fallback: string): string {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(prop).trim();
+  return v || fallback;
 }
 
 export const DotGrid = () => {
@@ -72,11 +79,11 @@ export const DotGrid = () => {
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
 
-    function getDotColor(): string {
-      return getComputedStyle(document.documentElement).getPropertyValue('--foreground').trim();
-    }
-
-    let cachedColor = getDotColor();
+    let dotColor = getCssHsl('--dot-color', '0 0% 48%');
+    let opIdle = getCssFloat('--dot-opacity-idle', 0.10);
+    let opHover = getCssFloat('--dot-opacity-hover', 0.22);
+    let rIdle = getCssFloat('--dot-radius-idle', 1);
+    let rHover = getCssFloat('--dot-radius-hover', 2.2);
     let frameCount = 0;
 
     function draw() {
@@ -85,7 +92,11 @@ export const DotGrid = () => {
       ctx.clearRect(0, 0, w, h);
 
       if (frameCount % 60 === 0) {
-        cachedColor = getDotColor();
+        dotColor = getCssHsl('--dot-color', '0 0% 48%');
+        opIdle = getCssFloat('--dot-opacity-idle', 0.10);
+        opHover = getCssFloat('--dot-opacity-hover', 0.22);
+        rIdle = getCssFloat('--dot-radius-idle', 1);
+        rHover = getCssFloat('--dot-radius-hover', 2.2);
       }
       frameCount++;
 
@@ -127,12 +138,12 @@ export const DotGrid = () => {
 
           if (influence > 1) influence = 1;
 
-          const radius = REST_RADIUS + (MAX_RADIUS - REST_RADIUS) * influence;
-          const opacity = REST_OPACITY + (MAX_OPACITY - REST_OPACITY) * influence;
+          const radius = rIdle + (rHover - rIdle) * influence;
+          const opacity = opIdle + (opHover - opIdle) * influence;
 
           ctx.beginPath();
           ctx.arc(dx, dy, radius, 0, Math.PI * 2);
-          ctx.fillStyle = `hsl(${cachedColor} / ${opacity})`;
+          ctx.fillStyle = `hsl(${dotColor} / ${opacity})`;
           ctx.fill();
         }
       }
@@ -164,8 +175,8 @@ export const DotGrid = () => {
         style={{
           width: CURSOR_SIZE,
           height: CURSOR_SIZE,
-          backgroundColor: 'hsl(var(--foreground))',
-          boxShadow: '0 0 8px 2px hsl(var(--foreground) / 0.4)',
+          backgroundColor: 'hsl(var(--dot-color, var(--foreground)))',
+          boxShadow: '0 0 8px 2px hsl(var(--dot-color, var(--foreground)) / 0.3)',
         }}
         aria-hidden="true"
       />
