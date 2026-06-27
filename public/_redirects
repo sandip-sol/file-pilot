@@ -2,5 +2,39 @@
 https://filepilot.space/* https://www.filepilot.space/:splat 301!
 http://filepilot.space/* https://www.filepilot.space/:splat 301!
 
-# SPA fallback — serve index.html for all routes not matching a static file
-/*    /index.html   200
+# Duplicate tool aliases → canonical indexable tools
+/png-to-pdf /images-to-pdf/ 301!
+/png-to-pdf/ /images-to-pdf/ 301!
+/webp-to-pdf /images-to-pdf/ 301!
+/webp-to-pdf/ /images-to-pdf/ 301!
+/svg-to-pdf /images-to-pdf/ 301!
+/svg-to-pdf/ /images-to-pdf/ 301!
+/bmp-to-pdf /images-to-pdf/ 301!
+/bmp-to-pdf/ /images-to-pdf/ 301!
+/heic-to-pdf /images-to-pdf/ 301!
+/heic-to-pdf/ /images-to-pdf/ 301!
+/tiff-to-pdf /images-to-pdf/ 301!
+/tiff-to-pdf/ /images-to-pdf/ 301!
+/pdf-to-png /pdf-to-images/ 301!
+/pdf-to-png/ /pdf-to-images/ 301!
+/pdf-to-webp /pdf-to-images/ 301!
+/pdf-to-webp/ /pdf-to-images/ 301!
+/pdf-to-bmp /pdf-to-images/ 301!
+/pdf-to-bmp/ /pdf-to-images/ 301!
+/pdf-to-tiff /pdf-to-images/ 301!
+/pdf-to-tiff/ /pdf-to-images/ 301!
+/rasterize-pdf /pdf-to-images/ 301!
+/rasterize-pdf/ /pdf-to-images/ 301!
+/pdf-to-docx /extract-text/ 301!
+/pdf-to-docx/ /extract-text/ 301!
+/pdf-to-pptx /extract-text/ 301!
+/pdf-to-pptx/ /extract-text/ 301!
+/pdf-to-excel /extract-text/ 301!
+/pdf-to-excel/ /extract-text/ 301!
+/remove-metadata /sanitize-pdf/ 301!
+/remove-metadata/ /sanitize-pdf/ 301!
+/encrypt-decrypt-pdf /pdf-security/ 301!
+/encrypt-decrypt-pdf/ /pdf-security/ 301!
+
+# Unknown routes should return a real 404 status after prerendered pages/assets are checked.
+/* /404.html 404

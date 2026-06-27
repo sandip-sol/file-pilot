@@ -24,12 +24,16 @@ export const Footer = () => {
                 <div className="border-t border-border py-8">
                     <p className="text-sm font-semibold text-foreground mb-4 text-center md:text-left">Popular Tools</p>
                     <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+                        <Link to="/pdf-tools" className="text-sm text-muted-foreground hover:text-foreground transition-colors">PDF Tools</Link>
+                        <Link to="/image-tools" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Image Tools</Link>
+                        <Link to="/image-workflows" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Image Workflows</Link>
+                        <Link to="/ai-tools" className="text-sm text-muted-foreground hover:text-foreground transition-colors">AI Tools</Link>
                         <Link to="/merge" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Merge PDF</Link>
                         <Link to="/split" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Split PDF</Link>
                         <Link to="/compress" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Compress PDF</Link>
                         <Link to="/images-to-pdf" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Images to PDF</Link>
                         <Link to="/extract-text" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Extract Text</Link>
-                        <Link to="/image-requirements" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Image Formatter</Link>
+                        <Link to="/image-formatter" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Image Formatter</Link>
                     </div>
                 </div>
 

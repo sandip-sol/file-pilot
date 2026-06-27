@@ -2,10 +2,6 @@
   command = "PUPPETEER_SKIP_DOWNLOAD=true npm run build"
   publish = "dist"
 
-# IndexNow: notify Bing & Yandex of updated pages after deploy
-[[plugins]]
-  package = "./plugins/indexnow"
-
 [[headers]]
   for = "/*"
   [headers.values]

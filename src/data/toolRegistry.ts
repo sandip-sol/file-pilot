@@ -656,6 +656,7 @@ export const toolRegistry: ToolDefinition[] = [
     description: 'Wipe all embedded metadata for maximum privacy.',
     icon: FileX, gradientClassName: 'from-gray-600 to-gray-900',
     category: 'secure-pdf',
+    visibility: 'alias', canonicalSlug: '/sanitize-pdf',
   },
   {
     slug: '/change-permissions', title: 'Change Permissions', shortTitle: 'Permissions',

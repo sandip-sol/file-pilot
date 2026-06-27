@@ -1,9 +1,7 @@
 import { writeFileSync } from 'node:fs';
-import { SITE_URL, getRouteSeoEntries } from './seoRoutes.js';
+import { SITE_URL, canonicalUrlForRoute, getRouteSeoEntries } from './seoRoutes.js';
 
 const LLMS_PATH = new URL('./public/llms.txt', import.meta.url);
-
-const absoluteUrl = (route) => new URL(route, SITE_URL).toString();
 
 const lines = [
   '# FilePilot',
@@ -17,7 +15,7 @@ const lines = [
   '## Indexable Tools and Pages',
   '',
   ...getRouteSeoEntries().map(
-    ({ route, title, description }) => `- [${title}](${absoluteUrl(route)}): ${description}`,
+    ({ route, title, description }) => `- [${title}](${canonicalUrlForRoute(route)}): ${description}`,
   ),
   '',
 ].join('\n');

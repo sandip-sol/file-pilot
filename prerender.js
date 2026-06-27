@@ -10,7 +10,7 @@ import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { canonicalUrlForRoute, getRouteSeo, getSeoRoutes } from './seoRoutes.js';
+import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getSeoRoutes } from './seoRoutes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
@@ -21,6 +21,9 @@ const INDEXABLE_ROBOTS = 'index,follow';
 const NOINDEX_ROBOTS = 'noindex,follow';
 const isNetlifyPreview =
   process.env.NETLIFY === 'true' && process.env.CONTEXT && process.env.CONTEXT !== 'production';
+const shouldRenderBingVerification =
+  Boolean(process.env.BING_SITE_VERIFICATION) &&
+  (process.env.CONTEXT === 'production' || process.env.ALLOW_BING_VERIFICATION_IN_NON_PRODUCTION === 'true');
 
 function escapeHtml(value) {
   return value
@@ -38,7 +41,7 @@ function withRouteSeo(html, route) {
   const escapedDescription = escapeHtml(description);
   const robots = isNetlifyPreview ? NOINDEX_ROBOTS : INDEXABLE_ROBOTS;
 
-  return html
+  let nextHtml = html
     .replace(/<title>[^<]*<\/title>/, `<title>${escapedTitle}</title>`)
     .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/, `<meta name="description" content="${escapedDescription}">`)
     .replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/, `<meta name="robots" content="${robots}">`)
@@ -48,7 +51,22 @@ function withRouteSeo(html, route) {
     .replace(/<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/, `<meta property="og:url" content="${canonicalUrl}">`)
     .replace(/<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:title" content="${escapedTitle}">`)
     .replace(/<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:description" content="${escapedDescription}">`)
+    .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, buildJsonLd(route))
     .replace('<div id="root"></div>', `<div id="root">${buildStaticRouteContent(route)}</div>`);
+
+  nextHtml = withBingVerification(nextHtml);
+
+  return nextHtml;
+}
+
+function withBingVerification(html) {
+  const withoutExistingTag = html.replace(/\n?\s*<meta\s+name="msvalidate\.01"\s+content="[^"]*"\s*\/?>/g, '');
+  if (!shouldRenderBingVerification) return withoutExistingTag;
+
+  const content = escapeHtml(process.env.BING_SITE_VERIFICATION.trim());
+  if (!content) return withoutExistingTag;
+
+  return withoutExistingTag.replace('</head>', `  <meta name="msvalidate.01" content="${content}" />\n</head>`);
 }
 
 function stripBrand(value) {
@@ -104,7 +122,24 @@ function buildJsonLd(route) {
         isAccessibleForFree: true,
       },
     );
-  } else if (!route.startsWith('/blog') && !['/privacy', '/terms', '/pdf-tools', '/image-tools'].includes(route)) {
+  } else if (['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools', '/blog'].includes(route)) {
+    graph.push(
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
+          { '@type': 'ListItem', position: 2, name: routeLabel(route), item: url },
+        ],
+      },
+      {
+        '@type': 'CollectionPage',
+        name: routeLabel(route),
+        url,
+        description: seo.description,
+        isPartOf: { '@id': `${SITE_URL}#website` },
+      },
+    );
+  } else if (!route.startsWith('/blog') && !['/privacy', '/terms'].includes(route)) {
     graph.push(
       {
         '@type': 'BreadcrumbList',
@@ -133,8 +168,8 @@ function buildJsonLd(route) {
 function buildStaticRouteContent(route) {
   const seo = getRouteSeo(route);
   const title = escapeHtml(routeLabel(route));
-  const description = escapeHtml(seo.description);
-  const relatedRoutes = route === '/'
+  const description = escapeHtml(seo.shortIntro ?? seo.description);
+  const relatedRoutes = seo.relatedTools ?? (route === '/'
     ? ['/pdf-tools', '/image-tools', '/merge', '/split', '/compress']
     : route === '/pdf-tools'
       ? ['/merge', '/split', '/compress', '/pdf-to-jpg', '/jpg-to-pdf']
@@ -142,9 +177,9 @@ function buildStaticRouteContent(route) {
         ? ['/compress-image', '/resize-image', '/convert-image', '/crop-image', '/image-formatter']
         : route.startsWith('/blog')
           ? ['/blog', '/privacy', '/pdf-tools', '/image-tools']
-          : ['/merge', '/split', '/compress', '/pdf-to-jpg', '/jpg-to-pdf'];
+          : ['/merge', '/split', '/compress', '/pdf-to-jpg', '/jpg-to-pdf']);
 
-  const isToolRoute = !['/', '/pdf-tools', '/image-tools', '/blog', '/privacy', '/terms'].includes(route) && !route.startsWith('/blog/');
+  const isToolRoute = !['/', '/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools', '/blog', '/privacy', '/terms'].includes(route) && !route.startsWith('/blog/');
   const body = isToolRoute
     ? `
       <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <span>${title}</span></nav>
@@ -196,7 +231,23 @@ function writeSeoShells() {
     writeFileSync(outFile, html, 'utf-8');
   }
 
+  write404Shell(baseHtml);
   console.log(`Wrote SEO HTML shells for ${ROUTES.length} routes.`);
+}
+
+function write404Shell(baseHtml) {
+  const notFoundHtml = baseHtml
+    .replace(/<title>[^<]*<\/title>/, '<title>Page Not Found | FilePilot</title>')
+    .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/, '<meta name="description" content="The requested FilePilot page could not be found.">')
+    .replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/, '<meta name="robots" content="noindex,follow">')
+    .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${SITE_URL}">`)
+    .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, '')
+    .replace(
+      '<div id="root"></div>',
+      `<div id="root"><main class="static-seo"><h1>Page not found</h1><p>The page you requested does not exist. Use the links below to return to FilePilot tools.</p><ul><li><a href="${canonicalUrlForRoute('/')}">FilePilot home</a></li><li><a href="${canonicalUrlForRoute('/pdf-tools')}">PDF tools</a></li><li><a href="${canonicalUrlForRoute('/image-tools')}">Image tools</a></li></ul></main></div>`,
+    );
+
+  writeFileSync(join(DIST, '404.html'), withBingVerification(notFoundHtml), 'utf-8');
 }
 
 let puppeteer;

@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node generateRobots.js && node generateSitemap.js && node generateLlms.js && tsc -b && vite build && node prerender.js",
+    "build": "node generateRobots.js && node generateSitemap.js && node generateLlms.js && node generateIndexNowKeyFile.js && tsc -b && vite build && node prerender.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "indexnow": "node indexnow.js"
+    "seo:validate": "node seoValidate.js",
+    "indexnow:submit": "node indexnow.js",
+    "indexnow:submit:priority": "node indexnow.js --priority"
   },
   "dependencies": {
     "@imgly/background-removal": "^1.7.0",

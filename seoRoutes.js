@@ -3,6 +3,27 @@ import { readFileSync } from 'node:fs';
 const TOOL_REGISTRY_PATH = new URL('./src/data/toolRegistry.ts', import.meta.url);
 
 export const SITE_URL = 'https://www.filepilot.space/';
+export const CANONICAL_HOST = new URL(SITE_URL).hostname;
+
+export const PRIORITY_SEO_ROUTES = [
+  '/',
+  '/pdf-tools',
+  '/image-tools',
+  '/merge',
+  '/split',
+  '/compress',
+  '/jpg-to-pdf',
+  '/pdf-to-jpg',
+  '/compress-image',
+  '/resize-image',
+  '/convert-image',
+  '/crop-image',
+  '/image-formatter',
+  '/qr-generator',
+  '/blog',
+  '/privacy',
+  '/terms',
+];
 
 const CORE_ROUTE_SEO = {
   '/': {
@@ -29,6 +50,24 @@ const CORE_ROUTE_SEO = {
     h1: 'Free Online Image Tools',
     changefreq: 'weekly',
     priority: '0.9',
+  },
+  '/image-workflows': {
+    title: 'Image Workflow Tools - Format, Validate and Prepare Images | FilePilot',
+    description:
+      'Prepare images for social media, ecommerce, passport photos, favicons, QR codes, and PDF workflows with private browser-based tools.',
+    h1: 'Image Workflow Tools',
+    shortIntro: 'Focused image workflow tools for real output requirements, processed privately in your browser.',
+    changefreq: 'weekly',
+    priority: '0.75',
+  },
+  '/ai-tools': {
+    title: 'AI Image Tools - Private Browser-Based Editing | FilePilot',
+    description:
+      'Remove backgrounds, enhance images, upscale photos, and clean edits with AI-assisted tools that run in your browser where supported.',
+    h1: 'AI Image Tools',
+    shortIntro: 'AI-assisted image tools for background removal, cleanup, enhancement, and upscaling with privacy-first browser processing.',
+    changefreq: 'weekly',
+    priority: '0.75',
   },
   '/blog': {
     title: 'FilePilot Blog - Privacy, PDFs and Image Tools',
@@ -111,6 +150,30 @@ const CORE_ROUTES = Object.keys(CORE_ROUTE_SEO);
 const BLOG_ROUTES = Object.keys(BLOG_ROUTE_SEO);
 const INDEXABLE_ALIAS_ROUTES = Object.keys(INDEXABLE_ALIAS_ROUTE_SEO);
 
+const DEFAULT_RELATED_ROUTES = ['/pdf-tools', '/image-tools', '/merge', '/compress', '/compress-image'];
+
+const RELATED_ROUTES = {
+  '/': ['/pdf-tools', '/image-tools', '/merge', '/compress-image', '/blog'],
+  '/pdf-tools': ['/merge', '/split', '/compress', '/jpg-to-pdf', '/pdf-to-jpg'],
+  '/image-tools': ['/compress-image', '/resize-image', '/convert-image', '/image-workflows', '/ai-tools'],
+  '/image-workflows': ['/image-formatter', '/social-media-resizer', '/ecommerce-image-formatter', '/qr-generator', '/favicon-generator'],
+  '/ai-tools': ['/remove-background', '/upscale-image', '/ai-enhance-image', '/object-remover', '/change-background'],
+  '/merge': ['/split', '/compress', '/organize-pdf', '/jpg-to-pdf'],
+  '/split': ['/merge', '/extract-pages', '/delete-pages', '/organize-pdf'],
+  '/compress': ['/merge', '/pdf-to-jpg', '/pdf-tools', '/repair-pdf'],
+  '/jpg-to-pdf': ['/images-to-pdf', '/pdf-to-jpg', '/compress-image', '/merge'],
+  '/pdf-to-jpg': ['/pdf-to-images', '/jpg-to-pdf', '/compress-image', '/compress'],
+  '/compress-image': ['/resize-image', '/convert-image', '/crop-image', '/image-formatter'],
+  '/resize-image': ['/compress-image', '/crop-image', '/social-media-resizer', '/image-formatter'],
+  '/convert-image': ['/compress-image', '/resize-image', '/image-to-svg', '/image-formatter'],
+  '/crop-image': ['/resize-image', '/rotate-image', '/image-formatter', '/compress-image'],
+  '/image-formatter': ['/social-media-resizer', '/ecommerce-image-formatter', '/compress-image', '/image-requirements'],
+  '/qr-generator': ['/favicon-generator', '/image-to-svg', '/image-formatter', '/image-workflows'],
+  '/blog': ['/blog/why-files-stay-in-browser', '/blog/privacy-risks-online-pdf-tools', '/privacy', '/pdf-tools'],
+  '/privacy': ['/pdf-tools', '/image-tools', '/blog/how-filepilot-keeps-documents-private'],
+  '/terms': ['/privacy', '/pdf-tools', '/image-tools'],
+};
+
 const extractSet = (source, name) => {
   const match = source.match(new RegExp(`const ${name} = new Set\\(\\[([\\s\\S]*?)\\]\\);`));
   if (!match) return new Set();
@@ -141,6 +204,27 @@ export const canonicalUrlForRoute = (route) => {
   if (normalizedRoute === '/') return SITE_URL;
   return new URL(`${normalizedRoute.slice(1)}/`, SITE_URL).toString();
 };
+
+const schemaTypeForRoute = (route, category) => {
+  if (route === '/') return 'WebSite';
+  if (route.startsWith('/blog/')) return 'Article';
+  if (route === '/blog') return 'CollectionPage';
+  if (['/privacy', '/terms'].includes(route)) return 'WebPage';
+  if (['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools'].includes(route)) return 'CollectionPage';
+  if (category) return 'WebApplication';
+  return 'WebPage';
+};
+
+const withSeoFields = (entry) => ({
+  ...entry,
+  path: entry.route,
+  indexable: entry.indexable ?? true,
+  canonicalUrl: canonicalUrlForRoute(entry.canonicalRoute ?? entry.route),
+  shortIntro: entry.shortIntro ?? entry.description,
+  relatedTools: entry.relatedTools ?? RELATED_ROUTES[entry.route] ?? DEFAULT_RELATED_ROUTES,
+  schemaType: entry.schemaType ?? schemaTypeForRoute(entry.route, entry.category),
+  sitemapPriority: entry.sitemapPriority ?? entry.priority ?? '0.8',
+});
 
 const toToolSeoTitle = (title) => {
   const normalizedTitle = title
@@ -181,11 +265,15 @@ const extractToolEntries = (source) => {
 
       return {
         route,
+        indexable: true,
         title: INDEXABLE_ALIAS_ROUTE_SEO[route]?.title ?? toToolSeoTitle(title),
         description: INDEXABLE_ALIAS_ROUTE_SEO[route]?.description ?? toToolDescription({ title, description, category }),
         h1: INDEXABLE_ALIAS_ROUTE_SEO[route]?.h1 ?? title,
+        shortIntro: INDEXABLE_ALIAS_ROUTE_SEO[route]?.description ?? description,
         category,
         canonicalRoute: isAlias ? route : canonicalSlug ?? route,
+        relatedTools: RELATED_ROUTES[route],
+        schemaType: 'WebApplication',
         changefreq: INDEXABLE_ALIAS_ROUTE_SEO[route]?.changefreq ?? 'monthly',
         priority: INDEXABLE_ALIAS_ROUTE_SEO[route]?.priority ?? (route === '/image-requirements' ? '0.9' : '0.8'),
       };
@@ -211,7 +299,7 @@ export const getRouteSeoEntries = () => [
   ...CORE_ROUTES.map((route) => ({ route, ...CORE_ROUTE_SEO[route] })),
   ...getDiscoverableToolEntries(),
   ...BLOG_ROUTES.map((route) => ({ route, ...BLOG_ROUTE_SEO[route] })),
-];
+].map(withSeoFields);
 
 export const getRouteSeo = (route) => {
   const normalizedRoute = normalizeRoute(route);
@@ -228,7 +316,44 @@ export const getSitemapEntries = () => {
       loc: canonicalUrlForRoute(route),
       lastmod: seo.lastmod,
       changefreq: seo.changefreq ?? 'monthly',
-      priority: seo.priority ?? '0.8',
+      priority: seo.sitemapPriority ?? seo.priority ?? '0.8',
     };
   });
+};
+
+export const getPrioritySitemapEntries = () => {
+  const sitemapEntries = getSitemapEntries();
+  return PRIORITY_SEO_ROUTES.map((route) => sitemapEntries.find((entry) => entry.route === route)).filter(Boolean);
+};
+
+export const getNonIndexableRouteEntries = () => {
+  const source = readFileSync(TOOL_REGISTRY_PATH, 'utf8');
+  const hiddenSlugs = extractSet(source, 'hiddenToolSlugs');
+  const comingSoonSlugs = extractSet(source, 'comingSoonToolSlugs');
+  const indexableRoutes = new Set(getSeoRoutes());
+  const toolBlocks = source.match(/\{\s*slug: '[^']+'[\s\S]*?\n  \}/g) ?? [];
+
+  return toolBlocks
+    .map((block) => {
+      const route = getBlockValue(block, 'slug');
+      const title = getBlockValue(block, 'title');
+      const canonicalSlug = getBlockValue(block, 'canonicalSlug');
+      const isAlias = block.includes("visibility: 'alias'");
+      if (!route || indexableRoutes.has(route)) return null;
+
+      return {
+        route,
+        title,
+        indexable: false,
+        reason: hiddenSlugs.has(route)
+          ? 'hidden'
+          : comingSoonSlugs.has(route)
+            ? 'coming-soon'
+            : isAlias
+              ? `duplicate alias of ${canonicalSlug}`
+              : 'not in indexable registry',
+        canonicalRoute: canonicalSlug,
+      };
+    })
+    .filter(Boolean);
 };

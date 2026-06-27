@@ -11,6 +11,7 @@ const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.N
 // ─── Hub pages ──────────────────────────────────────────────────────────────
 const PdfToolsHub = lazy(() => import('./pages/PdfToolsHub').then(m => ({ default: m.PdfToolsHub })));
 const ImageToolsHub = lazy(() => import('./pages/ImageToolsHub').then(m => ({ default: m.ImageToolsHub })));
+const CategoryHub = lazy(() => import('./pages/CategoryHub').then(m => ({ default: m.CategoryHub })));
 
 // ─── Blog ───────────────────────────────────────────────────────────────────
 const Blog = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
@@ -159,6 +160,8 @@ function App() {
           {/* Hub pages */}
           <Route path="/pdf-tools" element={<PdfToolsHub />} />
           <Route path="/image-tools" element={<ImageToolsHub />} />
+          <Route path="/image-workflows" element={<CategoryHub hubPath="/image-workflows" />} />
+          <Route path="/ai-tools" element={<CategoryHub hubPath="/ai-tools" />} />
 
           {/* Blog */}
           <Route path="/blog" element={<Blog />} />
