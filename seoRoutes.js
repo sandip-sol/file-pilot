@@ -5,7 +5,7 @@ const TOOL_REGISTRY_PATH = new URL('./src/data/toolRegistry.ts', import.meta.url
 export const SITE_URL = 'https://www.filepilot.space/';
 export const CANONICAL_HOST = new URL(SITE_URL).hostname;
 
-export const PRIORITY_SEO_ROUTES = [
+export const SITEMAP_ROUTES = [
   '/',
   '/pdf-tools',
   '/image-tools',
@@ -24,6 +24,8 @@ export const PRIORITY_SEO_ROUTES = [
   '/privacy',
   '/terms',
 ];
+
+export const PRIORITY_SEO_ROUTES = SITEMAP_ROUTES;
 
 const CORE_ROUTE_SEO = {
   '/': {
@@ -309,7 +311,7 @@ export const getRouteSeo = (route) => {
 export const getSitemapEntries = () => {
   const routeSeoEntries = getRouteSeoEntries();
 
-  return getSeoRoutes().map((route) => {
+  return SITEMAP_ROUTES.map((route) => {
     const seo = routeSeoEntries.find((entry) => entry.route === route) ?? {};
     return {
       route,

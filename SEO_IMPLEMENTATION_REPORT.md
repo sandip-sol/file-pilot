@@ -1,65 +1,66 @@
 # FilePilot SEO Implementation Report
 
-## Files changed
+## Deployment verification
+
+### Root cause found
+
+- Framework: Vite + React SPA.
+- Netlify publish directory: `dist`.
+- Static source directory: `public`.
+- Canonical production host: `https://www.filepilot.space/`.
+- Canonical URL style: trailing slash for non-root pages, for example `https://www.filepilot.space/merge/`.
+- Current repository redirect behavior: no `/* /index.html 200` SPA catch-all is present. Unknown routes fall through to `/* /404.html 404`, while physical files in `dist` are served directly by Netlify before that fallback.
+- Live check during this fix returned `200` for `https://www.filepilot.space/sitemap.xml` with `Content-Type: application/xml`, so the Google Search Console "Couldn't fetch" state was not reproducible at inspection time and may be stale from a previous crawl/deploy.
+- The durable repository issue was that validation was not strict enough: it accepted `public/` fallback files and the sitemap was generated from the broad discoverable route registry instead of the curated canonical sitemap set. A bad or stale production artifact could therefore go unnoticed.
+
+### Files changed
 
 - `seoRoutes.js`
-- `prerender.js`
 - `generateSitemap.js`
 - `generateRobots.js`
+- `seoValidate.js`
 - `package.json`
-- `index.html`
-- `src/components/PageSeo.tsx`
-- `src/components/ToolContentSection.tsx`
-- `src/components/RelatedTools.tsx`
-- `src/data/toolContent.ts`
-- `src/pages/ImagesToPdf.tsx`
-- `src/pages/PdfToImages.tsx`
-- `src/pages/ExtractText.tsx`
-- `src/pages/PdfMetadata.tsx`
-- `src/pages/PdfSecurity.tsx`
-- `src/pages/NotFound.tsx`
+- `netlify.toml`
+- `public/_redirects`
+- `public/sitemap.xml`
 
-## SEO architecture added
+Verified unchanged because it already matched the required production content:
 
-- Centralized build-time SEO route registry in `seoRoutes.js`.
-- Canonical URL generation now uses the production host and trailing-slash format, for example `https://www.filepilot.space/merge/`.
-- Sitemap entries, prerender route list, canonical URLs, and final prerendered metadata are generated from the same route registry.
-- `prerender.js` now writes SEO HTML shells before browser rendering and then normalizes final prerendered HTML metadata after React renders.
-- The static shell fallback includes route-specific crawlable content, how-it-works text, privacy messaging, breadcrumbs for tool pages, and internal links.
-- `PageSeo` now supports canonical trailing-slash URLs, robots metadata, Open Graph site name, Twitter card metadata, and noindex handling for duplicate/error routes.
-- Visible breadcrumbs were added to tool content pages without changing tool functionality.
-- The priority alias pages `/jpg-to-pdf/` and `/pdf-to-jpg/` now have unique metadata, H1s, visible copy, and sitemap entries.
-- Duplicate alias routes such as `/png-to-pdf/`, `/pdf-to-png/`, `/pdf-to-docx/`, `/pdf-to-pptx/`, `/pdf-to-excel/`, and `/encrypt-decrypt-pdf/` are canonicalized/noindexed at runtime where they share the same underlying tool.
-- `robots.txt` is generated at build time:
-  - production/local: allows crawling and declares the sitemap
-  - Netlify deploy previews: `Disallow: /`
+- `public/robots.txt`
 
-## Sitemap
+### Build output location
 
-- Sitemap URLs generated: 93
-- Generated files verified:
-  - `dist/sitemap.xml`
-  - `dist/robots.txt`
-  - 93 prerendered `index.html` files
-- Validation results:
-  - all sitemap URLs use `https://www.filepilot.space/`
-  - all sitemap URLs use trailing slash canonical format
-  - no sitemap route is missing a prerendered HTML file
-  - no sitemap route contains `noindex`
-  - no duplicate title groups across sitemap pages
-  - no duplicate meta-description groups across sitemap pages
+- Sitemap: `dist/sitemap.xml`
+- Robots: `dist/robots.txt`
+- Redirect rules: `dist/_redirects`
 
-## Routes intentionally excluded from indexing
+### Sitemap URL count
 
-- Coming-soon tools: `/add-attachments`, `/extract-attachments`, `/ocr-pdf`, `/invert-colors`, `/text-color`, `/word-to-pdf`, `/excel-to-pdf`, `/pptx-to-pdf`, `/epub-to-pdf`, `/mobi-to-pdf`, `/rtf-to-pdf`, `/xps-to-pdf`, `/djvu-to-pdf`, `/fb2-to-pdf`, `/email-to-pdf`, `/cbz-to-pdf`, `/digital-sign-pdf`, `/validate-signature`, `/html-to-pdf`, `/scan-to-pdf`, `/pdf-to-pdfa`, `/ai-summarize`, `/ai-translate`, `/ai-chat`, `/ai-extract`, `/ai-rewrite`, `/convert-to-jpg`, `/convert-from-jpg`, `/html-to-image`, `/meme-generator`.
-- Hidden/unpublished tools: `/edit-metadata`, `/linearize-pdf`, `/remove-restrictions`, `/encrypt-pdf`, `/decrypt-pdf`, `/change-permissions`, `/timestamp-pdf`.
-- Duplicate alias routes not selected for indexing: `/png-to-pdf`, `/webp-to-pdf`, `/svg-to-pdf`, `/bmp-to-pdf`, `/heic-to-pdf`, `/tiff-to-pdf`, `/pdf-to-png`, `/pdf-to-webp`, `/pdf-to-bmp`, `/pdf-to-tiff`, `/pdf-to-docx`, `/pdf-to-pptx`, `/pdf-to-excel`, `/rasterize-pdf`.
-- Catch-all/error routes are marked `noindex,follow`.
+- `17` URLs
+- All URLs begin with `https://www.filepilot.space/`
+- No duplicate URLs
+- No query-string URLs
+- No upload/result/error routes
+- No HTML or app-shell content in the XML file
 
-## Manual Search Console actions remaining
+### Commands run
 
-- Deploy the updated build to Netlify production.
-- In Google Search Console, submit `https://www.filepilot.space/sitemap.xml`.
-- Use URL Inspection on priority URLs after deployment, then request indexing where appropriate.
-- Confirm Google sees the final canonical trailing-slash URLs after Netlify redirects.
-- Monitor Coverage/Pages reports for soft 404s, duplicate canonicals, and crawl errors after Google recrawls the site.
+- `node generateRobots.js`
+- `node generateSitemap.js`
+- `npm run build`
+- `npm run seo:validate`
+
+### Validation result
+
+- `npm run build` completed successfully and now runs `node seoValidate.js` at the end.
+- `npm run seo:validate` completed successfully.
+- Final validator result: `SEO validation passed for 17 sitemap URLs in dist/sitemap.xml.`
+
+### Manual Google Search Console steps after deployment
+
+1. Deploy the updated Netlify production build.
+2. Open Google Search Console for `https://www.filepilot.space/`.
+3. Go to Sitemaps and resubmit `https://www.filepilot.space/sitemap.xml`.
+4. If the old entry still shows "Couldn't fetch", remove it if GSC allows, then submit the same sitemap URL again.
+5. Use URL Inspection on `https://www.filepilot.space/sitemap.xml` and several priority pages such as `/`, `/pdf-tools/`, `/merge/`, and `/compress-image/`.
+6. Request indexing for priority pages only after the live sitemap shows `Success`.

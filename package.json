@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node generateRobots.js && node generateSitemap.js && node generateLlms.js && node generateIndexNowKeyFile.js && tsc -b && vite build && node prerender.js",
+    "build": "node generateRobots.js && node generateSitemap.js && node generateLlms.js && node generateIndexNowKeyFile.js && tsc -b && vite build && node prerender.js && node seoValidate.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "seo:validate": "node seoValidate.js",

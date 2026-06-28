@@ -36,5 +36,7 @@ http://filepilot.space/* https://www.filepilot.space/:splat 301!
 /encrypt-decrypt-pdf /pdf-security/ 301!
 /encrypt-decrypt-pdf/ /pdf-security/ 301!
 
+# Static files such as /sitemap.xml, /robots.txt, favicons, the manifest, and /assets/*
+# are served directly by Netlify before this final fallback is evaluated.
 # Unknown routes should return a real 404 status after prerendered pages/assets are checked.
 /* /404.html 404
