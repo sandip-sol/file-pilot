@@ -13,6 +13,7 @@ import {
 } from '../utils/image/support';
 import { downloadBlobFile, downloadZipFromEntries } from '../utils/pdf/export';
 import type { ImageFormat, ImageFileInfo, ProcessedImageResult } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   ImageMinus,
   Sparkles,
@@ -172,11 +173,19 @@ export const CompressImage = () => {
   const totalSaved = totalOriginal - totalCompressed;
   const totalPercent = totalOriginal > 0 ? ((totalSaved / totalOriginal) * 100).toFixed(1) : '0';
 
+  const faqItems = [
+    { question: "Does compressing an image reduce its quality?", answer: "It depends on the compression level you choose. The 'High Quality' preset preserves most visual detail while still reducing file size, whereas the 'Small File' preset prioritizes size reduction and may introduce visible artifacts." },
+    { question: "What image formats can I compress?", answer: "You can compress JPEG, PNG, and WebP images. All processing happens in your browser using the Canvas API, so no server upload is required." },
+    { question: "Are my uploaded images sent to a server?", answer: "No. All compression is performed locally in your browser. Your images never leave your device, ensuring complete privacy." },
+    { question: "Can I compress multiple images at once?", answer: "Yes. You can upload and compress multiple images in a single batch. Compressed results can be downloaded individually or as a ZIP archive." },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Compress Image Online - Reduce Image File Size"
         description="Compress JPEG, PNG, and WebP images in your browser. Reduce file size while preserving quality. Free, private, no uploads."
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -543,6 +552,8 @@ export const CompressImage = () => {
             </div>
           )}
         </div>
+
+        <FAQSection items={faqItems} />
       </div>
     </div>
   );

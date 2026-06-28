@@ -12,6 +12,7 @@ import { detectAiCapabilities, checkImageSizeLimit } from '../utils/ai/capabilit
 import { MAX_INPUT_PIXELS } from '../utils/ai/types';
 import type { AiProgress, AiProcessingStatus } from '../utils/ai/types';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   CircleOff, Download, Loader2, RefreshCw, AlertTriangle,
   Info, Sliders, Eye,
@@ -183,11 +184,19 @@ export const RemoveBackground = () => {
 
   const isProcessing = status === 'loading-model' || status === 'processing';
 
+  const faqItems = [
+    { question: "How accurate is the AI background removal?", answer: "The AI model uses a neural network trained on millions of images to detect foreground subjects with high accuracy. It works well with portraits, products, pets, and distinct objects, though results may vary with complex edges, transparent objects, or similar foreground and background colours." },
+    { question: "What image types are supported?", answer: "FilePilot supports JPEG, PNG, and WebP images for background removal. The AI model is downloaded to your browser on first use (approximately 40 MB) and processes images locally." },
+    { question: "Can I get a transparent PNG output?", answer: "Yes, the default output format is PNG with a transparent background. You can also export as WebP with transparency or JPEG with a solid background colour of your choice." },
+    { question: "Is my image uploaded to a server?", answer: "No. All processing happens entirely in your browser using a local AI model. Your images are never uploaded to any server, ensuring complete privacy." },
+  ];
+
   return (
     <main className="container max-w-4xl py-8 px-4">
       <PageSeo
         title="Remove Background — Free AI Background Remover | FilePilot"
         description="Remove image backgrounds automatically using AI, directly in your browser. No upload needed — your images stay private."
+        faqItems={faqItems}
       />
 
       <div className="mb-6">
@@ -443,6 +452,8 @@ export const RemoveBackground = () => {
           </div>
         </div>
       )}
+
+      <FAQSection items={faqItems} />
     </main>
   );
 };

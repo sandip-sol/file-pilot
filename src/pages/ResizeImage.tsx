@@ -21,6 +21,7 @@ import {
   formatFileSize,
 } from '../utils/image/support';
 import { downloadBlobFile, downloadZipFromEntries } from '../utils/pdf/export';
+import { FAQSection } from '../components/FAQSection';
 import {
   Scaling,
   Sparkles,
@@ -272,11 +273,19 @@ export const ResizeImage = () => {
     setDimensionMode('pixels');
   };
 
+  const faqItems = [
+    { question: "Can I maintain the aspect ratio when resizing?", answer: "Yes. The aspect ratio lock is enabled by default. When locked, changing the width automatically adjusts the height proportionally, and vice versa." },
+    { question: "What dimensions can I resize to?", answer: "You can resize by exact pixel values up to 10,000 px or by percentage scale. Preset sizes for social media, web, and e-commerce are also available." },
+    { question: "Does resizing reduce image quality?", answer: "Downscaling generally preserves quality well. Upscaling may reduce sharpness, which is why the 'Do not upscale' option is enabled by default to prevent enlarging smaller images." },
+    { question: "Is my image uploaded to a server?", answer: "No. All resizing is performed locally in your browser. Your images are never uploaded, ensuring complete privacy." },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Resize Image Online - Free Browser-Based Tool"
         description="Resize images by pixels or percentage. Fit, fill, or stretch to exact dimensions. Free, private, browser-based."
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -808,6 +817,8 @@ export const ResizeImage = () => {
             </>
           )}
         </div>
+
+        <FAQSection items={faqItems} />
       </div>
     </div>
   );

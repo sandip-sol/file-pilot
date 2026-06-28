@@ -112,12 +112,19 @@ export const RedactPdf = () => {
     }
   };
 
+  const faqItems = [
+    { question: 'Are these full forensic PDF redactions?', answer: 'No. This MVP burns black boxes into the visual page output. The UI and copy make that limitation explicit.' },
+    { question: 'Can I place multiple boxes per page?', answer: 'Yes. Draw as many rectangles as you need on each page before exporting.' },
+    { question: 'Can I zoom while redacting?', answer: 'Yes. Use the zoom slider to make precise placements on small content areas.' },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Redact PDF – Visual Burn-In Redaction Tool"
         description="Place rectangular redaction boxes on a PDF and export a visually burned-in redacted copy locally in your browser."
         canonicalPath="/redact-pdf"
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -260,13 +267,7 @@ export const RedactPdf = () => {
         </div>
       </div>
 
-      <FAQSection
-        items={[
-          { question: 'Are these full forensic PDF redactions?', answer: 'No. This MVP burns black boxes into the visual page output. The UI and copy make that limitation explicit.' },
-          { question: 'Can I place multiple boxes per page?', answer: 'Yes. Draw as many rectangles as you need on each page before exporting.' },
-          { question: 'Can I zoom while redacting?', answer: 'Yes. Use the zoom slider to make precise placements on small content areas.' },
-        ]}
-      />
+      <FAQSection items={faqItems} />
     </div>
   );
 };

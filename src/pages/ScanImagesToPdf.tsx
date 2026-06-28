@@ -4,6 +4,7 @@ import { PageSeo } from '../components/PageSeo';
 import { RelatedTools } from '../components/RelatedTools';
 import { ToolUsageTracker } from '../components/ToolUsageTracker';
 import { toast } from 'sonner';
+import { FAQSection } from '../components/FAQSection';
 import {
   Loader2, Download, RefreshCw, RotateCw, RotateCcw, Trash2, Plus,
   GripVertical, FileText, Sparkles, ScanLine,
@@ -176,11 +177,19 @@ export const ScanImagesToPdf = () => {
   const avgSizeKB = pages.length > 0 ? pages.reduce((s, p) => s + p.size, 0) / pages.length / 1024 : 0;
   const estimate = pages.length > 0 ? estimatePdfSize(pages.length, avgSizeKB * quality) : '';
 
+  const faqItems = [
+    { question: "Can I reorder images before creating the PDF?", answer: "Yes. You can drag and drop images to reorder them, and the page order in the tool matches the final PDF output. You can also add or remove individual pages at any time." },
+    { question: "What page size options are available?", answer: "FilePilot supports A4, Letter, Original Image Size, and Custom dimensions. You can also choose automatic, portrait, or landscape orientation, and set margin sizes from none to large." },
+    { question: "How does scan quality affect the output?", answer: "You can adjust the image quality slider from 20% to 100%. Lower quality produces smaller files suitable for sharing, while higher quality preserves text clarity for archival purposes. Enhancement modes include grayscale, black and white, and high contrast." },
+    { question: "Is my data kept private?", answer: "Yes. All processing happens entirely in your browser. Your document images are never uploaded to any server, making it safe for sensitive documents like contracts, receipts, and personal records." },
+  ];
+
   return (
     <div>
       <PageSeo
         title="Scan Images to PDF — FilePilot"
         description="Turn photos of documents into a clean, ordered, downloadable PDF. All processing happens locally in your browser."
+        faqItems={faqItems}
       />
       <ToolUsageTracker />
 
@@ -390,6 +399,7 @@ export const ScanImagesToPdf = () => {
         )}
       </div>
 
+      <FAQSection items={faqItems} />
       <RelatedTools />
     </div>
   );

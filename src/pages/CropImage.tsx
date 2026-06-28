@@ -7,6 +7,7 @@ import { getSupportedExportFormats, formatFileSize } from '../utils/image/suppor
 import { cropAndResizeCanvas, exportCanvas, generateOutputFilename } from '../utils/image/canvas';
 import { downloadBlobFile } from '../utils/pdf/export';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   Crop, Sparkles, Download, Loader2, RefreshCw, AlertTriangle, ZoomIn, ZoomOut,
 } from 'lucide-react';
@@ -241,11 +242,19 @@ export const CropImage = () => {
     return false;
   })();
 
+  const faqItems = [
+    { question: "Can I crop to custom dimensions?", answer: "Yes. You can freely drag the crop area to any size, use aspect ratio presets like 1:1 or 16:9, or enter a custom aspect ratio. Optional output dimensions let you resize the cropped area to exact pixel values." },
+    { question: "What image formats are supported for cropping?", answer: "You can crop JPEG, PNG, and WebP images. The output format can be set independently, so you can crop a PNG and export it as JPEG or WebP." },
+    { question: "Does cropping reduce image quality?", answer: "Cropping itself does not reduce quality. The output quality depends on the format and quality slider setting you choose when exporting the cropped image." },
+    { question: "Are my images uploaded to a server?", answer: "No. All cropping is performed locally in your browser. Your images are never uploaded, ensuring complete privacy." },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Crop Image Online - Free Browser-Based Image Cropper"
         description="Crop JPEG, PNG, and WebP images with precision. Interactive crop editor with aspect ratio presets. Free, private, no uploads."
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -593,6 +602,8 @@ export const CropImage = () => {
             </>
           )}
         </div>
+
+        <FAQSection items={faqItems} />
       </div>
     </div>
   );

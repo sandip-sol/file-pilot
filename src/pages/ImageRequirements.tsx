@@ -295,6 +295,13 @@ export const ImageRequirements = () => {
                 title="Resize Image to Exact Size & KB – Free Online Tool"
                 description="Resize image to exact pixels, reduce file size to KB limit, convert to JPG/PNG/WebP. Free, private, browser-based."
                 canonicalPath="/image-requirements"
+                faqItems={[
+                    { question: "How to resize an image to specific pixel dimensions?", answer: "Upload your image and enter the desired width and height. You can choose to crop (cover) or add padding (contain) to fit the aspect ratio. Processing happens entirely in your browser." },
+                    { question: "How to reduce image file size to specific KB?", answer: "Enter your target limit (e.g., 50KB, 100KB, 2MB) in the Max File Size field. The tool uses smart compression to reach that size while maintaining the best possible quality." },
+                    { question: "Which format should I choose: JPG, PNG, or WebP?", answer: "JPG is best for photos and small file sizes. PNG is best for graphics with text or transparent backgrounds. WebP offers the best balance of quality and compression for web use." },
+                    { question: "Is this tool safe for passport photos and ID documents?", answer: "Yes. Unlike other online tools, FilePilot processes your images entirely within your browser. Your sensitive documents are never uploaded to any server or seen by anyone." },
+                    { question: "Can I resize images for Instagram, LinkedIn, or Twitter?", answer: "Yes. Use the Quick Presets to instantly select the correct dimensions for social media posts, profile pictures, and banners across all major platforms." },
+                ]}
             />
             {/* ── Header ── */}
             <div className="page-header">

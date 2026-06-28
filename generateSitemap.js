@@ -14,12 +14,16 @@ const escapeXml = (value) =>
 const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...getSitemapEntries().map(({ loc }) => {
-    return [
+  ...getSitemapEntries().map(({ loc, lastmod, changefreq, priority }) => {
+    const parts = [
       '  <url>',
       `    <loc>${escapeXml(loc)}</loc>`,
-      '  </url>',
-    ].join('\n');
+    ];
+    if (lastmod) parts.push(`    <lastmod>${escapeXml(lastmod)}</lastmod>`);
+    if (changefreq) parts.push(`    <changefreq>${escapeXml(changefreq)}</changefreq>`);
+    if (priority) parts.push(`    <priority>${escapeXml(priority)}</priority>`);
+    parts.push('  </url>');
+    return parts.join('\n');
   }),
   '</urlset>',
   '',

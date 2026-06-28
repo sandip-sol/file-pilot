@@ -102,6 +102,7 @@ export const PageSeo = ({
                         "applicationCategory": "UtilityApplication",
                         "operatingSystem": "Any",
                         "isAccessibleForFree": true,
+                        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
                     },
                 ],
         };

@@ -5,7 +5,7 @@ const TOOL_REGISTRY_PATH = new URL('./src/data/toolRegistry.ts', import.meta.url
 export const SITE_URL = 'https://www.filepilot.space/';
 export const CANONICAL_HOST = new URL(SITE_URL).hostname;
 
-export const SITEMAP_ROUTES = [
+export const PRIORITY_SEO_ROUTES = [
   '/',
   '/pdf-tools',
   '/image-tools',
@@ -25,8 +25,6 @@ export const SITEMAP_ROUTES = [
   '/terms',
 ];
 
-export const PRIORITY_SEO_ROUTES = SITEMAP_ROUTES;
-
 const CORE_ROUTE_SEO = {
   '/': {
     title: 'FilePilot - Free Private PDF, Image and File Tools',
@@ -42,6 +40,7 @@ const CORE_ROUTE_SEO = {
     description:
       'Merge, split, compress, convert, annotate, redact, sign, and organize PDFs with free tools that run privately in your browser.',
     h1: 'Free Online PDF Tools',
+    lastmod: '2026-06-28',
     changefreq: 'weekly',
     priority: '0.9',
   },
@@ -50,6 +49,7 @@ const CORE_ROUTE_SEO = {
     description:
       'Compress, resize, crop, convert, watermark, optimize, and edit images with free browser-based tools that do not upload your files.',
     h1: 'Free Online Image Tools',
+    lastmod: '2026-06-28',
     changefreq: 'weekly',
     priority: '0.9',
   },
@@ -59,6 +59,7 @@ const CORE_ROUTE_SEO = {
       'Prepare images for social media, ecommerce, passport photos, favicons, QR codes, and PDF workflows with private browser-based tools.',
     h1: 'Image Workflow Tools',
     shortIntro: 'Focused image workflow tools for real output requirements, processed privately in your browser.',
+    lastmod: '2026-06-28',
     changefreq: 'weekly',
     priority: '0.75',
   },
@@ -68,6 +69,7 @@ const CORE_ROUTE_SEO = {
       'Remove backgrounds, enhance images, upscale photos, and clean edits with AI-assisted tools that run in your browser where supported.',
     h1: 'AI Image Tools',
     shortIntro: 'AI-assisted image tools for background removal, cleanup, enhancement, and upscaling with privacy-first browser processing.',
+    lastmod: '2026-06-28',
     changefreq: 'weekly',
     priority: '0.75',
   },
@@ -276,6 +278,7 @@ const extractToolEntries = (source) => {
         canonicalRoute: isAlias ? route : canonicalSlug ?? route,
         relatedTools: RELATED_ROUTES[route],
         schemaType: 'WebApplication',
+        lastmod: '2026-06-28',
         changefreq: INDEXABLE_ALIAS_ROUTE_SEO[route]?.changefreq ?? 'monthly',
         priority: INDEXABLE_ALIAS_ROUTE_SEO[route]?.priority ?? (route === '/image-requirements' ? '0.9' : '0.8'),
       };
@@ -309,18 +312,13 @@ export const getRouteSeo = (route) => {
 };
 
 export const getSitemapEntries = () => {
-  const routeSeoEntries = getRouteSeoEntries();
-
-  return SITEMAP_ROUTES.map((route) => {
-    const seo = routeSeoEntries.find((entry) => entry.route === route) ?? {};
-    return {
-      route,
-      loc: canonicalUrlForRoute(route),
-      lastmod: seo.lastmod,
-      changefreq: seo.changefreq ?? 'monthly',
-      priority: seo.sitemapPriority ?? seo.priority ?? '0.8',
-    };
-  });
+  return getRouteSeoEntries().map((seo) => ({
+    route: seo.route,
+    loc: canonicalUrlForRoute(seo.route),
+    lastmod: seo.lastmod,
+    changefreq: seo.changefreq ?? 'monthly',
+    priority: seo.sitemapPriority ?? seo.priority ?? '0.8',
+  }));
 };
 
 export const getPrioritySitemapEntries = () => {

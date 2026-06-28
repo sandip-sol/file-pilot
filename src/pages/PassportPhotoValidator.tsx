@@ -20,6 +20,7 @@ import { extractMetadata, type ImageMetadataInfo } from '../utils/image/metadata
 import { formatFileSize, getFormatLabel } from '../utils/image/support';
 import { downloadBlob } from '../utils/image/batchExport';
 import type { ImageFormat } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   CheckCircle,
   AlertTriangle,
@@ -507,12 +508,20 @@ export const PassportPhotoValidator = () => {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
+  const faqItems = [
+    { question: "Which country requirements are supported?", answer: "FilePilot includes validation profiles for common passport photo standards including US, UK, EU, India, and more. You can also create a custom profile with your own dimensions, background colour, and file size limits." },
+    { question: "What photo compliance checks are performed?", answer: "The tool checks technical requirements including image dimensions, aspect ratio, file size limits, and format compatibility. It also provides head positioning guides and optional face detection to help you frame your photo correctly." },
+    { question: "Can I crop and resize my photo?", answer: "Yes. An interactive crop tool with aspect ratio locking, corner handles, and head positioning guides lets you precisely frame your photo. The tool then resizes and exports to the profile's required dimensions." },
+    { question: "Is my photo uploaded to a server?", answer: "No. All processing happens entirely in your browser. Your photo never leaves your device, and no data is collected or stored. The tool does not apply beauty filters or AI-based facial manipulation." },
+  ];
+
   /* ────────────────── RENDER ────────────────── */
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Passport Photo Validator - Check Photo Requirements | FilePilot"
         description="Validate passport photo dimensions, file size, and format against official requirements. Crop, resize, and export. Free, private, browser-based."
+        faqItems={faqItems}
       />
 
       {/* ── Header ── */}
@@ -1203,60 +1212,10 @@ export const PassportPhotoValidator = () => {
           </div>
 
           {/* ═══ FAQ ═══ */}
-          <div className="max-w-3xl mx-auto mt-12">
-            <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
-            <div className="space-y-3">
-              <FAQItem
-                q="Does this tool guarantee my photo will be accepted?"
-                a="No. This tool checks common technical requirements (dimensions, file size, format) but cannot guarantee official acceptance. Always verify the latest requirements from the relevant passport authority."
-              />
-              <FAQItem
-                q="Is my photo uploaded to a server?"
-                a="No. All processing happens entirely in your browser. Your photo never leaves your device, ensuring complete privacy."
-              />
-              <FAQItem
-                q="Can I use this for visa or ID photos too?"
-                a="Yes. You can select a matching profile or use the Custom option to set any dimensions. The same technical checks apply."
-              />
-              <FAQItem
-                q="What if face detection does not work?"
-                a="Face detection depends on browser support (currently Chrome-based browsers only). If unavailable, you can manually position the face using the crop tool and head-positioning guide lines."
-              />
-              <FAQItem
-                q="Does this tool alter my face or apply filters?"
-                a="No. This tool does not apply any beauty filters, face reshaping, or AI-based facial manipulation. It only crops, resizes, and re-encodes your photo."
-              />
-            </div>
-          </div>
+          <FAQSection items={faqItems} />
         </div>
       </div>
     </div>
   );
 };
 
-/* ── FAQ sub-component ── */
-
-const FAQItem = ({ q, a }: { q: string; a: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div className="border border-border rounded-xl overflow-hidden bg-card">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-4 text-left font-medium hover:bg-muted/50 transition-colors"
-        aria-expanded={isOpen}
-      >
-        {q}
-        {isOpen ? (
-          <ChevronUp className="w-5 h-5 text-muted-foreground shrink-0 ml-2" />
-        ) : (
-          <ChevronDown className="w-5 h-5 text-muted-foreground shrink-0 ml-2" />
-        )}
-      </button>
-      {isOpen && (
-        <div className="p-4 pt-0 text-muted-foreground text-sm leading-relaxed border-t border-border/50 bg-muted/20">
-          {a}
-        </div>
-      )}
-    </div>
-  );
-};

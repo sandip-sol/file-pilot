@@ -2,11 +2,11 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   CANONICAL_HOST,
-  SITEMAP_ROUTES,
   SITE_URL,
   canonicalUrlForRoute,
   getNonIndexableRouteEntries,
   getRouteSeo,
+  getSeoRoutes,
   getSitemapEntries,
 } from './seoRoutes.js';
 
@@ -17,6 +17,18 @@ const redirectsPath = new URL('./_redirects', DIST_DIR);
 const errors = [];
 
 const EXPECTED_ROBOTS = `User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://www.filepilot.space/sitemap.xml
@@ -154,7 +166,7 @@ function validateSitemap() {
       continue;
     }
 
-    if (!SITEMAP_ROUTES.includes(route)) fail(`Sitemap includes a route outside SITEMAP_ROUTES: ${route}`);
+    if (!getSeoRoutes().includes(route)) fail(`Sitemap includes a route outside getSeoRoutes(): ${route}`);
     if (nonIndexableRoutes.has(route)) fail(`Sitemap includes a noindex route: ${route}`);
     if (redirectSources.has(route)) fail(`Sitemap includes a redirect source route: ${route}`);
     if (canonicalUrlForRoute(route) !== url) fail(`Sitemap URL is not canonical for ${route}: ${url}`);
@@ -206,7 +218,7 @@ function validateRouteHtml(route) {
 }
 
 function validateSitemapRouteHtml() {
-  for (const route of SITEMAP_ROUTES) validateRouteHtml(route);
+  for (const route of getSeoRoutes()) validateRouteHtml(route);
 }
 
 function validate404() {

@@ -15,6 +15,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           'pdf-lib': ['pdf-lib'],
+          'pdfjs': ['pdfjs-dist'],
         },
       },
     },

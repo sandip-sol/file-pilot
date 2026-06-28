@@ -16,6 +16,7 @@ import {
 } from '../utils/image/support';
 import { downloadBlobFile, downloadZipFromEntries } from '../utils/pdf/export';
 import type { ImageFormat, ImageFileInfo, ResponsiveVariant } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   Globe,
   Sparkles,
@@ -301,11 +302,19 @@ export const WebsiteImageOptimiser = () => {
     return variants.map((v) => `${v.filename} ${v.width}w`).join(', ');
   };
 
+  const faqItems = [
+    { question: "What are responsive images and why do they matter?", answer: "Responsive images serve different sizes to different devices so that mobile users download smaller files and desktop users get full-resolution versions. This improves page load speed and Core Web Vitals scores." },
+    { question: "How does srcset generation work?", answer: "The tool generates multiple resized versions of your image at the widths you select, then provides ready-to-use HTML picture and srcset snippets that browsers use to pick the best variant for each viewport." },
+    { question: "What web-optimised formats are supported?", answer: "You can generate variants in WebP, AVIF, and JPEG. WebP offers strong compression with broad browser support, while AVIF provides even better compression for browsers that support it." },
+    { question: "Does this tool improve my website's performance?", answer: "Yes. Serving correctly sized images in modern formats like WebP can significantly reduce page weight and improve Largest Contentful Paint (LCP). All processing happens locally in your browser." },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Website Image Optimiser - Responsive Images for the Web"
         description="Generate optimised, responsive image variants for your website. Create WebP, AVIF, and JPEG versions at multiple sizes with ready-to-use HTML snippets. Free, private, no uploads."
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -786,6 +795,8 @@ export const WebsiteImageOptimiser = () => {
             </>
           )}
         </div>
+
+        <FAQSection items={faqItems} />
       </div>
     </div>
   );

@@ -59,6 +59,12 @@ export const PdfSecurity = () => {
     );
   };
 
+  const faqItems = [
+    { question: 'Does unlocking upload my PDF anywhere?', answer: 'No. Password handling, rendering, and export all stay inside your browser.' },
+    { question: 'Why is protect mode limited?', answer: 'The current browser-only PDF stack in this project does not expose reliable standards-compliant encryption for writing protected PDFs.' },
+    { question: 'What is preserved when unlocking?', answer: 'The unlocked export preserves the visual pages, but it does not preserve the original encrypted structure, interactive forms, or hidden content streams.' },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
@@ -66,6 +72,7 @@ export const PdfSecurity = () => {
         description="Unlock password-protected PDFs locally in your browser and manage browser-first PDF security workflows without server uploads."
         canonicalPath="/pdf-security"
         robots={isCanonicalRoute ? 'index,follow' : 'noindex,follow'}
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -167,13 +174,7 @@ export const PdfSecurity = () => {
         </div>
       </div>
 
-      <FAQSection
-        items={[
-          { question: 'Does unlocking upload my PDF anywhere?', answer: 'No. Password handling, rendering, and export all stay inside your browser.' },
-          { question: 'Why is protect mode limited?', answer: 'The current browser-only PDF stack in this project does not expose reliable standards-compliant encryption for writing protected PDFs.' },
-          { question: 'What is preserved when unlocking?', answer: 'The unlocked export preserves the visual pages, but it does not preserve the original encrypted structure, interactive forms, or hidden content streams.' },
-        ]}
-      />
+      <FAQSection items={faqItems} />
     </div>
   );
 };

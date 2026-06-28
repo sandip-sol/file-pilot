@@ -125,12 +125,19 @@ export const WatermarkPdf = () => {
     }
   };
 
+  const faqItems = [
+    { question: 'Does watermarking upload my PDF?', answer: 'No. The preview and the export both happen locally in the browser.' },
+    { question: 'Can I watermark only a few pages?', answer: 'Yes. Turn off Apply to all pages and enter page numbers such as 1,3,5-8.' },
+    { question: 'Can I use a logo image as a watermark?', answer: 'Yes. Switch to image watermark mode and upload a PNG or JPG logo.' },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Watermark PDF – Add Text or Image Watermarks"
         description="Add text or image watermarks to a PDF locally in your browser. Control opacity, size, rotation, and page targeting."
         canonicalPath="/watermark-pdf"
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -296,13 +303,7 @@ export const WatermarkPdf = () => {
         </div>
       </div>
 
-      <FAQSection
-        items={[
-          { question: 'Does watermarking upload my PDF?', answer: 'No. The preview and the export both happen locally in the browser.' },
-          { question: 'Can I watermark only a few pages?', answer: 'Yes. Turn off Apply to all pages and enter page numbers such as 1,3,5-8.' },
-          { question: 'Can I use a logo image as a watermark?', answer: 'Yes. Switch to image watermark mode and upload a PNG or JPG logo.' },
-        ]}
-      />
+      <FAQSection items={faqItems} />
     </div>
   );
 };

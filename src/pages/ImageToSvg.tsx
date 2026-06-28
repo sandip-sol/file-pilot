@@ -28,6 +28,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '../components/ui/collapsible';
+import { FAQSection } from '../components/FAQSection';
 import {
   ImageIcon,
   Download,
@@ -310,11 +311,19 @@ export const ImageToSvg = () => {
     sourceImage && svgBlobSize > sourceImage.originalSize;
   const highPathCount = result && result.pathCount > 1000;
 
+  const faqItems = [
+    { question: "How does raster to vector conversion work?", answer: "The tool traces the outlines of shapes in your raster image and converts them into scalable SVG paths. It supports monochrome threshold, line art edge detection, and multi-color quantization modes." },
+    { question: "What types of images convert best to SVG?", answer: "Logos, icons, signatures, line art, and simple illustrations produce the best results. Detailed photographs typically generate large SVG files with many paths and may not look accurate." },
+    { question: "Can I edit the resulting SVG file?", answer: "Yes. The output is a standard SVG file that can be opened and edited in any vector graphics editor like Inkscape, Adobe Illustrator, or Figma." },
+    { question: "Does the conversion affect image quality?", answer: "Vector tracing is an approximation, not a pixel-perfect copy. You can adjust smoothing, simplification, and color count settings to balance detail and file size. All processing happens locally in your browser." },
+  ];
+
   return (
     <div>
       <PageSeo
         title="Image to SVG Converter — FilePilot"
         description="Convert raster images into editable SVG vector graphics. Supports monochrome, line art, and multi-color vectorization. Free, private, browser-based."
+        faqItems={faqItems}
       />
       <ToolUsageTracker />
 
@@ -931,6 +940,10 @@ export const ImageToSvg = () => {
             </>
           )}
         </div>
+      </div>
+
+      <div className="container py-8 max-w-5xl mx-auto">
+        <FAQSection items={faqItems} />
       </div>
 
       <RelatedTools />

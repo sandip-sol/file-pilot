@@ -12,6 +12,7 @@ import { detectAiCapabilities, checkImageSizeLimit } from '../utils/ai/capabilit
 import { MAX_UPSCALE_INPUT_PIXELS } from '../utils/ai/types';
 import type { AiProgress, AiProcessingStatus } from '../utils/ai/types';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   ImagePlus, Download, Loader2, RefreshCw, AlertTriangle,
   Info, ZoomIn, Eye,
@@ -127,11 +128,19 @@ export const UpscaleImage = () => {
   const megapixels = file ? ((file.width * file.height) / 1e6).toFixed(1) : '0';
   const outputMp = file ? ((file.width * scale * file.height * scale) / 1e6).toFixed(1) : '0';
 
+  const faqItems = [
+    { question: "What is the maximum upscale factor?", answer: "FilePilot supports 2x and 4x upscaling. 4x upscaling produces the largest output but requires significantly more memory and processing time. The maximum input size is 4 megapixels." },
+    { question: "How does AI super-resolution work?", answer: "The AI model uses a neural network to intelligently add detail and sharpness when enlarging images, rather than simple pixel stretching. This produces much cleaner results, though it cannot perfectly recover details missing from the original." },
+    { question: "What image formats are supported?", answer: "You can upload JPEG, PNG, and WebP images. Output can be saved as PNG (lossless), WebP, or JPEG with adjustable quality. All processing happens locally in your browser." },
+    { question: "How long does upscaling take?", answer: "Processing time depends on image size, upscale factor, and your device's hardware. A typical 2x upscale takes a few seconds, while 4x may take longer. The AI model is downloaded once on first use and cached in your browser." },
+  ];
+
   return (
     <main className="container max-w-4xl py-8 px-4">
       <PageSeo
         title="Upscale Image — AI Super-Resolution | FilePilot"
         description="Enlarge images using AI super-resolution directly in your browser. Increase resolution while preserving detail — no upload needed."
+        faqItems={faqItems}
       />
 
       <div className="mb-6">
@@ -327,6 +336,8 @@ export const UpscaleImage = () => {
           </div>
         </div>
       )}
+
+      <FAQSection items={faqItems} />
     </main>
   );
 };

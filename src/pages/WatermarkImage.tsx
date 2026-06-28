@@ -11,6 +11,7 @@ import {
 } from '../utils/image/canvas';
 import { downloadBlobFile, downloadZipFromEntries } from '../utils/pdf/export';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   Droplets, Sparkles, Download, Loader2, Trash2, Archive, RefreshCw,
   AlertTriangle, Type, Image as ImageIcon, Info,
@@ -240,11 +241,19 @@ export const WatermarkImage = () => {
     });
   }, []);
 
+  const faqItems = [
+    { question: "What types of watermarks can I add?", answer: "You can add text watermarks with custom font, size, color, and shadow, or image/logo watermarks from an uploaded PNG, JPEG, or WebP file. Both types support adjustable position and opacity." },
+    { question: "Can I control the transparency of the watermark?", answer: "Yes. An opacity slider lets you set the watermark transparency from 5% to 100%. This works for both text and image watermarks." },
+    { question: "Can I watermark multiple images at once?", answer: "Yes. You can upload multiple images and apply the same watermark settings to all of them in a single batch. Results are downloaded individually or as a ZIP archive." },
+    { question: "Are my images uploaded to a server?", answer: "No. All watermarking is performed locally in your browser. Your images and logo files are never uploaded, ensuring complete privacy." },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Watermark Image Online - Add Text or Logo Watermarks"
         description="Add text or image watermarks to photos with adjustable position, opacity, and repeat patterns. Free, private, no uploads."
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -522,6 +531,8 @@ export const WatermarkImage = () => {
             </div>
           )}
         </div>
+
+        <FAQSection items={faqItems} />
       </div>
     </div>
   );

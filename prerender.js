@@ -10,7 +10,7 @@ import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getSeoRoutes } from './seoRoutes.js';
+import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeoRoutes } from './seoRoutes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
@@ -140,14 +140,32 @@ function buildJsonLd(route) {
       },
     );
   } else if (!route.startsWith('/blog') && !['/privacy', '/terms'].includes(route)) {
+    const entry = getRouteSeoEntries().find((e) => e.route === route);
+    const category = entry?.category;
+    const CATEGORY_HUBS = {
+      'organize-manage': { route: '/pdf-tools', label: 'PDF Tools' },
+      'edit-annotate': { route: '/pdf-tools', label: 'PDF Tools' },
+      'convert-to-pdf': { route: '/pdf-tools', label: 'PDF Tools' },
+      'convert-from-pdf': { route: '/pdf-tools', label: 'PDF Tools' },
+      'optimize-repair': { route: '/pdf-tools', label: 'PDF Tools' },
+      'secure-pdf': { route: '/pdf-tools', label: 'PDF Tools' },
+      'image-tools': { route: '/image-tools', label: 'Image Tools' },
+      'ai-tools': { route: '/ai-tools', label: 'AI Image Tools' },
+      'workflows': { route: '/image-workflows', label: 'Image Workflows' },
+    };
+    const hub = CATEGORY_HUBS[category];
+    const breadcrumbItems = [
+      { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
+    ];
+    if (hub) {
+      breadcrumbItems.push({ '@type': 'ListItem', position: 2, name: hub.label, item: canonicalUrlForRoute(hub.route) });
+      breadcrumbItems.push({ '@type': 'ListItem', position: 3, name: routeLabel(route), item: url });
+    } else {
+      breadcrumbItems.push({ '@type': 'ListItem', position: 2, name: routeLabel(route), item: url });
+    }
+
     graph.push(
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
-          { '@type': 'ListItem', position: 2, name: routeLabel(route), item: url },
-        ],
-      },
+      { '@type': 'BreadcrumbList', itemListElement: breadcrumbItems },
       {
         '@type': 'WebApplication',
         name: routeLabel(route),
@@ -156,6 +174,7 @@ function buildJsonLd(route) {
         applicationCategory: 'UtilityApplication',
         operatingSystem: 'Any',
         isAccessibleForFree: true,
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       },
     );
   }

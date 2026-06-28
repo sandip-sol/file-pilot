@@ -23,6 +23,7 @@ import {
   getFormatExtension,
   stripBasename,
 } from '../utils/image/support';
+import { FAQSection } from '../components/FAQSection';
 import {
   Share2,
   Sparkles,
@@ -439,11 +440,19 @@ export const SocialMediaResizer = () => {
   /*  Render                                                           */
   /* ---------------------------------------------------------------- */
 
+  const faqItems = [
+    { question: "Which social media platforms are supported?", answer: "FilePilot includes recommended export sizes for Instagram, Facebook, LinkedIn, X (Twitter), YouTube, Pinterest, and TikTok. Each platform has multiple presets covering posts, stories, profile pictures, banners, and more." },
+    { question: "Can I resize for multiple platforms at once?", answer: "Yes. You can select multiple presets across different platforms and process all of them in a single batch. The tool generates one output per preset per source image, and you can download everything as a ZIP file." },
+    { question: "What output quality can I expect?", answer: "Output quality depends on your source image resolution and the selected fit mode. You can choose between cover (crop to fill), contain (fit with padding), or stretch, and adjust JPEG/WebP quality from 10% to 100%." },
+    { question: "Are my images uploaded anywhere?", answer: "No. All processing happens entirely in your browser. Your images are never uploaded to any server, and closing the tab removes all data immediately." },
+  ];
+
   return (
     <div>
       <PageSeo
         title="Social Media Resizer — FilePilot"
         description="Resize images for Instagram, Facebook, LinkedIn, X/Twitter, YouTube, Pinterest, and TikTok. Free, private, browser-based."
+        faqItems={faqItems}
       />
       <ToolUsageTracker />
 
@@ -1070,6 +1079,7 @@ export const SocialMediaResizer = () => {
         </div>
       </div>
 
+      <FAQSection items={faqItems} />
       <RelatedTools />
     </div>
   );

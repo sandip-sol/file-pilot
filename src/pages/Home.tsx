@@ -21,7 +21,7 @@ import {
 import { PageSeo } from '../components/PageSeo';
 import { RecentlyUsedTools } from '../components/RecentlyUsedTools';
 import { discoverableTools, getToolStatus, plannedTools, type ToolDefinition } from '../data/toolRegistry';
-import heroImage from '../assets/hero.png';
+import heroImage from '../assets/hero.webp';
 
 const POPULAR_SLUGS = [
   '/merge',
@@ -337,7 +337,10 @@ export const Home = () => {
                 src={heroImage}
                 alt="FilePilot PDF, image and file tools preview"
                 className="h-auto max-h-[180px] w-full select-none object-contain sm:max-h-[240px] md:max-h-[390px]"
+                width={1254}
+                height={1254}
                 loading="eager"
+                fetchPriority="high"
               />
             </div>
           </div>

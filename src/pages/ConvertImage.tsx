@@ -6,6 +6,7 @@ import { downloadBlobFile, downloadZipFromEntries } from '../utils/pdf/export';
 import { loadImageFile, convertImage, revokeImageUrls } from '../utils/image/processing';
 import { getSupportedExportFormats, getFormatLabel, formatFileSize } from '../utils/image/support';
 import type { ImageFormat, ImageFileInfo, ProcessedImageResult } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   Replace,
   Sparkles,
@@ -171,11 +172,19 @@ export const ConvertImage = () => {
     return '0%';
   };
 
+  const faqItems = [
+    { question: "What image formats are supported for conversion?", answer: "You can convert between JPEG, PNG, WebP, and AVIF formats. AVIF availability depends on your browser's support for the format." },
+    { question: "Does converting an image affect its quality?", answer: "Converting between lossy formats (JPEG, WebP, AVIF) may slightly reduce quality depending on the quality slider setting. Converting to PNG preserves quality since PNG is lossless." },
+    { question: "Can I convert multiple images at once?", answer: "Yes. You can upload and convert multiple images in a single batch. All converted files can be downloaded individually or together as a ZIP archive." },
+    { question: "Are my images uploaded to a server during conversion?", answer: "No. All conversion is performed entirely in your browser using the Canvas API. Your images never leave your device, ensuring complete privacy." },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Convert Image — JPEG, PNG, WebP, AVIF | FilePilot"
         description="Convert images between JPEG, PNG, WebP, and AVIF formats. Processed locally in your browser — no uploads, 100% private."
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -529,6 +538,8 @@ export const ConvertImage = () => {
             </div>
           )}
         </div>
+
+        <FAQSection items={faqItems} />
       </div>
     </div>
   );

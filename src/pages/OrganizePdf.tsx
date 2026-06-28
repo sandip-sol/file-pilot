@@ -124,12 +124,19 @@ export const OrganizePdf = () => {
     }
   };
 
+  const faqItems = [
+    { question: 'Does organizing pages upload my PDF?', answer: 'No. The page previews, rotation, reordering, and export all run in your browser.' },
+    { question: 'Can I rotate every page at once?', answer: 'Yes. Use the rotate-all controls in the left panel to apply a 90 degree turn to the full document.' },
+    { question: 'Can I delete multiple pages together?', answer: 'Yes. Select several thumbnails and use Delete Selected before exporting the final PDF.' },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Organize PDF Pages – Reorder, Rotate, Delete"
         description="Reorder, rotate, and delete PDF pages with drag-and-drop thumbnails. Everything stays private in your browser."
         canonicalPath="/organize-pdf"
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -235,13 +242,7 @@ export const OrganizePdf = () => {
         </div>
       </div>
 
-      <FAQSection
-        items={[
-          { question: 'Does organizing pages upload my PDF?', answer: 'No. The page previews, rotation, reordering, and export all run in your browser.' },
-          { question: 'Can I rotate every page at once?', answer: 'Yes. Use the rotate-all controls in the left panel to apply a 90 degree turn to the full document.' },
-          { question: 'Can I delete multiple pages together?', answer: 'Yes. Select several thumbnails and use Delete Selected before exporting the final PDF.' },
-        ]}
-      />
+      <FAQSection items={faqItems} />
     </div>
   );
 };

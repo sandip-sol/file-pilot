@@ -3,6 +3,7 @@ import { PageSeo } from '../components/PageSeo';
 import { RelatedTools } from '../components/RelatedTools';
 import { ToolUsageTracker } from '../components/ToolUsageTracker';
 import { toast } from 'sonner';
+import { FAQSection } from '../components/FAQSection';
 import {
   LockKeyhole,
   Download,
@@ -610,11 +611,19 @@ export const QrGenerator = () => {
   // Render
   // -----------------------------------------------------------------------
 
+  const faqItems = [
+    { question: "What types of QR codes can I create?", answer: "FilePilot supports URL, plain text, email, phone, SMS, WiFi network, vCard contact, calendar event, and custom raw content QR codes. Each type uses the appropriate encoding format for maximum scanner compatibility." },
+    { question: "What customization options are available?", answer: "You can customize dot style (square, rounded, dots), corner styles, foreground and background colours, transparent backgrounds, margin size, error correction level, and add a custom logo image to the centre of the QR code." },
+    { question: "What download formats are available?", answer: "QR codes can be downloaded as PNG, SVG, or JPEG files at sizes up to 4096 pixels. SVG is ideal for print as it scales to any size without quality loss. You can also copy the QR code directly to your clipboard." },
+    { question: "Will customized QR codes still scan reliably?", answer: "Standard black-and-white QR codes with sufficient contrast scan reliably across all devices. Heavily styled codes, low contrast colours, or large logos may reduce scannability, so always test with multiple devices before printing." },
+  ];
+
   return (
     <div>
       <PageSeo
         title="QR Code Generator — FilePilot"
         description="Create custom QR codes for URLs, WiFi, vCards, events, and more. Customize colors, styles, and add logos. Free, private, and runs entirely in your browser."
+        faqItems={faqItems}
       />
       <ToolUsageTracker />
 
@@ -1007,6 +1016,7 @@ export const QrGenerator = () => {
         </div>
       </main>
 
+      <FAQSection items={faqItems} />
       <RelatedTools />
     </div>
   );

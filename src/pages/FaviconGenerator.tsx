@@ -4,6 +4,7 @@ import { PageSeo } from '../components/PageSeo';
 import { RelatedTools } from '../components/RelatedTools';
 import { ToolUsageTracker } from '../components/ToolUsageTracker';
 import { toast } from 'sonner';
+import { FAQSection } from '../components/FAQSection';
 import {
   Loader2, Download, RefreshCw, Gem, Copy, Check,
   Sparkles,
@@ -143,11 +144,19 @@ export const FaviconGenerator = () => {
 
   const htmlSnippet = generateHtmlSnippet();
 
+  const faqItems = [
+    { question: "What sizes are generated?", answer: "FilePilot generates a complete set of favicon assets including 16x16, 32x32, and 48x48 for browser tabs, 180x180 for Apple touch icons, and 192x192 and 512x512 for Android/PWA icons. All assets are downloadable as a single ZIP file." },
+    { question: "Does it generate ICO files?", answer: "This tool generates PNG favicon assets rather than .ico files, because generating a true ICO format requires a dedicated encoder. Modern browsers support PNG favicons directly, and the tool provides an HTML snippet for referencing them." },
+    { question: "Can I use an SVG image as input?", answer: "Yes. FilePilot accepts PNG, JPEG, WebP, and SVG images as input. Square images work best; non-square images are automatically centered and scaled to fit the square icon area." },
+    { question: "Is my logo uploaded to a server?", answer: "No. All favicon generation happens entirely in your browser. Your logo image is never uploaded to any server, ensuring your brand assets remain private." },
+  ];
+
   return (
     <div>
       <PageSeo
         title="Favicon Generator — FilePilot"
         description="Generate all website favicon and app icon assets from a single image. Creates PNG favicons, Apple touch icons, Android/PWA icons, and a web manifest."
+        faqItems={faqItems}
       />
       <ToolUsageTracker />
 
@@ -331,6 +340,7 @@ export const FaviconGenerator = () => {
         )}
       </div>
 
+      <FAQSection items={faqItems} />
       <RelatedTools />
     </div>
   );

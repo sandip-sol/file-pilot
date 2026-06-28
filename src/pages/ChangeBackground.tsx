@@ -12,6 +12,7 @@ import { detectAiCapabilities, checkImageSizeLimit } from '../utils/ai/capabilit
 import { MAX_INPUT_PIXELS } from '../utils/ai/types';
 import type { AiProgress, AiProcessingStatus } from '../utils/ai/types';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   Replace, Download, Loader2, RefreshCw, Info, Upload,
 } from 'lucide-react';
@@ -273,11 +274,19 @@ export const ChangeBackground = () => {
 
   const isProcessing = status === 'loading-model' || status === 'processing';
 
+  const faqItems = [
+    { question: "What background options are available?", answer: "You can replace the background with a solid colour, a custom gradient, a blurred version of the original image, a preset background, or your own custom image. Each option includes adjustable settings like colour, angle, and blur intensity." },
+    { question: "How good is the AI edge detection?", answer: "The AI model uses a neural network to detect foreground subjects with high accuracy, preserving fine details like hair and edges. You can fine-tune the result with the edge feather slider to soften any remaining artefacts." },
+    { question: "What output formats are supported?", answer: "You can export your result as PNG (with transparency support), WebP, or JPEG. For JPEG output, transparent areas are automatically filled with the selected background colour." },
+    { question: "Is my image uploaded to a server?", answer: "No. All processing happens entirely in your browser using a local AI model. Your images are never uploaded to any server, ensuring complete privacy." },
+  ];
+
   return (
     <main className="container max-w-4xl py-8 px-4">
       <PageSeo
         title="Change Background — AI Background Replacer | FilePilot"
         description="Replace image backgrounds with solid colours, gradients, blur, or custom images using AI — all in your browser."
+        faqItems={faqItems}
       />
 
       <div className="mb-6">
@@ -502,6 +511,8 @@ export const ChangeBackground = () => {
           </ToolStateMessage>
         </div>
       )}
+
+      <FAQSection items={faqItems} />
     </main>
   );
 };

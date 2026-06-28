@@ -86,6 +86,13 @@ export const PdfToImages = () => {
     );
   };
 
+  const faqItems = [
+    { question: 'Does PDF to images upload my file?', answer: 'No. PDF rendering and image export happen entirely in your browser.' },
+    { question: 'Which image formats can I export?', answer: 'You can export PDF pages as PNG, JPG, or WebP. BMP and TIFF alias pages use this image export workflow as their canonical replacement.' },
+    { question: 'Can I download every page at once?', answer: 'Yes. Use Download All as ZIP to save every exported page in one archive.' },
+    { question: 'Can I convert those images back into a PDF?', answer: 'Yes. Use the linked Images to PDF tool to roundtrip them back into a new document.' },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
@@ -93,6 +100,7 @@ export const PdfToImages = () => {
         description={seo.description}
         canonicalPath={isIndexableRoute ? route : '/pdf-to-images'}
         robots={isIndexableRoute ? 'index,follow' : 'noindex,follow'}
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -203,14 +211,7 @@ export const PdfToImages = () => {
         </div>
       </div>
 
-      <FAQSection
-        items={[
-          { question: 'Does PDF to images upload my file?', answer: 'No. PDF rendering and image export happen entirely in your browser.' },
-          { question: 'Which image formats can I export?', answer: 'You can export PDF pages as PNG, JPG, or WebP. BMP and TIFF alias pages use this image export workflow as their canonical replacement.' },
-          { question: 'Can I download every page at once?', answer: 'Yes. Use Download All as ZIP to save every exported page in one archive.' },
-          { question: 'Can I convert those images back into a PDF?', answer: 'Yes. Use the linked Images to PDF tool to roundtrip them back into a new document.' },
-        ]}
-      />
+      <FAQSection items={faqItems} />
     </div>
   );
 };

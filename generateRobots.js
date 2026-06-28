@@ -5,6 +5,18 @@ const ROBOTS_PATH = new URL('./public/robots.txt', import.meta.url);
 const robots = `User-agent: *
 Allow: /
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://www.filepilot.space/sitemap.xml
 `;
 

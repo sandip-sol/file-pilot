@@ -4,6 +4,7 @@ import { PageSeo } from '../components/PageSeo';
 import { RelatedTools } from '../components/RelatedTools';
 import { ToolUsageTracker } from '../components/ToolUsageTracker';
 import { toast } from 'sonner';
+import { FAQSection } from '../components/FAQSection';
 import {
   Pipette,
   Copy,
@@ -611,11 +612,19 @@ export const ColorPicker = () => {
   /*  Render                                                           */
   /* ================================================================ */
 
+  const faqItems = [
+    { question: "What color formats does the Color Picker support?", answer: "The tool supports HEX, HEX8, RGB, RGBA, HSL, HSLA, HSV, CMYK, and CSS custom property formats. You can copy any format to your clipboard with a single click." },
+    { question: "Can I pick colors from an uploaded image?", answer: "Yes. Upload any image and click on it to pick pixel-accurate colors. A magnifying loupe shows a zoomed view of surrounding pixels for precise selection." },
+    { question: "How do I copy a color value?", answer: "Each color format row has a copy button that copies the value to your clipboard. You can also click on saved palette swatches to copy their HEX value instantly." },
+    { question: "Does this tool work in all browsers?", answer: "The core color picking and conversion features work in all modern browsers. The screen EyeDropper feature requires Chromium-based browsers (Chrome, Edge). All processing happens locally in your browser." },
+  ];
+
   return (
     <>
       <PageSeo
         title="Color Picker -- FilePilot"
         description="Pick colours from images, extract palettes, and copy colour values in HEX, RGB, HSL, HSV, CMYK, and CSS variable formats. All processing happens locally in your browser."
+        faqItems={faqItems}
       />
       <ToolUsageTracker />
 
@@ -1279,6 +1288,10 @@ export const ColorPicker = () => {
           </p>
         </div>
       </main>
+
+      <div className="container max-w-5xl">
+        <FAQSection items={faqItems} />
+      </div>
 
       <RelatedTools />
     </>

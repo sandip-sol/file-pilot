@@ -7,6 +7,7 @@ import { loadImageFile, revokeImageUrls } from '../utils/image/processing';
 import { analyzeImage, ALL_USE_CASES } from '../utils/image/analysis';
 import type { IntendedUse } from '../utils/image/analysis';
 import type { ImageFileInfo, AnalysisResult, Recommendation } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   FileSearch,
   Sparkles,
@@ -128,11 +129,19 @@ export const ImageQualityAnalyzer = () => {
       }, {})
     : {};
 
+  const faqItems = [
+    { question: "What quality metrics are analyzed?", answer: "FilePilot checks image dimensions, megapixels, file size, format, aspect ratio, estimated DPI, colour depth, and transparency support. Each metric is evaluated against the requirements of your selected intended use." },
+    { question: "What recommendations does the analyzer provide?", answer: "Based on your intended use (web, print, social media, etc.), the tool provides categorized recommendations covering quality, dimensions, file weight, format suitability, and privacy concerns like embedded metadata." },
+    { question: "What image formats are supported?", answer: "The analyzer supports all common image formats including JPEG, PNG, WebP, GIF, and more. It detects the format automatically and advises whether it is suitable for your intended use." },
+    { question: "Is my image uploaded to a server?", answer: "No. All analysis happens entirely in your browser. Your image is never uploaded to any server, ensuring complete privacy for sensitive or proprietary images." },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Image Quality Analyzer - Check Image Resolution & Format"
         description="Analyze image quality, resolution, file size, and format suitability for web, print, and social media. Free, private, no uploads."
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -318,6 +327,8 @@ export const ImageQualityAnalyzer = () => {
           )}
         </div>
       </div>
+
+      <FAQSection items={faqItems} />
     </div>
   );
 };

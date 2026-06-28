@@ -4,6 +4,7 @@ import { PageSeo } from '../components/PageSeo';
 import { RelatedTools } from '../components/RelatedTools';
 import { ToolUsageTracker } from '../components/ToolUsageTracker';
 import { toast } from 'sonner';
+import { FAQSection } from '../components/FAQSection';
 import {
   Loader2, Download, RefreshCw, X, ShoppingBag, AlertTriangle,
   Image as ImageIcon, Sparkles,
@@ -219,11 +220,19 @@ export const EcommerceImageFormatter = () => {
 
   const upscaleWarnings = sources.filter(s => s.width < targetW || s.height < targetH);
 
+  const faqItems = [
+    { question: "Which marketplace requirements are supported?", answer: "FilePilot includes presets for common e-commerce platforms with recommended dimensions and formats. Presets are starting points; always verify the latest image requirements from each marketplace before uploading." },
+    { question: "Can I add a clean background to product photos?", answer: "Yes. You can set a solid background colour (white is the default for most marketplaces), add padding around the product, and optionally include a drop shadow or border for a professional look." },
+    { question: "Does it support batch processing?", answer: "Yes. You can upload multiple product images and format them all at once with the same settings. Results can be downloaded individually or as a ZIP file, with customizable filename templates." },
+    { question: "Are my product images kept private?", answer: "Yes. All processing happens entirely in your browser. Your product images are never uploaded to any server, making it safe for unreleased or confidential product photos." },
+  ];
+
   return (
     <div>
       <PageSeo
         title="E-commerce Image Formatter — FilePilot"
         description="Prepare product photos with clean backgrounds, consistent dimensions, and marketplace-ready formats. All processing happens locally in your browser."
+        faqItems={faqItems}
       />
       <ToolUsageTracker />
 
@@ -504,6 +513,7 @@ export const EcommerceImageFormatter = () => {
         </div>
       </div>
 
+      <FAQSection items={faqItems} />
       <RelatedTools />
     </div>
   );

@@ -11,6 +11,7 @@ import {
   type ImageAdjustments, getDefaultAdjustments,
   applyAdjustmentsToCanvas, FILTER_PRESETS, applyPreset,
 } from '../utils/image/filters';
+import { FAQSection } from '../components/FAQSection';
 import {
   Sparkles, Download, Loader2, RefreshCw, AlertTriangle,
   RotateCcw, RotateCw, FlipHorizontal, FlipVertical, Undo2, Redo2, Eye,
@@ -261,11 +262,19 @@ export const PhotoEditor = () => {
     setError(null);
   }, [file]);
 
+  const faqItems = [
+    { question: "What editing features are available?", answer: "The editor offers brightness, contrast, saturation, exposure, temperature, tint, highlights, shadows, sharpness, blur, grayscale, sepia, vignette adjustments, plus rotate, flip, text overlay, borders, and preset filters." },
+    { question: "What formats can I export my edited photo in?", answer: "You can export edited images as JPEG, PNG, or WebP. A quality slider is available for JPEG and WebP to control the balance between file size and visual quality." },
+    { question: "Can I undo changes while editing?", answer: "Yes. Full undo and redo support is built in, so you can step back through your editing history at any time. A reset button also restores all settings to their defaults." },
+    { question: "Are my photos uploaded to a server?", answer: "No. All editing is performed locally in your browser using the Canvas API. Your photos are never uploaded, ensuring complete privacy." },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Photo Editor Online - Free Browser-Based Image Editor"
         description="Edit photos with brightness, contrast, filters, text overlay, borders, and more. Free, private, no uploads."
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -490,6 +499,8 @@ export const PhotoEditor = () => {
             </div>
           )}
         </div>
+
+        <FAQSection items={faqItems} />
       </div>
     </div>
   );

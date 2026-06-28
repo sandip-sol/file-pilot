@@ -7,6 +7,7 @@ import { getSupportedExportFormats, formatFileSize } from '../utils/image/suppor
 import { applyTransform, calculateRotatedDimensions, exportCanvas, generateOutputFilename } from '../utils/image/canvas';
 import { downloadBlobFile, downloadZipFromEntries } from '../utils/pdf/export';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
+import { FAQSection } from '../components/FAQSection';
 import {
   RotateCcw, RotateCw, FlipHorizontal, FlipVertical, Sparkles, Download, Loader2,
   Trash2, Archive, RefreshCw, AlertTriangle,
@@ -138,11 +139,19 @@ export const RotateImage = () => {
 
   const hasNonRightAngle = files.some((f) => f.edit.rotation % 90 !== 0);
 
+  const faqItems = [
+    { question: "What rotation angles are supported?", answer: "You can rotate images by 90-degree increments with one click, or enter any custom angle. Non-90-degree rotations expand the canvas and fill corners with a configurable background color." },
+    { question: "Does rotation fix EXIF orientation issues?", answer: "Yes. Since the tool re-renders the image through the Canvas API, EXIF orientation tags are applied visually and the output is saved with the correct orientation baked in." },
+    { question: "Does rotating or flipping reduce image quality?", answer: "The output quality depends on the format and quality slider you choose. For lossless results, export as PNG. JPEG and WebP use lossy compression controlled by the quality setting." },
+    { question: "Are my images uploaded to a server?", answer: "No. All rotation and flipping is performed locally in your browser. Your images are never uploaded, ensuring complete privacy." },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Rotate & Flip Image Online - Free Browser-Based Tool"
         description="Rotate images by any angle and flip horizontally or vertically. Batch support with ZIP download. Free, private, no uploads."
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -413,6 +422,8 @@ export const RotateImage = () => {
             </div>
           )}
         </div>
+
+        <FAQSection items={faqItems} />
       </div>
     </div>
   );

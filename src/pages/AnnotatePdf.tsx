@@ -170,12 +170,19 @@ export const AnnotatePdf = () => {
     }
   };
 
+  const faqItems = [
+    { question: 'Can I add a typed or image signature?', answer: 'Yes. Use Typed signature for a quick name placement or Image signature to upload a signature graphic.' },
+    { question: 'Are the annotations flattened into the export?', answer: 'Yes. The exported PDF burns the current overlay items into the document so the result is easy to share.' },
+    { question: 'Can I move fields after placing them?', answer: 'Yes. Select a tool, click to add it, and drag the overlay item around before exporting.' },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
         title="Fill Forms / Annotate PDF – Text, Highlights, Signatures"
         description="Add text boxes, highlights, checkmarks, dates, and simple signatures to a PDF locally in your browser."
         canonicalPath="/annotate-pdf"
+        faqItems={faqItems}
       />
 
       <div className="page-header">
@@ -370,13 +377,7 @@ export const AnnotatePdf = () => {
         </div>
       </div>
 
-      <FAQSection
-        items={[
-          { question: 'Can I add a typed or image signature?', answer: 'Yes. Use Typed signature for a quick name placement or Image signature to upload a signature graphic.' },
-          { question: 'Are the annotations flattened into the export?', answer: 'Yes. The exported PDF burns the current overlay items into the document so the result is easy to share.' },
-          { question: 'Can I move fields after placing them?', answer: 'Yes. Select a tool, click to add it, and drag the overlay item around before exporting.' },
-        ]}
-      />
+      <FAQSection items={faqItems} />
     </div>
   );
 };
