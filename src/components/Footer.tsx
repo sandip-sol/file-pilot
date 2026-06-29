@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Github, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 export const Footer = () => {
     return (
@@ -13,10 +13,6 @@ export const Footer = () => {
                     <div className="flex items-center gap-8 text-sm text-muted-foreground">
                         <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
                         <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
-                        <a href="https://github.com/sandip-sol/filepilot" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors flex items-center gap-1">
-                            <Github className="w-4 h-4" />
-                            GitHub
-                        </a>
                     </div>
                 </div>
 
