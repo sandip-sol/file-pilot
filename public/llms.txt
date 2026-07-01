@@ -14,6 +14,7 @@ Robots: https://www.filepilot.space/robots.txt
 - [Image Workflow Tools - Format, Validate and Prepare Images | FilePilot](https://www.filepilot.space/image-workflows/): Prepare images for social media, ecommerce, passport photos, favicons, QR codes, and PDF workflows with private browser-based tools.
 - [AI Image Tools - Private Browser-Based Editing | FilePilot](https://www.filepilot.space/ai-tools/): Remove backgrounds, enhance images, upscale photos, and clean edits with AI-assisted tools that run in your browser where supported.
 - [FilePilot Blog - Privacy, PDFs and Image Tools](https://www.filepilot.space/blog/): Articles about privacy-first file processing, browser-based PDF tools, image tools, and why files should stay on your device.
+- [Support FilePilot | Keep private file tools free](https://www.filepilot.space/support/): Support FilePilot and help keep private, browser-based file tools free, ad-free and improving.
 - [Privacy Policy | FilePilot](https://www.filepilot.space/privacy/): Learn how FilePilot protects files with browser-based processing and no server uploads for supported tools.
 - [Terms of Service | FilePilot](https://www.filepilot.space/terms/): Read the terms for using FilePilot browser-based PDF, image, and file tools.
 - [Why Your Files Should Never Leave Your Browser | FilePilot](https://www.filepilot.space/blog/why-files-stay-in-browser/): Learn why browser-based file processing avoids server uploads, reduces privacy risks, and keeps sensitive documents under your control.

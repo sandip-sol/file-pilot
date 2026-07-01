@@ -64,6 +64,7 @@ export const PageSeo = ({
         const pathname = canonicalPath ?? location.pathname;
         const url = canonicalUrlForPath(pathname);
         const isHome = pathname === '/';
+        const isWebPage = ['/support', '/privacy', '/terms'].includes(pathname) || pathname === '/blog' || pathname.startsWith('/blog/');
         const schema = {
             "@context": "https://schema.org",
             "@graph": isHome
@@ -93,6 +94,23 @@ export const PageSeo = ({
                         "isAccessibleForFree": true,
                     },
                 ]
+                : isWebPage
+                    ? [
+                        {
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                { "@type": "ListItem", "position": 1, "name": "FilePilot", "item": SITE_URL },
+                                { "@type": "ListItem", "position": 2, "name": title.replace(/\s+\|\s+FilePilot.*$/i, ''), "item": url },
+                            ],
+                        },
+                        {
+                            "@type": "WebPage",
+                            "name": title,
+                            "url": url,
+                            "description": description,
+                            "isPartOf": { "@id": `${SITE_URL}#website` },
+                        },
+                    ]
                 : [
                     {
                         "@type": "WebApplication",

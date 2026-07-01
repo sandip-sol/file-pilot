@@ -21,6 +21,7 @@ export const PRIORITY_SEO_ROUTES = [
   '/image-formatter',
   '/qr-generator',
   '/blog',
+  '/support',
   '/privacy',
   '/terms',
 ];
@@ -81,6 +82,17 @@ const CORE_ROUTE_SEO = {
     lastmod: '2026-06-26',
     changefreq: 'monthly',
     priority: '0.6',
+  },
+  '/support': {
+    title: 'Support FilePilot | Keep private file tools free',
+    description:
+      'Support FilePilot and help keep private, browser-based file tools free, ad-free and improving.',
+    h1: 'Support FilePilot',
+    shortIntro:
+      'Help keep FilePilot free, private and ad-free while funding new tools, performance improvements and maintenance.',
+    lastmod: '2026-06-29',
+    changefreq: 'monthly',
+    priority: '0.5',
   },
   '/privacy': {
     title: 'Privacy Policy | FilePilot',
@@ -174,6 +186,7 @@ const RELATED_ROUTES = {
   '/image-formatter': ['/social-media-resizer', '/ecommerce-image-formatter', '/compress-image', '/image-requirements'],
   '/qr-generator': ['/favicon-generator', '/image-to-svg', '/image-formatter', '/image-workflows'],
   '/blog': ['/blog/why-files-stay-in-browser', '/blog/privacy-risks-online-pdf-tools', '/privacy', '/pdf-tools'],
+  '/support': ['/pdf-tools', '/image-tools', '/privacy', '/blog'],
   '/privacy': ['/pdf-tools', '/image-tools', '/blog/how-filepilot-keeps-documents-private'],
   '/terms': ['/privacy', '/pdf-tools', '/image-tools'],
 };
@@ -213,7 +226,7 @@ const schemaTypeForRoute = (route, category) => {
   if (route === '/') return 'WebSite';
   if (route.startsWith('/blog/')) return 'Article';
   if (route === '/blog') return 'CollectionPage';
-  if (['/privacy', '/terms'].includes(route)) return 'WebPage';
+  if (['/privacy', '/terms', '/support'].includes(route)) return 'WebPage';
   if (['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools'].includes(route)) return 'CollectionPage';
   if (category) return 'WebApplication';
   return 'WebPage';

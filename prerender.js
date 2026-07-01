@@ -139,6 +139,23 @@ function buildJsonLd(route) {
         isPartOf: { '@id': `${SITE_URL}#website` },
       },
     );
+  } else if (route === '/support') {
+    graph.push(
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
+          { '@type': 'ListItem', position: 2, name: routeLabel(route), item: url },
+        ],
+      },
+      {
+        '@type': 'WebPage',
+        name: routeLabel(route),
+        url,
+        description: seo.description,
+        isPartOf: { '@id': `${SITE_URL}#website` },
+      },
+    );
   } else if (!route.startsWith('/blog') && !['/privacy', '/terms'].includes(route)) {
     const entry = getRouteSeoEntries().find((e) => e.route === route);
     const category = entry?.category;
@@ -198,7 +215,7 @@ function buildStaticRouteContent(route) {
           ? ['/blog', '/privacy', '/pdf-tools', '/image-tools']
           : ['/merge', '/split', '/compress', '/pdf-to-jpg', '/jpg-to-pdf']);
 
-  const isToolRoute = !['/', '/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools', '/blog', '/privacy', '/terms'].includes(route) && !route.startsWith('/blog/');
+  const isToolRoute = !['/', '/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools', '/blog', '/support', '/privacy', '/terms'].includes(route) && !route.startsWith('/blog/');
   const body = isToolRoute
     ? `
       <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <span>${title}</span></nav>

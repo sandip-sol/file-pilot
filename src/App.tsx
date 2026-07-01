@@ -4,6 +4,7 @@ import { Layout } from './components/Layout';
 
 // ─── Core pages ─────────────────────────────────────────────────────────────
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
+const Support = lazy(() => import('./pages/Support').then(m => ({ default: m.Support })));
 const Privacy = lazy(() => import('./pages/Privacy').then(m => ({ default: m.Privacy })));
 const Terms = lazy(() => import('./pages/Terms').then(m => ({ default: m.Terms })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
@@ -154,6 +155,7 @@ function App() {
         <Routes>
           {/* Core */}
           <Route path="/" element={<Home />} />
+          <Route path="/support" element={<Support />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
 

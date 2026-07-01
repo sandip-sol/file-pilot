@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Heart, Menu, X } from 'lucide-react';
 import { forwardRef, useState, type ComponentPropsWithoutRef, type MouseEventHandler } from 'react';
 import {
     discoverableTools,
@@ -187,6 +187,14 @@ export const Navbar = () => {
                     </NavigationMenu>
                 </div>
 
+                <Link
+                    to="/support"
+                    className="hidden h-9 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 lg:inline-flex xl:px-3"
+                >
+                    <Heart className="h-4 w-4" aria-hidden="true" />
+                    Support
+                </Link>
+
                 <ToolSearchDialog />
 
                 {/* Mobile Menu Button */}
@@ -203,6 +211,16 @@ export const Navbar = () => {
             {isMenuOpen && (
                 <div className="lg:hidden bg-background border-t border-border animate-fade-in">
                     <div className="container max-h-[calc(100vh-4rem)] overflow-y-auto py-4">
+                        <Link
+                            to="/support"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="mb-3 flex min-h-12 items-center gap-3 rounded-md p-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20"
+                        >
+                            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-card">
+                                <Heart className="h-4 w-4" aria-hidden="true" />
+                            </span>
+                            Support FilePilot
+                        </Link>
                         {DIRECT_NAV_TOOLS.length > 0 && (
                             <div className="mb-3 space-y-1">
                                 {DIRECT_NAV_TOOLS.map((tool) => (

@@ -61,6 +61,16 @@ npm run dev
 npm run build
 ```
 
+### Support link
+
+Set `VITE_SUPPORT_URL` in your production environment to enable the Support FilePilot donation CTA:
+
+```bash
+VITE_SUPPORT_URL=https://buymeacoffee.com/REPLACE_WITH_USERNAME
+```
+
+The support flow opens the hosted payment partner page in a new tab. FilePilot does not embed donation scripts, widgets, iframes, tracking pixels, or payment processing code.
+
 ## Deployment
 
 ### Netlify
@@ -74,8 +84,7 @@ The `_redirects` file is already configured for SPA routing.
 
 ## Privacy
 
-**Your files never leave your device.**
-All file processing happens entirely within your browser's memory. FilePilot does not need a backend server to store or view your files.
+Your files stay on your device. File processing happens locally in your browser, and files are not uploaded to FilePilot servers.
 
 ## License
 

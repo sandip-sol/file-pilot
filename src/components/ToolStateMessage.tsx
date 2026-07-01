@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { AlertTriangle, CheckCircle2, Info, Loader2 } from 'lucide-react';
 
 type ToolState = 'empty' | 'loading' | 'success' | 'error' | 'hint';
@@ -43,6 +44,16 @@ export const ToolStateMessage = ({ state, title, children, className = '' }: Too
         <div className="min-w-0">
           {title ? <p className="font-semibold text-foreground">{title}</p> : null}
           <div className={title ? 'mt-1' : ''}>{children}</div>
+          {state === 'success' ? (
+            <p className="mt-2 text-xs">
+              <Link
+                to="/support"
+                className="font-semibold text-foreground underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                Enjoying FilePilot? Support its ad-free development.
+              </Link>
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

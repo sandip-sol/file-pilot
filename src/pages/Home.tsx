@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { RecentlyUsedTools } from '../components/RecentlyUsedTools';
+import { SupportFilePilot } from '../components/SupportFilePilot';
 import { discoverableTools, getToolStatus, plannedTools, type ToolDefinition } from '../data/toolRegistry';
 import heroImage from '../assets/hero.webp';
 
@@ -505,6 +506,10 @@ export const Home = () => {
             })}
           </div>
         )}
+      </section>
+
+      <section className="container pb-8 md:pb-10">
+        <SupportFilePilot />
       </section>
 
       {/* ── Privacy footer ──────────────────────────────────────────── */}
