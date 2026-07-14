@@ -8,9 +8,10 @@
 
 import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
-import { join, dirname } from 'path';
+import { extname, join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeoRoutes } from './seoRoutes.js';
+import { toolContent } from './src/data/toolContent.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
@@ -19,6 +20,37 @@ const PORT = 4173;
 const ROUTES = getSeoRoutes();
 const INDEXABLE_ROBOTS = 'index,follow';
 const NOINDEX_ROBOTS = 'noindex,follow';
+const TOOL_ROUTE_EXCLUSIONS = new Set([
+  '/',
+  '/pdf-tools',
+  '/image-tools',
+  '/image-workflows',
+  '/ai-tools',
+  '/blog',
+  '/support',
+  '/privacy',
+  '/terms',
+]);
+const CATEGORY_HUBS = {
+  'organize-manage': { route: '/pdf-tools', label: 'PDF Tools' },
+  'edit-annotate': { route: '/pdf-tools', label: 'PDF Tools' },
+  'convert-to-pdf': { route: '/pdf-tools', label: 'PDF Tools' },
+  'convert-from-pdf': { route: '/pdf-tools', label: 'PDF Tools' },
+  'optimize-repair': { route: '/pdf-tools', label: 'PDF Tools' },
+  'secure-pdf': { route: '/pdf-tools', label: 'PDF Tools' },
+  'image-tools': { route: '/image-tools', label: 'Image Tools' },
+  'ai-tools': { route: '/ai-tools', label: 'AI Image Tools' },
+  workflows: { route: '/image-workflows', label: 'Image Workflows' },
+};
+const PDF_CATEGORIES = new Set([
+  'organize-manage',
+  'edit-annotate',
+  'convert-to-pdf',
+  'convert-from-pdf',
+  'optimize-repair',
+  'secure-pdf',
+]);
+const IMAGE_CATEGORIES = new Set(['image-tools', 'workflows', 'ai-tools']);
 const isNetlifyPreview =
   process.env.NETLIFY === 'true' && process.env.CONTEXT && process.env.CONTEXT !== 'production';
 const shouldRenderBingVerification =
@@ -40,6 +72,7 @@ function withRouteSeo(html, route) {
   const escapedTitle = escapeHtml(title);
   const escapedDescription = escapeHtml(description);
   const robots = isNetlifyPreview ? NOINDEX_ROBOTS : INDEXABLE_ROBOTS;
+  const staticSeo = `<div id="root">${buildStaticRouteContent(route)}</div>`;
 
   let nextHtml = html
     .replace(/<title>[^<]*<\/title>/, `<title>${escapedTitle}</title>`)
@@ -52,7 +85,23 @@ function withRouteSeo(html, route) {
     .replace(/<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:title" content="${escapedTitle}">`)
     .replace(/<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:description" content="${escapedDescription}">`)
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, buildJsonLd(route))
-    .replace('<div id="root"></div>', `<div id="root">${buildStaticRouteContent(route)}</div>`);
+    .replace('<div id="root"></div>', staticSeo);
+
+  if (/<body>\s*<div id="root">[\s\S]*<\/div>\s*<noscript>/i.test(nextHtml)) {
+    nextHtml = nextHtml.replace(
+      /<body>\s*<div id="root">[\s\S]*<\/div>\s*<noscript>/i,
+      `<body>\n  ${staticSeo}\n  <noscript>`,
+    );
+  } else if (/<div id="root">\s*<div data-static-seo="true" class="static-seo">[\s\S]*?<\/div>\s*<\/div>/i.test(nextHtml)) {
+    nextHtml = nextHtml.replace(
+      /<div id="root">\s*<div data-static-seo="true" class="static-seo">[\s\S]*?<\/div>\s*<\/div>/i,
+      staticSeo,
+    );
+  }
+
+  nextHtml = nextHtml
+    .replace(/\n?<link\s+rel="modulepreload"[^>]*>/gi, '')
+    .replace(/\n?<script\s+id="(?:page-schema|faq-schema)"\s+type="application\/ld\+json">[\s\S]*?<\/script>/gi, '');
 
   nextHtml = withBingVerification(nextHtml);
 
@@ -76,17 +125,153 @@ function stripBrand(value) {
     .trim();
 }
 
+function routeEntry(route) {
+  return getRouteSeoEntries().find((entry) => entry.route === route);
+}
+
+function isToolRoute(route) {
+  return !TOOL_ROUTE_EXCLUSIONS.has(route) && !route.startsWith('/blog/');
+}
+
+function categoryHubForRoute(route) {
+  return CATEGORY_HUBS[routeEntry(route)?.category];
+}
+
 function routeLabel(route) {
   const seo = getRouteSeo(route);
   return seo.h1 ?? stripBrand(seo.title);
 }
 
-function linkList(routes) {
+function linkList(routes, limit = 5) {
   return routes
     .filter((route) => ROUTES.includes(route))
-    .slice(0, 5)
+    .slice(0, limit)
     .map((route) => `<li><a href="${canonicalUrlForRoute(route)}">${escapeHtml(routeLabel(route))}</a></li>`)
     .join('');
+}
+
+function relatedRoutesFor(route) {
+  const seo = getRouteSeo(route);
+  const hub = categoryHubForRoute(route)?.route;
+  return [...new Set([hub, ...(seo.relatedTools ?? [])])]
+    .filter(Boolean)
+    .filter((relatedRoute) => relatedRoute !== route && ROUTES.includes(relatedRoute))
+    .slice(0, 5);
+}
+
+function getFaqItems(route) {
+  if (!isToolRoute(route)) return [];
+
+  const seo = getRouteSeo(route);
+  const content = toolContent[route];
+  const title = routeLabel(route);
+  const action = content?.action ?? seo.h1 ?? title.toLowerCase();
+  const category = routeEntry(route)?.category ?? '';
+  const isImageTool = IMAGE_CATEGORIES.has(category);
+  const fileNoun = isImageTool ? 'images' : 'PDF files';
+
+  return [
+    {
+      question: `Is it safe to ${action} online?`,
+      answer: `${title} runs in your browser, so your ${fileNoun} stay on your device instead of being uploaded to FilePilot servers. That makes it suitable for private documents, work files, personal photos, and other sensitive material.`,
+    },
+    {
+      question: `Are my files uploaded when I use ${title}?`,
+      answer: `No. The tool uses local browser APIs and client-side libraries to process the file in memory. Closing the tab clears the working state from the browser session.`,
+    },
+    {
+      question: `Does ${title} reduce quality?`,
+      answer: category === 'optimize-repair' || route.includes('compress')
+        ? `${title} is designed to reduce file size while keeping output usable. Where quality settings are available, choose a higher quality level for print or archive copies.`
+        : `${title} preserves the original content wherever the operation allows it. Conversion and resizing tools may expose quality or size controls so you can choose the best output for your use case.`,
+    },
+    {
+      question: `Can I use ${title} without installing software?`,
+      answer: `Yes. FilePilot is a web app, so you can open the tool in a modern browser, complete the job, and download the result without installing a desktop PDF or image editor.`,
+    },
+  ];
+}
+
+function buildFaqSchema(route) {
+  const faqItems = getFaqItems(route);
+  if (!faqItems.length) return null;
+
+  return {
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+}
+
+function toolIntro(route) {
+  const seo = getRouteSeo(route);
+  const entry = routeEntry(route);
+  const content = toolContent[route];
+  const title = routeLabel(route);
+  const hub = categoryHubForRoute(route);
+  const relatedLabels = relatedRoutesFor(route).map(routeLabel).filter((label) => label !== title).slice(0, 3);
+  const useCases = content?.useCases?.slice(0, 4) ?? [];
+  const baseIntro = content?.intro ?? `${title} helps you ${seo.description.replace(/\.$/, '').toLowerCase()} from a browser tab.`;
+  const categoryText = hub
+    ? `${title} sits in FilePilot's ${hub.label.toLowerCase()} collection, so it is easy to move between this task and nearby tools such as ${relatedLabels.join(', ') || 'related conversion and editing tools'}.`
+    : `${title} is part of FilePilot's privacy-first browser toolkit.`;
+  const useCaseText = useCases.length
+    ? `It is useful when you need to ${useCases.map((item) => item.replace(/\.$/, '').toLowerCase()).join('; ')}.`
+    : `It is useful for preparing files for email, archiving, review, printing, publishing, or sharing without routing the original through a remote upload queue.`;
+  const privacyText = `The work happens locally in your browser using client-side processing, which keeps your files on your device and gives crawlers a clear plain-text description of what this page does before the interactive app loads.`;
+  const workflowText = content?.steps?.length
+    ? `The workflow is straightforward: ${content.steps.map((step) => step.replace(/\.$/, '').toLowerCase()).join('; ')}.`
+    : `Choose your file, review the available settings, preview the result where the tool supports it, and download the finished file when you are ready.`;
+
+  return [baseIntro, categoryText, useCaseText, workflowText, privacyText]
+    .filter(Boolean)
+    .join(' ');
+}
+
+function toolSteps(route) {
+  const content = toolContent[route];
+  if (content?.steps?.length) return content.steps.slice(0, 5);
+
+  const title = routeLabel(route);
+  return [
+    `Choose the file or files you want to use with ${title}.`,
+    'Adjust the available settings for page order, quality, size, format, or output options.',
+    'Preview the result where available and make any final changes.',
+    'Download the finished file from your browser.',
+  ];
+}
+
+function toolUseCases(route) {
+  return toolContent[route]?.useCases?.slice(0, 5) ?? [
+    'Prepare files for email, upload forms, print workflows, or internal review.',
+    'Clean up documents before sharing them with clients, colleagues, or family.',
+    'Convert, organize, or optimize files without installing a separate desktop app.',
+  ];
+}
+
+function faqList(route) {
+  return getFaqItems(route)
+    .map((item) => `<li><strong>${escapeHtml(item.question)}</strong><p>${escapeHtml(item.answer)}</p></li>`)
+    .join('');
+}
+
+function orderedList(items) {
+  return items.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+}
+
+function categoryToolRoutesForHub(route) {
+  const entries = getRouteSeoEntries().filter((entry) => entry.category);
+  if (route === '/pdf-tools') return entries.filter((entry) => PDF_CATEGORIES.has(entry.category)).map((entry) => entry.route);
+  if (route === '/image-tools') return entries.filter((entry) => IMAGE_CATEGORIES.has(entry.category)).map((entry) => entry.route);
+  if (route === '/image-workflows') return entries.filter((entry) => entry.category === 'workflows').map((entry) => entry.route);
+  if (route === '/ai-tools') return entries.filter((entry) => entry.category === 'ai-tools').map((entry) => entry.route);
+  return [];
 }
 
 function buildJsonLd(route) {
@@ -112,13 +297,13 @@ function buildJsonLd(route) {
         logo: 'https://www.filepilot.space/filepilot_logo.svg',
       },
       {
-        '@type': 'WebApplication',
+        '@type': 'SoftwareApplication',
         '@id': `${url}#app`,
         name: 'FilePilot',
         url,
         description: seo.description,
         applicationCategory: 'UtilityApplication',
-        operatingSystem: 'Any',
+        operatingSystem: 'Web',
         isAccessibleForFree: true,
       },
     );
@@ -156,20 +341,9 @@ function buildJsonLd(route) {
         isPartOf: { '@id': `${SITE_URL}#website` },
       },
     );
-  } else if (!route.startsWith('/blog') && !['/privacy', '/terms'].includes(route)) {
+  } else if (isToolRoute(route)) {
     const entry = getRouteSeoEntries().find((e) => e.route === route);
     const category = entry?.category;
-    const CATEGORY_HUBS = {
-      'organize-manage': { route: '/pdf-tools', label: 'PDF Tools' },
-      'edit-annotate': { route: '/pdf-tools', label: 'PDF Tools' },
-      'convert-to-pdf': { route: '/pdf-tools', label: 'PDF Tools' },
-      'convert-from-pdf': { route: '/pdf-tools', label: 'PDF Tools' },
-      'optimize-repair': { route: '/pdf-tools', label: 'PDF Tools' },
-      'secure-pdf': { route: '/pdf-tools', label: 'PDF Tools' },
-      'image-tools': { route: '/image-tools', label: 'Image Tools' },
-      'ai-tools': { route: '/ai-tools', label: 'AI Image Tools' },
-      'workflows': { route: '/image-workflows', label: 'Image Workflows' },
-    };
     const hub = CATEGORY_HUBS[category];
     const breadcrumbItems = [
       { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
@@ -184,17 +358,20 @@ function buildJsonLd(route) {
     graph.push(
       { '@type': 'BreadcrumbList', itemListElement: breadcrumbItems },
       {
-        '@type': 'WebApplication',
+        '@type': 'SoftwareApplication',
         name: routeLabel(route),
         url,
         description: seo.description,
         applicationCategory: 'UtilityApplication',
-        operatingSystem: 'Any',
+        operatingSystem: 'Web',
         isAccessibleForFree: true,
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       },
     );
   }
+
+  const faqSchema = buildFaqSchema(route);
+  if (faqSchema) graph.push(faqSchema);
 
   if (graph.length === 0) return '';
 
@@ -205,7 +382,7 @@ function buildStaticRouteContent(route) {
   const seo = getRouteSeo(route);
   const title = escapeHtml(routeLabel(route));
   const description = escapeHtml(seo.shortIntro ?? seo.description);
-  const relatedRoutes = seo.relatedTools ?? (route === '/'
+  const relatedRoutes = relatedRoutesFor(route).length ? relatedRoutesFor(route) : (route === '/'
     ? ['/pdf-tools', '/image-tools', '/merge', '/split', '/compress']
     : route === '/pdf-tools'
       ? ['/merge', '/split', '/compress', '/pdf-to-jpg', '/jpg-to-pdf']
@@ -215,26 +392,40 @@ function buildStaticRouteContent(route) {
           ? ['/blog', '/privacy', '/pdf-tools', '/image-tools']
           : ['/merge', '/split', '/compress', '/pdf-to-jpg', '/jpg-to-pdf']);
 
-  const isToolRoute = !['/', '/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools', '/blog', '/support', '/privacy', '/terms'].includes(route) && !route.startsWith('/blog/');
-  const body = isToolRoute
+  const categoryToolRoutes = categoryToolRoutesForHub(route);
+  const body = isToolRoute(route)
     ? `
+      <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a>${categoryHubForRoute(route) ? ` / <a href="${canonicalUrlForRoute(categoryHubForRoute(route).route)}">${escapeHtml(categoryHubForRoute(route).label)}</a>` : ''} / <span>${title}</span></nav>
+      <h1>${title}</h1>
+      <p>${escapeHtml(toolIntro(route))}</p>
+      <section>
+        <h2>How it works</h2>
+        <ol>${orderedList(toolSteps(route))}</ol>
+      </section>
+      <section>
+        <h2>Frequently asked questions</h2>
+        <ul>${faqList(route)}</ul>
+      </section>
+      <section>
+        <h2>Common uses</h2>
+        <ul>${orderedList(toolUseCases(route))}</ul>
+      </section>
+      <section>
+        <h2>Related tools</h2>
+        <ul>${linkList(relatedRoutes)}</ul>
+      </section>
+    `
+    : categoryToolRoutes.length
+      ? `
       <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <span>${title}</span></nav>
       <h1>${title}</h1>
       <p>${description}</p>
       <section>
-        <h2>How it works</h2>
-        <ol>
-          <li>Select your file or files from your device.</li>
-          <li>Choose the settings for this tool and preview the result where available.</li>
-          <li>Download the finished file. Processing happens in your browser, so files are not uploaded to FilePilot.</li>
-        </ol>
+        <h2>All tools in this category</h2>
+        <ul>${linkList(categoryToolRoutes, categoryToolRoutes.length)}</ul>
       </section>
       <section>
-        <h2>Common uses</h2>
-        <p>Use ${title} for everyday document and image workflows such as preparing files for email, organizing scanned pages, creating shareable downloads, reducing file size, or converting content into a format that is easier to archive and send.</p>
-      </section>
-      <section>
-        <h2>Related FilePilot tools</h2>
+        <h2>Explore FilePilot</h2>
         <ul>${linkList(relatedRoutes)}</ul>
       </section>
     `
@@ -251,7 +442,7 @@ function buildStaticRouteContent(route) {
       </section>
     `;
 
-  return `<div data-static-seo="true" class="static-seo">${body}${buildJsonLd(route)}</div>`;
+  return `<div data-static-seo="true" class="static-seo">${body}</div>`;
 }
 
 function writeSeoShells() {
@@ -313,10 +504,15 @@ function startServer() {
   };
 
   const server = createServer((req, res) => {
-    let filePath = join(DIST, req.url === '/' ? '/index.html' : req.url);
-    if (!existsSync(filePath) || !filePath.includes('.')) {
-      filePath = join(DIST, 'index.html');
-    }
+    const requestPath = decodeURIComponent(new URL(req.url ?? '/', `http://localhost:${PORT}`).pathname);
+    const candidates = requestPath === '/'
+      ? [join(DIST, 'index.html')]
+      : [
+          join(DIST, requestPath),
+          join(DIST, requestPath, 'index.html'),
+          join(DIST, 'index.html'),
+        ];
+    const filePath = candidates.find((candidate) => existsSync(candidate) && extname(candidate)) ?? join(DIST, 'index.html');
     const ext = '.' + filePath.split('.').pop();
     const contentType = mime[ext] || 'application/octet-stream';
     try {

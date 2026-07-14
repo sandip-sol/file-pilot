@@ -6,6 +6,7 @@ import {
   canonicalUrlForRoute,
   getNonIndexableRouteEntries,
   getRouteSeo,
+  getRouteSeoEntries,
   getSeoRoutes,
   getSitemapEntries,
 } from './seoRoutes.js';
@@ -67,6 +68,49 @@ function decodeHtml(value) {
     .replaceAll('&amp;', '&')
     .replaceAll('&lt;', '<')
     .replaceAll('&gt;', '>');
+}
+
+function escapeHtml(value) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function stripBrand(value) {
+  return value
+    .replace(/\s+\|\s+FilePilot.*$/i, '')
+    .replace(/\s+-\s+FilePilot.*$/i, '')
+    .trim();
+}
+
+function routeLabel(route) {
+  const seo = getRouteSeo(route);
+  return seo.h1 ?? stripBrand(seo.title);
+}
+
+function isToolRoute(route) {
+  return ![
+    '/',
+    '/pdf-tools',
+    '/image-tools',
+    '/image-workflows',
+    '/ai-tools',
+    '/blog',
+    '/support',
+    '/privacy',
+    '/terms',
+  ].includes(route) && !route.startsWith('/blog/');
+}
+
+function staticSeoBlock(html) {
+  return html.match(/<div data-static-seo="true" class="static-seo">([\s\S]*?)<\/div>\s*<\/div>/i)?.[1] ?? '';
+}
+
+function htmlContainsText(html, text) {
+  return html.includes(text) || html.includes(escapeHtml(text));
 }
 
 function loadRedirectSources() {
@@ -215,6 +259,38 @@ function validateRouteHtml(route) {
   if (ogUrl !== canonical) fail(`${route} has missing or incorrect og:url.`);
   if (!/<h1[\s>]/i.test(html)) fail(`${route} initial HTML has no H1.`);
   if (/<meta\s+name="robots"\s+content="noindex/i.test(html)) fail(`${route} initial HTML contains noindex.`);
+
+  const staticBlock = staticSeoBlock(html);
+  const label = routeLabel(route);
+  if (!staticBlock) fail(`${route} initial HTML is missing the static SEO body block.`);
+  if (route !== '/' && /<h1>FilePilot<\/h1>/i.test(staticBlock)) {
+    fail(`${route} static SEO body contains the homepage H1 instead of route-specific content.`);
+  }
+  if (route !== '/' && !htmlContainsText(staticBlock || html, label)) {
+    fail(`${route} static SEO body does not include the route label "${label}".`);
+  }
+  if (isToolRoute(route)) {
+    if (!/"@type":"SoftwareApplication"/.test(html)) fail(`${route} schema must include SoftwareApplication.`);
+    if (!/"operatingSystem":"Web"/.test(html)) fail(`${route} schema must declare operatingSystem Web.`);
+    if (!/"@type":"FAQPage"/.test(html)) fail(`${route} schema must include FAQPage.`);
+    if (!/Frequently asked questions/i.test(staticBlock)) fail(`${route} static SEO body must include visible FAQ text.`);
+    if (!/Related tools/i.test(staticBlock)) fail(`${route} static SEO body must include related tool links.`);
+  }
+  if (['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools'].includes(route)) {
+    const categoryLinks = getRouteSeoEntries().filter((entry) => {
+      if (!entry.category) return false;
+      if (route === '/pdf-tools') return ['organize-manage', 'edit-annotate', 'convert-to-pdf', 'convert-from-pdf', 'optimize-repair', 'secure-pdf'].includes(entry.category);
+      if (route === '/image-tools') return ['image-tools', 'workflows', 'ai-tools'].includes(entry.category);
+      if (route === '/image-workflows') return entry.category === 'workflows';
+      if (route === '/ai-tools') return entry.category === 'ai-tools';
+      return false;
+    });
+    for (const entry of categoryLinks) {
+      if (!staticBlock.includes(canonicalUrlForRoute(entry.route))) {
+        fail(`${route} static SEO hub is missing category link for ${entry.route}.`);
+      }
+    }
+  }
 }
 
 function validateSitemapRouteHtml() {

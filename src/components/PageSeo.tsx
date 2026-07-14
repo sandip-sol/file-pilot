@@ -85,12 +85,12 @@ export const PageSeo = ({
                         "logo": `${SITE_URL}filepilot_logo.svg`,
                     },
                     {
-                        "@type": "WebApplication",
+                        "@type": "SoftwareApplication",
                         "name": "FilePilot",
                         "url": SITE_URL,
                         "description": description,
                         "applicationCategory": "UtilityApplication",
-                        "operatingSystem": "Any",
+                        "operatingSystem": "Web",
                         "isAccessibleForFree": true,
                     },
                 ]
@@ -113,12 +113,12 @@ export const PageSeo = ({
                     ]
                 : [
                     {
-                        "@type": "WebApplication",
+                        "@type": "SoftwareApplication",
                         "name": title,
                         "url": url,
                         "description": description,
                         "applicationCategory": "UtilityApplication",
-                        "operatingSystem": "Any",
+                        "operatingSystem": "Web",
                         "isAccessibleForFree": true,
                         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
                     },
