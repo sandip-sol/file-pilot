@@ -209,6 +209,46 @@ function buildFaqSchema(route) {
   };
 }
 
+function howToStepName(text) {
+  const clean = text.replace(/\s+/g, ' ').trim().replace(/[.。]$/, '');
+  const commaIdx = clean.indexOf(',');
+  let name = commaIdx > 10 && commaIdx < 60 ? clean.slice(0, commaIdx) : clean;
+  if (name.length > 60) {
+    name = name.slice(0, 60);
+    const lastSpace = name.lastIndexOf(' ');
+    if (lastSpace > 20) name = name.slice(0, lastSpace);
+  }
+  return name;
+}
+
+function buildHowToSchema(route) {
+  if (!isToolRoute(route)) return null;
+
+  const steps = toolSteps(route);
+  if (!steps.length) return null;
+
+  const seo = getRouteSeo(route);
+  const title = routeLabel(route);
+  const content = toolContent[route];
+  const action = content?.action ?? seo.h1 ?? title.toLowerCase();
+  const url = canonicalUrlForRoute(route);
+
+  return {
+    '@type': 'HowTo',
+    name: `How to ${action} with FilePilot`,
+    description: `Step-by-step guide to ${action} privately in your browser using ${title}. Processing runs locally on your device with no file uploads.`,
+    inLanguage: 'en',
+    tool: { '@type': 'HowToTool', name: title },
+    step: steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: howToStepName(step),
+      text: step,
+      url: `${url}#step-${index + 1}`,
+    })),
+  };
+}
+
 function toolIntro(route) {
   const seo = getRouteSeo(route);
   const entry = routeEntry(route);
@@ -263,6 +303,12 @@ function faqList(route) {
 
 function orderedList(items) {
   return items.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+}
+
+function stepsList(items) {
+  return items
+    .map((item, index) => `<li id="step-${index + 1}">${escapeHtml(item)}</li>`)
+    .join('');
 }
 
 function categoryToolRoutesForHub(route) {
@@ -373,6 +419,9 @@ function buildJsonLd(route) {
   const faqSchema = buildFaqSchema(route);
   if (faqSchema) graph.push(faqSchema);
 
+  const howToSchema = buildHowToSchema(route);
+  if (howToSchema) graph.push(howToSchema);
+
   if (graph.length === 0) return '';
 
   return `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
@@ -400,7 +449,7 @@ function buildStaticRouteContent(route) {
       <p>${escapeHtml(toolIntro(route))}</p>
       <section>
         <h2>How it works</h2>
-        <ol>${orderedList(toolSteps(route))}</ol>
+        <ol>${stepsList(toolSteps(route))}</ol>
       </section>
       <section>
         <h2>Frequently asked questions</h2>

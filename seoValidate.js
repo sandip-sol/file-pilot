@@ -273,6 +273,7 @@ function validateRouteHtml(route) {
     if (!/"@type":"SoftwareApplication"/.test(html)) fail(`${route} schema must include SoftwareApplication.`);
     if (!/"operatingSystem":"Web"/.test(html)) fail(`${route} schema must declare operatingSystem Web.`);
     if (!/"@type":"FAQPage"/.test(html)) fail(`${route} schema must include FAQPage.`);
+    if (!/"@type":"HowTo"/.test(html)) fail(`${route} schema must include HowTo.`);
     if (!/Frequently asked questions/i.test(staticBlock)) fail(`${route} static SEO body must include visible FAQ text.`);
     if (!/Related tools/i.test(staticBlock)) fail(`${route} static SEO body must include related tool links.`);
   }
