@@ -48,13 +48,13 @@ Three winnable fronts, in priority order:
 
 ### Phase 0 — This week (quick wins, ~1 day total)
 
-| # | Task | Why |
+| # | Task | Status |
 |---|---|---|
-| 0.1 | **Verify indexation.** In GSC → Pages, confirm all 95 sitemap URLs are "Indexed." Fix any "Crawled – not indexed" (usually thin/duplicate). | Impressions on only some pages = wasted inventory. |
-| 0.2 | **Add HowTo schema** to every tool page (you have 0). Each tool is literally a how-to. | Wins how-to rich results + heavily boosts AI/LLM citation (ChatGPT, Perplexity, AI Overviews). |
-| 0.3 | **Submit to IndexNow + GSC** after every deploy. You already have the script — run `npm run indexnow:submit` on each release. | Fastest recrawl. |
-| 0.4 | **Pick your 12 "winnable tail" tools** (list in §2.1) and tag them as priority. | Focuses the next 3 months. |
-| 0.5 | **Fix the brand collision.** "FilePilot" collides with the popular *File Pilot* Windows file manager. Always brand as **"FilePilot"** (one word) + tagline "private browser-based file tools" in titles/OG, so branded search and AI don't confuse you. | Protects branded CTR. |
+| 0.1 | **Verify indexation.** In GSC → Pages, confirm all 95 sitemap URLs are "Indexed." Fix any "Crawled – not indexed" (usually thin/duplicate). | ⏳ **Manual** — checklist in [docs/PRIORITY_TOOLS.md](docs/PRIORITY_TOOLS.md#phase-0-manual-checklist--cant-be-automated--do-in-the-browser). |
+| 0.2 | **Add HowTo schema** to every tool page. Each tool is literally a how-to. | ✅ **Done** — `buildHowToSchema` in `prerender.js`, live on 83 tool pages, gated in `seoValidate.js`. |
+| 0.3 | **Submit to IndexNow + GSC** after every deploy. | ✅ **Tooling done** — `npm run indexnow:submit:tail` / `:all` added. GSC request-indexing is manual (see checklist). |
+| 0.4 | **Pick your 12 "winnable tail" tools and tag them as priority.** | ✅ **Done** — `PRIORITY_TAIL_ROUTES` in `seoRoutes.js` (sitemap priority 0.85); keyword targets in [docs/PRIORITY_TOOLS.md](docs/PRIORITY_TOOLS.md). |
+| 0.5 | **Fix the brand collision** with the *File Pilot* Windows file manager. | ✅ **Done** — enriched homepage `Organization` schema (`alternateName` + disambiguating `description`). Titles already use one-word "FilePilot". |
 
 ### Phase 1 — Weeks 1–4: Win the long tail
 

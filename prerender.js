@@ -339,8 +339,10 @@ function buildJsonLd(route) {
         '@type': 'Organization',
         '@id': `${url}#organization`,
         name: 'FilePilot',
+        alternateName: 'FilePilot File Tools',
         url,
         logo: 'https://www.filepilot.space/filepilot_logo.svg',
+        description: 'FilePilot is a free, privacy-first web app offering browser-based PDF, image, and file tools that process files locally on your device without uploads.',
       },
       {
         '@type': 'SoftwareApplication',

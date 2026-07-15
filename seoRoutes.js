@@ -26,6 +26,32 @@ export const PRIORITY_SEO_ROUTES = [
   '/terms',
 ];
 
+// Phase 1 SEO focus set: low-competition, winnable long-tail tools.
+// These are boosted in the sitemap and can be submitted to IndexNow via
+// `npm run indexnow:submit:tail`. See docs/PRIORITY_TOOLS.md for the
+// target keyword for each route and the rationale. Keep this list to the
+// dozen tools we are actively optimizing so the priority signal stays meaningful.
+export const PRIORITY_TAIL_ROUTES = [
+  '/pdf-to-cbz',
+  '/posterize-pdf',
+  '/n-up-pdf',
+  '/add-page-labels',
+  '/image-to-svg',
+  '/combine-single-page',
+  '/pdf-to-greyscale',
+  '/remove-image-metadata',
+  '/flatten-pdf',
+  '/json-to-pdf',
+  '/markdown-to-pdf',
+  '/pdf-to-zip',
+];
+
+const PRIORITY_TAIL_ROUTE_SET = new Set(PRIORITY_TAIL_ROUTES);
+
+// Sitemap priority for the focus tools. Above the 0.8 tool default but below
+// the 0.9 category hubs, so the relative importance ordering stays honest.
+const PRIORITY_TAIL_SITEMAP_PRIORITY = '0.85';
+
 const CORE_ROUTE_SEO = {
   '/': {
     title: 'FilePilot - Free Private PDF, Image and File Tools',
@@ -240,7 +266,9 @@ const withSeoFields = (entry) => ({
   shortIntro: entry.shortIntro ?? entry.description,
   relatedTools: entry.relatedTools ?? RELATED_ROUTES[entry.route] ?? DEFAULT_RELATED_ROUTES,
   schemaType: entry.schemaType ?? schemaTypeForRoute(entry.route, entry.category),
-  sitemapPriority: entry.sitemapPriority ?? entry.priority ?? '0.8',
+  sitemapPriority: PRIORITY_TAIL_ROUTE_SET.has(entry.route)
+    ? PRIORITY_TAIL_SITEMAP_PRIORITY
+    : entry.sitemapPriority ?? entry.priority ?? '0.8',
 });
 
 const toToolSeoTitle = (title) => {

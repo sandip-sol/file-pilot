@@ -1,10 +1,12 @@
-import { CANONICAL_HOST, PRIORITY_SEO_ROUTES, SITE_URL, canonicalUrlForRoute, getSeoRoutes } from './seoRoutes.js';
+import { CANONICAL_HOST, PRIORITY_SEO_ROUTES, PRIORITY_TAIL_ROUTES, SITE_URL, canonicalUrlForRoute, getSeoRoutes } from './seoRoutes.js';
 
 const ENDPOINT = 'https://api.indexnow.org/indexnow';
 const key = process.env.INDEXNOW_KEY?.trim();
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 const usePriorityRoutes = args.includes('--priority');
+const useTailRoutes = args.includes('--tail');
+const useAllRoutes = args.includes('--all');
 const submittedArgs = args.filter((arg) => !arg.startsWith('--'));
 const indexableRoutes = new Set(getSeoRoutes());
 const canonicalUrls = new Map(getSeoRoutes().map((route) => [canonicalUrlForRoute(route), route]));
@@ -12,7 +14,9 @@ const canonicalUrls = new Map(getSeoRoutes().map((route) => [canonicalUrlForRout
 const usage = `Usage:
   npm run indexnow:submit -- --dry-run https://www.filepilot.space/merge/
   npm run indexnow:submit -- https://www.filepilot.space/merge/ https://www.filepilot.space/compress/
-  npm run indexnow:submit:priority -- --dry-run`;
+  npm run indexnow:submit:priority -- --dry-run   # launch/head set
+  npm run indexnow:submit:tail -- --dry-run       # Phase 1 focus tools
+  npm run indexnow:submit:all -- --dry-run        # every indexable route`;
 
 function fail(message) {
   console.error(message);
@@ -43,8 +47,15 @@ function validateUrl(value) {
 }
 
 function getUrlList() {
-  const urls = usePriorityRoutes ? PRIORITY_SEO_ROUTES.map(canonicalUrlForRoute) : submittedArgs;
-  if (urls.length === 0) fail('Provide one or more changed canonical URLs, or use --priority for the launch set.');
+  let urls;
+  if (useAllRoutes) urls = getSeoRoutes().map(canonicalUrlForRoute);
+  else if (useTailRoutes) urls = PRIORITY_TAIL_ROUTES.map(canonicalUrlForRoute);
+  else if (usePriorityRoutes) urls = PRIORITY_SEO_ROUTES.map(canonicalUrlForRoute);
+  else urls = submittedArgs;
+
+  if (urls.length === 0) {
+    fail('Provide one or more changed canonical URLs, or use --priority / --tail / --all for a predefined set.');
+  }
 
   return [...new Set(urls.map(validateUrl))];
 }

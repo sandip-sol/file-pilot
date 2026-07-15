@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "seo:validate": "node seoValidate.js",
     "indexnow:submit": "node indexnow.js",
-    "indexnow:submit:priority": "node indexnow.js --priority"
+    "indexnow:submit:priority": "node indexnow.js --priority",
+    "indexnow:submit:tail": "node indexnow.js --tail",
+    "indexnow:submit:all": "node indexnow.js --all"
   },
   "dependencies": {
     "@imgly/background-removal": "^1.7.0",
