@@ -1,90 +1,95 @@
 # FilePilot
 
-> Smart tools for PDFs, images and files.
+> **Private, browser-based PDF & image tools that never upload your files.**
 
-FilePilot is a private, browser-based toolkit to edit, convert, optimise and organise PDFs, images and files. All processing happens locally using WebAssembly and JavaScript, so files stay on your device.
+[filepilot.space](https://www.filepilot.space) is a free toolkit of 90+ utilities to
+**merge, split, convert, compress, edit and organise PDFs and images** — all processed
+**locally in your browser** with WebAssembly, Canvas, and client-side JavaScript. Your
+files never touch a server.
 
-## Features
+Most online PDF/image tools upload your document, process it on their infrastructure,
+and send a copy back. FilePilot doesn't upload anything. That makes it safe for
+contracts, financial statements, ID scans, medical records, and anything else you would
+rather not hand to a third party.
 
-### PDF Tools
-- **Merge PDFs** - Combine multiple PDF files into one
-- **Split PDF** - Extract pages or split into separate files
-- **Compress PDF** - Reduce file size while maintaining quality
-- **Images to PDF** - Convert JPG, PNG, and WebP images to a single PDF
+## Why it's different
 
-### Image Tools
-- **Image Formatter** - Resize, compress, and convert images
-  - **Resize**: Exact pixel dimensions with Cover/Contain modes
-  - **Compress**: Enforce maximum file size, such as under 100KB
-  - **Convert**: Switch between JPG, PNG, and WebP
-  - **Presets**: Ready-made templates for passports, visas, social media, and e-commerce
+- 🔒 **No uploads.** Files are read into browser memory and processed on your device. Close the tab and the working state is gone.
+- 🆓 **Free, no signup, no watermarks, no ads.**
+- ⚡ **Instant.** No upload/download round-trip to a server.
+- 🤖 **AI-search ready.** Ships `llms.txt`, HowTo/FAQ structured data, and per-tool prerendered content.
 
-## SEO & Performance
-- **Optimized Meta Tags**: Custom `PageSeo` component for dynamic titles and descriptions
-- **Structured Data**: JSON-LD schemas for `WebApplication` and `FAQPage`
-- **Sitemap & Robots**: Auto-generated for better crawlability
-- **Bing IndexNow**: Submit all sitemap URLs using `npm run indexnow`
-- **Fast**: Zero-layout shift, client-side routing
+## Tools
 
-## Tech Stack
+**PDF** — merge, split, organise, rotate, delete/extract pages, compress, N-up,
+posterize, booklet, page numbers & labels, flatten, redact, watermark, sign, repair,
+metadata, security, and conversions to/from images, SVG, CBZ, ZIP, JSON, Markdown, text.
 
-- **Framework**: React + TypeScript + Vite
-- **Styling**: TailwindCSS + Lucide React
-- **PDF Processing**: `pdf-lib` + `jszip`
-- **Image Processing**: Canvas API, client-side
-- **Notifications**: `sonner`
+**Image** — compress, resize, crop, convert (JPG/PNG/WebP/SVG/BMP), watermark, remove
+metadata (EXIF/GPS), vectorise to SVG, favicon & QR generation, social/e-commerce/passport
+presets, and AI-assisted background removal, upscaling and object removal.
 
-## Getting Started
+See the full list at [filepilot.space](https://www.filepilot.space) or in
+[`public/llms.txt`](public/llms.txt).
 
-### Prerequisites
+## Tech stack
 
-- Node.js 18+
-- npm or yarn
+- **Framework:** React + TypeScript + Vite
+- **Styling:** TailwindCSS + Lucide
+- **PDF:** `pdf-lib`, `pdfjs-dist`, `jszip`
+- **Image / AI:** Canvas API, `onnxruntime-web`, `@imgly/background-removal`
+- **Hosting:** Netlify (static, SPA redirects in `_redirects`)
 
-### Installation
+## SEO architecture
+
+- **Prerendering** (`prerender.js`, Puppeteer): every route ships crawlable static HTML with per-tool content before the app hydrates.
+- **Single source of truth:** `src/data/toolContent.ts` drives each tool's title, description, FAQs and steps — consumed by both the prerenderer and the client `PageSeo` component, so the rendered DOM stays consistent.
+- **Structured data:** JSON-LD `SoftwareApplication`, `BreadcrumbList`, `FAQPage`, and `HowTo` per tool page.
+- **Generated at build:** `sitemap.xml`, `robots.txt`, `llms.txt`, IndexNow key.
+- **Validated at build:** `seoValidate.js` gates the build on SEO invariants across all sitemap URLs.
+- See [`SEO_ROADMAP.md`](SEO_ROADMAP.md) for the growth strategy.
+
+## Getting started
 
 ```bash
-git clone https://github.com/sandip-sol/filepilot.git
-cd filepilot
+git clone https://github.com/sandip-sol/file-pilot.git
+cd file-pilot
 npm install
-```
-
-### Development
-
-```bash
 npm run dev
 ```
 
-### Build
+## Build
 
 ```bash
-npm run build
+npm run build      # generate SEO files → tsc → vite build → prerender → validate
 ```
 
-### Support link
-
-Set `VITE_SUPPORT_URL` in your production environment to enable the Support FilePilot donation CTA:
+Useful scripts:
 
 ```bash
-VITE_SUPPORT_URL=https://buymeacoffee.com/REPLACE_WITH_USERNAME
+npm run seo:validate           # re-run SEO invariant checks against dist/
+npm run indexnow:submit:all    # ping IndexNow (Bing/Yandex) for every route
+npm run indexnow:submit:tail   # ping only the Phase 1 focus tools
+node generateOgImage.js        # regenerate the 1200×630 social preview image
 ```
 
-The support flow opens the hosted payment partner page in a new tab. FilePilot does not embed donation scripts, widgets, iframes, tracking pixels, or payment processing code.
+`npm run indexnow:*` needs `INDEXNOW_KEY` in the environment.
 
-## Deployment
+## Configuration
 
-### Netlify
+Set `VITE_SUPPORT_URL` to enable the optional "Support FilePilot" donation CTA:
 
-1. Push your code to GitHub
-2. Connect your repo to Netlify
-3. Set build command: `npm run build`
-4. Set publish directory: `dist`
+```bash
+VITE_SUPPORT_URL=https://buymeacoffee.com/yourusername
+```
 
-The `_redirects` file is already configured for SPA routing.
+The support flow opens the hosted payment page in a new tab. FilePilot embeds no
+donation scripts, widgets, iframes, tracking pixels, or payment code.
 
 ## Privacy
 
-Your files stay on your device. File processing happens locally in your browser, and files are not uploaded to FilePilot servers.
+Files are processed locally in your browser and are not uploaded to any FilePilot
+server. See the [privacy policy](https://www.filepilot.space/privacy/).
 
 ## License
 

@@ -101,14 +101,21 @@ site-wide, consumed by the prerenderer, `PageSeo`, and `FAQSection`.
 
 This is the front that actually moves position 55 → page 1. Do it continuously.
 
-| # | Task | Effort |
+> **This phase is human, off-platform work** — launching, listing, posting, emailing.
+> It can't be code-implemented, and faking it (bought links, bot posts) backfires.
+> **Execution kit prepared:** [docs/PHASE2_BACKLINKS.md](docs/PHASE2_BACKLINKS.md) —
+> paste-ready copy in every length, a ranked directory target list with URLs, a
+> Product Hunt launch kit + maker comment, Show HN / outreach templates, and a tracker.
+
+| # | Task | Status |
 |---|---|---|
-| 2.1 | **Launch on Product Hunt** with the privacy angle. | 1 day prep |
-| 2.2 | **List on tool directories:** AlternativeTo, Slant, SaaSHub, Toolfinder, FutureTools, There's An AI For That (AI tools), Product Hunt alternatives lists. | Ongoing |
-| 2.3 | **Submit to "free/privacy tool" roundups** — reach out to bloggers who list PDF tools; pitch the no-upload angle as the hook. | Ongoing |
-| 2.4 | **Reddit / HN / forums** — genuinely answer "how do I merge/convert X without uploading" questions in r/privacy, r/software, r/pdf, StackExchange. Link only when it truly helps. | Weekly |
-| 2.5 | **GitHub presence** — if any utility is open-sourceable, a repo + README linking the site earns a durable DR-90 backlink. | 1 day |
-| 2.6 | **Digital PR angle:** "We built PDF tools that never upload your file — here's why that matters." Pitch to privacy/tech newsletters. | Ongoing |
+| 2.1 | **Launch on Product Hunt** with the privacy angle. | 📋 Kit ready — launch copy, gallery plan, maker comment, prep checklist in the doc. Human to execute. |
+| 2.2 | **List on tool directories** (AlternativeTo, SaaSHub, Slant, G2, Capterra, BetaList…). | 📋 Kit ready — ranked target list + URLs + copy. Human to execute. |
+| 2.3 | **Blogger / roundup outreach.** | 📋 Kit ready — personalised email template. Human to execute. |
+| 2.4 | **Reddit / HN / forums.** | 📋 Kit ready — Show HN + Reddit templates, subreddit list, etiquette rules. Human to execute. |
+| 2.5 | **GitHub presence.** | ✅ **README rewritten** to be link-worthy (privacy-first framing, tool list, architecture). Make the repo public + add topics to earn the backlink. |
+| 2.6 | **Digital PR angle.** | 📋 Covered by the outreach template + the "why no-upload matters" framing. Human to execute. |
+| — | **Social preview image** (supports every earned link). | ✅ **Done** — replaced the 512² square logo with a proper 1200×630 `og-image.png` (generator: `node generateOgImage.js`); wired into OG + Twitter meta and `PageSeo`. |
 
 **Target: 15–30 referring domains by week 10.** That alone should pull average position from ~55 into the 20s for tail terms.
 

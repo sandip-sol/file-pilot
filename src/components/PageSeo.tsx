@@ -19,7 +19,7 @@ const SITE_URL = 'https://www.filepilot.space/';
 const DEFAULT_TITLE = 'FilePilot - PDF, Image and File Tools';
 const DEFAULT_DESCRIPTION =
     'Edit, convert, compress, organise and optimise PDFs, images and files with FilePilot. Your files are processed privately in your browser.';
-const DEFAULT_IMAGE = `${SITE_URL}icon-512.png`;
+const DEFAULT_IMAGE = `${SITE_URL}og-image.png`;
 
 const canonicalUrlForPath = (pathname: string) => {
     const normalizedPath = pathname === '/' ? '/' : pathname.replace(/\/+$/, '');
