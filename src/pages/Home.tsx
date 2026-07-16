@@ -22,6 +22,7 @@ import { PageSeo } from '../components/PageSeo';
 import { RecentlyUsedTools } from '../components/RecentlyUsedTools';
 import { SupportFilePilot } from '../components/SupportFilePilot';
 import { discoverableTools, getToolStatus, plannedTools, type ToolDefinition } from '../data/toolRegistry';
+import { toCanonicalPath, toolPath } from '../lib/routes';
 import heroImage from '../assets/hero.webp';
 
 const POPULAR_SLUGS = [
@@ -196,7 +197,7 @@ const ToolCard = ({ tool }: { tool: ToolDefinition }) => {
 
   return (
     <Link
-      to={tool.slug}
+      to={toolPath(tool.slug)}
       className="group flex h-full flex-col rounded-xl border border-border bg-card/60 backdrop-blur-sm transition-all hover:border-foreground/30 hover:shadow-md"
     >
       <div className={`flex items-center gap-3 rounded-t-xl bg-gradient-to-r ${tool.gradientClassName} px-4 py-3`}>
@@ -226,7 +227,7 @@ const PopularToolCard = ({ tool }: { tool: ToolDefinition }) => {
 
   return (
     <Link
-      to={tool.slug}
+      to={toolPath(tool.slug)}
       className="group relative flex flex-col items-center gap-3 rounded-xl border border-border bg-card/60 p-5 text-center backdrop-blur-sm transition-all hover:border-foreground/30 hover:shadow-md"
     >
       <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${tool.gradientClassName} text-white shadow-sm`}>
@@ -523,7 +524,7 @@ export const Home = () => {
               </p>
             </div>
             <Link
-              to="/privacy"
+              to={toCanonicalPath('/privacy')}
               className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted/60"
             >
               Privacy details <ArrowRight className="h-4 w-4" />

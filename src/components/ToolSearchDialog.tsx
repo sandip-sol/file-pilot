@@ -10,6 +10,7 @@ import {
     CommandList,
 } from './ui/command';
 import { discoverableTools, type ToolDefinition } from '../data/toolRegistry';
+import { toolPath } from '../lib/routes';
 
 const CATEGORY_LABELS: Record<string, string> = {
     'organize-manage': 'Organize & Manage',
@@ -48,7 +49,7 @@ export const ToolSearchDialog = () => {
 
     const selectTool = (slug: string) => {
         setOpen(false);
-        navigate(slug);
+        navigate(toolPath(slug));
     };
 
     return (

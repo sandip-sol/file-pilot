@@ -6,6 +6,7 @@ import { Image as ImageIcon, Loader2, Download, X, RotateCw, ArrowLeft, ArrowRig
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 import { Link, useLocation } from 'react-router-dom';
+import { toCanonicalPath } from '../lib/routes';
 
 const INDEXABLE_IMAGE_TO_PDF_ROUTES = new Set(['/images-to-pdf', '/jpg-to-pdf']);
 
@@ -208,7 +209,7 @@ export const ImagesToPdf = () => {
 
                             <div className="mt-6 rounded-2xl border border-border bg-background p-4 text-sm text-muted-foreground">
                                 <p>Need the reverse workflow?</p>
-                                <Link to="/pdf-to-images" className="mt-2 inline-flex items-center gap-2 font-medium text-foreground hover:underline">
+                                <Link to={toCanonicalPath('/pdf-to-images')} className="mt-2 inline-flex items-center gap-2 font-medium text-foreground hover:underline">
                                     Open PDF to Images
                                 </Link>
                             </div>

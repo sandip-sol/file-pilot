@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Bot, Images, Lock } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { discoverableTools, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
+import { toCanonicalPath, toolPath } from '../lib/routes';
 
 const HUBS = {
   '/image-workflows': {
@@ -35,7 +36,7 @@ const ToolCard = ({ tool }: { tool: ToolDefinition }) => {
 
   return (
     <Link
-      to={tool.slug}
+      to={toolPath(tool.slug)}
       className="group flex h-full flex-col rounded-xl border border-border bg-card/60 backdrop-blur-sm transition-all hover:border-foreground/30 hover:shadow-md"
     >
       <div className={`flex items-center gap-3 rounded-t-xl bg-gradient-to-r ${tool.gradientClassName} px-4 py-3`}>
@@ -101,7 +102,7 @@ export const CategoryHub = ({ hubPath }: { hubPath: keyof typeof HUBS }) => {
         <div className="rounded-xl border border-border bg-card/60 p-6 text-center backdrop-blur-sm">
           <p className="text-sm text-muted-foreground">Need more options?</p>
           <Link
-            to={hub.relatedHref}
+            to={toCanonicalPath(hub.relatedHref)}
             className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-foreground transition-colors hover:text-foreground/80"
           >
             {hub.relatedLabel} <ArrowRight className="h-4 w-4" />

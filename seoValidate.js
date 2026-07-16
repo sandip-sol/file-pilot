@@ -113,6 +113,11 @@ function htmlContainsText(html, text) {
   return html.includes(text) || html.includes(escapeHtml(text));
 }
 
+function routeFromPathname(pathname) {
+  const normalized = pathname.replace(/\/+$/, '');
+  return normalized === '' ? '/' : normalized;
+}
+
 function loadRedirectSources() {
   if (!existsSync(redirectsPath)) return new Set();
   const redirects = readText(redirectsPath);
@@ -217,6 +222,50 @@ function validateSitemap() {
   }
 }
 
+function validateNoScriptLinks(html, route) {
+  const noscriptBlocks = [...html.matchAll(/<noscript\b[^>]*>([\s\S]*?)<\/noscript>/gi)].map((match) => match[1]);
+  if (!noscriptBlocks.length) return;
+
+  const seoRoutes = new Set(getSeoRoutes());
+  const redirectSources = loadRedirectSources();
+  const nonIndexableRoutes = new Set(getNonIndexableRouteEntries().map((entry) => entry.route));
+  const canonicalOrigin = new URL(SITE_URL).origin;
+
+  for (const block of noscriptBlocks) {
+    const hrefs = [...block.matchAll(/href="([^"]+)"/gi)].map((match) => match[1]);
+
+    for (const href of hrefs) {
+      if (href.startsWith('/')) {
+        const linkedRoute = routeFromPathname(href.split(/[?#]/, 1)[0]);
+        if (seoRoutes.has(linkedRoute) || redirectSources.has(linkedRoute) || nonIndexableRoutes.has(linkedRoute)) {
+          fail(`${route} noscript links to non-canonical relative app route: ${href}`);
+        }
+        continue;
+      }
+
+      let parsed;
+      try {
+        parsed = new URL(href);
+      } catch {
+        continue;
+      }
+
+      if (parsed.origin !== canonicalOrigin) continue;
+
+      const linkedRoute = routeFromPathname(parsed.pathname);
+      if (redirectSources.has(linkedRoute)) {
+        fail(`${route} noscript links to redirect source route: ${href}`);
+      }
+      if (nonIndexableRoutes.has(linkedRoute)) {
+        fail(`${route} noscript links to non-indexable route: ${href}`);
+      }
+      if (seoRoutes.has(linkedRoute) && href !== canonicalUrlForRoute(linkedRoute)) {
+        fail(`${route} noscript links to non-canonical URL for ${linkedRoute}: ${href}`);
+      }
+    }
+  }
+}
+
 function validateRedirects() {
   if (!existsSync(redirectsPath)) return;
   const redirects = readText(redirectsPath);
@@ -259,6 +308,7 @@ function validateRouteHtml(route) {
   if (ogUrl !== canonical) fail(`${route} has missing or incorrect og:url.`);
   if (!/<h1[\s>]/i.test(html)) fail(`${route} initial HTML has no H1.`);
   if (/<meta\s+name="robots"\s+content="noindex/i.test(html)) fail(`${route} initial HTML contains noindex.`);
+  validateNoScriptLinks(html, route);
 
   const staticBlock = staticSeoBlock(html);
   const label = routeLabel(route);

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { PageSeo } from '../../components/PageSeo';
+import { toCanonicalPath } from '../../lib/routes';
 
 export const PrivacyRisksOnlinePdfTools = () => {
     return (
@@ -13,7 +14,7 @@ export const PrivacyRisksOnlinePdfTools = () => {
 
             <div className="container max-w-3xl py-10 pb-16">
                 <Link
-                    to="/blog"
+                    to={toCanonicalPath('/blog')}
                     className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
                 >
                     <ArrowLeft className="w-4 h-4" />

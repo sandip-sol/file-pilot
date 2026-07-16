@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { getToolStatus, type ToolDefinition } from '../data/toolRegistry';
+import { toolPath } from '../lib/routes';
 
 interface ToolLinkCardProps {
   tool: ToolDefinition;
@@ -13,7 +14,7 @@ export const ToolLinkCard = ({ tool, compact = false }: ToolLinkCardProps) => {
 
   return (
     <Link
-      to={tool.slug}
+      to={toolPath(tool.slug)}
       className={`group flex h-full min-h-[130px] flex-col rounded-lg border border-border bg-card p-3.5 transition-colors hover:border-foreground/40 hover:bg-muted/60 ${compact ? 'min-h-[112px]' : ''}`}
     >
       <div className="mb-3 flex items-start justify-between gap-3">
@@ -32,4 +33,3 @@ export const ToolLinkCard = ({ tool, compact = false }: ToolLinkCardProps) => {
     </Link>
   );
 };
-

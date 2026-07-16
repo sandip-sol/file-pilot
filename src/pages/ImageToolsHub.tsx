@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Lock, Images } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { discoverableTools, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
+import { toCanonicalPath, toolPath } from '../lib/routes';
 
 const IMAGE_CATEGORIES: { category: ToolCategory; label: string }[] = [
   { category: 'image-tools', label: 'Image Editing & Conversion' },
@@ -23,7 +24,7 @@ const ToolCard = ({ tool }: { tool: ToolDefinition }) => {
 
   return (
     <Link
-      to={tool.slug}
+      to={toolPath(tool.slug)}
       className="group flex h-full flex-col rounded-xl border border-border bg-card/60 backdrop-blur-sm transition-all hover:border-foreground/30 hover:shadow-md"
     >
       <div className={`flex items-center gap-3 rounded-t-xl bg-gradient-to-r ${tool.gradientClassName} px-4 py-3`}>
@@ -108,7 +109,7 @@ export const ImageToolsHub = () => {
             Looking for PDF tools?
           </p>
           <Link
-            to="/pdf-tools"
+            to={toCanonicalPath('/pdf-tools')}
             className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-foreground transition-colors hover:text-foreground/80"
           >
             Browse all PDF tools <ArrowRight className="h-4 w-4" />
@@ -127,7 +128,7 @@ export const ImageToolsHub = () => {
               </p>
             </div>
             <Link
-              to="/privacy"
+              to={toCanonicalPath('/privacy')}
               className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted/60"
             >
               Privacy details <ArrowRight className="h-4 w-4" />

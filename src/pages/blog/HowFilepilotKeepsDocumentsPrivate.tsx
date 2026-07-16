@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { PageSeo } from '../../components/PageSeo';
+import { toCanonicalPath } from '../../lib/routes';
 
 export const HowFilepilotKeepsDocumentsPrivate = () => {
     return (
@@ -13,7 +14,7 @@ export const HowFilepilotKeepsDocumentsPrivate = () => {
 
             <div className="container max-w-3xl py-10 pb-16">
                 <Link
-                    to="/blog"
+                    to={toCanonicalPath('/blog')}
                     className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
                 >
                     <ArrowLeft className="w-4 h-4" />
@@ -167,7 +168,7 @@ export const HowFilepilotKeepsDocumentsPrivate = () => {
                     </p>
                     <p>
                         If you want to learn more about FilePilot's privacy commitments, visit the{' '}
-                        <Link to="/privacy" className="text-primary hover:underline">
+                        <Link to={toCanonicalPath('/privacy')} className="text-primary hover:underline">
                             privacy policy
                         </Link>
                         . If you want to verify the claims in this article, open your browser's developer tools and

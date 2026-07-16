@@ -6,6 +6,7 @@ import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
 import { downloadBlobFile, downloadZipFromEntries } from '../utils/pdf/export';
 import { exportPdfPagesAsImages } from '../utils/pdf/pageTools';
+import { toCanonicalPath } from '../lib/routes';
 
 interface ExportedImageItem {
   pageNumber: number;
@@ -161,7 +162,7 @@ export const PdfToImages = () => {
                 Roundtrip ready
               </div>
               <p>Need to rebuild a PDF from the extracted images?</p>
-              <Link to="/images-to-pdf" className="mt-3 inline-flex items-center gap-2 font-medium text-foreground hover:underline">
+              <Link to={toCanonicalPath('/images-to-pdf')} className="mt-3 inline-flex items-center gap-2 font-medium text-foreground hover:underline">
                 Open Images to PDF
               </Link>
             </div>

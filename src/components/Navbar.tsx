@@ -18,6 +18,7 @@ import {
 } from './ui/navigation-menu';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import { ToolSearchDialog } from './ToolSearchDialog';
+import { toCanonicalPath, toolPath } from '../lib/routes';
 
 type NavCategoryGroup = {
     id: string;
@@ -108,7 +109,7 @@ const ToolMenuLink = forwardRef<HTMLAnchorElement, ToolMenuLinkProps>(({ tool, o
     return (
         <Link
             ref={ref}
-            to={tool.slug}
+            to={toolPath(tool.slug)}
             onClick={onClick}
             className={`group flex min-h-16 gap-3 rounded-md p-3 text-left transition-colors hover:bg-muted focus-visible:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 ${className ?? ''}`}
             {...props}
@@ -175,7 +176,7 @@ export const Navbar = () => {
                                 <NavigationMenuItem key={tool.slug}>
                                     <NavigationMenuLink asChild>
                                         <Link
-                                            to={tool.slug}
+                                            to={toolPath(tool.slug)}
                                             className="flex h-9 items-center rounded-md bg-transparent px-2.5 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 xl:px-3"
                                         >
                                             {tool.shortTitle}
@@ -188,7 +189,7 @@ export const Navbar = () => {
                 </div>
 
                 <Link
-                    to="/support"
+                    to={toCanonicalPath('/support')}
                     className="hidden h-9 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 lg:inline-flex xl:px-3"
                 >
                     <Heart className="h-4 w-4" aria-hidden="true" />
@@ -212,7 +213,7 @@ export const Navbar = () => {
                 <div className="lg:hidden bg-background border-t border-border animate-fade-in">
                     <div className="container max-h-[calc(100vh-4rem)] overflow-y-auto py-4">
                         <Link
-                            to="/support"
+                            to={toCanonicalPath('/support')}
                             onClick={() => setIsMenuOpen(false)}
                             className="mb-3 flex min-h-12 items-center gap-3 rounded-md p-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20"
                         >

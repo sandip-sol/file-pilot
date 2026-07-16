@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AlertTriangle, CheckCircle2, Info, Loader2 } from 'lucide-react';
+import { toCanonicalPath } from '../lib/routes';
 
 type ToolState = 'empty' | 'loading' | 'success' | 'error' | 'hint';
 
@@ -47,7 +48,7 @@ export const ToolStateMessage = ({ state, title, children, className = '' }: Too
           {state === 'success' ? (
             <p className="mt-2 text-xs">
               <Link
-                to="/support"
+                to={toCanonicalPath('/support')}
                 className="font-semibold text-foreground underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Enjoying FilePilot? Support its ad-free development.

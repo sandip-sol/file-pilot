@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { ArrowRight, Home, Search, ShieldCheck } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { discoverableTools, getToolStatus, toolRegistry, type ToolDefinition } from '../data/toolRegistry';
+import { toolPath } from '../lib/routes';
 
 const POPULAR_SLUGS = [
   '/merge',
@@ -26,7 +27,7 @@ const ToolLink = ({ tool }: { tool: ToolDefinition }) => {
   const status = getStatusLabel(tool);
 
   return (
-    <Link to={tool.slug} className="group rounded-lg border border-border bg-card p-4 transition-colors hover:bg-muted">
+    <Link to={toolPath(tool.slug)} className="group rounded-lg border border-border bg-card p-4 transition-colors hover:bg-muted">
       <div className="mb-3 flex items-start justify-between gap-3">
         <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${tool.gradientClassName} text-white`}>
           <Icon className="h-5 w-5" />
