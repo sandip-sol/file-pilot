@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { BRAND_SUFFIX, toolContent } from './src/data/toolContent.ts';
 
 const TOOL_REGISTRY_PATH = new URL('./src/data/toolRegistry.ts', import.meta.url);
 
@@ -211,6 +212,22 @@ const RELATED_ROUTES = {
   '/crop-image': ['/resize-image', '/rotate-image', '/image-formatter', '/compress-image'],
   '/image-formatter': ['/social-media-resizer', '/ecommerce-image-formatter', '/compress-image', '/image-requirements'],
   '/qr-generator': ['/favicon-generator', '/image-to-svg', '/image-formatter', '/image-workflows'],
+  // Phase 1 focus tools: curated topical siblings instead of the generic
+  // DEFAULT_RELATED_ROUTES fallback, so link equity flows between genuinely
+  // related tools rather than back to the same head-term pages every time.
+  '/pdf-to-cbz': ['/pdf-to-images', '/pdf-to-zip', '/extract-images', '/images-to-pdf'],
+  '/posterize-pdf': ['/n-up-pdf', '/pdf-booklet', '/fix-page-size', '/crop-pdf'],
+  '/n-up-pdf': ['/posterize-pdf', '/pdf-booklet', '/combine-single-page', '/grid-combine'],
+  '/add-page-labels': ['/page-numbers', '/organize-pdf', '/bookmark', '/pdf-metadata'],
+  '/image-to-svg': ['/convert-image', '/favicon-generator', '/pdf-to-svg', '/compress-image'],
+  '/combine-single-page': ['/merge', '/n-up-pdf', '/grid-combine', '/pdf-to-images'],
+  '/pdf-to-greyscale': ['/compress', '/pdf-to-images', '/flatten-pdf', '/pdf-to-jpg'],
+  '/remove-image-metadata': ['/pdf-metadata', '/compress-image', '/blur-face', '/privacy'],
+  '/flatten-pdf': ['/form-filler', '/form-creator', '/pdf-security', '/redact-pdf'],
+  '/json-to-pdf': ['/markdown-to-pdf', '/text-to-pdf', '/pdf-to-json', '/pdf-to-markdown'],
+  '/markdown-to-pdf': ['/json-to-pdf', '/text-to-pdf', '/pdf-to-markdown', '/pdf-to-json'],
+  '/pdf-to-zip': ['/split', '/merge', '/extract-pages', '/pdf-to-cbz'],
+
   '/blog': ['/blog/why-files-stay-in-browser', '/blog/privacy-risks-online-pdf-tools', '/privacy', '/pdf-tools'],
   '/support': ['/pdf-tools', '/image-tools', '/privacy', '/blog'],
   '/privacy': ['/pdf-tools', '/image-tools', '/blog/how-filepilot-keeps-documents-private'],
@@ -308,12 +325,21 @@ const extractToolEntries = (source) => {
       }
       if (isAlias && !INDEXABLE_ALIAS_ROUTES.includes(route)) return null;
 
+      // toolContent is the shared source of truth: PageSeo (client) reads the same
+      // seoTitle/seoDescription via toolSeo(), so the prerendered <title> and the
+      // title React sets at runtime stay identical instead of fighting each other.
+      const sharedContent = toolContent[route];
+      const sharedTitle = sharedContent?.seoTitle ? `${sharedContent.seoTitle}${BRAND_SUFFIX}` : null;
+
       return {
         route,
         indexable: true,
-        title: INDEXABLE_ALIAS_ROUTE_SEO[route]?.title ?? toToolSeoTitle(title),
-        description: INDEXABLE_ALIAS_ROUTE_SEO[route]?.description ?? toToolDescription({ title, description, category }),
-        h1: INDEXABLE_ALIAS_ROUTE_SEO[route]?.h1 ?? title,
+        title: INDEXABLE_ALIAS_ROUTE_SEO[route]?.title ?? sharedTitle ?? toToolSeoTitle(title),
+        description:
+          INDEXABLE_ALIAS_ROUTE_SEO[route]?.description
+          ?? sharedContent?.seoDescription
+          ?? toToolDescription({ title, description, category }),
+        h1: INDEXABLE_ALIAS_ROUTE_SEO[route]?.h1 ?? sharedContent?.h1 ?? title,
         shortIntro: INDEXABLE_ALIAS_ROUTE_SEO[route]?.description ?? description,
         category,
         canonicalRoute: isAlias ? route : canonicalSlug ?? route,

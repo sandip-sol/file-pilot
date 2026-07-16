@@ -4,6 +4,7 @@ import { FileUploader } from '../components/FileUploader';
 import { Tag, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const AddPageLabels = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -29,7 +30,7 @@ export const AddPageLabels = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Add Page Labels to PDF – Free & Private" description="Add custom page labels (prefix and start number) to PDF pages. Browser-based." faqItems={[{ question: 'What are page labels?', answer: 'Page labels are custom identifiers like "Appendix A-1" or "ii" added to PDF pages.' }, { question: 'Where do labels appear?', answer: 'Labels are rendered at the bottom center of each page.' }]} />
+            <PageSeo {...toolSeo('/add-page-labels')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-lime-500 to-green-600 text-white flex items-center justify-center shadow-lg"><Tag className="w-6 h-6" /></div></div>
                 <h1>Add Page Labels to PDF</h1><p>Add custom label prefixes and start numbers to your PDF pages.</p>
@@ -54,7 +55,7 @@ export const AddPageLabels = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'What are page labels?', answer: 'Custom identifiers like "App. A-1" added visually to page footers.' }, { question: 'Where do labels appear?', answer: 'Labels are rendered at the bottom center of each page.' }]} />
+            <FAQSection items={toolFaqs('/add-page-labels')} />
         </div>
     );
 };

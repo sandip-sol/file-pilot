@@ -5,6 +5,7 @@ import { flattenPDF } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, Layers, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const FlattenPdf = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -35,15 +36,7 @@ export const FlattenPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Flatten PDF Forms – Make Forms Non-Editable Free"
-                description="Flatten interactive PDF forms to make them non-editable. Embed form field values as permanent text. 100% browser-based, no uploads."
-                faqItems={[
-                    { question: 'What does flattening a PDF do?', answer: 'It converts interactive form fields into static text/graphics, making the PDF non-editable.' },
-                    { question: 'Will form data be preserved?', answer: 'Yes. The values you filled into the form fields will be preserved as static content.' },
-                    { question: 'Is my file uploaded?', answer: 'No. Everything runs locally in your browser.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/flatten-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -98,11 +91,7 @@ export const FlattenPdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What does flattening a PDF do?', answer: 'It converts interactive form fields into static text/graphics, making the PDF non-editable.' },
-                { question: 'Will form data be preserved?', answer: 'Yes. The values you filled into the form fields will be preserved as static content.' },
-                { question: 'Is my file uploaded?', answer: 'No. Everything runs locally in your browser.' },
-            ]} />
+            <FAQSection items={toolFaqs('/flatten-pdf')} />
         </div>
     );
 };

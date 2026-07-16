@@ -5,6 +5,7 @@ import { combineSinglePage } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, AlignVerticalJustifyCenter, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const CombineSinglePage = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -34,14 +35,7 @@ export const CombineSinglePage = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Combine PDF Pages Vertically – Stitch All Pages into One"
-                description="Stitch all pages of a PDF vertically into a single tall page. Great for scrollable documents and web viewing. 100% private."
-                faqItems={[
-                    { question: 'What does this tool do?', answer: 'It stitches all pages of a PDF vertically into a single, very tall page — useful for creating scrollable documents.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/combine-single-page')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -96,10 +90,7 @@ export const CombineSinglePage = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What does this tool do?', answer: 'It stitches all pages of a PDF vertically into a single, very tall page — useful for creating scrollable documents.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/combine-single-page')} />
         </div>
     );
 };

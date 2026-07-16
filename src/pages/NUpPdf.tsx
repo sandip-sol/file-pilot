@@ -5,6 +5,7 @@ import { createNUp } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, LayoutGrid, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 const LAYOUTS = [
     { value: 2, label: '2-Up (2 pages per sheet)', desc: '2 columns × 1 row' },
@@ -42,14 +43,7 @@ export const NUpPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="N-Up PDF – Multiple Pages Per Sheet Online Free"
-                description="Combine 2, 4, 6, or 9 PDF pages onto a single sheet. Save paper and create compact handouts. 100% private — browser only."
-                faqItems={[
-                    { question: 'What is N-Up printing?', answer: 'N-Up combines multiple pages onto a single sheet. 4-Up places 4 pages on one sheet, great for printing handouts.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/n-up-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -116,10 +110,7 @@ export const NUpPdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What is N-Up printing?', answer: 'N-Up combines multiple pages onto a single sheet. 4-Up places 4 pages on one sheet, great for printing handouts.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/n-up-pdf')} />
         </div>
     );
 };

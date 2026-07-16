@@ -5,6 +5,7 @@ import { markdownToPDF } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, FileText, FileCode2, AlignLeft } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const MarkdownToPdf = () => {
     const [markdown, setMarkdown] = useState('');
@@ -64,15 +65,7 @@ code block
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Markdown to PDF – Convert .md Files to PDF Free"
-                description="Convert Markdown text or .md files to PDF in your browser. Supports headings, lists, bold, italic, and code blocks. 100% private."
-                faqItems={[
-                    { question: 'What Markdown features are supported?', answer: 'Headings, bold, italic, lists, blockquotes, and code blocks are parsed and converted to PDF-friendly text.' },
-                    { question: 'Can I upload a .md file?', answer: 'Yes! Switch to the "Upload .md File" tab to upload a Markdown file directly.' },
-                    { question: 'Is my content uploaded to a server?', answer: 'No. Everything runs locally in your browser using JavaScript.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/markdown-to-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -146,11 +139,7 @@ code block
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What Markdown features are supported?', answer: 'Headings, bold, italic, lists, blockquotes, and code blocks are parsed and converted to PDF-friendly text.' },
-                { question: 'Can I upload a .md file?', answer: 'Yes! Switch to the "Upload .md File" tab to upload a Markdown file directly.' },
-                { question: 'Is my content uploaded to a server?', answer: 'No. Everything runs locally in your browser using JavaScript.' },
-            ]} />
+            <FAQSection items={toolFaqs('/markdown-to-pdf')} />
         </div>
     );
 };

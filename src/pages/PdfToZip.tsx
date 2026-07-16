@@ -5,6 +5,7 @@ import { packagePDFsToZip } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, X, Archive, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const PdfToZip = () => {
     const [files, setFiles] = useState<File[]>([]);
@@ -37,14 +38,7 @@ export const PdfToZip = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="PDF to ZIP – Package Multiple PDFs into a ZIP Archive"
-                description="Bundle multiple PDF files into a single compressed ZIP archive for easy sharing and downloading. 100% private."
-                faqItems={[
-                    { question: 'Can I add any number of PDFs?', answer: 'Yes. Add as many PDFs as you like. They will all be compressed into a single ZIP file.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your files never leave your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/pdf-to-zip')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -99,10 +93,7 @@ export const PdfToZip = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Can I add any number of PDFs?', answer: 'Yes. Add as many PDFs as you like. They will all be compressed into a single ZIP file.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your files never leave your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/pdf-to-zip')} />
         </div>
     );
 };

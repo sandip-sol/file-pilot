@@ -58,12 +58,27 @@ Three winnable fronts, in priority order:
 
 ### Phase 1 — Weeks 1–4: Win the long tail
 
-| # | Task | Detail |
+> **Architectural fix landed first (unplanned but blocking).** The site ran *two*
+> competing SEO systems: the prerenderer (`seoRoutes.js`) and client-side `PageSeo`,
+> which overwrote `document.title` and injected a second, different FAQ schema on
+> every page. Because Google renders JS, the client won — so tool pages were indexed
+> with the brand stripped from the title and two conflicting FAQPage blocks. A third
+> copy of the FAQs lived in each page's visible `<FAQSection>`, which *differed* from
+> the schema FAQs — a structured-data guideline violation.
+> `src/data/toolContent.ts` is now the single source of truth for the 12 focus tools
+> (title, description, H1, FAQs, comparison), consumed by the prerenderer *and*
+> `PageSeo` *and* `FAQSection` via `toolSeo()` / `toolFaqs()`.
+
+| # | Task | Status |
 |---|---|---|
-| 1.1 | **Rewrite the 12 priority tool pages for their exact keyword.** | Title = exact search term. Add a unique 150–200 word intro answering "what/why/how", a real HowTo (3–5 steps), 4–6 unique FAQs, and a "when to use this vs X" section. Kill any boilerplate shared across pages. |
-| 1.2 | **Unique FAQs per tool.** Right now FAQ schema likely repeats. Google discounts duplicate FAQ blocks. | Write tool-specific questions ("Does converting PDF to CBZ preserve reading order?"). |
-| 1.3 | **Comparison/alternative pages** for the privacy angle: "FilePilot vs Smallpdf (privacy)", "iLovePDF alternative that doesn't upload files". | Captures competitor-brand + "alternative" searches, which convert well. Use the `seo-competitor-pages` skill. |
-| 1.4 | **Internal-linking hubs.** Your `/pdf-tools`, `/image-tools`, `/ai-tools` hub pages should link to spokes with keyword-rich anchors, and each tool should link to 3–5 *related* tools (not the full 100-link footer, which dilutes). | Concentrates link equity on priority tools. |
+| 1.1 | **Rewrite the 12 priority tool pages for their exact keyword.** | ✅ **Done (12/12)** — keyword-first titles + `\| FilePilot` suffix, verified identical between client and prerender; H1s aligned; HowTo already live; unique intros; new "when to use this vs …" section on every focus page. |
+| 1.2 | **Unique FAQs per tool.** | ✅ **Done (12/12)** — 5–6 tool-specific FAQs each (was 4 generic boilerplate), now single-sourced so the visible accordion and FAQPage schema always match. |
+| 1.3 | **Comparison/alternative pages** ("FilePilot vs Smallpdf", "iLovePDF alternative that doesn't upload"). | ⏳ **Not started** — needs a decision: these pages make public claims about named competitors. Partly mitigated by the per-tool "when to use this vs …" sections shipped in 1.1. |
+| 1.4 | **Internal-linking hubs.** Each tool should link to 3–5 *related* tools, not the generic footer. | ✅ **Done for the 12** — curated `RELATED_ROUTES` siblings replace the `/merge`, `/compress` fallback. Hub → spoke anchors still to review. |
+
+**Rollout note:** the reconciliation pattern is proven on the 12 focus tools. The
+other ~78 tool pages still have the prerender-vs-`PageSeo` title conflict and the
+schema/visible FAQ mismatch. Migrating them is the natural follow-up.
 
 ### Phase 2 — Weeks 2–10: Authority / backlinks (runs in parallel, highest leverage)
 

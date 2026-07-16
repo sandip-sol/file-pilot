@@ -164,6 +164,10 @@ function getFaqItems(route) {
 
   const seo = getRouteSeo(route);
   const content = toolContent[route];
+
+  // Tool-specific FAQs win over the generic template. The same array is passed to
+  // PageSeo on the client, so only one set of FAQ content exists per tool.
+  if (content?.faqs?.length) return content.faqs;
   const title = routeLabel(route);
   const action = content?.action ?? seo.h1 ?? title.toLowerCase();
   const category = routeEntry(route)?.category ?? '';
@@ -309,6 +313,17 @@ function stepsList(items) {
   return items
     .map((item, index) => `<li id="step-${index + 1}">${escapeHtml(item)}</li>`)
     .join('');
+}
+
+function comparisonSection(route) {
+  const comparison = toolContent[route]?.comparison;
+  if (!comparison) return '';
+
+  return `
+      <section>
+        <h2>${escapeHtml(comparison.heading)}</h2>
+        <p>${escapeHtml(comparison.body)}</p>
+      </section>`;
 }
 
 function categoryToolRoutesForHub(route) {
@@ -461,6 +476,7 @@ function buildStaticRouteContent(route) {
         <h2>Common uses</h2>
         <ul>${orderedList(toolUseCases(route))}</ul>
       </section>
+      ${comparisonSection(route)}
       <section>
         <h2>Related tools</h2>
         <ul>${linkList(relatedRoutes)}</ul>

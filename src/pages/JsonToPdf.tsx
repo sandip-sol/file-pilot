@@ -5,6 +5,7 @@ import { jsonToPDF } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, FileJson, FileText, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const JsonToPdf = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -42,14 +43,7 @@ export const JsonToPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="JSON to PDF – Convert JSON Data to PDF Document"
-                description="Convert JSON data or .json files into a formatted PDF document. 100% private — browser only."
-                faqItems={[
-                    { question: 'Can I paste JSON directly?', answer: 'Yes. Type or paste JSON in the text area, or upload a .json file. The output PDF will have pretty-printed JSON.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/json-to-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -111,10 +105,7 @@ export const JsonToPdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Can I paste JSON directly?', answer: 'Yes. Type or paste JSON in the text area, or upload a .json file. The output PDF will have pretty-printed JSON.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/json-to-pdf')} />
         </div>
     );
 };

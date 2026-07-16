@@ -9,6 +9,7 @@ import { extractMetadata, removeMetadataByReencoding, type ImageMetadataInfo } f
 import { downloadBlobFile, downloadZipFromEntries } from '../utils/pdf/export';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import {
   EyeOff, Sparkles, Download, Loader2, Trash2, Archive, RefreshCw,
   AlertTriangle, Info, ShieldCheck, MapPin, Camera, CheckCircle, XCircle,
@@ -182,20 +183,11 @@ export const RemoveImageMetadata = () => {
     setError(null);
   }, [files]);
 
-  const faqItems = [
-    { question: "What metadata is removed from my images?", answer: "The tool strips EXIF data, GPS location coordinates, camera make and model, date/time stamps, software tags, and orientation metadata by re-rendering the image through the Canvas API." },
-    { question: "Why should I remove image metadata?", answer: "Image metadata can contain sensitive information like your GPS location, camera serial number, and the date a photo was taken. Removing it before sharing online protects your privacy." },
-    { question: "Are my images uploaded to a server?", answer: "No. All metadata inspection and removal is performed locally in your browser. Your images never leave your device, ensuring complete privacy." },
-    { question: "What image formats are supported?", answer: "You can process JPEG, PNG, WebP, and most other raster image formats. The cleaned output can be exported as JPEG, PNG, or WebP." },
-  ];
+  const faqItems = toolFaqs('/remove-image-metadata');
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo
-        title="Remove Image Metadata Online - Strip EXIF, GPS & Camera Data"
-        description="Inspect and remove EXIF, GPS location, and camera metadata from images for privacy. Free, private, no uploads."
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/remove-image-metadata')} />
 
       <div className="page-header">
         <div className="container">
@@ -204,7 +196,7 @@ export const RemoveImageMetadata = () => {
               <EyeOff className="w-6 h-6" />
             </div>
           </div>
-          <h1>Metadata Remover</h1>
+          <h1>Remove Image Metadata</h1>
           <p>Inspect and remove EXIF, GPS, and camera metadata from images.</p>
           <p className="mt-2 text-sm flex items-center justify-center gap-1.5 text-muted-foreground">
             <Sparkles className="w-4 h-4" />

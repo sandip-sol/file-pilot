@@ -4,6 +4,7 @@ import { pdfToMarkdown, downloadBytes } from '../utils/pdf/pdfOperations';
 import { BookOpen, Loader2, Download, CheckCircle, Info } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const PdfToCbz = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -26,7 +27,7 @@ export const PdfToCbz = () => {
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo title="PDF to CBZ Online – Free & Private" description="Convert PDF content to PDF to CBZ. Browser-based text extraction." faqItems={[{question:'Does the output look exactly like the PDF?',answer:'Text content is extracted; precise formatting requires a desktop converter like LibreOffice.'},{question:'Is my file uploaded?',answer:'No. All processing is local in your browser.'}]} />
+      <PageSeo {...toolSeo('/pdf-to-cbz')} />
       <div className="page-header"><div className="container">
         <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-500 to-amber-700 text-white flex items-center justify-center shadow-lg"><BookOpen className="w-6 h-6" /></div></div>
         <h1>PDF to CBZ Online</h1><p>Extract text content from your PDF. Browser-based, private.</p>
@@ -50,7 +51,7 @@ export const PdfToCbz = () => {
           )}
         </div>
       </div></div>
-      <FAQSection items={[{question:'Does the output look exactly like the PDF?',answer:'Text content is extracted. For pixel-perfect output use a desktop converter.'},{question:'Is my file uploaded?',answer:'No. Everything happens in the browser.'}]} />
+      <FAQSection items={toolFaqs('/pdf-to-cbz')} />
     </div>
   );
 };

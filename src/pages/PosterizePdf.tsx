@@ -5,6 +5,7 @@ import { posterizePDF } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, Maximize2, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const PosterizePdf = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -36,14 +37,7 @@ export const PosterizePdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Posterize PDF – Tile Large Pages for Poster Printing"
-                description="Split each PDF page into a grid of tiles for large-format poster printing. 100% private — browser only."
-                faqItems={[
-                    { question: 'What is posterizing a PDF?', answer: 'It tiles each page into multiple smaller sheets so you can print large formats by assembling the tiles.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/posterize-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -117,10 +111,7 @@ export const PosterizePdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What is posterizing a PDF?', answer: 'It tiles each page into multiple smaller sheets so you can print large formats by assembling the tiles.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/posterize-pdf')} />
         </div>
     );
 };

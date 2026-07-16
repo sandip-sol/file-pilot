@@ -5,6 +5,7 @@ import { pdfPagesToGreyscale } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, Moon, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const PdfToGreyscale = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -36,14 +37,7 @@ export const PdfToGreyscale = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="PDF to Grayscale - Convert Color PDF to Black & White"
-                description="Convert a color PDF to grayscale or black and white in your browser. Save ink and create printer-friendly documents. 100% private."
-                faqItems={[
-                    { question: 'How does grayscale conversion work?', answer: 'Each page is rendered to a canvas, converted to grayscale pixel by pixel, and repacked into a new PDF. No server involved.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/pdf-to-greyscale')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -106,10 +100,7 @@ export const PdfToGreyscale = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'How does grayscale conversion work?', answer: 'Each page is rendered to a canvas, converted to grayscale pixel by pixel, and repacked into a new PDF. No server involved.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/pdf-to-greyscale')} />
         </div>
     );
 };

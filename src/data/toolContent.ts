@@ -1,9 +1,62 @@
+export interface ToolFaq {
+  question: string;
+  answer: string;
+}
+
 interface ToolContentEntry {
   intro: string;
   action: string;
   steps: string[];
   useCases: string[];
+  /**
+   * Keyword-first SEO title WITHOUT the brand suffix — `toolSeo()` and the
+   * prerenderer both append BRAND_SUFFIX, so the client-rendered title and the
+   * prerendered <title> stay identical. Lead with the exact target keyword.
+   */
+  seoTitle?: string;
+  seoDescription?: string;
+  /**
+   * Visible H1. Set this only when the registry's UI name differs from the
+   * search term (e.g. "Stitch Pages" vs "Combine PDF Pages into One"). It must
+   * match the H1 the page component renders, or the prerendered and rendered
+   * DOM disagree.
+   */
+  h1?: string;
+  /** Tool-specific FAQs. Replaces the generic template in prerender.js. */
+  faqs?: ToolFaq[];
+  /** "When to use this vs …" section contrasting with the usual alternative. */
+  comparison?: { heading: string; body: string };
 }
+
+export const BRAND_SUFFIX = ' | FilePilot';
+
+const FALLBACK_TITLE = `FilePilot - PDF, Image and File Tools`;
+const FALLBACK_DESCRIPTION =
+  'Edit, convert, compress, organise and optimise PDFs, images and files with FilePilot. Your files are processed privately in your browser.';
+
+/**
+ * Single source of truth for per-tool SEO. Both the prerenderer (build time,
+ * via seoRoutes.js) and PageSeo (client) read this, so the prerendered <title>
+ * and the title React sets at runtime are identical rather than competing.
+ * Spread it straight into PageSeo: `<PageSeo {...toolSeo('/merge')} />`.
+ */
+export const toolSeo = (
+  route: string,
+): { title: string; description: string; faqItems?: ToolFaq[] } => {
+  const entry = toolContent[route];
+  return {
+    title: entry?.seoTitle ? `${entry.seoTitle}${BRAND_SUFFIX}` : FALLBACK_TITLE,
+    description: entry?.seoDescription ?? FALLBACK_DESCRIPTION,
+    faqItems: entry?.faqs,
+  };
+};
+
+/**
+ * FAQs for the on-page <FAQSection>. Google requires FAQ structured data to match
+ * the visible content, so the rendered accordion and the FAQPage schema must both
+ * come from here — never hard-code a second copy in the page component.
+ */
+export const toolFaqs = (route: string): ToolFaq[] => toolContent[route]?.faqs ?? [];
 
 export const toolContent: Record<string, ToolContentEntry> = {
   // ── ORGANIZE & MANAGE ──────────────────────────────────────────────────────
@@ -166,6 +219,40 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Save paper when printing draft documents for review.',
       'Prepare study materials with multiple pages visible at once.',
     ],
+    seoTitle: 'N-Up PDF – Multiple Pages Per Sheet Online Free',
+    seoDescription:
+      'Put multiple PDF pages on one sheet — 2-up, 4-up or 9-up. Free N-up PDF tool that runs in your browser with no file uploads.',
+    faqs: [
+      {
+        question: 'What is N-up printing?',
+        answer:
+          'N-up printing places several pages side by side on a single sheet. 2-up puts two pages on one sheet, 4-up puts four in a 2×2 grid, and 9-up puts nine in a 3×3 grid. It is the standard way to print handouts and drafts while using less paper.',
+      },
+      {
+        question: 'How do I put 2 pages per sheet in a PDF?',
+        answer:
+          'Upload your PDF, choose the 2-up layout, and download the result. The tool creates a genuinely new PDF where each sheet contains two original pages, so the layout is baked into the file rather than being a print-time setting.',
+      },
+      {
+        question: 'Does N-up change the PDF itself or just how it prints?',
+        answer:
+          'It changes the PDF itself. Your printer driver\'s N-up option only affects that one print job, whereas this tool produces a new file you can share, archive, or print anywhere and get the same layout.',
+      },
+      {
+        question: 'Will the text still be readable at 4-up or 9-up?',
+        answer:
+          'Pages are scaled down proportionally, so text stays sharp but becomes physically smaller. 2-up and 4-up remain comfortable to read for most documents; 9-up is best for visual reference such as slides or thumbnails rather than body text.',
+      },
+      {
+        question: 'Is the original page order preserved?',
+        answer:
+          'Yes. Pages are placed left to right, then top to bottom, in their original order, so reading sequence is maintained across every sheet.',
+      },
+    ],
+    comparison: {
+      heading: 'N-Up PDF vs your printer\'s N-up setting',
+      body: 'Most printer drivers can print several pages per sheet, but the setting lives in the print dialog: it applies to one job on one machine, and anyone you send the file to gets the original one-page-per-sheet layout. This tool bakes the N-up layout into a new PDF, so the handout looks identical wherever it is opened or printed. Use the printer setting for a quick one-off print on your own machine; use this tool when you need to share, email, or archive the compact version — and because it runs locally, the document never leaves your device.',
+    },
   },
   '/overlay-pdf': {
     intro:
@@ -202,7 +289,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
   '/combine-single-page': {
     intro:
       'Stitch Pages combines all pages of a PDF into one long, continuous page — like a single scrollable strip. This is ideal for creating seamless previews of multi-page designs, timelines, or workflows where page breaks interrupt the visual flow.',
-    action: 'stitch PDF pages',
+    action: 'combine PDF pages into one page',
     steps: [
       'Upload the multi-page PDF you want to stitch.',
       'The tool automatically combines all pages vertically.',
@@ -214,6 +301,41 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Prepare a timeline or workflow diagram as one continuous image.',
       'Convert a multi-page form into a single scrollable page.',
     ],
+    h1: "Combine PDF Pages into One",
+    seoTitle: 'Combine PDF Pages Into One Page – Stitch Vertically',
+    seoDescription:
+      'Stitch every page of a PDF into one long, continuous page. Free browser-based tool for scrollable documents — no uploads, no signup.',
+    faqs: [
+      {
+        question: 'How do I combine PDF pages into one single page?',
+        answer:
+          'Upload your PDF and the tool stacks every page vertically into one tall page, then gives you the result as a new PDF. Unlike merging, which joins files while keeping separate pages, this removes the page breaks entirely.',
+      },
+      {
+        question: 'What is the difference between this and merging a PDF?',
+        answer:
+          'Merging combines multiple files into one document that still has separate pages. This tool takes a single document and flattens all of its pages into one continuous canvas, so there are no page breaks at all.',
+      },
+      {
+        question: 'Can I stack pages horizontally instead of vertically?',
+        answer:
+          'This tool stitches vertically, producing one tall page suited to scrolling. For a side-by-side grid layout, use the Grid Combine or N-Up PDF tools instead.',
+      },
+      {
+        question: 'Is there a limit to how tall the combined page can be?',
+        answer:
+          'The PDF format allows very large page dimensions, but extremely long pages can be slow to open in some viewers and may not print on standard paper. For documents beyond roughly 50 pages, expect a very tall file best suited to on-screen viewing.',
+      },
+      {
+        question: 'Does combining pages reduce quality?',
+        answer:
+          'No. Page content is placed onto the taller canvas at its original resolution, so text stays selectable and images keep their quality.',
+      },
+    ],
+    comparison: {
+      heading: 'When to use this vs Merge PDF',
+      body: 'These two tools sound similar but solve opposite problems. Use Merge PDF when you have several files and want one document that still turns page by page — reports, contracts, application packs. Use this tool when page breaks are the problem: a design mockup, a timeline, a long form, or anything you want to scroll through as one continuous strip rather than click through. If you need a printable document, merge; if you need a seamless on-screen preview, stitch. Both run entirely in your browser, so neither uploads your file.',
+    },
   },
   '/grid-combine': {
     intro:
@@ -246,11 +368,45 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Produce large event signage without a wide-format printer.',
       'Print classroom displays or educational wall charts.',
     ],
+    seoTitle: 'Posterize PDF – Tile Large Pages for Poster Printing',
+    seoDescription:
+      'Split a large PDF page into printable tiles and assemble a full-size poster on a normal printer. Free, browser-based, no file uploads.',
+    faqs: [
+      {
+        question: 'What does posterizing a PDF mean?',
+        answer:
+          'Posterizing tiles one large page across several standard-sized sheets. You print the sheets on an ordinary printer and tape or glue them together to assemble a poster far larger than your printer can produce in one pass.',
+      },
+      {
+        question: 'How do I print a poster without a large-format printer?',
+        answer:
+          'Upload your design, choose how many rows and columns of sheets to split it across, and download the tiled PDF. Every tile prints on regular A4 or Letter paper, and assembling them recreates the full-size poster.',
+      },
+      {
+        question: 'What is the overlap margin for?',
+        answer:
+          'The overlap repeats a small strip of the design along the edge of adjacent tiles, giving you a margin to trim and a visual guide for lining sheets up. Without overlap, printer edge margins would leave visible white gaps between tiles.',
+      },
+      {
+        question: 'Will enlarging the PDF make it blurry?',
+        answer:
+          'Vector artwork — text, shapes and logos — stays perfectly sharp at any size. Embedded photos are limited by their original resolution, so a low-resolution image will look soft once enlarged to poster scale.',
+      },
+      {
+        question: 'What size poster can I make?',
+        answer:
+          'It depends on the grid you choose. A 2×2 grid of A4 sheets makes roughly an A2 poster, and 3×3 makes roughly A1. Larger grids keep scaling up, limited only by how many sheets you are willing to assemble.',
+      },
+    ],
+    comparison: {
+      heading: 'When to use this vs a print shop',
+      body: 'A print shop gives you a single seamless sheet on heavy stock, which is the right call for a client presentation or anything customer-facing. But it costs money, takes a trip or a delivery wait, and means handing your artwork to a third party. Posterize PDF is the better option when you need the poster today, when it is for internal use — a wall chart, an event sign, a draft review of an architectural drawing — or when the design is confidential. Because tiling happens in your browser, the file is never uploaded, so unreleased or sensitive artwork stays on your machine.',
+    },
   },
   '/add-page-labels': {
     intro:
       'Add Page Labels lets you assign custom labels to PDF page ranges — Roman numerals for front matter, Arabic numbers for the body, or prefixed labels like "A-1, A-2" for appendices. The labels appear in the PDF viewer\'s page navigation, making long documents much easier to navigate.',
-    action: 'add page labels',
+    action: 'add page labels to a PDF',
     steps: [
       'Upload the PDF you want to label.',
       'Define label ranges: choose a style (Arabic, Roman, letters) and starting number for each section.',
@@ -262,6 +418,41 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Set page numbering to start at a specific number for extracted sections.',
       'Add consistent labels across merged documents from different sources.',
     ],
+    h1: "Add Page Labels to PDF",
+    seoTitle: 'Add Page Labels to PDF – Roman Numerals & Prefixes',
+    seoDescription:
+      'Add custom PDF page labels — Roman numerals, letters, or prefixes like A-1. Free browser-based tool, no uploads and no signup.',
+    faqs: [
+      {
+        question: 'What are PDF page labels?',
+        answer:
+          'Page labels are the identifiers a PDF viewer shows for each page, such as "ii", "A-1" or "12". They are stored as document metadata, which means a page can be labelled "iv" even though it is physically the fourth page in the file.',
+      },
+      {
+        question: 'How do I add Roman numeral page numbers to a PDF?',
+        answer:
+          'Upload the PDF, define a label range covering your front matter, and choose the Roman numeral style. The preface and table of contents will then display as i, ii, iii while the body can restart at 1 in Arabic numerals.',
+      },
+      {
+        question: 'What is the difference between page labels and page numbers?',
+        answer:
+          'Page numbers are printed onto the page content and are visible when you print. Page labels are metadata shown in the viewer\'s navigation and thumbnail panel. Use the Page Numbers tool if you want visible numbers stamped onto the page itself.',
+      },
+      {
+        question: 'Can I use different label styles in one document?',
+        answer:
+          'Yes. You can define several ranges, each with its own style and starting number — for example Roman numerals for pages 1 to 8, then Arabic numbers restarting at 1 for the body, then an "A-" prefix for the appendix.',
+      },
+      {
+        question: 'Do page labels work in every PDF reader?',
+        answer:
+          'Page labels are part of the PDF specification and are honoured by Adobe Acrobat, Preview, and most desktop readers. Some lightweight mobile and browser viewers ignore them and display sequential numbers instead.',
+      },
+    ],
+    comparison: {
+      heading: 'When to use page labels vs stamped page numbers',
+      body: 'Reach for page labels when you want the viewer\'s navigation to match the document\'s real structure — so that typing "iv" jumps to the fourth page of the preface, and the body starts again at page 1. Nothing is drawn onto the page, so the design stays untouched and the change is reversible. Choose the Page Numbers tool instead when the numbers must survive printing or be visible to anyone who opens the file, since stamped numbers are part of the page content. Long documents often want both: labels for on-screen navigation, stamped numbers for the printed copy.',
+    },
   },
   '/pdf-metadata': {
     intro:
@@ -294,6 +485,40 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Package multiple certificates or forms for batch download.',
       'Prepare document sets for archival or backup storage.',
     ],
+    seoTitle: 'PDF to ZIP – Package Multiple PDFs into an Archive',
+    seoDescription:
+      'Bundle several PDF files into one ZIP archive for easy sharing or backup. Free browser-based tool — your documents are never uploaded.',
+    faqs: [
+      {
+        question: 'How do I put multiple PDFs into one ZIP file?',
+        answer:
+          'Select every PDF you want to include, and the tool packages them into a single ZIP archive you can download. There is no software to install, and the files are bundled on your own device.',
+      },
+      {
+        question: 'Does zipping PDFs make them smaller?',
+        answer:
+          'Usually only slightly. PDFs already compress their text and images internally, so ZIP has little left to squeeze out — expect a few percent at best. The real benefit is packaging many files into one tidy download. Use the Compress PDF tool if size reduction is your actual goal.',
+      },
+      {
+        question: 'What is the difference between zipping PDFs and merging them?',
+        answer:
+          'A ZIP keeps each PDF as a separate file inside one container, so recipients can extract them individually. Merging combines everything into a single continuous document. Choose ZIP when the files must stay distinct, and Merge when they should read as one document.',
+      },
+      {
+        question: 'Is there a file size or count limit?',
+        answer:
+          'There is no artificial limit. Because archiving happens in your browser, the practical ceiling is your device\'s available memory — bundling many very large PDFs at once may be slow on low-memory machines.',
+      },
+      {
+        question: 'Can I password-protect the ZIP archive?',
+        answer:
+          'Not from this tool — it produces a standard, unencrypted ZIP. If you need protection, use the PDF Security tool to password-protect the individual PDFs before bundling them.',
+      },
+    ],
+    comparison: {
+      heading: 'When to use PDF to ZIP vs Merge PDF',
+      body: 'Use PDF to ZIP when the documents need to stay separate: a batch of invoices your accountant will file individually, certificates for different people, or a set of forms someone will open one at a time. The recipient gets a single download but still ends up with distinct files. Use Merge PDF when the pages belong together as one readable document — a report, a contract, an application pack. A useful rule of thumb: if someone would print it front to back, merge it; if they would sort it into folders, zip it.',
+    },
   },
   '/compare-pdf': {
     intro:
@@ -634,6 +859,40 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create readable reports from exported JSON data.',
       'Archive data exports as human-readable PDF documents.',
     ],
+    seoTitle: 'JSON to PDF – Convert JSON Data to a PDF Document',
+    seoDescription:
+      'Convert JSON files or pasted data into a formatted, syntax-highlighted PDF. Free and browser-based — your data is never uploaded.',
+    faqs: [
+      {
+        question: 'How do I convert a JSON file to PDF?',
+        answer:
+          'Paste your JSON or upload a .json file, check the formatted preview, then download the PDF. The tool pretty-prints the structure with indentation and syntax highlighting so the result is readable rather than one long line.',
+      },
+      {
+        question: 'Is the JSON structure preserved in the PDF?',
+        answer:
+          'Yes. Nesting is rendered with consistent indentation, and keys, strings, numbers and booleans are colour-coded, so the hierarchy of objects and arrays stays easy to follow on the page.',
+      },
+      {
+        question: 'What happens if my JSON is invalid?',
+        answer:
+          'The tool parses your input before rendering and reports a syntax error instead of producing a broken document, so you can fix the JSON and try again.',
+      },
+      {
+        question: 'Can I convert a large JSON file?',
+        answer:
+          'Yes, though very large files produce very long PDFs and take longer to render since all the work happens in your browser. For multi-megabyte exports, consider converting the specific section you actually need.',
+      },
+      {
+        question: 'Is my data safe when converting sensitive JSON?',
+        answer:
+          'Conversion runs entirely in your browser and nothing is transmitted to a server. That matters for JSON, which so often contains API responses, tokens, customer records or config values you should not paste into a remote service.',
+      },
+    ],
+    comparison: {
+      heading: 'When to use this vs printing JSON from your editor',
+      body: 'Printing from VS Code or a browser dev tools panel works, but you get whatever the editor decides — often clipped lines, lost highlighting, or a header and footer you did not want. This tool renders the JSON specifically for the page: consistent indentation, preserved syntax colours, and no truncation. That makes it the better choice for anything shared or archived, such as attaching an API response to a bug report, including config in an audit pack, or keeping a human-readable record of a data export. And because your JSON frequently holds credentials or customer data, doing the conversion locally means none of it is sent anywhere.',
+    },
   },
   '/markdown-to-pdf': {
     intro:
@@ -650,6 +909,45 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create formatted reports from Markdown notes.',
       'Produce professional-looking proposals from Markdown drafts.',
     ],
+    seoTitle: 'Markdown to PDF – Convert .md Files to PDF Free',
+    seoDescription:
+      'Convert Markdown or README .md files into a styled PDF with headings, tables and code blocks. Free, browser-based, no uploads.',
+    faqs: [
+      {
+        question: 'How do I convert a Markdown file to PDF?',
+        answer:
+          'Paste your Markdown or upload a .md file, check the rendered preview, then download the PDF. Headings, lists, tables, links and code blocks are all styled automatically — there is nothing to configure.',
+      },
+      {
+        question: 'Are code blocks and tables rendered properly?',
+        answer:
+          'Yes. Fenced code blocks keep their monospace formatting and syntax highlighting, and Markdown tables are rendered as real bordered tables rather than raw pipes and dashes.',
+      },
+      {
+        question: 'Can I convert a GitHub README to PDF?',
+        answer:
+          'Yes — README files are one of the most common uses. Standard GitHub-flavoured Markdown including tables, task lists and fenced code converts cleanly. Images referenced by relative repository paths will not resolve, so use absolute URLs or embed them directly.',
+      },
+      {
+        question: 'Does it support images in Markdown?',
+        answer:
+          'Images referenced by absolute URL or embedded as data URIs are rendered in the PDF. Relative paths pointing at files on your disk or in a repository cannot be resolved by the browser and will appear as broken references.',
+      },
+      {
+        question: 'Will my document formatting or page breaks be preserved?',
+        answer:
+          'Content flows onto pages automatically, with headings and paragraphs kept together where possible. Markdown has no concept of a page break, so exact pagination is decided at render time rather than by the source file.',
+      },
+      {
+        question: 'Is my Markdown content uploaded to a server?',
+        answer:
+          'No. Rendering happens entirely in your browser, which matters when converting internal documentation, unpublished drafts or private notes.',
+      },
+    ],
+    comparison: {
+      heading: 'When to use this vs Pandoc or a desktop converter',
+      body: 'Pandoc is more powerful — custom LaTeX templates, bibliographies, precise typographic control — and it is the right tool if you are producing a book or a document with a house style. The trade-off is installing it, learning its flags, and setting up a template before you get a single page. This tool targets the far more common case: you have a README, some notes or a draft proposal, and you need a clean PDF in the next thirty seconds. You get sensible styling with no setup, and since it runs in the browser, unreleased documentation never leaves your machine.',
+    },
   },
 
   // ── CONVERT FROM PDF ───────────────────────────────────────────────────────
@@ -716,6 +1014,45 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Reduce file size of scanned color documents.',
       'Prepare documents for black-and-white publishing or photocopying.',
     ],
+    seoTitle: 'PDF to Grayscale – Convert Color PDF to Black & White',
+    seoDescription:
+      'Convert a colour PDF to greyscale (grayscale) black-and-white online. Save toner and shrink scanned files — free, private, no uploads.',
+    faqs: [
+      {
+        question: 'How do I convert a colour PDF to greyscale?',
+        answer:
+          'Upload the PDF and every page is converted to greyscale automatically, then you download the result. There are no settings to choose — colours are mapped to their equivalent grey tones in one pass.',
+      },
+      {
+        question: 'Is it spelled greyscale or grayscale?',
+        answer:
+          'Both are correct and mean the same thing: "grayscale" is the American spelling and "greyscale" the British one. This tool does the same job whichever term you searched for.',
+      },
+      {
+        question: 'Does converting to grayscale reduce PDF file size?',
+        answer:
+          'Often, yes — especially for scanned or image-heavy documents, where discarding colour channels can cut size noticeably. For text-based PDFs the saving is small, because the text was never the bulk of the file. Use Compress PDF if size is your main goal.',
+      },
+      {
+        question: 'Can I convert the grayscale PDF back to colour?',
+        answer:
+          'No. Converting to greyscale discards the colour information permanently, so keep your original file if you might need the colour version later.',
+      },
+      {
+        question: 'Will text stay sharp and selectable after conversion?',
+        answer:
+          'Yes. Text remains real text — selectable and searchable — rather than being flattened into an image, so the document keeps its clarity and accessibility.',
+      },
+      {
+        question: 'Why convert to grayscale before printing?',
+        answer:
+          'Colour pages can draw from expensive colour cartridges even when the visible content is mostly black. Converting first guarantees the whole document prints on black toner alone, which is cheaper and more consistent across printers.',
+      },
+    ],
+    comparison: {
+      heading: 'When to use this vs your printer\'s black-and-white setting',
+      body: 'Ticking "print in greyscale" in the print dialog is fine for a quick one-off on your own printer. It only changes that single job, though — the file itself is still in colour, so anyone you send it to prints colour again, and some drivers still pull from colour cartridges for "composite black". This tool converts the document itself, so the greyscale version is what you share, archive, or hand to a print shop, and every printer treats it identically. It also shrinks scanned colour documents in a way a print setting never can.',
+    },
   },
   '/pdf-to-json': {
     intro:
@@ -796,6 +1133,45 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert graphic novels from PDF to CBZ for e-reader compatibility.',
       'Archive digital comics in the standard CBZ format.',
     ],
+    seoTitle: 'PDF to CBZ – Convert PDF Comics & Manga to CBZ',
+    seoDescription:
+      'Convert PDF comics, manga and graphic novels to CBZ for comic reader apps. Free, runs in your browser, no file uploads.',
+    faqs: [
+      {
+        question: 'What is a CBZ file?',
+        answer:
+          'A CBZ (Comic Book ZIP) is simply a ZIP archive of page images named in reading order. Comic readers such as CDisplayEx, YACReader, Panels and Tachiyomi open them natively and page through the images.',
+      },
+      {
+        question: 'Why convert a PDF comic to CBZ?',
+        answer:
+          'Comic readers are built for the job: fast page-turning, double-page spreads, guided panel-by-panel view, and reading-position sync. PDF viewers treat a comic like a document, so they tend to be slower and clumsier on a tablet or e-reader.',
+      },
+      {
+        question: 'Does converting to CBZ preserve page and reading order?',
+        answer:
+          'Yes. Each PDF page is exported as an image with a zero-padded sequential filename, which is how the CBZ format defines reading order, so pages always appear in the correct sequence.',
+      },
+      {
+        question: 'Will image quality drop when converting to CBZ?',
+        answer:
+          'Pages are rendered to images at the quality setting you pick. A higher setting stays visually faithful to the original at the cost of a larger archive; a lower setting saves space but can soften fine line art and lettering.',
+      },
+      {
+        question: 'Is text still searchable inside a CBZ?',
+        answer:
+          'No. CBZ is an image format by definition, so any selectable text in the source PDF becomes part of the page image. Keep the PDF if you need text search; use CBZ for reading.',
+      },
+      {
+        question: 'Can I convert a CBZ back into a PDF?',
+        answer:
+          'Yes — extract the images from the archive and use the Images to PDF tool to rebuild a document, though text that was rasterised during conversion cannot be recovered.',
+      },
+    ],
+    comparison: {
+      heading: 'When to use CBZ vs keeping the PDF',
+      body: 'Keep the PDF when the text matters — searching dialogue, copying a quote, or reading on a desktop where a document viewer is perfectly comfortable. Convert to CBZ when you are actually reading the comic on a tablet, phone or e-reader: dedicated comic apps handle spreads, panel-guided view and reading position far better than any PDF viewer, and the format is what services like Komga and Kavita expect for a library. The trade-off is losing searchable text, so many people keep the PDF as the archive copy and use the CBZ for reading.',
+    },
   },
 
   // ── OPTIMIZE & REPAIR ──────────────────────────────────────────────────────
@@ -944,6 +1320,45 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Prepare PDFs for archival where interactive elements could cause display issues.',
       'Ensure consistent rendering across different PDF viewers.',
     ],
+    seoTitle: 'Flatten PDF – Make Forms & Annotations Non-Editable',
+    seoDescription:
+      'Flatten PDF form fields, annotations and layers into static content so nothing can be edited. Free browser-based tool, no uploads.',
+    faqs: [
+      {
+        question: 'What does flattening a PDF actually do?',
+        answer:
+          'Flattening merges interactive layers — form fields, annotations, stamps and comments — into the page content itself. The document looks identical, but the elements become part of the page rather than separate objects that can be clicked or edited.',
+      },
+      {
+        question: 'How do I make a filled PDF form non-editable?',
+        answer:
+          'Upload the completed form and flatten it. The entered values are painted onto the page and the fields disappear, so the answers can still be read but no longer changed or cleared.',
+      },
+      {
+        question: 'Is flattening a PDF the same as password-protecting it?',
+        answer:
+          'No, and the distinction matters. Flattening removes editable elements but the file is still open — anyone can view it. A password restricts who can open or modify the document. Use the PDF Security tool for access control, and flatten for locking in content.',
+      },
+      {
+        question: 'Can a flattened PDF be un-flattened?',
+        answer:
+          'Not in any practical sense. Once fields and annotations are merged into the page, the interactive structure is gone. Always keep the original if you may need to edit the form again.',
+      },
+      {
+        question: 'Does flattening keep text selectable?',
+        answer:
+          'Existing page text stays selectable and searchable. Content that came from form fields and annotations is rendered into the page, so it may no longer behave as separate selectable text.',
+      },
+      {
+        question: 'Why do my annotations disappear in some PDF readers?',
+        answer:
+          'Annotation support varies between viewers, and some mobile or browser readers ignore certain types entirely. Flattening makes comments and highlights part of the page, guaranteeing they render the same way everywhere — a common reason to flatten before sharing.',
+      },
+    ],
+    comparison: {
+      heading: 'When to flatten vs when to password-protect',
+      body: 'These solve different problems and are often confused. Flatten when the content must stay exactly as it is: a signed form heading to a client, an annotated review copy, or an archival document that has to render identically in every reader for years. Password-protect when the issue is who may open or change the file at all. Flattening does not stop anyone reading the document, and a password does not stop someone with access from editing form fields — so for a completed contract that is both confidential and final, do both: flatten first to lock the content, then apply protection with the PDF Security tool.',
+    },
   },
   '/remove-metadata': {
     intro:
@@ -1302,6 +1717,46 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Clean metadata before uploading photos to marketplaces or social media.',
       'Batch-strip metadata from an entire photo collection.',
     ],
+    h1: "Remove Image Metadata",
+    seoTitle: 'Remove Image Metadata – Strip EXIF, GPS & Camera Data',
+    seoDescription:
+      'Remove EXIF, GPS location and camera metadata from photos before sharing. Free EXIF remover that runs locally — images never uploaded.',
+    faqs: [
+      {
+        question: 'What is EXIF data and why should I remove it?',
+        answer:
+          'EXIF is information your camera or phone embeds in each photo: GPS coordinates, date and time, device model, and exposure settings. Shared as-is, a holiday photo can reveal your home address and the exact device that took it — which is why stripping it before publishing is worth the few seconds it takes.',
+      },
+      {
+        question: 'How do I remove GPS location from a photo?',
+        answer:
+          'Upload the image and the tool shows the embedded metadata, including any GPS coordinates, then produces a clean copy with those tags removed while leaving the picture itself untouched.',
+      },
+      {
+        question: 'Does removing metadata change image quality?',
+        answer:
+          'No. Metadata is stored in tags alongside the pixels, so removing it leaves the image data bit-for-bit intact. There is no recompression and no visible change — just a slightly smaller file.',
+      },
+      {
+        question: 'Do social media sites already strip EXIF for me?',
+        answer:
+          'Most large platforms strip EXIF on upload, but you cannot rely on it. The photo is still transmitted with its location intact and stored on their servers, and plenty of forums, marketplaces, blog platforms and messaging apps pass the original file straight through.',
+      },
+      {
+        question: 'Can I clean several photos at once?',
+        answer:
+          'Yes. Multiple images can be processed in a single batch, which is the practical way to clean an entire album before publishing it.',
+      },
+      {
+        question: 'Is it safe to upload private photos to a metadata remover?',
+        answer:
+          'With this tool there is no upload at all — the work happens in your browser and the images never leave your device. That is the point: sending a photo to a remote server to strip its location data means handing that exact location data to the server first.',
+      },
+    ],
+    comparison: {
+      heading: 'When to use this vs a server-based EXIF remover',
+      body: 'Most online EXIF removers upload your photo, strip the tags on their server, and send a clean copy back. The contradiction is hard to miss: to hide your GPS coordinates from strangers, you first transmit them to a stranger, along with the photo, and trust the logs and retention policy you cannot see. This tool does the work in your browser, so the location data is erased on the device that recorded it and nothing is transmitted. Desktop tools like ExifTool are equally private and more powerful for scripted batch jobs — use those for automation, and this when you want a clean photo in a few seconds with nothing to install.',
+    },
   },
   '/blur-face': {
     intro:
@@ -1350,6 +1805,45 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create SVG versions of icons for responsive web design.',
       'Convert hand-drawn sketches into clean vector graphics.',
     ],
+    seoTitle: 'Image to SVG – Convert PNG & JPG to Vector Online',
+    seoDescription:
+      'Convert PNG, JPG and raster images to scalable SVG vectors by tracing. Free online image to SVG converter — no uploads, no signup.',
+    faqs: [
+      {
+        question: 'How does raster to vector conversion work?',
+        answer:
+          'The tool traces the outlines of shapes in your raster image and converts them into scalable SVG paths. It supports monochrome threshold, line art edge detection, and multi-color quantization modes.',
+      },
+      {
+        question: 'What types of images convert best to SVG?',
+        answer:
+          'Logos, icons, signatures, line art, and simple illustrations produce the best results. Detailed photographs typically generate large SVG files with many paths and may not look accurate.',
+      },
+      {
+        question: 'Can I convert a PNG logo to SVG for my website?',
+        answer:
+          'Yes — this is the most common use. A traced SVG logo stays crisp at any size, from a favicon to a billboard, and usually weighs less than a set of PNG exports. Check the result against the original, since very small text or soft gradients can trace imperfectly.',
+      },
+      {
+        question: 'Can I edit the resulting SVG file?',
+        answer:
+          'Yes. The output is a standard SVG file that can be opened and edited in any vector graphics editor like Inkscape, Adobe Illustrator, or Figma.',
+      },
+      {
+        question: 'Does the conversion affect image quality?',
+        answer:
+          'Vector tracing is an approximation, not a pixel-perfect copy. You can adjust smoothing, simplification, and color count settings to balance detail and file size. All processing happens locally in your browser.',
+      },
+      {
+        question: 'Why does my photo produce a huge SVG file?',
+        answer:
+          'Tracing has to describe every colour region as a path, and a photograph contains thousands of them, so the SVG ends up larger and slower than the original JPG. Vectorisation suits flat graphics; keep photographs as raster and use Compress Image instead.',
+      },
+    ],
+    comparison: {
+      heading: 'When to vectorise vs keep the raster image',
+      body: 'Convert to SVG when the artwork is flat and needs to scale: logos, icons, signatures and line art all benefit, staying razor-sharp on any screen and usually shrinking in file size along the way. Keep the raster file when the image is photographic — tracing a photo produces thousands of paths, giving you a file that is bigger, slower to render, and less faithful than the JPG you started with. The quick test is whether you could redraw it with a handful of solid shapes: if yes, vectorise; if it has soft gradients and fine texture, compress the raster instead.',
+    },
   },
   '/color-picker': {
     intro:
