@@ -12,6 +12,7 @@ import { checkImageSizeLimit } from '../utils/ai/capabilities';
 import { MAX_INPUT_PIXELS } from '../utils/ai/types';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import {
   Sparkles, Download, Loader2, AlertTriangle, Info,
   Sun, Droplet, Focus, Palette, ImageIcon, Sliders, Undo2,
@@ -129,20 +130,9 @@ export const AiEnhanceImage = () => {
     setSliderPos(Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100)));
   }, []);
 
-  const faqItems = [
-    { question: "What enhancements are applied to my image?", answer: "Depending on the mode you select, the tool applies adjustments such as exposure correction, contrast improvement, colour balance, sharpening, and noise reduction. The Auto Enhance mode analyses your image and applies the most relevant combination automatically." },
-    { question: "Can I see a before and after comparison?", answer: "Yes. After enhancement, an interactive before/after slider lets you drag to compare the original and enhanced versions side by side, making it easy to evaluate the improvements." },
-    { question: "How much quality improvement can I expect?", answer: "Results depend on the original image quality and the selected mode and intensity. The tool can significantly improve exposure, reduce noise, and sharpen detail, but it cannot recover information that was not present in the original image." },
-    { question: "Is my image uploaded to a server?", answer: "No. All enhancement processing happens entirely in your browser using image adjustment algorithms. Your images are never uploaded to any server, ensuring complete privacy." },
-  ];
-
   return (
     <main className="container max-w-4xl py-8 px-4">
-      <PageSeo
-        title="AI Enhance Image — Smart Image Enhancement | FilePilot"
-        description="Improve image quality with smart analysis-based enhancement. Fix exposure, reduce noise, sharpen details, and correct colours — all locally in your browser."
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/ai-enhance-image')} />
 
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
@@ -336,7 +326,7 @@ export const AiEnhanceImage = () => {
         </div>
       )}
 
-      <FAQSection items={faqItems} />
+      <FAQSection items={toolFaqs('/ai-enhance-image')} />
     </main>
   );
 };

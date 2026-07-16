@@ -4,6 +4,7 @@ import { Download, Loader2, LockKeyhole, Shield, Unlock } from 'lucide-react';
 import { FAQSection } from '../components/FAQSection';
 import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { downloadBytes } from '../utils/pdf/export';
 import { unlockPdfByRasterizing } from '../utils/pdf/pageTools';
 
@@ -59,20 +60,14 @@ export const PdfSecurity = () => {
     );
   };
 
-  const faqItems = [
-    { question: 'Does unlocking upload my PDF anywhere?', answer: 'No. Password handling, rendering, and export all stay inside your browser.' },
-    { question: 'Why is protect mode limited?', answer: 'The current browser-only PDF stack in this project does not expose reliable standards-compliant encryption for writing protected PDFs.' },
-    { question: 'What is preserved when unlocking?', answer: 'The unlocked export preserves the visual pages, but it does not preserve the original encrypted structure, interactive forms, or hidden content streams.' },
-  ];
+  const faqItems = toolFaqs('/pdf-security');
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
-        title="Protect or Unlock PDF – Browser-Only PDF Security"
-        description="Unlock password-protected PDFs locally in your browser and manage browser-first PDF security workflows without server uploads."
+        {...toolSeo('/pdf-security')}
         canonicalPath="/pdf-security"
         robots={isCanonicalRoute ? 'index,follow' : 'noindex,follow'}
-        faqItems={faqItems}
       />
 
       <div className="page-header">

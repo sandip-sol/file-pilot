@@ -6,6 +6,7 @@ import { removeMetadata, editMetadata, extractMetadata } from '../utils/pdf/pdfO
 import { Loader2, Download, RefreshCw, FileText, Tag, Eye, Trash2, Pencil, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 type Mode = 'view' | 'edit' | 'remove';
 
@@ -13,16 +14,15 @@ export const PdfMetadata = () => {
     const { pathname } = useLocation();
     const route = pathname.replace(/\/$/, '') || '/pdf-metadata';
     const isRemoveMetadataRoute = route === '/remove-metadata';
+    // Title/description/FAQs come from toolContent (shared with the prerenderer);
+    // h1 and intro are page-body copy and stay local.
+    const seoRoute = isRemoveMetadataRoute ? '/remove-metadata' : '/pdf-metadata';
     const seo = isRemoveMetadataRoute
         ? {
-            title: 'Remove PDF Metadata Online - Free and Private | FilePilot',
-            description: 'Remove embedded PDF metadata such as author, title, creator, keywords, and dates locally in your browser without uploads.',
             h1: 'Remove PDF Metadata Online',
             intro: 'Inspect and remove embedded PDF metadata, including title, author, creator, keywords, and dates. Processing stays private in your browser.',
         }
         : {
-            title: 'PDF Metadata Editor - View, Edit and Remove PDF Metadata',
-            description: 'View, edit, or remove all PDF metadata including title, author, keywords, and dates. 100% private, processed locally in your browser.',
             h1: 'PDF Metadata Editor',
             intro: 'View, edit, or remove PDF metadata. Title, author, keywords and more. 100% private.',
         };
@@ -94,16 +94,7 @@ export const PdfMetadata = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title={seo.title}
-                description={seo.description}
-                canonicalPath={route}
-                faqItems={[
-                    { question: 'What metadata is stored in a PDF?', answer: 'PDFs can contain title, author, subject, keywords, creator, producer, and creation/modification dates.' },
-                    { question: 'Will my file be uploaded?', answer: 'No. Everything runs locally in your browser.' },
-                    { question: 'Can I remove all metadata at once?', answer: 'Yes! Use the "Remove All" mode to strip all metadata in one click.' },
-                ]}
-            />
+            <PageSeo {...toolSeo(seoRoute)} canonicalPath={route} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -198,11 +189,7 @@ export const PdfMetadata = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What metadata is stored in a PDF?', answer: 'PDFs can contain title, author, subject, keywords, creator, producer, and creation/modification dates.' },
-                { question: 'Will my file be uploaded?', answer: 'No. Everything runs locally in your browser.' },
-                { question: 'Can I remove all metadata at once?', answer: 'Yes! Use the "Remove All" mode to strip all metadata in one click.' },
-            ]} />
+            <FAQSection items={toolFaqs(seoRoute)} />
         </div>
     );
 };

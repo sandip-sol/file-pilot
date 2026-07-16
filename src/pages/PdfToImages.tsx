@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FAQSection } from '../components/FAQSection';
 import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { downloadBlobFile, downloadZipFromEntries } from '../utils/pdf/export';
 import { exportPdfPagesAsImages } from '../utils/pdf/pageTools';
 import { toCanonicalPath } from '../lib/routes';
@@ -20,16 +21,14 @@ type PdfImageFormat = 'png' | 'jpg' | 'webp';
 const scaleFromDpi = (dpi: number) => dpi / 100;
 const INDEXABLE_PDF_TO_IMAGE_ROUTES = new Set(['/pdf-to-images', '/pdf-to-jpg']);
 
-const pdfToImageSeoByRoute: Record<string, { title: string; description: string; h1: string; intro: string; format?: PdfImageFormat }> = {
+// Title/description/FAQs live in toolContent (shared with the prerenderer via
+// toolSeo). Only page-body copy and the format default stay here.
+const pdfToImageSeoByRoute: Record<string, { h1: string; intro: string; format?: PdfImageFormat }> = {
   '/pdf-to-images': {
-    title: 'PDF to Images - Export PDF Pages as PNG, JPG, or WebP',
-    description: 'Convert each PDF page to PNG, JPG, or WebP locally in your browser with DPI and quality controls. Download individually or as ZIP.',
     h1: 'PDF to Images',
     intro: 'Export every PDF page as a private PNG, JPG, or WebP image with custom DPI and quality settings.',
   },
   '/pdf-to-jpg': {
-    title: 'PDF to JPG Online - Free and Private | FilePilot',
-    description: 'Convert PDF pages to JPG images locally in your browser with DPI and quality controls. Download pages as a private ZIP file.',
     h1: 'PDF to JPG Online',
     intro: 'Convert every PDF page to JPG images in your browser, then download the rendered pages together as a private ZIP file.',
     format: 'jpg',
@@ -41,6 +40,9 @@ export const PdfToImages = () => {
   const route = pathname.replace(/\/$/, '') || '/pdf-to-images';
   const seo = pdfToImageSeoByRoute[route] ?? pdfToImageSeoByRoute['/pdf-to-images'];
   const isIndexableRoute = INDEXABLE_PDF_TO_IMAGE_ROUTES.has(route);
+  // Non-indexable variants (/pdf-to-png, /rasterize-pdf, …) canonicalise to the hub
+  // and reuse its SEO, matching the previous fallback behaviour.
+  const seoRoute = isIndexableRoute ? route : '/pdf-to-images';
   const [file, setFile] = useState<File | null>(null);
   const [items, setItems] = useState<ExportedImageItem[]>([]);
   const [format, setFormat] = useState<PdfImageFormat>(seo.format ?? 'png');
@@ -87,21 +89,14 @@ export const PdfToImages = () => {
     );
   };
 
-  const faqItems = [
-    { question: 'Does PDF to images upload my file?', answer: 'No. PDF rendering and image export happen entirely in your browser.' },
-    { question: 'Which image formats can I export?', answer: 'You can export PDF pages as PNG, JPG, or WebP. BMP and TIFF alias pages use this image export workflow as their canonical replacement.' },
-    { question: 'Can I download every page at once?', answer: 'Yes. Use Download All as ZIP to save every exported page in one archive.' },
-    { question: 'Can I convert those images back into a PDF?', answer: 'Yes. Use the linked Images to PDF tool to roundtrip them back into a new document.' },
-  ];
+  const faqItems = toolFaqs(seoRoute);
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
-        title={seo.title}
-        description={seo.description}
-        canonicalPath={isIndexableRoute ? route : '/pdf-to-images'}
+        {...toolSeo(seoRoute)}
+        canonicalPath={seoRoute}
         robots={isIndexableRoute ? 'index,follow' : 'noindex,follow'}
-        faqItems={faqItems}
       />
 
       <div className="page-header">

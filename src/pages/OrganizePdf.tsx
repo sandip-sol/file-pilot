@@ -3,6 +3,7 @@ import { Download, LayoutGrid, Loader2, RotateCcw, RotateCw, Trash2 } from 'luci
 import { FileUploader } from '../components/FileUploader';
 import { FAQSection } from '../components/FAQSection';
 import { PageSeo } from '../components/PageSeo';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { PdfPageThumbnail } from '../components/pdf/PdfPageThumbnail';
 import { downloadBytes } from '../utils/pdf/export';
 import { exportOrganizedPdf, type OrganizerPageState } from '../utils/pdf/pageTools';
@@ -124,20 +125,9 @@ export const OrganizePdf = () => {
     }
   };
 
-  const faqItems = [
-    { question: 'Does organizing pages upload my PDF?', answer: 'No. The page previews, rotation, reordering, and export all run in your browser.' },
-    { question: 'Can I rotate every page at once?', answer: 'Yes. Use the rotate-all controls in the left panel to apply a 90 degree turn to the full document.' },
-    { question: 'Can I delete multiple pages together?', answer: 'Yes. Select several thumbnails and use Delete Selected before exporting the final PDF.' },
-  ];
-
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo
-        title="Organize PDF Pages – Reorder, Rotate, Delete"
-        description="Reorder, rotate, and delete PDF pages with drag-and-drop thumbnails. Everything stays private in your browser."
-        canonicalPath="/organize-pdf"
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/organize-pdf')} canonicalPath="/organize-pdf" />
 
       <div className="page-header">
         <div className="container">
@@ -242,7 +232,7 @@ export const OrganizePdf = () => {
         </div>
       </div>
 
-      <FAQSection items={faqItems} />
+      <FAQSection items={toolFaqs('/organize-pdf')} />
     </div>
   );
 };

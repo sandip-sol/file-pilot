@@ -5,21 +5,20 @@ import type { ImageItem } from '../utils/pdfHelpers';
 import { Image as ImageIcon, Loader2, Download, X, RotateCw, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { Link, useLocation } from 'react-router-dom';
 import { toCanonicalPath } from '../lib/routes';
 
 const INDEXABLE_IMAGE_TO_PDF_ROUTES = new Set(['/images-to-pdf', '/jpg-to-pdf']);
 
-const imageToPdfSeoByRoute: Record<string, { title: string; description: string; h1: string; intro: string }> = {
+// Title/description/FAQs live in toolContent (shared with the prerenderer via
+// toolSeo). Only page-body copy stays here.
+const imageToPdfSeoByRoute: Record<string, { h1: string; intro: string }> = {
     '/images-to-pdf': {
-        title: 'Convert Images to PDF - JPG, PNG, WebP, SVG, BMP to PDF',
-        description: 'Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images to a single PDF with page size, orientation, and margin controls. Free and private.',
         h1: 'Convert Images to PDF',
         intro: 'Convert JPG, PNG, WebP, SVG, BMP, and browser-supported HEIC or TIFF images to one PDF with custom page size and orientation.',
     },
     '/jpg-to-pdf': {
-        title: 'JPG to PDF Online - Free and Private | FilePilot',
-        description: 'Convert JPG and JPEG photos into a PDF in your browser. Arrange images, choose page size, and download privately without uploads.',
         h1: 'JPG to PDF Online',
         intro: 'Convert JPG or JPEG images into one private PDF with custom page size, orientation, margins, reordering, and rotation controls.',
     },
@@ -30,6 +29,9 @@ export const ImagesToPdf = () => {
     const route = pathname.replace(/\/$/, '') || '/images-to-pdf';
     const seo = imageToPdfSeoByRoute[route] ?? imageToPdfSeoByRoute['/images-to-pdf'];
     const isIndexableRoute = INDEXABLE_IMAGE_TO_PDF_ROUTES.has(route);
+    // Non-indexable variants (/png-to-pdf, /svg-to-pdf, …) canonicalise to the hub
+    // and reuse its SEO, matching the previous fallback behaviour.
+    const seoRoute = isIndexableRoute ? route : '/images-to-pdf';
     const [items, setItems] = useState<ImageItem[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [pageSize, setPageSize] = useState<'A4' | 'Letter'>('A4');
@@ -109,16 +111,9 @@ export const ImagesToPdf = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
             <PageSeo
-                title={seo.title}
-                description={seo.description}
-                canonicalPath={isIndexableRoute ? route : '/images-to-pdf'}
+                {...toolSeo(seoRoute)}
+                canonicalPath={seoRoute}
                 robots={isIndexableRoute ? 'index,follow' : 'noindex,follow'}
-                faqItems={[
-                    { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
-                    { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP are supported in modern browsers. HEIC/HEIF and TIFF support depends on whether your browser can decode the files." },
-                    { question: "Can I choose the page size and orientation?", answer: "Yes. You can select A4 or Letter page size and choose portrait or landscape orientation before converting." },
-                    { question: "Can I reorder or rotate images before converting?", answer: "Yes. Use the arrow buttons to reorder and the rotate button to adjust each image before generating the PDF." },
-                ]}
             />
             <div className="page-header">
                 <div className="container">
@@ -267,12 +262,7 @@ export const ImagesToPdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
-                { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP work in modern browsers. HEIC/HEIF and TIFF files are accepted when the browser can decode them." },
-                { question: "Can I choose the page size and orientation?", answer: "Yes. You can select A4 or Letter page size and choose portrait or landscape orientation before converting." },
-                { question: "Can I reorder or rotate images before converting?", answer: "Yes. Use the arrow buttons to reorder and the rotate button to adjust each image before generating the PDF." },
-            ]} />
+            <FAQSection items={toolFaqs(seoRoute)} />
         </div>
     );
 };

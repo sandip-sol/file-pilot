@@ -5,6 +5,7 @@ import { deskewPDF } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, ScanLine, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const DeskewPdf = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -35,14 +36,7 @@ export const DeskewPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Deskew PDF – Straighten Skewed Scanned Documents"
-                description="Automatically straighten skewed or tilted pages from scanned PDFs. 100% private — browser only."
-                faqItems={[
-                    { question: 'How does deskewing work?', answer: 'Each page is rendered to a canvas and re-embedded straight into a new PDF, correcting minor tilt from scanning.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/deskew-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -109,10 +103,7 @@ export const DeskewPdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'How does deskewing work?', answer: 'Each page is rendered to a canvas and re-embedded straight into a new PDF, correcting minor tilt from scanning.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/deskew-pdf')} />
         </div>
     );
 };

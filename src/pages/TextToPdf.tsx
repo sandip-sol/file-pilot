@@ -5,6 +5,7 @@ import { textToPDF } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, FileText, FileType2, AlignLeft } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const TextToPdf = () => {
     const [text, setText] = useState('');
@@ -48,15 +49,7 @@ export const TextToPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Text to PDF – Convert TXT to PDF Free Online"
-                description="Convert plain text or .txt files to PDF instantly in your browser. Custom font size and page size. 100% private — no uploads."
-                faqItems={[
-                    { question: 'Can I paste text directly?', answer: 'Yes! Switch to the "Type / Paste" tab and paste your text directly.' },
-                    { question: 'What formats can I upload?', answer: 'You can upload .txt plain text files.' },
-                    { question: 'Is my text uploaded to a server?', answer: 'No. Everything runs locally in your browser using JavaScript.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/text-to-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -146,11 +139,7 @@ export const TextToPdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Can I paste text directly?', answer: 'Yes! Switch to the "Type / Paste" tab and paste your text directly.' },
-                { question: 'What formats can I upload?', answer: 'You can upload .txt plain text files.' },
-                { question: 'Is my text uploaded to a server?', answer: 'No. Everything runs locally in your browser using JavaScript.' },
-            ]} />
+            <FAQSection items={toolFaqs('/text-to-pdf')} />
         </div>
     );
 };

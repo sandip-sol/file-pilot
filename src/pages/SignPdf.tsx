@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { Loader2, Download, RefreshCw, FileText, PenLine, X, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const SignPdf = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -85,14 +86,7 @@ export const SignPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Sign PDF – Add Signature to PDF Online Free"
-                description="Draw your signature and add it to any PDF page. 100% private — all processing done in your browser."
-                faqItems={[
-                    { question: 'Is this a legally binding signature?', answer: 'This draws an image of your signature on the PDF — it is not a cryptographic digital signature. For legal binding, you need a certified CA-backed digital signature.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/sign-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -172,10 +166,7 @@ export const SignPdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Is this a legally binding signature?', answer: 'This draws an image of your signature on the PDF — it is not a cryptographic digital signature. For legal binding, check local regulations.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/sign-pdf')} />
         </div>
     );
 };

@@ -3,6 +3,7 @@ import { CalendarDays, CheckSquare, Download, FileSignature, Highlighter, Loader
 import { FAQSection } from '../components/FAQSection';
 import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { downloadBytes } from '../utils/pdf/export';
 import { applyAnnotationsToPdf } from '../utils/pdf/pageTools';
 import { openPdfDocument, renderPdfPagePreview, revokePdfPreviews } from '../utils/pdf/rendering';
@@ -170,20 +171,9 @@ export const AnnotatePdf = () => {
     }
   };
 
-  const faqItems = [
-    { question: 'Can I add a typed or image signature?', answer: 'Yes. Use Typed signature for a quick name placement or Image signature to upload a signature graphic.' },
-    { question: 'Are the annotations flattened into the export?', answer: 'Yes. The exported PDF burns the current overlay items into the document so the result is easy to share.' },
-    { question: 'Can I move fields after placing them?', answer: 'Yes. Select a tool, click to add it, and drag the overlay item around before exporting.' },
-  ];
-
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo
-        title="Fill Forms / Annotate PDF – Text, Highlights, Signatures"
-        description="Add text boxes, highlights, checkmarks, dates, and simple signatures to a PDF locally in your browser."
-        canonicalPath="/annotate-pdf"
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/annotate-pdf')} canonicalPath="/annotate-pdf" />
 
       <div className="page-header">
         <div className="container">
@@ -377,7 +367,7 @@ export const AnnotatePdf = () => {
         </div>
       </div>
 
-      <FAQSection items={faqItems} />
+      <FAQSection items={toolFaqs('/annotate-pdf')} />
     </div>
   );
 };

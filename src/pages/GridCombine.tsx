@@ -5,6 +5,7 @@ import { gridCombinePDFs } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, X, Grid, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const GridCombine = () => {
     const [files, setFiles] = useState<File[]>([]);
@@ -38,14 +39,7 @@ export const GridCombine = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Grid Combine PDFs – Arrange Multiple PDFs in a Grid Layout"
-                description="Arrange first pages of multiple PDFs in a grid layout. Create comparison sheets or overviews. 100% private — browser only."
-                faqItems={[
-                    { question: 'What does Grid Combine do?', answer: 'It takes the first page of each PDF you upload and arranges them in a grid layout on a single page, like a comparison sheet.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your files never leave your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/grid-combine')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -103,10 +97,7 @@ export const GridCombine = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What does Grid Combine do?', answer: 'It takes the first page of each PDF you upload and arranges them in a grid layout on a single page, like a comparison sheet.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your files never leave your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/grid-combine')} />
         </div>
     );
 };

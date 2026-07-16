@@ -4,6 +4,7 @@ import { rotatePDF, downloadBytes } from '../utils/pdf/pdfOperations';
 import { RotateCw, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const RotatePdf = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -26,7 +27,7 @@ export const RotatePdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Rotate PDF Pages Online – Free & Private" description="Rotate all pages of a PDF by 90, 180, or 270 degrees. 100% browser-based, no uploads." faqItems={[{ question: 'Does rotating modify the original file?', answer: 'No. A new rotated PDF is downloaded while your original stays untouched.' }, { question: 'Can I rotate only some pages?', answer: 'For per-page control, use Organize PDF tool.' }]} />
+            <PageSeo {...toolSeo('/rotate-pdf')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 text-white flex items-center justify-center shadow-lg"><RotateCw className="w-6 h-6" /></div></div>
                 <h1>Rotate PDF Pages Online</h1><p>Rotate all pages by 90°, 180°, or 270°. Private &amp; instant in your browser.</p>
@@ -51,7 +52,7 @@ export const RotatePdf = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'Does rotating modify the original file?', answer: 'No. A new PDF is downloaded; your original is untouched.' }, { question: 'Can I rotate only some pages?', answer: 'For per-page control, use the Organize PDF tool.' }]} />
+            <FAQSection items={toolFaqs('/rotate-pdf')} />
         </div>
     );
 };

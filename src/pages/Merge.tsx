@@ -7,6 +7,7 @@ import { getPdfRecoveryMessage } from '../utils/pdf/errorMessages';
 import { ArrowUp, ArrowDown, X, FileText, Loader2, Download, Files } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const Merge = () => {
 
@@ -61,16 +62,7 @@ export const Merge = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Merge PDF Files Online – Free & Private"
-                description="Combine multiple PDF files into one document. 100% free, secure, and client-side only."
-                faqItems={[
-                    { question: "Does merging PDFs upload my files to a server?", answer: "No. All merging is done locally in your browser. Your files never leave your device." },
-                    { question: "How many PDF files can I merge at once?", answer: "There is no fixed limit. You can combine as many PDFs as your browser's memory allows — typically dozens of files without issue." },
-                    { question: "Can I reorder the files before merging?", answer: "Yes. After uploading, use the arrow buttons to drag files up or down into your preferred order before merging." },
-                    { question: "Will merging PDFs reduce quality?", answer: "No. The tool copies pages as-is without re-encoding, so quality remains identical to the originals." },
-                ]}
-            />
+            <PageSeo {...toolSeo('/merge')} />
             {/* Page Header */}
             <div className="page-header">
                 <div className="container">
@@ -188,12 +180,7 @@ export const Merge = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: "Does merging PDFs upload my files to a server?", answer: "No. All merging is done locally in your browser. Your files never leave your device." },
-                { question: "How many PDF files can I merge at once?", answer: "There is no fixed limit. You can combine as many PDFs as your browser's memory allows — typically dozens of files without issue." },
-                { question: "Can I reorder the files before merging?", answer: "Yes. After uploading, use the arrow buttons to drag files up or down into your preferred order before merging." },
-                { question: "Will merging PDFs reduce quality?", answer: "No. The tool copies pages as-is without re-encoding, so quality remains identical to the originals." },
-            ]} />
+            <FAQSection items={toolFaqs('/merge')} />
         </div>
     );
 };

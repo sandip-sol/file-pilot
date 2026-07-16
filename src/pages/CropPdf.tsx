@@ -4,6 +4,7 @@ import { downloadBytes } from '../utils/pdf/pdfOperations';
 import { Crop, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { PDFDocument } from 'pdf-lib';
 
 export const CropPdf = () => {
@@ -37,7 +38,7 @@ export const CropPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Crop PDF Pages Online – Free & Private" description="Trim PDF margins by setting crop amounts (in points) for top, right, bottom, left. Browser-based." faqItems={[{ question: 'What unit are the crop values?', answer: 'Values are in points (72 points = 1 inch).' }, { question: 'Does cropping delete content?', answer: 'No. PDF crop boxes hide content; the original data remains embedded.' }]} />
+            <PageSeo {...toolSeo('/crop-pdf')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-600 text-white flex items-center justify-center shadow-lg"><Crop className="w-6 h-6" /></div></div>
                 <h1>Crop PDF Pages</h1><p>Set crop margins (in pt) to trim all pages. 72 pt = 1 inch.</p>
@@ -65,7 +66,7 @@ export const CropPdf = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'What unit are crop values?', answer: 'Points — 72 pt = 1 inch. A4 = 595 × 842 pt.' }, { question: 'Does cropping delete content?', answer: 'No. PDF crop boxes visually hide content; original data stays embedded.' }]} />
+            <FAQSection items={toolFaqs('/crop-pdf')} />
         </div>
     );
 };

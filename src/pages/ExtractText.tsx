@@ -4,6 +4,7 @@ import { Copy, Download, FileSearch2, Loader2, ScanText, Trash2 } from 'lucide-r
 import { FileUploader } from '../components/FileUploader';
 import { FAQSection } from '../components/FAQSection';
 import { PageSeo } from '../components/PageSeo';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { Textarea } from '../components/ui/textarea';
 import { terminateOcrWorker } from '../utils/ocrHelpers';
 import { buildCombinedText, buildPerPageTextEntries, exportSearchablePdfFromOcr } from '../utils/pdf/ocrExport';
@@ -76,17 +77,9 @@ export const ExtractText = () => {
   return (
     <div className="min-h-[calc(100vh-200px)]">
       <PageSeo
-        title="Extract Text from PDF or Images – TXT for Word, Sheets, and Slides"
-        description="Extract text from PDFs, scanned PDFs, and images in your browser for TXT exports you can reuse in Word, Sheets, Slides, and other editors."
+        {...toolSeo('/extract-text')}
         canonicalPath="/extract-text"
         robots={isCanonicalRoute ? 'index,follow' : 'noindex,follow'}
-        faqItems={[
-          { question: 'Can I extract text from both PDFs and images?', answer: 'Yes. Text PDFs are read directly, and scanned pages or images fall back to OCR in the browser.' },
-          { question: 'Does this upload my files?', answer: 'No. Extraction, OCR, previews, and exports all stay on your device.' },
-          { question: 'Does this create DOCX, XLSX, or PPTX files?', answer: 'No. Current exports are TXT and searchable PDF workflows. Use the extracted text in Word, Sheets, Slides, or another editor.' },
-          { question: 'Can I inspect OCR confidence and boxes?', answer: 'Yes. The page-level result viewer can show OCR bounding boxes and average confidence metrics.' },
-          { question: 'Can I export page-wise text files?', answer: 'Yes. Download a combined TXT or export individual page TXT files as a ZIP archive.' },
-        ]}
       />
 
       <div className="page-header">
@@ -265,15 +258,7 @@ export const ExtractText = () => {
         </div>
       </div>
 
-      <FAQSection
-        items={[
-          { question: 'Can I extract text from both PDFs and images?', answer: 'Yes. Text PDFs are read directly, and scanned pages or images use OCR in the browser.' },
-          { question: 'Does this upload my files?', answer: 'No. Text extraction, OCR, previews, and exports stay local to your device.' },
-          { question: 'Does this create Word, Excel, or PowerPoint files?', answer: 'No. It exports text files and searchable PDFs. The extracted TXT can be reused in Word, Sheets, Slides, or similar apps.' },
-          { question: 'Can I export page-wise text files?', answer: 'Yes. Use the page-wise TXT ZIP export when you want a separate file for each OCR page.' },
-          { question: 'Is searchable PDF export browser-only?', answer: 'Yes. The searchable export is generated locally by combining page images with low-opacity OCR text overlays.' },
-        ]}
-      />
+      <FAQSection items={toolFaqs('/extract-text')} />
     </div>
   );
 };

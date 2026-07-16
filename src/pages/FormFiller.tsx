@@ -5,6 +5,7 @@ import { getFormFields, fillFormFields } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, ClipboardList, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const FormFiller = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -53,14 +54,7 @@ export const FormFiller = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Fill PDF Forms – Fill & Flatten PDF Form Fields Online"
-                description="Upload a PDF with form fields, fill them in directly in your browser, and download the flattened result. 100% private."
-                faqItems={[
-                    { question: 'What types of fields are supported?', answer: 'Text fields and checkboxes are supported. Radio buttons and dropdown lists may have limited support.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/form-filler')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -139,10 +133,7 @@ export const FormFiller = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What types of fields are supported?', answer: 'Text fields and checkboxes are supported. Radio buttons and dropdown lists may have limited support.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/form-filler')} />
         </div>
     );
 };

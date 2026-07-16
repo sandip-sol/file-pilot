@@ -5,6 +5,7 @@ import { findAndRedact } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, Search, CheckCircle, ShieldAlert } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const FindAndRedactPage = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -39,15 +40,7 @@ export const FindAndRedactPage = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Find & Redact PDF Text – Free Privacy Tool"
-                description="Search for sensitive text in your PDF and export an image-only redacted copy with redactions burned into the page pixels. 100% private — processed locally."
-                faqItems={[
-                    { question: 'Are redactions permanent?', answer: 'Yes. Matching pages are rendered to images with redactions burned in, so the exported PDF no longer contains the original selectable text layer.' },
-                    { question: 'Is searching case-sensitive?', answer: 'No. The search is case-insensitive by default.' },
-                    { question: 'Will my file be uploaded?', answer: 'No. Everything runs locally in your browser.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/find-and-redact')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -116,11 +109,7 @@ export const FindAndRedactPage = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Are redactions permanent?', answer: 'Yes. The exported PDF is rebuilt from rendered page images after redactions are applied, so the original text layer is not preserved.' },
-                { question: 'Is searching case-sensitive?', answer: 'No. The search is case-insensitive by default.' },
-                { question: 'Will my file be uploaded?', answer: 'No. Everything runs locally in your browser.' },
-            ]} />
+            <FAQSection items={toolFaqs('/find-and-redact')} />
         </div>
     );
 };

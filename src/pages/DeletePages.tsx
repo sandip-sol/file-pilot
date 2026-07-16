@@ -5,6 +5,7 @@ import { deletePDFPages } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, Trash2, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const DeletePages = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -76,15 +77,7 @@ export const DeletePages = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Delete PDF Pages Online – Free & Private"
-                description="Remove specific pages from your PDF instantly in the browser. Enter page numbers or ranges. 100% private — no uploads."
-                faqItems={[
-                    { question: 'Will my file be uploaded?', answer: 'No. Processing happens entirely in your browser with no server involved.' },
-                    { question: 'How do I specify pages to delete?', answer: 'Enter page numbers separated by commas. Use hyphens for ranges, e.g. "1, 3-5, 8".' },
-                    { question: 'Can I delete all pages?', answer: 'No — you cannot delete all pages because a PDF must have at least one page.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/delete-pages')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -150,11 +143,7 @@ export const DeletePages = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Will my file be uploaded?', answer: 'No. Processing happens entirely in your browser with no server involved.' },
-                { question: 'How do I specify pages to delete?', answer: 'Enter page numbers separated by commas. Use hyphens for ranges, e.g. "1, 3-5, 8".' },
-                { question: 'Can I delete all pages?', answer: 'No — you cannot delete all pages because a PDF must have at least one page.' },
-            ]} />
+            <FAQSection items={toolFaqs('/delete-pages')} />
         </div>
     );
 };

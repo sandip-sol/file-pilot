@@ -4,6 +4,7 @@ import { downloadBytes } from '../utils/pdf/pdfOperations';
 import { FileMinus2, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { PDFDocument } from 'pdf-lib';
 import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
@@ -59,7 +60,7 @@ export const RemoveBlankPages = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Remove Blank PDF Pages Online – Free & Private" description="Automatically detect and remove blank pages from a PDF. Adjust sensitivity. Browser-based." faqItems={[{ question: 'How is a blank page detected?', answer: 'Pages are rendered and analysed; those with over 98% white pixels are considered blank.' }, { question: 'What if a near-blank page is removed?', answer: 'Lower the sensitivity slider to keep pages with light content.' }]} />
+            <PageSeo {...toolSeo('/remove-blank-pages')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-400 to-rose-600 text-white flex items-center justify-center shadow-lg"><FileMinus2 className="w-6 h-6" /></div></div>
                 <h1>Remove Blank PDF Pages</h1><p>Automatically detect and strip blank pages from a PDF document.</p>
@@ -84,7 +85,7 @@ export const RemoveBlankPages = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'How is blank detected?', answer: 'Pages are rendered; those with >threshold% white pixels are removed.' }, { question: 'What if a valid page is removed?', answer: 'Lower the threshold slider to preserve light-content pages.' }]} />
+            <FAQSection items={toolFaqs('/remove-blank-pages')} />
         </div>
     );
 };

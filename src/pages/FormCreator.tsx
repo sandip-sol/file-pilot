@@ -4,6 +4,7 @@ import { getFormFields, fillFormFields, downloadBytes } from '../utils/pdf/pdfOp
 import { FileInput, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const FormCreator = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -39,7 +40,7 @@ export const FormCreator = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="PDF Form Filler – Fill & Flatten PDF Forms Online" description="Detect and fill PDF form fields, then flatten and download. 100% browser-based." faqItems={[{ question: 'What PDF forms are supported?', answer: 'Standard AcroForms with text fields and checkboxes.' }, { question: 'What does flatten mean?', answer: 'Flatten converts form fields to static text, making the form non-editable.' }]} />
+            <PageSeo {...toolSeo('/form-creator')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-700 text-white flex items-center justify-center shadow-lg"><FileInput className="w-6 h-6" /></div></div>
                 <h1>PDF Form Filler</h1><p>Automatically detect form fields, fill them in, and download the completed PDF.</p>
@@ -71,7 +72,7 @@ export const FormCreator = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'What forms are supported?', answer: 'Standard AcroForms (text fields, checkboxes).' }, { question: 'What does flatten mean?', answer: 'Converts interactive fields to static text so the form cannot be re-edited.' }]} />
+            <FAQSection items={toolFaqs('/form-creator')} />
         </div>
     );
 };

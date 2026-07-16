@@ -4,6 +4,7 @@ import { addPageNumbers, downloadBytes } from '../utils/pdf/pdfOperations';
 import { ListOrdered, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 const POSITIONS = ['bottom-center', 'bottom-right', 'bottom-left', 'top-center', 'top-right', 'top-left'] as const;
 type Position = typeof POSITIONS[number];
@@ -32,7 +33,7 @@ export const PageNumbers = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Add Page Numbers to PDF – Free & Private" description="Add customizable page numbers to any PDF. Choose position, start number, font size, and prefix/suffix." faqItems={[{ question: 'Can I start numbering from a custom number?', answer: 'Yes. Set the start number field to any value.' }, { question: 'Can I add a prefix like "Page"?', answer: 'Yes. Enter text in the Prefix field, e.g. "Page ".' }]} />
+            <PageSeo {...toolSeo('/page-numbers')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-700 text-white flex items-center justify-center shadow-lg"><ListOrdered className="w-6 h-6" /></div></div>
                 <h1>Add Page Numbers to PDF</h1><p>Customize position, start number, font size, prefix and suffix.</p>
@@ -67,7 +68,7 @@ export const PageNumbers = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'Can I start numbering from a custom number?', answer: 'Yes – set any start number in the field.' }, { question: 'Can I add a prefix?', answer: 'Yes – enter text in the Prefix field, e.g. "Page ".' }]} />
+            <FAQSection items={toolFaqs('/page-numbers')} />
         </div>
     );
 };

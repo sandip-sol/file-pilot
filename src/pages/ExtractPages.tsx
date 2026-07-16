@@ -4,6 +4,7 @@ import { extractPDFPages, downloadBytes } from '../utils/pdf/pdfOperations';
 import { Ungroup, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const ExtractPages = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -37,7 +38,7 @@ export const ExtractPages = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Extract PDF Pages Online – Free & Private" description="Pull out specific pages from a PDF into a new document. Browser-based, private." faqItems={[{ question: 'What format do I enter pages?', answer: 'Comma-separated numbers or ranges: 1,3,5-8.' }, { question: 'Does the original file change?', answer: 'No. A new PDF is created with only the extracted pages.' }]} />
+            <PageSeo {...toolSeo('/extract-pages')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white flex items-center justify-center shadow-lg"><Ungroup className="w-6 h-6" /></div></div>
                 <h1>Extract PDF Pages Online</h1><p>Pull specific pages out of a PDF into a new file. Enter page numbers or ranges.</p>
@@ -59,7 +60,7 @@ export const ExtractPages = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'What format do I use?', answer: 'Comma-separated numbers or ranges: 1,3,5-8.' }, { question: 'Does the original change?', answer: 'No. A new PDF is created with only the extracted pages.' }]} />
+            <FAQSection items={toolFaqs('/extract-pages')} />
         </div>
     );
 };

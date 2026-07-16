@@ -12,6 +12,7 @@ import {
 import { downloadBlobFile } from '../utils/pdf/export';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import {
   Eraser, Sparkles, Download, Loader2, RefreshCw, AlertTriangle,
   Plus, Trash2, Undo2, Redo2, Info, Eye, Square, Circle,
@@ -384,20 +385,9 @@ export const BlurFace = () => {
 
   const selectedRegion = regions.find((r) => r.id === selectedId);
 
-  const faqItems = [
-    { question: "Does the tool automatically detect faces?", answer: "Yes, if your browser supports the FaceDetector API it can automatically detect faces in the image. Otherwise, you can manually draw blur regions by clicking and dragging on the canvas." },
-    { question: "Can I adjust the blur intensity?", answer: "Yes. A blur intensity slider lets you control the strength of the Gaussian blur or pixelation effect from subtle to heavy, depending on the level of anonymization you need." },
-    { question: "Is this tool safe for protecting people's privacy?", answer: "The tool applies visible image edits that obscure selected areas. However, you should always verify the blurred output carefully before sharing, as incorrectly placed regions may leave sensitive content visible." },
-    { question: "What image formats are supported?", answer: "You can blur areas in JPEG, PNG, WebP, and most other raster image formats. All processing happens locally in your browser and images are never uploaded to any server." },
-  ];
-
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo
-        title="Blur Face & Plate Online - Privacy Blur Tool"
-        description="Blur faces, license plates, and sensitive areas in images. Gaussian blur, pixelate, or black bar. Free, private, no uploads."
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/blur-face')} />
 
       <div className="page-header">
         <div className="container">
@@ -636,7 +626,7 @@ export const BlurFace = () => {
           )}
         </div>
 
-        <FAQSection items={faqItems} />
+        <FAQSection items={toolFaqs('/blur-face')} />
       </div>
     </div>
   );

@@ -76,9 +76,26 @@ Three winnable fronts, in priority order:
 | 1.3 | **Comparison/alternative pages** ("FilePilot vs Smallpdf", "iLovePDF alternative that doesn't upload"). | ⏳ **Not started** — needs a decision: these pages make public claims about named competitors. Partly mitigated by the per-tool "when to use this vs …" sections shipped in 1.1. |
 | 1.4 | **Internal-linking hubs.** Each tool should link to 3–5 *related* tools, not the generic footer. | ✅ **Done for the 12** — curated `RELATED_ROUTES` siblings replace the `/merge`, `/compress` fallback. Hub → spoke anchors still to review. |
 
-**Rollout note:** the reconciliation pattern is proven on the 12 focus tools. The
-other ~78 tool pages still have the prerender-vs-`PageSeo` title conflict and the
-schema/visible FAQ mismatch. Migrating them is the natural follow-up.
+**Rollout: ✅ complete — all 83 tool routes.** The reconciliation was extended from the
+12 focus tools to every tool page. `toolContent.ts` is now the single source of truth
+site-wide, consumed by the prerenderer, `PageSeo`, and `FAQSection`.
+
+- **Title parity: 83/83** client-vs-prerender (was 12/83). Every tool page now keeps
+  its `| FilePilot` brand suffix in the DOM Google actually indexes.
+- **FAQ single-sourcing: 83/83** — one FAQ set per tool, so the visible accordion and
+  the FAQPage schema can no longer drift apart.
+- Route-aware components (`ImagesToPdf`, `PdfToImages`, `ExtractText`, `PdfSecurity`,
+  `PdfMetadata`) keep their dynamic `canonicalPath`/`robots` logic; non-indexable
+  variants (`/png-to-pdf`, `/rasterize-pdf`, …) still canonicalise to their hub.
+
+**Follow-ups surfaced by the rollout:**
+1. **14 of 83 titles now exceed ~65 chars** and will truncate in SERPs (worst:
+   `/extract-text` at 78). Pre-existing length + the 12-char brand suffix. Worth trimming.
+2. **Dead page components** are never routed and should probably be deleted:
+   `JpgToPdf`, `PdfToJpg`, `BmpToPdf`, `HeicToPdf`, `WebpToPdf`, `TiffToPdf`,
+   `PdfToPng`, `PdfToTiff`, `PdfToWebp`, `PdfToDocx`, `PdfToExcel`, `PdfToPptx`,
+   `EncryptDecryptPdf`, `TextColor`, `ConvertToPdfPages`, `SecureOptimizePages`
+   (superseded by the route-aware components above).
 
 ### Phase 2 — Weeks 2–10: Authority / backlinks (runs in parallel, highest leverage)
 

@@ -8,6 +8,7 @@ import { getPdfRecoveryMessage } from '../utils/pdf/errorMessages';
 import { Loader2, Download, RefreshCw, FileText, Info, Minimize2 } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const Compress = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -55,16 +56,7 @@ export const Compress = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Compress PDF Online – Reduce File Size Free"
-                description="Reduce PDF file size while maintaining quality. Optimize PDFs locally in your browser. No uploads, 100% private."
-                faqItems={[
-                    { question: "Does compressing a PDF upload my file?", answer: "No. All compression happens in your browser using JavaScript. Your file never leaves your device." },
-                    { question: "How much can I reduce the PDF file size?", answer: "Results vary by content. Metadata removal and object-stream compression typically reduce size by 10–40%. Scanned PDFs with large images see the biggest savings." },
-                    { question: "Will compressing a PDF reduce its quality?", answer: "The tool strips unnecessary metadata and applies lossless object-stream compression, so visible quality stays the same." },
-                    { question: "Is there a file size limit for compression?", answer: "There is no hard limit. Because processing happens in your browser, very large files (100 MB+) may be slower depending on your device." },
-                ]}
-            />
+            <PageSeo {...toolSeo('/compress')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -175,12 +167,7 @@ export const Compress = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: "Does compressing a PDF upload my file?", answer: "No. All compression happens in your browser using JavaScript. Your file never leaves your device." },
-                { question: "How much can I reduce the PDF file size?", answer: "Results vary by content. Metadata removal and object-stream compression typically reduce size by 10–40%. Scanned PDFs with large images see the biggest savings." },
-                { question: "Will compressing a PDF reduce its quality?", answer: "The tool strips unnecessary metadata and applies lossless object-stream compression, so visible quality stays the same." },
-                { question: "Is there a file size limit for compression?", answer: "There is no hard limit. Because processing happens in your browser, very large files (100 MB+) may be slower depending on your device." },
-            ]} />
+            <FAQSection items={toolFaqs('/compress')} />
         </div>
     );
 };

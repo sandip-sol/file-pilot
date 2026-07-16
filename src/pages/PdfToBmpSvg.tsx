@@ -4,6 +4,7 @@ import { rasterizePDF, downloadBlob2 } from '../utils/pdf/pdfOperations';
 import { FileImage, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const PdfToBmp = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -90,7 +91,7 @@ export const PdfToSvg = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="PDF to SVG Online – Free & Private" description="Convert PDF pages to scalable SVG vector graphics. Download instantly. Browser-based." faqItems={[{ question: 'Are fonts preserved?', answer: 'Text is embedded as path data in the SVG when using vector extraction.' }, { question: 'Does this work for scanned PDFs?', answer: 'Scanned PDFs output raster-image SVGs; vector extraction only works for text-based PDFs.' }]} />
+            <PageSeo {...toolSeo('/pdf-to-svg')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-800 text-white flex items-center justify-center shadow-lg"><FileImage className="w-6 h-6" /></div></div>
                 <h1>PDF to SVG Online</h1><p>Convert each PDF page to a scalable SVG vector graphic.</p>
@@ -110,7 +111,7 @@ export const PdfToSvg = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'Are fonts preserved?', answer: 'Text is converted to path data in the SVG output.' }, { question: 'Does it work for scanned PDFs?', answer: 'Scanned PDFs produce image-embedded SVGs; best results with text-based PDFs.' }]} />
+            <FAQSection items={toolFaqs('/pdf-to-svg')} />
         </div>
     );
 };

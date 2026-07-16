@@ -5,6 +5,7 @@ import { alternateMerge } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, X, FileText, Shuffle, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const AlternateMerge = () => {
     const [files, setFiles] = useState<File[]>([]);
@@ -37,14 +38,7 @@ export const AlternateMerge = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Alternate Merge PDFs – Interleave Pages from Multiple PDFs"
-                description="Interleave pages from two or more PDFs in alternating order. Perfect for combining front and back scans. 100% private — browser only."
-                faqItems={[
-                    { question: 'What is alternate merge?', answer: 'It interleaves pages from multiple PDFs: page 1 of doc 1, page 1 of doc 2, page 2 of doc 1, etc. — perfect for merging duplex scans.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your files never leave your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/alternate-merge')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -101,10 +95,7 @@ export const AlternateMerge = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What is alternate merge?', answer: 'It interleaves pages from multiple PDFs: page 1 of doc 1, page 1 of doc 2, page 2 of doc 1, etc. — perfect for merging duplex scans.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your files never leave your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/alternate-merge')} />
         </div>
     );
 };

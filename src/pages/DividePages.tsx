@@ -4,6 +4,7 @@ import { posterizePDF, downloadBytes } from '../utils/pdf/pdfOperations';
 import { TableColumnsSplit, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const DividePages = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -28,7 +29,7 @@ export const DividePages = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Divide PDF Pages Online – Free & Private" description="Split each PDF page in half horizontally or vertically. Browser-based, no uploads." faqItems={[{ question: 'What does Divide do?', answer: 'Each page is split into two halves, doubling the page count.' }, { question: 'Which direction should I choose?', answer: 'Vertical splits pages left/right; Horizontal splits top/bottom.' }]} />
+            <PageSeo {...toolSeo('/divide-pages')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-400 to-amber-600 text-white flex items-center justify-center shadow-lg"><TableColumnsSplit className="w-6 h-6" /></div></div>
                 <h1>Divide PDF Pages</h1><p>Split each page in half — ideal for double-page scans. Fully browser-based.</p>
@@ -58,7 +59,7 @@ export const DividePages = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'What does Divide do?', answer: 'Each page is split into two halves, doubling the page count.' }, { question: 'Which direction?', answer: 'Vertical splits left/right; Horizontal splits top/bottom.' }]} />
+            <FAQSection items={toolFaqs('/divide-pages')} />
         </div>
     );
 };

@@ -5,6 +5,7 @@ import { sanitizePDF } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, ShieldCheck, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const SanitizePdf = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -41,15 +42,7 @@ export const SanitizePdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Sanitize PDF – Remove Metadata & Hidden Data Free"
-                description="Remove all metadata, hidden data, and flatten interactive elements from your PDF to protect privacy. 100% browser-based, no uploads."
-                faqItems={[
-                    { question: 'What does sanitizing a PDF do?', answer: 'It removes all metadata (author, creator, keywords), flattens form fields, and re-serializes the PDF structure to remove hidden data.' },
-                    { question: 'Will my file content be changed?', answer: 'No. Only metadata and interactive elements are removed. The visible page content remains unchanged.' },
-                    { question: 'Is my file uploaded?', answer: 'No. Everything runs locally in your browser.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/sanitize-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -114,11 +107,7 @@ export const SanitizePdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What does sanitizing a PDF do?', answer: 'It removes all metadata (author, creator, keywords), flattens form fields, and re-serializes the PDF structure to remove hidden data.' },
-                { question: 'Will my file content be changed?', answer: 'No. Only metadata and interactive elements are removed. The visible page content remains unchanged.' },
-                { question: 'Is my file uploaded?', answer: 'No. Everything runs locally in your browser.' },
-            ]} />
+            <FAQSection items={toolFaqs('/sanitize-pdf')} />
         </div>
     );
 };

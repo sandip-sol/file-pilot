@@ -5,6 +5,7 @@ import { addBlankPage } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, FilePlus, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const AddBlankPage = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -38,14 +39,7 @@ export const AddBlankPage = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Add Blank Page to PDF – Insert Empty Page Online Free"
-                description="Insert a blank page at the beginning, end, or any position in your PDF. 100% private — processed in your browser."
-                faqItems={[
-                    { question: 'Can I insert a blank page at any position?', answer: 'Yes. You can insert before the first page, after the last page, or specify a page number to insert after.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/add-blank-page')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -117,10 +111,7 @@ export const AddBlankPage = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Can I insert a blank page at any position?', answer: 'Yes. You can insert before the first page, after the last page, or specify a page number to insert after.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/add-blank-page')} />
         </div>
     );
 };

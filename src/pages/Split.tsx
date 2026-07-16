@@ -8,6 +8,7 @@ import { getPdfRecoveryMessage } from '../utils/pdf/errorMessages';
 import { FileText, Loader2, Scissors, Download, RefreshCw } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const Split = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -83,16 +84,7 @@ export const Split = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Split PDF Online – Extract Pages Free"
-                description="Split PDF documents or extract specific pages. Fast, free, and secure browser-based tool."
-                faqItems={[
-                    { question: "Does splitting a PDF upload my file?", answer: "No. All splitting happens in your browser using JavaScript. Your file never leaves your device." },
-                    { question: "Can I extract a specific page range from a PDF?", answer: "Yes. Enter the start and end page numbers and the tool will extract only those pages into a new PDF." },
-                    { question: "Can I split a PDF into individual pages?", answer: "Yes. Toggle the 'Separate pages' option and every page will be saved as its own PDF, downloaded together in a ZIP file." },
-                    { question: "Is there a page limit for splitting?", answer: "No. The tool works in your browser, so it can handle PDFs with hundreds of pages — speed depends on your device." },
-                ]}
-            />
+            <PageSeo {...toolSeo('/split')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -221,12 +213,7 @@ export const Split = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: "Does splitting a PDF upload my file?", answer: "No. All splitting happens in your browser using JavaScript. Your file never leaves your device." },
-                { question: "Can I extract a specific page range from a PDF?", answer: "Yes. Enter the start and end page numbers and the tool will extract only those pages into a new PDF." },
-                { question: "Can I split a PDF into individual pages?", answer: "Yes. Toggle the 'Separate pages' option and every page will be saved as its own PDF, downloaded together in a ZIP file." },
-                { question: "Is there a page limit for splitting?", answer: "No. The tool works in your browser, so it can handle PDFs with hundreds of pages — speed depends on your device." },
-            ]} />
+            <FAQSection items={toolFaqs('/split')} />
         </div>
     );
 };

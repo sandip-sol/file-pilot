@@ -4,6 +4,7 @@ import { downloadBytes } from '../utils/pdf/pdfOperations';
 import { List, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
@@ -69,7 +70,7 @@ export const TableOfContents = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Add Table of Contents to PDF – Free & Private" description="Prepend an auto-generated table of contents page to any PDF. Browser-based." faqItems={[{ question: 'What headings are detected?', answer: 'A page-by-page TOC is generated listing each page number.' }, { question: 'Is the TOC with hyperlinks?', answer: 'Basic page-number listing is generated; full hyperlink TOC requires a desktop app.' }]} />
+            <PageSeo {...toolSeo('/table-of-contents')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-700 text-white flex items-center justify-center shadow-lg"><List className="w-6 h-6" /></div></div>
                 <h1>Add Table of Contents to PDF</h1><p>Auto-generate a TOC page with page numbers and prepend it to your PDF.</p>
@@ -93,7 +94,7 @@ export const TableOfContents = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'What headings are detected?', answer: 'A page-by-page listing is generated. Semantic heading extraction requires desktop tools.' }, { question: 'Are hyperlinks included?', answer: 'Page number references are listed; clickable links require a desktop PDF editor.' }]} />
+            <FAQSection items={toolFaqs('/table-of-contents')} />
         </div>
     );
 };

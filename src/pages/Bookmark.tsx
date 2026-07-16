@@ -4,6 +4,7 @@ import { downloadBytes } from '../utils/pdf/pdfOperations';
 import { BookMarked, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { PDFDocument } from 'pdf-lib';
 
 export const Bookmark = () => {
@@ -38,7 +39,7 @@ export const Bookmark = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Add PDF Bookmarks Online – Free & Private" description="Add navigation bookmarks to a PDF. Specify title and page number for each bookmark." faqItems={[{ question: 'What are PDF bookmarks?', answer: 'Bookmarks (outline entries) are navigation shortcuts that appear in the PDF reader sidebar.' }, { question: 'Can I nest bookmarks?', answer: 'Flat bookmarks are supported. Hierarchical nesting requires a desktop PDF editor.' }]} />
+            <PageSeo {...toolSeo('/bookmark')} />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-700 text-white flex items-center justify-center shadow-lg"><BookMarked className="w-6 h-6" /></div></div>
                 <h1>Add PDF Bookmarks</h1><p>Create navigation bookmarks in your PDF. Fully browser-based.</p>
@@ -68,7 +69,7 @@ export const Bookmark = () => {
                     )}
                 </div>
             </div></div>
-            <FAQSection items={[{ question: 'What are PDF bookmarks?', answer: 'Navigation shortcuts shown in the PDF reader\'s outline/bookmarks sidebar.' }, { question: 'Can I nest bookmarks?', answer: 'Flat bookmarks are supported; hierarchical nesting requires a desktop PDF editor.' }]} />
+            <FAQSection items={toolFaqs('/bookmark')} />
         </div>
     );
 };

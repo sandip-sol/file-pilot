@@ -5,6 +5,7 @@ import { repairPDF } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, Wrench, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const RepairPdf = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -35,15 +36,7 @@ export const RepairPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Repair Corrupted PDF – Free Online PDF Fix Tool"
-                description="Repair a broken or corrupted PDF file instantly in your browser. Re-serializes the PDF structure to fix common errors. 100% private — no uploads."
-                faqItems={[
-                    { question: 'What kind of PDF errors can this fix?', answer: 'It can fix structural issues like cross-reference table errors, invalid objects, and malformed metadata by completely re-serializing the PDF.' },
-                    { question: 'Will it fix encrypted or password-protected PDFs?', answer: 'It attempts to open and re-save even encrypted PDFs, which can resolve some structural issues.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/repair-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -98,11 +91,7 @@ export const RepairPdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What kind of PDF errors can this fix?', answer: 'It can fix structural issues like cross-reference table errors, invalid objects, and malformed metadata by completely re-serializing the PDF.' },
-                { question: 'Will it fix encrypted or password-protected PDFs?', answer: 'It attempts to open and re-save even encrypted PDFs, which can resolve some structural issues.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/repair-pdf')} />
         </div>
     );
 };

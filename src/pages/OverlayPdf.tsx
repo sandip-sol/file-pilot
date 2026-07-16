@@ -5,6 +5,7 @@ import { overlayPDF } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, X, Layers, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const OverlayPdf = () => {
     const [baseFile, setBaseFile] = useState<File | null>(null);
@@ -32,14 +33,7 @@ export const OverlayPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Overlay / Underlay PDFs – Stamp One PDF Over Another"
-                description="Layer one PDF on top of or behind another. Perfect for adding letterheads, watermarks, or background templates. 100% private."
-                faqItems={[
-                    { question: 'What is the difference between overlay and underlay?', answer: 'Overlay places the second PDF on top of the base. Underlay places it behind the base content.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your files never leave your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/overlay-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -108,10 +102,7 @@ export const OverlayPdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What is the difference between overlay and underlay?', answer: 'Overlay places the second PDF on top of the base. Underlay places it behind the base content.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your files never leave your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/overlay-pdf')} />
         </div>
     );
 };

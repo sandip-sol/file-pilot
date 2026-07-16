@@ -5,6 +5,7 @@ import { reversePDF } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, ArrowLeftRight, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const ReversePdf = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -39,15 +40,7 @@ export const ReversePdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Reverse PDF Pages Order – Free & Private Online Tool"
-                description="Reverse the page order of your PDF instantly in the browser. No uploads, 100% private and free. Great for reading books and documents in reverse."
-                faqItems={[
-                    { question: 'What does reversing a PDF do?', answer: 'It flips the page order so the last page becomes the first page, and vice versa.' },
-                    { question: 'Is my file uploaded to a server?', answer: 'No. Everything runs locally in your browser. Your file never leaves your device.' },
-                    { question: 'Is there a page limit?', answer: 'No hard limit. Very large files may take more time depending on your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/reverse-pdf')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -103,11 +96,7 @@ export const ReversePdf = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What does reversing a PDF do?', answer: 'It flips the page order so the last page becomes the first page, and vice versa.' },
-                { question: 'Is my file uploaded to a server?', answer: 'No. Everything runs locally in your browser. Your file never leaves your device.' },
-                { question: 'Is there a page limit?', answer: 'No hard limit. Very large files may take more time depending on your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/reverse-pdf')} />
         </div>
     );
 };

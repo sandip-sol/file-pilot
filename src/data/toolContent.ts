@@ -75,6 +75,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Join a cover letter and resume into a single application PDF.',
       'Combine individual contract pages into one signed document.',
     ],
+      seoTitle: "Merge PDF Files Online – Free & Private",
+    seoDescription: "Combine multiple PDF files into one document. 100% free, secure, and client-side only.",
+    faqs: [
+      { question: "Does merging PDFs upload my files to a server?", answer: "No. All merging is done locally in your browser. Your files never leave your device." },
+      { question: "How many PDF files can I merge at once?", answer: "There is no fixed limit. You can combine as many PDFs as your browser's memory allows — typically dozens of files without issue." },
+      { question: "Can I reorder the files before merging?", answer: "Yes. After uploading, use the arrow buttons to drag files up or down into your preferred order before merging." },
+      { question: "Will merging PDFs reduce quality?", answer: "No. The tool copies pages as-is without re-encoding, so quality remains identical to the originals." },
+    ],
   },
   '/split': {
     intro:
@@ -90,6 +98,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Break a lengthy contract into sections for individual review.',
       'Pull out single pages to share without revealing the full document.',
       'Split scanned documents that were batched into one file.',
+    ],
+      seoTitle: "Split PDF Online – Extract Pages Free",
+    seoDescription: "Split PDF documents or extract specific pages. Fast, free, and secure browser-based tool.",
+    faqs: [
+      { question: "Does splitting a PDF upload my file?", answer: "No. All splitting happens in your browser using JavaScript. Your file never leaves your device." },
+      { question: "Can I extract a specific page range from a PDF?", answer: "Yes. Enter the start and end page numbers and the tool will extract only those pages into a new PDF." },
+      { question: "Can I split a PDF into individual pages?", answer: "Yes. Toggle the 'Separate pages' option and every page will be saved as its own PDF, downloaded together in a ZIP file." },
+      { question: "Is there a page limit for splitting?", answer: "No. The tool works in your browser, so it can handle PDFs with hundreds of pages — speed depends on your device." },
     ],
   },
   '/organize-pdf': {
@@ -107,6 +123,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Remove blank or duplicate pages from a scanned batch.',
       'Rearrange presentation slides before printing handouts.',
     ],
+      seoTitle: "Organize PDF Pages – Reorder, Rotate, Delete",
+    seoDescription: "Reorder, rotate, and delete PDF pages with drag-and-drop thumbnails. Everything stays private in your browser.",
+    faqs: [
+      { question: "Does organizing pages upload my PDF?", answer: "No. The page previews, rotation, reordering, and export all run in your browser." },
+      { question: "Can I rotate every page at once?", answer: "Yes. Use the rotate-all controls in the left panel to apply a 90 degree turn to the full document." },
+      { question: "Can I delete multiple pages together?", answer: "Yes. Select several thumbnails and use Delete Selected before exporting the final PDF." },
+    ],
   },
   '/rotate-pdf': {
     intro:
@@ -122,6 +145,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Correct landscape tables embedded in portrait documents.',
       'Prepare PDFs for consistent printing orientation.',
       'Fix mobile-scanned documents with mixed orientations.',
+    ],
+      seoTitle: "Rotate PDF Pages Online – Free & Private",
+    seoDescription: "Rotate all pages of a PDF by 90, 180, or 270 degrees. 100% browser-based, no uploads.",
+    faqs: [
+      { question: "Does rotating modify the original file?", answer: "No. A new rotated PDF is downloaded while your original stays untouched." },
+      { question: "Can I rotate only some pages?", answer: "For per-page control, use Organize PDF tool." },
     ],
   },
   '/delete-pages': {
@@ -139,6 +168,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Delete pages with outdated information from a report.',
       'Trim appendices or reference pages you don\'t need.',
     ],
+      seoTitle: "Delete PDF Pages Online – Free & Private",
+    seoDescription: "Remove specific pages from your PDF instantly in the browser. Enter page numbers or ranges. 100% private — no uploads.",
+    faqs: [
+      { question: "Will my file be uploaded?", answer: "No. Processing happens entirely in your browser with no server involved." },
+      { question: "How do I specify pages to delete?", answer: "Enter page numbers separated by commas. Use hyphens for ranges, e.g. \"1, 3-5, 8\"." },
+      { question: "Can I delete all pages?", answer: "No — you cannot delete all pages because a PDF must have at least one page." },
+    ],
   },
   '/extract-pages': {
     intro:
@@ -154,6 +190,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create a summary PDF with only the key pages from a report.',
       'Extract certificates or appendices from a training manual.',
       'Share select pages without exposing the full document.',
+    ],
+      seoTitle: "Extract PDF Pages Online – Free & Private",
+    seoDescription: "Pull out specific pages from a PDF into a new document. Browser-based, private.",
+    faqs: [
+      { question: "What format do I enter pages?", answer: "Comma-separated numbers or ranges: 1,3,5-8." },
+      { question: "Does the original file change?", answer: "No. A new PDF is created with only the extracted pages." },
     ],
   },
   '/reverse-pdf': {
@@ -171,6 +213,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Prepare documents for specific binding requirements.',
       'Reorder photo albums or portfolio pages.',
     ],
+      seoTitle: "Reverse PDF Pages Order – Free & Private Online Tool",
+    seoDescription: "Reverse the page order of your PDF instantly in the browser. No uploads, 100% private and free. Great for reading books and documents in reverse.",
+    faqs: [
+      { question: "What does reversing a PDF do?", answer: "It flips the page order so the last page becomes the first page, and vice versa." },
+      { question: "Is my file uploaded to a server?", answer: "No. Everything runs locally in your browser. Your file never leaves your device." },
+      { question: "Is there a page limit?", answer: "No hard limit. Very large files may take more time depending on your device." },
+    ],
   },
   '/add-blank-page': {
     intro:
@@ -187,6 +236,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Ensure chapters start on odd-numbered pages for booklet printing.',
       'Pad a document to meet a minimum page-count requirement.',
     ],
+      seoTitle: "Add Blank Page to PDF – Insert Empty Page Online Free",
+    seoDescription: "Insert a blank page at the beginning, end, or any position in your PDF. 100% private — processed in your browser.",
+    faqs: [
+      { question: "Can I insert a blank page at any position?", answer: "Yes. You can insert before the first page, after the last page, or specify a page number to insert after." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
+    ],
   },
   '/alternate-merge': {
     intro:
@@ -202,6 +257,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Interleave question sheets and answer sheets.',
       'Combine two parallel document versions page-by-page.',
       'Merge translated and original-language pages side by side.',
+    ],
+      seoTitle: "Alternate Merge PDFs – Interleave Pages from Multiple PDFs",
+    seoDescription: "Interleave pages from two or more PDFs in alternating order. Perfect for combining front and back scans. 100% private — browser only.",
+    faqs: [
+      { question: "What is alternate merge?", answer: "It interleaves pages from multiple PDFs: page 1 of doc 1, page 1 of doc 2, page 2 of doc 1, etc. — perfect for merging duplex scans." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your files never leave your device." },
     ],
   },
   '/n-up-pdf': {
@@ -269,6 +330,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Overlay a signature template onto a contract.',
       'Layer grid lines or ruled paper under handwritten notes.',
     ],
+      seoTitle: "Overlay / Underlay PDFs – Stamp One PDF Over Another",
+    seoDescription: "Layer one PDF on top of or behind another. Perfect for adding letterheads, watermarks, or background templates. 100% private.",
+    faqs: [
+      { question: "What is the difference between overlay and underlay?", answer: "Overlay places the second PDF on top of the base. Underlay places it behind the base content." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your files never leave your device." },
+    ],
   },
   '/divide-pages': {
     intro:
@@ -284,6 +351,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Divide wide landscape pages into two portrait pages.',
       'Separate two-column layouts into individual pages.',
       'Convert two-up handouts back to full-size pages.',
+    ],
+      seoTitle: "Divide PDF Pages Online – Free & Private",
+    seoDescription: "Split each PDF page in half horizontally or vertically. Browser-based, no uploads.",
+    faqs: [
+      { question: "What does Divide do?", answer: "Each page is split into two halves, doubling the page count." },
+      { question: "Which direction should I choose?", answer: "Vertical splits pages left/right; Horizontal splits top/bottom." },
     ],
   },
   '/combine-single-page': {
@@ -351,6 +424,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Build portfolio proof sheets from multiple design files.',
       'Arrange thumbnail previews for a document index.',
       'Combine receipts or small documents onto a single page for filing.',
+    ],
+      seoTitle: "Grid Combine PDFs – Arrange Multiple PDFs in a Grid Layout",
+    seoDescription: "Arrange first pages of multiple PDFs in a grid layout. Create comparison sheets or overviews. 100% private — browser only.",
+    faqs: [
+      { question: "What does Grid Combine do?", answer: "It takes the first page of each PDF you upload and arranges them in a grid layout on a single page, like a comparison sheet." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your files never leave your device." },
     ],
   },
   '/posterize-pdf': {
@@ -469,6 +548,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Audit metadata before publishing or sharing confidential documents.',
       'Confirm the PDF producer tool used for troubleshooting formatting issues.',
     ],
+      seoTitle: "PDF Metadata Editor - View, Edit and Remove PDF Metadata",
+    seoDescription: "View, edit, or remove all PDF metadata including title, author, keywords, and dates. 100% private, processed locally in your browser.",
+    faqs: [
+      { question: "What metadata is stored in a PDF?", answer: "PDFs can contain title, author, subject, keywords, creator, producer, and creation/modification dates." },
+      { question: "Will my file be uploaded?", answer: "No. Everything runs locally in your browser." },
+      { question: "Can I remove all metadata at once?", answer: "Yes! Use the \"Remove All\" mode to strip all metadata in one click." },
+    ],
   },
   '/pdf-to-zip': {
     intro:
@@ -535,6 +621,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Proofread by comparing draft and final versions of a report.',
       'Check that redaction or editing didn\'t affect surrounding content.',
     ],
+      seoTitle: "Compare PDFs – Page Count and Text Differences",
+    seoDescription: "Compare two PDFs page by page using extracted text differences, page counts, and changed-page summaries.",
+    faqs: [
+      { question: "Does PDF compare use visual image diffing?", answer: "No. This tool keeps things practical in the browser by comparing extracted text page by page first." },
+      { question: "Will scanned PDFs still work?", answer: "Often yes. If needed, the compare flow falls back to OCR, which can take longer on large scanned files." },
+      { question: "Can it detect different page counts?", answer: "Yes. The summary shows each document page count and highlights changed or missing pages." },
+    ],
   },
   '/pdf-booklet': {
     intro:
@@ -550,6 +643,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create event programs or wedding booklets.',
       'Make compact reference guides that fold into pocket-sized booklets.',
       'Produce church bulletins or meeting agendas in booklet format.',
+    ],
+      seoTitle: "PDF Booklet – Create Saddle-Stitch Booklet Layout",
+    seoDescription: "Rearrange PDF pages into a booklet layout that you can print, fold, and staple. 100% private — browser only.",
+    faqs: [
+      { question: "What is a booklet layout?", answer: "A booklet layout reorders pages so that when you print double-sided, fold, and staple, the pages appear in the correct reading order." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
     ],
   },
 
@@ -569,6 +668,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Mark up a student paper or manuscript with feedback.',
       'Sign and annotate forms for remote submission.',
     ],
+      seoTitle: "Fill Forms / Annotate PDF – Text, Highlights, Signatures",
+    seoDescription: "Add text boxes, highlights, checkmarks, dates, and simple signatures to a PDF locally in your browser.",
+    faqs: [
+      { question: "Can I add a typed or image signature?", answer: "Yes. Use Typed signature for a quick name placement or Image signature to upload a signature graphic." },
+      { question: "Are the annotations flattened into the export?", answer: "Yes. The exported PDF burns the current overlay items into the document so the result is easy to share." },
+      { question: "Can I move fields after placing them?", answer: "Yes. Select a tool, click to add it, and drag the overlay item around before exporting." },
+    ],
   },
   '/watermark-pdf': {
     intro:
@@ -584,6 +690,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add "CONFIDENTIAL" stamps to sensitive internal reports.',
       'Apply company branding or logos across all pages.',
       'Protect creative work with a visible copyright watermark.',
+    ],
+      seoTitle: "Watermark PDF – Add Text or Image Watermarks",
+    seoDescription: "Add text or image watermarks to a PDF locally in your browser. Control opacity, size, rotation, and page targeting.",
+    faqs: [
+      { question: "Does watermarking upload my PDF?", answer: "No. The preview and the export both happen locally in the browser." },
+      { question: "Can I watermark only a few pages?", answer: "Yes. Turn off Apply to all pages and enter page numbers such as 1,3,5-8." },
+      { question: "Can I use a logo image as a watermark?", answer: "Yes. Switch to image watermark mode and upload a PNG or JPG logo." },
     ],
   },
   '/redact-pdf': {
@@ -601,6 +714,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Black out student names on shared academic records.',
       'Remove classified or proprietary information from government documents.',
     ],
+      seoTitle: "Redact PDF – Visual Burn-In Redaction Tool",
+    seoDescription: "Place rectangular redaction boxes on a PDF and export a visually burned-in redacted copy locally in your browser.",
+    faqs: [
+      { question: "Are these full forensic PDF redactions?", answer: "No. This MVP burns black boxes into the visual page output. The UI and copy make that limitation explicit." },
+      { question: "Can I place multiple boxes per page?", answer: "Yes. Draw as many rectangles as you need on each page before exporting." },
+      { question: "Can I zoom while redacting?", answer: "Yes. Use the zoom slider to make precise placements on small content areas." },
+    ],
   },
   '/sign-pdf': {
     intro:
@@ -616,6 +736,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add your signature to permission slips, forms, or applications.',
       'Sign NDAs and legal documents remotely.',
       'Initial multiple pages of a multi-page agreement.',
+    ],
+      seoTitle: "Sign PDF – Add Signature to PDF Online Free",
+    seoDescription: "Draw your signature and add it to any PDF page. 100% private — all processing done in your browser.",
+    faqs: [
+      { question: "Is this a legally binding signature?", answer: "This draws an image of your signature on the PDF — it is not a cryptographic digital signature. For legal binding, you need a certified CA-backed digital signature." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
     ],
   },
   '/crop-pdf': {
@@ -633,6 +759,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Focus on a specific region of a page for presentation slides.',
       'Standardize page sizes across a merged document with inconsistent margins.',
     ],
+      seoTitle: "Crop PDF Pages Online – Free & Private",
+    seoDescription: "Trim PDF margins by setting crop amounts (in points) for top, right, bottom, left. Browser-based.",
+    faqs: [
+      { question: "What unit are the crop values?", answer: "Values are in points (72 points = 1 inch)." },
+      { question: "Does cropping delete content?", answer: "No. PDF crop boxes hide content; the original data remains embedded." },
+    ],
   },
   '/bookmark': {
     intro:
@@ -648,6 +780,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Fix or update broken bookmark links in an existing PDF.',
       'Create a structured outline for a thesis or dissertation.',
       'Remove unwanted bookmarks from a PDF before distributing.',
+    ],
+      seoTitle: "Add PDF Bookmarks Online – Free & Private",
+    seoDescription: "Add navigation bookmarks to a PDF. Specify title and page number for each bookmark.",
+    faqs: [
+      { question: "What are PDF bookmarks?", answer: "Bookmarks (outline entries) are navigation shortcuts that appear in the PDF reader sidebar." },
+      { question: "Can I nest bookmarks?", answer: "Flat bookmarks are supported. Hierarchical nesting requires a desktop PDF editor." },
     ],
   },
   '/table-of-contents': {
@@ -665,6 +803,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create a contents page for a compiled anthology or collection.',
       'Improve accessibility of documents by adding structured navigation.',
     ],
+      seoTitle: "Add Table of Contents to PDF – Free & Private",
+    seoDescription: "Prepend an auto-generated table of contents page to any PDF. Browser-based.",
+    faqs: [
+      { question: "What headings are detected?", answer: "A page-by-page TOC is generated listing each page number." },
+      { question: "Is the TOC with hyperlinks?", answer: "Basic page-number listing is generated; full hyperlink TOC requires a desktop app." },
+    ],
   },
   '/page-numbers': {
     intro:
@@ -680,6 +824,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Number the pages of a merged document for reference.',
       'Add numbered footers to legal or academic documents.',
       'Create numbered handouts for workshops or classes.',
+    ],
+      seoTitle: "Add Page Numbers to PDF – Free & Private",
+    seoDescription: "Add customizable page numbers to any PDF. Choose position, start number, font size, and prefix/suffix.",
+    faqs: [
+      { question: "Can I start numbering from a custom number?", answer: "Yes. Set the start number field to any value." },
+      { question: "Can I add a prefix like \"Page\"?", answer: "Yes. Enter text in the Prefix field, e.g. \"Page \"." },
     ],
   },
   '/header-footer': {
@@ -697,6 +847,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add company name or project title to all pages of a proposal.',
       'Insert legal disclaimers in the footer of terms and conditions.',
     ],
+      seoTitle: "Add Header & Footer to PDF – Free Online Tool",
+    seoDescription: "Add custom header and footer text to every page of your PDF. Works entirely in your browser — no uploads, 100% private.",
+    faqs: [
+      { question: "Will my file be uploaded?", answer: "No. Everything runs locally in your browser." },
+      { question: "Can I add just a header or just a footer?", answer: "Yes! You can fill in only the header field, only the footer field, or both." },
+      { question: "Is the header/footer centered?", answer: "Yes, both header and footer text are centered horizontally on the page." },
+    ],
   },
   '/background-color': {
     intro:
@@ -712,6 +869,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create visually distinct sections with different background colors.',
       'Prepare colored paper simulation for digital distribution.',
       'Add a branded background color to match corporate guidelines.',
+    ],
+      seoTitle: "Add Background Color to PDF – Change PDF Page Color Online",
+    seoDescription: "Add a colored background to all pages of your PDF. Choose from presets or pick a custom color. 100% private.",
+    faqs: [
+      { question: "Will this cover existing content?", answer: "The color layer is drawn over existing content. For best results, use light, transparent-friendly colors or use the underlay mode." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
     ],
   },
   '/add-stamp': {
@@ -729,6 +892,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add "COPY" stamps to distinguish duplicates from originals.',
       'Label documents as "FOR INTERNAL USE ONLY" before distribution.',
     ],
+      seoTitle: "Add Stamp to PDF – DRAFT, CONFIDENTIAL & Custom Stamps Free",
+    seoDescription: "Add watermark stamps like DRAFT, CONFIDENTIAL, APPROVED to your PDF. Custom text, color, opacity. 100% private — processed locally.",
+    faqs: [
+      { question: "Will my file be uploaded?", answer: "No. All processing happens in your browser." },
+      { question: "Can I use custom text for the stamp?", answer: "Yes! Type any text you like into the stamp field." },
+      { question: "Can I control the stamp opacity?", answer: "Yes, use the opacity slider — lower values make the stamp more transparent." },
+    ],
   },
   '/remove-annotations': {
     intro:
@@ -744,6 +914,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Remove all comments and highlights from a shared draft.',
       'Strip hyperlinks from a PDF before printing.',
       'Prepare a clean copy of a heavily-annotated academic paper.',
+    ],
+      seoTitle: "Remove PDF Annotations Online – Free & Private",
+    seoDescription: "Strip all comments, highlights, form fields, and interactive annotations from a PDF.",
+    faqs: [
+      { question: "What annotations are removed?", answer: "Form fields, comments, highlights, links, and other interactive elements are flattened or removed." },
+      { question: "Is the content affected?", answer: "Static text and images remain; only interactive layers are removed." },
     ],
   },
   '/form-filler': {
@@ -761,6 +937,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Complete employment onboarding documents remotely.',
       'Submit completed insurance claims or benefits forms.',
     ],
+      seoTitle: "Fill PDF Forms – Fill & Flatten PDF Form Fields Online",
+    seoDescription: "Upload a PDF with form fields, fill them in directly in your browser, and download the flattened result. 100% private.",
+    faqs: [
+      { question: "What types of fields are supported?", answer: "Text fields and checkboxes are supported. Radio buttons and dropdown lists may have limited support." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
+    ],
   },
   '/form-creator': {
     intro:
@@ -777,6 +959,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Design order forms or request forms for internal workflows.',
       'Create surveys or questionnaires in PDF format.',
     ],
+      seoTitle: "PDF Form Filler – Fill & Flatten PDF Forms Online",
+    seoDescription: "Detect and fill PDF form fields, then flatten and download. 100% browser-based.",
+    faqs: [
+      { question: "What PDF forms are supported?", answer: "Standard AcroForms with text fields and checkboxes." },
+      { question: "What does flatten mean?", answer: "Flatten converts form fields to static text, making the form non-editable." },
+    ],
   },
   '/remove-blank-pages': {
     intro:
@@ -792,6 +980,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Remove accidental blank pages from exported reports.',
       'Trim trailing blank pages before sharing or printing.',
       'Reduce file size by eliminating unnecessary empty pages.',
+    ],
+      seoTitle: "Remove Blank PDF Pages Online – Free & Private",
+    seoDescription: "Automatically detect and remove blank pages from a PDF. Adjust sensitivity. Browser-based.",
+    faqs: [
+      { question: "How is a blank page detected?", answer: "Pages are rendered and analysed; those with over 98% white pixels are considered blank." },
+      { question: "What if a near-blank page is removed?", answer: "Lower the sensitivity slider to keep pages with light content." },
     ],
   },
 
@@ -811,6 +1005,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Bundle design mockups or screenshots into a single deliverable.',
       'Create a PDF photo album from vacation or event pictures.',
     ],
+      seoTitle: "Convert Images to PDF - JPG, PNG, WebP, SVG, BMP to PDF",
+    seoDescription: "Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images to a single PDF with page size, orientation, and margin controls. Free and private.",
+    faqs: [
+      { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
+      { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP are supported in modern browsers. HEIC/HEIF and TIFF support depends on whether your browser can decode the files." },
+      { question: "Can I choose the page size and orientation?", answer: "Yes. You can select A4 or Letter page size and choose portrait or landscape orientation before converting." },
+      { question: "Can I reorder or rotate images before converting?", answer: "Yes. Use the arrow buttons to reorder and the rotate button to adjust each image before generating the PDF." },
+    ],
   },
   '/jpg-to-pdf': {
     intro:
@@ -827,6 +1029,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create a PDF photo sheet for sharing or printing.',
       'Upload JPEG images to services that require PDF documents.',
     ],
+      seoTitle: "JPG to PDF Online - Free and Private",
+    seoDescription: "Convert JPG and JPEG photos into a PDF in your browser. Arrange images, choose page size, and download privately without uploads.",
+    faqs: [
+      { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
+      { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP are supported in modern browsers. HEIC/HEIF and TIFF support depends on whether your browser can decode the files." },
+      { question: "Can I choose the page size and orientation?", answer: "Yes. You can select A4 or Letter page size and choose portrait or landscape orientation before converting." },
+      { question: "Can I reorder or rotate images before converting?", answer: "Yes. Use the arrow buttons to reorder and the rotate button to adjust each image before generating the PDF." },
+    ],
   },
   '/text-to-pdf': {
     intro:
@@ -842,6 +1052,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Turn a README or changelog into a printable document.',
       'Create a formatted PDF from code snippets or configuration files.',
       'Produce documentation from plain text drafts.',
+    ],
+      seoTitle: "Text to PDF – Convert TXT to PDF Free Online",
+    seoDescription: "Convert plain text or .txt files to PDF instantly in your browser. Custom font size and page size. 100% private — no uploads.",
+    faqs: [
+      { question: "Can I paste text directly?", answer: "Yes! Switch to the \"Type / Paste\" tab and paste your text directly." },
+      { question: "What formats can I upload?", answer: "You can upload .txt plain text files." },
+      { question: "Is my text uploaded to a server?", answer: "No. Everything runs locally in your browser using JavaScript." },
     ],
   },
   '/json-to-pdf': {
@@ -966,6 +1183,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert PDF presentations into image files for video editing.',
       'Generate thumbnail previews of PDF documents.',
     ],
+      seoTitle: "PDF to Images - Export PDF Pages as PNG, JPG, or WebP",
+    seoDescription: "Convert each PDF page to PNG, JPG, or WebP locally in your browser with DPI and quality controls. Download individually or as ZIP.",
+    faqs: [
+      { question: "Does PDF to images upload my file?", answer: "No. PDF rendering and image export happen entirely in your browser." },
+      { question: "Which image formats can I export?", answer: "You can export PDF pages as PNG, JPG, or WebP. BMP and TIFF alias pages use this image export workflow as their canonical replacement." },
+      { question: "Can I download every page at once?", answer: "Yes. Use Download All as ZIP to save every exported page in one archive." },
+      { question: "Can I convert those images back into a PDF?", answer: "Yes. Use the linked Images to PDF tool to roundtrip them back into a new document." },
+    ],
   },
   '/pdf-to-jpg': {
     intro:
@@ -982,6 +1207,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Extract document pages as shareable JPEG files.',
       'Generate lightweight page images for review or annotation.',
     ],
+      seoTitle: "PDF to JPG Online - Free and Private",
+    seoDescription: "Convert PDF pages to JPG images locally in your browser with DPI and quality controls. Download pages as a private ZIP file.",
+    faqs: [
+      { question: "Does PDF to images upload my file?", answer: "No. PDF rendering and image export happen entirely in your browser." },
+      { question: "Which image formats can I export?", answer: "You can export PDF pages as PNG, JPG, or WebP. BMP and TIFF alias pages use this image export workflow as their canonical replacement." },
+      { question: "Can I download every page at once?", answer: "Yes. Use Download All as ZIP to save every exported page in one archive." },
+      { question: "Can I convert those images back into a PDF?", answer: "Yes. Use the linked Images to PDF tool to roundtrip them back into a new document." },
+    ],
   },
   '/pdf-to-svg': {
     intro:
@@ -997,6 +1230,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert PDF illustrations for web use where scalability matters.',
       'Pull out editable graphics from PDF design files.',
       'Create infinitely-scalable versions of PDF charts or infographics.',
+    ],
+      seoTitle: "PDF to SVG Online – Free & Private",
+    seoDescription: "Convert PDF pages to scalable SVG vector graphics. Download instantly. Browser-based.",
+    faqs: [
+      { question: "Are fonts preserved?", answer: "Text is embedded as path data in the SVG when using vector extraction." },
+      { question: "Does this work for scanned PDFs?", answer: "Scanned PDFs output raster-image SVGs; vector extraction only works for text-based PDFs." },
     ],
   },
   '/pdf-to-greyscale': {
@@ -1069,6 +1308,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Build a searchable index from a collection of PDF documents.',
       'Parse PDF reports into structured data for analysis.',
     ],
+      seoTitle: "PDF to JSON – Extract PDF Content as JSON Data",
+    seoDescription: "Extract text and metadata from your PDF and download it as a structured JSON file. 100% private — browser only.",
+    faqs: [
+      { question: "What data is extracted?", answer: "The JSON contains metadata, page count, and the extracted text from each page." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
+    ],
   },
   '/pdf-to-markdown': {
     intro:
@@ -1084,6 +1329,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert a PDF article into a blog post draft.',
       'Extract formatted notes from a PDF for import into Obsidian or Notion.',
       'Convert PDF meeting minutes into editable Markdown for team sharing.',
+    ],
+      seoTitle: "PDF to Markdown – Extract PDF Text as Markdown",
+    seoDescription: "Convert your PDF into a Markdown (.md) file with page structure preserved. 100% private — browser only.",
+    faqs: [
+      { question: "Is the formatting preserved?", answer: "Basic text is extracted and wrapped in Markdown syntax with page headings. Complex formatting like tables may not be preserved." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
     ],
   },
   '/extract-text': {
@@ -1101,6 +1352,15 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Pull text from PDF invoices or receipts for data entry.',
       'Convert PDF content to plain text for search or analysis.',
     ],
+      seoTitle: "Extract Text from PDF or Images – TXT for Word, Sheets, and Slides",
+    seoDescription: "Extract text from PDFs, scanned PDFs, and images in your browser for TXT exports you can reuse in Word, Sheets, Slides, and other editors.",
+    faqs: [
+      { question: "Can I extract text from both PDFs and images?", answer: "Yes. Text PDFs are read directly, and scanned pages or images fall back to OCR in the browser." },
+      { question: "Does this upload my files?", answer: "No. Extraction, OCR, previews, and exports all stay on your device." },
+      { question: "Does this create DOCX, XLSX, or PPTX files?", answer: "No. Current exports are TXT and searchable PDF workflows. Use the extracted text in Word, Sheets, Slides, or another editor." },
+      { question: "Can I inspect OCR confidence and boxes?", answer: "Yes. The page-level result viewer can show OCR bounding boxes and average confidence metrics." },
+      { question: "Can I export page-wise text files?", answer: "Yes. Download a combined TXT or export individual page TXT files as a ZIP archive." },
+    ],
   },
   '/extract-images': {
     intro:
@@ -1116,6 +1376,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Extract logos or graphics from PDF marketing materials.',
       'Pull images from a PDF report for use in a presentation.',
       'Save embedded charts or diagrams from a research paper.',
+    ],
+      seoTitle: "Extract Images from PDF – Export PDF Pages as PNG Images",
+    seoDescription: "Extract and download all pages of a PDF as PNG images in a ZIP archive. 100% private — browser only.",
+    faqs: [
+      { question: "What format are the extracted images?", answer: "Each PDF page is rendered as a PNG image at 2× resolution for high quality, then packed into a ZIP archive." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
     ],
   },
   '/pdf-to-cbz': {
@@ -1190,6 +1456,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Optimize PDFs for faster web loading or download.',
       'Shrink portfolio or presentation files for easier sharing.',
     ],
+      seoTitle: "Compress PDF Online – Reduce File Size Free",
+    seoDescription: "Reduce PDF file size while maintaining quality. Optimize PDFs locally in your browser. No uploads, 100% private.",
+    faqs: [
+      { question: "Does compressing a PDF upload my file?", answer: "No. All compression happens in your browser using JavaScript. Your file never leaves your device." },
+      { question: "How much can I reduce the PDF file size?", answer: "Results vary by content. Metadata removal and object-stream compression typically reduce size by 10–40%. Scanned PDFs with large images see the biggest savings." },
+      { question: "Will compressing a PDF reduce its quality?", answer: "The tool strips unnecessary metadata and applies lossless object-stream compression, so visible quality stays the same." },
+      { question: "Is there a file size limit for compression?", answer: "There is no hard limit. Because processing happens in your browser, very large files (100 MB+) may be slower depending on your device." },
+    ],
   },
   '/fix-page-size': {
     intro:
@@ -1205,6 +1479,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert Letter-sized documents to A4 for international printing.',
       'Fix PDFs with mixed landscape and portrait pages to a consistent size.',
       'Prepare documents for professional printing with exact trim sizes.',
+    ],
+      seoTitle: "Fix PDF Page Size – Resize to A4, Letter, A3, Legal Free",
+    seoDescription: "Resize all pages of your PDF to A4, US Letter, A3, or Legal size. Scales content to fit. 100% private — no uploads.",
+    faqs: [
+      { question: "Will my page content be cropped?", answer: "No. Content is scaled proportionally to fit the new page size with equal margins." },
+      { question: "Does this change the orientation?", answer: "No. The tool scales the existing content to fit the target size, preserving orientation." },
+      { question: "Is my file uploaded?", answer: "No. Everything runs locally in your browser." },
     ],
   },
   '/page-dimensions': {
@@ -1222,6 +1503,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Check the DPI and dimensions of scanned document pages.',
       'Identify landscape pages in a predominantly portrait document.',
     ],
+      seoTitle: "PDF Page Dimensions – View Page Size and Orientation",
+    seoDescription: "Instantly view the width, height, and orientation of every page in a PDF. Detect mixed page sizes. 100% private.",
+    faqs: [
+      { question: "Can I detect mixed page sizes?", answer: "Yes. The tool shows the dimensions of every individual page, making it easy to spot inconsistencies." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
+    ],
   },
   '/repair-pdf': {
     intro:
@@ -1238,6 +1525,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Repair files corrupted by disk errors or incomplete saves.',
       'Recover content from PDFs produced by faulty export tools.',
     ],
+      seoTitle: "Repair Corrupted PDF – Free Online PDF Fix Tool",
+    seoDescription: "Repair a broken or corrupted PDF file instantly in your browser. Re-serializes the PDF structure to fix common errors. 100% private — no uploads.",
+    faqs: [
+      { question: "What kind of PDF errors can this fix?", answer: "It can fix structural issues like cross-reference table errors, invalid objects, and malformed metadata by completely re-serializing the PDF." },
+      { question: "Will it fix encrypted or password-protected PDFs?", answer: "It attempts to open and re-save even encrypted PDFs, which can resolve some structural issues." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
+    ],
   },
   '/deskew-pdf': {
     intro:
@@ -1253,6 +1547,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Improve the appearance of mobile-scanned documents.',
       'Prepare scanned documents for OCR by correcting text angle.',
       'Clean up batch-scanned documents with inconsistent alignment.',
+    ],
+      seoTitle: "Deskew PDF – Straighten Skewed Scanned Documents",
+    seoDescription: "Automatically straighten skewed or tilted pages from scanned PDFs. 100% private — browser only.",
+    faqs: [
+      { question: "How does deskewing work?", answer: "Each page is rendered to a canvas and re-embedded straight into a new PDF, correcting minor tilt from scanning." },
+      { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
     ],
   },
 
@@ -1272,6 +1572,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Unlock a PDF to enable printing or text copying.',
       'Change the password on an existing protected document.',
     ],
+      seoTitle: "Protect or Unlock PDF – Browser-Only PDF Security",
+    seoDescription: "Unlock password-protected PDFs locally in your browser and manage browser-first PDF security workflows without server uploads.",
+    faqs: [
+      { question: "Does unlocking upload my PDF anywhere?", answer: "No. Password handling, rendering, and export all stay inside your browser." },
+      { question: "Why is protect mode limited?", answer: "The current browser-only PDF stack in this project does not expose reliable standards-compliant encryption for writing protected PDFs." },
+      { question: "What is preserved when unlocking?", answer: "The unlocked export preserves the visual pages, but it does not preserve the original encrypted structure, interactive forms, or hidden content streams." },
+    ],
   },
   '/sanitize-pdf': {
     intro:
@@ -1288,6 +1595,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Strip embedded scripts for security before opening untrusted PDFs.',
       'Prepare documents for public release by removing all non-visible data.',
     ],
+      seoTitle: "Sanitize PDF – Remove Metadata & Hidden Data Free",
+    seoDescription: "Remove all metadata, hidden data, and flatten interactive elements from your PDF to protect privacy. 100% browser-based, no uploads.",
+    faqs: [
+      { question: "What does sanitizing a PDF do?", answer: "It removes all metadata (author, creator, keywords), flattens form fields, and re-serializes the PDF structure to remove hidden data." },
+      { question: "Will my file content be changed?", answer: "No. Only metadata and interactive elements are removed. The visible page content remains unchanged." },
+      { question: "Is my file uploaded?", answer: "No. Everything runs locally in your browser." },
+    ],
   },
   '/find-and-redact': {
     intro:
@@ -1303,6 +1617,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Remove email addresses or phone numbers from a shared document.',
       'Redact account numbers or SSNs across a multi-page financial report.',
       'Bulk-redact specific terms from legal discovery documents.',
+    ],
+      seoTitle: "Find & Redact PDF Text – Free Privacy Tool",
+    seoDescription: "Search for sensitive text in your PDF and export an image-only redacted copy with redactions burned into the page pixels. 100% private — processed locally.",
+    faqs: [
+      { question: "Are redactions permanent?", answer: "Yes. Matching pages are rendered to images with redactions burned in, so the exported PDF no longer contains the original selectable text layer." },
+      { question: "Is searching case-sensitive?", answer: "No. The search is case-insensitive by default." },
+      { question: "Will my file be uploaded?", answer: "No. Everything runs locally in your browser." },
     ],
   },
   '/flatten-pdf': {
@@ -1375,6 +1696,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Clean metadata before submitting documents to courts or regulatory bodies.',
       'Protect personal information embedded in PDFs shared online.',
     ],
+      seoTitle: "Remove PDF Metadata Online - Free and Private",
+    seoDescription: "Remove embedded PDF metadata such as author, title, creator, keywords, and dates locally in your browser without uploads.",
+    faqs: [
+      { question: "What metadata is stored in a PDF?", answer: "PDFs can contain title, author, subject, keywords, creator, producer, and creation/modification dates." },
+      { question: "Will my file be uploaded?", answer: "No. Everything runs locally in your browser." },
+      { question: "Can I remove all metadata at once?", answer: "Yes! Use the \"Remove All\" mode to strip all metadata in one click." },
+    ],
   },
 
   // ── AI TOOLS ───────────────────────────────────────────────────────────────
@@ -1393,6 +1721,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Prepare cutout images for graphic design or presentations.',
       'Clean up pet or object photos for e-commerce listings.',
     ],
+      seoTitle: "Remove Background — Free AI Background Remover",
+    seoDescription: "Remove image backgrounds automatically using AI, directly in your browser. No upload needed — your images stay private.",
+    faqs: [
+      { question: "How accurate is the AI background removal?", answer: "The AI model uses a neural network trained on millions of images to detect foreground subjects with high accuracy. It works well with portraits, products, pets, and distinct objects, though results may vary with complex edges, transparent objects, or similar foreground and background colours." },
+      { question: "What image types are supported?", answer: "FilePilot supports JPEG, PNG, and WebP images for background removal. The AI model is downloaded to your browser on first use (approximately 40 MB) and processes images locally." },
+      { question: "Can I get a transparent PNG output?", answer: "Yes, the default output format is PNG with a transparent background. You can also export as WebP with transparency or JPEG with a solid background colour of your choice." },
+      { question: "Is my image uploaded to a server?", answer: "No. All processing happens entirely in your browser using a local AI model. Your images are never uploaded to any server, ensuring complete privacy." },
+    ],
   },
   '/change-background': {
     intro:
@@ -1408,6 +1744,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create professional headshots with corporate-colored backgrounds.',
       'Add creative backgrounds to product photos for social media.',
       'Simulate different environments for real estate or interior design previews.',
+    ],
+      seoTitle: "Change Background — AI Background Replacer",
+    seoDescription: "Replace image backgrounds with solid colours, gradients, blur, or custom images using AI — all in your browser.",
+    faqs: [
+      { question: "What background options are available?", answer: "You can replace the background with a solid colour, a custom gradient, a blurred version of the original image, a preset background, or your own custom image. Each option includes adjustable settings like colour, angle, and blur intensity." },
+      { question: "How good is the AI edge detection?", answer: "The AI model uses a neural network to detect foreground subjects with high accuracy, preserving fine details like hair and edges. You can fine-tune the result with the edge feather slider to soften any remaining artefacts." },
+      { question: "What output formats are supported?", answer: "You can export your result as PNG (with transparency support), WebP, or JPEG. For JPEG output, transparent areas are automatically filled with the selected background colour." },
+      { question: "Is my image uploaded to a server?", answer: "No. All processing happens entirely in your browser using a local AI model. Your images are never uploaded to any server, ensuring complete privacy." },
     ],
   },
   '/upscale-image': {
@@ -1425,6 +1769,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Improve the resolution of screenshots or cropped images.',
       'Enhance product photos that were shot at low resolution.',
     ],
+      seoTitle: "Upscale Image — AI Super-Resolution",
+    seoDescription: "Enlarge images using AI super-resolution directly in your browser. Increase resolution while preserving detail — no upload needed.",
+    faqs: [
+      { question: "What is the maximum upscale factor?", answer: "FilePilot supports 2x and 4x upscaling. 4x upscaling produces the largest output but requires significantly more memory and processing time. The maximum input size is 4 megapixels." },
+      { question: "How does AI super-resolution work?", answer: "The AI model uses a neural network to intelligently add detail and sharpness when enlarging images, rather than simple pixel stretching. This produces much cleaner results, though it cannot perfectly recover details missing from the original." },
+      { question: "What image formats are supported?", answer: "You can upload JPEG, PNG, and WebP images. Output can be saved as PNG (lossless), WebP, or JPEG with adjustable quality. All processing happens locally in your browser." },
+      { question: "How long does upscaling take?", answer: "Processing time depends on image size, upscale factor, and your device's hardware. A typical 2x upscale takes a few seconds, while 4x may take longer. The AI model is downloaded once on first use and cached in your browser." },
+    ],
   },
   '/ai-enhance-image': {
     intro:
@@ -1441,6 +1793,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Clean up noisy images taken in low-light conditions.',
       'Sharpen blurry or slightly out-of-focus photos.',
     ],
+      seoTitle: "AI Enhance Image — Smart Image Enhancement",
+    seoDescription: "Improve image quality with smart analysis-based enhancement. Fix exposure, reduce noise, sharpen details, and correct colours — all locally in your browser.",
+    faqs: [
+      { question: "What enhancements are applied to my image?", answer: "Depending on the mode you select, the tool applies adjustments such as exposure correction, contrast improvement, colour balance, sharpening, and noise reduction. The Auto Enhance mode analyses your image and applies the most relevant combination automatically." },
+      { question: "Can I see a before and after comparison?", answer: "Yes. After enhancement, an interactive before/after slider lets you drag to compare the original and enhanced versions side by side, making it easy to evaluate the improvements." },
+      { question: "How much quality improvement can I expect?", answer: "Results depend on the original image quality and the selected mode and intensity. The tool can significantly improve exposure, reduce noise, and sharpen detail, but it cannot recover information that was not present in the original image." },
+      { question: "Is my image uploaded to a server?", answer: "No. All enhancement processing happens entirely in your browser using image adjustment algorithms. Your images are never uploaded to any server, ensuring complete privacy." },
+    ],
   },
   '/object-remover': {
     intro:
@@ -1456,6 +1816,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Clean up product photos by removing distracting background objects.',
       'Remove power lines, signs, or other visual clutter from landscape shots.',
       'Erase blemishes or temporary marks from document scans.',
+    ],
+      seoTitle: "Object Remover — Content-Aware Object Removal",
+    seoDescription: "Remove unwanted objects from images using content-aware inpainting, entirely in your browser. No upload needed.",
+    faqs: [
+      { question: "How accurate is the inpainting?", answer: "The tool uses the Telea content-aware inpainting algorithm to fill removed areas based on surrounding pixel data. It works best for small to medium objects on relatively uniform backgrounds; complex scenes, detailed textures, or large masked areas may produce imperfect results." },
+      { question: "How do I select the object to remove?", answer: "Simply paint over the unwanted object using the brush tool. You can adjust the brush size, switch between paint and erase modes, and use undo/redo to refine your selection before processing." },
+      { question: "What output quality can I expect?", answer: "Output quality depends on the complexity of the surrounding area. Simple backgrounds produce seamless results, while detailed or textured backgrounds may show artefacts. You can export as JPEG, PNG, or WebP with adjustable quality." },
+      { question: "Is processing done in my browser?", answer: "Yes. All processing happens entirely in your browser using a content-aware inpainting algorithm. No external AI model or server is required, and your images are never uploaded anywhere." },
     ],
   },
 
@@ -1475,6 +1843,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert and compress images to meet email or form submission size limits.',
       'Format screenshots to exact pixel dimensions for documentation.',
     ],
+      seoTitle: "Image Formatter — Resize, Convert & Optimize Images Online",
+    seoDescription: "Format images to exact dimensions, convert formats, set file size targets, and batch export. Free, private, browser-based.",
+    faqs: [
+      { question: "Can I format multiple images at once?", answer: "Yes. FilePilot supports batch formatting, allowing you to upload and process multiple images simultaneously. All images are formatted with the same settings and can be downloaded individually or as a ZIP file." },
+      { question: "What output dimensions and formats are available?", answer: "You can set exact pixel dimensions or scale by percentage, and export as JPEG, PNG, or WebP. You can also set a target file size in KB, adjust quality, and choose between contain, cover, or stretch fit modes." },
+      { question: "Are there preset templates available?", answer: "Yes. Built-in presets cover common use cases with pre-configured dimensions. You can also create custom dimensions and lock the aspect ratio to maintain proportions." },
+      { question: "Is my data private?", answer: "Yes. All image processing happens entirely in your browser. Your files are never uploaded to any server, and EXIF metadata (including GPS data) is stripped by default during re-export." },
+    ],
   },
   '/passport-photo-validator': {
     intro:
@@ -1490,6 +1866,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Validate ID photos for driver\'s license or national ID requirements.',
       'Crop and resize photos to meet specific country photo specifications.',
       'Save money by preparing compliant photos at home instead of at a studio.',
+    ],
+      seoTitle: "Passport Photo Validator - Check Photo Requirements",
+    seoDescription: "Validate passport photo dimensions, file size, and format against official requirements. Crop, resize, and export. Free, private, browser-based.",
+    faqs: [
+      { question: "Which country requirements are supported?", answer: "FilePilot includes validation profiles for common passport photo standards including US, UK, EU, India, and more. You can also create a custom profile with your own dimensions, background colour, and file size limits." },
+      { question: "What photo compliance checks are performed?", answer: "The tool checks technical requirements including image dimensions, aspect ratio, file size limits, and format compatibility. It also provides head positioning guides and optional face detection to help you frame your photo correctly." },
+      { question: "Can I crop and resize my photo?", answer: "Yes. An interactive crop tool with aspect ratio locking, corner handles, and head positioning guides lets you precisely frame your photo. The tool then resizes and exports to the profile's required dimensions." },
+      { question: "Is my photo uploaded to a server?", answer: "No. All processing happens entirely in your browser. Your photo never leaves your device, and no data is collected or stored. The tool does not apply beauty filters or AI-based facial manipulation." },
     ],
   },
   '/social-media-resizer': {
@@ -1507,6 +1891,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Prepare YouTube thumbnails at the recommended 1280×720 resolution.',
       'Batch-resize a brand photo for every social platform at once.',
     ],
+      seoTitle: "Social Media Resizer",
+    seoDescription: "Resize images for Instagram, Facebook, LinkedIn, X/Twitter, YouTube, Pinterest, and TikTok. Free, private, browser-based.",
+    faqs: [
+      { question: "Which social media platforms are supported?", answer: "FilePilot includes recommended export sizes for Instagram, Facebook, LinkedIn, X (Twitter), YouTube, Pinterest, and TikTok. Each platform has multiple presets covering posts, stories, profile pictures, banners, and more." },
+      { question: "Can I resize for multiple platforms at once?", answer: "Yes. You can select multiple presets across different platforms and process all of them in a single batch. The tool generates one output per preset per source image, and you can download everything as a ZIP file." },
+      { question: "What output quality can I expect?", answer: "Output quality depends on your source image resolution and the selected fit mode. You can choose between cover (crop to fill), contain (fit with padding), or stretch, and adjust JPEG/WebP quality from 10% to 100%." },
+      { question: "Are my images uploaded anywhere?", answer: "No. All processing happens entirely in your browser. Your images are never uploaded to any server, and closing the tab removes all data immediately." },
+    ],
   },
   '/ecommerce-image-formatter': {
     intro:
@@ -1522,6 +1914,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Format photos for eBay, Etsy, or Shopify product pages.',
       'Add white backgrounds to product photos for consistent catalog styling.',
       'Batch-process product images when launching a new collection.',
+    ],
+      seoTitle: "E-commerce Image Formatter",
+    seoDescription: "Prepare product photos with clean backgrounds, consistent dimensions, and marketplace-ready formats. All processing happens locally in your browser.",
+    faqs: [
+      { question: "Which marketplace requirements are supported?", answer: "FilePilot includes presets for common e-commerce platforms with recommended dimensions and formats. Presets are starting points; always verify the latest image requirements from each marketplace before uploading." },
+      { question: "Can I add a clean background to product photos?", answer: "Yes. You can set a solid background colour (white is the default for most marketplaces), add padding around the product, and optionally include a drop shadow or border for a professional look." },
+      { question: "Does it support batch processing?", answer: "Yes. You can upload multiple product images and format them all at once with the same settings. Results can be downloaded individually or as a ZIP file, with customizable filename templates." },
+      { question: "Are my product images kept private?", answer: "Yes. All processing happens entirely in your browser. Your product images are never uploaded to any server, making it safe for unreleased or confidential product photos." },
     ],
   },
   '/scan-images-to-pdf': {
@@ -1539,6 +1939,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Scan multi-page paper documents without a physical scanner.',
       'Convert photos of old letters or records into searchable PDFs.',
     ],
+      seoTitle: "Scan Images to PDF",
+    seoDescription: "Turn photos of documents into a clean, ordered, downloadable PDF. All processing happens locally in your browser.",
+    faqs: [
+      { question: "Can I reorder images before creating the PDF?", answer: "Yes. You can drag and drop images to reorder them, and the page order in the tool matches the final PDF output. You can also add or remove individual pages at any time." },
+      { question: "What page size options are available?", answer: "FilePilot supports A4, Letter, Original Image Size, and Custom dimensions. You can also choose automatic, portrait, or landscape orientation, and set margin sizes from none to large." },
+      { question: "How does scan quality affect the output?", answer: "You can adjust the image quality slider from 20% to 100%. Lower quality produces smaller files suitable for sharing, while higher quality preserves text clarity for archival purposes. Enhancement modes include grayscale, black and white, and high contrast." },
+      { question: "Is my data kept private?", answer: "Yes. All processing happens entirely in your browser. Your document images are never uploaded to any server, making it safe for sensitive documents like contracts, receipts, and personal records." },
+    ],
   },
   '/favicon-generator': {
     intro:
@@ -1555,6 +1963,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Update favicons when rebranding a website.',
       'Generate complete icon sets for PWA (Progressive Web App) manifests.',
     ],
+      seoTitle: "Favicon Generator",
+    seoDescription: "Generate all website favicon and app icon assets from a single image. Creates PNG favicons, Apple touch icons, Android/PWA icons, and a web manifest.",
+    faqs: [
+      { question: "What sizes are generated?", answer: "FilePilot generates a complete set of favicon assets including 16x16, 32x32, and 48x48 for browser tabs, 180x180 for Apple touch icons, and 192x192 and 512x512 for Android/PWA icons. All assets are downloadable as a single ZIP file." },
+      { question: "Does it generate ICO files?", answer: "This tool generates PNG favicon assets rather than .ico files, because generating a true ICO format requires a dedicated encoder. Modern browsers support PNG favicons directly, and the tool provides an HTML snippet for referencing them." },
+      { question: "Can I use an SVG image as input?", answer: "Yes. FilePilot accepts PNG, JPEG, WebP, and SVG images as input. Square images work best; non-square images are automatically centered and scaled to fit the square icon area." },
+      { question: "Is my logo uploaded to a server?", answer: "No. All favicon generation happens entirely in your browser. Your logo image is never uploaded to any server, ensuring your brand assets remain private." },
+    ],
   },
   '/qr-generator': {
     intro:
@@ -1570,6 +1986,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Generate Wi-Fi QR codes for office or guest network access.',
       'Build vCard QR codes for business cards.',
       'Create scannable links for event registration or product pages.',
+    ],
+      seoTitle: "QR Code Generator",
+    seoDescription: "Create custom QR codes for URLs, WiFi, vCards, events, and more. Customize colors, styles, and add logos. Free, private, and runs entirely in your browser.",
+    faqs: [
+      { question: "What types of QR codes can I create?", answer: "FilePilot supports URL, plain text, email, phone, SMS, WiFi network, vCard contact, calendar event, and custom raw content QR codes. Each type uses the appropriate encoding format for maximum scanner compatibility." },
+      { question: "What customization options are available?", answer: "You can customize dot style (square, rounded, dots), corner styles, foreground and background colours, transparent backgrounds, margin size, error correction level, and add a custom logo image to the centre of the QR code." },
+      { question: "What download formats are available?", answer: "QR codes can be downloaded as PNG, SVG, or JPEG files at sizes up to 4096 pixels. SVG is ideal for print as it scales to any size without quality loss. You can also copy the QR code directly to your clipboard." },
+      { question: "Will customized QR codes still scan reliably?", answer: "Standard black-and-white QR codes with sufficient contrast scan reliably across all devices. Heavily styled codes, low contrast colours, or large logos may reduce scannability, so always test with multiple devices before printing." },
     ],
   },
 
@@ -1589,6 +2013,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Batch-optimize images for a portfolio or gallery.',
       'Shrink screenshots for documentation without visible quality loss.',
     ],
+      seoTitle: "Compress Image Online - Reduce Image File Size",
+    seoDescription: "Compress JPEG, PNG, and WebP images in your browser. Reduce file size while preserving quality. Free, private, no uploads.",
+    faqs: [
+      { question: "Does compressing an image reduce its quality?", answer: "It depends on the compression level you choose. The 'High Quality' preset preserves most visual detail while still reducing file size, whereas the 'Small File' preset prioritizes size reduction and may introduce visible artifacts." },
+      { question: "What image formats can I compress?", answer: "You can compress JPEG, PNG, and WebP images. All processing happens in your browser using the Canvas API, so no server upload is required." },
+      { question: "Are my uploaded images sent to a server?", answer: "No. All compression is performed locally in your browser. Your images never leave your device, ensuring complete privacy." },
+      { question: "Can I compress multiple images at once?", answer: "Yes. You can upload and compress multiple images in a single batch. Compressed results can be downloaded individually or as a ZIP archive." },
+    ],
   },
   '/resize-image': {
     intro:
@@ -1604,6 +2036,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Scale down large camera photos for sharing via email or messaging.',
       'Prepare images at exact sizes for form submissions or profile pictures.',
       'Batch-resize a folder of images to consistent dimensions.',
+    ],
+      seoTitle: "Resize Image Online - Free Browser-Based Tool",
+    seoDescription: "Resize images by pixels or percentage. Fit, fill, or stretch to exact dimensions. Free, private, browser-based.",
+    faqs: [
+      { question: "Can I maintain the aspect ratio when resizing?", answer: "Yes. The aspect ratio lock is enabled by default. When locked, changing the width automatically adjusts the height proportionally, and vice versa." },
+      { question: "What dimensions can I resize to?", answer: "You can resize by exact pixel values up to 10,000 px or by percentage scale. Preset sizes for social media, web, and e-commerce are also available." },
+      { question: "Does resizing reduce image quality?", answer: "Downscaling generally preserves quality well. Upscaling may reduce sharpness, which is why the 'Do not upscale' option is enabled by default to prevent enlarging smaller images." },
+      { question: "Is my image uploaded to a server?", answer: "No. All resizing is performed locally in your browser. Your images are never uploaded, ensuring complete privacy." },
     ],
   },
   '/convert-image': {
@@ -1621,6 +2061,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert images to WebP or AVIF for modern web performance.',
       'Produce JPEG versions of WebP images for compatibility with older apps.',
     ],
+      seoTitle: "Convert Image — JPEG, PNG, WebP, AVIF",
+    seoDescription: "Convert images between JPEG, PNG, WebP, and AVIF formats. Processed locally in your browser — no uploads, 100% private.",
+    faqs: [
+      { question: "What image formats are supported for conversion?", answer: "You can convert between JPEG, PNG, WebP, and AVIF formats. AVIF availability depends on your browser's support for the format." },
+      { question: "Does converting an image affect its quality?", answer: "Converting between lossy formats (JPEG, WebP, AVIF) may slightly reduce quality depending on the quality slider setting. Converting to PNG preserves quality since PNG is lossless." },
+      { question: "Can I convert multiple images at once?", answer: "Yes. You can upload and convert multiple images in a single batch. All converted files can be downloaded individually or together as a ZIP archive." },
+      { question: "Are my images uploaded to a server during conversion?", answer: "No. All conversion is performed entirely in your browser using the Canvas API. Your images never leave your device, ensuring complete privacy." },
+    ],
   },
   '/website-image-optimiser': {
     intro:
@@ -1636,6 +2084,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create WebP and AVIF variants alongside JPEG fallbacks.',
       'Produce correctly-sized images for different screen densities (1×, 2×, 3×).',
       'Optimize hero images and banners for fast page loading.',
+    ],
+      seoTitle: "Website Image Optimiser - Responsive Images for the Web",
+    seoDescription: "Generate optimised, responsive image variants for your website. Create WebP, AVIF, and JPEG versions at multiple sizes with ready-to-use HTML snippets. Free, private, no uploads.",
+    faqs: [
+      { question: "What are responsive images and why do they matter?", answer: "Responsive images serve different sizes to different devices so that mobile users download smaller files and desktop users get full-resolution versions. This improves page load speed and Core Web Vitals scores." },
+      { question: "How does srcset generation work?", answer: "The tool generates multiple resized versions of your image at the widths you select, then provides ready-to-use HTML picture and srcset snippets that browsers use to pick the best variant for each viewport." },
+      { question: "What web-optimised formats are supported?", answer: "You can generate variants in WebP, AVIF, and JPEG. WebP offers strong compression with broad browser support, while AVIF provides even better compression for browsers that support it." },
+      { question: "Does this tool improve my website's performance?", answer: "Yes. Serving correctly sized images in modern formats like WebP can significantly reduce page weight and improve Largest Contentful Paint (LCP). All processing happens locally in your browser." },
     ],
   },
   '/image-quality-analyzer': {
@@ -1653,6 +2109,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Assess whether an image needs optimization before uploading to a website.',
       'Diagnose why an image appears blurry or pixelated.',
     ],
+      seoTitle: "Image Quality Analyzer - Check Image Resolution & Format",
+    seoDescription: "Analyze image quality, resolution, file size, and format suitability for web, print, and social media. Free, private, no uploads.",
+    faqs: [
+      { question: "What quality metrics are analyzed?", answer: "FilePilot checks image dimensions, megapixels, file size, format, aspect ratio, estimated DPI, colour depth, and transparency support. Each metric is evaluated against the requirements of your selected intended use." },
+      { question: "What recommendations does the analyzer provide?", answer: "Based on your intended use (web, print, social media, etc.), the tool provides categorized recommendations covering quality, dimensions, file weight, format suitability, and privacy concerns like embedded metadata." },
+      { question: "What image formats are supported?", answer: "The analyzer supports all common image formats including JPEG, PNG, WebP, GIF, and more. It detects the format automatically and advises whether it is suitable for your intended use." },
+      { question: "Is my image uploaded to a server?", answer: "No. All analysis happens entirely in your browser. Your image is never uploaded to any server, ensuring complete privacy for sensitive or proprietary images." },
+    ],
   },
   '/crop-image': {
     intro:
@@ -1668,6 +2132,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Remove unwanted borders or background from product photos.',
       'Extract a specific area of interest from a larger image.',
       'Create correctly-proportioned thumbnails for video platforms.',
+    ],
+      seoTitle: "Crop Image Online - Free Browser-Based Image Cropper",
+    seoDescription: "Crop JPEG, PNG, and WebP images with precision. Interactive crop editor with aspect ratio presets. Free, private, no uploads.",
+    faqs: [
+      { question: "Can I crop to custom dimensions?", answer: "Yes. You can freely drag the crop area to any size, use aspect ratio presets like 1:1 or 16:9, or enter a custom aspect ratio. Optional output dimensions let you resize the cropped area to exact pixel values." },
+      { question: "What image formats are supported for cropping?", answer: "You can crop JPEG, PNG, and WebP images. The output format can be set independently, so you can crop a PNG and export it as JPEG or WebP." },
+      { question: "Does cropping reduce image quality?", answer: "Cropping itself does not reduce quality. The output quality depends on the format and quality slider setting you choose when exporting the cropped image." },
+      { question: "Are my images uploaded to a server?", answer: "No. All cropping is performed locally in your browser. Your images are never uploaded, ensuring complete privacy." },
     ],
   },
   '/rotate-image': {
@@ -1685,6 +2157,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Flip images for mirror effects or design requirements.',
       'Batch-correct orientation for a folder of camera photos.',
     ],
+      seoTitle: "Rotate & Flip Image Online - Free Browser-Based Tool",
+    seoDescription: "Rotate images by any angle and flip horizontally or vertically. Batch support with ZIP download. Free, private, no uploads.",
+    faqs: [
+      { question: "What rotation angles are supported?", answer: "You can rotate images by 90-degree increments with one click, or enter any custom angle. Non-90-degree rotations expand the canvas and fill corners with a configurable background color." },
+      { question: "Does rotation fix EXIF orientation issues?", answer: "Yes. Since the tool re-renders the image through the Canvas API, EXIF orientation tags are applied visually and the output is saved with the correct orientation baked in." },
+      { question: "Does rotating or flipping reduce image quality?", answer: "The output quality depends on the format and quality slider you choose. For lossless results, export as PNG. JPEG and WebP use lossy compression controlled by the quality setting." },
+      { question: "Are my images uploaded to a server?", answer: "No. All rotation and flipping is performed locally in your browser. Your images are never uploaded, ensuring complete privacy." },
+    ],
   },
   '/watermark-image': {
     intro:
@@ -1700,6 +2180,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Brand images with a company logo before distributing.',
       'Add "PROOF" or "SAMPLE" overlays to design previews.',
       'Batch-watermark event photos before sharing with clients.',
+    ],
+      seoTitle: "Watermark Image Online - Add Text or Logo Watermarks",
+    seoDescription: "Add text or image watermarks to photos with adjustable position, opacity, and repeat patterns. Free, private, no uploads.",
+    faqs: [
+      { question: "What types of watermarks can I add?", answer: "You can add text watermarks with custom font, size, color, and shadow, or image/logo watermarks from an uploaded PNG, JPEG, or WebP file. Both types support adjustable position and opacity." },
+      { question: "Can I control the transparency of the watermark?", answer: "Yes. An opacity slider lets you set the watermark transparency from 5% to 100%. This works for both text and image watermarks." },
+      { question: "Can I watermark multiple images at once?", answer: "Yes. You can upload multiple images and apply the same watermark settings to all of them in a single batch. Results are downloaded individually or as a ZIP archive." },
+      { question: "Are my images uploaded to a server?", answer: "No. All watermarking is performed locally in your browser. Your images and logo files are never uploaded, ensuring complete privacy." },
     ],
   },
   '/remove-image-metadata': {
@@ -1773,6 +2261,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Anonymize people in screenshots or documentation images.',
       'Protect children\'s identities in published event photos.',
     ],
+      seoTitle: "Blur Face & Plate Online - Privacy Blur Tool",
+    seoDescription: "Blur faces, license plates, and sensitive areas in images. Gaussian blur, pixelate, or black bar. Free, private, no uploads.",
+    faqs: [
+      { question: "Does the tool automatically detect faces?", answer: "Yes, if your browser supports the FaceDetector API it can automatically detect faces in the image. Otherwise, you can manually draw blur regions by clicking and dragging on the canvas." },
+      { question: "Can I adjust the blur intensity?", answer: "Yes. A blur intensity slider lets you control the strength of the Gaussian blur or pixelation effect from subtle to heavy, depending on the level of anonymization you need." },
+      { question: "Is this tool safe for protecting people's privacy?", answer: "The tool applies visible image edits that obscure selected areas. However, you should always verify the blurred output carefully before sharing, as incorrectly placed regions may leave sensitive content visible." },
+      { question: "What image formats are supported?", answer: "You can blur areas in JPEG, PNG, WebP, and most other raster image formats. All processing happens locally in your browser and images are never uploaded to any server." },
+    ],
   },
   '/photo-editor': {
     intro:
@@ -1788,6 +2284,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Apply filters and color corrections to batch of photos.',
       'Add text overlays or captions to images.',
       'Perform basic retouching without installing Photoshop or GIMP.',
+    ],
+      seoTitle: "Photo Editor Online - Free Browser-Based Image Editor",
+    seoDescription: "Edit photos with brightness, contrast, filters, text overlay, borders, and more. Free, private, no uploads.",
+    faqs: [
+      { question: "What editing features are available?", answer: "The editor offers brightness, contrast, saturation, exposure, temperature, tint, highlights, shadows, sharpness, blur, grayscale, sepia, vignette adjustments, plus rotate, flip, text overlay, borders, and preset filters." },
+      { question: "What formats can I export my edited photo in?", answer: "You can export edited images as JPEG, PNG, or WebP. A quality slider is available for JPEG and WebP to control the balance between file size and visual quality." },
+      { question: "Can I undo changes while editing?", answer: "Yes. Full undo and redo support is built in, so you can step back through your editing history at any time. A reset button also restores all settings to their defaults." },
+      { question: "Are my photos uploaded to a server?", answer: "No. All editing is performed locally in your browser using the Canvas API. Your photos are never uploaded, ensuring complete privacy." },
     ],
   },
   '/image-to-svg': {
@@ -1859,6 +2363,14 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Build a color palette from a photograph for design inspiration.',
       'Identify exact colors from a screenshot or mockup.',
       'Sample colors from an image to match in CSS or design software.',
+    ],
+      seoTitle: "Color Picker -",
+    seoDescription: "Pick colours from images, extract palettes, and copy colour values in HEX, RGB, HSL, HSV, CMYK, and CSS variable formats. All processing happens locally in your browser.",
+    faqs: [
+      { question: "What color formats does the Color Picker support?", answer: "The tool supports HEX, HEX8, RGB, RGBA, HSL, HSLA, HSV, CMYK, and CSS custom property formats. You can copy any format to your clipboard with a single click." },
+      { question: "Can I pick colors from an uploaded image?", answer: "Yes. Upload any image and click on it to pick pixel-accurate colors. A magnifying loupe shows a zoomed view of surrounding pixels for precise selection." },
+      { question: "How do I copy a color value?", answer: "Each color format row has a copy button that copies the value to your clipboard. You can also click on saved palette swatches to copy their HEX value instantly." },
+      { question: "Does this tool work in all browsers?", answer: "The core color picking and conversion features work in all modern browsers. The screen EyeDropper feature requires Chromium-based browsers (Chrome, Edge). All processing happens locally in your browser." },
     ],
   },
 };

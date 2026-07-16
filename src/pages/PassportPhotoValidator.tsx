@@ -21,6 +21,7 @@ import { formatFileSize, getFormatLabel } from '../utils/image/support';
 import { downloadBlob } from '../utils/image/batchExport';
 import type { ImageFormat } from '../utils/image/types';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import {
   CheckCircle,
   AlertTriangle,
@@ -508,21 +509,10 @@ export const PassportPhotoValidator = () => {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  const faqItems = [
-    { question: "Which country requirements are supported?", answer: "FilePilot includes validation profiles for common passport photo standards including US, UK, EU, India, and more. You can also create a custom profile with your own dimensions, background colour, and file size limits." },
-    { question: "What photo compliance checks are performed?", answer: "The tool checks technical requirements including image dimensions, aspect ratio, file size limits, and format compatibility. It also provides head positioning guides and optional face detection to help you frame your photo correctly." },
-    { question: "Can I crop and resize my photo?", answer: "Yes. An interactive crop tool with aspect ratio locking, corner handles, and head positioning guides lets you precisely frame your photo. The tool then resizes and exports to the profile's required dimensions." },
-    { question: "Is my photo uploaded to a server?", answer: "No. All processing happens entirely in your browser. Your photo never leaves your device, and no data is collected or stored. The tool does not apply beauty filters or AI-based facial manipulation." },
-  ];
-
   /* ────────────────── RENDER ────────────────── */
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo
-        title="Passport Photo Validator - Check Photo Requirements | FilePilot"
-        description="Validate passport photo dimensions, file size, and format against official requirements. Crop, resize, and export. Free, private, browser-based."
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/passport-photo-validator')} />
 
       {/* ── Header ── */}
       <div className="page-header">
@@ -1212,7 +1202,7 @@ export const PassportPhotoValidator = () => {
           </div>
 
           {/* ═══ FAQ ═══ */}
-          <FAQSection items={faqItems} />
+          <FAQSection items={toolFaqs('/passport-photo-validator')} />
         </div>
       </div>
     </div>

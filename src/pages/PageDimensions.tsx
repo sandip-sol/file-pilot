@@ -4,6 +4,7 @@ import { analyzePageDimensions } from '../utils/pdf/pdfOperations';
 import { Loader2, RefreshCw, FileText, Ruler, Monitor } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 interface PageDimension { page: number; width: number; height: number; unit: string; orientation: string; }
 
@@ -33,14 +34,7 @@ export const PageDimensions = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="PDF Page Dimensions – View Page Size and Orientation"
-                description="Instantly view the width, height, and orientation of every page in a PDF. Detect mixed page sizes. 100% private."
-                faqItems={[
-                    { question: 'Can I detect mixed page sizes?', answer: 'Yes. The tool shows the dimensions of every individual page, making it easy to spot inconsistencies.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/page-dimensions')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -119,10 +113,7 @@ export const PageDimensions = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Can I detect mixed page sizes?', answer: 'Yes. The tool shows the dimensions of every individual page, making it easy to spot inconsistencies.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/page-dimensions')} />
         </div>
     );
 };

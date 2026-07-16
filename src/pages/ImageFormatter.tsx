@@ -21,6 +21,7 @@ import {
 import { getFormatLabel } from '../utils/image/support';
 import { extractMetadata, type ImageMetadataInfo } from '../utils/image/metadata';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import {
   Sparkles,
   Download,
@@ -371,20 +372,9 @@ export const ImageFormatter = () => {
   /*  Render                                                           */
   /* ---------------------------------------------------------------- */
 
-  const faqItems = [
-    { question: "Can I format multiple images at once?", answer: "Yes. FilePilot supports batch formatting, allowing you to upload and process multiple images simultaneously. All images are formatted with the same settings and can be downloaded individually or as a ZIP file." },
-    { question: "What output dimensions and formats are available?", answer: "You can set exact pixel dimensions or scale by percentage, and export as JPEG, PNG, or WebP. You can also set a target file size in KB, adjust quality, and choose between contain, cover, or stretch fit modes." },
-    { question: "Are there preset templates available?", answer: "Yes. Built-in presets cover common use cases with pre-configured dimensions. You can also create custom dimensions and lock the aspect ratio to maintain proportions." },
-    { question: "Is my data private?", answer: "Yes. All image processing happens entirely in your browser. Your files are never uploaded to any server, and EXIF metadata (including GPS data) is stripped by default during re-export." },
-  ];
-
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo
-        title="Image Formatter — Resize, Convert & Optimize Images Online"
-        description="Format images to exact dimensions, convert formats, set file size targets, and batch export. Free, private, browser-based."
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/image-formatter')} />
       <ToolUsageTracker />
 
       {/* Header */}
@@ -1076,7 +1066,7 @@ export const ImageFormatter = () => {
         </div>
       </div>
 
-      <FAQSection items={faqItems} />
+      <FAQSection items={toolFaqs('/image-formatter')} />
       <RelatedTools />
     </div>
   );

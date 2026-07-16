@@ -3,6 +3,7 @@ import { Download, Eraser, Loader2, Trash2, ZoomIn } from 'lucide-react';
 import { FAQSection } from '../components/FAQSection';
 import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { downloadBytes } from '../utils/pdf/export';
 import { applyRedactionsToPdf } from '../utils/pdf/pageTools';
 import { openPdfDocument, renderPdfPagePreview, revokePdfPreviews } from '../utils/pdf/rendering';
@@ -112,20 +113,9 @@ export const RedactPdf = () => {
     }
   };
 
-  const faqItems = [
-    { question: 'Are these full forensic PDF redactions?', answer: 'No. This MVP burns black boxes into the visual page output. The UI and copy make that limitation explicit.' },
-    { question: 'Can I place multiple boxes per page?', answer: 'Yes. Draw as many rectangles as you need on each page before exporting.' },
-    { question: 'Can I zoom while redacting?', answer: 'Yes. Use the zoom slider to make precise placements on small content areas.' },
-  ];
-
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo
-        title="Redact PDF – Visual Burn-In Redaction Tool"
-        description="Place rectangular redaction boxes on a PDF and export a visually burned-in redacted copy locally in your browser."
-        canonicalPath="/redact-pdf"
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/redact-pdf')} canonicalPath="/redact-pdf" />
 
       <div className="page-header">
         <div className="container">
@@ -267,7 +257,7 @@ export const RedactPdf = () => {
         </div>
       </div>
 
-      <FAQSection items={faqItems} />
+      <FAQSection items={toolFaqs('/redact-pdf')} />
     </div>
   );
 };

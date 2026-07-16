@@ -5,6 +5,7 @@ import { addHeaderFooter } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, AlignVerticalJustifyCenter, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const HeaderFooter = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -46,15 +47,7 @@ export const HeaderFooter = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Add Header & Footer to PDF – Free Online Tool"
-                description="Add custom header and footer text to every page of your PDF. Works entirely in your browser — no uploads, 100% private."
-                faqItems={[
-                    { question: 'Will my file be uploaded?', answer: 'No. Everything runs locally in your browser.' },
-                    { question: 'Can I add just a header or just a footer?', answer: 'Yes! You can fill in only the header field, only the footer field, or both.' },
-                    { question: 'Is the header/footer centered?', answer: 'Yes, both header and footer text are centered horizontally on the page.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/header-footer')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -128,11 +121,7 @@ export const HeaderFooter = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Will my file be uploaded?', answer: 'No. Everything runs locally in your browser.' },
-                { question: 'Can I add just a header or just a footer?', answer: 'Yes! You can fill in only the header field, only the footer field, or both.' },
-                { question: 'Is the header/footer centered?', answer: 'Yes, both header and footer text are centered horizontally on the page.' },
-            ]} />
+            <FAQSection items={toolFaqs('/header-footer')} />
         </div>
     );
 };

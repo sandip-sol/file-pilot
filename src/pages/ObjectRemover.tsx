@@ -12,6 +12,7 @@ import { checkImageSizeLimit } from '../utils/ai/capabilities';
 import { MAX_INPAINT_PIXELS } from '../utils/ai/types';
 import type { ImageFormat, ImageFileInfo } from '../utils/image/types';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import {
   Eraser, Download, Loader2, RefreshCw, AlertTriangle, Info,
   Undo2, Redo2, Trash2, Eye, ZoomIn, ZoomOut, Minus, Plus,
@@ -295,20 +296,9 @@ export const ObjectRemover = () => {
 
   const hasMask = paths.some((p) => !p.isErase);
 
-  const faqItems = [
-    { question: "How accurate is the inpainting?", answer: "The tool uses the Telea content-aware inpainting algorithm to fill removed areas based on surrounding pixel data. It works best for small to medium objects on relatively uniform backgrounds; complex scenes, detailed textures, or large masked areas may produce imperfect results." },
-    { question: "How do I select the object to remove?", answer: "Simply paint over the unwanted object using the brush tool. You can adjust the brush size, switch between paint and erase modes, and use undo/redo to refine your selection before processing." },
-    { question: "What output quality can I expect?", answer: "Output quality depends on the complexity of the surrounding area. Simple backgrounds produce seamless results, while detailed or textured backgrounds may show artefacts. You can export as JPEG, PNG, or WebP with adjustable quality." },
-    { question: "Is processing done in my browser?", answer: "Yes. All processing happens entirely in your browser using a content-aware inpainting algorithm. No external AI model or server is required, and your images are never uploaded anywhere." },
-  ];
-
   return (
     <main className="container max-w-4xl py-8 px-4">
-      <PageSeo
-        title="Object Remover — Content-Aware Object Removal | FilePilot"
-        description="Remove unwanted objects from images using content-aware inpainting, entirely in your browser. No upload needed."
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/object-remover')} />
 
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
@@ -524,7 +514,7 @@ export const ObjectRemover = () => {
         </div>
       )}
 
-      <FAQSection items={faqItems} />
+      <FAQSection items={toolFaqs('/object-remover')} />
     </main>
   );
 };

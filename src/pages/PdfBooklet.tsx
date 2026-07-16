@@ -5,6 +5,7 @@ import { createBooklet } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, BookOpen, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const PdfBooklet = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -34,14 +35,7 @@ export const PdfBooklet = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="PDF Booklet – Create Saddle-Stitch Booklet Layout"
-                description="Rearrange PDF pages into a booklet layout that you can print, fold, and staple. 100% private — browser only."
-                faqItems={[
-                    { question: 'What is a booklet layout?', answer: 'A booklet layout reorders pages so that when you print double-sided, fold, and staple, the pages appear in the correct reading order.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/pdf-booklet')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -103,10 +97,7 @@ export const PdfBooklet = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What is a booklet layout?', answer: 'A booklet layout reorders pages so that when you print double-sided, fold, and staple, the pages appear in the correct reading order.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/pdf-booklet')} />
         </div>
     );
 };

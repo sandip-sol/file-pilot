@@ -5,6 +5,7 @@ import { fixPageSize } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, Maximize2, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 type PageSizeOption = 'A4' | 'Letter' | 'A3' | 'Legal';
 
@@ -45,15 +46,7 @@ export const FixPageSize = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Fix PDF Page Size – Resize to A4, Letter, A3, Legal Free"
-                description="Resize all pages of your PDF to A4, US Letter, A3, or Legal size. Scales content to fit. 100% private — no uploads."
-                faqItems={[
-                    { question: 'Will my page content be cropped?', answer: 'No. Content is scaled proportionally to fit the new page size with equal margins.' },
-                    { question: 'Does this change the orientation?', answer: 'No. The tool scales the existing content to fit the target size, preserving orientation.' },
-                    { question: 'Is my file uploaded?', answer: 'No. Everything runs locally in your browser.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/fix-page-size')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -117,11 +110,7 @@ export const FixPageSize = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Will my page content be cropped?', answer: 'No. Content is scaled proportionally to fit the new page size with equal margins.' },
-                { question: 'Does this change the orientation?', answer: 'No. The tool scales the existing content to fit the target size, preserving orientation.' },
-                { question: 'Is my file uploaded?', answer: 'No. Everything runs locally in your browser.' },
-            ]} />
+            <FAQSection items={toolFaqs('/fix-page-size')} />
         </div>
     );
 };

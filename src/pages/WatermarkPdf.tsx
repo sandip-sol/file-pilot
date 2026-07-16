@@ -3,6 +3,7 @@ import { Download, ImagePlus, Loader2, Stamp } from 'lucide-react';
 import { FAQSection } from '../components/FAQSection';
 import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { downloadBytes } from '../utils/pdf/export';
 import { parsePageSelectionInput } from '../utils/pdf/pageSelection';
 import { openPdfDocument, renderPdfPagePreview } from '../utils/pdf/rendering';
@@ -125,20 +126,9 @@ export const WatermarkPdf = () => {
     }
   };
 
-  const faqItems = [
-    { question: 'Does watermarking upload my PDF?', answer: 'No. The preview and the export both happen locally in the browser.' },
-    { question: 'Can I watermark only a few pages?', answer: 'Yes. Turn off Apply to all pages and enter page numbers such as 1,3,5-8.' },
-    { question: 'Can I use a logo image as a watermark?', answer: 'Yes. Switch to image watermark mode and upload a PNG or JPG logo.' },
-  ];
-
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo
-        title="Watermark PDF – Add Text or Image Watermarks"
-        description="Add text or image watermarks to a PDF locally in your browser. Control opacity, size, rotation, and page targeting."
-        canonicalPath="/watermark-pdf"
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/watermark-pdf')} canonicalPath="/watermark-pdf" />
 
       <div className="page-header">
         <div className="container">
@@ -303,7 +293,7 @@ export const WatermarkPdf = () => {
         </div>
       </div>
 
-      <FAQSection items={faqItems} />
+      <FAQSection items={toolFaqs('/watermark-pdf')} />
     </div>
   );
 };

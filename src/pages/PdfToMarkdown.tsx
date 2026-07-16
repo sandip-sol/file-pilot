@@ -4,6 +4,7 @@ import { pdfToMarkdown } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, FileCode, CheckCircle, Copy } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const PdfToMarkdown = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -48,14 +49,7 @@ export const PdfToMarkdown = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="PDF to Markdown – Extract PDF Text as Markdown"
-                description="Convert your PDF into a Markdown (.md) file with page structure preserved. 100% private — browser only."
-                faqItems={[
-                    { question: 'Is the formatting preserved?', answer: 'Basic text is extracted and wrapped in Markdown syntax with page headings. Complex formatting like tables may not be preserved.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/pdf-to-markdown')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -119,10 +113,7 @@ export const PdfToMarkdown = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Is the formatting preserved?', answer: 'Basic text is extracted and wrapped in Markdown syntax with page headings. Complex formatting may not be preserved.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/pdf-to-markdown')} />
         </div>
     );
 };

@@ -4,6 +4,7 @@ import { pdfToJSON } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, FileJson, CheckCircle, Copy } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 export const PdfToJson = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -49,14 +50,7 @@ export const PdfToJson = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="PDF to JSON – Extract PDF Content as JSON Data"
-                description="Extract text and metadata from your PDF and download it as a structured JSON file. 100% private — browser only."
-                faqItems={[
-                    { question: 'What data is extracted?', answer: 'The JSON contains metadata, page count, and the extracted text from each page.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/pdf-to-json')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -120,10 +114,7 @@ export const PdfToJson = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'What data is extracted?', answer: 'The JSON contains metadata, page count, and the extracted text from each page.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/pdf-to-json')} />
         </div>
     );
 };

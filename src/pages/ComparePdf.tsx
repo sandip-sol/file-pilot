@@ -3,6 +3,7 @@ import { GitCompareArrows, Loader2 } from 'lucide-react';
 import { FAQSection } from '../components/FAQSection';
 import { FileUploader } from '../components/FileUploader';
 import { PageSeo } from '../components/PageSeo';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 import { buildPdfCompareResult } from '../utils/pdf/compare';
 import type { PdfCompareResult } from '../utils/pdf/types';
 import { extractRichTextFromFiles } from '../utils/textExtraction';
@@ -38,20 +39,9 @@ export const ComparePdf = () => {
     }
   };
 
-  const faqItems = [
-    { question: 'Does PDF compare use visual image diffing?', answer: 'No. This tool keeps things practical in the browser by comparing extracted text page by page first.' },
-    { question: 'Will scanned PDFs still work?', answer: 'Often yes. If needed, the compare flow falls back to OCR, which can take longer on large scanned files.' },
-    { question: 'Can it detect different page counts?', answer: 'Yes. The summary shows each document page count and highlights changed or missing pages.' },
-  ];
-
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo
-        title="Compare PDFs – Page Count and Text Differences"
-        description="Compare two PDFs page by page using extracted text differences, page counts, and changed-page summaries."
-        canonicalPath="/compare-pdf"
-        faqItems={faqItems}
-      />
+      <PageSeo {...toolSeo('/compare-pdf')} canonicalPath="/compare-pdf" />
 
       <div className="page-header">
         <div className="container">
@@ -189,7 +179,7 @@ export const ComparePdf = () => {
         </div>
       </div>
 
-      <FAQSection items={faqItems} />
+      <FAQSection items={toolFaqs('/compare-pdf')} />
     </div>
   );
 };

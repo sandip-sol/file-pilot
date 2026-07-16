@@ -5,6 +5,7 @@ import { addStamp } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, Stamp, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 const PRESET_STAMPS = [
     { label: 'DRAFT', color: '#2563eb' },
@@ -81,15 +82,7 @@ export const AddStamp = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Add Stamp to PDF – DRAFT, CONFIDENTIAL & Custom Stamps Free"
-                description="Add watermark stamps like DRAFT, CONFIDENTIAL, APPROVED to your PDF. Custom text, color, opacity. 100% private — processed locally."
-                faqItems={[
-                    { question: 'Will my file be uploaded?', answer: 'No. All processing happens in your browser.' },
-                    { question: 'Can I use custom text for the stamp?', answer: 'Yes! Type any text you like into the stamp field.' },
-                    { question: 'Can I control the stamp opacity?', answer: 'Yes, use the opacity slider — lower values make the stamp more transparent.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/add-stamp')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -211,11 +204,7 @@ export const AddStamp = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Will my file be uploaded?', answer: 'No. All processing happens in your browser.' },
-                { question: 'Can I use custom text for the stamp?', answer: 'Yes! Type any text you like into the stamp field.' },
-                { question: 'Can I control the stamp opacity?', answer: 'Yes, use the opacity slider — lower values make the stamp more transparent.' },
-            ]} />
+            <FAQSection items={toolFaqs('/add-stamp')} />
         </div>
     );
 };

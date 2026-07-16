@@ -5,6 +5,7 @@ import { addBackgroundColor } from '../utils/pdf/pdfOperations';
 import { Loader2, Download, RefreshCw, FileText, Palette, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
+import { toolFaqs, toolSeo } from '../data/toolContent';
 
 const PRESETS = [
     { label: 'White', r: 255, g: 255, b: 255 },
@@ -57,14 +58,7 @@ export const BackgroundColor = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Add Background Color to PDF – Change PDF Page Color Online"
-                description="Add a colored background to all pages of your PDF. Choose from presets or pick a custom color. 100% private."
-                faqItems={[
-                    { question: 'Will this cover existing content?', answer: 'The color layer is drawn over existing content. For best results, use light, transparent-friendly colors or use the underlay mode.' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
-            />
+            <PageSeo {...toolSeo('/background-color')} />
             <div className="page-header">
                 <div className="container">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -141,10 +135,7 @@ export const BackgroundColor = () => {
                 </div>
             </div>
 
-            <FAQSection items={[
-                { question: 'Will this cover existing content?', answer: 'The color layer is drawn over existing content. For best results, use light colors.' },
-                { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-            ]} />
+            <FAQSection items={toolFaqs('/background-color')} />
         </div>
     );
 };
