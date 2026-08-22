@@ -13,6 +13,7 @@ const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.N
 const PdfToolsHub = lazy(() => import('./pages/PdfToolsHub').then(m => ({ default: m.PdfToolsHub })));
 const ImageToolsHub = lazy(() => import('./pages/ImageToolsHub').then(m => ({ default: m.ImageToolsHub })));
 const CategoryHub = lazy(() => import('./pages/CategoryHub').then(m => ({ default: m.CategoryHub })));
+const ComparisonPage = lazy(() => import('./pages/ComparisonPage').then(m => ({ default: m.ComparisonPage })));
 
 // ─── Blog ───────────────────────────────────────────────────────────────────
 const Blog = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
@@ -164,6 +165,12 @@ function App() {
           <Route path="/image-tools" element={<ImageToolsHub />} />
           <Route path="/image-workflows" element={<CategoryHub hubPath="/image-workflows" />} />
           <Route path="/ai-tools" element={<CategoryHub hubPath="/ai-tools" />} />
+
+          {/* Phase 1.3 — "alternative to X" pages */}
+          <Route path="/smallpdf-alternative" element={<ComparisonPage route="/smallpdf-alternative" />} />
+          <Route path="/ilovepdf-alternative" element={<ComparisonPage route="/ilovepdf-alternative" />} />
+          <Route path="/adobe-acrobat-online-alternative" element={<ComparisonPage route="/adobe-acrobat-online-alternative" />} />
+          <Route path="/pdf24-alternative" element={<ComparisonPage route="/pdf24-alternative" />} />
 
           {/* Blog */}
           <Route path="/blog" element={<Blog />} />

@@ -130,31 +130,25 @@ fronts, in priority order:
 
 | # | Task | Status |
 |---|---|---|
-| 1.1 | **Rewrite the 12 priority tool pages for their exact keyword.** | ✅ **Done (12/12)** — keyword-first titles + `\| FilePilot` suffix, verified identical between client and prerender; H1s aligned; HowTo already live; unique intros; new "when to use this vs …" section on every focus page. |
-| 1.2 | **Unique FAQs per tool.** | ✅ **Done (12/12)** — 5–6 tool-specific FAQs each (was 4 generic boilerplate), now single-sourced so the visible accordion and FAQPage schema always match. |
-| 1.3 | **Comparison/alternative pages** ("FilePilot vs Smallpdf", "iLovePDF alternative that doesn't upload"). | ⏳ **Not started** — needs a decision: these pages make public claims about named competitors. Partly mitigated by the per-tool "when to use this vs …" sections shipped in 1.1. |
-| 1.4 | **Internal-linking hubs.** Each tool should link to 3–5 *related* tools, not the generic footer. | ✅ **Done for the 12** — curated `RELATED_ROUTES` siblings replace the `/merge`, `/compress` fallback. Hub → spoke anchors still to review. |
+| 1.1 | **Rewrite the priority tool pages for their exact keyword.** | ✅ **Done (13/13)** — keyword-first titles + `\| FilePilot` suffix, verified identical between client and prerender; H1s aligned; HowTo live; unique intros; "when to use this vs …" on every focus page. `/image-requirements` received the full treatment when it was rescued from its 404 in Phase 0. |
+| 1.2 | **Unique FAQs per tool.** | ✅ **Done (13/13)** — 5–6 tool-specific FAQs each, single-sourced so the visible accordion and the FAQPage schema always match. |
+| 1.3 | **Comparison/alternative pages.** | ✅ **Done — 4 pages shipped (2026-08-22).** `/smallpdf-alternative`, `/ilovepdf-alternative`, `/adobe-acrobat-online-alternative`, `/pdf24-alternative`. 773–916 crawlable words each, `WebPage` + `BreadcrumbList` + `FAQPage` schema, 17 internal links each, linked from the `/pdf-tools` hub and the homepage. Format chosen deliberately: **"alternative to X", not "FilePilot vs X"** — the vs-terms need brand recognition the site does not yet have, while "smallpdf alternative" already has volume from people looking to switch. Content lives in `src/data/comparisons.ts`. |
+| 1.4 | **Internal-linking hubs.** Each tool should link to 3–5 *related* tools, not the generic footer. | ✅ **Done (84/84).** This had only ever covered the 12 focus tools. **61 of 84 tool pages were still falling back to a flat list of `/pdf-tools`, `/image-tools`, `/merge`, `/compress`, `/compress-image`** — funnelling the entire site's internal link equity into five head-term pages it cannot win. Worse, there were *two* competing graphs: `RELATED_ROUTES` in `seoRoutes.js` (23 entries, crawlable HTML) and `relatedToolSlugs` in `RelatedTools.tsx` (34 entries, rendered DOM), which **disagreed on 6 of the 10 routes they shared**. Both now resolve through `src/data/relatedTools.ts`: curated neighbours first, then same-category siblings picked by registry adjacency. Verified 0 mismatches, 0 head-term-only pages; the most-linked page now has 12 inbound internal links instead of ~305 across five. |
 
-**Rollout: ✅ complete — all 83 tool routes.** The reconciliation was extended from the
-12 focus tools to every tool page. `toolContent.ts` is now the single source of truth
-site-wide, consumed by the prerenderer, `PageSeo`, and `FAQSection`.
+**Guardrails added so Phase 1 cannot silently regress** (all in `seoValidate.js`, all build-failing):
 
-- **Title parity: 83/83** client-vs-prerender (was 12/83). Every tool page now keeps
-  its `| FilePilot` brand suffix in the DOM Google actually indexes.
-- **FAQ single-sourcing: 83/83** — one FAQ set per tool, so the visible accordion and
-  the FAQPage schema can no longer drift apart.
-- Route-aware components (`ImagesToPdf`, `PdfToImages`, `ExtractText`, `PdfSecurity`,
-  `PdfMetadata`) keep their dynamic `canonicalPath`/`robots` logic; non-indexable
-  variants (`/png-to-pdf`, `/rasterize-pdf`, …) still canonicalise to their hub.
+- Every routed page must spread `toolSeo()`/`siteSeo()` into `<PageSeo>` — no literal titles.
+- Every route in `App.tsx` must have prerendered HTML, a sitemap entry or a redirect.
+- Every tool page must carry ≥3 related links, none of them self, none head-term-only, all present in the prerendered HTML.
+- **Every sitemap URL must be linked from some other page's prerendered HTML.** This one immediately caught `/support` and `/terms`, which were in the sitemap with zero crawlable inbound links because the footer only exists in the React render.
+- `isToolRoute` now has one definition, exported from `seoRoutes.js`. `prerender.js` and `seoValidate.js` each kept their own hard-coded copy, so registering the comparison pages made both demand HowTo schema of them.
 
-**Follow-ups surfaced by the rollout:**
-1. **14 of 83 titles now exceed ~65 chars** and will truncate in SERPs (worst:
-   `/extract-text` at 78). Pre-existing length + the 12-char brand suffix. Worth trimming.
-2. **Dead page components** are never routed and should probably be deleted:
-   `JpgToPdf`, `PdfToJpg`, `BmpToPdf`, `HeicToPdf`, `WebpToPdf`, `TiffToPdf`,
-   `PdfToPng`, `PdfToTiff`, `PdfToWebp`, `PdfToDocx`, `PdfToExcel`, `PdfToPptx`,
-   `EncryptDecryptPdf`, `TextColor`, `ConvertToPdfPages`, `SecureOptimizePages`
-   (superseded by the route-aware components above).
+**Follow-ups still open:**
+1. **45 of 100 titles exceed 60 characters** and truncate in SERPs (worst: `/extract-text` at 78). Deliberately deferred — this is a click-through cost, and click-through is irrelevant at average position 58. Revisit when tail terms reach page 2.
+2. **15 dead page components** are never routed: `JpgToPdf`, `PdfToJpg`, `BmpToPdf`, `HeicToPdf`, `WebpToPdf`, `TiffToPdf`, `PdfToPng`, `PdfToTiff`, `PdfToWebp`, `PdfToDocx`, `PdfToExcel`, `PdfToPptx`, `EncryptDecryptPdf`, `TextColor`, `ConvertToPdfPages`, `SecureOptimizePages`. No SEO impact — they do not ship — but they carry stale `PageSeo` blocks. `PdfToBmp` was deleted in the 2026-08-22 pass.
+3. **Thin hub pages**: `/ai-tools` (71 words) and `/image-workflows` (84) are thin because they hold few tools. Worth a paragraph each.
+
+**Phase 1 exit check:** `npm run build && npm run seo:crawl` — 100 routes, both green.
 
 ### Phase 2 — Weeks 2–10: Authority / backlinks (runs in parallel, highest leverage)
 

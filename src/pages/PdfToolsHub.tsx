@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Lock, FileText } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { siteContent, siteSeo } from '../data/siteContent';
+import { comparisonContent, comparisonRoutes } from '../data/comparisons';
 import { discoverableTools, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
 import { toCanonicalPath, toolPath } from '../lib/routes';
 
@@ -114,6 +115,29 @@ export const PdfToolsHub = () => {
           >
             Browse all image tools <ArrowRight className="h-4 w-4" />
           </Link>
+        </div>
+      </section>
+
+      {/* Switching from another tool */}
+      <section className="container pb-10">
+        <div className="border-t border-border pt-8">
+          <h2 className="text-xl font-bold text-foreground">Coming from another PDF tool?</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Honest comparisons of how the popular PDF services handle your file, and which FilePilot tool covers each task.
+          </p>
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+            {comparisonRoutes.map((route) => (
+              <li key={route}>
+                <Link
+                  to={toCanonicalPath(route)}
+                  className="flex items-center justify-between gap-2 rounded-lg border border-border bg-card/60 px-3 py-2.5 text-sm text-foreground transition-colors hover:border-foreground/30"
+                >
+                  A {comparisonContent[route].competitor} alternative
+                  <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

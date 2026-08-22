@@ -2,6 +2,8 @@ import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { BRAND_SUFFIX, toolContent } from './src/data/toolContent.ts';
 import { siteContent } from './src/data/siteContent.ts';
+import { resolveRelatedTools } from './src/data/relatedTools.ts';
+import { comparisonContent, comparisonRoutes } from './src/data/comparisons.ts';
 
 const TOOL_REGISTRY_PATH = new URL('./src/data/toolRegistry.ts', import.meta.url);
 
@@ -85,6 +87,13 @@ const CORE_ROUTE_SEO = {
   '/support': { ...fromSiteContent('/support'), changefreq: 'monthly', priority: '0.4' },
   '/privacy': { ...fromSiteContent('/privacy'), changefreq: 'yearly', priority: '0.3' },
   '/terms': { ...fromSiteContent('/terms'), changefreq: 'yearly', priority: '0.3' },
+  // Phase 1.3 "alternative to X" pages. Priority 0.7: below the category hubs,
+  // above an ordinary tool, because they target commercial-intent keywords
+  // ("smallpdf alternative") that convert better than a generic tool term.
+  ...Object.fromEntries(comparisonRoutes.map((route) => [
+    route,
+    { ...fromSiteContent(route), changefreq: 'monthly', priority: '0.7' },
+  ])),
 };
 
 const BLOG_ROUTE_SEO = {
@@ -165,44 +174,28 @@ const INDEXABLE_ALIAS_ROUTES = Object.keys(INDEXABLE_ALIAS_ROUTE_SEO);
 
 const DEFAULT_RELATED_ROUTES = ['/pdf-tools', '/image-tools', '/merge', '/compress', '/compress-image'];
 
-const RELATED_ROUTES = {
+// Non-tool routes only. Tool-to-tool links resolve through
+// `src/data/relatedTools.ts`, which the client's <RelatedTools> uses too, so
+// the crawlable link graph and the rendered one cannot disagree.
+const CORE_RELATED_ROUTES = {
   '/': ['/pdf-tools', '/image-tools', '/merge', '/compress-image', '/blog'],
   '/pdf-tools': ['/merge', '/split', '/compress', '/jpg-to-pdf', '/pdf-to-jpg'],
   '/image-tools': ['/compress-image', '/resize-image', '/convert-image', '/image-workflows', '/ai-tools'],
   '/image-workflows': ['/image-formatter', '/social-media-resizer', '/ecommerce-image-formatter', '/qr-generator', '/favicon-generator'],
   '/ai-tools': ['/remove-background', '/upscale-image', '/ai-enhance-image', '/object-remover', '/change-background'],
-  '/merge': ['/split', '/compress', '/organize-pdf', '/jpg-to-pdf'],
-  '/split': ['/merge', '/extract-pages', '/delete-pages', '/organize-pdf'],
-  '/compress': ['/merge', '/pdf-to-jpg', '/pdf-tools', '/repair-pdf'],
-  '/jpg-to-pdf': ['/images-to-pdf', '/pdf-to-jpg', '/compress-image', '/merge'],
-  '/pdf-to-jpg': ['/pdf-to-images', '/jpg-to-pdf', '/compress-image', '/compress'],
-  '/compress-image': ['/resize-image', '/convert-image', '/crop-image', '/image-formatter'],
-  '/resize-image': ['/compress-image', '/crop-image', '/social-media-resizer', '/image-formatter'],
-  '/convert-image': ['/compress-image', '/resize-image', '/image-to-svg', '/image-formatter'],
-  '/crop-image': ['/resize-image', '/rotate-image', '/image-formatter', '/compress-image'],
-  '/image-formatter': ['/social-media-resizer', '/ecommerce-image-formatter', '/compress-image', '/image-requirements'],
-  '/qr-generator': ['/favicon-generator', '/image-to-svg', '/image-formatter', '/image-workflows'],
-  // Phase 1 focus tools: curated topical siblings instead of the generic
-  // DEFAULT_RELATED_ROUTES fallback, so link equity flows between genuinely
-  // related tools rather than back to the same head-term pages every time.
-  '/pdf-to-cbz': ['/pdf-to-images', '/pdf-to-zip', '/extract-images', '/images-to-pdf'],
-  '/posterize-pdf': ['/n-up-pdf', '/pdf-booklet', '/fix-page-size', '/crop-pdf'],
-  '/n-up-pdf': ['/posterize-pdf', '/pdf-booklet', '/combine-single-page', '/grid-combine'],
-  '/add-page-labels': ['/page-numbers', '/organize-pdf', '/bookmark', '/pdf-metadata'],
-  '/image-to-svg': ['/convert-image', '/favicon-generator', '/pdf-to-svg', '/compress-image'],
-  '/combine-single-page': ['/merge', '/n-up-pdf', '/grid-combine', '/pdf-to-images'],
-  '/pdf-to-greyscale': ['/compress', '/pdf-to-images', '/flatten-pdf', '/pdf-to-jpg'],
-  '/remove-image-metadata': ['/pdf-metadata', '/compress-image', '/blur-face', '/privacy'],
-  '/flatten-pdf': ['/form-filler', '/form-creator', '/pdf-security', '/redact-pdf'],
-  '/json-to-pdf': ['/markdown-to-pdf', '/text-to-pdf', '/pdf-to-json', '/pdf-to-markdown'],
-  '/markdown-to-pdf': ['/json-to-pdf', '/text-to-pdf', '/pdf-to-markdown', '/pdf-to-json'],
-  '/pdf-to-zip': ['/split', '/merge', '/extract-pages', '/pdf-to-cbz'],
-
-  '/blog': ['/blog/why-files-stay-in-browser', '/blog/privacy-risks-online-pdf-tools', '/privacy', '/pdf-tools'],
+  '/blog': ['/blog/why-files-stay-in-browser', '/blog/privacy-risks-online-pdf-tools', '/blog/how-filepilot-keeps-documents-private', '/pdf-tools'],
   '/support': ['/pdf-tools', '/image-tools', '/privacy', '/blog'],
   '/privacy': ['/pdf-tools', '/image-tools', '/blog/how-filepilot-keeps-documents-private'],
   '/terms': ['/privacy', '/pdf-tools', '/image-tools'],
+  ...Object.fromEntries(comparisonRoutes.map((route) => [
+    route,
+    comparisonContent[route].toolMap.slice(0, 5).map((item) => item.route),
+  ])),
 };
+
+/** Tool-route neighbours, resolved once from the shared graph. */
+const relatedForToolRoute = (route, toolEntries) =>
+  resolveRelatedTools(route, toolEntries.map(({ route: r, category }) => ({ route: r, category })));
 
 const extractSet = (source, name) => {
   const match = source.match(new RegExp(`const ${name} = new Set\\(\\[([\\s\\S]*?)\\]\\);`));
@@ -251,7 +244,7 @@ const withSeoFields = (entry) => ({
   indexable: entry.indexable ?? true,
   canonicalUrl: canonicalUrlForRoute(entry.canonicalRoute ?? entry.route),
   shortIntro: entry.shortIntro ?? entry.description,
-  relatedTools: entry.relatedTools ?? RELATED_ROUTES[entry.route] ?? DEFAULT_RELATED_ROUTES,
+  relatedTools: entry.relatedTools ?? CORE_RELATED_ROUTES[entry.route] ?? DEFAULT_RELATED_ROUTES,
   schemaType: entry.schemaType ?? schemaTypeForRoute(entry.route, entry.category),
   sitemapPriority: PRIORITY_TAIL_ROUTE_SET.has(entry.route)
     ? PRIORITY_TAIL_SITEMAP_PRIORITY
@@ -280,7 +273,7 @@ const extractToolEntries = (source) => {
   const comingSoonSlugs = extractSet(source, 'comingSoonToolSlugs');
   const toolBlocks = source.match(/\{\s*slug: '[^']+'[\s\S]*?\n  \}/g) ?? [];
 
-  return toolBlocks
+  const entries = toolBlocks
     .map((block) => {
       const route = getBlockValue(block, 'slug');
       const title = getBlockValue(block, 'title');
@@ -313,14 +306,32 @@ const extractToolEntries = (source) => {
         shortIntro: INDEXABLE_ALIAS_ROUTE_SEO[route]?.description ?? description,
         category,
         canonicalRoute: isAlias ? route : canonicalSlug ?? route,
-        relatedTools: RELATED_ROUTES[route],
         schemaType: 'WebApplication',
         changefreq: INDEXABLE_ALIAS_ROUTE_SEO[route]?.changefreq ?? 'monthly',
         priority: INDEXABLE_ALIAS_ROUTE_SEO[route]?.priority ?? (route === '/image-requirements' ? '0.9' : '0.8'),
       };
     })
     .filter(Boolean);
+
+  // Second pass: the resolver needs the complete tool list to pick category
+  // siblings, so related links are filled in only once every entry exists.
+  const graphInput = entries.map(({ route, category }) => ({ route, category }));
+  for (const entry of entries) {
+    entry.relatedTools = resolveRelatedTools(entry.route, graphInput);
+  }
+
+  return entries;
 };
+
+/**
+ * A "tool route" is anything that is not a hand-authored page. Both the
+ * prerenderer and seoValidate used to keep their own hard-coded exclusion list,
+ * so adding the Phase 1.3 comparison pages to CORE_ROUTE_SEO left both of them
+ * still treating those pages as tools and demanding HowTo schema for them.
+ * Derived from CORE_ROUTE_SEO here so new page types register in one place.
+ */
+export const isToolRoute = (route) =>
+  !CORE_ROUTES.includes(normalizeRoute(route)) && !normalizeRoute(route).startsWith('/blog/');
 
 const uniqueRoutes = (routes) => [...new Set(routes)];
 
@@ -369,7 +380,7 @@ export const getNonIndexableRouteEntries = () => {
   const indexableRoutes = new Set(getSeoRoutes());
   const toolBlocks = source.match(/\{\s*slug: '[^']+'[\s\S]*?\n  \}/g) ?? [];
 
-  return toolBlocks
+  const entries = toolBlocks
     .map((block) => {
       const route = getBlockValue(block, 'slug');
       const title = getBlockValue(block, 'title');
@@ -392,4 +403,13 @@ export const getNonIndexableRouteEntries = () => {
       };
     })
     .filter(Boolean);
+
+  // Second pass: the resolver needs the complete tool list to pick category
+  // siblings, so related links are filled in only once every entry exists.
+  const graphInput = entries.map(({ route, category }) => ({ route, category }));
+  for (const entry of entries) {
+    entry.relatedTools = resolveRelatedTools(entry.route, graphInput);
+  }
+
+  return entries;
 };

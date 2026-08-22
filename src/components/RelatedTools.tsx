@@ -2,66 +2,28 @@ import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { discoverableTools, toolRegistry, type ToolDefinition } from '../data/toolRegistry';
 import { ToolLinkCard } from './ToolLinkCard';
+import { resolveRelatedTools } from '../data/relatedTools';
 
-const relatedToolSlugs: Record<string, string[]> = {
-  '/merge': ['/split', '/compress', '/organize-pdf'],
-  '/split': ['/merge', '/extract-pages', '/delete-pages'],
-  '/compress': ['/pdf-to-images', '/repair-pdf', '/page-dimensions'],
-  '/pdf-to-images': ['/images-to-pdf', '/compress', '/extract-text'],
-  '/pdf-to-jpg': ['/pdf-to-images', '/compress-image', '/jpg-to-pdf'],
-  '/images-to-pdf': ['/pdf-to-images', '/compress', '/merge'],
-  '/jpg-to-pdf': ['/images-to-pdf', '/pdf-to-jpg', '/compress-image'],
-  '/extract-text': ['/pdf-to-images', '/pdf-to-markdown', '/pdf-to-json'],
-  '/watermark-pdf': ['/redact-pdf', '/sign-pdf', '/add-stamp'],
-  '/redact-pdf': ['/find-and-redact', '/sanitize-pdf', '/remove-metadata'],
-  '/sign-pdf': ['/annotate-pdf', '/watermark-pdf', '/flatten-pdf'],
-  '/organize-pdf': ['/merge', '/split', '/rotate-pdf'],
-  '/pdf-security': ['/sanitize-pdf', '/remove-metadata', '/redact-pdf'],
-  '/image-requirements': ['/image-formatter', '/compress-image', '/resize-image'],
-  '/image-formatter': ['/social-media-resizer', '/ecommerce-image-formatter', '/compress-image'],
-  '/passport-photo-validator': ['/image-formatter', '/crop-image', '/remove-image-metadata'],
-  '/social-media-resizer': ['/image-formatter', '/ecommerce-image-formatter', '/crop-image'],
-  '/ecommerce-image-formatter': ['/image-formatter', '/social-media-resizer', '/remove-background'],
-  '/scan-images-to-pdf': ['/images-to-pdf', '/compress', '/organize-pdf'],
-  '/favicon-generator': ['/image-formatter', '/resize-image', '/crop-image'],
-  '/crop-image': ['/resize-image', '/rotate-image', '/photo-editor'],
-  '/rotate-image': ['/crop-image', '/photo-editor', '/watermark-image'],
-  '/watermark-image': ['/photo-editor', '/crop-image', '/blur-face'],
-  '/photo-editor': ['/crop-image', '/watermark-image', '/remove-image-metadata'],
-  '/remove-image-metadata': ['/compress-image', '/blur-face', '/photo-editor'],
-  '/blur-face': ['/remove-image-metadata', '/watermark-image', '/crop-image'],
-  '/remove-background': ['/change-background', '/object-remover', '/crop-image'],
-  '/change-background': ['/remove-background', '/ai-enhance-image', '/photo-editor'],
-  '/upscale-image': ['/ai-enhance-image', '/resize-image', '/compress-image'],
-  '/ai-enhance-image': ['/upscale-image', '/photo-editor', '/remove-background'],
-  '/object-remover': ['/remove-background', '/blur-face', '/crop-image'],
-  '/image-to-svg': ['/convert-image', '/compress-image', '/crop-image'],
-  '/color-picker': ['/photo-editor', '/convert-image', '/image-formatter'],
-  '/qr-generator': ['/image-to-svg', '/favicon-generator', '/image-formatter'],
-};
+/**
+ * The related-tool graph lives in `src/data/relatedTools.ts` and is shared with
+ * the prerenderer via `seoRoutes.js`. This component used to keep its own
+ * 34-entry map which disagreed with the prerenderer's on 6 of the 10 routes
+ * they had in common — so the internal link graph in the crawlable HTML and the
+ * one Google saw after rendering JS described two different sites.
+ */
+const graphInput = discoverableTools.map((tool) => ({ route: tool.slug, category: tool.category }));
 
-const getRelatedTools = (currentTool: ToolDefinition) => {
-  const explicitSlugs = relatedToolSlugs[currentTool.slug] ?? [];
-  const explicitTools = explicitSlugs
-    .map((slug) => discoverableTools.find((tool) => tool.slug === slug))
+const getRelatedTools = (currentTool: ToolDefinition, limit: number) =>
+  resolveRelatedTools(currentTool.slug, graphInput, limit)
+    .map((route) => discoverableTools.find((tool) => tool.slug === route))
     .filter((tool): tool is ToolDefinition => Boolean(tool));
-
-  const fallbackTools = discoverableTools.filter(
-    (tool) =>
-      tool.slug !== currentTool.slug &&
-      !explicitSlugs.includes(tool.slug) &&
-      (tool.category === currentTool.category || tool.featured),
-  );
-
-  return [...explicitTools, ...fallbackTools].slice(0, 3);
-};
 
 export const RelatedTools = () => {
   const location = useLocation();
   const slug = location.pathname.replace(/\/$/, '') || '/';
   const currentTool = toolRegistry.find((tool) => tool.slug === slug);
 
-  const tools = useMemo(() => (currentTool ? getRelatedTools(currentTool) : []), [currentTool]);
+  const tools = useMemo(() => (currentTool ? getRelatedTools(currentTool, 3) : []), [currentTool]);
 
   if (!currentTool || tools.length === 0) return null;
 

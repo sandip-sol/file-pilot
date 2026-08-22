@@ -1,3 +1,5 @@
+import { comparisonContent } from './comparisons.ts';
+
 export interface SiteFaq {
   question: string;
   answer: string;
@@ -160,6 +162,19 @@ export const siteContent: Record<string, SiteContentEntry> = {
     h1: 'How FilePilot Keeps Your Documents Private',
   },
 };
+
+// The "alternative to X" pages (Phase 1.3) keep their copy in comparisons.ts
+// but expose SEO through the same siteSeo()/siteContent path as every other
+// non-tool route, so seoRoutes.js and PageSeo pick them up automatically.
+for (const entry of Object.values(comparisonContent)) {
+  siteContent[entry.route] = {
+    title: entry.title,
+    description: entry.description,
+    h1: entry.h1,
+    intro: entry.intro,
+    faqs: entry.faqs,
+  };
+}
 
 export const siteSeo = (
   route: string,

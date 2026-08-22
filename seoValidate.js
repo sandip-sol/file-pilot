@@ -9,6 +9,7 @@ import {
   getRouteSeoEntries,
   getSeoRoutes,
   getSitemapEntries,
+  isToolRoute,
 } from './seoRoutes.js';
 
 const DIST_DIR = new URL('./dist/', import.meta.url);
@@ -89,20 +90,6 @@ function stripBrand(value) {
 function routeLabel(route) {
   const seo = getRouteSeo(route);
   return seo.h1 ?? stripBrand(seo.title);
-}
-
-function isToolRoute(route) {
-  return ![
-    '/',
-    '/pdf-tools',
-    '/image-tools',
-    '/image-workflows',
-    '/ai-tools',
-    '/blog',
-    '/support',
-    '/privacy',
-    '/terms',
-  ].includes(route) && !route.startsWith('/blog/');
 }
 
 function staticSeoBlock(html) {
@@ -430,6 +417,71 @@ function validateNoOrphanRoutes() {
   }
 }
 
+
+/**
+ * Internal links are how authority moves between pages, so the "Related tools"
+ * block on each tool page has to point at genuine topical siblings.
+ *
+ * 61 of 84 tool pages used to fall back to a flat list of `/pdf-tools`,
+ * `/image-tools`, `/merge`, `/compress` and `/compress-image` — funnelling the
+ * whole site's internal link equity into five head-term pages it cannot win,
+ * while the long-tail pages that *are* winnable got no topical context at all.
+ */
+function validateRelatedToolLinks() {
+  const HEAD_TERM_ROUTES = new Set(['/pdf-tools', '/image-tools', '/merge', '/compress', '/compress-image']);
+  const indexableRoutes = new Set(getSeoRoutes());
+
+  for (const entry of getRouteSeoEntries()) {
+    if (!isToolRoute(entry.route)) continue;
+
+    const related = entry.relatedTools ?? [];
+    if (related.length < 3) {
+      fail(`${entry.route} has only ${related.length} related-tool links; expected at least 3.`);
+      continue;
+    }
+    if (related.every((route) => HEAD_TERM_ROUTES.has(route))) {
+      fail(`${entry.route} links only to head-term pages (${related.join(', ')}) instead of topical siblings.`);
+    }
+    for (const route of related) {
+      if (route === entry.route) fail(`${entry.route} lists itself as a related tool.`);
+      else if (!indexableRoutes.has(route)) {
+        fail(`${entry.route} links to ${route}, which is not an indexable route.`);
+      }
+    }
+
+    const staticBlock = staticSeoBlock(readFileSync(getHtmlPath(entry.route), 'utf8')) ?? '';
+    for (const route of related.slice(0, 4)) {
+      if (!staticBlock.includes(canonicalUrlForRoute(route))) {
+        fail(`${entry.route} static SEO body is missing its related-tool link to ${route}.`);
+      }
+    }
+  }
+}
+
+
+/**
+ * A page in the sitemap that nothing links to is a page Google will discount.
+ *
+ * The Phase 1.3 comparison pages were exactly this risk: registered, built and
+ * sitemapped, but reachable only by typing the URL. Sitemap inclusion is a hint;
+ * internal links are the actual signal.
+ */
+function validateNoOrphanedFromLinks() {
+  const linked = new Set();
+  for (const route of getSeoRoutes()) {
+    const html = readFileSync(getHtmlPath(route), 'utf8');
+    const block = staticSeoBlock(html) ?? '';
+    for (const [, href] of block.matchAll(/href="([^"]+)"/g)) linked.add(href);
+  }
+
+  for (const route of getSeoRoutes()) {
+    if (route === '/') continue; // reachable as the site root
+    if (!linked.has(canonicalUrlForRoute(route))) {
+      fail(`${route} is in the sitemap but no other page's prerendered HTML links to it.`);
+    }
+  }
+}
+
 validateFilesExist();
 validateRobots();
 validateSitemap();
@@ -437,6 +489,8 @@ validateRedirects();
 validateSitemapRouteHtml();
 validateNoInlinePageSeo();
 validateNoOrphanRoutes();
+validateRelatedToolLinks();
+validateNoOrphanedFromLinks();
 validate404();
 
 if (errors.length > 0) {

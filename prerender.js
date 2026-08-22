@@ -19,8 +19,9 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeoRoutes, getSitemapEntries } from './seoRoutes.js';
+import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeoRoutes, getSitemapEntries, isToolRoute } from './seoRoutes.js';
 import { toolContent } from './src/data/toolContent.ts';
+import { comparisonContent } from './src/data/comparisons.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
@@ -28,17 +29,6 @@ const DIST = join(__dirname, 'dist');
 const ROUTES = getSeoRoutes();
 const INDEXABLE_ROBOTS = 'index,follow';
 const NOINDEX_ROBOTS = 'noindex,follow';
-const TOOL_ROUTE_EXCLUSIONS = new Set([
-  '/',
-  '/pdf-tools',
-  '/image-tools',
-  '/image-workflows',
-  '/ai-tools',
-  '/blog',
-  '/support',
-  '/privacy',
-  '/terms',
-]);
 const CATEGORY_HUBS = {
   'organize-manage': { route: '/pdf-tools', label: 'PDF Tools' },
   'edit-annotate': { route: '/pdf-tools', label: 'PDF Tools' },
@@ -158,10 +148,6 @@ function stripBrand(value) {
 
 function routeEntry(route) {
   return getRouteSeoEntries().find((entry) => entry.route === route);
-}
-
-function isToolRoute(route) {
-  return !TOOL_ROUTE_EXCLUSIONS.has(route) && !route.startsWith('/blog/');
 }
 
 function categoryHubForRoute(route) {
@@ -488,6 +474,30 @@ function buildJsonLd(route) {
         ...(articleDates(route)),
       },
     );
+  } else if (comparisonContent[route]) {
+    const entry = comparisonContent[route];
+    graph.push(
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
+          { '@type': 'ListItem', position: 2, name: routeLabel('/pdf-tools'), item: canonicalUrlForRoute('/pdf-tools') },
+          { '@type': 'ListItem', position: 3, name: entry.h1, item: url },
+        ],
+      },
+      {
+        // Deliberately WebPage, not Review/AggregateRating: FilePilot has no
+        // ratings to report and inventing them is a manual-action risk.
+        '@type': 'WebPage',
+        name: entry.h1,
+        url,
+        description: seo.description,
+        isPartOf: { '@id': `${SITE_URL}#website` },
+        publisher: { '@id': `${SITE_URL}#organization` },
+        about: { '@type': 'SoftwareApplication', name: entry.competitor, applicationCategory: 'UtilityApplication' },
+        mentions: { '@id': `${SITE_URL}#app` },
+      },
+    );
   } else if (STANDALONE_PAGE_ROUTES.has(route)) {
     // /privacy and /terms previously fell through every branch and shipped no
     // JSON-LD at all. On a site whose entire pitch is privacy, the privacy
@@ -630,8 +640,12 @@ function homeStaticContent() {
         <ul>${faqList('/')}</ul>
       </section>
       <section>
+        <h2>Comparisons</h2>
+        <ul>${linkList(Object.keys(comparisonContent), 4)}</ul>
+      </section>
+      <section>
         <h2>Read more</h2>
-        <ul>${linkList(['/blog', '/blog/why-files-stay-in-browser', '/privacy'], 3)}</ul>
+        <ul>${linkList(['/blog', '/blog/why-files-stay-in-browser', '/privacy', '/terms', '/support'], 5)}</ul>
       </section>
     `;
 }
@@ -662,6 +676,57 @@ function hubSiblings(route, relatedRoutes, categoryToolRoutes) {
   const filtered = relatedRoutes.filter((related) => !categoryToolRoutes.includes(related));
   if (filtered.length) return filtered;
   return [...HOME_HUBS.filter((hub) => hub !== route), '/blog'];
+}
+
+
+/**
+ * Prerendered body for the "alternative to X" pages (Phase 1.3).
+ *
+ * These target commercial-intent keywords ("smallpdf alternative"), so the
+ * comparison table, the honest limitations and the task→tool links all have to
+ * be in the crawlable HTML rather than only in the React render.
+ */
+function comparisonStaticContent(route) {
+  const entry = comparisonContent[route];
+  const cell = (value) => escapeHtml(value);
+
+  const tableRows = entry.table
+    .map((row) => `<tr><th scope="row">${cell(row.aspect)}</th><td>${cell(row.competitor)}</td><td>${cell(row.filepilot)}</td></tr>`)
+    .join('');
+
+  return `
+      <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <a href="${canonicalUrlForRoute('/pdf-tools')}">Free Online PDF Tools</a> / <span>${escapeHtml(entry.h1)}</span></nav>
+      <h1>${escapeHtml(entry.h1)}</h1>
+      <p>${escapeHtml(entry.intro)}</p>
+      <section>
+        <h2>Why people look for a ${escapeHtml(entry.competitor)} alternative</h2>
+        <p>${escapeHtml(entry.motivation)}</p>
+      </section>
+      <section>
+        <h2>The difference: where your file is processed</h2>
+        <p>${escapeHtml(entry.difference)}</p>
+      </section>
+      <section>
+        <h2>${escapeHtml(entry.competitor)} vs FilePilot</h2>
+        <table><thead><tr><th scope="col">Aspect</th><th scope="col">${cell(entry.competitor)}</th><th scope="col">FilePilot</th></tr></thead><tbody>${tableRows}</tbody></table>
+      </section>
+      <section>
+        <h2>When ${escapeHtml(entry.competitor)} is the better choice</h2>
+        <ul>${entry.limitations.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+      </section>
+      <section>
+        <h2>${escapeHtml(entry.competitor)} tasks and the FilePilot tool that replaces them</h2>
+        <ul>${entry.toolMap.map((item) => `<li><a href="${canonicalUrlForRoute(item.route)}">${escapeHtml(item.task)}</a> — ${escapeHtml(routeLabel(item.route))}</li>`).join('')}</ul>
+      </section>
+      <section>
+        <h2>Frequently asked questions</h2>
+        <ul>${faqList(route)}</ul>
+      </section>
+      <section>
+        <h2>Related tools</h2>
+        <ul>${linkList(relatedRoutesFor(route))}</ul>
+      </section>
+    `;
 }
 
 function buildStaticRouteContent(route) {
@@ -711,17 +776,23 @@ function buildStaticRouteContent(route) {
         <h2>All tools in this category</h2>
         <ul>${linkList(categoryToolRoutes, categoryToolRoutes.length)}</ul>
       </section>
+      ${route === '/pdf-tools' ? `<section>
+        <h2>Coming from another PDF tool?</h2>
+        <ul>${Object.values(comparisonContent).map((entry) => `<li><a href="${canonicalUrlForRoute(entry.route)}">A ${escapeHtml(entry.competitor)} alternative</a> — ${escapeHtml(entry.description)}</li>`).join('')}</ul>
+      </section>` : ''}
       <section>
         <h2>Explore FilePilot</h2>
         <ul>${linkList(hubSiblings(route, relatedRoutes, categoryToolRoutes))}</ul>
       </section>
     `
-    : route === '/'
-      ? homeStaticContent()
-      : route === '/blog'
-        ? blogIndexContent()
-      : extractArticleHtml(route)
-        ? `
+    : comparisonContent[route]
+      ? comparisonStaticContent(route)
+      : route === '/'
+        ? homeStaticContent()
+        : route === '/blog'
+          ? blogIndexContent()
+          : extractArticleHtml(route)
+            ? `
       <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <a href="${canonicalUrlForRoute('/blog')}">Blog</a> / <span>${title}</span></nav>
       <h1>${title}</h1>
       ${extractArticleHtml(route)}
@@ -730,7 +801,7 @@ function buildStaticRouteContent(route) {
         <ul>${linkList(relatedRoutes)}</ul>
       </section>
     `
-        : `
+            : `
       <h1>${title}</h1>
       <p>${description}</p>
       <section>
