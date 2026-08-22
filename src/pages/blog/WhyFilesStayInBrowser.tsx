@@ -1,16 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { PageSeo } from '../../components/PageSeo';
+import { siteSeo } from '../../data/siteContent';
 import { toCanonicalPath } from '../../lib/routes';
 
 export const WhyFilesStayInBrowser = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Why Your Files Should Never Leave Your Browser — FilePilot Blog"
-                description="Uploading files to remote servers introduces privacy risks, data breaches, and unclear retention policies. Learn how browser-based processing with WebAssembly and Web Workers keeps your documents private."
-                canonicalPath="/blog/why-files-stay-in-browser"
-            />
+            <PageSeo {...siteSeo('/blog/why-files-stay-in-browser')} canonicalPath="/blog/why-files-stay-in-browser" />
 
             <div className="container max-w-3xl py-10 pb-16">
                 <Link

@@ -1,16 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { PageSeo } from '../../components/PageSeo';
+import { siteSeo } from '../../data/siteContent';
 import { toCanonicalPath } from '../../lib/routes';
 
 export const HowFilepilotKeepsDocumentsPrivate = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="How FilePilot Keeps Your Documents Private — FilePilot Blog"
-                description="A deep dive into FilePilot's privacy architecture: WebAssembly with pdf-lib, Canvas API rendering, ONNX Runtime for AI features, PWA offline support, and zero server involvement."
-                canonicalPath="/blog/how-filepilot-keeps-documents-private"
-            />
+            <PageSeo {...siteSeo('/blog/how-filepilot-keeps-documents-private')} canonicalPath="/blog/how-filepilot-keeps-documents-private" />
 
             <div className="container max-w-3xl py-10 pb-16">
                 <Link

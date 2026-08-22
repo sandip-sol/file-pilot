@@ -1,48 +1,105 @@
 # FilePilot SEO Roadmap — Path to the Top
 
 **Site:** https://www.filepilot.space
-**Date:** 2026-07-15
+**Date:** 2026-08-22 (supersedes the 2026-07-15 revision)
 **Author:** SEO strategy review
 
 ---
 
 ## 1. Where you actually stand (read this first)
 
-| Signal | Google (3 mo) | Bing (3 mo) |
+| Signal | Google (3 mo, 2026-08-22) | Bing (3 mo, 2026-08-22) |
 |---|---|---|
-| Impressions | 344 | 160 |
-| Clicks | 0 | 1 |
-| Avg. position | **55.8** | — |
-| CTR | 0% | 0.63% |
+| Impressions | 1,030 | 422 |
+| Clicks | 1 | 4 |
+| Avg. position | **58.5** | — |
+| CTR | 0.1% | 0.95% |
 
-**Diagnosis:** You are **indexed and improving, but invisible.** Position 55.8 = page 5–6. Nobody clicks page 5. Impressions are trending *up* over the last two weeks, which is the healthy signature of a fresh domain leaving the sandbox. Your clicks are zero not because of a technical bug — it's because you are ranking far below the fold in the most competitive utility niche on the web.
+**Impressions tripled since July (344 → 1,030). Position did not move (55.8 → 58.5).**
+That combination is diagnostic: Google is crawling and surfacing more of the site,
+but nothing is climbing. More lottery tickets, same odds.
 
-**Your technical foundation is already good.** The June audit's crises are fixed:
+Bing still converts ~10x better than Google (0.95% vs 0.1% CTR) on 40% of the
+impressions. Bing is the cheaper channel *and* it feeds ChatGPT search — weight it
+accordingly.
 
-- ✅ Prerendered HTML (~940 words/tool page) — no longer a blank SPA
-- ✅ 91 unique titles across 91 pages
-- ✅ FAQPage + BreadcrumbList schema
-- ✅ Sitemap (95 URLs), llms.txt, robots with AI-bot allows, IndexNow
-- ✅ Security headers (CSP, X-Frame-Options, etc.)
-- ✅ Deep internal linking (~100 links/page)
+### 1a. The brand-name problem is worse than "a Windows app"
 
-**So the problem is NOT technical. It is authority and keyword targeting.** Smallpdf, iLovePDF, PDF24, and Adobe sit at DR 85–90 with millions of backlinks. You have ~0 authority. You cannot out-rank them for "merge pdf" this year, and every impression you're getting for head terms converts to zero clicks because you're on page 5. **That is the entire story of this screenshot.**
+Searching `filepilot` returns, in order: the **File Pilot** Windows Explorer
+replacement (filepilot.tech — XDA and andrewlock.net coverage, MajorGeeks
+downloads, YouTube reviews), a Python FilePilot on GitHub, a FilePilot iOS app —
+and then **three other sites doing the same thing this one does**:
 
-The roadmap below is built around one strategic bet: **stop competing where you can't win, dominate where you can.**
+- `filepilot.org` — "FilePilot — Free Privacy-First Browser Utilities"
+- `filepilot.online` — "FilePilot — Free Online File Converter | PDF, Image, Video, Audio Tools"
+- `filepilottools.top` — "Free Online PDF and Image Tools | FilePilot Tools"
 
----
+filepilot.space is the lowest-authority entrant in a name that is already
+saturated — including by direct positioning clones. **Ranking #1 for "filepilot"
+is not a realistic near-term goal, and it is not a goal worth pursuing:** brand
+search volume for an unknown brand is ~0 anyway. Optimise for what people
+actually type ("resize image to 50kb", "pdf to cbz") and let brand recognition
+follow traffic, not precede it.
+
+What *does* need fixing is entity disambiguation, so Google knows these are
+different things: `sameAs` on the Organization schema (now shipped, pointing at
+the GitHub repo) plus every additional profile you control. Add more as you
+create them — Product Hunt, X, Reddit, LinkedIn, an About page with a real name.
+
+### 1b. "Your technical foundation is already good" was wrong
+
+The July claim that the tech was done did not survive an audit of what the
+production site actually serves. Fixed in the 2026-08-22 pass:
+
+| Issue | Impact |
+|---|---|
+| **Homepage prerendered as a 73-word generic fallback** — the same branch as `/privacy` and `/terms`. Thinnest page on the site, and the one a brand search lands on. | Now 562 words with the tool categories, the privacy mechanism, an FAQ, `ItemList` + `FAQPage` schema. |
+| **All 3 blog posts served as ~80-word near-duplicate stubs.** The real ~1,000-word articles existed only inside React components, invisible to every non-rendering crawler (Bing, GPTBot, PerplexityBot, ClaudeBot). **Zero structured data on any of them.** | Article bodies are now extracted from the components at build time: 913 / 1,094 / 1,100 words, plus `BlogPosting` + `BreadcrumbList` schema with real dates. |
+| **Client/prerender SEO drift on 8 routes.** The July rollout single-sourced the 83 tool pages but left the core routes behind. `/` , `/pdf-tools`, `/image-tools`, `/privacy`, `/terms`, `/image-requirements` and all 3 blog posts shipped one `<title>` in the HTML and a *different* one from `PageSeo` at runtime. Google renders JS, so the client copy won — and both hub pages were being indexed **with no brand in the title at all**. | `src/data/siteContent.ts` is now the single source for every non-tool route, consumed by the prerenderer *and* `PageSeo`. A new `seoValidate` gate fails the build if any routed page passes a literal title to `<PageSeo>`. |
+| **`/image-requirements` returned 404 in production.** A complete "resize to exact size & KB" tool — one of the best long-tail keywords on the whole site — was routed in the app, referenced by `RelatedTools`, given sitemap priority 0.9 in `seoRoutes.js`, and never added to the registry. No static HTML, not in the sitemap, 404 for every crawler and every direct link. | Registered. Now prerendered, in the sitemap, with FAQ + HowTo schema. |
+| **Sitemap `lastmod` frozen at June 2026** while the July rewrite changed every tool page's title, H1, FAQs and HowTo schema. A stale-but-old lastmod actively suppresses recrawls. | Derived from git commit dates of the files each route's copy comes from. Self-maintaining. |
+| **Duplicate `<h1>` on all 95 pages** from the global `<noscript>` block, plus 13 identical boilerplate links site-wide. | Removed; exactly one H1 per page. |
+| **The Puppeteer prerender pass was a no-op.** It launched Chrome and rendered 95 routes per build — then `withRouteSeo` overwrote `#root` with the static shell, discarding every render. Verified by diffing both outputs: the only difference was ~120 lines of runtime-injected component CSS. | Removed. Builds no longer need Chrome, so Netlify's `PUPPETEER_SKIP_DOWNLOAD=true` is no longer papering over a silently-degraded build. |
+
+**Median prerendered content is now 365 words/page, up from 350, with the two
+worst categories — homepage and blog — up 8x and 12x.**
+
+**Still open (deliberately not done):**
+
+- **45 of 96 titles exceed 60 characters** and truncate in SERPs (worst:
+  `/extract-text` at 78). Pure CTR cost, and CTR is irrelevant at position 58 —
+  fix this when positions reach page 2, not before.
+- **15 dead page components** (`JpgToPdf`, `PdfToJpg`, `BmpToPdf`, `HeicToPdf`,
+  `WebpToPdf`, `TiffToPdf`, `PdfToPng`, `PdfToTiff`, `PdfToWebp`, `PdfToDocx`,
+  `PdfToExcel`, `PdfToPptx`, `EncryptDecryptPdf`, `TextColor`,
+  `ConvertToPdfPages`, `SecureOptimizePages`) are never routed. No SEO impact —
+  they do not ship — but they carry stale `PageSeo` blocks that would drift if
+  ever revived. `PdfToBmp` was deleted in this pass; the rest are a cleanup call.
+- **Thin hub/legal pages**: `/ai-tools` (71 words), `/image-workflows` (84),
+  `/terms`, `/support`, `/privacy`. The legal pages are fine thin. The two hubs
+  are thin because they have few tools — worth a paragraph each.
 
 ## 2. The strategic bet
 
-Three winnable fronts, in priority order:
+Unchanged, and the on-page work above does not replace it. Three winnable
+fronts, in priority order:
 
-1. **The long tail of niche tools.** You have ~90 tools. A dozen of them target keywords the giants barely bother with: `pdf to cbz`, `posterize pdf`, `n-up pdf`, `add page labels to pdf`, `pdf to tiff`, `image to svg`, `combine single page pdf`, `pdf to greyscale`, `remove image metadata`, `flatten pdf`. Low volume each, but **low competition and winnable in 2–4 months.** Ten tools ranking page 1 for their exact term beats one tool on page 5 for "merge pdf."
+1. **The long tail of niche tools.** ~90 tools, a dozen of which target keywords
+   the giants ignore: `pdf to cbz`, `posterize pdf`, `n-up pdf`, `add page labels
+   to pdf`, `image to svg`, `combine single page pdf`, `pdf to greyscale`,
+   `remove image metadata`, `flatten pdf` — plus `/image-requirements`, newly
+   rescued from a 404, which targets the "resize image to 50kb" family. Low
+   volume each, low competition, winnable in 2–4 months.
 
-2. **The privacy / no-upload angle.** Every giant uploads your file to their server. You process locally in the browser. That is a *real* differentiator and a keyword cluster nobody owns: `offline pdf tool`, `pdf tool no upload`, `private pdf editor`, `edit pdf without uploading`, `pdf tool that works offline`. Own it.
+2. **The privacy / no-upload angle.** Every giant uploads your file. You do not.
+   That is a real differentiator and a keyword cluster nobody owns: `offline pdf
+   tool`, `pdf tool no upload`, `private pdf editor`, `edit pdf without
+   uploading`. The homepage now actually says this in crawlable HTML.
 
-3. **Authority (backlinks).** This is the actual bottleneck for *everything*. No amount of on-page work moves you off page 5 without links. This front runs continuously in parallel.
-
----
+3. **Authority (backlinks).** Still the binding constraint for everything else.
+   No amount of on-page work moves you off page 5 without links. Runs
+   continuously in parallel. **Every row of the Phase 2 tracker is still
+   unchecked** — that has not changed since July.
 
 ## 3. Phased roadmap
 

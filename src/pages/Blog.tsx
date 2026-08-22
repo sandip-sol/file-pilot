@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
+import { siteSeo } from '../data/siteContent';
 
 interface BlogPost {
     slug: string;
@@ -40,11 +41,7 @@ const posts: BlogPost[] = [
 export const Blog = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="FilePilot Blog — Privacy, PDFs & Image Tools"
-                description="Articles about privacy-first file processing, browser-based PDF tools, and why your documents should never leave your device."
-                canonicalPath="/blog"
-            />
+            <PageSeo {...siteSeo('/blog')} canonicalPath="/blog" />
 
             <div className="page-header">
                 <div className="container">

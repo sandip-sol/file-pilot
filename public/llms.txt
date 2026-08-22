@@ -8,18 +8,18 @@ Robots: https://www.filepilot.space/robots.txt
 
 ## Main Pages
 
-- [FilePilot - Free Private PDF, Image and File Tools](https://www.filepilot.space/): Free browser-based PDF, image, and file tools. Edit, convert, compress, organize, and optimize files privately without uploads.
-- [Free Online PDF Tools - Private Browser-Based Tools | FilePilot](https://www.filepilot.space/pdf-tools/): Merge, split, compress, convert, annotate, redact, sign, and organize PDFs with free tools that run privately in your browser.
-- [Free Online Image Tools - Private Browser-Based Tools | FilePilot](https://www.filepilot.space/image-tools/): Compress, resize, crop, convert, watermark, optimize, and edit images with free browser-based tools that do not upload your files.
+- [FilePilot — Free Private PDF & Image Tools, No Upload](https://www.filepilot.space/): FilePilot is a free toolkit of 90+ PDF and image tools that run entirely in your browser. Merge, split, compress, convert and edit files privately — nothing is ever uploaded to a server.
+- [Free Online PDF Tools — Private, No Upload | FilePilot](https://www.filepilot.space/pdf-tools/): A complete collection of free, browser-based PDF tools. Merge, split, compress, convert, annotate, redact, sign and organize PDFs — all processed privately on your device with no uploads.
+- [Free Online Image Tools — Private, No Upload | FilePilot](https://www.filepilot.space/image-tools/): A complete suite of free, browser-based image tools. Compress, resize, crop, convert, watermark, strip metadata and remove backgrounds — all processed privately on your device with no uploads.
 - [Image Workflow Tools - Format, Validate and Prepare Images | FilePilot](https://www.filepilot.space/image-workflows/): Prepare images for social media, ecommerce, passport photos, favicons, QR codes, and PDF workflows with private browser-based tools.
 - [AI Image Tools - Private Browser-Based Editing | FilePilot](https://www.filepilot.space/ai-tools/): Remove backgrounds, enhance images, upscale photos, and clean edits with AI-assisted tools that run in your browser where supported.
-- [FilePilot Blog - Privacy, PDFs and Image Tools](https://www.filepilot.space/blog/): Articles about privacy-first file processing, browser-based PDF tools, image tools, and why files should stay on your device.
+- [FilePilot Blog — Privacy, PDFs and Image Tools](https://www.filepilot.space/blog/): Articles about privacy-first file processing, browser-based PDF tools, image tools, and why your documents should never leave your device.
 - [Support FilePilot | Keep private file tools free](https://www.filepilot.space/support/): Support FilePilot and help keep private, browser-based file tools free, ad-free and improving.
 - [Privacy Policy | FilePilot](https://www.filepilot.space/privacy/): Learn how FilePilot protects files with browser-based processing and no server uploads for supported tools.
 - [Terms of Service | FilePilot](https://www.filepilot.space/terms/): Read the terms for using FilePilot browser-based PDF, image, and file tools.
-- [Why Your Files Should Never Leave Your Browser | FilePilot](https://www.filepilot.space/blog/why-files-stay-in-browser/): Learn why browser-based file processing avoids server uploads, reduces privacy risks, and keeps sensitive documents under your control.
-- [The Hidden Privacy Risks of Online PDF Tools | FilePilot](https://www.filepilot.space/blog/privacy-risks-online-pdf-tools/): Understand the privacy risks of uploading PDFs to server-based tools and how local browser processing reduces exposure.
-- [How FilePilot Keeps Your Documents Private | FilePilot](https://www.filepilot.space/blog/how-filepilot-keeps-documents-private/): A practical look at FilePilot privacy architecture: browser memory, WebAssembly, Canvas APIs, and zero document uploads.
+- [Why Your Files Should Never Leave Your Browser | FilePilot](https://www.filepilot.space/blog/why-files-stay-in-browser/): Uploading files to remote servers introduces privacy risks, data breaches, and unclear retention policies. Learn how browser-based processing with WebAssembly and Web Workers keeps your documents private.
+- [The Hidden Privacy Risks of Online PDF Tools | FilePilot](https://www.filepilot.space/blog/privacy-risks-online-pdf-tools/): What really happens when you upload a PDF to an online tool: server storage, metadata exposure, third-party processing, and how to evaluate whether a tool is truly private.
+- [How FilePilot Keeps Your Documents Private | FilePilot](https://www.filepilot.space/blog/how-filepilot-keeps-documents-private/): A practical look at FilePilot's privacy architecture: WebAssembly with pdf-lib, Canvas API rendering, ONNX Runtime for AI features, PWA offline support, and zero server involvement.
 
 ## PDF Organization Tools
 
@@ -124,6 +124,7 @@ Robots: https://www.filepilot.space/robots.txt
 ## Image Workflow Tools
 
 - [Image Formatter — Resize, Convert & Optimize Images Online | FilePilot](https://www.filepilot.space/image-formatter/): Format images to exact dimensions, convert formats, set file size targets, and batch export. Free, private, browser-based.
+- [Resize Image to Exact Size & KB | FilePilot](https://www.filepilot.space/image-requirements/): Resize an image to exact pixel dimensions and a target KB file size, then export as JPG, PNG or WebP. Free, private and processed entirely in your browser.
 - [Passport Photo Validator - Check Photo Requirements | FilePilot](https://www.filepilot.space/passport-photo-validator/): Validate passport photo dimensions, file size, and format against official requirements. Crop, resize, and export. Free, private, browser-based.
 - [Social Media Resizer | FilePilot](https://www.filepilot.space/social-media-resizer/): Resize images for Instagram, Facebook, LinkedIn, X/Twitter, YouTube, Pinterest, and TikTok. Free, private, browser-based.
 - [E-commerce Image Formatter | FilePilot](https://www.filepilot.space/ecommerce-image-formatter/): Prepare product photos with clean backgrounds, consistent dimensions, and marketplace-ready formats. All processing happens locally in your browser.

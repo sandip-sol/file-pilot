@@ -753,6 +753,12 @@ export const toolRegistry: ToolDefinition[] = [
     category: 'workflows', featured: true,
   },
   {
+    slug: '/image-requirements', title: 'Resize Image to Exact Size', shortTitle: 'Exact Size',
+    description: 'Resize an image to exact pixel dimensions or a target KB file size, then export as JPG, PNG or WebP.',
+    icon: SlidersHorizontal, gradientClassName: 'from-sky-500 to-indigo-600',
+    category: 'workflows',
+  },
+  {
     slug: '/passport-photo-validator', title: 'Passport Photo Validator', shortTitle: 'Passport',
     description: 'Check passport and ID photo technical requirements with crop and export tools.',
     icon: UserCheck, gradientClassName: 'from-emerald-500 to-teal-600',

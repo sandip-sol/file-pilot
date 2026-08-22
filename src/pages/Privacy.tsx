@@ -1,13 +1,11 @@
 import { ShieldCheck, Lock, Eye, Server } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
+import { siteSeo } from '../data/siteContent';
 
 export const Privacy = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Privacy Policy – FilePilot"
-                description="Learn how FilePilot protects your files with 100% browser-based processing and no server uploads."
-            />
+            <PageSeo {...siteSeo('/privacy')} canonicalPath="/privacy" />
             <div className="page-header">
                 <div className="container">
                     <h1>Privacy Policy</h1>

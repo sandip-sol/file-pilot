@@ -1,13 +1,11 @@
 import { FileText, Scale, Shield, Copyright } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
+import { siteSeo } from '../data/siteContent';
 
 export const Terms = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="Terms of Service – FilePilot"
-                description="Read the terms for using FilePilot's private browser-based PDF, image and file tools."
-            />
+            <PageSeo {...siteSeo('/terms')} canonicalPath="/terms" />
             <div className="page-header">
                 <div className="container">
                     <h1>Terms of Service</h1>

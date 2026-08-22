@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Lock, FileText } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
+import { siteContent, siteSeo } from '../data/siteContent';
 import { discoverableTools, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
 import { toCanonicalPath, toolPath } from '../lib/routes';
 
@@ -50,11 +51,7 @@ const ToolCard = ({ tool }: { tool: ToolDefinition }) => {
 export const PdfToolsHub = () => {
   return (
     <div>
-      <PageSeo
-        title="Free Online PDF Tools — Edit, Convert & Organize PDFs Privately"
-        description="A comprehensive collection of free, browser-based PDF tools. Merge, split, compress, convert, annotate, redact, sign, and secure your PDF files — all processed privately on your device with no uploads required."
-        canonicalPath="/pdf-tools"
-      />
+      <PageSeo {...siteSeo('/pdf-tools')} canonicalPath="/pdf-tools" />
 
       {/* Hero */}
       <section className="border-b border-border bg-card/20">
@@ -65,7 +62,7 @@ export const PdfToolsHub = () => {
               100% private — files never leave your device
             </div>
             <h1 className="text-3xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
-              Free Online PDF Tools
+              {siteContent['/pdf-tools'].h1}
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
               Everything you need to work with PDFs — merge, split, compress, convert, annotate, sign, redact, and secure your documents. All tools run entirely in your browser so your files stay private and never get uploaded to any server.

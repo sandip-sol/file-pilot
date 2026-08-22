@@ -1,5 +1,7 @@
 import { readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { BRAND_SUFFIX, toolContent } from './src/data/toolContent.ts';
+import { siteContent } from './src/data/siteContent.ts';
 
 const TOOL_REGISTRY_PATH = new URL('./src/data/toolRegistry.ts', import.meta.url);
 
@@ -53,121 +55,38 @@ const PRIORITY_TAIL_ROUTE_SET = new Set(PRIORITY_TAIL_ROUTES);
 // the 0.9 category hubs, so the relative importance ordering stays honest.
 const PRIORITY_TAIL_SITEMAP_PRIORITY = '0.85';
 
+// Title, description, H1 and intro for every non-tool route live in
+// src/data/siteContent.ts so the prerenderer and each page's <PageSeo> render
+// identical values. Only the crawl hints (lastmod/changefreq/priority) are
+// build-time concerns and stay here.
+const fromSiteContent = (route) => {
+  const entry = siteContent[route];
+  if (!entry) throw new Error(`seoRoutes: no siteContent entry for "${route}"`);
+  return {
+    title: entry.title,
+    description: entry.description,
+    h1: entry.h1,
+    ...(entry.intro ? { shortIntro: entry.intro } : {}),
+    ...(entry.faqs ? { faqs: entry.faqs } : {}),
+  };
+};
+
 const CORE_ROUTE_SEO = {
-  '/': {
-    title: 'FilePilot - Free Private PDF, Image and File Tools',
-    description:
-      'Free browser-based PDF, image, and file tools. Edit, convert, compress, organize, and optimize files privately without uploads.',
-    h1: 'FilePilot',
-    lastmod: '2026-06-26',
-    changefreq: 'weekly',
-    priority: '1.0',
-  },
-  '/pdf-tools': {
-    title: 'Free Online PDF Tools - Private Browser-Based Tools | FilePilot',
-    description:
-      'Merge, split, compress, convert, annotate, redact, sign, and organize PDFs with free tools that run privately in your browser.',
-    h1: 'Free Online PDF Tools',
-    lastmod: '2026-06-28',
-    changefreq: 'weekly',
-    priority: '0.9',
-  },
-  '/image-tools': {
-    title: 'Free Online Image Tools - Private Browser-Based Tools | FilePilot',
-    description:
-      'Compress, resize, crop, convert, watermark, optimize, and edit images with free browser-based tools that do not upload your files.',
-    h1: 'Free Online Image Tools',
-    lastmod: '2026-06-28',
-    changefreq: 'weekly',
-    priority: '0.9',
-  },
-  '/image-workflows': {
-    title: 'Image Workflow Tools - Format, Validate and Prepare Images | FilePilot',
-    description:
-      'Prepare images for social media, ecommerce, passport photos, favicons, QR codes, and PDF workflows with private browser-based tools.',
-    h1: 'Image Workflow Tools',
-    shortIntro: 'Focused image workflow tools for real output requirements, processed privately in your browser.',
-    lastmod: '2026-06-28',
-    changefreq: 'weekly',
-    priority: '0.75',
-  },
-  '/ai-tools': {
-    title: 'AI Image Tools - Private Browser-Based Editing | FilePilot',
-    description:
-      'Remove backgrounds, enhance images, upscale photos, and clean edits with AI-assisted tools that run in your browser where supported.',
-    h1: 'AI Image Tools',
-    shortIntro: 'AI-assisted image tools for background removal, cleanup, enhancement, and upscaling with privacy-first browser processing.',
-    lastmod: '2026-06-28',
-    changefreq: 'weekly',
-    priority: '0.75',
-  },
-  '/blog': {
-    title: 'FilePilot Blog - Privacy, PDFs and Image Tools',
-    description:
-      'Articles about privacy-first file processing, browser-based PDF tools, image tools, and why files should stay on your device.',
-    h1: 'FilePilot Blog',
-    lastmod: '2026-06-26',
-    changefreq: 'monthly',
-    priority: '0.6',
-  },
-  '/support': {
-    title: 'Support FilePilot | Keep private file tools free',
-    description:
-      'Support FilePilot and help keep private, browser-based file tools free, ad-free and improving.',
-    h1: 'Support FilePilot',
-    shortIntro:
-      'Help keep FilePilot free, private and ad-free while funding new tools, performance improvements and maintenance.',
-    lastmod: '2026-06-29',
-    changefreq: 'monthly',
-    priority: '0.5',
-  },
-  '/privacy': {
-    title: 'Privacy Policy | FilePilot',
-    description:
-      'Learn how FilePilot protects files with browser-based processing and no server uploads for supported tools.',
-    h1: 'Privacy Policy',
-    lastmod: '2026-06-19',
-    changefreq: 'yearly',
-    priority: '0.3',
-  },
-  '/terms': {
-    title: 'Terms of Service | FilePilot',
-    description: 'Read the terms for using FilePilot browser-based PDF, image, and file tools.',
-    h1: 'Terms of Service',
-    lastmod: '2026-06-19',
-    changefreq: 'yearly',
-    priority: '0.3',
-  },
+  '/': { ...fromSiteContent('/'), changefreq: 'weekly', priority: '1.0' },
+  '/pdf-tools': { ...fromSiteContent('/pdf-tools'), changefreq: 'weekly', priority: '0.9' },
+  '/image-tools': { ...fromSiteContent('/image-tools'), changefreq: 'weekly', priority: '0.9' },
+  '/image-workflows': { ...fromSiteContent('/image-workflows'), changefreq: 'weekly', priority: '0.75' },
+  '/ai-tools': { ...fromSiteContent('/ai-tools'), changefreq: 'weekly', priority: '0.75' },
+  '/blog': { ...fromSiteContent('/blog'), changefreq: 'monthly', priority: '0.6' },
+  '/support': { ...fromSiteContent('/support'), changefreq: 'monthly', priority: '0.4' },
+  '/privacy': { ...fromSiteContent('/privacy'), changefreq: 'yearly', priority: '0.3' },
+  '/terms': { ...fromSiteContent('/terms'), changefreq: 'yearly', priority: '0.3' },
 };
 
 const BLOG_ROUTE_SEO = {
-  '/blog/why-files-stay-in-browser': {
-    title: 'Why Your Files Should Never Leave Your Browser | FilePilot',
-    description:
-      'Learn why browser-based file processing avoids server uploads, reduces privacy risks, and keeps sensitive documents under your control.',
-    h1: 'Why Your Files Should Never Leave Your Browser',
-    lastmod: '2026-06-26',
-    changefreq: 'yearly',
-    priority: '0.5',
-  },
-  '/blog/privacy-risks-online-pdf-tools': {
-    title: 'The Hidden Privacy Risks of Online PDF Tools | FilePilot',
-    description:
-      'Understand the privacy risks of uploading PDFs to server-based tools and how local browser processing reduces exposure.',
-    h1: 'The Hidden Privacy Risks of Online PDF Tools',
-    lastmod: '2026-06-26',
-    changefreq: 'yearly',
-    priority: '0.5',
-  },
-  '/blog/how-filepilot-keeps-documents-private': {
-    title: 'How FilePilot Keeps Your Documents Private | FilePilot',
-    description:
-      'A practical look at FilePilot privacy architecture: browser memory, WebAssembly, Canvas APIs, and zero document uploads.',
-    h1: 'How FilePilot Keeps Your Documents Private',
-    lastmod: '2026-06-26',
-    changefreq: 'yearly',
-    priority: '0.5',
-  },
+  '/blog/why-files-stay-in-browser': { ...fromSiteContent('/blog/why-files-stay-in-browser'), changefreq: 'yearly', priority: '0.5' },
+  '/blog/privacy-risks-online-pdf-tools': { ...fromSiteContent('/blog/privacy-risks-online-pdf-tools'), changefreq: 'yearly', priority: '0.5' },
+  '/blog/how-filepilot-keeps-documents-private': { ...fromSiteContent('/blog/how-filepilot-keeps-documents-private'), changefreq: 'yearly', priority: '0.5' },
 };
 
 const INDEXABLE_ALIAS_ROUTE_SEO = {
@@ -187,6 +106,53 @@ const INDEXABLE_ALIAS_ROUTE_SEO = {
     changefreq: 'monthly',
     priority: '0.8',
   },
+};
+
+/**
+ * `lastmod` is derived from git rather than hand-maintained.
+ *
+ * It used to be a hard-coded date per route, which silently went stale: the
+ * July content rewrite changed every tool page's title, H1, FAQs and HowTo
+ * schema while the sitemap kept telling crawlers "unchanged since 2026-06-28".
+ * A wrong-but-old lastmod actively suppresses recrawls, so it is worse than
+ * none. Now each route reports the commit date of the files its copy comes from.
+ */
+const gitLastModified = (relativePaths) => {
+  let newest = null;
+  for (const relativePath of relativePaths) {
+    try {
+      const date = execFileSync('git', ['log', '-1', '--format=%cs', '--', relativePath], {
+        cwd: new URL('./', import.meta.url),
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+      }).trim();
+      if (date && (!newest || date > newest)) newest = date;
+    } catch {
+      // git unavailable (tarball export, shallow checkout without history)
+    }
+  }
+  return newest;
+};
+
+const TODAY = new Date().toISOString().slice(0, 10);
+const lastmodCache = new Map();
+
+const lastmodForRoute = (route) => {
+  const sources = route.startsWith('/blog/')
+    ? ['src/data/siteContent.ts', `src/pages/blog/${BLOG_COMPONENTS[route] ?? ''}`]
+    : CORE_ROUTE_SEO[route]
+      ? ['src/data/siteContent.ts', 'seoRoutes.js']
+      : ['src/data/toolContent.ts', 'src/data/toolRegistry.ts'];
+
+  const key = sources.join('|');
+  if (!lastmodCache.has(key)) lastmodCache.set(key, gitLastModified(sources.filter(Boolean)) ?? TODAY);
+  return lastmodCache.get(key);
+};
+
+const BLOG_COMPONENTS = {
+  '/blog/why-files-stay-in-browser': 'WhyFilesStayInBrowser.tsx',
+  '/blog/privacy-risks-online-pdf-tools': 'PrivacyRisksOnlinePdfTools.tsx',
+  '/blog/how-filepilot-keeps-documents-private': 'HowFilepilotKeepsDocumentsPrivate.tsx',
 };
 
 const CORE_ROUTES = Object.keys(CORE_ROUTE_SEO);
@@ -345,7 +311,6 @@ const extractToolEntries = (source) => {
         canonicalRoute: isAlias ? route : canonicalSlug ?? route,
         relatedTools: RELATED_ROUTES[route],
         schemaType: 'WebApplication',
-        lastmod: '2026-06-28',
         changefreq: INDEXABLE_ALIAS_ROUTE_SEO[route]?.changefreq ?? 'monthly',
         priority: INDEXABLE_ALIAS_ROUTE_SEO[route]?.priority ?? (route === '/image-requirements' ? '0.9' : '0.8'),
       };
@@ -382,7 +347,7 @@ export const getSitemapEntries = () => {
   return getRouteSeoEntries().map((seo) => ({
     route: seo.route,
     loc: canonicalUrlForRoute(seo.route),
-    lastmod: seo.lastmod,
+    lastmod: seo.lastmod ?? lastmodForRoute(seo.route),
     changefreq: seo.changefreq ?? 'monthly',
     priority: seo.sitemapPriority ?? seo.priority ?? '0.8',
   }));

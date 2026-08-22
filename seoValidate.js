@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   CANONICAL_HOST,
@@ -357,11 +357,54 @@ function validate404() {
   }
 }
 
+
+/**
+ * Static guard against client/prerender SEO drift.
+ *
+ * The prerendered <title> is validated against seoRoutes above, but Google
+ * renders JavaScript, so whatever <PageSeo> sets at runtime is what actually
+ * gets indexed. When a routed page passes its own literal title instead of
+ * reading the shared data, the two silently disagree and the prerendered copy
+ * is wasted — that is exactly what had happened to the homepage, both tool
+ * hubs, /privacy, /terms and all three blog posts.
+ *
+ * Every routed page must therefore spread toolSeo()/siteSeo() into PageSeo.
+ */
+function validateNoInlinePageSeo() {
+  const appSource = readFileSync(new URL('./src/App.tsx', import.meta.url), 'utf8');
+  const routedComponents = new Set(
+    [...appSource.matchAll(/element=\{<([A-Za-z0-9_]+)\s*\/?>/g)].map(([, name]) => name),
+  );
+
+  const tsxIn = (dir) =>
+    readdirSync(new URL(`./${dir}/`, import.meta.url))
+      .filter((name) => name.endsWith('.tsx'))
+      .map((name) => `${dir}/${name}`);
+  const pageFiles = [...tsxIn('src/pages'), ...tsxIn('src/pages/blog')];
+
+  // /404 has no sitemap route, so it has no shared SEO entry to read from.
+  const EXEMPT = new Set(['src/pages/NotFound.tsx']);
+
+  for (const file of pageFiles) {
+    if (EXEMPT.has(file)) continue;
+    const source = readFileSync(new URL(`./${file}`, import.meta.url), 'utf8');
+    const exported = [...source.matchAll(/export const ([A-Za-z0-9_]+)\s*[=:]/g)].map(([, name]) => name);
+    if (!exported.some((name) => routedComponents.has(name))) continue; // unrouted/dead component
+
+    for (const [match] of source.matchAll(/<PageSeo\b[^>]*?\/>/gs)) {
+      if (/\btitle\s*=\s*["'{]/.test(match) && !/\{\s*\.\.\.(toolSeo|siteSeo)\(/.test(match)) {
+        fail(`${file} passes a literal title to <PageSeo>. Use {...toolSeo(route)} or {...siteSeo(route)} so the client and the prerenderer cannot drift.`);
+      }
+    }
+  }
+}
+
 validateFilesExist();
 validateRobots();
 validateSitemap();
 validateRedirects();
 validateSitemapRouteHtml();
+validateNoInlinePageSeo();
 validate404();
 
 if (errors.length > 0) {

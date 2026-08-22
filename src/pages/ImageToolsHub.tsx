@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Lock, Images } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
+import { siteContent, siteSeo } from '../data/siteContent';
 import { discoverableTools, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
 import { toCanonicalPath, toolPath } from '../lib/routes';
 
@@ -47,11 +48,7 @@ const ToolCard = ({ tool }: { tool: ToolDefinition }) => {
 export const ImageToolsHub = () => {
   return (
     <div>
-      <PageSeo
-        title="Free Online Image Tools — Edit, Convert & Optimize Images Privately"
-        description="A complete suite of free, browser-based image tools. Compress, resize, crop, convert, watermark, remove backgrounds, and optimize your images — all processed privately on your device with no uploads required."
-        canonicalPath="/image-tools"
-      />
+      <PageSeo {...siteSeo('/image-tools')} canonicalPath="/image-tools" />
 
       {/* Hero */}
       <section className="border-b border-border bg-card/20">
@@ -62,7 +59,7 @@ export const ImageToolsHub = () => {
               100% private — files never leave your device
             </div>
             <h1 className="text-3xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
-              Free Online Image Tools
+              {siteContent['/image-tools'].h1}
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
               Everything you need to work with images — compress, resize, crop, convert, watermark, remove backgrounds, and enhance your photos. All tools run entirely in your browser so your files stay private and never get uploaded to any server.

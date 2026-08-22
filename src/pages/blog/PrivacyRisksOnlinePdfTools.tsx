@@ -1,16 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { PageSeo } from '../../components/PageSeo';
+import { siteSeo } from '../../data/siteContent';
 import { toCanonicalPath } from '../../lib/routes';
 
 export const PrivacyRisksOnlinePdfTools = () => {
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo
-                title="The Hidden Privacy Risks of Online PDF Tools — FilePilot Blog"
-                description="Discover what really happens when you upload a PDF to an online tool: server storage, metadata exposure, third-party processing, and how to evaluate whether a tool is truly private."
-                canonicalPath="/blog/privacy-risks-online-pdf-tools"
-            />
+            <PageSeo {...siteSeo('/blog/privacy-risks-online-pdf-tools')} canonicalPath="/blog/privacy-risks-online-pdf-tools" />
 
             <div className="container max-w-3xl py-10 pb-16">
                 <Link

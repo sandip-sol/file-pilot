@@ -1828,6 +1828,39 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
 
   // ── WORKFLOWS ──────────────────────────────────────────────────────────────
+  '/image-requirements': {
+    intro:
+      'Resize an image to an exact pixel size, an exact file size in KB, or both at once. Government forms, job portals and exam applications routinely demand something like "JPG, 200x230 px, under 50 KB" — this tool hits those numbers precisely, then exports as JPG, PNG or WebP. Everything runs in your browser, which matters because the documents people resize to a KB limit are usually ID photos, signatures and certificates.',
+    action: 'resize an image to an exact size',
+    steps: [
+      'Select the image you need to resize.',
+      'Enter the exact width and height in pixels, or pick a preset.',
+      'Set a maximum file size in KB if the form you are filling requires one.',
+      'Choose JPG, PNG or WebP and download the resized image.',
+    ],
+    useCases: [
+      'Meeting the exact photo and signature specs on government or exam application forms.',
+      'Getting a photo under a 20 KB, 50 KB or 100 KB upload limit without visible quality loss.',
+      'Producing exact pixel dimensions for a job portal, visa application or ID card.',
+      'Preparing correctly sized images for social profiles and marketplace listings.',
+    ],
+    seoTitle: 'Resize Image to Exact Size & KB',
+    seoDescription:
+      'Resize an image to exact pixel dimensions and a target KB file size, then export as JPG, PNG or WebP. Free, private and processed entirely in your browser.',
+    h1: 'Resize Image to Exact Size',
+    faqs: [
+      { question: 'How do I resize an image to specific pixel dimensions?', answer: 'Upload your image and enter the desired width and height. You can choose to crop (cover) or add padding (contain) to fit the aspect ratio. Processing happens entirely in your browser.' },
+      { question: 'How do I reduce an image file size to a specific KB limit?', answer: 'Enter your target limit (for example 20KB, 50KB, 100KB or 2MB) in the Max File Size field. The tool compresses towards that size while keeping the best quality it can within the limit.' },
+      { question: 'Which format should I choose: JPG, PNG, or WebP?', answer: 'JPG is best for photos and small file sizes. PNG is best for graphics with text or transparent backgrounds. WebP offers the best balance of quality and compression for web use.' },
+      { question: 'Is this safe for passport photos and ID documents?', answer: 'Yes. FilePilot processes your image entirely within your browser, so passport photos, signatures and ID scans are never uploaded to a server or seen by anyone else.' },
+      { question: 'Can I resize images for Instagram, LinkedIn, or X?', answer: 'Yes. Use the Quick Presets to select the correct dimensions for social media posts, profile pictures and banners across the major platforms.' },
+    ],
+    comparison: {
+      heading: 'When to use this vs the Image Formatter',
+      body: 'Use this tool when a form gives you hard numbers to hit — an exact pixel size, an exact KB ceiling, or both. Use the Image Formatter when you are batch-processing several images to a consistent look rather than satisfying one strict specification.',
+    },
+  },
+
   '/image-formatter': {
     intro:
       'Image Formatter is a batch image processing tool that resizes, converts, compresses, and exports images to exact specifications. Set target dimensions, file format (JPG, PNG, WebP), quality level, and maximum file size — then process multiple images at once. Perfect for preparing images that need to meet specific upload requirements.',

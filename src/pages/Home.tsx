@@ -19,6 +19,8 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
+import { FAQSection } from '../components/FAQSection';
+import { siteContent, siteFaqs, siteSeo } from '../data/siteContent';
 import { RecentlyUsedTools } from '../components/RecentlyUsedTools';
 import { SupportFilePilot } from '../components/SupportFilePilot';
 import { discoverableTools, getToolStatus, plannedTools, type ToolDefinition } from '../data/toolRegistry';
@@ -279,10 +281,7 @@ export const Home = () => {
 
   return (
     <div>
-      <PageSeo
-        title="FilePilot — PDF, Image and File Tools"
-        description="Edit, convert, compress, organise and optimise PDFs, images and files with FilePilot. Your files are processed privately in your browser."
-      />
+      <PageSeo {...siteSeo('/')} canonicalPath="/" />
 
       {/* ── Hero ────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-border bg-card/20">
@@ -295,7 +294,7 @@ export const Home = () => {
               </div>
 
               <h1 className="hero-color-shift text-2xl font-bold leading-tight md:text-4xl lg:text-[2.75rem]">
-                Your complete workspace for PDFs, images, conversions and AI-powered file tasks.
+                {siteContent['/'].h1}
               </h1>
               <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base lg:mx-0">
                 One place for every file task — from PDFs and images to smart AI tools. Process everything securely and privately, right in your browser.
@@ -507,6 +506,11 @@ export const Home = () => {
             })}
           </div>
         )}
+      </section>
+
+      <section className="container pb-8 md:pb-10">
+        <h2 className="mb-4 text-2xl font-bold text-foreground">Frequently asked questions</h2>
+        <FAQSection items={siteFaqs('/')} />
       </section>
 
       <section className="container pb-8 md:pb-10">

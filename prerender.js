@@ -1,21 +1,29 @@
 /**
  * Post-build prerender script.
- * Spins up a local server for dist/, visits each route with Puppeteer,
- * and saves the fully-rendered HTML so crawlers see complete meta/SEO tags.
+ *
+ * Writes a static, crawler-facing HTML body into each route's index.html —
+ * title, description, canonical, JSON-LD and a real content block built from
+ * `siteContent.ts` / `toolContent.ts`. The same data drives the client's
+ * <PageSeo>, so the prerendered HTML and the DOM React renders agree.
+ *
+ * This used to also drive the app through Puppeteer and save the rendered
+ * page. That pass was a no-op: `withRouteSeo` overwrites #root with the static
+ * block afterwards, so the only thing Puppeteer contributed was ~120 lines of
+ * runtime-injected component CSS. It was removed — it cost a Chrome launch and
+ * 95 page loads per build and produced no crawlable content. Do not
+ * reintroduce it without also removing the #root overwrite.
  *
  * Usage:  node prerender.js
  */
 
-import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
-import { extname, join, dirname } from 'path';
+import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeoRoutes } from './seoRoutes.js';
+import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeoRoutes, getSitemapEntries } from './seoRoutes.js';
 import { toolContent } from './src/data/toolContent.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
-const PORT = 4173;
 
 const ROUTES = getSeoRoutes();
 const INDEXABLE_ROBOTS = 'index,follow';
@@ -51,6 +59,18 @@ const PDF_CATEGORIES = new Set([
   'secure-pdf',
 ]);
 const IMAGE_CATEGORIES = new Set(['image-tools', 'workflows', 'ai-tools']);
+
+const HOME_HUBS = ['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools'];
+
+/**
+ * Profiles that prove FilePilot-the-site is a real, distinct entity.
+ * "FilePilot" collides with a Windows file manager, an iOS app and several
+ * other browser tool sites, so Google needs corroborating URLs to tell them
+ * apart. Add every profile you actually control — the more, the better.
+ */
+const ORGANIZATION_PROFILES = [
+  'https://github.com/sandip-sol/file-pilot',
+];
 const isNetlifyPreview =
   process.env.NETLIFY === 'true' && process.env.CONTEXT && process.env.CONTEXT !== 'production';
 const shouldRenderBingVerification =
@@ -160,6 +180,10 @@ function relatedRoutesFor(route) {
 }
 
 function getFaqItems(route) {
+  // Core routes carry their own authored FAQs in siteContent.ts (the homepage
+  // does). Tool routes fall through to toolContent.ts or the generic template.
+  const coreFaqs = getRouteSeo(route)?.faqs;
+  if (coreFaqs?.length) return coreFaqs;
   if (!isToolRoute(route)) return [];
 
   const seo = getRouteSeo(route);
@@ -335,6 +359,23 @@ function categoryToolRoutesForHub(route) {
   return [];
 }
 
+/** datePublished from the article byline, dateModified from the sitemap's git-derived lastmod. */
+function articleDates(route) {
+  const file = BLOG_COMPONENT_FILES[route];
+  const path = file && join(__dirname, 'src', 'pages', 'blog', file);
+  const byline = path && existsSync(path)
+    ? readFileSync(path, 'utf8').match(/>\s*([A-Z][a-z]+ \d{1,2}, \d{4})\s*&middot;/)?.[1]
+    : null;
+
+  const published = byline ? new Date(`${byline} UTC`).toISOString().slice(0, 10) : null;
+  const modified = getSitemapEntries().find((entry) => entry.route === route)?.lastmod;
+
+  return {
+    ...(published ? { datePublished: published } : {}),
+    ...(modified ? { dateModified: modified } : {}),
+  };
+}
+
 function buildJsonLd(route) {
   const seo = getRouteSeo(route);
   const url = canonicalUrlForRoute(route);
@@ -354,10 +395,14 @@ function buildJsonLd(route) {
         '@type': 'Organization',
         '@id': `${url}#organization`,
         name: 'FilePilot',
-        alternateName: 'FilePilot File Tools',
+        alternateName: ['FilePilot File Tools', 'filepilot.space'],
         url,
         logo: 'https://www.filepilot.space/filepilot_logo.svg',
-        description: 'FilePilot is a free, privacy-first web app offering browser-based PDF, image, and file tools that process files locally on your device without uploads.',
+        description: 'FilePilot is a free, privacy-first web app offering browser-based PDF, image, and file tools that process files locally on your device without uploads. It is not affiliated with the File Pilot Windows file manager.',
+        // sameAs is how Google links this site to a known entity. Without it the
+        // "FilePilot" name is ambiguous — it collides with a Windows file
+        // manager, an iOS app and several other file-tool sites.
+        sameAs: ORGANIZATION_PROFILES,
       },
       {
         '@type': 'SoftwareApplication',
@@ -368,6 +413,18 @@ function buildJsonLd(route) {
         applicationCategory: 'UtilityApplication',
         operatingSystem: 'Web',
         isAccessibleForFree: true,
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        featureList: HOME_HUBS.map((hub) => routeLabel(hub)),
+      },
+      {
+        '@type': 'ItemList',
+        name: 'FilePilot tool categories',
+        itemListElement: HOME_HUBS.map((hub, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: routeLabel(hub),
+          url: canonicalUrlForRoute(hub),
+        })),
       },
     );
   } else if (['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools', '/blog'].includes(route)) {
@@ -385,6 +442,32 @@ function buildJsonLd(route) {
         url,
         description: seo.description,
         isPartOf: { '@id': `${SITE_URL}#website` },
+      },
+    );
+  } else if (route.startsWith('/blog/')) {
+    // Blog posts previously emitted no structured data at all.
+    graph.push(
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: canonicalUrlForRoute('/blog') },
+          { '@type': 'ListItem', position: 3, name: routeLabel(route), item: url },
+        ],
+      },
+      {
+        '@type': 'BlogPosting',
+        '@id': `${url}#article`,
+        headline: seo.h1 ?? routeLabel(route),
+        description: seo.description,
+        url,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+        image: `${SITE_URL}og-image.png`,
+        inLanguage: 'en',
+        isPartOf: { '@id': `${SITE_URL}#website` },
+        author: { '@type': 'Organization', name: 'FilePilot', url: SITE_URL },
+        publisher: { '@id': `${SITE_URL}#organization` },
+        ...(articleDates(route)),
       },
     );
   } else if (route === '/support') {
@@ -444,6 +527,121 @@ function buildJsonLd(route) {
   return `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
 }
 
+
+/**
+ * Turns the JSX body of a blog post component into plain prerendered HTML.
+ *
+ * The three articles are ~1,200 words each but live only inside React
+ * components, so the prerendered shell shipped an 80-word boilerplate stub in
+ * their place — near-identical across all three posts. Every crawler that does
+ * not execute JavaScript (Bing, GPTBot, PerplexityBot, ClaudeBot) saw nothing
+ * but the stub. Extracting from the component keeps one copy of the prose:
+ * edit the article, and the prerendered HTML follows automatically.
+ */
+const BLOG_COMPONENT_FILES = {
+  '/blog/why-files-stay-in-browser': 'WhyFilesStayInBrowser.tsx',
+  '/blog/privacy-risks-online-pdf-tools': 'PrivacyRisksOnlinePdfTools.tsx',
+  '/blog/how-filepilot-keeps-documents-private': 'HowFilepilotKeepsDocumentsPrivate.tsx',
+};
+
+function extractArticleHtml(route) {
+  const file = BLOG_COMPONENT_FILES[route];
+  if (!file) return '';
+
+  const path = join(__dirname, 'src', 'pages', 'blog', file);
+  if (!existsSync(path)) return '';
+
+  const source = readFileSync(path, 'utf8');
+  const article = source.match(/<article[^>]*>([\s\S]*?)<\/article>/)?.[1];
+  if (!article) return '';
+
+  return article
+    // <Link to={toCanonicalPath('/privacy')} className="…">Text</Link> -> <a href="…">
+    .replace(/<Link\s+to=\{toCanonicalPath\('([^']+)'\)\}[^>]*>([\s\S]*?)<\/Link>/g,
+      (_, to, text) => `<a href="${canonicalUrlForRoute(to)}">${text.trim()}</a>`)
+    .replace(/\{'\s*'\}/g, ' ')          // JSX whitespace escapes
+    .replace(/\s+className="[^"]*"/g, '') // styling has no place in the shell
+    // The article's own <h1> and the byline are emitted by the caller
+    .replace(/<h1[^>]*>[\s\S]*?<\/h1>/, '')
+    .replace(/<p>\s*[A-Z][a-z]+ \d{1,2}, \d{4}\s*&middot;[\s\S]*?<\/p>/, '')
+    .replace(/<(\/?)(h2|h3|p|ul|ol|li|strong|em|a|blockquote|code)\b/g, '<$1$2')
+    // Drop any tag that is not on the allow-list above
+    .replace(/<(?!\/?(?:h2|h3|p|ul|ol|li|strong|em|a|blockquote|code)\b)[^>]*>/g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/>\s+</g, '><')
+    .trim();
+}
+
+
+/**
+ * The homepage used to fall through to the same generic branch as /privacy and
+ * /terms: 73 words and five links, the thinnest page on a 95-page site — and
+ * the one page a brand search has to land on. It now gets a real body: what
+ * FilePilot is, the privacy mechanism that differentiates it, every category
+ * hub, the most-used tools, and the FAQ that backs the FAQPage schema.
+ */
+function homeStaticContent() {
+  const seo = getRouteSeo('/');
+  const popular = [
+    '/merge', '/split', '/compress', '/organize-pdf', '/images-to-pdf', '/pdf-to-images',
+    '/extract-text', '/redact-pdf', '/compress-image', '/resize-image', '/convert-image',
+    '/remove-background',
+  ].filter((route) => getSeoRoutes().includes(route));
+
+  return `
+      <h1>${escapeHtml(seo.h1)}</h1>
+      <p>${escapeHtml(seo.shortIntro ?? seo.description)}</p>
+      <section>
+        <h2>Your files never leave your device</h2>
+        <p>Most online PDF and image tools upload your document to their servers, process it there, and send a copy back. That means your file is stored — however briefly — on hardware you do not control, handled by code you cannot audit, under a retention policy you have to take on trust. FilePilot works differently: it reads your file into browser memory and processes it locally using WebAssembly, the Canvas API and Web Workers. Nothing is transmitted, so there is no upload queue, no server-side copy and no account to create. You can verify it yourself in your browser's Network tab.</p>
+      </section>
+      <section>
+        <h2>Browse tools by category</h2>
+        <ul>${linkList(HOME_HUBS, HOME_HUBS.length)}</ul>
+      </section>
+      <section>
+        <h2>Most-used tools</h2>
+        <ul>${linkList(popular, popular.length)}</ul>
+      </section>
+      <section>
+        <h2>Frequently asked questions</h2>
+        <ul>${faqList('/')}</ul>
+      </section>
+      <section>
+        <h2>Read more</h2>
+        <ul>${linkList(['/blog', '/blog/why-files-stay-in-browser', '/privacy'], 3)}</ul>
+      </section>
+    `;
+}
+
+
+/** The blog index listed only two of the three posts, via the generic fallback. */
+function blogIndexContent() {
+  const seo = getRouteSeo('/blog');
+  const posts = getRouteSeoEntries().filter((entry) => entry.route.startsWith('/blog/'));
+
+  return `
+      <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <span>${escapeHtml(routeLabel('/blog'))}</span></nav>
+      <h1>${escapeHtml(seo.h1)}</h1>
+      <p>${escapeHtml(seo.shortIntro ?? seo.description)}</p>
+      <section>
+        <h2>All articles</h2>
+        <ul>${posts.map((post) => `<li><a href="${canonicalUrlForRoute(post.route)}">${escapeHtml(post.h1 ?? routeLabel(post.route))}</a> — ${escapeHtml(post.description)}</li>`).join('')}</ul>
+      </section>
+      <section>
+        <h2>Explore FilePilot</h2>
+        <ul>${linkList(['/pdf-tools', '/image-tools', '/privacy'], 3)}</ul>
+      </section>
+    `;
+}
+
+/** Hub "Explore" links must not just repeat the category listing above them. */
+function hubSiblings(route, relatedRoutes, categoryToolRoutes) {
+  const filtered = relatedRoutes.filter((related) => !categoryToolRoutes.includes(related));
+  if (filtered.length) return filtered;
+  return [...HOME_HUBS.filter((hub) => hub !== route), '/blog'];
+}
+
 function buildStaticRouteContent(route) {
   const seo = getRouteSeo(route);
   const title = escapeHtml(routeLabel(route));
@@ -493,10 +691,24 @@ function buildStaticRouteContent(route) {
       </section>
       <section>
         <h2>Explore FilePilot</h2>
+        <ul>${linkList(hubSiblings(route, relatedRoutes, categoryToolRoutes))}</ul>
+      </section>
+    `
+    : route === '/'
+      ? homeStaticContent()
+      : route === '/blog'
+        ? blogIndexContent()
+      : extractArticleHtml(route)
+        ? `
+      <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <a href="${canonicalUrlForRoute('/blog')}">Blog</a> / <span>${title}</span></nav>
+      <h1>${title}</h1>
+      ${extractArticleHtml(route)}
+      <section>
+        <h2>Related reading</h2>
         <ul>${linkList(relatedRoutes)}</ul>
       </section>
     `
-    : `
+        : `
       <h1>${title}</h1>
       <p>${description}</p>
       <section>
@@ -544,104 +756,4 @@ function write404Shell(baseHtml) {
   writeFileSync(join(DIST, '404.html'), withBingVerification(notFoundHtml), 'utf-8');
 }
 
-let puppeteer;
-try {
-  puppeteer = (await import('puppeteer')).default;
-} catch {
-  console.log('⚠ Puppeteer not installed. Writing SEO HTML shells instead.');
-  writeSeoShells();
-  process.exit(0);
-}
-
-/** Tiny static file server that falls back to index.html (SPA behaviour). */
-function startServer() {
-  const mime = {
-    '.html': 'text/html',
-    '.js': 'application/javascript',
-    '.css': 'text/css',
-    '.json': 'application/json',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.svg': 'image/svg+xml',
-    '.ico': 'image/x-icon',
-    '.woff2': 'font/woff2',
-    '.woff': 'font/woff',
-    '.txt': 'text/plain',
-    '.xml': 'text/xml',
-  };
-
-  const server = createServer((req, res) => {
-    const requestPath = decodeURIComponent(new URL(req.url ?? '/', `http://localhost:${PORT}`).pathname);
-    const candidates = requestPath === '/'
-      ? [join(DIST, 'index.html')]
-      : [
-          join(DIST, requestPath),
-          join(DIST, requestPath, 'index.html'),
-          join(DIST, 'index.html'),
-        ];
-    const filePath = candidates.find((candidate) => existsSync(candidate) && extname(candidate)) ?? join(DIST, 'index.html');
-    const ext = '.' + filePath.split('.').pop();
-    const contentType = mime[ext] || 'application/octet-stream';
-    try {
-      const data = readFileSync(filePath);
-      res.writeHead(200, { 'Content-Type': contentType });
-      res.end(data);
-    } catch {
-      res.writeHead(404);
-      res.end('Not found');
-    }
-  });
-
-  return new Promise((resolve, reject) => {
-    server.once('error', reject);
-    server.listen(PORT, '127.0.0.1', () => resolve(server));
-  });
-}
-
-async function prerender() {
-  console.log('Starting prerender...');
-  writeSeoShells();
-
-  const server = await startServer();
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
-
-  for (const route of ROUTES) {
-    const url = `http://localhost:${PORT}${route}`;
-    console.log(`  Rendering ${route} ...`);
-
-    const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
-    // Give React a moment to finish client-side useEffect for meta tags / JSON-LD
-    await page.evaluate(() => new Promise((r) => setTimeout(r, 1500)));
-
-    let html = await page.content();
-
-    // Clean up: remove extra data-* attrs Puppeteer may insert
-    html = html.replace(/ data-reactroot=""/g, '');
-    html = withRouteSeo(html, route);
-
-    // Write the rendered HTML
-    const outDir = route === '/' ? DIST : join(DIST, route);
-    if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
-    const outFile = route === '/' ? join(DIST, 'index.html') : join(outDir, 'index.html');
-    writeFileSync(outFile, html, 'utf-8');
-    console.log(`  ✓ Saved ${outFile.replace(DIST, 'dist')}`);
-    await page.close();
-  }
-
-  await browser.close();
-  server.close();
-  console.log('Prerender complete!');
-}
-
-prerender().catch((err) => {
-  console.error('⚠ Prerender skipped:', err.message);
-  writeSeoShells();
-  console.error('  The build output in dist/ is still valid with route-specific title, description, and canonical tags.');
-  console.error('  Install Chrome/Chromium system dependencies and allow the local preview port to enable prerendering.');
-  // Exit 0 so the build doesn't fail — prerender is an enhancement, not a requirement.
-  process.exit(0);
-});
+writeSeoShells();

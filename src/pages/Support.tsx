@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Gauge, Globe2, Hammer, HeartHandshake, ShieldCheck, Sparkles } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
+import { siteSeo } from '../data/siteContent';
 import { SupportFilePilot } from '../components/SupportFilePilot';
 
 const faqItems = [
@@ -48,12 +49,7 @@ const supportAreas = [
 export const Support = () => {
   return (
     <div>
-      <PageSeo
-        title="Support FilePilot | Keep private file tools free"
-        description="Support FilePilot and help keep private, browser-based file tools free, ad-free and improving."
-        canonicalPath="/support"
-        faqItems={faqItems}
-      />
+      <PageSeo {...siteSeo('/support')} canonicalPath="/support" />
 
       <section className="border-b border-border bg-card/20">
         <div className="container py-10 md:py-14">

@@ -3,27 +3,16 @@ import { ArrowRight, Bot, Images, Lock } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { discoverableTools, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
 import { toCanonicalPath, toolPath } from '../lib/routes';
+import { siteContent, siteSeo } from '../data/siteContent';
 
 const HUBS = {
   '/image-workflows': {
-    title: 'Image Workflow Tools - Format, Validate and Prepare Images | FilePilot',
-    description:
-      'Prepare images for social media, ecommerce, passport photos, favicons, QR codes, and PDF workflows with private browser-based tools.',
-    h1: 'Image Workflow Tools',
-    intro:
-      'Format, validate, and prepare images for real publishing requirements. These tools help with social media sizes, ecommerce output, passport photo checks, favicons, QR codes, and image-to-PDF workflows without uploading your files.',
     categories: ['workflows'] as ToolCategory[],
     icon: Images,
     relatedHref: '/image-tools',
     relatedLabel: 'Browse all image tools',
   },
   '/ai-tools': {
-    title: 'AI Image Tools - Private Browser-Based Editing | FilePilot',
-    description:
-      'Remove backgrounds, enhance images, upscale photos, and clean edits with AI-assisted tools that run in your browser where supported.',
-    h1: 'AI Image Tools',
-    intro:
-      'Use AI-assisted image tools for background removal, cleanup, enhancement, upscaling, and object removal. FilePilot keeps privacy clear by running supported processing in your browser instead of collecting your images on a server.',
     categories: ['ai-tools'] as ToolCategory[],
     icon: Bot,
     relatedHref: '/image-tools',
@@ -58,12 +47,13 @@ const ToolCard = ({ tool }: { tool: ToolDefinition }) => {
 
 export const CategoryHub = ({ hubPath }: { hubPath: keyof typeof HUBS }) => {
   const hub = HUBS[hubPath];
+  const content = siteContent[hubPath];
   const HubIcon = hub.icon;
   const tools = discoverableTools.filter((tool) => hub.categories.includes(tool.category));
 
   return (
     <div>
-      <PageSeo title={hub.title} description={hub.description} canonicalPath={hubPath} />
+      <PageSeo {...siteSeo(hubPath)} canonicalPath={hubPath} />
 
       <section className="border-b border-border bg-card/20">
         <div className="container py-10 md:py-14">
@@ -78,10 +68,10 @@ export const CategoryHub = ({ hubPath }: { hubPath: keyof typeof HUBS }) => {
               </div>
             </div>
             <h1 className="text-3xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
-              {hub.h1}
+              {content.h1}
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
-              {hub.intro}
+              {content.intro}
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
               <strong className="text-foreground">{tools.length}</strong> tools available
