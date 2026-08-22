@@ -150,27 +150,34 @@ fronts, in priority order:
 
 **Phase 1 exit check:** `npm run build && npm run seo:crawl` — 100 routes, both green.
 
-### Phase 2 — Weeks 2–10: Authority / backlinks (runs in parallel, highest leverage)
+### Phase 2 — Weeks 2–10: Authority / backlinks (the actual constraint)
 
-This is the front that actually moves position 55 → page 1. Do it continuously.
+> ⚠️ **This phase is human, off-platform work.** Creating accounts, launching,
+> posting to forums and emailing people cannot be code-implemented, and faking it
+> (bought links, bot posts, sock puppets) gets flagged and burns your one first
+> impression. What *was* automated on 2026-08-22 is the preparation and the
+> measurement — not the execution.
+>
+> **Execution kit:** [docs/PHASE2_BACKLINKS.md](docs/PHASE2_BACKLINKS.md).
 
-> **This phase is human, off-platform work** — launching, listing, posting, emailing.
-> It can't be code-implemented, and faking it (bought links, bot posts) backfires.
-> **Execution kit prepared:** [docs/PHASE2_BACKLINKS.md](docs/PHASE2_BACKLINKS.md) —
-> paste-ready copy in every length, a ranked directory target list with URLs, a
-> Product Hunt launch kit + maker comment, Show HN / outreach templates, and a tracker.
+**Baseline, measured rather than assumed:** `npm run seo:backlinks` reports
+**1 referring domain, 0 authority-passing.** Everything below starts from zero.
 
 | # | Task | Status |
 |---|---|---|
-| 2.1 | **Launch on Product Hunt** with the privacy angle. | 📋 Kit ready — launch copy, gallery plan, maker comment, prep checklist in the doc. Human to execute. |
-| 2.2 | **List on tool directories** (AlternativeTo, SaaSHub, Slant, G2, Capterra, BetaList…). | 📋 Kit ready — ranked target list + URLs + copy. Human to execute. |
-| 2.3 | **Blogger / roundup outreach.** | 📋 Kit ready — personalised email template. Human to execute. |
-| 2.4 | **Reddit / HN / forums.** | 📋 Kit ready — Show HN + Reddit templates, subreddit list, etiquette rules. Human to execute. |
-| 2.5 | **GitHub presence.** | ✅ **README rewritten** to be link-worthy (privacy-first framing, tool list, architecture). Make the repo public + add topics to earn the backlink. |
-| 2.6 | **Digital PR angle.** | 📋 Covered by the outreach template + the "why no-upload matters" framing. Human to execute. |
-| — | **Social preview image** (supports every earned link). | ✅ **Done** — replaced the 512² square logo with a proper 1200×630 `og-image.png` (generator: `node generateOgImage.js`); wired into OG + Twitter meta and `PageSeo`. |
+| 2.1 | **Launch on Product Hunt.** | 📋 Kit ready — **human to execute.** Note the outbound link is nofollow: launch for attention and the secondary coverage it attracts, not for the link. |
+| 2.2 | **List on tool directories.** | 📋 Kit ready — **human to execute.** Ranked target list with URLs; all verified reachable 2026-08-22 (several return 403 to scripts — that is bot-blocking, not a dead link). |
+| 2.3 | **Blogger / roundup outreach.** | 📋 Kit ready — **human to execute.** Template now points recipients at the matching Phase 1.3 comparison page, which concedes real limitations and so reads as credible rather than promotional. **Soft blocker:** the site is still anonymous. An About page with a real name (Phase 3.3) makes "I maintain FilePilot" a much stronger pitch. |
+| 2.4 | **Reddit / HN / forums.** | 📋 Kit ready — **human to execute.** Verified 2026-08-22: **HN front-page story links are dofollow**, so a Show HN that gets traction is the single most valuable link on this list. Reddit is nofollow. |
+| 2.5 | **GitHub presence.** | ⚠️ **Half done.** Repo is public and the README is rewritten — but `description`, `homepage` and `topics` are all **empty**, so the repo earns nothing and the sidebar has no link to the site. Two-minute fix, checklist in the kit. Also corrected: the kit claimed a repo + README link was "a durable, high-trust backlink". **It is `rel="nofollow"`** — verified by fetching the page. Real value is discovery, referral traffic and entity disambiguation, not authority. |
+| 2.6 | **Digital PR angle.** | 📋 Covered by the outreach template and the comparison pages. |
+| — | **Measurement.** | ✅ **New — `npm run seo:backlinks`.** The tracker was a markdown table of checkboxes, which cannot tell a live link from a rejected submission. The checker fetches every recorded listing and reports `LIVE` (with dofollow/nofollow), `MISSING` (with whether the site is at least mentioned — usually means the URL field was dropped), `BLOCKED` (host refused the request; **not** a missing link) or `NOT SUBMITTED`. Targets live in [backlinkTargets.js](backlinkTargets.js); paste a listing URL in as each goes live. |
+| — | **Social preview image.** | ✅ Done — 1200×630 `og-image.png`. |
 
-**Target: 15–30 referring domains by week 10.** That alone should pull average position from ~55 into the 20s for tail terms.
+**Target: 15–30 referring domains by ~week 10**, tracking the dofollow count
+separately since that is what moves average position. Re-run the checker monthly
+and cross-check against Bing Webmaster Tools → Backlinks and GSC → Links, which
+see links from places no local list covers.
 
 ### Phase 3 — Weeks 4–12: Topical authority via content
 

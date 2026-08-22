@@ -11,6 +11,30 @@ domain authority exists.
 
 ---
 
+## Read this before you start (added 2026-08-22)
+
+**Most of these links will be `nofollow`, and that is fine — but plan for it.**
+Verified by fetching the pages:
+
+| Target | Outbound links | Verified |
+|---|---|---|
+| GitHub (repo homepage + README) | **nofollow** | ✅ 2026-08-22 |
+| Hacker News (front-page story link) | **dofollow** | ✅ 2026-08-22 |
+| Product Hunt | nofollow | documented behaviour |
+| Reddit | nofollow | documented behaviour |
+| AlternativeTo, G2, Capterra, Slant | unknown — they block automated requests | verify by hand |
+
+A nofollow link still earns you: discovery by real people, referral traffic, an
+entity signal Google can use to tell filepilot.space apart from the other
+"FilePilot" products, and — most importantly — **secondary coverage**. A Product
+Hunt launch that a blogger notices produces the dofollow link; the PH link itself
+does not. Judge Tier 1 by attention earned, not by link juice.
+
+**Current baseline:** run `npm run seo:backlinks`. As of 2026-08-22 it reports
+**1 referring domain, 0 authority-passing.** That is the honest starting line.
+
+---
+
 ## Ready-to-paste copy
 
 Keep these identical everywhere — consistent name + description is itself a trust signal.
@@ -34,7 +58,33 @@ Keep these identical everywhere — consistent name + description is itself a tr
 
 **Categories/tags:** PDF, PDF tools, image tools, privacy, productivity, file conversion, web app, developer tools, no-signup
 
-**Social image:** `public/og-image.png` (1200×630, generated this phase)
+**Social image:** `public/og-image.png` (1200×630)
+
+**Pages worth linking to in outreach** (shipped since this kit was written):
+
+| Page | Use it for |
+|---|---|
+| `/smallpdf-alternative/` | AlternativeTo listing, and any roundup that already covers Smallpdf |
+| `/ilovepdf-alternative/` | Same, for iLovePDF |
+| `/adobe-acrobat-online-alternative/` | Roundups about free Acrobat substitutes |
+| `/pdf24-alternative/` | The most nuanced one — PDF24 already offers a local desktop app, so this page argues on installation, not privacy alone |
+| `/image-requirements/` | "Resize image to exact size & KB" — the most distinctive single tool on the site; good hook for form/exam/visa audiences |
+
+Each comparison page includes an honest "when *X* is the better choice" section.
+Point reviewers at them: a comparison that concedes real limitations reads as
+credible and is far more likely to get cited than a feature list.
+
+**GitHub repo metadata — do this first, it takes two minutes** (Settings → General,
+and the ⚙ next to "About" on the repo home):
+
+- [ ] **Description:** `Free, privacy-first PDF and image tools that run entirely in your browser — no uploads.`
+- [ ] **Website:** `https://www.filepilot.space/`  ← currently empty; this is the sidebar link
+- [ ] **Topics:** `pdf`, `privacy`, `webassembly`, `image-tools`, `pdf-tools`, `client-side`, `no-upload`, `react`
+- [ ] **Licence:** deliberately left unset. A permissive licence would let anyone
+      redeploy FilePilot, and the name already collides with three same-category
+      clone domains. Only add one if you intend that.
+
+Verify with `npm run seo:backlinks`.
 
 ---
 
@@ -49,7 +99,7 @@ Work top-down; the first block is highest ROI. Mark status in the tracker below.
 | **AlternativeTo** | alternativeto.net | List as an alternative to Smallpdf, iLovePDF, Adobe Acrobat online. High-DR, exact-intent traffic. |
 | **SaaSHub** | saashub.com/submit | Free listing; also an "alternatives" network. |
 | **Hacker News (Show HN)** | news.ycombinator.com/showhn.html | "Show HN: FilePilot – PDF/image tools that never upload your files". Post 08:00–10:00 ET weekday. High risk/reward; engage in comments. |
-| **GitHub** | (this repo) | Make the repo public with the improved README. A public repo + README link is a durable, high-trust backlink. Add topics: `pdf`, `privacy`, `webassembly`, `image-tools`. |
+| **GitHub** | [github.com/sandip-sol/file-pilot](https://github.com/sandip-sol/file-pilot) | Repo is public ✅. **Metadata is not set** — see the checklist below. Note the links are `nofollow`, so treat this as discovery + entity signal, not authority. |
 
 ### Tier 2 — steady drip
 | Target | URL | Notes |
@@ -122,6 +172,8 @@ Target: authors of existing "best free PDF tools" / "Smallpdf alternatives" post
 >
 > I maintain FilePilot (filepilot.space), a free PDF/image toolkit with one differentiator worth a mention: it processes files **entirely in the browser** — nothing is uploaded. For a privacy-focused roundup that's a real distinction from Smallpdf/iLovePDF, which upload to their servers.
 >
+> I've written up the comparison honestly, including where [SPECIFIC TOOL] is still the better choice: filepilot.space/[smallpdf|ilovepdf|pdf24]-alternative/
+>
 > No ask beyond: if it fits, it might be a useful addition for your readers. Happy to answer anything.
 >
 > Thanks,
@@ -133,22 +185,34 @@ Send 5–10 a week, personalised. Generic blasts get ignored and can hurt reputa
 
 ## Progress tracker
 
-| Target | Submitted | Live URL | Status |
-|---|---|---|---|
-| Product Hunt | | | ☐ |
-| AlternativeTo | | | ☐ |
-| SaaSHub | | | ☐ |
-| Show HN | | | ☐ |
-| GitHub (public + topics) | | | ☐ |
-| Slant | | | ☐ |
-| G2 | | | ☐ |
-| Capterra | | | ☐ |
-| BetaList | | | ☐ |
-| dev.to build post | | | ☐ |
+**The tracker is now code, not checkboxes.** A submitted listing is not an earned
+link — listings get rejected, held in moderation, published without the URL, or
+published with the link stripped out. A tick in a markdown table cannot tell you
+which of those happened.
 
-**Target:** 15–30 referring domains by ~week 10. That alone should pull average
-position out of the 50s. Track referring domains in Bing Webmaster Tools (free) or
-Search Console's Links report; re-check monthly.
+```bash
+npm run seo:backlinks
+```
+
+It checks GitHub repo metadata, then fetches every listing recorded in
+`backlinkTargets.js` and reports what is actually on the page:
+
+| State | Meaning |
+|---|---|
+| `LIVE` | a link to filepilot.space is present — reports dofollow vs nofollow |
+| `MISSING` | page loaded, no link found. Says whether the site is at least mentioned, which usually means the URL field got dropped |
+| `BLOCKED` | the host refused an automated request. **Not a missing link** — verify by hand |
+| `NOT SUBMITTED` | no listing URL recorded yet |
+
+**Workflow:** when a submission goes live, open [`backlinkTargets.js`](../backlinkTargets.js),
+paste the public listing URL into that target's `listingUrl`, and re-run. Adding a
+new target is one object in the same array.
+
+Re-run monthly. Cross-check against Bing Webmaster Tools → Backlinks and Search
+Console → Links, which see links from places this script has no list for.
+
+**Target:** 15–30 referring domains by ~week 10. Weight the dofollow count
+separately — that is the number that moves average position.
 
 ---
 

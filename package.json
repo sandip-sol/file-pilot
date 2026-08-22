@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "seo:validate": "node seoValidate.js",
     "seo:crawl": "node seoCrawl.js",
+    "seo:backlinks": "node seoBacklinks.js",
     "indexnow:submit": "node indexnow.js",
     "indexnow:submit:priority": "node indexnow.js --priority",
     "indexnow:submit:tail": "node indexnow.js --tail",
