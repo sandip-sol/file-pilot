@@ -1,4 +1,5 @@
 import { comparisonContent } from './comparisons.ts';
+import { blogPosts } from './blogContent.ts';
 
 export interface SiteFaq {
   question: string;
@@ -172,26 +173,8 @@ export const siteContent: Record<string, SiteContentEntry> = {
     h1: 'Terms of Service',
   },
 
-  '/blog/why-files-stay-in-browser': {
-    title: 'Why Your Files Should Never Leave Your Browser | FilePilot',
-    description:
-      'Uploading files to remote servers introduces privacy risks, data breaches, and unclear retention policies. Learn how browser-based processing with WebAssembly and Web Workers keeps your documents private.',
-    h1: 'Why Your Files Should Never Leave Your Browser',
-  },
 
-  '/blog/privacy-risks-online-pdf-tools': {
-    title: 'The Hidden Privacy Risks of Online PDF Tools | FilePilot',
-    description:
-      'What really happens when you upload a PDF to an online tool: server storage, metadata exposure, third-party processing, and how to evaluate whether a tool is truly private.',
-    h1: 'The Hidden Privacy Risks of Online PDF Tools',
-  },
 
-  '/blog/how-filepilot-keeps-documents-private': {
-    title: 'How FilePilot Keeps Your Documents Private | FilePilot',
-    description:
-      'A practical look at FilePilot\'s privacy architecture: WebAssembly with pdf-lib, Canvas API rendering, ONNX Runtime for AI features, PWA offline support, and zero server involvement.',
-    h1: 'How FilePilot Keeps Your Documents Private',
-  },
 };
 
 // The "alternative to X" pages (Phase 1.3) keep their copy in comparisons.ts
@@ -204,6 +187,17 @@ for (const entry of Object.values(comparisonContent)) {
     h1: entry.h1,
     intro: entry.intro,
     faqs: entry.faqs,
+  };
+}
+
+// Blog posts keep their prose and their SEO together in blogContent.ts; this
+// republishes the SEO half through the same path every other route uses.
+for (const post of Object.values(blogPosts)) {
+  siteContent[post.route] = {
+    title: post.title,
+    description: post.description,
+    h1: post.h1,
+    faqs: post.faqs,
   };
 }
 

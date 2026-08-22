@@ -4,6 +4,7 @@ import { BRAND_SUFFIX, toolContent } from './src/data/toolContent.ts';
 import { siteContent } from './src/data/siteContent.ts';
 import { resolveRelatedTools } from './src/data/relatedTools.ts';
 import { comparisonContent, comparisonRoutes } from './src/data/comparisons.ts';
+import { blogPosts, blogRoutes as allBlogRoutes } from './src/data/blogContent.ts';
 
 const TOOL_REGISTRY_PATH = new URL('./src/data/toolRegistry.ts', import.meta.url);
 
@@ -97,11 +98,9 @@ const CORE_ROUTE_SEO = {
   ])),
 };
 
-const BLOG_ROUTE_SEO = {
-  '/blog/why-files-stay-in-browser': { ...fromSiteContent('/blog/why-files-stay-in-browser'), changefreq: 'yearly', priority: '0.5' },
-  '/blog/privacy-risks-online-pdf-tools': { ...fromSiteContent('/blog/privacy-risks-online-pdf-tools'), changefreq: 'yearly', priority: '0.5' },
-  '/blog/how-filepilot-keeps-documents-private': { ...fromSiteContent('/blog/how-filepilot-keeps-documents-private'), changefreq: 'yearly', priority: '0.5' },
-};
+const BLOG_ROUTE_SEO = Object.fromEntries(
+  allBlogRoutes.map((route) => [route, { ...fromSiteContent(route), changefreq: 'yearly', priority: '0.5' }]),
+);
 
 const INDEXABLE_ALIAS_ROUTE_SEO = {
   '/jpg-to-pdf': {
@@ -153,7 +152,7 @@ const lastmodCache = new Map();
 
 const lastmodForRoute = (route) => {
   const sources = route.startsWith('/blog/')
-    ? ['src/data/siteContent.ts', `src/pages/blog/${BLOG_COMPONENTS[route] ?? ''}`]
+    ? ['src/data/blogContent.ts']
     : CORE_ROUTE_SEO[route]
       ? ['src/data/siteContent.ts', 'seoRoutes.js']
       : ['src/data/toolContent.ts', 'src/data/toolRegistry.ts'];
@@ -163,11 +162,10 @@ const lastmodForRoute = (route) => {
   return lastmodCache.get(key);
 };
 
-const BLOG_COMPONENTS = {
-  '/blog/why-files-stay-in-browser': 'WhyFilesStayInBrowser.tsx',
-  '/blog/privacy-risks-online-pdf-tools': 'PrivacyRisksOnlinePdfTools.tsx',
-  '/blog/how-filepilot-keeps-documents-private': 'HowFilepilotKeepsDocumentsPrivate.tsx',
-};
+// The cluster pillar is the page the spokes point at; rank it above them.
+for (const [route, entry] of Object.entries(BLOG_ROUTE_SEO)) {
+  if (blogPosts[route]?.cluster === 'pillar') entry.priority = '0.7';
+}
 
 const CORE_ROUTES = Object.keys(CORE_ROUTE_SEO);
 const BLOG_ROUTES = Object.keys(BLOG_ROUTE_SEO);
@@ -189,6 +187,7 @@ const CORE_RELATED_ROUTES = {
   '/privacy': ['/pdf-tools', '/image-tools', '/blog/how-filepilot-keeps-documents-private'],
   '/terms': ['/privacy', '/pdf-tools', '/image-tools'],
   '/about': ['/privacy', '/blog/how-filepilot-keeps-documents-private', '/pdf-tools', '/support'],
+  ...Object.fromEntries(allBlogRoutes.map((route) => [route, blogPosts[route].related])),
   ...Object.fromEntries(comparisonRoutes.map((route) => [
     route,
     comparisonContent[route].toolMap.slice(0, 5).map((item) => item.route),

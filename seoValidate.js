@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { maintainer } from './src/data/aboutContent.ts';
+import { PILLAR_ROUTE, blogPosts } from './src/data/blogContent.ts';
 import {
   CANONICAL_HOST,
   SITE_URL,
@@ -365,10 +366,12 @@ function validateNoInlinePageSeo() {
     [...appSource.matchAll(/element=\{<([A-Za-z0-9_]+)\s*\/?>/g)].map(([, name]) => name),
   );
 
-  const tsxIn = (dir) =>
-    readdirSync(new URL(`./${dir}/`, import.meta.url))
+  const tsxIn = (dir) => {
+    if (!existsSync(new URL(`./${dir}/`, import.meta.url))) return [];
+    return readdirSync(new URL(`./${dir}/`, import.meta.url))
       .filter((name) => name.endsWith('.tsx'))
       .map((name) => `${dir}/${name}`);
+  };
   const pageFiles = [...tsxIn('src/pages'), ...tsxIn('src/pages/blog')];
 
   // /404 has no sitemap route, so it has no shared SEO entry to read from.
@@ -499,6 +502,60 @@ function warnIfAnonymous() {
   );
 }
 
+
+/**
+ * Cluster integrity and the anti-cannibalisation rule (Phase 3.1).
+ *
+ * A hub-and-spoke cluster only works if the links actually form one: the pillar
+ * must reach every spoke and every spoke must point back, or it is just a pile
+ * of posts. Separately, a post must never target the same keyword as a tool
+ * page — `/pdf-to-cbz` already owns "pdf to cbz" with HowTo schema, and a post
+ * competing for it would split the signal instead of adding to it.
+ */
+function validateBlogCluster() {
+  const routes = Object.keys(blogPosts);
+  const indexable = new Set(getSeoRoutes());
+
+  const pillar = blogPosts[PILLAR_ROUTE];
+  if (!pillar) {
+    fail(`Blog cluster has no pillar: ${PILLAR_ROUTE} is not in blogContent.ts.`);
+    return;
+  }
+
+  const pillarText = JSON.stringify(pillar);
+  const toolTitles = new Map(
+    getRouteSeoEntries()
+      .filter((entry) => isToolRoute(entry.route))
+      .map((entry) => [stripBrand(entry.title).toLowerCase().trim(), entry.route]),
+  );
+
+  for (const route of routes) {
+    const post = blogPosts[route];
+
+    if (!post.primaryTool) fail(`${route} has no primaryTool — every post must hand the reader to a tool.`);
+    else if (!indexable.has(post.primaryTool)) fail(`${route} primaryTool ${post.primaryTool} is not an indexable route.`);
+
+    // Cannibalisation: a post title must not duplicate a tool page's title.
+    const clash = toolTitles.get(stripBrand(post.title).toLowerCase().trim());
+    if (clash) fail(`${route} has the same title as the tool page ${clash} — they would compete for the same query.`);
+
+    if (route === PILLAR_ROUTE) continue;
+
+    if (!pillarText.includes(route)) fail(`Pillar ${PILLAR_ROUTE} does not link to spoke ${route}.`);
+    const linksBack = post.related.includes(PILLAR_ROUTE) || JSON.stringify(post.blocks).includes(PILLAR_ROUTE);
+    if (!linksBack) fail(`${route} does not link back to the cluster pillar ${PILLAR_ROUTE}.`);
+  }
+
+  // The handoff has to survive into the HTML a crawler reads, not just the data.
+  for (const route of routes) {
+    const block = staticSeoBlock(readFileSync(getHtmlPath(route), 'utf8')) ?? '';
+    const target = canonicalUrlForRoute(blogPosts[route].primaryTool);
+    if (!block.includes(target)) {
+      fail(`${route} prerendered HTML does not link to its primaryTool ${blogPosts[route].primaryTool}.`);
+    }
+  }
+}
+
 validateFilesExist();
 validateRobots();
 validateSitemap();
@@ -508,6 +565,7 @@ validateNoInlinePageSeo();
 validateNoOrphanRoutes();
 validateRelatedToolLinks();
 validateNoOrphanedFromLinks();
+validateBlogCluster();
 warnIfAnonymous();
 validate404();
 

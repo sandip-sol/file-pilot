@@ -23,6 +23,7 @@ import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeo
 import { toolContent } from './src/data/toolContent.ts';
 import { comparisonContent } from './src/data/comparisons.ts';
 import { GITHUB_REPO_URL, aboutSections, maintainer, pressKit } from './src/data/aboutContent.ts';
+import { blogPosts, blogPostsByDate } from './src/data/blogContent.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
@@ -357,16 +358,13 @@ function categoryToolRoutesForHub(route) {
   return [];
 }
 
-/** datePublished from the article byline, dateModified from the sitemap's git-derived lastmod. */
+/** Dates come from the post data; dateModified from the git-derived sitemap lastmod. */
 function articleDates(route) {
-  const file = BLOG_COMPONENT_FILES[route];
-  const path = file && join(__dirname, 'src', 'pages', 'blog', file);
-  const byline = path && existsSync(path)
-    ? readFileSync(path, 'utf8').match(/>\s*([A-Z][a-z]+ \d{1,2}, \d{4})\s*&middot;/)?.[1]
-    : null;
-
-  const published = byline ? new Date(`${byline} UTC`).toISOString().slice(0, 10) : null;
-  const modified = getSitemapEntries().find((entry) => entry.route === route)?.lastmod;
+  const published = blogPosts[route]?.published;
+  // The author-declared revision date wins over the git-derived sitemap lastmod:
+  // a commit that only touches links is not a content update.
+  const modified = blogPosts[route]?.updated
+    ?? getSitemapEntries().find((entry) => entry.route === route)?.lastmod;
 
   return {
     ...(published ? { datePublished: published } : {}),
@@ -462,6 +460,12 @@ function buildJsonLd(route) {
           { '@type': 'ListItem', position: 3, name: routeLabel(route), item: url },
         ],
       },
+      ...(maintainer ? [{
+        '@type': 'Person',
+        '@id': `${SITE_URL}#person`,
+        name: maintainer.name,
+        url: canonicalUrlForRoute('/about'),
+      }] : []),
       {
         '@type': 'BlogPosting',
         '@id': `${url}#article`,
@@ -472,8 +476,14 @@ function buildJsonLd(route) {
         image: `${SITE_URL}og-image.png`,
         inLanguage: 'en',
         isPartOf: { '@id': `${SITE_URL}#website` },
-        author: { '@type': 'Organization', name: 'FilePilot', url: SITE_URL },
+        // A named author is a stronger E-E-A-T signal than a corporate byline,
+        // but it must be a real person — falls back to the Organization until one
+        // is configured in aboutContent.ts.
+        author: maintainer
+          ? { '@id': `${SITE_URL}#person` }
+          : { '@type': 'Organization', name: 'FilePilot', url: SITE_URL },
         publisher: { '@id': `${SITE_URL}#organization` },
+        ...(blogPosts[route]?.readTime ? { timeRequired: `PT${parseInt(blogPosts[route].readTime, 10) || 5}M` } : {}),
         ...(articleDates(route)),
       },
     );
@@ -605,57 +615,66 @@ function buildJsonLd(route) {
 
 
 /**
- * Turns the JSX body of a blog post component into plain prerendered HTML.
+ * Renders a post's blocks as static HTML.
  *
- * The three articles are ~1,200 words each but live only inside React
- * components, so the prerendered shell shipped an 80-word boilerplate stub in
- * their place — near-identical across all three posts. Every crawler that does
- * not execute JavaScript (Bing, GPTBot, PerplexityBot, ClaudeBot) saw nothing
- * but the stub. Extracting from the component keeps one copy of the prose:
- * edit the article, and the prerendered HTML follows automatically.
+ * This replaced a regex that scraped prose out of each post's JSX. That worked
+ * while there were three posts written by hand; it was never going to survive
+ * twelve. Blocks now come from blogContent.ts, which the React renderer reads
+ * too, so the prerendered article and the rendered one are the same text by
+ * construction rather than by a parser keeping up.
  */
-const BLOG_COMPONENT_FILES = {
-  '/blog/why-files-stay-in-browser': 'WhyFilesStayInBrowser.tsx',
-  '/blog/privacy-risks-online-pdf-tools': 'PrivacyRisksOnlinePdfTools.tsx',
-  '/blog/how-filepilot-keeps-documents-private': 'HowFilepilotKeepsDocumentsPrivate.tsx',
-};
-
-function extractArticleHtml(route) {
-  const file = BLOG_COMPONENT_FILES[route];
-  if (!file) return '';
-
-  const path = join(__dirname, 'src', 'pages', 'blog', file);
-  if (!existsSync(path)) return '';
-
-  const source = readFileSync(path, 'utf8');
-  const article = source.match(/<article[^>]*>([\s\S]*?)<\/article>/)?.[1];
-  if (!article) return '';
-
-  return article
-    // <Link to={toCanonicalPath('/privacy')} className="…">Text</Link> -> <a href="…">
-    .replace(/<Link\s+to=\{toCanonicalPath\('([^']+)'\)\}[^>]*>([\s\S]*?)<\/Link>/g,
-      (_, to, text) => `<a href="${canonicalUrlForRoute(to)}">${text.trim()}</a>`)
-    .replace(/\{'\s*'\}/g, ' ')          // JSX whitespace escapes
-    .replace(/\s+className="[^"]*"/g, '') // styling has no place in the shell
-    // The article's own <h1> and the byline are emitted by the caller
-    .replace(/<h1[^>]*>[\s\S]*?<\/h1>/, '')
-    .replace(/<p>\s*[A-Z][a-z]+ \d{1,2}, \d{4}\s*&middot;[\s\S]*?<\/p>/, '')
-    .replace(/<(\/?)(h2|h3|p|ul|ol|li|strong|em|a|blockquote|code)\b/g, '<$1$2')
-    // Drop any tag that is not on the allow-list above
-    .replace(/<(?!\/?(?:h2|h3|p|ul|ol|li|strong|em|a|blockquote|code)\b)[^>]*>/g, '')
-    .replace(/\s+/g, ' ')
-    .replace(/>\s+</g, '><')
-    .trim();
+function renderBlocks(blocks) {
+  return blocks.map((block) => {
+    if (block.type === 'ul' || block.type === 'ol') {
+      return `<${block.type}>${block.items.map((item) => `<li>${withCanonicalLinks(item)}</li>`).join('')}</${block.type}>`;
+    }
+    if (block.type === 'callout') return `<blockquote><p>${withCanonicalLinks(block.html)}</p></blockquote>`;
+    return `<${block.type}>${withCanonicalLinks(block.html)}</${block.type}>`;
+  }).join('');
 }
 
-
 /**
- * The homepage used to fall through to the same generic branch as /privacy and
- * /terms: 73 words and five links, the thinnest page on a 95-page site — and
- * the one page a brand search has to land on. It now gets a real body: what
- * FilePilot is, the privacy mechanism that differentiates it, every category
- * hub, the most-used tools, and the FAQ that backs the FAQPage schema.
+ * Post prose links to routes as `/merge`. The prerendered HTML has to carry the
+ * absolute, trailing-slash canonical form, or the internal-link gate in
+ * seoValidate cannot match them and crawlers follow a redirect on every hop.
  */
+function withCanonicalLinks(html) {
+  return html.replace(/href="(\/[^"#]*)"/g, (match, route) => {
+    const normalized = route.replace(/\/+$/, '') || '/';
+    if (!getSeoRoutes().includes(normalized)) return match;
+    return `href="${canonicalUrlForRoute(normalized)}"`;
+  });
+}
+
+function blogPostContent(route) {
+  const post = blogPosts[route];
+  const byline = [
+    maintainer ? `By ${escapeHtml(maintainer.name)}` : null,
+    `Published ${escapeHtml(post.published)}`,
+    post.updated && post.updated !== post.published ? `Updated ${escapeHtml(post.updated)}` : null,
+    escapeHtml(post.readTime),
+  ].filter(Boolean).join(' · ');
+
+  return `
+      <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <a href="${canonicalUrlForRoute('/blog')}">Blog</a> / <span>${escapeHtml(post.h1)}</span></nav>
+      <h1>${escapeHtml(post.h1)}</h1>
+      <p>${byline}</p>
+      ${renderBlocks(post.blocks)}
+      <section>
+        <h2>Try it yourself</h2>
+        <p><a href="${canonicalUrlForRoute(post.primaryTool)}">${escapeHtml(routeLabel(post.primaryTool))}</a> — runs in your browser, nothing is uploaded.</p>
+      </section>
+      ${post.faqs?.length ? `<section>
+        <h2>Frequently asked questions</h2>
+        <ul>${faqList(route)}</ul>
+      </section>` : ''}
+      <section>
+        <h2>Keep reading</h2>
+        <ul>${linkList(post.related, post.related.length)}</ul>
+      </section>
+    `;
+}
+
 function homeStaticContent() {
   const seo = getRouteSeo('/');
   const popular = [
@@ -698,15 +717,18 @@ function homeStaticContent() {
 /** The blog index listed only two of the three posts, via the generic fallback. */
 function blogIndexContent() {
   const seo = getRouteSeo('/blog');
-  const posts = getRouteSeoEntries().filter((entry) => entry.route.startsWith('/blog/'));
 
   return `
       <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <span>${escapeHtml(routeLabel('/blog'))}</span></nav>
       <h1>${escapeHtml(seo.h1)}</h1>
       <p>${escapeHtml(seo.shortIntro ?? seo.description)}</p>
       <section>
+        <h2>Start here</h2>
+        <ul>${blogPostsByDate().filter((post) => post.cluster === 'pillar').map((post) => `<li><a href="${canonicalUrlForRoute(post.route)}">${escapeHtml(post.h1)}</a> — ${escapeHtml(post.description)}</li>`).join('')}</ul>
+      </section>
+      <section>
         <h2>All articles</h2>
-        <ul>${posts.map((post) => `<li><a href="${canonicalUrlForRoute(post.route)}">${escapeHtml(post.h1 ?? routeLabel(post.route))}</a> — ${escapeHtml(post.description)}</li>`).join('')}</ul>
+        <ul>${blogPostsByDate().filter((post) => post.cluster !== 'pillar').map((post) => `<li><a href="${canonicalUrlForRoute(post.route)}">${escapeHtml(post.h1)}</a> — ${escapeHtml(post.published)} · ${escapeHtml(post.readTime)} — ${escapeHtml(post.description)}</li>`).join('')}</ul>
       </section>
       <section>
         <h2>Explore FilePilot</h2>
@@ -886,16 +908,8 @@ function buildStaticRouteContent(route) {
           ? homeStaticContent()
           : route === '/blog'
             ? blogIndexContent()
-            : extractArticleHtml(route)
-              ? `
-      <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <a href="${canonicalUrlForRoute('/blog')}">Blog</a> / <span>${title}</span></nav>
-      <h1>${title}</h1>
-      ${extractArticleHtml(route)}
-      <section>
-        <h2>Related reading</h2>
-        <ul>${linkList(relatedRoutes)}</ul>
-      </section>
-    `
+            : blogPosts[route]
+              ? blogPostContent(route)
             : `
       <h1>${title}</h1>
       <p>${description}</p>

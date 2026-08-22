@@ -179,15 +179,61 @@ separately since that is what moves average position. Re-run the checker monthly
 and cross-check against Bing Webmaster Tools → Backlinks and GSC → Links, which
 see links from places no local list covers.
 
-### Phase 3 — Weeks 4–12: Topical authority via content
+### Phase 3 — Topical authority via content ✅ complete (2026-08-22)
 
-You have only **3 blog posts** — too thin to signal topical authority.
+The blog went from **3 posts to 12**, and from ~240 crawlable words total to
+**11,952**. The three originals were migrated mechanically, so their wording is
+byte-for-byte unchanged.
 
-| # | Task |
-|---|---|
-| 3.1 | Build a **privacy + how-to content cluster** (hub-and-spoke). Pillar: "Private, offline file processing." Spokes: one deep how-to per tool category + privacy explainers. Use the `seo-cluster` skill to design it. |
-| 3.2 | Publish **8–12 how-to articles** targeting question keywords ("how to combine scanned pages into one PDF without uploading", "how to convert PDF to CBZ for comics"). Each links to the matching tool. |
-| 3.3 | Add **E-E-A-T signals**. ✅ **About page done (2026-08-22, pulled forward — Phase 2.3 depended on it):** `/about` with the technical architecture, a falsifiable verification procedure, the funding model, honest limitations, and a press kit; `AboutPage` schema, plus `Person` + `Organization.founder` that appear automatically once `maintainer` is set in `src/data/aboutContent.ts` (currently `null` — a fabricated identity is worse than none, so the build warns instead). **Still open:** a real name in that field, author bylines on the blog, and "last updated" dates. |
+**Architectural fix landed first.** Posts were hand-written `.tsx` components
+whose prose the prerenderer recovered with a regex over the JSX. That survived
+three posts and would not have survived twelve. Content now lives in
+`src/data/blogContent.ts` as blocks; one `BlogPost.tsx` renders them and the
+prerenderer emits the same blocks as static HTML. `extractArticleHtml` is gone,
+along with the three per-post components. Two drifts were found and closed on the
+way: `Blog.tsx` had a hardcoded list of **3** posts while the prerendered index
+listed **12**, and `seoCrawl.js` still classified routes with a list written
+before `/about` and the comparison pages existed — it was reporting five healthy
+pages as broken.
+
+| # | Task | Status |
+|---|---|---|
+| 3.1 | **Privacy + how-to content cluster (hub-and-spoke).** | ✅ **Done.** Pillar: [`/blog/edit-pdf-without-uploading`](https://www.filepilot.space/blog/edit-pdf-without-uploading/) — 1,295 words, 34 internal links. **Pillar → all 11 spokes, all 11 spokes → pillar**, both enforced by a build gate. |
+| 3.2 | **Publish 8–12 how-to articles targeting question keywords.** | ✅ **Done — 9 new posts, 773–1,295 words each**, every one with `BreadcrumbList` + `BlogPosting` + `FAQPage` schema and a link to the tool that performs the task. |
+| 3.3 | **E-E-A-T signals.** | ✅ **Mostly done.** `/about` shipped (pulled forward in the Phase 2 pass). Author bylines and "last updated" dates now render on every post and feed `author` / `datePublished` / `dateModified`. **Still open: a real name.** `maintainer` in `src/data/aboutContent.ts` is `null`, so posts fall back to an Organization byline. The build warns. |
+
+**The anti-cannibalisation rule — the important design decision.** A post must
+never target the same keyword as a tool page. `/pdf-to-cbz` already owns "pdf to
+cbz" with HowTo schema; a post aiming at that term would have split the signal
+rather than added to it. So tool pages keep transactional intent ("pdf to cbz",
+"resize image to 50kb") and posts take informational intent — "why online forms
+reject your photo", "why blacking out text doesn't redact it", "PDF or CBZ for
+comics?" — handing the reader to the tool at the point of action. Every post
+declares a `primaryTool`, and a build gate fails on a title that duplicates a
+tool page's.
+
+**The nine new posts:**
+
+| Post | Targets | Sends readers to |
+|---|---|---|
+| Edit a PDF without uploading it anywhere *(pillar)* | edit pdf without uploading, offline pdf editor | `/pdf-tools` |
+| Is it safe to upload a PDF to an online tool? | is it safe to upload pdf, are online pdf tools safe | `/pdf-tools` |
+| Why blacking out text doesn't redact it | pdf redaction failure, black box pdf not removed | `/redact-pdf` |
+| Why online forms reject your photo | photo rejected online form, image too large for form | `/image-requirements` |
+| What EXIF data reveals about your photos | does a photo contain my location, exif gps | `/remove-image-metadata` |
+| How to combine scanned pages into one PDF | combine scanned pages, scan too large to email | `/merge` |
+| Compress a PDF without wrecking the quality | why is my pdf so large, compress without quality loss | `/compress` |
+| PDF or CBZ for comics and manga? | cbz vs pdf, what is a cbz file | `/pdf-to-cbz` |
+| Printing multiple PDF pages per sheet | n-up vs booklet, print poster across pages | `/n-up-pdf` |
+
+**Guardrails added** (`seoValidate.js`, build-failing, negative-tested):
+
+- Pillar must link to every spoke; every spoke must link back to the pillar.
+- Every post must declare a `primaryTool` that is an indexable route, and the
+  prerendered HTML must actually contain that link.
+- No post title may duplicate a tool page's title.
+
+**Phase 3 exit check:** `npm run build` — 110 routes, green.
 
 ### Phase 4 — Ongoing: Performance, AI search, monitoring
 

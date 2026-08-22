@@ -23,7 +23,10 @@ import {
   canonicalUrlForRoute,
   getRouteSeo,
   getSeoRoutes,
+  isToolRoute,
 } from './seoRoutes.js';
+import { comparisonContent } from './src/data/comparisons.ts';
+import { blogPosts } from './src/data/blogContent.ts';
 
 const args = process.argv.slice(2);
 const baseArg = args.find((arg) => arg.startsWith('--base='))?.slice('--base='.length)
@@ -65,21 +68,24 @@ function schemaProblems(route, html) {
     return [`JSON-LD does not parse: ${error.message}`];
   }
 
-  const required = route === '/'
-    ? ['WebSite', 'Organization', 'SoftwareApplication', 'FAQPage']
-    : route.startsWith('/blog/')
-      ? ['BreadcrumbList', 'BlogPosting']
-      : TOOL_HUBS.has(route) || route === '/blog'
-        ? ['BreadcrumbList', 'CollectionPage']
-        : LEGAL_ROUTES.has(route)
-          ? ['BreadcrumbList']
-          : ['BreadcrumbList', 'SoftwareApplication', 'FAQPage', 'HowTo'];
-
-  return required.filter((type) => !types.has(type)).map((type) => `schema is missing ${type}`);
+  return expectedSchema(route).filter((type) => !types.has(type)).map((type) => `schema is missing ${type}`);
 }
 
-const TOOL_HUBS = new Set(['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools']);
-const LEGAL_ROUTES = new Set(['/privacy', '/terms', '/support']);
+/**
+ * Derived from the same modules that generate the pages rather than a local list.
+ * This function previously carried its own hardcoded set of hubs and legal pages,
+ * written before the comparison pages and /about existed — so it demanded HowTo
+ * schema of them and reported five healthy pages as broken.
+ */
+function expectedSchema(route) {
+  if (route === '/') return ['WebSite', 'Organization', 'SoftwareApplication', 'FAQPage'];
+  if (route === '/about') return ['BreadcrumbList', 'AboutPage'];
+  if (route === '/blog') return ['BreadcrumbList', 'CollectionPage'];
+  if (blogPosts[route]) return ['BreadcrumbList', 'BlogPosting'];
+  if (comparisonContent[route]) return ['BreadcrumbList', 'WebPage'];
+  if (!isToolRoute(route)) return ['BreadcrumbList'];
+  return ['BreadcrumbList', 'SoftwareApplication', 'FAQPage', 'HowTo'];
+}
 
 async function checkRoute(route) {
   const url = urlForRoute(route);

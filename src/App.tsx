@@ -15,12 +15,10 @@ const ImageToolsHub = lazy(() => import('./pages/ImageToolsHub').then(m => ({ de
 const CategoryHub = lazy(() => import('./pages/CategoryHub').then(m => ({ default: m.CategoryHub })));
 const ComparisonPage = lazy(() => import('./pages/ComparisonPage').then(m => ({ default: m.ComparisonPage })));
 const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
+const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
 
 // ─── Blog ───────────────────────────────────────────────────────────────────
 const Blog = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
-const WhyFilesStayInBrowser = lazy(() => import('./pages/blog/WhyFilesStayInBrowser').then(m => ({ default: m.WhyFilesStayInBrowser })));
-const PrivacyRisksOnlinePdfTools = lazy(() => import('./pages/blog/PrivacyRisksOnlinePdfTools').then(m => ({ default: m.PrivacyRisksOnlinePdfTools })));
-const HowFilepilotKeepsDocumentsPrivate = lazy(() => import('./pages/blog/HowFilepilotKeepsDocumentsPrivate').then(m => ({ default: m.HowFilepilotKeepsDocumentsPrivate })));
 
 // ─── Organize & Manage ───────────────────────────────────────────────────────
 const Merge = lazy(() => import('./pages/Merge').then(m => ({ default: m.Merge })));
@@ -169,6 +167,20 @@ function App() {
 
           <Route path="/about" element={<About />} />
 
+          {/* Phase 3 — blog cluster, all rendered from src/data/blogContent.ts */}
+          <Route path="/blog/edit-pdf-without-uploading" element={<BlogPost route="/blog/edit-pdf-without-uploading" />} />
+          <Route path="/blog/why-files-stay-in-browser" element={<BlogPost route="/blog/why-files-stay-in-browser" />} />
+          <Route path="/blog/privacy-risks-online-pdf-tools" element={<BlogPost route="/blog/privacy-risks-online-pdf-tools" />} />
+          <Route path="/blog/how-filepilot-keeps-documents-private" element={<BlogPost route="/blog/how-filepilot-keeps-documents-private" />} />
+          <Route path="/blog/is-it-safe-to-upload-pdf-online" element={<BlogPost route="/blog/is-it-safe-to-upload-pdf-online" />} />
+          <Route path="/blog/redact-pdf-properly" element={<BlogPost route="/blog/redact-pdf-properly" />} />
+          <Route path="/blog/resize-image-for-online-forms" element={<BlogPost route="/blog/resize-image-for-online-forms" />} />
+          <Route path="/blog/what-exif-data-reveals" element={<BlogPost route="/blog/what-exif-data-reveals" />} />
+          <Route path="/blog/combine-scanned-pages-into-one-pdf" element={<BlogPost route="/blog/combine-scanned-pages-into-one-pdf" />} />
+          <Route path="/blog/compress-pdf-without-losing-quality" element={<BlogPost route="/blog/compress-pdf-without-losing-quality" />} />
+          <Route path="/blog/pdf-comics-to-cbz" element={<BlogPost route="/blog/pdf-comics-to-cbz" />} />
+          <Route path="/blog/print-multiple-pdf-pages-per-sheet" element={<BlogPost route="/blog/print-multiple-pdf-pages-per-sheet" />} />
+
           {/* Phase 1.3 — "alternative to X" pages */}
           <Route path="/smallpdf-alternative" element={<ComparisonPage route="/smallpdf-alternative" />} />
           <Route path="/ilovepdf-alternative" element={<ComparisonPage route="/ilovepdf-alternative" />} />
@@ -177,9 +189,6 @@ function App() {
 
           {/* Blog */}
           <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/why-files-stay-in-browser" element={<WhyFilesStayInBrowser />} />
-          <Route path="/blog/privacy-risks-online-pdf-tools" element={<PrivacyRisksOnlinePdfTools />} />
-          <Route path="/blog/how-filepilot-keeps-documents-private" element={<HowFilepilotKeepsDocumentsPrivate />} />
 
           {/* Organize & Manage */}
           <Route path="/merge" element={<Merge />} />
