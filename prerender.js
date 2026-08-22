@@ -62,11 +62,22 @@ const IMAGE_CATEGORIES = new Set(['image-tools', 'workflows', 'ai-tools']);
 
 const HOME_HUBS = ['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools'];
 
+const STANDALONE_PAGE_ROUTES = new Set(['/support', '/privacy', '/terms']);
+
 /**
  * Profiles that prove FilePilot-the-site is a real, distinct entity.
- * "FilePilot" collides with a Windows file manager, an iOS app and several
- * other browser tool sites, so Google needs corroborating URLs to tell them
- * apart. Add every profile you actually control — the more, the better.
+ *
+ * "FilePilot" is a saturated name. It collides with the File Pilot Windows
+ * Explorer replacement (filepilot.tech — the dominant entity, with XDA and
+ * MajorGeeks coverage), a GitHub project, an iOS app, AND three sites in the
+ * same category: filepilot.org, filepilot.online and filepilottools.top.
+ * Google has no reason to treat this domain as distinct without corroborating
+ * URLs it can crawl and match back here.
+ *
+ * ADD EVERY PROFILE YOU CONTROL AS YOU CREATE IT. Product Hunt, X, Reddit,
+ * LinkedIn, Mastodon, an AlternativeTo listing — each one is both a `sameAs`
+ * edge and a backlink, which is the Phase 2 bottleneck anyway. This list is the
+ * single place to add them; the homepage Organization schema picks them up.
  */
 const ORGANIZATION_PROFILES = [
   'https://github.com/sandip-sol/file-pilot',
@@ -390,6 +401,7 @@ function buildJsonLd(route) {
         name: 'FilePilot',
         description: seo.description,
         inLanguage: 'en',
+        publisher: { '@id': `${url}#organization` },
       },
       {
         '@type': 'Organization',
@@ -398,7 +410,13 @@ function buildJsonLd(route) {
         alternateName: ['FilePilot File Tools', 'filepilot.space'],
         url,
         logo: 'https://www.filepilot.space/filepilot_logo.svg',
-        description: 'FilePilot is a free, privacy-first web app offering browser-based PDF, image, and file tools that process files locally on your device without uploads. It is not affiliated with the File Pilot Windows file manager.',
+        description: 'FilePilot is a free, privacy-first web app offering browser-based PDF, image, and file tools that process files locally on your device without uploads. It is a website, not a desktop application, and is not affiliated with the File Pilot Windows file manager, the FilePilot iOS app, or any similarly named file-tool site.',
+        knowsAbout: [
+          'browser-based PDF editing',
+          'client-side image processing',
+          'privacy-preserving file conversion',
+          'WebAssembly document processing',
+        ],
         // sameAs is how Google links this site to a known entity. Without it the
         // "FilePilot" name is ambiguous — it collides with a Windows file
         // manager, an iOS app and several other file-tool sites.
@@ -470,7 +488,10 @@ function buildJsonLd(route) {
         ...(articleDates(route)),
       },
     );
-  } else if (route === '/support') {
+  } else if (STANDALONE_PAGE_ROUTES.has(route)) {
+    // /privacy and /terms previously fell through every branch and shipped no
+    // JSON-LD at all. On a site whose entire pitch is privacy, the privacy
+    // policy is a trust page worth describing to crawlers.
     graph.push(
       {
         '@type': 'BreadcrumbList',
@@ -480,11 +501,12 @@ function buildJsonLd(route) {
         ],
       },
       {
-        '@type': 'WebPage',
+        '@type': route === '/privacy' ? 'PrivacyPolicy' : 'WebPage',
         name: routeLabel(route),
         url,
         description: seo.description,
         isPartOf: { '@id': `${SITE_URL}#website` },
+        publisher: { '@id': `${SITE_URL}#organization` },
       },
     );
   } else if (isToolRoute(route)) {

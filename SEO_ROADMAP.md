@@ -103,15 +103,17 @@ fronts, in priority order:
 
 ## 3. Phased roadmap
 
-### Phase 0 — This week (quick wins, ~1 day total)
+### Phase 0 — Quick wins ✅ complete (2026-08-22)
 
 | # | Task | Status |
 |---|---|---|
-| 0.1 | **Verify indexation.** In GSC → Pages, confirm all 95 sitemap URLs are "Indexed." Fix any "Crawled – not indexed" (usually thin/duplicate). | ⏳ **Manual** — checklist in [docs/PRIORITY_TOOLS.md](docs/PRIORITY_TOOLS.md#phase-0-manual-checklist--cant-be-automated--do-in-the-browser). |
-| 0.2 | **Add HowTo schema** to every tool page. Each tool is literally a how-to. | ✅ **Done** — `buildHowToSchema` in `prerender.js`, live on 83 tool pages, gated in `seoValidate.js`. |
-| 0.3 | **Submit to IndexNow + GSC** after every deploy. | ✅ **Tooling done** — `npm run indexnow:submit:tail` / `:all` added. GSC request-indexing is manual (see checklist). |
-| 0.4 | **Pick your 12 "winnable tail" tools and tag them as priority.** | ✅ **Done** — `PRIORITY_TAIL_ROUTES` in `seoRoutes.js` (sitemap priority 0.85); keyword targets in [docs/PRIORITY_TOOLS.md](docs/PRIORITY_TOOLS.md). |
-| 0.5 | **Fix the brand collision** with the *File Pilot* Windows file manager. | ✅ **Done** — enriched homepage `Organization` schema (`alternateName` + disambiguating `description`). Titles already use one-word "FilePilot". |
+| 0.1 | **Verify indexation.** | ✅ **Automated half done, GSC half still manual.** `npm run seo:crawl` fetches every sitemap URL from production and checks status, canonical, robots meta, `X-Robots-Tag`, H1 count, schema and prerendered word count. Current result: **96/96 live routes crawlable and indexable.** It caught `/privacy` and `/terms` shipping no JSON-LD at all (now fixed). A new `seoValidate` gate also fails the build on any route that is routed in `App.tsx` but has no HTML, no sitemap entry and no redirect — the exact defect that made `/image-requirements` a silent 404. The GSC/Bing coverage report still has to be read in the browser: [docs/PRIORITY_TOOLS.md](docs/PRIORITY_TOOLS.md#phase-0-manual-checklist--cant-be-automated--do-in-the-browser). |
+| 0.2 | **Add HowTo schema** to every tool page. | ✅ **Done and now verified live** — `buildHowToSchema` in `prerender.js`, gated in `seoValidate.js` at build time and re-checked against production by `seo:crawl`. |
+| 0.3 | **Submit to IndexNow + GSC** after every deploy. | ✅ **Now actually runs.** It never had: `INDEXNOW_KEY` was unset, so every build printed a quiet warning, published no key file and submitted nothing. The build now ends with `node indexnow.js --post-deploy` (production context only, never on previews, never fails the deploy), and a missing key produces a loud, actionable error instead of a warning. **Requires one manual step: set `INDEXNOW_KEY` in Netlify** (see [.env.example](.env.example)). Google ignores IndexNow — use GSC URL Inspection there. |
+| 0.4 | **Pick your winnable tail tools and tag them as priority.** | ✅ **Done, now 13.** `PRIORITY_TAIL_ROUTES` in `seoRoutes.js` (sitemap priority 0.85); `/image-requirements` added — "resize image to 50kb" and its family are the highest-volume winnable terms on the site, and the page was 404ing until this pass. Keyword targets in [docs/PRIORITY_TOOLS.md](docs/PRIORITY_TOOLS.md). |
+| 0.5 | **Fix the brand collision.** | ✅ **Done, scoped correctly.** The collision is not one Windows app — it is filepilot.tech *plus* filepilot.org, filepilot.online and filepilottools.top doing the same thing. Homepage `Organization` schema now carries `sameAs`, an explicit "website, not a desktop app, not affiliated with…" description, `knowsAbout`, and a `WebSite → publisher → Organization` edge. **`ORGANIZATION_PROFILES` in `prerender.js` is the single place to add every profile you create** — each is both a `sameAs` edge and a Phase 2 backlink. |
+
+**Phase 0 exit check:** `npm run build && npm run seo:crawl` — both green.
 
 ### Phase 1 — Weeks 1–4: Win the long tail
 

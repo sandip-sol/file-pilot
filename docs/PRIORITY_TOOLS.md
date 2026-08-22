@@ -3,10 +3,10 @@
 **Source:** `SEO_ROADMAP.md` → Phase 0.4 / Phase 1.1
 **Machine-readable list:** `PRIORITY_TAIL_ROUTES` in `seoRoutes.js`
 
-These 12 tools target keywords the giants (Smallpdf, iLovePDF, PDF24, Adobe) barely
-compete for. Each has low search volume but **low competition**, so they are realistically
+These 13 tools target keywords the giants (Smallpdf, iLovePDF, PDF24, Adobe) barely
+compete for. Most have low search volume but **low competition**, so they are realistically
 winnable to page 1 in 2–4 months with focused on-page work + a handful of backlinks.
-**Do not spread effort across all 90 tools — win these 12 first.**
+**Do not spread effort across all 90 tools — win these 13 first.**
 
 Each of these routes is:
 - Boosted to sitemap priority `0.85` (above the `0.8` tool default).
@@ -26,6 +26,7 @@ Each of these routes is:
 | 10 | `/json-to-pdf` | json to pdf | convert json to pdf, json file to pdf | Dev audience, low competition. |
 | 11 | `/markdown-to-pdf` | markdown to pdf | md to pdf, convert markdown to pdf, readme to pdf | Dev/writer audience; privacy angle strong. |
 | 12 | `/pdf-to-zip` | pdf to zip | split pdf into zip, pdf pages to zip, batch pdf to zip | Niche batch workflow, thin SERP. |
+| 13 | `/image-requirements` | resize image to exact size | resize image to 50kb, resize image to 20kb, image resize in kb, resize photo for form | **Highest-volume term in the set.** Form/exam/visa uploads with hard KB limits; strong privacy angle (ID photos, signatures). Was 404ing in production until 2026-08-22. |
 
 ## What to do on each page (Phase 1.1)
 

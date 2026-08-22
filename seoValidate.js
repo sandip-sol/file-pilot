@@ -399,12 +399,44 @@ function validateNoInlinePageSeo() {
   }
 }
 
+
+/**
+ * Every route the app serves must resolve for a crawler hitting it cold.
+ *
+ * `/image-requirements` did not: it was routed in App.tsx, linked from
+ * RelatedTools, and given sitemap priority 0.9 in seoRoutes.js — but it was
+ * never added to the tool registry, so no static HTML was written and no
+ * redirect covered it. In-app navigation worked (react-router handled it
+ * client-side) while every direct hit and every crawler got a hard 404. The
+ * page was invisible for months without anything failing.
+ *
+ * A route is acceptable if it is in the sitemap, has a prerendered shell
+ * (noindex variants do), or is a redirect source.
+ */
+function validateNoOrphanRoutes() {
+  const appSource = readFileSync(new URL('./src/App.tsx', import.meta.url), 'utf8');
+  const appRoutes = [...appSource.matchAll(/<Route\s+path="([^"]+)"/g)]
+    .map(([, path]) => path)
+    .filter((path) => path !== '*');
+
+  const sitemapRoutes = new Set(getSeoRoutes());
+  const redirectSources = loadRedirectSources();
+
+  for (const route of appRoutes) {
+    if (sitemapRoutes.has(route)) continue;
+    if (redirectSources.has(route)) continue;
+    if (existsSync(getHtmlPath(route))) continue;
+    fail(`${route} is routed in App.tsx but has no prerendered HTML, no sitemap entry and no redirect — a direct hit or a crawler gets a 404.`);
+  }
+}
+
 validateFilesExist();
 validateRobots();
 validateSitemap();
 validateRedirects();
 validateSitemapRouteHtml();
 validateNoInlinePageSeo();
+validateNoOrphanRoutes();
 validate404();
 
 if (errors.length > 0) {

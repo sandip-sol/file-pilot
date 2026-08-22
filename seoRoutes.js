@@ -47,6 +47,10 @@ export const PRIORITY_TAIL_ROUTES = [
   '/json-to-pdf',
   '/markdown-to-pdf',
   '/pdf-to-zip',
+  // Added 2026-08-22. This page was returning a hard 404 in production despite
+  // being routed and linked; "resize image to 50kb" and its family are the
+  // highest-volume winnable terms on the site, so it joins the focus set.
+  '/image-requirements',
 ];
 
 const PRIORITY_TAIL_ROUTE_SET = new Set(PRIORITY_TAIL_ROUTES);

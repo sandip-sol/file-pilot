@@ -7,6 +7,10 @@ const dryRun = args.includes('--dry-run');
 const usePriorityRoutes = args.includes('--priority');
 const useTailRoutes = args.includes('--tail');
 const useAllRoutes = args.includes('--all');
+// Post-deploy mode: runs at the end of every build. It must never fail the
+// build and must never fire from a deploy preview or branch deploy, which
+// would submit preview URLs (or duplicate production URLs) to IndexNow.
+const postDeploy = args.includes('--post-deploy');
 const submittedArgs = args.filter((arg) => !arg.startsWith('--'));
 const indexableRoutes = new Set(getSeoRoutes());
 const canonicalUrls = new Map(getSeoRoutes().map((route) => [canonicalUrlForRoute(route), route]));
@@ -16,7 +20,8 @@ const usage = `Usage:
   npm run indexnow:submit -- https://www.filepilot.space/merge/ https://www.filepilot.space/compress/
   npm run indexnow:submit:priority -- --dry-run   # launch/head set
   npm run indexnow:submit:tail -- --dry-run       # Phase 1 focus tools
-  npm run indexnow:submit:all -- --dry-run        # every indexable route`;
+  npm run indexnow:submit:all -- --dry-run        # every indexable route
+  node indexnow.js --post-deploy                 # runs from the build; production-only, never fails`;
 
 function fail(message) {
   console.error(message);
@@ -48,7 +53,7 @@ function validateUrl(value) {
 
 function getUrlList() {
   let urls;
-  if (useAllRoutes) urls = getSeoRoutes().map(canonicalUrlForRoute);
+  if (postDeploy || useAllRoutes) urls = getSeoRoutes().map(canonicalUrlForRoute);
   else if (useTailRoutes) urls = PRIORITY_TAIL_ROUTES.map(canonicalUrlForRoute);
   else if (usePriorityRoutes) urls = PRIORITY_SEO_ROUTES.map(canonicalUrlForRoute);
   else urls = submittedArgs;
@@ -61,6 +66,17 @@ function getUrlList() {
 }
 
 async function submit() {
+  if (postDeploy) {
+    if (process.env.CONTEXT !== 'production') {
+      console.log(`IndexNow: skipped (CONTEXT=${process.env.CONTEXT ?? 'unset'}, not a production deploy).`);
+      return;
+    }
+    if (!key) {
+      console.log('IndexNow: skipped (INDEXNOW_KEY not set). See generateIndexNowKeyFile.js output above.');
+      return;
+    }
+  }
+
   if (!key) fail('INDEXNOW_KEY is not set. Add it to Netlify and to your local shell before submitting.');
 
   const urlList = getUrlList();
@@ -96,5 +112,6 @@ async function submit() {
 
 submit().catch((error) => {
   console.error('IndexNow submission failed:', error.message);
-  process.exitCode = 1;
+  // A search-engine ping is not worth failing a deploy over.
+  if (!postDeploy) process.exitCode = 1;
 });
