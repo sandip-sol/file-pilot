@@ -34,6 +34,7 @@ const lines = [
   `Canonical site: ${SITE_URL}`,
   `Sitemap: ${new URL('/sitemap.xml', SITE_URL).toString()}`,
   `Robots: ${new URL('/robots.txt', SITE_URL).toString()}`,
+  `Full content: ${new URL('/llms-full.txt', SITE_URL).toString()}`,
   '',
   '## Main Pages',
   '',

@@ -235,10 +235,28 @@ tool page's.
 
 **Phase 3 exit check:** `npm run build` — 110 routes, green.
 
-### Phase 4 — Ongoing: Performance, AI search, monitoring
+### Phase 4 — Performance, AI search, monitoring ✅ complete (2026-08-22)
 
-| # | Task |
+| # | Task | Status |
+|---|---|---|
+| 4.1 | **Core Web Vitals.** | ✅ **Done — and the roadmap's hunch was right for the wrong reason.** The engines *were* code-split, but `manualChunks` had made the pdf-lib chunk the host for Rollup's shared CommonJS interop helpers, so **the entry chunk imported it — every page on the site downloaded and executed a PDF engine to get a few lines of interop shim.** Removing the config took the homepage from **401 KB to 224 KB gzipped, a 44% cut**. Four strategies were measured; three made it worse (534, 469, 422 KB) and the numbers are recorded in `vite.config.ts` so nobody re-adds it on intuition. New `npm run seo:budget` fails the build if a content page exceeds its budget or statically imports a heavy engine. |
+| 4.2 | **GEO / AI search.** | ✅ **Done.** `llms.txt` was an index — titles and URLs, nothing quotable. Added **`llms-full.txt`: 34,000 words, 351 question-and-answer pairs**, generated from the same data the site renders from, so an assistant ingests one file instead of crawling 110 pages. Referenced from `llms.txt` and served as UTF-8. AI crawler access (GPTBot, PerplexityBot, ClaudeBot, Google-Extended) was already verified in Phase 0, and since none of them execute JavaScript, the prerendered shell is what they read — which is why Phase 3's word counts mattered. |
+| 4.3 | **Rank tracking.** | ✅ **Done, within what is possible without paid data.** Live SERP APIs cost money and scraping Google breaks its terms, so `npm run seo:ranks` reads the CSV Search Console already exports for free (Performance → Export → CSV → `Queries.csv`) and appends a dated snapshot to `seo-ranks.json`, reporting movement per term. The 48 tracked terms are machine-readable in `src/data/trackedKeywords.ts`. **It reports position, not clicks** — at position 58 the click count is noise, and judging this work by clicks for the first few months would mean concluding it failed while it was working. |
+| 4.4 | **Drift monitoring.** | ✅ **Done — `npm run seo:drift`.** `seoValidate` enforces invariants and cannot detect *change*: every rule still passes when a refactor silently rewrites 40 titles. This snapshots title, description, canonical, robots, H1, schema types, word count and internal links for all 110 routes into a committed `seo-baseline.json`, so drift shows up in code review like any other diff. Intentional edits are accepted with `-- --save`. Every regression in this project's history would have surfaced here. |
+
+**The tooling now in place**
+
+| Command | What it catches |
 |---|---|
+| `npm run build` | Runs validate + budget. Fails on broken SEO or a payload regression. |
+| `npm run seo:validate` | Invariants: titles, canonicals, schema, orphan routes, internal links, cluster integrity, client/prerender drift. |
+| `npm run seo:budget` | A content page importing a processing engine, or exceeding its gzip budget. |
+| `npm run seo:drift` | Unintended change to any SEO-critical field since the last accepted baseline. |
+| `npm run seo:crawl` | What production actually serves — status, canonical, robots, schema, word count. |
+| `npm run seo:backlinks` | Whether a submitted listing produced a real, live, dofollow link. |
+| `npm run seo:ranks` | Position trend for the 48 tracked terms, from a GSC CSV export. |
+
+---|---|
 | 4.1 | **Core Web Vitals.** Your bundles are heavy (index 499K + pdf-lib 428K + pdfjs 402K + ONNX 387K). Confirm these are lazy-loaded per-tool (they appear code-split — verify tool JS doesn't load on the homepage). Check field data in GSC → Core Web Vitals + PageSpeed. Aim LCP < 2.5s, INP < 200ms on the prerendered shell. |
 | 4.2 | **GEO / AI search.** You already have llms.txt — good. Add HowTo schema (0.2) + concise, quotable answer paragraphs so ChatGPT/Perplexity/AI Overviews cite you. This is a growing traffic source the giants under-optimize. |
 | 4.3 | **Rank tracking.** Track your 12 priority terms weekly. Watch GSC position trend, not clicks (clicks lag position by weeks). |

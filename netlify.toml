@@ -12,6 +12,19 @@
   [headers.values]
     Content-Type = "text/plain; charset=UTF-8"
 
+# llms.txt and its full-content companion. Explicit UTF-8 so the em dashes and
+# quotes in the prose are not mangled for the assistants that read them.
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=UTF-8"
+
+[[headers]]
+  for = "/llms-full.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=UTF-8"
+    Cache-Control = "public, max-age=3600"
+
 [[headers]]
   for = "/*"
   [headers.values]

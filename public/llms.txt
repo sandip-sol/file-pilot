@@ -5,6 +5,7 @@
 Canonical site: https://www.filepilot.space/
 Sitemap: https://www.filepilot.space/sitemap.xml
 Robots: https://www.filepilot.space/robots.txt
+Full content: https://www.filepilot.space/llms-full.txt
 
 ## Main Pages
 

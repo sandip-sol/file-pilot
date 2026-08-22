@@ -1,0 +1,2582 @@
+{
+  "/": {
+    "title": "FilePilot — Free Private PDF & Image Tools, No Upload",
+    "description": "FilePilot is a free toolkit of 90+ PDF and image tools that run entirely in your browser. Merge, split, compress, convert and edit files privately — nothing is ever uploaded to a server.",
+    "canonical": "https://www.filepilot.space/",
+    "robots": "index,follow",
+    "h1": "Free, private PDF and image tools that run in your browser",
+    "schemaTypes": [
+      "FAQPage",
+      "ItemList",
+      "Organization",
+      "SoftwareApplication",
+      "WebSite"
+    ],
+    "words": 608,
+    "links": [
+      "https://www.filepilot.space/about/",
+      "https://www.filepilot.space/adobe-acrobat-online-alternative/",
+      "https://www.filepilot.space/ai-tools/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/why-files-stay-in-browser/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/convert-image/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/ilovepdf-alternative/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/organize-pdf/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/pdf24-alternative/",
+      "https://www.filepilot.space/privacy/",
+      "https://www.filepilot.space/redact-pdf/",
+      "https://www.filepilot.space/remove-background/",
+      "https://www.filepilot.space/resize-image/",
+      "https://www.filepilot.space/smallpdf-alternative/",
+      "https://www.filepilot.space/split/",
+      "https://www.filepilot.space/support/",
+      "https://www.filepilot.space/terms/"
+    ]
+  },
+  "/pdf-tools": {
+    "title": "Free Online PDF Tools — Private, No Upload | FilePilot",
+    "description": "A complete collection of free, browser-based PDF tools. Merge, split, compress, convert, annotate, redact, sign and organize PDFs — all processed privately on your device with no uploads.",
+    "canonical": "https://www.filepilot.space/pdf-tools/",
+    "robots": "index,follow",
+    "h1": "Free Online PDF Tools",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "CollectionPage"
+    ],
+    "words": 367,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-blank-page/",
+      "https://www.filepilot.space/add-page-labels/",
+      "https://www.filepilot.space/add-stamp/",
+      "https://www.filepilot.space/adobe-acrobat-online-alternative/",
+      "https://www.filepilot.space/ai-tools/",
+      "https://www.filepilot.space/alternate-merge/",
+      "https://www.filepilot.space/annotate-pdf/",
+      "https://www.filepilot.space/background-color/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/bookmark/",
+      "https://www.filepilot.space/combine-single-page/",
+      "https://www.filepilot.space/compare-pdf/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/crop-pdf/",
+      "https://www.filepilot.space/delete-pages/",
+      "https://www.filepilot.space/deskew-pdf/",
+      "https://www.filepilot.space/divide-pages/",
+      "https://www.filepilot.space/extract-images/",
+      "https://www.filepilot.space/extract-pages/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/find-and-redact/",
+      "https://www.filepilot.space/fix-page-size/",
+      "https://www.filepilot.space/flatten-pdf/",
+      "https://www.filepilot.space/form-creator/",
+      "https://www.filepilot.space/form-filler/",
+      "https://www.filepilot.space/grid-combine/",
+      "https://www.filepilot.space/header-footer/",
+      "https://www.filepilot.space/ilovepdf-alternative/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/jpg-to-pdf/",
+      "https://www.filepilot.space/json-to-pdf/",
+      "https://www.filepilot.space/markdown-to-pdf/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/n-up-pdf/",
+      "https://www.filepilot.space/organize-pdf/",
+      "https://www.filepilot.space/overlay-pdf/",
+      "https://www.filepilot.space/page-dimensions/",
+      "https://www.filepilot.space/page-numbers/",
+      "https://www.filepilot.space/pdf-booklet/",
+      "https://www.filepilot.space/pdf-metadata/",
+      "https://www.filepilot.space/pdf-security/",
+      "https://www.filepilot.space/pdf-to-cbz/",
+      "https://www.filepilot.space/pdf-to-greyscale/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-to-jpg/",
+      "https://www.filepilot.space/pdf-to-json/",
+      "https://www.filepilot.space/pdf-to-markdown/",
+      "https://www.filepilot.space/pdf-to-svg/",
+      "https://www.filepilot.space/pdf-to-zip/",
+      "https://www.filepilot.space/pdf24-alternative/",
+      "https://www.filepilot.space/posterize-pdf/",
+      "https://www.filepilot.space/redact-pdf/",
+      "https://www.filepilot.space/remove-annotations/",
+      "https://www.filepilot.space/remove-blank-pages/",
+      "https://www.filepilot.space/repair-pdf/",
+      "https://www.filepilot.space/reverse-pdf/",
+      "https://www.filepilot.space/rotate-pdf/",
+      "https://www.filepilot.space/sanitize-pdf/",
+      "https://www.filepilot.space/sign-pdf/",
+      "https://www.filepilot.space/smallpdf-alternative/",
+      "https://www.filepilot.space/split/",
+      "https://www.filepilot.space/table-of-contents/",
+      "https://www.filepilot.space/text-to-pdf/",
+      "https://www.filepilot.space/watermark-pdf/"
+    ]
+  },
+  "/image-tools": {
+    "title": "Free Online Image Tools — Private, No Upload | FilePilot",
+    "description": "A complete suite of free, browser-based image tools. Compress, resize, crop, convert, watermark, strip metadata and remove backgrounds — all processed privately on your device with no uploads.",
+    "canonical": "https://www.filepilot.space/image-tools/",
+    "robots": "index,follow",
+    "h1": "Free Online Image Tools",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "CollectionPage"
+    ],
+    "words": 128,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/ai-enhance-image/",
+      "https://www.filepilot.space/ai-tools/",
+      "https://www.filepilot.space/blur-face/",
+      "https://www.filepilot.space/change-background/",
+      "https://www.filepilot.space/color-picker/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/convert-image/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/ecommerce-image-formatter/",
+      "https://www.filepilot.space/favicon-generator/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-quality-analyzer/",
+      "https://www.filepilot.space/image-requirements/",
+      "https://www.filepilot.space/image-to-svg/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/object-remover/",
+      "https://www.filepilot.space/passport-photo-validator/",
+      "https://www.filepilot.space/photo-editor/",
+      "https://www.filepilot.space/qr-generator/",
+      "https://www.filepilot.space/remove-background/",
+      "https://www.filepilot.space/remove-image-metadata/",
+      "https://www.filepilot.space/resize-image/",
+      "https://www.filepilot.space/rotate-image/",
+      "https://www.filepilot.space/scan-images-to-pdf/",
+      "https://www.filepilot.space/social-media-resizer/",
+      "https://www.filepilot.space/upscale-image/",
+      "https://www.filepilot.space/watermark-image/",
+      "https://www.filepilot.space/website-image-optimiser/"
+    ]
+  },
+  "/image-workflows": {
+    "title": "Image Workflow Tools - Format, Validate and Prepare Images | FilePilot",
+    "description": "Prepare images for social media, ecommerce, passport photos, favicons, QR codes, and PDF workflows with private browser-based tools.",
+    "canonical": "https://www.filepilot.space/image-workflows/",
+    "robots": "index,follow",
+    "h1": "Image Workflow Tools",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "CollectionPage"
+    ],
+    "words": 84,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/ai-tools/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/ecommerce-image-formatter/",
+      "https://www.filepilot.space/favicon-generator/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-requirements/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/passport-photo-validator/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/qr-generator/",
+      "https://www.filepilot.space/scan-images-to-pdf/",
+      "https://www.filepilot.space/social-media-resizer/"
+    ]
+  },
+  "/ai-tools": {
+    "title": "AI Image Tools - Private Browser-Based Editing | FilePilot",
+    "description": "Remove backgrounds, enhance images, upscale photos, and clean edits with AI-assisted tools that run in your browser where supported.",
+    "canonical": "https://www.filepilot.space/ai-tools/",
+    "robots": "index,follow",
+    "h1": "AI Image Tools",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "CollectionPage"
+    ],
+    "words": 71,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/ai-enhance-image/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/change-background/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/object-remover/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/remove-background/",
+      "https://www.filepilot.space/upscale-image/"
+    ]
+  },
+  "/blog": {
+    "title": "FilePilot Blog — Privacy, PDFs and Image Tools",
+    "description": "Articles about privacy-first file processing, browser-based PDF tools, image tools, and why your documents should never leave your device.",
+    "canonical": "https://www.filepilot.space/blog/",
+    "robots": "index,follow",
+    "h1": "FilePilot Blog",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "CollectionPage"
+    ],
+    "words": 610,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/combine-scanned-pages-into-one-pdf/",
+      "https://www.filepilot.space/blog/compress-pdf-without-losing-quality/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/blog/how-filepilot-keeps-documents-private/",
+      "https://www.filepilot.space/blog/is-it-safe-to-upload-pdf-online/",
+      "https://www.filepilot.space/blog/pdf-comics-to-cbz/",
+      "https://www.filepilot.space/blog/print-multiple-pdf-pages-per-sheet/",
+      "https://www.filepilot.space/blog/privacy-risks-online-pdf-tools/",
+      "https://www.filepilot.space/blog/redact-pdf-properly/",
+      "https://www.filepilot.space/blog/resize-image-for-online-forms/",
+      "https://www.filepilot.space/blog/what-exif-data-reveals/",
+      "https://www.filepilot.space/blog/why-files-stay-in-browser/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/privacy/"
+    ]
+  },
+  "/about": {
+    "title": "About FilePilot — Who Builds It and How It Works",
+    "description": "Who builds FilePilot, why it processes files in your browser instead of on a server, the libraries it uses, how to verify the no-upload claim yourself, and what it deliberately cannot do.",
+    "canonical": "https://www.filepilot.space/about/",
+    "robots": "index,follow",
+    "h1": "About FilePilot",
+    "schemaTypes": [
+      "AboutPage",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "words": 1265,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/why-files-stay-in-browser/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/privacy/",
+      "https://www.filepilot.space/smallpdf-alternative/"
+    ]
+  },
+  "/support": {
+    "title": "Support FilePilot | Keep private file tools free",
+    "description": "Support FilePilot and help keep private, browser-based file tools free, ad-free and improving.",
+    "canonical": "https://www.filepilot.space/support/",
+    "robots": "index,follow",
+    "h1": "Support FilePilot",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "WebPage"
+    ],
+    "words": 70,
+    "links": [
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/privacy/"
+    ]
+  },
+  "/privacy": {
+    "title": "Privacy Policy | FilePilot",
+    "description": "Learn how FilePilot protects files with browser-based processing and no server uploads for supported tools.",
+    "canonical": "https://www.filepilot.space/privacy/",
+    "robots": "index,follow",
+    "h1": "Privacy Policy",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "PrivacyPolicy"
+    ],
+    "words": 72,
+    "links": [
+      "https://www.filepilot.space/blog/how-filepilot-keeps-documents-private/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/terms": {
+    "title": "Terms of Service | FilePilot",
+    "description": "Read the terms for using FilePilot browser-based PDF, image, and file tools.",
+    "canonical": "https://www.filepilot.space/terms/",
+    "robots": "index,follow",
+    "h1": "Terms of Service",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "WebPage"
+    ],
+    "words": 66,
+    "links": [
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/privacy/"
+    ]
+  },
+  "/smallpdf-alternative": {
+    "title": "Smallpdf Alternative That Never Uploads Your Files | FilePilot",
+    "description": "A free Smallpdf alternative that processes PDFs in your browser instead of on a server. No uploads, no account, no file limits. Compare how the two handle your documents.",
+    "canonical": "https://www.filepilot.space/smallpdf-alternative/",
+    "robots": "index,follow",
+    "h1": "A Smallpdf Alternative That Doesn't Upload Your Files",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "WebPage"
+    ],
+    "words": 916,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/delete-pages/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/jpg-to-pdf/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/pdf-to-jpg/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/rotate-pdf/",
+      "https://www.filepilot.space/sign-pdf/",
+      "https://www.filepilot.space/split/",
+      "https://www.filepilot.space/watermark-pdf/"
+    ]
+  },
+  "/ilovepdf-alternative": {
+    "title": "iLovePDF Alternative With No File Uploads | FilePilot",
+    "description": "A free iLovePDF alternative that runs entirely in your browser. Merge, split, compress and convert PDFs without uploading them to a server, without an account and without task limits.",
+    "canonical": "https://www.filepilot.space/ilovepdf-alternative/",
+    "robots": "index,follow",
+    "h1": "An iLovePDF Alternative That Keeps Files on Your Device",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "WebPage"
+    ],
+    "words": 809,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/jpg-to-pdf/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/organize-pdf/",
+      "https://www.filepilot.space/page-numbers/",
+      "https://www.filepilot.space/pdf-to-jpg/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/repair-pdf/",
+      "https://www.filepilot.space/rotate-pdf/",
+      "https://www.filepilot.space/split/",
+      "https://www.filepilot.space/watermark-pdf/"
+    ]
+  },
+  "/adobe-acrobat-online-alternative": {
+    "title": "Free Adobe Acrobat Online Alternative, No Upload | FilePilot",
+    "description": "A free alternative to Adobe Acrobat's online PDF tools that needs no Adobe account and never uploads your file. Merge, split, compress, convert and sign PDFs in your browser.",
+    "canonical": "https://www.filepilot.space/adobe-acrobat-online-alternative/",
+    "robots": "index,follow",
+    "h1": "A Free Alternative to Adobe Acrobat's Online PDF Tools",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "WebPage"
+    ],
+    "words": 773,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/flatten-pdf/",
+      "https://www.filepilot.space/form-filler/",
+      "https://www.filepilot.space/jpg-to-pdf/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/organize-pdf/",
+      "https://www.filepilot.space/pdf-metadata/",
+      "https://www.filepilot.space/pdf-to-jpg/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/redact-pdf/",
+      "https://www.filepilot.space/split/"
+    ]
+  },
+  "/pdf24-alternative": {
+    "title": "PDF24 Alternative — Browser-Based, No Upload | FilePilot",
+    "description": "A free PDF24 alternative that processes files in your browser instead of on a server, with no desktop install. Compare PDF24 Tools, PDF24 Creator and FilePilot on where your file goes.",
+    "canonical": "https://www.filepilot.space/pdf24-alternative/",
+    "robots": "index,follow",
+    "h1": "A PDF24 Alternative That Runs in the Browser, Not on a Server",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "WebPage"
+    ],
+    "words": 790,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/delete-pages/",
+      "https://www.filepilot.space/extract-images/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/page-numbers/",
+      "https://www.filepilot.space/pdf-security/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/rotate-pdf/",
+      "https://www.filepilot.space/split/"
+    ]
+  },
+  "/merge": {
+    "title": "Merge PDF Files Online – Free & Private | FilePilot",
+    "description": "Combine multiple PDF files into one document. 100% free, secure, and client-side only.",
+    "canonical": "https://www.filepilot.space/merge/",
+    "robots": "index,follow",
+    "h1": "Merge PDFs",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 399,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/jpg-to-pdf/",
+      "https://www.filepilot.space/organize-pdf/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/split/"
+    ]
+  },
+  "/split": {
+    "title": "Split PDF Online – Extract Pages Free | FilePilot",
+    "description": "Split PDF documents or extract specific pages. Fast, free, and secure browser-based tool.",
+    "canonical": "https://www.filepilot.space/split/",
+    "robots": "index,follow",
+    "h1": "Split PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 411,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/delete-pages/",
+      "https://www.filepilot.space/extract-pages/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/organize-pdf/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/organize-pdf": {
+    "title": "Organize PDF Pages – Reorder, Rotate, Delete | FilePilot",
+    "description": "Reorder, rotate, and delete PDF pages with drag-and-drop thumbnails. Everything stays private in your browser.",
+    "canonical": "https://www.filepilot.space/organize-pdf/",
+    "robots": "index,follow",
+    "h1": "Organize PDF Pages",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 341,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/delete-pages/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/rotate-pdf/",
+      "https://www.filepilot.space/split/"
+    ]
+  },
+  "/rotate-pdf": {
+    "title": "Rotate PDF Pages Online – Free & Private | FilePilot",
+    "description": "Rotate all pages of a PDF by 90, 180, or 270 degrees. 100% browser-based, no uploads.",
+    "canonical": "https://www.filepilot.space/rotate-pdf/",
+    "robots": "index,follow",
+    "h1": "Rotate PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 304,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-blank-page/",
+      "https://www.filepilot.space/delete-pages/",
+      "https://www.filepilot.space/extract-pages/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/reverse-pdf/"
+    ]
+  },
+  "/delete-pages": {
+    "title": "Delete PDF Pages Online – Free & Private | FilePilot",
+    "description": "Remove specific pages from your PDF instantly in the browser. Enter page numbers or ranges. 100% private — no uploads.",
+    "canonical": "https://www.filepilot.space/delete-pages/",
+    "robots": "index,follow",
+    "h1": "Delete Pages",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 331,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-blank-page/",
+      "https://www.filepilot.space/alternate-merge/",
+      "https://www.filepilot.space/extract-pages/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/reverse-pdf/"
+    ]
+  },
+  "/extract-pages": {
+    "title": "Extract PDF Pages Online – Free & Private | FilePilot",
+    "description": "Pull out specific pages from a PDF into a new document. Browser-based, private.",
+    "canonical": "https://www.filepilot.space/extract-pages/",
+    "robots": "index,follow",
+    "h1": "Extract Pages",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 313,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-blank-page/",
+      "https://www.filepilot.space/alternate-merge/",
+      "https://www.filepilot.space/n-up-pdf/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/reverse-pdf/"
+    ]
+  },
+  "/reverse-pdf": {
+    "title": "Reverse PDF Pages Order – Free & Private Online Tool | FilePilot",
+    "description": "Reverse the page order of your PDF instantly in the browser. No uploads, 100% private and free. Great for reading books and documents in reverse.",
+    "canonical": "https://www.filepilot.space/reverse-pdf/",
+    "robots": "index,follow",
+    "h1": "Reverse PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 313,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-blank-page/",
+      "https://www.filepilot.space/alternate-merge/",
+      "https://www.filepilot.space/n-up-pdf/",
+      "https://www.filepilot.space/overlay-pdf/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/add-blank-page": {
+    "title": "Add Blank Page to PDF – Insert Empty Page Online Free | FilePilot",
+    "description": "Insert a blank page at the beginning, end, or any position in your PDF. 100% private — processed in your browser.",
+    "canonical": "https://www.filepilot.space/add-blank-page/",
+    "robots": "index,follow",
+    "h1": "Add Blank Page",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 335,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/alternate-merge/",
+      "https://www.filepilot.space/divide-pages/",
+      "https://www.filepilot.space/n-up-pdf/",
+      "https://www.filepilot.space/overlay-pdf/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/alternate-merge": {
+    "title": "Alternate Merge PDFs – Interleave Pages from Multiple PDFs | FilePilot",
+    "description": "Interleave pages from two or more PDFs in alternating order. Perfect for combining front and back scans. 100% private — browser only.",
+    "canonical": "https://www.filepilot.space/alternate-merge/",
+    "robots": "index,follow",
+    "h1": "Alternate Merge",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 322,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/combine-single-page/",
+      "https://www.filepilot.space/divide-pages/",
+      "https://www.filepilot.space/n-up-pdf/",
+      "https://www.filepilot.space/overlay-pdf/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/n-up-pdf": {
+    "title": "N-Up PDF – Multiple Pages Per Sheet Online Free | FilePilot",
+    "description": "Put multiple PDF pages on one sheet — 2-up, 4-up or 9-up. Free N-up PDF tool that runs in your browser with no file uploads.",
+    "canonical": "https://www.filepilot.space/n-up-pdf/",
+    "robots": "index,follow",
+    "h1": "N-Up PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 606,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/combine-single-page/",
+      "https://www.filepilot.space/grid-combine/",
+      "https://www.filepilot.space/pdf-booklet/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/posterize-pdf/"
+    ]
+  },
+  "/overlay-pdf": {
+    "title": "Overlay / Underlay PDFs – Stamp One PDF Over Another | FilePilot",
+    "description": "Layer one PDF on top of or behind another. Perfect for adding letterheads, watermarks, or background templates. 100% private.",
+    "canonical": "https://www.filepilot.space/overlay-pdf/",
+    "robots": "index,follow",
+    "h1": "Overlay PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 306,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/combine-single-page/",
+      "https://www.filepilot.space/divide-pages/",
+      "https://www.filepilot.space/grid-combine/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/posterize-pdf/"
+    ]
+  },
+  "/divide-pages": {
+    "title": "Divide PDF Pages Online – Free & Private | FilePilot",
+    "description": "Split each PDF page in half horizontally or vertically. Browser-based, no uploads.",
+    "canonical": "https://www.filepilot.space/divide-pages/",
+    "robots": "index,follow",
+    "h1": "Divide Pages",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 310,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-page-labels/",
+      "https://www.filepilot.space/combine-single-page/",
+      "https://www.filepilot.space/grid-combine/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/posterize-pdf/"
+    ]
+  },
+  "/combine-single-page": {
+    "title": "Combine PDF Pages Into One Page – Stitch Vertically | FilePilot",
+    "description": "Stitch every page of a PDF into one long, continuous page. Free browser-based tool for scrollable documents — no uploads, no signup.",
+    "canonical": "https://www.filepilot.space/combine-single-page/",
+    "robots": "index,follow",
+    "h1": "Combine PDF Pages into One",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 575,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/grid-combine/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/n-up-pdf/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/grid-combine": {
+    "title": "Grid Combine PDFs – Arrange Multiple PDFs in a Grid Layout | FilePilot",
+    "description": "Arrange first pages of multiple PDFs in a grid layout. Create comparison sheets or overviews. 100% private — browser only.",
+    "canonical": "https://www.filepilot.space/grid-combine/",
+    "robots": "index,follow",
+    "h1": "Grid Combine",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 317,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-page-labels/",
+      "https://www.filepilot.space/pdf-metadata/",
+      "https://www.filepilot.space/pdf-to-zip/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/posterize-pdf/"
+    ]
+  },
+  "/posterize-pdf": {
+    "title": "Posterize PDF – Tile Large Pages for Poster Printing | FilePilot",
+    "description": "Split a large PDF page into printable tiles and assemble a full-size poster on a normal printer. Free, browser-based, no file uploads.",
+    "canonical": "https://www.filepilot.space/posterize-pdf/",
+    "robots": "index,follow",
+    "h1": "Posterize PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 614,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/crop-pdf/",
+      "https://www.filepilot.space/fix-page-size/",
+      "https://www.filepilot.space/n-up-pdf/",
+      "https://www.filepilot.space/pdf-booklet/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/add-page-labels": {
+    "title": "Add Page Labels to PDF – Roman Numerals & Prefixes | FilePilot",
+    "description": "Add custom PDF page labels — Roman numerals, letters, or prefixes like A-1. Free browser-based tool, no uploads and no signup.",
+    "canonical": "https://www.filepilot.space/add-page-labels/",
+    "robots": "index,follow",
+    "h1": "Add Page Labels to PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 658,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/bookmark/",
+      "https://www.filepilot.space/organize-pdf/",
+      "https://www.filepilot.space/page-numbers/",
+      "https://www.filepilot.space/pdf-metadata/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/pdf-metadata": {
+    "title": "PDF Metadata Editor - View, Edit and Remove PDF Metadata | FilePilot",
+    "description": "View, edit, or remove all PDF metadata including title, author, keywords, and dates. 100% private, processed locally in your browser.",
+    "canonical": "https://www.filepilot.space/pdf-metadata/",
+    "robots": "index,follow",
+    "h1": "PDF Metadata",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 337,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compare-pdf/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/pdf-booklet/",
+      "https://www.filepilot.space/pdf-to-zip/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/pdf-to-zip": {
+    "title": "PDF to ZIP – Package Multiple PDFs into an Archive | FilePilot",
+    "description": "Bundle several PDF files into one ZIP archive for easy sharing or backup. Free browser-based tool — your documents are never uploaded.",
+    "canonical": "https://www.filepilot.space/pdf-to-zip/",
+    "robots": "index,follow",
+    "h1": "PDF to ZIP",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 603,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/extract-pages/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/pdf-to-cbz/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/split/"
+    ]
+  },
+  "/compare-pdf": {
+    "title": "Compare PDFs – Page Count and Text Differences | FilePilot",
+    "description": "Compare two PDFs page by page using extracted text differences, page counts, and changed-page summaries.",
+    "canonical": "https://www.filepilot.space/compare-pdf/",
+    "robots": "index,follow",
+    "h1": "Compare PDFs",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 347,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/organize-pdf/",
+      "https://www.filepilot.space/pdf-booklet/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/split/"
+    ]
+  },
+  "/pdf-booklet": {
+    "title": "PDF Booklet – Create Saddle-Stitch Booklet Layout | FilePilot",
+    "description": "Rearrange PDF pages into a booklet layout that you can print, fold, and staple. 100% private — browser only.",
+    "canonical": "https://www.filepilot.space/pdf-booklet/",
+    "robots": "index,follow",
+    "h1": "PDF Booklet",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 311,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/organize-pdf/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/rotate-pdf/",
+      "https://www.filepilot.space/split/"
+    ]
+  },
+  "/annotate-pdf": {
+    "title": "Fill Forms / Annotate PDF – Text, Highlights, Signatures | FilePilot",
+    "description": "Add text boxes, highlights, checkmarks, dates, and simple signatures to a PDF locally in your browser.",
+    "canonical": "https://www.filepilot.space/annotate-pdf/",
+    "robots": "index,follow",
+    "h1": "Fill Forms / Annotate",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 357,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/crop-pdf/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/redact-pdf/",
+      "https://www.filepilot.space/sign-pdf/",
+      "https://www.filepilot.space/watermark-pdf/"
+    ]
+  },
+  "/watermark-pdf": {
+    "title": "Watermark PDF – Add Text or Image Watermarks | FilePilot",
+    "description": "Add text or image watermarks to a PDF locally in your browser. Control opacity, size, rotation, and page targeting.",
+    "canonical": "https://www.filepilot.space/watermark-pdf/",
+    "robots": "index,follow",
+    "h1": "Watermark PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 337,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-stamp/",
+      "https://www.filepilot.space/header-footer/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/redact-pdf/",
+      "https://www.filepilot.space/sign-pdf/"
+    ]
+  },
+  "/redact-pdf": {
+    "title": "Redact PDF – Visual Burn-In Redaction Tool | FilePilot",
+    "description": "Place rectangular redaction boxes on a PDF and export a visually burned-in redacted copy locally in your browser.",
+    "canonical": "https://www.filepilot.space/redact-pdf/",
+    "robots": "index,follow",
+    "h1": "Redact PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 349,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/find-and-redact/",
+      "https://www.filepilot.space/pdf-security/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/sanitize-pdf/",
+      "https://www.filepilot.space/sign-pdf/"
+    ]
+  },
+  "/sign-pdf": {
+    "title": "Sign PDF – Add Signature to PDF Online Free | FilePilot",
+    "description": "Draw your signature and add it to any PDF page. 100% private — all processing done in your browser.",
+    "canonical": "https://www.filepilot.space/sign-pdf/",
+    "robots": "index,follow",
+    "h1": "Sign PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 348,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/annotate-pdf/",
+      "https://www.filepilot.space/flatten-pdf/",
+      "https://www.filepilot.space/form-filler/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/watermark-pdf/"
+    ]
+  },
+  "/crop-pdf": {
+    "title": "Crop PDF Pages Online – Free & Private | FilePilot",
+    "description": "Trim PDF margins by setting crop amounts (in points) for top, right, bottom, left. Browser-based.",
+    "canonical": "https://www.filepilot.space/crop-pdf/",
+    "robots": "index,follow",
+    "h1": "Crop PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 319,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/bookmark/",
+      "https://www.filepilot.space/header-footer/",
+      "https://www.filepilot.space/page-numbers/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/table-of-contents/"
+    ]
+  },
+  "/bookmark": {
+    "title": "Add PDF Bookmarks Online – Free & Private | FilePilot",
+    "description": "Add navigation bookmarks to a PDF. Specify title and page number for each bookmark.",
+    "canonical": "https://www.filepilot.space/bookmark/",
+    "robots": "index,follow",
+    "h1": "PDF Bookmarks",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 322,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/background-color/",
+      "https://www.filepilot.space/header-footer/",
+      "https://www.filepilot.space/page-numbers/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/table-of-contents/"
+    ]
+  },
+  "/table-of-contents": {
+    "title": "Add Table of Contents to PDF – Free & Private | FilePilot",
+    "description": "Prepend an auto-generated table of contents page to any PDF. Browser-based.",
+    "canonical": "https://www.filepilot.space/table-of-contents/",
+    "robots": "index,follow",
+    "h1": "Table of Contents",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 313,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-stamp/",
+      "https://www.filepilot.space/background-color/",
+      "https://www.filepilot.space/header-footer/",
+      "https://www.filepilot.space/page-numbers/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/page-numbers": {
+    "title": "Add Page Numbers to PDF – Free & Private | FilePilot",
+    "description": "Add customizable page numbers to any PDF. Choose position, start number, font size, and prefix/suffix.",
+    "canonical": "https://www.filepilot.space/page-numbers/",
+    "robots": "index,follow",
+    "h1": "Add Page Numbers",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 309,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-stamp/",
+      "https://www.filepilot.space/background-color/",
+      "https://www.filepilot.space/header-footer/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/remove-annotations/"
+    ]
+  },
+  "/header-footer": {
+    "title": "Add Header & Footer to PDF – Free Online Tool | FilePilot",
+    "description": "Add custom header and footer text to every page of your PDF. Works entirely in your browser — no uploads, 100% private.",
+    "canonical": "https://www.filepilot.space/header-footer/",
+    "robots": "index,follow",
+    "h1": "Header & Footer",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 352,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-stamp/",
+      "https://www.filepilot.space/background-color/",
+      "https://www.filepilot.space/form-filler/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/remove-annotations/"
+    ]
+  },
+  "/background-color": {
+    "title": "Add Background Color to PDF – Change PDF Page Color Online | FilePilot",
+    "description": "Add a colored background to all pages of your PDF. Choose from presets or pick a custom color. 100% private.",
+    "canonical": "https://www.filepilot.space/background-color/",
+    "robots": "index,follow",
+    "h1": "Background Color",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 314,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/add-stamp/",
+      "https://www.filepilot.space/form-creator/",
+      "https://www.filepilot.space/form-filler/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/remove-annotations/"
+    ]
+  },
+  "/add-stamp": {
+    "title": "Add Stamp to PDF – DRAFT, CONFIDENTIAL & Custom Stamps Free | FilePilot",
+    "description": "Add watermark stamps like DRAFT, CONFIDENTIAL, APPROVED to your PDF. Custom text, color, opacity. 100% private — processed locally.",
+    "canonical": "https://www.filepilot.space/add-stamp/",
+    "robots": "index,follow",
+    "h1": "Add Stamp",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 313,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/form-creator/",
+      "https://www.filepilot.space/form-filler/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/remove-annotations/",
+      "https://www.filepilot.space/remove-blank-pages/"
+    ]
+  },
+  "/remove-annotations": {
+    "title": "Remove PDF Annotations Online – Free & Private | FilePilot",
+    "description": "Strip all comments, highlights, form fields, and interactive annotations from a PDF.",
+    "canonical": "https://www.filepilot.space/remove-annotations/",
+    "robots": "index,follow",
+    "h1": "Remove Annotations",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 304,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/annotate-pdf/",
+      "https://www.filepilot.space/form-creator/",
+      "https://www.filepilot.space/form-filler/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/remove-blank-pages/"
+    ]
+  },
+  "/form-filler": {
+    "title": "Fill PDF Forms – Fill & Flatten PDF Form Fields Online | FilePilot",
+    "description": "Upload a PDF with form fields, fill them in directly in your browser, and download the flattened result. 100% private.",
+    "canonical": "https://www.filepilot.space/form-filler/",
+    "robots": "index,follow",
+    "h1": "Form Filler",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 306,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/annotate-pdf/",
+      "https://www.filepilot.space/form-creator/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/remove-blank-pages/",
+      "https://www.filepilot.space/watermark-pdf/"
+    ]
+  },
+  "/form-creator": {
+    "title": "PDF Form Filler – Fill & Flatten PDF Forms Online | FilePilot",
+    "description": "Detect and fill PDF form fields, then flatten and download. 100% browser-based.",
+    "canonical": "https://www.filepilot.space/form-creator/",
+    "robots": "index,follow",
+    "h1": "Form Creator",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 305,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/annotate-pdf/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/redact-pdf/",
+      "https://www.filepilot.space/remove-blank-pages/",
+      "https://www.filepilot.space/watermark-pdf/"
+    ]
+  },
+  "/remove-blank-pages": {
+    "title": "Remove Blank PDF Pages Online – Free & Private | FilePilot",
+    "description": "Automatically detect and remove blank pages from a PDF. Adjust sensitivity. Browser-based.",
+    "canonical": "https://www.filepilot.space/remove-blank-pages/",
+    "robots": "index,follow",
+    "h1": "Remove Blank Pages",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 317,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/annotate-pdf/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/redact-pdf/",
+      "https://www.filepilot.space/sign-pdf/",
+      "https://www.filepilot.space/watermark-pdf/"
+    ]
+  },
+  "/images-to-pdf": {
+    "title": "Convert Images to PDF - JPG, PNG, WebP, SVG, BMP to PDF | FilePilot",
+    "description": "Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images to a single PDF with page size, orientation, and margin controls. Free and private.",
+    "canonical": "https://www.filepilot.space/images-to-pdf/",
+    "robots": "index,follow",
+    "h1": "Images to PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 387,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/scan-images-to-pdf/"
+    ]
+  },
+  "/jpg-to-pdf": {
+    "title": "JPG to PDF Online - Free and Private | FilePilot",
+    "description": "Convert JPG and JPEG photos into a PDF in your browser. Arrange images, choose page size, and download privately without uploads.",
+    "canonical": "https://www.filepilot.space/jpg-to-pdf/",
+    "robots": "index,follow",
+    "h1": "JPG to PDF Online",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 430,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/pdf-to-jpg/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/text-to-pdf": {
+    "title": "Text to PDF – Convert TXT to PDF Free Online | FilePilot",
+    "description": "Convert plain text or .txt files to PDF instantly in your browser. Custom font size and page size. 100% private — no uploads.",
+    "canonical": "https://www.filepilot.space/text-to-pdf/",
+    "robots": "index,follow",
+    "h1": "Text to PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 319,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/jpg-to-pdf/",
+      "https://www.filepilot.space/json-to-pdf/",
+      "https://www.filepilot.space/markdown-to-pdf/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/json-to-pdf": {
+    "title": "JSON to PDF – Convert JSON Data to a PDF Document | FilePilot",
+    "description": "Convert JSON files or pasted data into a formatted, syntax-highlighted PDF. Free and browser-based — your data is never uploaded.",
+    "canonical": "https://www.filepilot.space/json-to-pdf/",
+    "robots": "index,follow",
+    "h1": "JSON to PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 576,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/markdown-to-pdf/",
+      "https://www.filepilot.space/pdf-to-json/",
+      "https://www.filepilot.space/pdf-to-markdown/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/text-to-pdf/"
+    ]
+  },
+  "/markdown-to-pdf": {
+    "title": "Markdown to PDF – Convert .md Files to PDF Free | FilePilot",
+    "description": "Convert Markdown or README .md files into a styled PDF with headings, tables and code blocks. Free, browser-based, no uploads.",
+    "canonical": "https://www.filepilot.space/markdown-to-pdf/",
+    "robots": "index,follow",
+    "h1": "Markdown to PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 610,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/json-to-pdf/",
+      "https://www.filepilot.space/pdf-to-json/",
+      "https://www.filepilot.space/pdf-to-markdown/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/text-to-pdf/"
+    ]
+  },
+  "/pdf-to-images": {
+    "title": "PDF to Images - Export PDF Pages as PNG, JPG, or WebP | FilePilot",
+    "description": "Convert each PDF page to PNG, JPG, or WebP locally in your browser with DPI and quality controls. Download individually or as ZIP.",
+    "canonical": "https://www.filepilot.space/pdf-to-images/",
+    "robots": "index,follow",
+    "h1": "PDF to Images",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 368,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/pdf-to-zip/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/pdf-to-jpg": {
+    "title": "PDF to JPG Online - Free and Private | FilePilot",
+    "description": "Convert PDF pages to JPG images locally in your browser with DPI and quality controls. Download pages as a private ZIP file.",
+    "canonical": "https://www.filepilot.space/pdf-to-jpg/",
+    "robots": "index,follow",
+    "h1": "PDF to JPG Online",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 405,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/jpg-to-pdf/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/pdf-to-svg": {
+    "title": "PDF to SVG Online – Free & Private | FilePilot",
+    "description": "Convert PDF pages to scalable SVG vector graphics. Download instantly. Browser-based.",
+    "canonical": "https://www.filepilot.space/pdf-to-svg/",
+    "robots": "index,follow",
+    "h1": "PDF to SVG",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 311,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/pdf-to-greyscale/",
+      "https://www.filepilot.space/pdf-to-json/",
+      "https://www.filepilot.space/pdf-to-markdown/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/pdf-to-greyscale": {
+    "title": "PDF to Grayscale – Convert Color PDF to Black & White | FilePilot",
+    "description": "Convert a colour PDF to greyscale (grayscale) black-and-white online. Save toner and shrink scanned files — free, private, no uploads.",
+    "canonical": "https://www.filepilot.space/pdf-to-greyscale/",
+    "robots": "index,follow",
+    "h1": "PDF to Grayscale",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 600,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/flatten-pdf/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-to-jpg/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/pdf-to-json": {
+    "title": "PDF to JSON – Extract PDF Content as JSON Data | FilePilot",
+    "description": "Extract text and metadata from your PDF and download it as a structured JSON file. 100% private — browser only.",
+    "canonical": "https://www.filepilot.space/pdf-to-json/",
+    "robots": "index,follow",
+    "h1": "PDF to JSON",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 322,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/extract-images/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/pdf-to-cbz/",
+      "https://www.filepilot.space/pdf-to-markdown/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/pdf-to-markdown": {
+    "title": "PDF to Markdown – Extract PDF Text as Markdown | FilePilot",
+    "description": "Convert your PDF into a Markdown (.md) file with page structure preserved. 100% private — browser only.",
+    "canonical": "https://www.filepilot.space/pdf-to-markdown/",
+    "robots": "index,follow",
+    "h1": "PDF to Markdown",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 316,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/extract-images/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/pdf-to-cbz/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/extract-text": {
+    "title": "Extract Text from PDF or Images – TXT for Word, Sheets, and Slides | FilePilot",
+    "description": "Extract text from PDFs, scanned PDFs, and images in your browser for TXT exports you can reuse in Word, Sheets, Slides, and other editors.",
+    "canonical": "https://www.filepilot.space/extract-text/",
+    "robots": "index,follow",
+    "h1": "Extract Text",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 421,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/extract-images/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-to-json/",
+      "https://www.filepilot.space/pdf-to-markdown/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/extract-images": {
+    "title": "Extract Images from PDF – Export PDF Pages as PNG Images | FilePilot",
+    "description": "Extract and download all pages of a PDF as PNG images in a ZIP archive. 100% private — browser only.",
+    "canonical": "https://www.filepilot.space/extract-images/",
+    "robots": "index,follow",
+    "h1": "Extract Images",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 322,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/pdf-to-cbz/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-to-jpg/",
+      "https://www.filepilot.space/pdf-to-svg/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/pdf-to-cbz": {
+    "title": "PDF to CBZ – Convert PDF Comics & Manga to CBZ | FilePilot",
+    "description": "Convert PDF comics, manga and graphic novels to CBZ for comic reader apps. Free, runs in your browser, no file uploads.",
+    "canonical": "https://www.filepilot.space/pdf-to-cbz/",
+    "robots": "index,follow",
+    "h1": "PDF to CBZ",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 638,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/extract-images/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-to-zip/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/compress": {
+    "title": "Compress PDF Online – Reduce File Size Free | FilePilot",
+    "description": "Reduce PDF file size while maintaining quality. Optimize PDFs locally in your browser. No uploads, 100% private.",
+    "canonical": "https://www.filepilot.space/compress/",
+    "robots": "index,follow",
+    "h1": "Compress PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 371,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/page-dimensions/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/repair-pdf/"
+    ]
+  },
+  "/fix-page-size": {
+    "title": "Fix PDF Page Size – Resize to A4, Letter, A3, Legal Free | FilePilot",
+    "description": "Resize all pages of your PDF to A4, US Letter, A3, or Legal size. Scales content to fit. 100% private — no uploads.",
+    "canonical": "https://www.filepilot.space/fix-page-size/",
+    "robots": "index,follow",
+    "h1": "Fix Page Size",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 331,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/deskew-pdf/",
+      "https://www.filepilot.space/page-dimensions/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/repair-pdf/"
+    ]
+  },
+  "/page-dimensions": {
+    "title": "PDF Page Dimensions – View Page Size and Orientation | FilePilot",
+    "description": "Instantly view the width, height, and orientation of every page in a PDF. Detect mixed page sizes. 100% private.",
+    "canonical": "https://www.filepilot.space/page-dimensions/",
+    "robots": "index,follow",
+    "h1": "Page Dimensions",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 307,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/deskew-pdf/",
+      "https://www.filepilot.space/fix-page-size/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/repair-pdf/"
+    ]
+  },
+  "/repair-pdf": {
+    "title": "Repair Corrupted PDF – Free Online PDF Fix Tool | FilePilot",
+    "description": "Repair a broken or corrupted PDF file instantly in your browser. Re-serializes the PDF structure to fix common errors. 100% private — no uploads.",
+    "canonical": "https://www.filepilot.space/repair-pdf/",
+    "robots": "index,follow",
+    "h1": "Repair PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 345,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/deskew-pdf/",
+      "https://www.filepilot.space/fix-page-size/",
+      "https://www.filepilot.space/page-dimensions/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/deskew-pdf": {
+    "title": "Deskew PDF – Straighten Skewed Scanned Documents | FilePilot",
+    "description": "Automatically straighten skewed or tilted pages from scanned PDFs. 100% private — browser only.",
+    "canonical": "https://www.filepilot.space/deskew-pdf/",
+    "robots": "index,follow",
+    "h1": "Deskew PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 294,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/fix-page-size/",
+      "https://www.filepilot.space/page-dimensions/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/repair-pdf/"
+    ]
+  },
+  "/pdf-security": {
+    "title": "Protect or Unlock PDF – Browser-Only PDF Security | FilePilot",
+    "description": "Unlock password-protected PDFs locally in your browser and manage browser-first PDF security workflows without server uploads.",
+    "canonical": "https://www.filepilot.space/pdf-security/",
+    "robots": "index,follow",
+    "h1": "Protect / Unlock PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 357,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/find-and-redact/",
+      "https://www.filepilot.space/flatten-pdf/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/redact-pdf/",
+      "https://www.filepilot.space/sanitize-pdf/"
+    ]
+  },
+  "/sanitize-pdf": {
+    "title": "Sanitize PDF – Remove Metadata & Hidden Data Free | FilePilot",
+    "description": "Remove all metadata, hidden data, and flatten interactive elements from your PDF to protect privacy. 100% browser-based, no uploads.",
+    "canonical": "https://www.filepilot.space/sanitize-pdf/",
+    "robots": "index,follow",
+    "h1": "Sanitize PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 337,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/find-and-redact/",
+      "https://www.filepilot.space/flatten-pdf/",
+      "https://www.filepilot.space/pdf-security/",
+      "https://www.filepilot.space/pdf-tools/"
+    ]
+  },
+  "/find-and-redact": {
+    "title": "Find & Redact PDF Text – Free Privacy Tool | FilePilot",
+    "description": "Search for sensitive text in your PDF and export an image-only redacted copy with redactions burned into the page pixels. 100% private — processed locally.",
+    "canonical": "https://www.filepilot.space/find-and-redact/",
+    "robots": "index,follow",
+    "h1": "Find & Redact",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 351,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/flatten-pdf/",
+      "https://www.filepilot.space/pdf-security/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/sanitize-pdf/"
+    ]
+  },
+  "/flatten-pdf": {
+    "title": "Flatten PDF – Make Forms & Annotations Non-Editable | FilePilot",
+    "description": "Flatten PDF form fields, annotations and layers into static content so nothing can be edited. Free browser-based tool, no uploads.",
+    "canonical": "https://www.filepilot.space/flatten-pdf/",
+    "robots": "index,follow",
+    "h1": "Flatten PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 652,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/form-creator/",
+      "https://www.filepilot.space/form-filler/",
+      "https://www.filepilot.space/pdf-security/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/redact-pdf/"
+    ]
+  },
+  "/remove-background": {
+    "title": "Remove Background — Free AI Background Remover | FilePilot",
+    "description": "Remove image backgrounds automatically using AI, directly in your browser. No upload needed — your images stay private.",
+    "canonical": "https://www.filepilot.space/remove-background/",
+    "robots": "index,follow",
+    "h1": "Remove Background",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 434,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/ai-tools/",
+      "https://www.filepilot.space/change-background/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/ecommerce-image-formatter/",
+      "https://www.filepilot.space/object-remover/"
+    ]
+  },
+  "/change-background": {
+    "title": "Change Background — AI Background Replacer | FilePilot",
+    "description": "Replace image backgrounds with solid colours, gradients, blur, or custom images using AI — all in your browser.",
+    "canonical": "https://www.filepilot.space/change-background/",
+    "robots": "index,follow",
+    "h1": "Change Background",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 425,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/ai-enhance-image/",
+      "https://www.filepilot.space/ai-tools/",
+      "https://www.filepilot.space/object-remover/",
+      "https://www.filepilot.space/photo-editor/",
+      "https://www.filepilot.space/remove-background/"
+    ]
+  },
+  "/upscale-image": {
+    "title": "Upscale Image — AI Super-Resolution | FilePilot",
+    "description": "Enlarge images using AI super-resolution directly in your browser. Increase resolution while preserving detail — no upload needed.",
+    "canonical": "https://www.filepilot.space/upscale-image/",
+    "robots": "index,follow",
+    "h1": "Upscale Image",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 401,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/ai-enhance-image/",
+      "https://www.filepilot.space/ai-tools/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/photo-editor/",
+      "https://www.filepilot.space/resize-image/"
+    ]
+  },
+  "/ai-enhance-image": {
+    "title": "AI Enhance Image — Smart Image Enhancement | FilePilot",
+    "description": "Improve image quality with smart analysis-based enhancement. Fix exposure, reduce noise, sharpen details, and correct colours — all locally in your browser.",
+    "canonical": "https://www.filepilot.space/ai-enhance-image/",
+    "robots": "index,follow",
+    "h1": "AI Enhance Image",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 408,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/ai-tools/",
+      "https://www.filepilot.space/change-background/",
+      "https://www.filepilot.space/photo-editor/",
+      "https://www.filepilot.space/remove-background/",
+      "https://www.filepilot.space/upscale-image/"
+    ]
+  },
+  "/object-remover": {
+    "title": "Object Remover — Content-Aware Object Removal | FilePilot",
+    "description": "Remove unwanted objects from images using content-aware inpainting, entirely in your browser. No upload needed.",
+    "canonical": "https://www.filepilot.space/object-remover/",
+    "robots": "index,follow",
+    "h1": "Object Remover",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 430,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/ai-tools/",
+      "https://www.filepilot.space/blur-face/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/photo-editor/",
+      "https://www.filepilot.space/remove-background/"
+    ]
+  },
+  "/image-formatter": {
+    "title": "Image Formatter — Resize, Convert & Optimize Images Online | FilePilot",
+    "description": "Format images to exact dimensions, convert formats, set file size targets, and batch export. Free, private, browser-based.",
+    "canonical": "https://www.filepilot.space/image-formatter/",
+    "robots": "index,follow",
+    "h1": "Image Formatter",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 441,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/ecommerce-image-formatter/",
+      "https://www.filepilot.space/image-requirements/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/social-media-resizer/"
+    ]
+  },
+  "/image-requirements": {
+    "title": "Resize Image to Exact Size & KB | FilePilot",
+    "description": "Resize an image to exact pixel dimensions and a target KB file size, then export as JPG, PNG or WebP. Free, private and processed entirely in your browser.",
+    "canonical": "https://www.filepilot.space/image-requirements/",
+    "robots": "index,follow",
+    "h1": "Resize Image to Exact Size",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 627,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/passport-photo-validator/",
+      "https://www.filepilot.space/resize-image/"
+    ]
+  },
+  "/passport-photo-validator": {
+    "title": "Passport Photo Validator - Check Photo Requirements | FilePilot",
+    "description": "Validate passport photo dimensions, file size, and format against official requirements. Crop, resize, and export. Free, private, browser-based.",
+    "canonical": "https://www.filepilot.space/passport-photo-validator/",
+    "robots": "index,follow",
+    "h1": "Passport Photo Validator",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 453,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-requirements/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/remove-image-metadata/"
+    ]
+  },
+  "/social-media-resizer": {
+    "title": "Social Media Resizer | FilePilot",
+    "description": "Resize images for Instagram, Facebook, LinkedIn, X/Twitter, YouTube, Pinterest, and TikTok. Free, private, browser-based.",
+    "canonical": "https://www.filepilot.space/social-media-resizer/",
+    "robots": "index,follow",
+    "h1": "Social Media Resizer",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 435,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/ecommerce-image-formatter/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/resize-image/"
+    ]
+  },
+  "/ecommerce-image-formatter": {
+    "title": "E-commerce Image Formatter | FilePilot",
+    "description": "Prepare product photos with clean backgrounds, consistent dimensions, and marketplace-ready formats. All processing happens locally in your browser.",
+    "canonical": "https://www.filepilot.space/ecommerce-image-formatter/",
+    "robots": "index,follow",
+    "h1": "E-commerce Image Formatter",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 403,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/remove-background/",
+      "https://www.filepilot.space/social-media-resizer/"
+    ]
+  },
+  "/scan-images-to-pdf": {
+    "title": "Scan Images to PDF | FilePilot",
+    "description": "Turn photos of documents into a clean, ordered, downloadable PDF. All processing happens locally in your browser.",
+    "canonical": "https://www.filepilot.space/scan-images-to-pdf/",
+    "robots": "index,follow",
+    "h1": "Scan Images to PDF",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 417,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/deskew-pdf/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/organize-pdf/"
+    ]
+  },
+  "/favicon-generator": {
+    "title": "Favicon Generator | FilePilot",
+    "description": "Generate all website favicon and app icon assets from a single image. Creates PNG favicons, Apple touch icons, Android/PWA icons, and a web manifest.",
+    "canonical": "https://www.filepilot.space/favicon-generator/",
+    "robots": "index,follow",
+    "h1": "Favicon Generator",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 436,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-to-svg/",
+      "https://www.filepilot.space/image-workflows/",
+      "https://www.filepilot.space/resize-image/"
+    ]
+  },
+  "/compress-image": {
+    "title": "Compress Image Online - Reduce Image File Size | FilePilot",
+    "description": "Compress JPEG, PNG, and WebP images in your browser. Reduce file size while preserving quality. Free, private, no uploads.",
+    "canonical": "https://www.filepilot.space/compress-image/",
+    "robots": "index,follow",
+    "h1": "Compress Image",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 398,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/convert-image/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/resize-image/"
+    ]
+  },
+  "/resize-image": {
+    "title": "Resize Image Online - Free Browser-Based Tool | FilePilot",
+    "description": "Resize images by pixels or percentage. Fit, fill, or stretch to exact dimensions. Free, private, browser-based.",
+    "canonical": "https://www.filepilot.space/resize-image/",
+    "robots": "index,follow",
+    "h1": "Resize Image",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 401,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/image-requirements/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/social-media-resizer/"
+    ]
+  },
+  "/convert-image": {
+    "title": "Convert Image — JPEG, PNG, WebP, AVIF | FilePilot",
+    "description": "Convert images between JPEG, PNG, WebP, and AVIF formats. Processed locally in your browser — no uploads, 100% private.",
+    "canonical": "https://www.filepilot.space/convert-image/",
+    "robots": "index,follow",
+    "h1": "Convert Image",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 392,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-to-svg/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/resize-image/"
+    ]
+  },
+  "/website-image-optimiser": {
+    "title": "Website Image Optimiser - Responsive Images for the Web | FilePilot",
+    "description": "Generate optimised, responsive image variants for your website. Create WebP, AVIF, and JPEG versions at multiple sizes with ready-to-use HTML snippets. Free, private, no uploads.",
+    "canonical": "https://www.filepilot.space/website-image-optimiser/",
+    "robots": "index,follow",
+    "h1": "Website Image Optimiser",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 424,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/image-quality-analyzer/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/rotate-image/",
+      "https://www.filepilot.space/watermark-image/"
+    ]
+  },
+  "/image-quality-analyzer": {
+    "title": "Image Quality Analyzer - Check Image Resolution & Format | FilePilot",
+    "description": "Analyze image quality, resolution, file size, and format suitability for web, print, and social media. Free, private, no uploads.",
+    "canonical": "https://www.filepilot.space/image-quality-analyzer/",
+    "robots": "index,follow",
+    "h1": "Image Quality Analyzer",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 407,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/remove-image-metadata/",
+      "https://www.filepilot.space/rotate-image/",
+      "https://www.filepilot.space/watermark-image/"
+    ]
+  },
+  "/crop-image": {
+    "title": "Crop Image Online - Free Browser-Based Image Cropper | FilePilot",
+    "description": "Crop JPEG, PNG, and WebP images with precision. Interactive crop editor with aspect ratio presets. Free, private, no uploads.",
+    "canonical": "https://www.filepilot.space/crop-image/",
+    "robots": "index,follow",
+    "h1": "Crop Image",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 400,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/photo-editor/",
+      "https://www.filepilot.space/resize-image/",
+      "https://www.filepilot.space/rotate-image/"
+    ]
+  },
+  "/rotate-image": {
+    "title": "Rotate & Flip Image Online - Free Browser-Based Tool | FilePilot",
+    "description": "Rotate images by any angle and flip horizontally or vertically. Batch support with ZIP download. Free, private, no uploads.",
+    "canonical": "https://www.filepilot.space/rotate-image/",
+    "robots": "index,follow",
+    "h1": "Rotate Image",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 401,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blur-face/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/photo-editor/",
+      "https://www.filepilot.space/remove-image-metadata/",
+      "https://www.filepilot.space/watermark-image/"
+    ]
+  },
+  "/watermark-image": {
+    "title": "Watermark Image Online - Add Text or Logo Watermarks | FilePilot",
+    "description": "Add text or image watermarks to photos with adjustable position, opacity, and repeat patterns. Free, private, no uploads.",
+    "canonical": "https://www.filepilot.space/watermark-image/",
+    "robots": "index,follow",
+    "h1": "Watermark Image",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 397,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blur-face/",
+      "https://www.filepilot.space/image-to-svg/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/photo-editor/",
+      "https://www.filepilot.space/remove-image-metadata/"
+    ]
+  },
+  "/remove-image-metadata": {
+    "title": "Remove Image Metadata – Strip EXIF, GPS & Camera Data | FilePilot",
+    "description": "Remove EXIF, GPS location and camera metadata from photos before sharing. Free EXIF remover that runs locally — images never uploaded.",
+    "canonical": "https://www.filepilot.space/remove-image-metadata/",
+    "robots": "index,follow",
+    "h1": "Remove Image Metadata",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 667,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blur-face/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/pdf-metadata/",
+      "https://www.filepilot.space/photo-editor/"
+    ]
+  },
+  "/blur-face": {
+    "title": "Blur Face & Plate Online - Privacy Blur Tool | FilePilot",
+    "description": "Blur faces, license plates, and sensitive areas in images. Gaussian blur, pixelate, or black bar. Free, private, no uploads.",
+    "canonical": "https://www.filepilot.space/blur-face/",
+    "robots": "index,follow",
+    "h1": "Blur Face",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 417,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/photo-editor/",
+      "https://www.filepilot.space/remove-image-metadata/",
+      "https://www.filepilot.space/watermark-image/"
+    ]
+  },
+  "/photo-editor": {
+    "title": "Photo Editor Online - Free Browser-Based Image Editor | FilePilot",
+    "description": "Edit photos with brightness, contrast, filters, text overlay, borders, and more. Free, private, no uploads.",
+    "canonical": "https://www.filepilot.space/photo-editor/",
+    "robots": "index,follow",
+    "h1": "Photo Editor",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 402,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/color-picker/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/image-to-svg/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/resize-image/"
+    ]
+  },
+  "/image-to-svg": {
+    "title": "Image to SVG – Convert PNG & JPG to Vector Online | FilePilot",
+    "description": "Convert PNG, JPG and raster images to scalable SVG vectors by tracing. Free online image to SVG converter — no uploads, no signup.",
+    "canonical": "https://www.filepilot.space/image-to-svg/",
+    "robots": "index,follow",
+    "h1": "Image to SVG Converter",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 633,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/convert-image/",
+      "https://www.filepilot.space/favicon-generator/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/pdf-to-svg/"
+    ]
+  },
+  "/color-picker": {
+    "title": "Color Picker - | FilePilot",
+    "description": "Pick colours from images, extract palettes, and copy colour values in HEX, RGB, HSL, HSV, CMYK, and CSS variable formats. All processing happens locally in your browser.",
+    "canonical": "https://www.filepilot.space/color-picker/",
+    "robots": "index,follow",
+    "h1": "Color Picker",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 436,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/compress-image/",
+      "https://www.filepilot.space/convert-image/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/resize-image/",
+      "https://www.filepilot.space/website-image-optimiser/"
+    ]
+  },
+  "/qr-generator": {
+    "title": "QR Code Generator | FilePilot",
+    "description": "Create custom QR codes for URLs, WiFi, vCards, events, and more. Customize colors, styles, and add logos. Free, private, and runs entirely in your browser.",
+    "canonical": "https://www.filepilot.space/qr-generator/",
+    "robots": "index,follow",
+    "h1": "QR Code Generator",
+    "schemaTypes": [
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo",
+      "SoftwareApplication"
+    ],
+    "words": 451,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/color-picker/",
+      "https://www.filepilot.space/favicon-generator/",
+      "https://www.filepilot.space/image-formatter/",
+      "https://www.filepilot.space/image-to-svg/",
+      "https://www.filepilot.space/image-workflows/"
+    ]
+  },
+  "/blog/edit-pdf-without-uploading": {
+    "title": "How to Edit a PDF Without Uploading It Anywhere | FilePilot",
+    "description": "A complete guide to working with PDFs without sending them to a server: what actually happens when you upload, which tasks can run locally in a browser, which still cannot, and how to verify any tool's claim yourself.",
+    "canonical": "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+    "robots": "index,follow",
+    "h1": "How to Edit a PDF Without Uploading It Anywhere",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "words": 1511,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/about/",
+      "https://www.filepilot.space/add-stamp/",
+      "https://www.filepilot.space/annotate-pdf/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/combine-scanned-pages-into-one-pdf/",
+      "https://www.filepilot.space/blog/compress-pdf-without-losing-quality/",
+      "https://www.filepilot.space/blog/how-filepilot-keeps-documents-private/",
+      "https://www.filepilot.space/blog/is-it-safe-to-upload-pdf-online/",
+      "https://www.filepilot.space/blog/pdf-comics-to-cbz/",
+      "https://www.filepilot.space/blog/print-multiple-pdf-pages-per-sheet/",
+      "https://www.filepilot.space/blog/privacy-risks-online-pdf-tools/",
+      "https://www.filepilot.space/blog/redact-pdf-properly/",
+      "https://www.filepilot.space/blog/resize-image-for-online-forms/",
+      "https://www.filepilot.space/blog/what-exif-data-reveals/",
+      "https://www.filepilot.space/blog/why-files-stay-in-browser/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/delete-pages/",
+      "https://www.filepilot.space/extract-pages/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/fix-page-size/",
+      "https://www.filepilot.space/flatten-pdf/",
+      "https://www.filepilot.space/image-tools/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/n-up-pdf/",
+      "https://www.filepilot.space/organize-pdf/",
+      "https://www.filepilot.space/page-numbers/",
+      "https://www.filepilot.space/pdf-booklet/",
+      "https://www.filepilot.space/pdf-to-cbz/",
+      "https://www.filepilot.space/pdf-to-greyscale/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/posterize-pdf/",
+      "https://www.filepilot.space/redact-pdf/",
+      "https://www.filepilot.space/sign-pdf/",
+      "https://www.filepilot.space/split/",
+      "https://www.filepilot.space/watermark-pdf/"
+    ]
+  },
+  "/blog/why-files-stay-in-browser": {
+    "title": "Why Your Files Should Never Leave Your Browser | FilePilot",
+    "description": "Uploading files to remote servers introduces privacy risks, data breaches, and unclear retention policies. Learn how browser-based processing with WebAssembly and Web Workers keeps your documents private.",
+    "canonical": "https://www.filepilot.space/blog/why-files-stay-in-browser/",
+    "robots": "index,follow",
+    "h1": "Why Your Files Should Never Leave Your Browser",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList"
+    ],
+    "words": 948,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/blog/how-filepilot-keeps-documents-private/",
+      "https://www.filepilot.space/blog/privacy-risks-online-pdf-tools/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/privacy/"
+    ]
+  },
+  "/blog/privacy-risks-online-pdf-tools": {
+    "title": "The Hidden Privacy Risks of Online PDF Tools | FilePilot",
+    "description": "What really happens when you upload a PDF to an online tool: server storage, metadata exposure, third-party processing, and how to evaluate whether a tool is truly private.",
+    "canonical": "https://www.filepilot.space/blog/privacy-risks-online-pdf-tools/",
+    "robots": "index,follow",
+    "h1": "The Hidden Privacy Risks of Online PDF Tools",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList"
+    ],
+    "words": 1131,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/blog/why-files-stay-in-browser/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/privacy/",
+      "https://www.filepilot.space/smallpdf-alternative/"
+    ]
+  },
+  "/blog/how-filepilot-keeps-documents-private": {
+    "title": "How FilePilot Keeps Your Documents Private | FilePilot",
+    "description": "A practical look at FilePilot's privacy architecture: WebAssembly with pdf-lib, Canvas API rendering, ONNX Runtime for AI features, PWA offline support, and zero server involvement.",
+    "canonical": "https://www.filepilot.space/blog/how-filepilot-keeps-documents-private/",
+    "robots": "index,follow",
+    "h1": "How FilePilot Keeps Your Documents Private",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList"
+    ],
+    "words": 1131,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/about/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/blog/why-files-stay-in-browser/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/privacy/"
+    ]
+  },
+  "/blog/is-it-safe-to-upload-pdf-online": {
+    "title": "Is It Safe to Upload a PDF to an Online Tool? | FilePilot",
+    "description": "What happens to your document when you upload it to a free PDF site, what the deletion policies actually promise, when the risk is acceptable, and how to decide for a specific file.",
+    "canonical": "https://www.filepilot.space/blog/is-it-safe-to-upload-pdf-online/",
+    "robots": "index,follow",
+    "h1": "Is It Safe to Upload a PDF to an Online Tool?",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "words": 960,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/ilovepdf-alternative/",
+      "https://www.filepilot.space/pdf-metadata/",
+      "https://www.filepilot.space/pdf-tools/",
+      "https://www.filepilot.space/privacy/",
+      "https://www.filepilot.space/smallpdf-alternative/"
+    ]
+  },
+  "/blog/redact-pdf-properly": {
+    "title": "Why Blacking Out Text in a PDF Does Not Redact It | FilePilot",
+    "description": "Drawing a black rectangle over text leaves the text in the file, fully selectable and searchable. How PDF redaction actually fails, the cases where it went public, and how to remove text rather than hide it.",
+    "canonical": "https://www.filepilot.space/blog/redact-pdf-properly/",
+    "robots": "index,follow",
+    "h1": "Why Blacking Out Text in a PDF Does Not Redact It",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "words": 1023,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/find-and-redact/",
+      "https://www.filepilot.space/flatten-pdf/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/pdf-metadata/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/redact-pdf/"
+    ]
+  },
+  "/blog/resize-image-for-online-forms": {
+    "title": "Why Online Forms Reject Your Photo (and How to Fix It) | FilePilot",
+    "description": "Government, exam and visa portals reject photos for size, dimensions, format and aspect ratio. What each error message actually means, why the KB limits exist, and how to hit the exact spec.",
+    "canonical": "https://www.filepilot.space/blog/resize-image-for-online-forms/",
+    "robots": "index,follow",
+    "h1": "Why Online Forms Reject Your Photo, and How to Fix It",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "words": 932,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/crop-image/",
+      "https://www.filepilot.space/image-requirements/",
+      "https://www.filepilot.space/passport-photo-validator/"
+    ]
+  },
+  "/blog/what-exif-data-reveals": {
+    "title": "What EXIF Data Reveals About Your Photos | FilePilot",
+    "description": "Photos carry GPS coordinates, timestamps, device serial numbers and more. What is actually stored, which platforms strip it and which do not, and how to remove it before sharing.",
+    "canonical": "https://www.filepilot.space/blog/what-exif-data-reveals/",
+    "robots": "index,follow",
+    "h1": "What EXIF Data Reveals About Your Photos",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "words": 809,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/blog/is-it-safe-to-upload-pdf-online/",
+      "https://www.filepilot.space/blur-face/",
+      "https://www.filepilot.space/pdf-metadata/",
+      "https://www.filepilot.space/remove-image-metadata/"
+    ]
+  },
+  "/blog/combine-scanned-pages-into-one-pdf": {
+    "title": "How to Combine Scanned Pages Into One PDF | FilePilot",
+    "description": "Scanners produce one file per page, in the wrong order, sometimes crooked and always too large. How to get from a folder of scans to a single clean PDF without uploading anything.",
+    "canonical": "https://www.filepilot.space/blog/combine-scanned-pages-into-one-pdf/",
+    "robots": "index,follow",
+    "h1": "How to Combine Scanned Pages Into One PDF",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "words": 890,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/alternate-merge/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/crop-pdf/",
+      "https://www.filepilot.space/delete-pages/",
+      "https://www.filepilot.space/deskew-pdf/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/fix-page-size/",
+      "https://www.filepilot.space/images-to-pdf/",
+      "https://www.filepilot.space/merge/",
+      "https://www.filepilot.space/pdf-to-greyscale/",
+      "https://www.filepilot.space/rotate-pdf/",
+      "https://www.filepilot.space/scan-images-to-pdf/"
+    ]
+  },
+  "/blog/compress-pdf-without-losing-quality": {
+    "title": "How to Compress a PDF Without Wrecking the Quality | FilePilot",
+    "description": "Why PDFs get large, which part of your file is actually taking the space, and the order of operations that shrinks a document without turning the text to mush.",
+    "canonical": "https://www.filepilot.space/blog/compress-pdf-without-losing-quality/",
+    "robots": "index,follow",
+    "h1": "How to Compress a PDF Without Wrecking the Quality",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "words": 928,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/compress/",
+      "https://www.filepilot.space/delete-pages/",
+      "https://www.filepilot.space/extract-images/",
+      "https://www.filepilot.space/extract-text/",
+      "https://www.filepilot.space/flatten-pdf/",
+      "https://www.filepilot.space/pdf-to-greyscale/",
+      "https://www.filepilot.space/split/"
+    ]
+  },
+  "/blog/pdf-comics-to-cbz": {
+    "title": "PDF or CBZ for Comics and Manga? | FilePilot",
+    "description": "Why comic readers prefer CBZ over PDF, what the format actually is, when converting helps and when it does not, and how page order and naming decide whether the result works.",
+    "canonical": "https://www.filepilot.space/blog/pdf-comics-to-cbz/",
+    "robots": "index,follow",
+    "h1": "PDF or CBZ for Comics and Manga?",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "words": 981,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/pdf-to-cbz/",
+      "https://www.filepilot.space/pdf-to-images/",
+      "https://www.filepilot.space/pdf-to-zip/"
+    ]
+  },
+  "/blog/print-multiple-pdf-pages-per-sheet": {
+    "title": "Printing Multiple PDF Pages Per Sheet, Explained | FilePilot",
+    "description": "N-up printing, booklet imposition and poster tiling are three different things that print dialogs handle badly. What each one does, when to use it, and how to get a predictable result.",
+    "canonical": "https://www.filepilot.space/blog/print-multiple-pdf-pages-per-sheet/",
+    "robots": "index,follow",
+    "h1": "Printing Multiple PDF Pages Per Sheet, Explained",
+    "schemaTypes": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "words": 969,
+    "links": [
+      "https://www.filepilot.space/",
+      "https://www.filepilot.space/blog/",
+      "https://www.filepilot.space/blog/edit-pdf-without-uploading/",
+      "https://www.filepilot.space/fix-page-size/",
+      "https://www.filepilot.space/n-up-pdf/",
+      "https://www.filepilot.space/pdf-booklet/",
+      "https://www.filepilot.space/posterize-pdf/"
+    ]
+  }
+}
