@@ -93,4 +93,13 @@ server. See the [privacy policy](https://www.filepilot.space/privacy/).
 
 ## License
 
-MIT
+All rights reserved.
+
+The source is public so that the "your files never leave your browser" claim can be
+audited — read the code, or watch the Network tab while a tool runs. It is not
+offered under an open-source licence: FilePilot already competes with several
+same-named sites, and a permissive licence would explicitly permit redeploying it
+under someone else's brand.
+
+Want to use part of this in your own project? Open an issue — the answer is likely
+yes for anything that isn't a wholesale redeploy.

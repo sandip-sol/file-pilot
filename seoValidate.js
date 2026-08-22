@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { maintainer } from './src/data/aboutContent.ts';
 import {
   CANONICAL_HOST,
   SITE_URL,
@@ -17,6 +18,7 @@ const sitemapPath = new URL('./sitemap.xml', DIST_DIR);
 const robotsPath = new URL('./robots.txt', DIST_DIR);
 const redirectsPath = new URL('./_redirects', DIST_DIR);
 const errors = [];
+const warnings = [];
 
 const EXPECTED_ROBOTS = `User-agent: *
 Allow: /
@@ -482,6 +484,21 @@ function validateNoOrphanedFromLinks() {
   }
 }
 
+/**
+ * Warning, not a failure: /about is useful without a named maintainer, but the
+ * E-E-A-T signal Google actually weighs — a real person accountable for the site
+ * — is missing until one is set. Deliberately never auto-filled: a fabricated
+ * identity on an About page is worse than an absent one.
+ */
+function warnIfAnonymous() {
+  if (maintainer) return;
+  warnings.push(
+    '/about has no maintainer configured, so it ships no Person schema and no named author. '
+    + 'Google discounts anonymous utility sites, and the Phase 2.3 outreach template says "I maintain FilePilot" — '
+    + 'a recipient who follows up finds nobody. Set `maintainer` in src/data/aboutContent.ts.',
+  );
+}
+
 validateFilesExist();
 validateRobots();
 validateSitemap();
@@ -491,6 +508,7 @@ validateNoInlinePageSeo();
 validateNoOrphanRoutes();
 validateRelatedToolLinks();
 validateNoOrphanedFromLinks();
+warnIfAnonymous();
 validate404();
 
 if (errors.length > 0) {
@@ -500,3 +518,5 @@ if (errors.length > 0) {
 }
 
 console.log(`SEO validation passed for ${getSitemapEntries().length} sitemap URLs in dist/sitemap.xml.`);
+
+for (const warning of warnings) console.warn(`  ⚠  ${warning}`);

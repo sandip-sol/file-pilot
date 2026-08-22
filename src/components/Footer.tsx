@@ -12,6 +12,7 @@ export const Footer = () => {
                     </div>
 
                     <div className="flex items-center gap-8 text-sm text-muted-foreground">
+                        <Link to={toCanonicalPath('/about')} className="hover:text-foreground transition-colors">About</Link>
                         <Link to={toCanonicalPath('/support')} className="hover:text-foreground transition-colors">Support FilePilot</Link>
                         <Link to={toCanonicalPath('/privacy')} className="hover:text-foreground transition-colors">Privacy</Link>
                         <Link to={toCanonicalPath('/terms')} className="hover:text-foreground transition-colors">Terms</Link>

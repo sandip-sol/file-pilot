@@ -84,6 +84,7 @@ const CORE_ROUTE_SEO = {
   '/image-workflows': { ...fromSiteContent('/image-workflows'), changefreq: 'weekly', priority: '0.75' },
   '/ai-tools': { ...fromSiteContent('/ai-tools'), changefreq: 'weekly', priority: '0.75' },
   '/blog': { ...fromSiteContent('/blog'), changefreq: 'monthly', priority: '0.6' },
+  '/about': { ...fromSiteContent('/about'), changefreq: 'monthly', priority: '0.6' },
   '/support': { ...fromSiteContent('/support'), changefreq: 'monthly', priority: '0.4' },
   '/privacy': { ...fromSiteContent('/privacy'), changefreq: 'yearly', priority: '0.3' },
   '/terms': { ...fromSiteContent('/terms'), changefreq: 'yearly', priority: '0.3' },
@@ -187,6 +188,7 @@ const CORE_RELATED_ROUTES = {
   '/support': ['/pdf-tools', '/image-tools', '/privacy', '/blog'],
   '/privacy': ['/pdf-tools', '/image-tools', '/blog/how-filepilot-keeps-documents-private'],
   '/terms': ['/privacy', '/pdf-tools', '/image-tools'],
+  '/about': ['/privacy', '/blog/how-filepilot-keeps-documents-private', '/pdf-tools', '/support'],
   ...Object.fromEntries(comparisonRoutes.map((route) => [
     route,
     comparisonContent[route].toolMap.slice(0, 5).map((item) => item.route),

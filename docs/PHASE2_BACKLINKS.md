@@ -69,6 +69,7 @@ Keep these identical everywhere — consistent name + description is itself a tr
 | `/adobe-acrobat-online-alternative/` | Roundups about free Acrobat substitutes |
 | `/pdf24-alternative/` | The most nuanced one — PDF24 already offers a local desktop app, so this page argues on installation, not privacy alone |
 | `/image-requirements/` | "Resize image to exact size & KB" — the most distinctive single tool on the site; good hook for form/exam/visa audiences |
+| `/about/` | **Send this with every outreach email.** Who builds it, how the local processing works, how to verify the no-upload claim, how it's funded, and what it deliberately can't do — plus a press-kit block with boilerplate copy and downloadable assets, so a writer never has to ask |
 
 Each comparison page includes an honest "when *X* is the better choice" section.
 Point reviewers at them: a comparison that concedes real limitations reads as
@@ -164,6 +165,12 @@ Lead with the engineering story and the honest limitations — HN rewards candor
 
 Target: authors of existing "best free PDF tools" / "Smallpdf alternatives" posts.
 
+> ⚠️ **Set `maintainer` in `src/data/aboutContent.ts` before you send any of these.**
+> The template opens with "I maintain FilePilot". The first thing a recipient does is
+> check who that is — and an anonymous site is an easy pass for a reviewer. The About
+> page renders without a name rather than inventing one, so the section is simply
+> absent until you fill it in. `npm run seo:validate` warns while it is unset.
+
 > Subject: A no-upload PDF tool for your [POST TITLE] roundup
 >
 > Hi [NAME],
@@ -178,6 +185,7 @@ Target: authors of existing "best free PDF tools" / "Smallpdf alternatives" post
 >
 > Thanks,
 > [YOU]
+> filepilot.space/about/ — who I am and how the browser-only architecture works
 
 Send 5–10 a week, personalised. Generic blasts get ignored and can hurt reputation.
 

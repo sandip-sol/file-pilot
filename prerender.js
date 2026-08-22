@@ -22,6 +22,7 @@ import { fileURLToPath } from 'url';
 import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeoRoutes, getSitemapEntries, isToolRoute } from './seoRoutes.js';
 import { toolContent } from './src/data/toolContent.ts';
 import { comparisonContent } from './src/data/comparisons.ts';
+import { GITHUB_REPO_URL, aboutSections, maintainer, pressKit } from './src/data/aboutContent.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
@@ -407,6 +408,8 @@ function buildJsonLd(route) {
         // "FilePilot" name is ambiguous — it collides with a Windows file
         // manager, an iOS app and several other file-tool sites.
         sameAs: ORGANIZATION_PROFILES,
+        ...(maintainer ? { founder: { '@id': `${SITE_URL}#person` } } : {}),
+        mainEntityOfPage: canonicalUrlForRoute('/about'),
       },
       {
         '@type': 'SoftwareApplication',
@@ -474,6 +477,47 @@ function buildJsonLd(route) {
         ...(articleDates(route)),
       },
     );
+  } else if (route === '/about') {
+    graph.push(
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
+          { '@type': 'ListItem', position: 2, name: 'About FilePilot', item: url },
+        ],
+      },
+      {
+        '@type': 'AboutPage',
+        '@id': `${url}#about`,
+        name: seo.h1,
+        url,
+        description: seo.description,
+        isPartOf: { '@id': `${SITE_URL}#website` },
+        // Points back at the homepage Organization node rather than redeclaring
+        // it, so Google reads one entity described in two places.
+        mainEntity: { '@id': `${SITE_URL}#organization` },
+        publisher: { '@id': `${SITE_URL}#organization` },
+      },
+    );
+
+    // A named person is the strongest E-E-A-T signal an anonymous utility site
+    // can add, and doubles as entity disambiguation from the other "FilePilot"
+    // products. Emitted only when a real maintainer is configured — never faked.
+    if (maintainer) {
+      graph.push({
+        '@type': 'Person',
+        '@id': `${SITE_URL}#person`,
+        name: maintainer.name,
+        jobTitle: maintainer.role,
+        description: maintainer.bio[0],
+        url,
+        ...(maintainer.email ? { email: maintainer.email } : {}),
+        ...(maintainer.profiles?.length
+          ? { sameAs: maintainer.profiles.map((profile) => profile.url) }
+          : {}),
+        worksFor: { '@id': `${SITE_URL}#organization` },
+      });
+    }
   } else if (comparisonContent[route]) {
     const entry = comparisonContent[route];
     graph.push(
@@ -645,7 +689,7 @@ function homeStaticContent() {
       </section>
       <section>
         <h2>Read more</h2>
-        <ul>${linkList(['/blog', '/blog/why-files-stay-in-browser', '/privacy', '/terms', '/support'], 5)}</ul>
+        <ul>${linkList(['/about', '/blog', '/blog/why-files-stay-in-browser', '/privacy', '/terms', '/support'], 6)}</ul>
       </section>
     `;
 }
@@ -729,6 +773,55 @@ function comparisonStaticContent(route) {
     `;
 }
 
+
+/**
+ * Prerendered body for /about. E-E-A-T signals are worth nothing if they only
+ * exist after JavaScript runs, and the press-kit block is specifically there for
+ * writers and crawlers that never execute it.
+ */
+function aboutStaticContent() {
+  const seo = getRouteSeo('/about');
+
+  const section = (heading, paragraphs = [], bullets = []) => `
+      <section>
+        <h2>${escapeHtml(heading)}</h2>
+        ${paragraphs.map((text) => `<p>${escapeHtml(text)}</p>`).join('')}
+        ${bullets.length ? `<ul>${bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}
+      </section>`;
+
+  const maintainerBlock = maintainer
+    ? section(
+      'Who builds FilePilot',
+      [`${maintainer.name} — ${maintainer.role}${maintainer.location ? `, ${maintainer.location}` : ''}.`, ...maintainer.bio],
+      [
+        ...(maintainer.email ? [`Contact: ${maintainer.email}`] : []),
+        ...(maintainer.profiles ?? []).map((profile) => `${profile.label}: ${profile.url}`),
+      ],
+    )
+    : '';
+
+  return `
+      <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <span>About FilePilot</span></nav>
+      <h1>${escapeHtml(seo.h1)}</h1>
+      <p>${escapeHtml(seo.shortIntro ?? seo.description)}</p>
+      ${maintainerBlock}
+      ${aboutSections.map((entry) => section(entry.heading, entry.paragraphs ?? [], entry.bullets ?? [])).join('')}
+      <section>
+        <h2>Source code</h2>
+        <p>FilePilot is developed in the open. The repository is at <a href="${GITHUB_REPO_URL}">${escapeHtml(GITHUB_REPO_URL)}</a>.</p>
+      </section>
+      <section>
+        <h2>For press and reviewers</h2>
+        <p>${escapeHtml(pressKit.boilerplate)}</p>
+        <ul>${pressKit.linkablePages.map((page) => `<li><a href="${canonicalUrlForRoute(page.route)}">${escapeHtml(page.label)}</a></li>`).join('')}</ul>
+      </section>
+      <section>
+        <h2>Frequently asked questions</h2>
+        <ul>${faqList('/about')}</ul>
+      </section>
+    `;
+}
+
 function buildStaticRouteContent(route) {
   const seo = getRouteSeo(route);
   const title = escapeHtml(routeLabel(route));
@@ -785,14 +878,16 @@ function buildStaticRouteContent(route) {
         <ul>${linkList(hubSiblings(route, relatedRoutes, categoryToolRoutes))}</ul>
       </section>
     `
-    : comparisonContent[route]
-      ? comparisonStaticContent(route)
-      : route === '/'
-        ? homeStaticContent()
-        : route === '/blog'
-          ? blogIndexContent()
-          : extractArticleHtml(route)
-            ? `
+    : route === '/about'
+      ? aboutStaticContent()
+      : comparisonContent[route]
+        ? comparisonStaticContent(route)
+        : route === '/'
+          ? homeStaticContent()
+          : route === '/blog'
+            ? blogIndexContent()
+            : extractArticleHtml(route)
+              ? `
       <nav aria-label="Breadcrumb"><a href="${canonicalUrlForRoute('/')}">FilePilot</a> / <a href="${canonicalUrlForRoute('/blog')}">Blog</a> / <span>${title}</span></nav>
       <h1>${title}</h1>
       ${extractArticleHtml(route)}

@@ -14,6 +14,7 @@ const PdfToolsHub = lazy(() => import('./pages/PdfToolsHub').then(m => ({ defaul
 const ImageToolsHub = lazy(() => import('./pages/ImageToolsHub').then(m => ({ default: m.ImageToolsHub })));
 const CategoryHub = lazy(() => import('./pages/CategoryHub').then(m => ({ default: m.CategoryHub })));
 const ComparisonPage = lazy(() => import('./pages/ComparisonPage').then(m => ({ default: m.ComparisonPage })));
+const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
 
 // ─── Blog ───────────────────────────────────────────────────────────────────
 const Blog = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
@@ -165,6 +166,8 @@ function App() {
           <Route path="/image-tools" element={<ImageToolsHub />} />
           <Route path="/image-workflows" element={<CategoryHub hubPath="/image-workflows" />} />
           <Route path="/ai-tools" element={<CategoryHub hubPath="/ai-tools" />} />
+
+          <Route path="/about" element={<About />} />
 
           {/* Phase 1.3 — "alternative to X" pages */}
           <Route path="/smallpdf-alternative" element={<ComparisonPage route="/smallpdf-alternative" />} />

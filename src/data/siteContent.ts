@@ -127,6 +127,37 @@ export const siteContent: Record<string, SiteContentEntry> = {
       'Help keep FilePilot free, private and ad-free while funding new tools, performance improvements and maintenance.',
   },
 
+  '/about': {
+    title: 'About FilePilot — Who Builds It and How It Works',
+    description:
+      'Who builds FilePilot, why it processes files in your browser instead of on a server, the libraries it uses, how to verify the no-upload claim yourself, and what it deliberately cannot do.',
+    h1: 'About FilePilot',
+    intro:
+      'FilePilot is a free set of 90+ PDF and image tools that run entirely in your browser. This page explains who builds it, how the local processing actually works, how you can verify that claim for yourself, how the site is paid for, and where it falls short.',
+    faqs: [
+      {
+        question: 'Who is behind FilePilot?',
+        answer: 'FilePilot is an independently built and maintained web app. It is not a venture-funded company or a subsidiary; there is no sales team and no account system. Details of the maintainer are on this page.',
+      },
+      {
+        question: 'How do I know my files are not uploaded?',
+        answer: 'Verify it rather than trusting it. Open your browser\'s developer tools, switch to the Network tab, and run any tool — you will see the page and its code load, and no request carrying your file. The site also sends a Content-Security-Policy with connect-src \'self\', which tells your browser to block requests to any other host.',
+      },
+      {
+        question: 'How does FilePilot make money?',
+        answer: 'It largely does not. There are no ads, trackers, analytics, affiliate links, accounts or paid tiers. Because processing happens on your device there are no per-file server costs to recover. An optional donation link opens a hosted payment page in a new tab; no payment code is embedded in the site.',
+      },
+      {
+        question: 'Is this the same as the File Pilot Windows file manager?',
+        answer: 'No. FilePilot at filepilot.space is a website for working with PDFs and images in a browser. File Pilot at filepilot.tech is an unrelated Windows file-manager application. There is no affiliation in either direction.',
+      },
+      {
+        question: 'Can I contact the maintainer?',
+        answer: 'Yes — contact details are listed on this page, and the source repository is public on GitHub.',
+      },
+    ],
+  },
+
   '/privacy': {
     title: 'Privacy Policy | FilePilot',
     description:
