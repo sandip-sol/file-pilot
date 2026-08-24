@@ -150,7 +150,18 @@ const gitLastModified = (relativePaths) => {
 const TODAY = new Date().toISOString().slice(0, 10);
 const lastmodCache = new Map();
 
-const lastmodForRoute = (route) => {
+/**
+ * Exported because the JSON-LD needs it too. Sitemap `lastmod` is a crawl hint
+ * and page-node `dateModified` is a content assertion; they corroborate each
+ * other only while they agree, so both read this one function.
+ *
+ * Granularity is the source *file set*, not the route — every tool page shares
+ * the date of the newest commit to toolContent.ts / toolRegistry.ts. Deliberate:
+ * a per-route date (via `git log -L` over each entry's block) is derivable and
+ * cheap, but it would make dateModified disagree with the lastmod for the same
+ * URL. If that precision is ever wanted, both have to move together.
+ */
+export const lastmodForRoute = (route) => {
   const sources = route.startsWith('/blog/')
     ? ['src/data/blogContent.ts']
     : CORE_ROUTE_SEO[route]

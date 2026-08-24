@@ -19,7 +19,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeoRoutes, getSitemapEntries, isToolRoute } from './seoRoutes.js';
+import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeoRoutes, getSitemapEntries, isToolRoute, lastmodForRoute } from './seoRoutes.js';
 import { toolContent } from './src/data/toolContent.ts';
 import { comparisonContent } from './src/data/comparisons.ts';
 import { GITHUB_REPO_URL, ORGANIZATION_PROFILES, aboutSections, maintainer, pressKit } from './src/data/aboutContent.ts';
@@ -626,8 +626,24 @@ function breadcrumbNode(route, trail) {
   };
 }
 
+/**
+ * Every page-level node in every branch of buildJsonLd is built here, so this is
+ * the single place `dateModified` needs to go rather than one line per branch.
+ *
+ * The date is the same git-derived value the sitemap publishes as `lastmod` for
+ * this URL. That agreement is the point: lastmod is a crawl hint, dateModified
+ * is a content assertion, and each is only worth anything while it corroborates
+ * the other. On a post, the author-declared revision date wins over both — a
+ * commit touching links is not a content update, and BlogPosting already says so.
+ */
+function pageModified(route) {
+  if (blogPosts[route]) return articleDates(route).dateModified;
+  return lastmodForRoute(route);
+}
+
 function pageNode(route, type, extra = {}) {
   const seo = getRouteSeo(route);
+  const modified = pageModified(route);
   return {
     '@type': type,
     '@id': nodeId(route, 'webpage'),
@@ -638,6 +654,7 @@ function pageNode(route, type, extra = {}) {
     publisher: { '@id': ORG_ID },
     primaryImageOfPage: { '@id': OG_IMAGE_ID },
     inLanguage: 'en',
+    ...(modified ? { dateModified: modified } : {}),
     ...extra,
   };
 }
