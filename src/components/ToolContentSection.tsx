@@ -48,8 +48,12 @@ export const ToolContentSection = () => {
           How to {content.action} with FilePilot
         </h2>
         <ol className="list-decimal list-inside space-y-3 text-muted-foreground mb-8">
+          {/* The id is what HowToStep.url points at (`#step-N`, minted in
+              prerender.js). React replaces the prerendered shell on mount, so
+              without it here the fragment resolves in the static HTML and
+              dangles in the DOM Google actually indexes. */}
           {content.steps.map((step, i) => (
-            <li key={i} className="leading-relaxed pl-1">{step}</li>
+            <li key={i} id={`step-${i + 1}`} className="leading-relaxed pl-1">{step}</li>
           ))}
         </ol>
 
