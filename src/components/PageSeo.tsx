@@ -27,6 +27,13 @@ interface PageSeoProps {
     image?: string;
     canonicalPath?: string;
     robots?: 'index,follow' | 'noindex,follow';
+    /**
+     * Mirrors what prerender.js writes into the static HTML. Social scrapers read
+     * that and never run this, so the only thing this fixes is the tag going
+     * stale across client-side navigation — a post would otherwise leave
+     * `article` behind on the next page. Defaults to the site-wide 'website'.
+     */
+    ogType?: 'website' | 'article';
 }
 
 const SITE_URL = 'https://www.filepilot.space/';
@@ -70,6 +77,7 @@ export const PageSeo = ({
     image = DEFAULT_IMAGE,
     canonicalPath,
     robots = 'index,follow',
+    ogType = 'website',
 }: PageSeoProps) => {
     const location = useLocation();
 
@@ -83,6 +91,7 @@ export const PageSeo = ({
         upsertMeta('meta[name="description"]', { name: 'description', content: description });
         upsertMeta('meta[name="robots"]', { name: 'robots', content: robots });
         upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: 'FilePilot' });
+        upsertMeta('meta[property="og:type"]', { property: 'og:type', content: ogType });
         upsertMeta('meta[property="og:title"]', { property: 'og:title', content: title });
         upsertMeta('meta[property="og:description"]', { property: 'og:description', content: description });
         upsertMeta('meta[property="og:url"]', { property: 'og:url', content: url });
@@ -97,6 +106,7 @@ export const PageSeo = ({
             upsertCanonical(SITE_URL);
             upsertMeta('meta[name="description"]', { name: 'description', content: DEFAULT_DESCRIPTION });
             upsertMeta('meta[name="robots"]', { name: 'robots', content: 'index,follow' });
+            upsertMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' });
             upsertMeta('meta[property="og:title"]', { property: 'og:title', content: DEFAULT_TITLE });
             upsertMeta('meta[property="og:description"]', { property: 'og:description', content: DEFAULT_DESCRIPTION });
             upsertMeta('meta[property="og:url"]', { property: 'og:url', content: SITE_URL });
@@ -106,7 +116,7 @@ export const PageSeo = ({
             upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: DEFAULT_DESCRIPTION });
             upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: DEFAULT_IMAGE });
         };
-    }, [canonicalPath, description, image, location.pathname, robots, title]);
+    }, [canonicalPath, description, image, location.pathname, ogType, robots, title]);
 
     return null;
 };

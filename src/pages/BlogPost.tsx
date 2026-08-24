@@ -65,7 +65,7 @@ export const BlogPost = ({ route }: { route: keyof typeof blogPosts }) => {
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo {...siteSeo(route)} canonicalPath={route} />
+      <PageSeo {...siteSeo(route)} canonicalPath={route} ogType="article" />
 
       <div className="container max-w-3xl py-10 pb-16">
         <Link

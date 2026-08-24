@@ -77,6 +77,10 @@ function withRouteSeo(html, route) {
   const escapedTitle = escapeHtml(title);
   const escapedDescription = escapeHtml(description);
   const robots = isNetlifyPreview ? NOINDEX_ROBOTS : INDEXABLE_ROBOTS;
+  // Open Graph is the other structured-data channel: platforms that never parse
+  // JSON-LD read this instead, and typing a post as a website throws away the
+  // byline and date slots in their preview cards.
+  const ogType = blogPosts[route] ? 'article' : 'website';
   const staticSeo = `<div id="root">${buildStaticRouteContent(route)}</div>`;
 
   let nextHtml = html
@@ -84,6 +88,7 @@ function withRouteSeo(html, route) {
     .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/, `<meta name="description" content="${escapedDescription}">`)
     .replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/, `<meta name="robots" content="${robots}">`)
     .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${canonicalUrl}">`)
+    .replace(/<meta\s+property="og:type"\s+content="[^"]*"\s*\/?>/, `<meta property="og:type" content="${ogType}">`)
     .replace(/<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/, `<meta property="og:title" content="${escapedTitle}">`)
     .replace(/<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/, `<meta property="og:description" content="${escapedDescription}">`)
     .replace(/<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/, `<meta property="og:url" content="${canonicalUrl}">`)
@@ -114,9 +119,40 @@ function withRouteSeo(html, route) {
   nextHtml = nextHtml
     .replace(/\n?<link\s+rel="modulepreload"[^>]*>/gi, '');
 
+  nextHtml = withArticleMeta(nextHtml, route);
   nextHtml = withBingVerification(nextHtml);
 
   return nextHtml;
+}
+
+/**
+ * The date and byline half of an `og:type=article` card. Mirrors the JSON-LD
+ * exactly — same `articleDates()` source — because a preview card contradicting
+ * the structured data is worse than a card with no dates at all.
+ *
+ * Strips before it writes: `writeSeoShells` reads dist/index.html as its
+ * template, so a re-run over an already-prerendered dist must not accumulate or
+ * inherit another route's tags.
+ *
+ * No `twitter:site`. It names an X account, and there is no FilePilot account to
+ * name — an invented handle is a broken link on every shared card. It belongs
+ * here the day the account exists, alongside its `ORGANIZATION_PROFILES` entry.
+ */
+function withArticleMeta(html, route) {
+  const stripped = html.replace(/\n?\s*<meta\s+property="article:[^"]*"\s+content="[^"]*"\s*\/?>/g, '');
+  const post = blogPosts[route];
+  if (!post) return stripped;
+
+  const { datePublished, dateModified } = articleDates(route);
+  const tags = [
+    datePublished ? `<meta property="article:published_time" content="${escapeHtml(datePublished)}" />` : null,
+    dateModified ? `<meta property="article:modified_time" content="${escapeHtml(dateModified)}" />` : null,
+    // Gated on a real maintainer for the same reason the Person node is.
+    maintainer ? `<meta property="article:author" content="${escapeHtml(canonicalUrlForRoute('/about'))}" />` : null,
+  ].filter(Boolean);
+
+  if (!tags.length) return stripped;
+  return stripped.replace('</head>', `  ${tags.join('\n  ')}\n</head>`);
 }
 
 function withBingVerification(html) {
