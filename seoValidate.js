@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { maintainer } from './src/data/aboutContent.ts';
+import { MIN_ORGANIZATION_PROFILES, ORGANIZATION_PROFILES, maintainer } from './src/data/aboutContent.ts';
 import { PILLAR_ROUTE, blogPosts } from './src/data/blogContent.ts';
 import {
   CANONICAL_HOST,
@@ -506,6 +506,24 @@ function warnIfAnonymous() {
 
 
 /**
+ * Warning, not a failure: no amount of markup can manufacture corroboration.
+ * `sameAs` is how Google triangulates that this domain is a distinct entity from
+ * the File Pilot Windows file manager and the three positioning clones, and it
+ * only works with URLs that exist. This cannot be fixed in code — it is outreach
+ * — but it stays visible on every build so it is not quietly forgotten.
+ */
+function warnIfThinSameAs() {
+  if (ORGANIZATION_PROFILES.length >= MIN_ORGANIZATION_PROFILES) return;
+  warnings.push(
+    `Organization sameAs has ${ORGANIZATION_PROFILES.length} `
+    + `profile${ORGANIZATION_PROFILES.length === 1 ? '' : 's'}, below the ${MIN_ORGANIZATION_PROFILES} `
+    + 'needed to disambiguate a colliding brand name. "FilePilot" resolves to the Windows file manager '
+    + 'at filepilot.tech until more corroborating URLs exist. Each profile you create is also a backlink — '
+    + 'add it to `ORGANIZATION_PROFILES` in src/data/aboutContent.ts.',
+  );
+}
+
+/**
  * Cluster integrity and the anti-cannibalisation rule (Phase 3.1).
  *
  * A hub-and-spoke cluster only works if the links actually form one: the pillar
@@ -569,6 +587,7 @@ validateRelatedToolLinks();
 validateNoOrphanedFromLinks();
 validateBlogCluster();
 warnIfAnonymous();
+warnIfThinSameAs();
 validate404();
 
 if (errors.length > 0) {

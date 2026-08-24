@@ -60,6 +60,33 @@ export const maintainer: Maintainer | null = null;
 
 export const GITHUB_REPO_URL = 'https://github.com/sandip-sol/file-pilot';
 
+/**
+ * Profiles that prove FilePilot-the-site is a real, distinct entity. Emitted as
+ * the Organization's `sameAs`.
+ *
+ * "FilePilot" is a saturated name. It collides with the File Pilot Windows
+ * Explorer replacement (filepilot.tech — the dominant entity, with XDA and
+ * MajorGeeks coverage), a GitHub project, an iOS app, AND three sites in the
+ * same category: filepilot.org, filepilot.online and filepilottools.top.
+ * Google has no reason to treat this domain as distinct without corroborating
+ * URLs it can crawl and match back here.
+ *
+ * ADD EVERY PROFILE YOU CONTROL AS YOU CREATE IT. Product Hunt, X, Reddit,
+ * LinkedIn, Mastodon, an AlternativeTo listing — each one is both a `sameAs`
+ * edge and a backlink, which is the Phase 2 bottleneck anyway. This list is the
+ * single place to add them; the Organization schema on all 110 pages picks
+ * them up, and `seoValidate` warns while it is this short.
+ *
+ * A profile only corroborates if the page at the other end names FilePilot and
+ * links back to this domain. An edge to a page that does neither is decoration.
+ */
+export const ORGANIZATION_PROFILES: string[] = [
+  GITHUB_REPO_URL,
+];
+
+/** Below this, `sameAs` is too thin to win a name collision. */
+export const MIN_ORGANIZATION_PROFILES = 3;
+
 export interface AboutSection {
   heading: string;
   paragraphs?: string[];

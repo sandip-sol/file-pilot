@@ -22,7 +22,7 @@ import { fileURLToPath } from 'url';
 import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeoRoutes, getSitemapEntries, isToolRoute } from './seoRoutes.js';
 import { toolContent } from './src/data/toolContent.ts';
 import { comparisonContent } from './src/data/comparisons.ts';
-import { GITHUB_REPO_URL, aboutSections, maintainer, pressKit } from './src/data/aboutContent.ts';
+import { GITHUB_REPO_URL, ORGANIZATION_PROFILES, aboutSections, maintainer, pressKit } from './src/data/aboutContent.ts';
 import { blogDateLabel, blogPosts, blogPostsByDate } from './src/data/blogContent.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -56,24 +56,6 @@ const HOME_HUBS = ['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools'
 
 const STANDALONE_PAGE_ROUTES = new Set(['/support', '/privacy', '/terms']);
 
-/**
- * Profiles that prove FilePilot-the-site is a real, distinct entity.
- *
- * "FilePilot" is a saturated name. It collides with the File Pilot Windows
- * Explorer replacement (filepilot.tech — the dominant entity, with XDA and
- * MajorGeeks coverage), a GitHub project, an iOS app, AND three sites in the
- * same category: filepilot.org, filepilot.online and filepilottools.top.
- * Google has no reason to treat this domain as distinct without corroborating
- * URLs it can crawl and match back here.
- *
- * ADD EVERY PROFILE YOU CONTROL AS YOU CREATE IT. Product Hunt, X, Reddit,
- * LinkedIn, Mastodon, an AlternativeTo listing — each one is both a `sameAs`
- * edge and a backlink, which is the Phase 2 bottleneck anyway. This list is the
- * single place to add them; the homepage Organization schema picks them up.
- */
-const ORGANIZATION_PROFILES = [
-  'https://github.com/sandip-sol/file-pilot',
-];
 const isNetlifyPreview =
   process.env.NETLIFY === 'true' && process.env.CONTEXT && process.env.CONTEXT !== 'production';
 const shouldRenderBingVerification =
@@ -487,7 +469,9 @@ function organizationNode() {
     // "FilePilot" name is ambiguous — it collides with a Windows file
     // manager, an iOS app and several other file-tool sites.
     sameAs: ORGANIZATION_PROFILES,
-    foundingDate: '2026',
+    // The first commit, not a bare year: a precise date is a corroborable claim
+    // and the git history is public.
+    foundingDate: '2026-01-23',
     contactPoint: {
       '@type': 'ContactPoint',
       '@id': `${SITE_URL}#contact`,
