@@ -40,10 +40,6 @@ export const RasterizePdf = () => {
             <PageSeo
                 title="Rasterize PDF – Convert PDF Pages to High-DPI Images"
                 description="Render PDF pages to high-resolution images in PNG, JPG, or WebP format. Download as a ZIP archive. 100% private."
-                faqItems={[
-                    { question: 'What is rasterization?', answer: 'Rasterization converts vector PDF content into pixel-based images at a specified resolution (DPI).' },
-                    { question: 'Is my file uploaded?', answer: 'No. All processing is done in your browser. Your file never leaves your device.' },
-                ]}
             />
             <div className="page-header">
                 <div className="container">

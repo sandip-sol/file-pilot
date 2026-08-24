@@ -26,7 +26,7 @@ export const PdfToJpg = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="PDF to JPG Online – Free & Private" description="Convert every page of a PDF to JPG images. Download as a ZIP. 100% browser-based." faqItems={[{ question: 'How do I get individual JPG files?', answer: 'All pages are converted and packed into a ZIP for easy download.' }, { question: 'What DPI should I use?', answer: '150 DPI is good for web; 300 DPI for print-quality images.' }]} />
+            <PageSeo title="PDF to JPG Online – Free & Private" description="Convert every page of a PDF to JPG images. Download as a ZIP. 100% browser-based." />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-600 text-white flex items-center justify-center shadow-lg"><FileImage className="w-6 h-6" /></div></div>
                 <h1>PDF to JPG Online</h1><p>Convert every page to a JPG image and download as a ZIP file.</p>

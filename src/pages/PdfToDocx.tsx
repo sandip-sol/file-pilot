@@ -26,7 +26,7 @@ export const PdfToDocx = () => {
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo title="Extract PDF Text for Word – Free & Private" description="Extract PDF text into a plain text file you can open or paste into Word. Browser-based and private." faqItems={[{question:'Does this create a DOCX file?',answer:'No. This extracts text into a plain text file. Editable DOCX conversion is not published yet.'},{question:'Is my file uploaded?',answer:'No. All processing is local in your browser.'}]} />
+      <PageSeo title="Extract PDF Text for Word – Free & Private" description="Extract PDF text into a plain text file you can open or paste into Word. Browser-based and private." />
       <div className="page-header"><div className="container">
         <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 text-white flex items-center justify-center shadow-lg"><FileText className="w-6 h-6" /></div></div>
         <h1>Extract PDF Text for Word</h1><p>Extract readable text from your PDF as a plain text file. Browser-based, private.</p>

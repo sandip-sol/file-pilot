@@ -45,7 +45,7 @@ export const JpgToPdf = () => {
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo title="JPG to PDF Online – Free & Private" description="Convert JPG images to PDF in your browser. No uploads, 100% private." faqItems={[{ question: 'Can I convert multiple images?', answer: 'Yes. Select multiple files to create a multi-page PDF.' }, { question: 'Is quality preserved?', answer: 'Images are embedded at their original resolution.' }]} />
+      <PageSeo title="JPG to PDF Online – Free & Private" description="Convert JPG images to PDF in your browser. No uploads, 100% private." />
       <div className="page-header"><div className="container">
         <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-600 text-white flex items-center justify-center shadow-lg"><FileImage className="w-6 h-6" /></div></div>
         <h1>JPG to PDF Online</h1><p>Convert JPG images to PDF instantly in your browser.</p>

@@ -26,7 +26,7 @@ export const PdfToWebp = () => {
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo title="PDF to WebP Online – Free & Private" description="Convert every PDF page to WebP images. Download as ZIP. 100% browser-based." faqItems={[{question:'How are images delivered?',answer:'All pages are zipped for easy download.'},{question:'What DPI should I use?',answer:'150 DPI is good for web; 300 DPI for print-quality.'}]} />
+      <PageSeo title="PDF to WebP Online – Free & Private" description="Convert every PDF page to WebP images. Download as ZIP. 100% browser-based." />
       <div className="page-header"><div className="container">
         <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500 to-green-600 text-white flex items-center justify-center shadow-lg"><FileImage className="w-6 h-6" /></div></div>
         <h1>PDF to WebP Online</h1><p>Convert every page to a WebP image and download as a ZIP.</p>

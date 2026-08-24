@@ -33,7 +33,7 @@ export const EncryptDecryptPdf = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Encrypt & Decrypt PDF Online – Free & Private" description="Password-protect or unlock PDF files. 100% browser-based, files never leave your device." faqItems={[{ question: 'What encryption is used?', answer: 'pdf-lib re-serialises the document. For hardware-level AES-256, use a native PDF application.' }, { question: 'Can I decrypt any encrypted PDF?', answer: 'Only PDFs you have access to (open in browser).' }]} />
+            <PageSeo title="Encrypt & Decrypt PDF Online – Free & Private" description="Password-protect or unlock PDF files. 100% browser-based, files never leave your device." />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4">
                     <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-600 to-rose-800 text-white flex items-center justify-center shadow-lg">{mode === 'encrypt' ? <Lock className="w-6 h-6" /> : <Unlock className="w-6 h-6" />}</div>

@@ -26,7 +26,7 @@ export const PdfToExcel = () => {
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo title="Extract PDF Text for Sheets – Free & Private" description="Extract PDF text into a plain text file you can review in a spreadsheet. Browser-based and private." faqItems={[{question:'Does this create an XLSX file?',answer:'No. This extracts text into a plain text file. Table-to-spreadsheet conversion is not published yet.'},{question:'Is my file uploaded?',answer:'No. All processing is local in your browser.'}]} />
+      <PageSeo title="Extract PDF Text for Sheets – Free & Private" description="Extract PDF text into a plain text file you can review in a spreadsheet. Browser-based and private." />
       <div className="page-header"><div className="container">
         <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-600 to-green-800 text-white flex items-center justify-center shadow-lg"><FileSpreadsheet className="w-6 h-6" /></div></div>
         <h1>Extract PDF Text for Sheets</h1><p>Extract readable text from your PDF as a plain text file. Browser-based, private.</p>

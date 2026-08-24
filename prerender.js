@@ -107,7 +107,11 @@ function withRouteSeo(html, route) {
     .replace(/<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/, `<meta property="og:url" content="${canonicalUrl}">`)
     .replace(/<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:title" content="${escapedTitle}">`)
     .replace(/<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:description" content="${escapedDescription}">`)
-    .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, buildJsonLd(route))
+    // Tolerant of the id attribute so a re-run over an already-prerendered dist
+    // replaces its own previous output instead of leaving it in place. The
+    // homepage writes back to dist/index.html, which is also the template every
+    // other route is built from, so this regex must match what buildJsonLd emits.
+    .replace(/<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/i, buildJsonLd(route))
     .replace('<div id="root"></div>', staticSeo);
 
   if (/<body>\s*<div id="root">[\s\S]*<\/div>\s*<noscript>/i.test(nextHtml)) {
@@ -122,9 +126,11 @@ function withRouteSeo(html, route) {
     );
   }
 
+  // The id="page-schema" strip that used to live here was removed: buildJsonLd
+  // now emits that id itself, so stripping it would delete the only structured
+  // data on the page.
   nextHtml = nextHtml
-    .replace(/\n?<link\s+rel="modulepreload"[^>]*>/gi, '')
-    .replace(/\n?<script\s+id="(?:page-schema|faq-schema)"\s+type="application\/ld\+json">[\s\S]*?<\/script>/gi, '');
+    .replace(/\n?<link\s+rel="modulepreload"[^>]*>/gi, '');
 
   nextHtml = withBingVerification(nextHtml);
 
@@ -225,8 +231,14 @@ function buildFaqSchema(route) {
 
   return {
     '@type': 'FAQPage',
-    mainEntity: faqItems.map((item) => ({
+    '@id': nodeId(route, 'faq'),
+    // Attaches the questions to the page entity. Without this the FAQPage was a
+    // second, competing page-level node for the same URL.
+    mainEntityOfPage: { '@id': nodeId(route, 'webpage') },
+    inLanguage: 'en',
+    mainEntity: faqItems.map((item, index) => ({
       '@type': 'Question',
+      '@id': nodeId(route, `faq-${index + 1}`),
       name: item.question,
       acceptedAnswer: {
         '@type': 'Answer',
@@ -262,10 +274,15 @@ function buildHowToSchema(route) {
 
   return {
     '@type': 'HowTo',
+    '@id': nodeId(route, 'howto'),
     name: `How to ${action} with FilePilot`,
     description: `Step-by-step guide to ${action} privately in your browser using ${title}. Processing runs locally on your device with no file uploads.`,
     inLanguage: 'en',
-    tool: { '@type': 'HowToTool', name: title },
+    estimatedCost: { '@type': 'MonetaryAmount', currency: 'USD', value: '0' },
+    // References the real app node instead of restating the name as a bare
+    // HowToTool, so the procedure has a stated subject.
+    tool: { '@id': nodeId(route, 'app') },
+    mainEntityOfPage: { '@id': nodeId(route, 'webpage') },
     step: steps.map((step, index) => ({
       '@type': 'HowToStep',
       position: index + 1,
@@ -372,58 +389,321 @@ function articleDates(route) {
   };
 }
 
+/**
+ * ---------------------------------------------------------------------------
+ * JSON-LD graph
+ * ---------------------------------------------------------------------------
+ *
+ * Every page emits the same "spine" nodes — Organization, WebSite, the
+ * suite-level SoftwareApplication, the OG image, and the maintainer Person when
+ * one is configured — followed by page-specific nodes built on top.
+ *
+ * INVARIANT: an `{ '@id': X }` reference may only point at a spine id or at an
+ * id minted for the route currently being built. Structured data is evaluated
+ * per URL, so a reference to a node defined on some *other* page resolves to
+ * nothing. That is what used to be broken here: 109 of 110 pages pointed
+ * `isPartOf` and `publisher` at `#website` / `#organization`, two nodes that
+ * only ever existed on the homepage. Cross-page pointers use a plain URL
+ * string, which is always resolvable, or emit a stub node for the target.
+ */
+
+const ORG_ID = `${SITE_URL}#organization`;
+const WEBSITE_ID = `${SITE_URL}#website`;
+const SUITE_APP_ID = `${SITE_URL}#app`;
+const LOGO_ID = `${SITE_URL}#logo`;
+const OG_IMAGE_ID = `${SITE_URL}#og`;
+const PERSON_ID = `${SITE_URL}#person`;
+
+const HUB_ROUTES = ['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools'];
+
+/** Google's least-specific classification is the same for all 84 tools; this narrows it. */
+const APPLICATION_SUBCATEGORY = {
+  'organize-manage': 'PDF organiser',
+  'edit-annotate': 'PDF editor',
+  'convert-to-pdf': 'PDF converter',
+  'convert-from-pdf': 'PDF converter',
+  'optimize-repair': 'PDF optimiser',
+  'secure-pdf': 'PDF security',
+  'image-tools': 'Image editor',
+  workflows: 'Image workflow',
+  'ai-tools': 'AI image tool',
+};
+
+/** Fragment-scoped node id, so no @id is hand-typed anywhere below. */
+function nodeId(route, fragment) {
+  return `${canonicalUrlForRoute(route)}#${fragment}`;
+}
+
+/**
+ * Tool routes whose category maps to `hubRoute`, using the same CATEGORY_HUBS
+ * mapping the breadcrumbs use — so a tool's hub ItemList membership and its
+ * breadcrumb trail can never disagree.
+ *
+ * Deliberately not `categoryToolRoutesForHub`, which buckets all image
+ * categories under /image-tools for the HTML link lists.
+ */
+function toolsForHub(hubRoute) {
+  return getRouteSeoEntries()
+    .filter((entry) => entry.category && CATEGORY_HUBS[entry.category]?.route === hubRoute)
+    .filter((entry) => ROUTES.includes(entry.route))
+    .map((entry) => entry.route);
+}
+
+function organizationNode() {
+  return {
+    '@type': 'Organization',
+    '@id': ORG_ID,
+    name: 'FilePilot',
+    alternateName: ['FilePilot File Tools', 'filepilot.space'],
+    url: SITE_URL,
+    // Google's logo guidance accepts .jpg/.png/.gif only. This was an SVG, so
+    // the property was being dropped and the site had no logo association.
+    logo: {
+      '@type': 'ImageObject',
+      '@id': LOGO_ID,
+      url: `${SITE_URL}icon-512.png`,
+      contentUrl: `${SITE_URL}icon-512.png`,
+      width: 512,
+      height: 512,
+      caption: 'FilePilot',
+    },
+    image: { '@id': LOGO_ID },
+    description: 'FilePilot is a free, privacy-first web app offering browser-based PDF, image, and file tools that process files locally on your device without uploads. It is a website, not a desktop application, and is not affiliated with the File Pilot Windows file manager, the FilePilot iOS app, or any similarly named file-tool site.',
+    // The property built for entities that collide by name. "FilePilot" competes
+    // with a Windows file manager, an iOS app and three positioning clones.
+    disambiguatingDescription: 'A free web app at filepilot.space for browser-based PDF and image editing. Not the File Pilot Windows file manager at filepilot.tech, not the FilePilot iOS app, and not affiliated with filepilot.org, filepilot.online or filepilottools.top.',
+    knowsAbout: [
+      'browser-based PDF editing',
+      'client-side image processing',
+      'privacy-preserving file conversion',
+      'WebAssembly document processing',
+    ],
+    // sameAs is how Google links this site to a known entity. Without it the
+    // "FilePilot" name is ambiguous — it collides with a Windows file
+    // manager, an iOS app and several other file-tool sites.
+    sameAs: ORGANIZATION_PROFILES,
+    foundingDate: '2026',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      '@id': `${SITE_URL}#contact`,
+      contactType: 'customer support',
+      url: canonicalUrlForRoute('/support'),
+      availableLanguage: 'en',
+    },
+    termsOfService: canonicalUrlForRoute('/terms'),
+    ...(maintainer ? { founder: { '@id': PERSON_ID } } : {}),
+    // A URL string, not an @id: the /about page node does not exist in this graph.
+    mainEntityOfPage: canonicalUrlForRoute('/about'),
+  };
+}
+
+function webSiteNode() {
+  return {
+    '@type': 'WebSite',
+    '@id': WEBSITE_ID,
+    url: SITE_URL,
+    name: 'FilePilot',
+    alternateName: 'filepilot.space',
+    description: getRouteSeo('/').description,
+    inLanguage: 'en',
+    publisher: { '@id': ORG_ID },
+    copyrightHolder: { '@id': ORG_ID },
+    // No potentialAction/SearchAction: there is no /search?q= route. Declaring a
+    // sitelinks searchbox that resolves to a 404 causes the feature to be withheld.
+  };
+}
+
+/** The suite. Every per-tool app node declares `isPartOf` this, which is what
+ *  turns 84 otherwise-orphan tool pages into one product family. */
+function suiteAppNode() {
+  return {
+    '@type': ['SoftwareApplication', 'WebApplication'],
+    '@id': SUITE_APP_ID,
+    name: 'FilePilot',
+    url: SITE_URL,
+    description: getRouteSeo('/').description,
+    applicationCategory: 'UtilityApplication',
+    applicationSubCategory: 'Document and image editing',
+    operatingSystem: 'Web browser (Chrome, Edge, Firefox, Safari)',
+    browserRequirements: 'Requires JavaScript and a browser with WebAssembly support.',
+    permissions: "No account required. No file upload. Files are read into browser memory and processed on the user's own device.",
+    isAccessibleForFree: true,
+    inLanguage: 'en',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+    featureList: HOME_HUBS.map((hub) => routeLabel(hub)),
+    screenshot: { '@id': OG_IMAGE_ID },
+    provider: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
+    // No aggregateRating. Self-authored ratings for your own product have been
+    // ineligible for rich results since 2019 and inventing counts is a
+    // manual-action risk. Add it only when real third-party reviews exist.
+  };
+}
+
+function ogImageNode() {
+  return {
+    '@type': 'ImageObject',
+    '@id': OG_IMAGE_ID,
+    url: `${SITE_URL}og-image.png`,
+    contentUrl: `${SITE_URL}og-image.png`,
+    width: 1200,
+    height: 630,
+    caption: 'FilePilot — private, browser-based PDF and image tools that never upload your files',
+  };
+}
+
+/**
+ * A named person is the strongest E-E-A-T signal an anonymous utility site can
+ * add, and doubles as entity disambiguation from the other "FilePilot"
+ * products. Emitted only when a real maintainer is configured — never faked.
+ */
+function personNode() {
+  return {
+    '@type': 'Person',
+    '@id': PERSON_ID,
+    name: maintainer.name,
+    jobTitle: maintainer.role,
+    description: maintainer.bio[0],
+    url: canonicalUrlForRoute('/about'),
+    ...(maintainer.email ? { email: maintainer.email } : {}),
+    ...(maintainer.profiles?.length
+      ? { sameAs: maintainer.profiles.map((profile) => profile.url) }
+      : {}),
+    knowsAbout: [
+      'client-side document processing',
+      'PDF file format internals',
+      'WebAssembly',
+      'browser privacy',
+    ],
+    worksFor: { '@id': ORG_ID },
+  };
+}
+
+/** Present on all 110 pages, so every reference below resolves. */
+function spineNodes() {
+  return [
+    organizationNode(),
+    webSiteNode(),
+    suiteAppNode(),
+    ogImageNode(),
+    ...(maintainer ? [personNode()] : []),
+  ];
+}
+
+/** `trail` is [{ name, route }]; the last entry omits `item` per Google's guidance. */
+function breadcrumbNode(route, trail) {
+  return {
+    '@type': 'BreadcrumbList',
+    '@id': nodeId(route, 'breadcrumb'),
+    itemListElement: trail.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.name,
+      ...(index < trail.length - 1 ? { item: canonicalUrlForRoute(crumb.route) } : {}),
+    })),
+  };
+}
+
+function pageNode(route, type, extra = {}) {
+  const seo = getRouteSeo(route);
+  return {
+    '@type': type,
+    '@id': nodeId(route, 'webpage'),
+    url: canonicalUrlForRoute(route),
+    name: routeLabel(route),
+    description: seo.description,
+    isPartOf: { '@id': WEBSITE_ID },
+    publisher: { '@id': ORG_ID },
+    primaryImageOfPage: { '@id': OG_IMAGE_ID },
+    inLanguage: 'en',
+    ...extra,
+  };
+}
+
+/** Compact SoftwareApplication for a tool, used both on its own page and inside
+ *  a hub's ItemList — same @id both times, so it is one entity, not two. */
+function toolAppNode(route, { full }) {
+  const seo = getRouteSeo(route);
+  const category = getRouteSeoEntries().find((entry) => entry.route === route)?.category;
+  const base = {
+    '@type': ['SoftwareApplication', 'WebApplication'],
+    '@id': nodeId(route, 'app'),
+    // Short tool label only, never the <title>. Two nodes disagreeing about this
+    // (the label vs. "… – Free & Private | FilePilot") was the duplicate-schema bug.
+    name: routeLabel(route),
+    url: canonicalUrlForRoute(route),
+    description: seo.description,
+    applicationCategory: 'UtilityApplication',
+    ...(APPLICATION_SUBCATEGORY[category] ? { applicationSubCategory: APPLICATION_SUBCATEGORY[category] } : {}),
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+    isPartOf: { '@id': SUITE_APP_ID },
+  };
+
+  if (!full) return { ...base, operatingSystem: 'Web browser' };
+
+  return {
+    ...base,
+    operatingSystem: 'Web browser (Chrome, Edge, Firefox, Safari)',
+    browserRequirements: 'Requires JavaScript and a browser with WebAssembly support.',
+    permissions: 'No account required. No file upload. Files are processed locally in the browser.',
+    inLanguage: 'en',
+    provider: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
+    mainEntityOfPage: { '@id': nodeId(route, 'webpage') },
+  };
+}
+
+/** Full on /blog (with the post list); a stub on a post page so that post's
+ *  `isPartOf` has something to resolve to. */
+function blogNode({ full }) {
+  const route = '/blog';
+  const base = {
+    '@type': 'Blog',
+    '@id': nodeId(route, 'blog'),
+    name: 'FilePilot Blog',
+    url: canonicalUrlForRoute(route),
+    inLanguage: 'en',
+    publisher: { '@id': ORG_ID },
+  };
+
+  if (!full) return base;
+
+  return {
+    ...base,
+    description: getRouteSeo(route).intro ?? getRouteSeo(route).description,
+    isPartOf: { '@id': WEBSITE_ID },
+    blogPost: blogPostsByDate()
+      .filter((post) => ROUTES.includes(post.route))
+      .map((post) => ({
+        '@type': 'BlogPosting',
+        '@id': nodeId(post.route, 'article'),
+        headline: getRouteSeo(post.route).h1 ?? routeLabel(post.route),
+        url: canonicalUrlForRoute(post.route),
+        ...(articleDates(post.route)),
+        author: maintainer ? { '@id': PERSON_ID } : { '@id': ORG_ID },
+      })),
+  };
+}
+
 function buildJsonLd(route) {
   const seo = getRouteSeo(route);
   const url = canonicalUrlForRoute(route);
-  const graph = [];
+  const graph = spineNodes();
+  const home = { name: 'FilePilot', route: '/' };
 
   if (route === '/') {
     graph.push(
-      {
-        '@type': 'WebSite',
-        '@id': `${url}#website`,
-        url,
-        name: 'FilePilot',
-        description: seo.description,
-        inLanguage: 'en',
-        publisher: { '@id': `${url}#organization` },
-      },
-      {
-        '@type': 'Organization',
-        '@id': `${url}#organization`,
-        name: 'FilePilot',
-        alternateName: ['FilePilot File Tools', 'filepilot.space'],
-        url,
-        logo: 'https://www.filepilot.space/filepilot_logo.svg',
-        description: 'FilePilot is a free, privacy-first web app offering browser-based PDF, image, and file tools that process files locally on your device without uploads. It is a website, not a desktop application, and is not affiliated with the File Pilot Windows file manager, the FilePilot iOS app, or any similarly named file-tool site.',
-        knowsAbout: [
-          'browser-based PDF editing',
-          'client-side image processing',
-          'privacy-preserving file conversion',
-          'WebAssembly document processing',
-        ],
-        // sameAs is how Google links this site to a known entity. Without it the
-        // "FilePilot" name is ambiguous — it collides with a Windows file
-        // manager, an iOS app and several other file-tool sites.
-        sameAs: ORGANIZATION_PROFILES,
-        ...(maintainer ? { founder: { '@id': `${SITE_URL}#person` } } : {}),
-        mainEntityOfPage: canonicalUrlForRoute('/about'),
-      },
-      {
-        '@type': 'SoftwareApplication',
-        '@id': `${url}#app`,
-        name: 'FilePilot',
-        url,
-        description: seo.description,
-        applicationCategory: 'UtilityApplication',
-        operatingSystem: 'Web',
-        isAccessibleForFree: true,
-        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        featureList: HOME_HUBS.map((hub) => routeLabel(hub)),
-      },
+      pageNode(route, 'WebPage', {
+        about: { '@id': SUITE_APP_ID },
+        mainEntity: { '@id': SUITE_APP_ID },
+      }),
       {
         '@type': 'ItemList',
+        '@id': nodeId(route, 'hubs'),
         name: 'FilePilot tool categories',
+        numberOfItems: HOME_HUBS.length,
+        itemListOrder: 'https://schema.org/ItemListOrderAscending',
         itemListElement: HOME_HUBS.map((hub, index) => ({
           '@type': 'ListItem',
           position: index + 1,
@@ -432,173 +712,180 @@ function buildJsonLd(route) {
         })),
       },
     );
-  } else if (['/pdf-tools', '/image-tools', '/image-workflows', '/ai-tools', '/blog'].includes(route)) {
+  } else if (HUB_ROUTES.includes(route)) {
+    const tools = toolsForHub(route);
     graph.push(
+      breadcrumbNode(route, [home, { name: routeLabel(route) }]),
+      pageNode(route, 'CollectionPage', {
+        breadcrumb: { '@id': nodeId(route, 'breadcrumb') },
+        about: { '@id': SUITE_APP_ID },
+        // A CollectionPage that collects nothing is a contradiction in terms;
+        // this is the only machine-readable statement of what the hub contains.
+        mainEntity: { '@id': nodeId(route, 'tools') },
+      }),
       {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
-          { '@type': 'ListItem', position: 2, name: routeLabel(route), item: url },
-        ],
-      },
-      {
-        '@type': 'CollectionPage',
+        '@type': 'ItemList',
+        '@id': nodeId(route, 'tools'),
         name: routeLabel(route),
-        url,
-        description: seo.description,
-        isPartOf: { '@id': `${SITE_URL}#website` },
+        numberOfItems: tools.length,
+        itemListOrder: 'https://schema.org/ItemListOrderAscending',
+        itemListElement: tools.map((toolRoute, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: routeLabel(toolRoute),
+          url: canonicalUrlForRoute(toolRoute),
+          // Same @id the tool page publishes: one entity described in two places.
+          item: toolAppNode(toolRoute, { full: false }),
+        })),
       },
     );
-  } else if (route.startsWith('/blog/')) {
-    // Blog posts previously emitted no structured data at all.
+  } else if (route === '/blog') {
     graph.push(
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
-          { '@type': 'ListItem', position: 2, name: 'Blog', item: canonicalUrlForRoute('/blog') },
-          { '@type': 'ListItem', position: 3, name: routeLabel(route), item: url },
-        ],
-      },
-      ...(maintainer ? [{
-        '@type': 'Person',
-        '@id': `${SITE_URL}#person`,
-        name: maintainer.name,
-        url: canonicalUrlForRoute('/about'),
-      }] : []),
+      breadcrumbNode(route, [home, { name: routeLabel(route) }]),
+      pageNode(route, 'CollectionPage', {
+        breadcrumb: { '@id': nodeId(route, 'breadcrumb') },
+        mainEntity: { '@id': nodeId(route, 'blog') },
+      }),
+      blogNode({ full: true }),
+    );
+  } else if (route.startsWith('/blog/')) {
+    graph.push(
+      breadcrumbNode(route, [home, { name: 'Blog', route: '/blog' }, { name: routeLabel(route) }]),
+      pageNode(route, 'WebPage', {
+        breadcrumb: { '@id': nodeId(route, 'breadcrumb') },
+        mainEntity: { '@id': nodeId(route, 'article') },
+      }),
+      blogNode({ full: false }),
       {
         '@type': 'BlogPosting',
-        '@id': `${url}#article`,
+        '@id': nodeId(route, 'article'),
         headline: seo.h1 ?? routeLabel(route),
         description: seo.description,
         url,
-        mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-        image: `${SITE_URL}og-image.png`,
+        mainEntityOfPage: { '@id': nodeId(route, 'webpage') },
+        image: { '@id': OG_IMAGE_ID },
         inLanguage: 'en',
-        isPartOf: { '@id': `${SITE_URL}#website` },
+        // Was the dangling `#website`; now the Blog stub emitted just above.
+        isPartOf: { '@id': nodeId('/blog', 'blog') },
         // A named author is a stronger E-E-A-T signal than a corporate byline,
         // but it must be a real person — falls back to the Organization until one
         // is configured in aboutContent.ts.
-        author: maintainer
-          ? { '@id': `${SITE_URL}#person` }
-          : { '@type': 'Organization', name: 'FilePilot', url: SITE_URL },
-        publisher: { '@id': `${SITE_URL}#organization` },
+        author: maintainer ? { '@id': PERSON_ID } : { '@id': ORG_ID },
+        publisher: { '@id': ORG_ID },
         ...(blogPosts[route]?.readTime ? { timeRequired: `PT${parseInt(blogPosts[route].readTime, 10) || 5}M` } : {}),
         ...(articleDates(route)),
       },
     );
   } else if (route === '/about') {
     graph.push(
+      breadcrumbNode(route, [home, { name: 'About FilePilot' }]),
+      pageNode(route, 'AboutPage', {
+        breadcrumb: { '@id': nodeId(route, 'breadcrumb') },
+        // Points at the spine Organization node rather than redeclaring it, so
+        // Google reads one entity described in two places.
+        mainEntity: { '@id': ORG_ID },
+        about: { '@id': ORG_ID },
+      }),
       {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
-          { '@type': 'ListItem', position: 2, name: 'About FilePilot', item: url },
-        ],
-      },
-      {
-        '@type': 'AboutPage',
-        '@id': `${url}#about`,
-        name: seo.h1,
-        url,
-        description: seo.description,
-        isPartOf: { '@id': `${SITE_URL}#website` },
-        // Points back at the homepage Organization node rather than redeclaring
-        // it, so Google reads one entity described in two places.
-        mainEntity: { '@id': `${SITE_URL}#organization` },
-        publisher: { '@id': `${SITE_URL}#organization` },
+        // The public repo is the site's verifiable claim — an entity, not a link.
+        '@type': 'SoftwareSourceCode',
+        '@id': nodeId(route, 'source'),
+        name: 'FilePilot source code',
+        codeRepository: GITHUB_REPO_URL,
+        programmingLanguage: ['TypeScript', 'JavaScript'],
+        targetProduct: { '@id': SUITE_APP_ID },
+        about: { '@id': SUITE_APP_ID },
       },
     );
-
-    // A named person is the strongest E-E-A-T signal an anonymous utility site
-    // can add, and doubles as entity disambiguation from the other "FilePilot"
-    // products. Emitted only when a real maintainer is configured — never faked.
-    if (maintainer) {
-      graph.push({
-        '@type': 'Person',
-        '@id': `${SITE_URL}#person`,
-        name: maintainer.name,
-        jobTitle: maintainer.role,
-        description: maintainer.bio[0],
-        url,
-        ...(maintainer.email ? { email: maintainer.email } : {}),
-        ...(maintainer.profiles?.length
-          ? { sameAs: maintainer.profiles.map((profile) => profile.url) }
-          : {}),
-        worksFor: { '@id': `${SITE_URL}#organization` },
-      });
-    }
   } else if (comparisonContent[route]) {
     const entry = comparisonContent[route];
+    const equivalents = entry.toolMap.filter((item) => ROUTES.includes(item.route));
     graph.push(
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
-          { '@type': 'ListItem', position: 2, name: routeLabel('/pdf-tools'), item: canonicalUrlForRoute('/pdf-tools') },
-          { '@type': 'ListItem', position: 3, name: entry.h1, item: url },
-        ],
-      },
+      breadcrumbNode(route, [
+        home,
+        { name: routeLabel('/pdf-tools'), route: '/pdf-tools' },
+        { name: entry.h1 },
+      ]),
       {
         // Deliberately WebPage, not Review/AggregateRating: FilePilot has no
         // ratings to report and inventing them is a manual-action risk.
-        '@type': 'WebPage',
-        name: entry.h1,
-        url,
-        description: seo.description,
-        isPartOf: { '@id': `${SITE_URL}#website` },
-        publisher: { '@id': `${SITE_URL}#organization` },
-        about: { '@type': 'SoftwareApplication', name: entry.competitor, applicationCategory: 'UtilityApplication' },
-        mentions: { '@id': `${SITE_URL}#app` },
+        ...pageNode(route, 'WebPage', {
+          name: entry.h1,
+          breadcrumb: { '@id': nodeId(route, 'breadcrumb') },
+          // The page is about OUR app and MENTIONS theirs, not the reverse.
+          about: { '@id': SUITE_APP_ID },
+          mentions: { '@id': nodeId(route, 'competitor') },
+          mainEntity: { '@id': nodeId(route, 'alternatives') },
+        }),
+      },
+      {
+        '@type': 'SoftwareApplication',
+        '@id': nodeId(route, 'competitor'),
+        name: entry.competitor,
+        applicationCategory: 'UtilityApplication',
+        operatingSystem: 'Web browser',
+        // No sameAs to their domain and no claims about their product.
+      },
+      {
+        '@type': 'ItemList',
+        '@id': nodeId(route, 'alternatives'),
+        name: `FilePilot tools that replace ${entry.competitor}`,
+        numberOfItems: equivalents.length,
+        itemListElement: equivalents.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: routeLabel(item.route),
+          url: canonicalUrlForRoute(item.route),
+          item: toolAppNode(item.route, { full: false }),
+        })),
       },
     );
   } else if (STANDALONE_PAGE_ROUTES.has(route)) {
-    // /privacy and /terms previously fell through every branch and shipped no
-    // JSON-LD at all. On a site whose entire pitch is privacy, the privacy
-    // policy is a trust page worth describing to crawlers.
     graph.push(
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
-          { '@type': 'ListItem', position: 2, name: routeLabel(route), item: url },
-        ],
-      },
-      {
-        '@type': route === '/privacy' ? 'PrivacyPolicy' : 'WebPage',
-        name: routeLabel(route),
-        url,
-        description: seo.description,
-        isPartOf: { '@id': `${SITE_URL}#website` },
-        publisher: { '@id': `${SITE_URL}#organization` },
-      },
+      breadcrumbNode(route, [home, { name: routeLabel(route) }]),
+      pageNode(route, 'WebPage', {
+        // Was '@type': 'PrivacyPolicy' for /privacy, which is not a schema.org
+        // type — the node was unrecognised and silently discarded, on the one
+        // page carrying the site's central claim. There is no `privacyPolicy`
+        // property either; WebPage + about is the correct modelling.
+        breadcrumb: { '@id': nodeId(route, 'breadcrumb') },
+        about: { '@id': SUITE_APP_ID },
+        ...(route === '/support'
+          ? {
+            potentialAction: {
+              '@type': 'DonateAction',
+              name: 'Support FilePilot',
+              recipient: { '@id': ORG_ID },
+              target: url,
+            },
+          }
+          : {}),
+      }),
     );
   } else if (isToolRoute(route)) {
     const entry = getRouteSeoEntries().find((e) => e.route === route);
-    const category = entry?.category;
-    const hub = CATEGORY_HUBS[category];
-    const breadcrumbItems = [
-      { '@type': 'ListItem', position: 1, name: 'FilePilot', item: canonicalUrlForRoute('/') },
-    ];
-    if (hub) {
-      breadcrumbItems.push({ '@type': 'ListItem', position: 2, name: hub.label, item: canonicalUrlForRoute(hub.route) });
-      breadcrumbItems.push({ '@type': 'ListItem', position: 3, name: routeLabel(route), item: url });
-    } else {
-      breadcrumbItems.push({ '@type': 'ListItem', position: 2, name: routeLabel(route), item: url });
-    }
+    const hub = CATEGORY_HUBS[entry?.category];
+    const trail = [home];
+    if (hub) trail.push({ name: hub.label, route: hub.route });
+    trail.push({ name: routeLabel(route) });
 
     graph.push(
-      { '@type': 'BreadcrumbList', itemListElement: breadcrumbItems },
-      {
-        '@type': 'SoftwareApplication',
-        name: routeLabel(route),
-        url,
-        description: seo.description,
-        applicationCategory: 'UtilityApplication',
-        operatingSystem: 'Web',
-        isAccessibleForFree: true,
-        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-      },
+      breadcrumbNode(route, trail),
+      pageNode(route, 'WebPage', {
+        breadcrumb: { '@id': nodeId(route, 'breadcrumb') },
+        mainEntity: { '@id': nodeId(route, 'app') },
+        about: { '@id': nodeId(route, 'app') },
+      }),
+      toolAppNode(route, { full: true }),
+    );
+  } else {
+    // Anything routed that matches no archetype above still needs a page node,
+    // or the FAQ/HowTo appended below would reference a #webpage that does not exist.
+    graph.push(
+      breadcrumbNode(route, [home, { name: routeLabel(route) }]),
+      pageNode(route, 'WebPage', {
+        breadcrumb: { '@id': nodeId(route, 'breadcrumb') },
+      }),
     );
   }
 
@@ -608,9 +895,9 @@ function buildJsonLd(route) {
   const howToSchema = buildHowToSchema(route);
   if (howToSchema) graph.push(howToSchema);
 
-  if (graph.length === 0) return '';
-
-  return `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
+  // Stable id so client-side route changes can address this block. PageSeo no
+  // longer writes schema at all, so this is the single JSON-LD block per page.
+  return `<script id="page-schema" type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
 }
 
 
@@ -949,7 +1236,7 @@ function write404Shell(baseHtml) {
     .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/, '<meta name="description" content="The requested FilePilot page could not be found.">')
     .replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/, '<meta name="robots" content="noindex,follow">')
     .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${SITE_URL}">`)
-    .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, '')
+    .replace(/<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(
       '<div id="root"></div>',
       `<div id="root"><main class="static-seo"><h1>Page not found</h1><p>The page you requested does not exist. Use the links below to return to FilePilot tools.</p><ul><li><a href="${canonicalUrlForRoute('/')}">FilePilot home</a></li><li><a href="${canonicalUrlForRoute('/pdf-tools')}">PDF tools</a></li><li><a href="${canonicalUrlForRoute('/image-tools')}">Image tools</a></li></ul></main></div>`,

@@ -42,7 +42,7 @@ export const TextColor = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Change PDF Text Color Online – Free & Private" description="Change the text color across all pages of a PDF. Browser-based tool." faqItems={[{ question: 'Can I change color per page?', answer: 'Currently the color change applies to all pages.' }, { question: 'Does this work on scanned PDFs?', answer: 'Scanned PDFs are images; use the Invert Colors tool for image PDFs.' }]} />
+            <PageSeo title="Change PDF Text Color Online – Free & Private" description="Change the text color across all pages of a PDF. Browser-based tool." />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-500 to-purple-700 text-white flex items-center justify-center shadow-lg"><Palette className="w-6 h-6" /></div></div>
                 <h1>Change PDF Text Color</h1><p>Recolor all text in your PDF document. Fully browser-based.</p>

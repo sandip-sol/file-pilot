@@ -13,7 +13,7 @@ const ConversionNote = ({ fmt }: { fmt: string }) => (
 
 export const WordToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="Word to PDF Online" description="Convert DOCX/DOC Word documents to PDF. Browser-based text conversion." faqItems={[{ question: 'Does it preserve formatting?', answer: 'Text content is extracted. For exact formatting, use LibreOffice Desktop.' }, { question: 'Is cloud processing used?', answer: 'No. This tool is fully offline.' }]} />
+        <PageSeo title="Word to PDF Online" description="Convert DOCX/DOC Word documents to PDF. Browser-based text conversion." />
         <div className="page-header"><div className="container"><h1>Word to PDF</h1><p>Convert Word DOCX documents to PDF in your browser.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="Word (DOCX)" />
@@ -25,7 +25,7 @@ export const WordToPdf = () => (
 
 export const ExcelToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="Excel to PDF Online" description="Convert XLSX/XLS spreadsheets to PDF. Browser-based." faqItems={[{ question: 'Does it preserve formatting?', answer: 'Complex spreadsheet layouts require desktop tools.' }, { question: 'Is data secure?', answer: 'No data is uploaded to any server.' }]} />
+        <PageSeo title="Excel to PDF Online" description="Convert XLSX/XLS spreadsheets to PDF. Browser-based." />
         <div className="page-header"><div className="container"><h1>Excel to PDF</h1><p>Convert Excel spreadsheets to PDF — fully client-side.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="Excel (XLSX)" />
@@ -37,7 +37,7 @@ export const ExcelToPdf = () => (
 
 export const PptxToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="PowerPoint to PDF Online" description="Convert PPTX/PPT presentations to PDF. Browser-based." faqItems={[{ question: 'Will animations be preserved?', answer: 'Static slide content is converted; animations are not supported in PDF.' }, { question: 'Is my data secure?', answer: 'All processing is local in your browser.' }]} />
+        <PageSeo title="PowerPoint to PDF Online" description="Convert PPTX/PPT presentations to PDF. Browser-based." />
         <div className="page-header"><div className="container"><h1>PowerPoint to PDF</h1><p>Convert PPTX presentations to PDF — fully private.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="PowerPoint (PPTX)" />
@@ -49,7 +49,7 @@ export const PptxToPdf = () => (
 
 export const EpubToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="EPUB to PDF Online" description="Convert eBook EPUB files to PDF. Browser-based." faqItems={[{ question: 'Are images preserved?', answer: 'Text content and basic structure are converted.' }, { question: 'Is my file uploaded?', answer: 'No. Processing is 100% local.' }]} />
+        <PageSeo title="EPUB to PDF Online" description="Convert eBook EPUB files to PDF. Browser-based." />
         <div className="page-header"><div className="container"><h1>EPUB to PDF</h1><p>Convert EPUB eBooks to PDF.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="EPUB" />
@@ -61,7 +61,7 @@ export const EpubToPdf = () => (
 
 export const MobiToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="MOBI to PDF Online" description="Convert Kindle MOBI/AZW eBooks to PDF." faqItems={[{ question: 'Is Kindle DRM removed?', answer: 'This tool cannot remove DRM. Only DRM-free MOBI files can be converted.' }, { question: 'Alternative?', answer: 'Calibre handles MOBI conversion.' }]} />
+        <PageSeo title="MOBI to PDF Online" description="Convert Kindle MOBI/AZW eBooks to PDF." />
         <div className="page-header"><div className="container"><h1>MOBI to PDF</h1><p>Convert Kindle MOBI/AZW files to PDF.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="MOBI/AZW" />
@@ -73,7 +73,7 @@ export const MobiToPdf = () => (
 
 export const RtfToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="RTF to PDF Online" description="Convert Rich Text Format files to PDF." faqItems={[{ question: 'Is formatting preserved?', answer: 'Basic text and paragraph structure are preserved.' }, { question: 'Alternative?', answer: 'LibreOffice handles RTF to PDF conversion.' }]} />
+        <PageSeo title="RTF to PDF Online" description="Convert Rich Text Format files to PDF." />
         <div className="page-header"><div className="container"><h1>RTF to PDF</h1><p>Convert Rich Text Format files to PDF.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="RTF" />
@@ -85,7 +85,7 @@ export const RtfToPdf = () => (
 
 export const XpsToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="XPS to PDF Online" description="Convert Microsoft XPS documents to PDF." faqItems={[{ question: 'What is XPS?', answer: 'XPS (XML Paper Specification) is Microsoft\'s document format, similar to PDF.' }, { question: 'Alternative?', answer: 'LibreOffice or GhostXPS can convert XPS to PDF.' }]} />
+        <PageSeo title="XPS to PDF Online" description="Convert Microsoft XPS documents to PDF." />
         <div className="page-header"><div className="container"><h1>XPS to PDF</h1><p>Convert Microsoft XPS documents to PDF.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="XPS" />
@@ -97,7 +97,7 @@ export const XpsToPdf = () => (
 
 export const DjvuToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="DjVu to PDF Online" description="Convert DjVu scanned documents to PDF." faqItems={[{ question: 'What is DjVu?', answer: 'DjVu is a format for scanned documents, common in academic archives.' }, { question: 'Alternative?', answer: 'DjVuLibre (free) can convert DjVu to PDF.' }]} />
+        <PageSeo title="DjVu to PDF Online" description="Convert DjVu scanned documents to PDF." />
         <div className="page-header"><div className="container"><h1>DjVu to PDF</h1><p>Convert DjVu scanned documents to PDF.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="DjVu" />
@@ -109,7 +109,7 @@ export const DjvuToPdf = () => (
 
 export const Fb2ToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="FB2 to PDF Online" description="Convert FictionBook FB2 eBooks to PDF." faqItems={[{ question: 'What is FB2?', answer: 'FictionBook (FB2) is an XML-based eBook format popular in Eastern Europe.' }, { question: 'Alternative?', answer: 'Calibre (free) converts FB2 to PDF.' }]} />
+        <PageSeo title="FB2 to PDF Online" description="Convert FictionBook FB2 eBooks to PDF." />
         <div className="page-header"><div className="container"><h1>FB2 to PDF</h1><p>Convert FictionBook eBooks to PDF.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="FB2" />
@@ -121,7 +121,7 @@ export const Fb2ToPdf = () => (
 
 export const EmailToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="Email to PDF Online" description="Convert EML/MSG email files to PDF." faqItems={[{ question: 'What formats are supported?', answer: 'EML (standard) and MSG (Outlook) formats will be supported.' }, { question: 'Are attachments included?', answer: 'Email body is converted; attachments are listed but not embedded.' }]} />
+        <PageSeo title="Email to PDF Online" description="Convert EML/MSG email files to PDF." />
         <div className="page-header"><div className="container"><h1>Email to PDF</h1><p>Convert EML/MSG email files to PDF.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="EML/MSG" />
@@ -133,7 +133,7 @@ export const EmailToPdf = () => (
 
 export const CbzToPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="CBZ to PDF Online" description="Convert comic book CBZ/CBR archives to PDF." faqItems={[{ question: 'What is CBZ?', answer: 'CBZ is a ZIP archive of comic page images (.jpg/.png).' }, { question: 'Is quality maintained?', answer: 'Images are embedded at their original resolution.' }]} />
+        <PageSeo title="CBZ to PDF Online" description="Convert comic book CBZ/CBR archives to PDF." />
         <div className="page-header"><div className="container"><h1>CBZ to PDF</h1><p>Convert comic book CBZ archives to PDF.</p></div></div>
         <div className="container pb-12"><div className="max-w-2xl mx-auto"><div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
             <ConversionNote fmt="CBZ/CBR" />

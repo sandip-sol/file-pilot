@@ -9,7 +9,7 @@ import { PDFDocument } from 'pdf-lib';
 // ─── LinearizePdf ───────────────────────────────────────────────────────────
 export const LinearizePdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="Linearize PDF - Not Available" description="True PDF linearization is not currently available in the browser tool." faqItems={[{ question: 'Why is this unavailable?', answer: 'Fast Web View requires rewriting the PDF file structure for byte-range loading. A normal browser-side re-save does not guarantee that.' }, { question: 'What should I use instead?', answer: 'Use a PDF engine that explicitly supports linearization, such as qpdf or a professional desktop PDF tool.' }]} />
+        <PageSeo title="Linearize PDF - Not Available" description="True PDF linearization is not currently available in the browser tool." />
         <div className="page-header"><div className="container">
             <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-700 text-white flex items-center justify-center shadow-lg"><Zap className="w-6 h-6" /></div></div>
             <h1>Linearize PDF</h1><p>This tool is not available yet.</p>
@@ -47,7 +47,7 @@ export const RemoveRestrictions = () => {
 
     return (
         <div className="min-h-[calc(100vh-200px)]">
-            <PageSeo title="Remove PDF Restrictions Online – Free & Private" description="Remove print, copy, and edit restrictions from a PDF. Browser-based." faqItems={[{ question: 'What restrictions are removed?', answer: 'Print, copy, and edit restrictions from the permissions dictionary are cleared.' }, { question: 'Does this bypass passwords?', answer: 'Only owner-restriction flags are cleared; password-protected files still require the password.' }]} />
+            <PageSeo title="Remove PDF Restrictions Online – Free & Private" description="Remove print, copy, and edit restrictions from a PDF. Browser-based." />
             <div className="page-header"><div className="container">
                 <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-700 text-white flex items-center justify-center shadow-lg"><Unlock className="w-6 h-6" /></div></div>
                 <h1>Remove PDF Restrictions</h1><p>Clear print, copy, and edit restrictions from your PDF document.</p>
@@ -73,7 +73,7 @@ export const RemoveRestrictions = () => {
 // ─── ChangePermissions ──────────────────────────────────────────────────────
 export const ChangePermissions = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="Change PDF Permissions - Not Available" description="Changing PDF permission flags is not currently available in the browser tool." faqItems={[{ question: 'Why is this unavailable?', answer: 'Permission flags need to be written with compatible encryption and owner-password handling. Re-saving a PDF does not apply those settings.' }, { question: 'Are permission toggles supported?', answer: 'No. The previous UI has been removed until the selected permissions can be written into the output file.' }]} />
+        <PageSeo title="Change PDF Permissions - Not Available" description="Changing PDF permission flags is not currently available in the browser tool." />
         <div className="page-header"><div className="container">
             <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-700 text-white flex items-center justify-center shadow-lg"><Shield className="w-6 h-6" /></div></div>
             <h1>Change PDF Permissions</h1><p>This tool is not available yet.</p>
@@ -91,7 +91,7 @@ export const ChangePermissions = () => (
 // ─── DigitalSignPdf ─────────────────────────────────────────────────────────
 export const DigitalSignPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="Digitally Sign PDF Online – Free & Private" description="Add a cryptographic digital signature to a PDF. Browser-based." faqItems={[{ question: 'What is a digital signature?', answer: 'A cryptographic hash embedded in the PDF that verifies authenticity and detects tampering.' }, { question: 'How is it different from a drawn signature?', answer: 'Digital signatures use public key cryptography; drawn signatures are just images.' }]} />
+        <PageSeo title="Digitally Sign PDF Online – Free & Private" description="Add a cryptographic digital signature to a PDF. Browser-based." />
         <div className="page-header"><div className="container">
             <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-800 text-white flex items-center justify-center shadow-lg"><Shield className="w-6 h-6" /></div></div>
             <h1>Digital Sign PDF</h1><p>Cryptographically sign your PDF — browser-based PKI signing coming soon.</p>
@@ -110,7 +110,7 @@ export const DigitalSignPdf = () => (
 // ─── ValidateSignature ──────────────────────────────────────────────────────
 export const ValidateSignature = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="Validate PDF Signature Online – Free & Private" description="Check whether a PDF contains valid digital signatures. Browser-based." faqItems={[{ question: 'What does validation check?', answer: 'Whether the signature hash matches the document content, confirming no tampering.' }, { question: 'Is an internet connection needed?', answer: 'OCSP/CRL checks require internet. Basic hash validation is offline.' }]} />
+        <PageSeo title="Validate PDF Signature Online – Free & Private" description="Check whether a PDF contains valid digital signatures. Browser-based." />
         <div className="page-header"><div className="container">
             <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-700 text-white flex items-center justify-center shadow-lg"><CheckCircle className="w-6 h-6" /></div></div>
             <h1>Validate PDF Signature</h1><p>Verify if a PDF's digital signature is valid and untampered. Browser-based.</p>
@@ -129,7 +129,7 @@ export const ValidateSignature = () => (
 // ─── TimestampPdf ───────────────────────────────────────────────────────────
 export const TimestampPdf = () => (
     <div className="min-h-[calc(100vh-200px)]">
-        <PageSeo title="Timestamp PDF - Not Available" description="Trusted RFC 3161 PDF timestamping is not currently available in the browser tool." faqItems={[{ question: 'Why is this unavailable?', answer: 'A trusted timestamp requires a timestamp authority response and proper signature embedding. Local metadata is not equivalent.' }, { question: 'Does this write local metadata?', answer: 'No. Downloads are disabled to avoid confusing local dates with trusted timestamps.' }]} />
+        <PageSeo title="Timestamp PDF - Not Available" description="Trusted RFC 3161 PDF timestamping is not currently available in the browser tool." />
         <div className="page-header"><div className="container">
             <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 text-white flex items-center justify-center shadow-lg"><Clock className="w-6 h-6" /></div></div>
             <h1>Timestamp PDF</h1><p>This tool is not available yet.</p>

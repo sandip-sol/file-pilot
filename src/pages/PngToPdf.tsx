@@ -45,7 +45,7 @@ export const PngToPdf = () => {
 
   return (
     <div className="min-h-[calc(100vh-200px)]">
-      <PageSeo title="PNG to PDF Online – Free & Private" description="Convert PNG images to PDF in your browser. No uploads, 100% private." faqItems={[{question:'Can I convert multiple images?',answer:'Yes. Select multiple files to create a multi-page PDF.'},{question:'Is quality preserved?',answer:'Images are embedded at their original resolution.'}]} />
+      <PageSeo title="PNG to PDF Online – Free & Private" description="Convert PNG images to PDF in your browser. No uploads, 100% private." />
       <div className="page-header"><div className="container">
         <div className="flex items-center justify-center gap-3 mb-4"><div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white flex items-center justify-center shadow-lg"><FileImage className="w-6 h-6" /></div></div>
         <h1>PNG to PDF Online</h1><p>Convert PNG images to PDF instantly in your browser.</p>

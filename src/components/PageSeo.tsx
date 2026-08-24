@@ -1,17 +1,31 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-interface FaqItem {
-    question: string;
-    answer: string;
-}
+/**
+ * Client-side head management for routed pages: title, description, canonical,
+ * robots and the Open Graph / Twitter tags.
+ *
+ * DELIBERATELY DOES NOT EMIT JSON-LD. `prerender.js` writes the structured data
+ * for every route into the static HTML as a single `#page-schema` block, built
+ * from `siteContent.ts` / `toolContent.ts` / `comparisons.ts` with the route's
+ * category, hub membership and tool steps in hand — none of which this component
+ * can see.
+ *
+ * When this component also emitted schema, every rendered page carried three
+ * `application/ld+json` blocks: the prerendered graph, plus a `#page-schema` and
+ * a `#faq-schema` that React appended on hydration because the prerendered
+ * script had no id to match. That shipped duplicate `FAQPage` nodes and two
+ * anonymous `SoftwareApplication` nodes disagreeing about the tool's name (the
+ * short label vs. the full `<title>`), which left Google to pick one at random.
+ *
+ * Do not reintroduce schema here. Add it to `buildJsonLd()` in prerender.js.
+ */
 
 interface PageSeoProps {
     title: string;
     description: string;
     image?: string;
     canonicalPath?: string;
-    faqItems?: FaqItem[];
     robots?: 'index,follow' | 'noindex,follow';
 }
 
@@ -55,7 +69,6 @@ export const PageSeo = ({
     description,
     image = DEFAULT_IMAGE,
     canonicalPath,
-    faqItems,
     robots = 'index,follow',
 }: PageSeoProps) => {
     const location = useLocation();
@@ -63,101 +76,6 @@ export const PageSeo = ({
     useEffect(() => {
         const pathname = canonicalPath ?? location.pathname;
         const url = canonicalUrlForPath(pathname);
-        const isHome = pathname === '/';
-        const isWebPage = ['/support', '/privacy', '/terms'].includes(pathname) || pathname === '/blog' || pathname.startsWith('/blog/');
-        const schema = {
-            "@context": "https://schema.org",
-            "@graph": isHome
-                ? [
-                    {
-                        "@type": "WebSite",
-                        "@id": `${SITE_URL}#website`,
-                        "url": SITE_URL,
-                        "name": "FilePilot",
-                        "description": description,
-                        "inLanguage": "en",
-                    },
-                    {
-                        "@type": "Organization",
-                        "@id": `${SITE_URL}#organization`,
-                        "name": "FilePilot",
-                        "url": SITE_URL,
-                        "logo": `${SITE_URL}filepilot_logo.svg`,
-                    },
-                    {
-                        "@type": "SoftwareApplication",
-                        "name": "FilePilot",
-                        "url": SITE_URL,
-                        "description": description,
-                        "applicationCategory": "UtilityApplication",
-                        "operatingSystem": "Web",
-                        "isAccessibleForFree": true,
-                    },
-                ]
-                : isWebPage
-                    ? [
-                        {
-                            "@type": "BreadcrumbList",
-                            "itemListElement": [
-                                { "@type": "ListItem", "position": 1, "name": "FilePilot", "item": SITE_URL },
-                                { "@type": "ListItem", "position": 2, "name": title.replace(/\s+\|\s+FilePilot.*$/i, ''), "item": url },
-                            ],
-                        },
-                        {
-                            "@type": "WebPage",
-                            "name": title,
-                            "url": url,
-                            "description": description,
-                            "isPartOf": { "@id": `${SITE_URL}#website` },
-                        },
-                    ]
-                : [
-                    {
-                        "@type": "SoftwareApplication",
-                        "name": title,
-                        "url": url,
-                        "description": description,
-                        "applicationCategory": "UtilityApplication",
-                        "operatingSystem": "Web",
-                        "isAccessibleForFree": true,
-                        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-                    },
-                ],
-        };
-        let scriptTag = document.head.querySelector('#page-schema') as HTMLScriptElement | null;
-        if (!scriptTag) {
-            scriptTag = document.createElement('script');
-            scriptTag.id = 'page-schema';
-            scriptTag.type = 'application/ld+json';
-            document.head.appendChild(scriptTag);
-        }
-        scriptTag.textContent = JSON.stringify(schema);
-
-        // FAQ schema
-        let faqScript = document.head.querySelector('#faq-schema') as HTMLScriptElement | null;
-        if (faqItems && faqItems.length > 0) {
-            const faqSchema = {
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": faqItems.map(item => ({
-                    "@type": "Question",
-                    "name": item.question,
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": item.answer,
-                    },
-                })),
-            };
-            if (!faqScript) {
-                faqScript = document.createElement('script');
-                faqScript.id = 'faq-schema';
-                faqScript.type = 'application/ld+json';
-                document.head.appendChild(faqScript);
-            }
-            faqScript.textContent = JSON.stringify(faqSchema);
-        } else if (faqScript) {
-            faqScript.remove();
-        }
 
         document.title = title;
         upsertCanonical(url);
@@ -177,8 +95,6 @@ export const PageSeo = ({
         return () => {
             document.title = DEFAULT_TITLE;
             upsertCanonical(SITE_URL);
-            const faqTag = document.head.querySelector('#faq-schema');
-            if (faqTag) faqTag.remove();
             upsertMeta('meta[name="description"]', { name: 'description', content: DEFAULT_DESCRIPTION });
             upsertMeta('meta[name="robots"]', { name: 'robots', content: 'index,follow' });
             upsertMeta('meta[property="og:title"]', { property: 'og:title', content: DEFAULT_TITLE });
@@ -190,7 +106,7 @@ export const PageSeo = ({
             upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: DEFAULT_DESCRIPTION });
             upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: DEFAULT_IMAGE });
         };
-    }, [canonicalPath, description, faqItems, image, location.pathname, robots, title]);
+    }, [canonicalPath, description, image, location.pathname, robots, title]);
 
     return null;
 };
