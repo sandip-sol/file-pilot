@@ -2,16 +2,11 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CalendarDays, Clock } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
-import { type BlogBlock, blogPosts } from '../data/blogContent';
+import { type BlogBlock, blogDateLabel, blogPosts } from '../data/blogContent';
 import { siteSeo } from '../data/siteContent';
 import { maintainer } from '../data/aboutContent';
 import { toCanonicalPath } from '../lib/routes';
 import { toolRegistry } from '../data/toolRegistry';
-
-const formatDate = (iso: string) =>
-  new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
-  });
 
 const routeLabel = (route: string) =>
   toolRegistry.find((tool) => tool.slug === route)?.title
@@ -96,11 +91,11 @@ export const BlogPost = ({ route }: { route: keyof typeof blogPosts }) => {
             )}
             <span className="inline-flex items-center gap-1.5">
               <CalendarDays className="h-3.5 w-3.5" />
-              <time dateTime={post.published}>{formatDate(post.published)}</time>
+              <time dateTime={post.published}>{blogDateLabel(post.published)}</time>
             </span>
             {post.updated && post.updated !== post.published && (
               <span>
-                Updated <time dateTime={post.updated}>{formatDate(post.updated)}</time>
+                Updated <time dateTime={post.updated}>{blogDateLabel(post.updated)}</time>
               </span>
             )}
             <span className="inline-flex items-center gap-1.5">

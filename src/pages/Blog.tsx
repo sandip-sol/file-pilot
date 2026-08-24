@@ -1,14 +1,9 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
-import { PILLAR_ROUTE, blogPosts, blogPostsByDate } from '../data/blogContent';
+import { PILLAR_ROUTE, blogDateLabel, blogPosts, blogPostsByDate } from '../data/blogContent';
 import { siteContent, siteSeo } from '../data/siteContent';
 import { toCanonicalPath } from '../lib/routes';
-
-const formatDate = (iso: string) =>
-  new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
-  });
 
 export const Blog = () => {
   // The post list used to be a hardcoded array here, which had drifted to three
@@ -59,7 +54,7 @@ export const Blog = () => {
                 className="group flex flex-col rounded-2xl border border-border bg-card/60 p-6 transition-colors hover:bg-muted"
               >
                 <p className="mb-3 text-xs text-muted-foreground">
-                  {formatDate(post.published)} &middot; {post.readTime}
+                  {blogDateLabel(post.published)} &middot; {post.readTime}
                 </p>
                 <h2 className="mb-3 text-lg font-bold text-foreground transition-colors group-hover:text-primary">
                   {post.h1}

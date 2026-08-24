@@ -37,19 +37,49 @@ export type BlogBlock =
   /** Pulled out visually — use for the one thing a skimmer must not miss. */
   | { type: 'callout'; html: string };
 
+/**
+ * Per-post artwork. Optional — when unset the post falls back to the shared
+ * FilePilot card, which is honest but generic: one brand image cannot illustrate
+ * twelve different articles, so it earns nothing in image search or in the
+ * Discover visual slot. Setting this emits a per-post `ImageObject` carrying real
+ * dimensions; no schema change is needed when the art arrives.
+ *
+ * Google asks for 1200px or wider and prefers 16:9, 4:3 or 1:1. Ship one crop
+ * unless you have all three.
+ */
+export interface BlogImage {
+  /** Site-root path, e.g. '/blog/redact-pdf-properly.png'. */
+  src: string;
+  width: number;
+  height: number;
+  /** Describes *this article's* image. A restated brand tagline is not a caption. */
+  caption: string;
+}
+
 export interface BlogPost {
   route: string;
   title: string;
   description: string;
   h1: string;
-  /** ISO date. Rendered visibly and emitted as datePublished. */
+  /**
+   * Either a plain `YYYY-MM-DD` or a full ISO-8601 timestamp with an offset.
+   * Prefer the timestamp: emitted as datePublished, and a whole archive stamped
+   * to the day with no time component reads as a bulk import rather than a
+   * publication. Rendered visibly as the day alone either way.
+   *
+   * These are the real commit times the posts landed at, not staggered dates —
+   * nine of them genuinely shipped in one commit and inventing a spread would be
+   * fabricating publication history.
+   */
   published: string;
   /**
-   * ISO date of the last substantive revision. Shown as "Updated …" and emitted
+   * Same format. The last substantive revision: shown as "Updated …" and emitted
    * as dateModified. Set it only when the content actually changed — a bumped
    * date on untouched text is a stale-content signal, not a freshness one.
    */
   updated?: string;
+  /** Falls back to the shared OG card when unset. See {@link BlogImage}. */
+  image?: BlogImage;
   readTime: string;
   /** 'pillar' | 'privacy' | 'how-to' | 'pillar-adjacent' — for the cluster index. */
   cluster: string;
@@ -67,7 +97,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'How to Edit a PDF Without Uploading It Anywhere | FilePilot',
     description: 'A complete guide to working with PDFs without sending them to a server: what actually happens when you upload, which tasks can run locally in a browser, which still cannot, and how to verify any tool\'s claim yourself.',
     h1: 'How to Edit a PDF Without Uploading It Anywhere',
-    published: '2026-08-22',
+    published: '2026-08-22T18:54:59+05:30',
     readTime: '9 min read',
     cluster: 'pillar',
     primaryTool: '/pdf-tools',
@@ -151,8 +181,8 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'Why Your Files Should Never Leave Your Browser | FilePilot',
     description: 'Uploading files to remote servers introduces privacy risks, data breaches, and unclear retention policies. Learn how browser-based processing with WebAssembly and Web Workers keeps your documents private.',
     h1: 'Why Your Files Should Never Leave Your Browser',
-    published: '2026-06-26',
-    updated: '2026-08-22',
+    published: '2026-06-26T18:32:21+05:30',
+    updated: '2026-08-22T18:54:59+05:30',
     readTime: '5 min read',
     cluster: 'pillar-adjacent',
     primaryTool: '/pdf-tools',
@@ -189,8 +219,8 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'The Hidden Privacy Risks of Online PDF Tools | FilePilot',
     description: 'What really happens when you upload a PDF to an online tool: server storage, metadata exposure, third-party processing, and how to evaluate whether a tool is truly private.',
     h1: 'The Hidden Privacy Risks of Online PDF Tools',
-    published: '2026-06-26',
-    updated: '2026-08-22',
+    published: '2026-06-26T18:32:21+05:30',
+    updated: '2026-08-22T18:54:59+05:30',
     readTime: '5 min read',
     cluster: 'privacy',
     primaryTool: '/pdf-tools',
@@ -231,8 +261,8 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'How FilePilot Keeps Your Documents Private | FilePilot',
     description: 'A practical look at FilePilot\'s privacy architecture: WebAssembly with pdf-lib, Canvas API rendering, ONNX Runtime for AI features, PWA offline support, and zero server involvement.',
     h1: 'How FilePilot Keeps Your Documents Private',
-    published: '2026-06-26',
-    updated: '2026-08-22',
+    published: '2026-06-26T18:32:21+05:30',
+    updated: '2026-08-22T18:54:59+05:30',
     readTime: '5 min read',
     cluster: 'privacy',
     primaryTool: '/pdf-tools',
@@ -277,7 +307,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'Is It Safe to Upload a PDF to an Online Tool? | FilePilot',
     description: 'What happens to your document when you upload it to a free PDF site, what the deletion policies actually promise, when the risk is acceptable, and how to decide for a specific file.',
     h1: 'Is It Safe to Upload a PDF to an Online Tool?',
-    published: '2026-08-22',
+    published: '2026-08-22T18:54:59+05:30',
     readTime: '7 min read',
     cluster: 'privacy',
     primaryTool: '/pdf-tools',
@@ -334,7 +364,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'Why Blacking Out Text in a PDF Does Not Redact It | FilePilot',
     description: 'Drawing a black rectangle over text leaves the text in the file, fully selectable and searchable. How PDF redaction actually fails, the cases where it went public, and how to remove text rather than hide it.',
     h1: 'Why Blacking Out Text in a PDF Does Not Redact It',
-    published: '2026-08-22',
+    published: '2026-08-22T18:54:59+05:30',
     readTime: '7 min read',
     cluster: 'how-to',
     primaryTool: '/redact-pdf',
@@ -400,7 +430,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'Why Online Forms Reject Your Photo (and How to Fix It) | FilePilot',
     description: 'Government, exam and visa portals reject photos for size, dimensions, format and aspect ratio. What each error message actually means, why the KB limits exist, and how to hit the exact spec.',
     h1: 'Why Online Forms Reject Your Photo, and How to Fix It',
-    published: '2026-08-22',
+    published: '2026-08-22T18:54:59+05:30',
     readTime: '7 min read',
     cluster: 'how-to',
     primaryTool: '/image-requirements',
@@ -454,7 +484,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'What EXIF Data Reveals About Your Photos | FilePilot',
     description: 'Photos carry GPS coordinates, timestamps, device serial numbers and more. What is actually stored, which platforms strip it and which do not, and how to remove it before sharing.',
     h1: 'What EXIF Data Reveals About Your Photos',
-    published: '2026-08-22',
+    published: '2026-08-22T18:54:59+05:30',
     readTime: '6 min read',
     cluster: 'privacy',
     primaryTool: '/remove-image-metadata',
@@ -510,7 +540,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'How to Combine Scanned Pages Into One PDF | FilePilot',
     description: 'Scanners produce one file per page, in the wrong order, sometimes crooked and always too large. How to get from a folder of scans to a single clean PDF without uploading anything.',
     h1: 'How to Combine Scanned Pages Into One PDF',
-    published: '2026-08-22',
+    published: '2026-08-22T18:54:59+05:30',
     readTime: '6 min read',
     cluster: 'how-to',
     primaryTool: '/merge',
@@ -564,7 +594,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'How to Compress a PDF Without Wrecking the Quality | FilePilot',
     description: 'Why PDFs get large, which part of your file is actually taking the space, and the order of operations that shrinks a document without turning the text to mush.',
     h1: 'How to Compress a PDF Without Wrecking the Quality',
-    published: '2026-08-22',
+    published: '2026-08-22T18:54:59+05:30',
     readTime: '6 min read',
     cluster: 'how-to',
     primaryTool: '/compress',
@@ -623,7 +653,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'PDF or CBZ for Comics and Manga? | FilePilot',
     description: 'Why comic readers prefer CBZ over PDF, what the format actually is, when converting helps and when it does not, and how page order and naming decide whether the result works.',
     h1: 'PDF or CBZ for Comics and Manga?',
-    published: '2026-08-22',
+    published: '2026-08-22T18:54:59+05:30',
     readTime: '6 min read',
     cluster: 'how-to',
     primaryTool: '/pdf-to-cbz',
@@ -682,7 +712,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: 'Printing Multiple PDF Pages Per Sheet, Explained | FilePilot',
     description: 'N-up printing, booklet imposition and poster tiling are three different things that print dialogs handle badly. What each one does, when to use it, and how to get a predictable result.',
     h1: 'Printing Multiple PDF Pages Per Sheet, Explained',
-    published: '2026-08-22',
+    published: '2026-08-22T18:54:59+05:30',
     readTime: '6 min read',
     cluster: 'how-to',
     primaryTool: '/n-up-pdf',
@@ -731,8 +761,23 @@ export const blogPosts: Record<string, BlogPost> = {
 
 export const blogRoutes = Object.keys(blogPosts);
 
-/** Newest first — used by the blog index and the prerendered listing. */
+/** Newest first — used by the blog index and the prerendered listing.
+ *  Date-only and full-timestamp values share a `YYYY-MM-DD` prefix, so a string
+ *  compare still orders a mixed archive correctly. */
 export const blogPostsByDate = () =>
   Object.values(blogPosts).sort((a, b) => b.published.localeCompare(a.published));
+
+/**
+ * The one place a post date is turned into display text, so the React pages and
+ * the prerendered HTML cannot drift apart. Accepts either accepted `published`
+ * format and trims it to the day.
+ *
+ * Formatted in UTC deliberately: a date-only value carries no zone, and letting
+ * it render in the reader's would show the previous day west of Greenwich.
+ */
+export const blogDateLabel = (iso: string) =>
+  new Date(iso.length === 10 ? `${iso}T00:00:00Z` : iso).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
+  });
 
 export const PILLAR_ROUTE = '/blog/edit-pdf-without-uploading';

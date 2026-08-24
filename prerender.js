@@ -23,7 +23,7 @@ import { SITE_URL, canonicalUrlForRoute, getRouteSeo, getRouteSeoEntries, getSeo
 import { toolContent } from './src/data/toolContent.ts';
 import { comparisonContent } from './src/data/comparisons.ts';
 import { GITHUB_REPO_URL, aboutSections, maintainer, pressKit } from './src/data/aboutContent.ts';
-import { blogPosts, blogPostsByDate } from './src/data/blogContent.ts';
+import { blogDateLabel, blogPosts, blogPostsByDate } from './src/data/blogContent.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, 'dist');
@@ -380,8 +380,13 @@ function articleDates(route) {
   const published = blogPosts[route]?.published;
   // The author-declared revision date wins over the git-derived sitemap lastmod:
   // a commit that only touches links is not a content update.
-  const modified = blogPosts[route]?.updated
-    ?? getSitemapEntries().find((entry) => entry.route === route)?.lastmod;
+  const lastmod = getSitemapEntries().find((entry) => entry.route === route)?.lastmod;
+  let modified = blogPosts[route]?.updated ?? lastmod;
+
+  // The sitemap lastmod is git's `%cs` — a bare date. When it lands on the same
+  // day the post was published, it is the same commit, so the published
+  // timestamp restores the time component without asserting anything new.
+  if (modified && published && modified === published.slice(0, 10)) modified = published;
 
   return {
     ...(published ? { datePublished: published } : {}),
@@ -553,6 +558,35 @@ function ogImageNode() {
 }
 
 /**
+ * Blog posts point at their own artwork when they have some and at the shared
+ * brand card when they do not. The fallback is deliberate rather than lazy: a
+ * generic card at least resolves to a real ImageObject with dimensions, whereas
+ * a bare URL string carries nothing a validator can check. It illustrates
+ * nothing, though, so it buys no image-search or Discover placement — set
+ * `image` in blogContent.ts per post to fix that.
+ */
+function articleImageId(route) {
+  return blogPosts[route]?.image ? nodeId(route, 'image') : OG_IMAGE_ID;
+}
+
+/** The node itself, emitted only for posts that carry their own art. */
+function articleImageNode(route) {
+  const image = blogPosts[route]?.image;
+  if (!image) return [];
+
+  const url = `${SITE_URL}${image.src.replace(/^\//, '')}`;
+  return [{
+    '@type': 'ImageObject',
+    '@id': nodeId(route, 'image'),
+    url,
+    contentUrl: url,
+    width: image.width,
+    height: image.height,
+    caption: image.caption,
+  }];
+}
+
+/**
  * A named person is the strongest E-E-A-T signal an anonymous utility site can
  * add, and doubles as entity disambiguation from the other "FilePilot"
  * products. Emitted only when a real maintainer is configured — never faked.
@@ -680,6 +714,7 @@ function blogNode({ full }) {
         '@id': nodeId(post.route, 'article'),
         headline: getRouteSeo(post.route).h1 ?? routeLabel(post.route),
         url: canonicalUrlForRoute(post.route),
+        image: { '@id': articleImageId(post.route) },
         ...(articleDates(post.route)),
         author: maintainer ? { '@id': PERSON_ID } : { '@id': ORG_ID },
       })),
@@ -754,8 +789,10 @@ function buildJsonLd(route) {
       pageNode(route, 'WebPage', {
         breadcrumb: { '@id': nodeId(route, 'breadcrumb') },
         mainEntity: { '@id': nodeId(route, 'article') },
+        primaryImageOfPage: { '@id': articleImageId(route) },
       }),
       blogNode({ full: false }),
+      ...articleImageNode(route),
       {
         '@type': 'BlogPosting',
         '@id': nodeId(route, 'article'),
@@ -763,7 +800,7 @@ function buildJsonLd(route) {
         description: seo.description,
         url,
         mainEntityOfPage: { '@id': nodeId(route, 'webpage') },
-        image: { '@id': OG_IMAGE_ID },
+        image: { '@id': articleImageId(route) },
         inLanguage: 'en',
         // Was the dangling `#website`; now the Blog stub emitted just above.
         isPartOf: { '@id': nodeId('/blog', 'blog') },
@@ -937,8 +974,8 @@ function blogPostContent(route) {
   const post = blogPosts[route];
   const byline = [
     maintainer ? `By ${escapeHtml(maintainer.name)}` : null,
-    `Published ${escapeHtml(post.published)}`,
-    post.updated && post.updated !== post.published ? `Updated ${escapeHtml(post.updated)}` : null,
+    `Published ${escapeHtml(blogDateLabel(post.published))}`,
+    post.updated && post.updated !== post.published ? `Updated ${escapeHtml(blogDateLabel(post.updated))}` : null,
     escapeHtml(post.readTime),
   ].filter(Boolean).join(' · ');
 
@@ -1015,7 +1052,7 @@ function blogIndexContent() {
       </section>
       <section>
         <h2>All articles</h2>
-        <ul>${blogPostsByDate().filter((post) => post.cluster !== 'pillar').map((post) => `<li><a href="${canonicalUrlForRoute(post.route)}">${escapeHtml(post.h1)}</a> — ${escapeHtml(post.published)} · ${escapeHtml(post.readTime)} — ${escapeHtml(post.description)}</li>`).join('')}</ul>
+        <ul>${blogPostsByDate().filter((post) => post.cluster !== 'pillar').map((post) => `<li><a href="${canonicalUrlForRoute(post.route)}">${escapeHtml(post.h1)}</a> — ${escapeHtml(blogDateLabel(post.published))} · ${escapeHtml(post.readTime)} — ${escapeHtml(post.description)}</li>`).join('')}</ul>
       </section>
       <section>
         <h2>Explore FilePilot</h2>

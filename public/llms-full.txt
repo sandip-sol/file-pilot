@@ -6,7 +6,7 @@
 
 Canonical site: https://www.filepilot.space/
 Index: https://www.filepilot.space/llms.txt
-Generated: 2026-08-22
+Generated: 2026-08-24
 
 FilePilot is a website. It is not affiliated with File Pilot, the Windows file
 manager at filepilot.tech, nor with the FilePilot iOS app, nor with any other
@@ -79,7 +79,7 @@ The name is unfortunately a busy one. FilePilot at filepilot.space is a website 
 ### How to Edit a PDF Without Uploading It Anywhere
 
 URL: https://www.filepilot.space/blog/edit-pdf-without-uploading/
-Published: 2026-08-22
+Published: 2026-08-22T18:54:59+05:30
 
 There is a specific moment most people recognise. You need to remove two pages from a PDF, or shrink it below an upload limit, or sign it. You search, you find a free online tool, you drag the file in — and somewhere between dropping it and clicking the button, you notice what the document actually is. A contract. A payslip. A scan of your passport. And you are about to hand a copy of it to a company you had not heard of ninety seconds ago.
 
@@ -177,7 +177,7 @@ A: Yes, though the memory limits are tighter than on a laptop, so very large doc
 ### Is It Safe to Upload a PDF to an Online Tool?
 
 URL: https://www.filepilot.space/blog/is-it-safe-to-upload-pdf-online/
-Published: 2026-08-22
+Published: 2026-08-22T18:54:59+05:30
 
 The honest answer is: usually, and it depends entirely on the document. That is less satisfying than a yes or a no, but "is it safe" is the wrong shape of question. What you actually want to know is what happens to this particular file, and whether that is acceptable for this particular file.
 
@@ -245,7 +245,7 @@ A: Not illegal in itself, but it can breach a confidentiality agreement or an em
 ### Why Blacking Out Text in a PDF Does Not Redact It
 
 URL: https://www.filepilot.space/blog/redact-pdf-properly/
-Published: 2026-08-22
+Published: 2026-08-22T18:54:59+05:30
 
 This is the most consequential misunderstanding in everyday PDF use, and it has embarrassed governments, law firms and newspapers. Drawing a black box over a name in a PDF does not remove the name. It draws a black box. The name is still there, underneath, intact — and anyone can retrieve it by selecting the text and pasting it elsewhere.
 
@@ -325,7 +325,7 @@ A: Open the file fresh, select all the text including over the blacked-out areas
 ### Why Online Forms Reject Your Photo, and How to Fix It
 
 URL: https://www.filepilot.space/blog/resize-image-for-online-forms/
-Published: 2026-08-22
+Published: 2026-08-22T18:54:59+05:30
 
 Application portals are unusually strict about photographs, and unusually unhelpful about explaining why. "Photo size should be between 20KB and 50KB." "Dimensions must be 200x230 pixels." "Invalid file format." You resize, it is still rejected. You compress, now it is too small. This is one of the most common and most frustrating tasks on the internet, and it is entirely solvable once you know what is being asked.
 
@@ -390,7 +390,7 @@ A: Most upload your image to a server. For an identity document that is worth av
 ### What EXIF Data Reveals About Your Photos
 
 URL: https://www.filepilot.space/blog/what-exif-data-reveals/
-Published: 2026-08-22
+Published: 2026-08-22T18:54:59+05:30
 
 Every photograph your phone takes carries a block of data describing how, when and where it was taken. It is called EXIF, it is invisible in the picture, and it travels with the file when you send it. Most of the time this is harmless and occasionally useful. Sometimes it tells a stranger where you live.
 
@@ -454,7 +454,7 @@ A: Uploading a geotagged photo to a website in order to strip the geotag gives t
 ### How to Combine Scanned Pages Into One PDF
 
 URL: https://www.filepilot.space/blog/combine-scanned-pages-into-one-pdf/
-Published: 2026-08-22
+Published: 2026-08-22T18:54:59+05:30
 
 Scanners and phone scanning apps have a habit of producing exactly what you did not ask for: twelve separate files, named in a way that sorts wrongly, a few pages upside down, one crooked, and a total size too large to email. Getting from that to a single tidy PDF is a five-minute job once you do the steps in the right order.
 
@@ -520,7 +520,7 @@ A: Only after optical character recognition, because a scan is an image of text 
 ### How to Compress a PDF Without Wrecking the Quality
 
 URL: https://www.filepilot.space/blog/compress-pdf-without-losing-quality/
-Published: 2026-08-22
+Published: 2026-08-22T18:54:59+05:30
 
 Compression is usually approached as one button pressed repeatedly until either the file fits or it becomes unreadable. It works better if you first find out what is actually large, because the right fix for a scanned document is the wrong fix for a report full of charts.
 
@@ -587,7 +587,7 @@ A: Often substantially, because colour images store roughly three times the chan
 ### PDF or CBZ for Comics and Manga?
 
 URL: https://www.filepilot.space/blog/pdf-comics-to-cbz/
-Published: 2026-08-22
+Published: 2026-08-22T18:54:59+05:30
 
 If you read comics or manga on a tablet or e-reader, you will eventually hit a PDF that behaves badly — it will not fit the screen, page turns are slow, and double-page spreads split down the middle. Converting to CBZ usually fixes it. Understanding why explains when it will not.
 
@@ -664,7 +664,7 @@ A: The archive format inside — ZIP for CBZ, RAR for CBR. Readers support both,
 ### Printing Multiple PDF Pages Per Sheet, Explained
 
 URL: https://www.filepilot.space/blog/print-multiple-pdf-pages-per-sheet/
-Published: 2026-08-22
+Published: 2026-08-22T18:54:59+05:30
 
 Printing several pages onto one sheet sounds like a print-dialog setting, and sometimes it is. The trouble starts when you need the result to be a file rather than a printout — to email it, to hand it to a print shop, or to get the same output twice. Print dialogs are inconsistent between applications, drivers and operating systems, and they leave you nothing to check.
 
@@ -732,7 +732,7 @@ A: 4-up quarters the page area, rendering 11pt body text at roughly 5.5pt. That 
 ### Why Your Files Should Never Leave Your Browser
 
 URL: https://www.filepilot.space/blog/why-files-stay-in-browser/
-Published: 2026-06-26 · Updated: 2026-08-22
+Published: 2026-06-26T18:32:21+05:30 · Updated: 2026-08-22T18:54:59+05:30
 
 Most people never think twice about uploading a document to an online tool. You drag a file into a web page, click a button, and get a result back. It feels instantaneous and harmless. But between the moment your file leaves your device and the moment a processed version returns, something important happens: your data travels to a server you do not control, gets stored in memory you cannot inspect, and is handled by code you have no way to audit.
 
@@ -785,7 +785,7 @@ Your files contain information about your finances, your health, your work, and 
 ### The Hidden Privacy Risks of Online PDF Tools
 
 URL: https://www.filepilot.space/blog/privacy-risks-online-pdf-tools/
-Published: 2026-06-26 · Updated: 2026-08-22
+Published: 2026-06-26T18:32:21+05:30 · Updated: 2026-08-22T18:54:59+05:30
 
 PDFs are the universal document format. They carry contracts, bank statements, medical records, resumes, tax forms, and business proposals. When you need to merge, split, compress, or convert a PDF, the fastest path is usually an online tool. You search, click the first result, upload your file, and download the output. The whole interaction takes thirty seconds.
 
@@ -853,7 +853,7 @@ The next time you need to process a PDF, ask yourself: does this tool need my fi
 ### How FilePilot Keeps Your Documents Private
 
 URL: https://www.filepilot.space/blog/how-filepilot-keeps-documents-private/
-Published: 2026-06-26 · Updated: 2026-08-22
+Published: 2026-06-26T18:32:21+05:30 · Updated: 2026-08-22T18:54:59+05:30
 
 Privacy claims are easy to make. Every file processing tool on the internet says it takes privacy seriously. Few explain exactly how their architecture enforces that claim. This article describes, in concrete technical detail, how FilePilot processes your files without ever transmitting them to a server.
 
