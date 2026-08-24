@@ -520,7 +520,11 @@ function suiteAppNode() {
     inLanguage: 'en',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
     featureList: HOME_HUBS.map((hub) => routeLabel(hub)),
-    screenshot: { '@id': OG_IMAGE_ID },
+    // No screenshot. og-image.png is a marketing card — headline, tagline and
+    // three feature pills — and schema.org `screenshot` means an image of the
+    // running application. Pointing one at the other is a false claim on a site
+    // whose whole argument is that its claims are checkable. Restore this the
+    // moment a real capture of the app exists.
     provider: { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
     // No aggregateRating. Self-authored ratings for your own product have been
@@ -666,6 +670,9 @@ function toolAppNode(route, { full }) {
     browserRequirements: 'Requires JavaScript and a browser with WebAssembly support.',
     permissions: 'No account required. No file upload. Files are processed locally in the browser.',
     inLanguage: 'en',
+    // Authored per tool in toolContent.ts — never derived from `useCases`, which
+    // describe the reader's job rather than the tool's capabilities.
+    ...(toolContent[route]?.features?.length ? { featureList: toolContent[route].features } : {}),
     provider: { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
     mainEntityOfPage: { '@id': nodeId(route, 'webpage') },

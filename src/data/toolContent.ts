@@ -9,6 +9,19 @@ interface ToolContentEntry {
   steps: string[];
   useCases: string[];
   /**
+   * Capabilities the tool actually exposes, emitted as SoftwareApplication
+   * `featureList`. Optional; omitted from the schema when unset.
+   *
+   * NOT `useCases`. A use case is a job a reader brings ("bundle receipts for
+   * expenses"); a feature is something the tool does ("reorder pages before
+   * merging"). Mapping one onto the other is semantically wrong and was the
+   * reason this stayed unset rather than being auto-derived.
+   *
+   * Every entry must be verifiable by using the page. An aspirational feature
+   * list is a worse signal than none.
+   */
+  features?: string[];
+  /**
    * Keyword-first SEO title WITHOUT the brand suffix — `toolSeo()` and the
    * prerenderer both append BRAND_SUFFIX, so the client-rendered title and the
    * prerendered <title> stay identical. Lead with the exact target keyword.
@@ -75,6 +88,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Join a cover letter and resume into a single application PDF.',
       'Combine individual contract pages into one signed document.',
     ],
+    features: [
+      'Combine any number of PDF files into a single document.',
+      'Reorder files before merging with per-file move up and move down controls.',
+      'Remove a queued file without clearing the whole selection.',
+      'Pages are copied between documents rather than re-encoded, so content is unchanged.',
+    ],
       seoTitle: "Merge PDF Files Online – Free & Private",
     seoDescription: "Combine multiple PDF files into one document. 100% free, secure, and client-side only.",
     faqs: [
@@ -98,6 +117,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Break a lengthy contract into sections for individual review.',
       'Pull out single pages to share without revealing the full document.',
       'Split scanned documents that were batched into one file.',
+    ],
+    features: [
+      'Extract a page range by choosing a start and end page.',
+      'Split every page of the document into a separate PDF.',
+      'Page count is read from the loaded file, so ranges cannot exceed the document.',
     ],
       seoTitle: "Split PDF Online – Extract Pages Free",
     seoDescription: "Split PDF documents or extract specific pages. Fast, free, and secure browser-based tool.",
@@ -1005,6 +1029,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Bundle design mockups or screenshots into a single deliverable.',
       'Create a PDF photo album from vacation or event pictures.',
     ],
+    features: [
+      'A4 or Letter page size.',
+      'Portrait or landscape page orientation.',
+      'None, small or medium page margins.',
+      'Reorder images before building the PDF, and remove any of them.',
+    ],
       seoTitle: "Convert Images to PDF - JPG, PNG, WebP, SVG, BMP to PDF",
     seoDescription: "Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images to a single PDF with page size, orientation, and margin controls. Free and private.",
     faqs: [
@@ -1183,6 +1213,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert PDF presentations into image files for video editing.',
       'Generate thumbnail previews of PDF documents.',
     ],
+    features: [
+      'Export pages as PNG, JPEG or WebP.',
+      'Adjustable output resolution, set in DPI.',
+      'Adjustable quality for the lossy formats.',
+      'Download every page at once as a single ZIP archive.',
+    ],
       seoTitle: "PDF to Images - Export PDF Pages as PNG, JPG, or WebP",
     seoDescription: "Convert each PDF page to PNG, JPG, or WebP locally in your browser with DPI and quality controls. Download individually or as ZIP.",
     faqs: [
@@ -1352,6 +1388,15 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Pull text from PDF invoices or receipts for data entry.',
       'Convert PDF content to plain text for search or analysis.',
     ],
+    features: [
+      'Optical character recognition runs locally in the browser, not on a server.',
+      'Reads text from PDFs and from image files.',
+      'Inspect results page by page, with per-word confidence scores.',
+      'Overlay bounding boxes on the page to see what was detected where.',
+      'Copy the text of any page to the clipboard.',
+      'Export a searchable PDF built from the recognised text layer.',
+      'Download extracted text as TXT, or every page at once as a ZIP.',
+    ],
       seoTitle: "Extract Text from PDF or Images – TXT for Word, Sheets, and Slides",
     seoDescription: "Extract text from PDFs, scanned PDFs, and images in your browser for TXT exports you can reuse in Word, Sheets, Slides, and other editors.",
     faqs: [
@@ -1455,6 +1500,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Compress scanned documents that are unnecessarily large.',
       'Optimize PDFs for faster web loading or download.',
       'Shrink portfolio or presentation files for easier sharing.',
+    ],
+    features: [
+      'Three compression levels: low, medium and high.',
+      'Original file size is shown before compressing.',
+      'Compressed file downloads directly, with no server round trip.',
     ],
       seoTitle: "Compress PDF Online – Reduce File Size Free",
     seoDescription: "Reduce PDF file size while maintaining quality. Optimize PDFs locally in your browser. No uploads, 100% private.",

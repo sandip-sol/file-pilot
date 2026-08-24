@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { MIN_ORGANIZATION_PROFILES, ORGANIZATION_PROFILES, maintainer } from './src/data/aboutContent.ts';
 import { PILLAR_ROUTE, blogPosts } from './src/data/blogContent.ts';
+import { toolContent } from './src/data/toolContent.ts';
 import {
   CANONICAL_HOST,
   SITE_URL,
@@ -586,8 +587,30 @@ validateNoOrphanRoutes();
 validateRelatedToolLinks();
 validateNoOrphanedFromLinks();
 validateBlogCluster();
+/**
+ * Warning, not a failure: `featureList` is the property that tells a machine what
+ * a tool actually does, and without it every one of the 84 tool pages is
+ * described only by an applicationSubCategory shared with dozens of siblings.
+ *
+ * Deliberately not auto-derived from `useCases` — those describe the reader's
+ * job, not the tool's capabilities, and the mapping would be wrong on every
+ * page. Author them in toolContent.ts, and only from what the tool visibly does.
+ */
+function warnIfThinFeatureLists() {
+  const toolRoutes = getSeoRoutes().filter((route) => isToolRoute(route));
+  const withFeatures = toolRoutes.filter((route) => toolContent[route]?.features?.length);
+  if (withFeatures.length === toolRoutes.length) return;
+  warnings.push(
+    `${withFeatures.length} of ${toolRoutes.length} tool pages have an authored \`features\` list; `
+    + `${toolRoutes.length - withFeatures.length} emit no SoftwareApplication featureList and are described `
+    + 'only by a shared applicationSubCategory. Add `features` in src/data/toolContent.ts — '
+    + 'capabilities the tool visibly has, never `useCases`.',
+  );
+}
+
 warnIfAnonymous();
 warnIfThinSameAs();
+warnIfThinFeatureLists();
 validate404();
 
 if (errors.length > 0) {
