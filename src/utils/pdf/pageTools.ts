@@ -1,4 +1,5 @@
 import { PDFDocument, degrees, rgb, StandardFonts } from 'pdf-lib';
+import { dataUrlToBytes } from '../dataUrl';
 import { canvasToBlob, openPdfDocument, renderPdfPageToCanvas } from './rendering';
 import type { AnnotationItem, RedactionItem } from './types';
 
@@ -145,7 +146,7 @@ export const applyAnnotationsToPdf = async (file: File, items: AnnotationItem[])
     }
 
     if (item.kind === 'signature-image' && item.imageDataUrl) {
-      const imageBytes = await fetch(item.imageDataUrl).then((response) => response.arrayBuffer());
+      const imageBytes = await dataUrlToBytes(item.imageDataUrl);
       const image = item.imageDataUrl.startsWith('data:image/png') ? await pdf.embedPng(imageBytes) : await pdf.embedJpg(imageBytes);
       page.drawImage(image, {
         x,

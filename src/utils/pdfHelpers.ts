@@ -1,4 +1,5 @@
-import { PDFDocument, degrees } from 'pdf-lib';
+import { PDFDocument, degrees, type PDFImage } from 'pdf-lib';
+import { decodeToPngPages, needsSpecialDecoder } from './image/decodeSpecialFormats';
 
 export const mergePDFs = async (files: File[]): Promise<Uint8Array> => {
     const mergedPdf = await PDFDocument.create();
@@ -135,66 +136,83 @@ export interface ImageItem {
     previewUrl: string;
 }
 
-export const convertImagesToPDF = async (items: ImageItem[], options: ImageToPdfOptions): Promise<Uint8Array> => {
+const embedItemImages = async (pdf: PDFDocument, file: File): Promise<PDFImage[]> => {
+    if (needsSpecialDecoder(file)) {
+        const pages = await decodeToPngPages(file);
+        return Promise.all(pages.map((png) => pdf.embedPng(png)));
+    }
+
+    try {
+        const buffer = await file.arrayBuffer();
+        if (file.type === 'image/jpeg') return [await pdf.embedJpg(buffer)];
+        if (file.type === 'image/png') return [await pdf.embedPng(buffer)];
+    } catch (e) {
+        console.warn(`Failed to process image ${file.name}, trying conversion fallback`, e);
+    }
+    return [await pdf.embedPng(await convertImageToPng(file))];
+};
+
+export interface ImagesToPdfResult {
+    pdfBytes: Uint8Array;
+    /** Names of files that could not be decoded and were left out. */
+    skipped: string[];
+}
+
+export const convertImagesToPDF = async (items: ImageItem[], options: ImageToPdfOptions): Promise<ImagesToPdfResult> => {
     const pdf = await PDFDocument.create();
     const { width: pageWidth, height: pageHeight } = getPageDimensions(options.pageSize, options.orientation);
     const margin = getMargin(options.margin);
     const contentWidth = pageWidth - (margin * 2);
     const contentHeight = pageHeight - (margin * 2);
 
+    const skipped: string[] = [];
+
     for (const item of items) {
-        let image;
+        let images: PDFImage[];
         try {
-            const buffer = await item.file.arrayBuffer();
-            if (item.file.type === 'image/jpeg') {
-                image = await pdf.embedJpg(buffer);
-            } else if (item.file.type === 'image/png') {
-                image = await pdf.embedPng(buffer);
-            } else {
-                const pngBytes = await convertImageToPng(item.file);
-                image = await pdf.embedPng(pngBytes);
-            }
-        } catch (e) {
-            console.warn(`Failed to process image ${item.file.name}, trying conversion fallback`, e);
-            try {
-                const pngBytes = await convertImageToPng(item.file);
-                image = await pdf.embedPng(pngBytes);
-            } catch (fallbackError) {
-                console.error(`Skipping file ${item.file.name}`, fallbackError);
-                continue;
-            }
+            images = await embedItemImages(pdf, item.file);
+        } catch (error) {
+            console.error(`Skipping file ${item.file.name}`, error);
+            skipped.push(item.file.name);
+            continue;
         }
 
-        const page = pdf.addPage([pageWidth, pageHeight]);
+        for (const image of images) {
+            const page = pdf.addPage([pageWidth, pageHeight]);
 
-        const imgWidth = image.width;
-        const imgHeight = image.height;
+            const imgWidth = image.width;
+            const imgHeight = image.height;
 
-        const isSideways = item.rotation === 90 || item.rotation === 270;
-        const effectiveImgWidth = isSideways ? imgHeight : imgWidth;
-        const effectiveImgHeight = isSideways ? imgWidth : imgHeight;
+            const isSideways = item.rotation === 90 || item.rotation === 270;
+            const effectiveImgWidth = isSideways ? imgHeight : imgWidth;
+            const effectiveImgHeight = isSideways ? imgWidth : imgHeight;
 
-        const scaleFactor = Math.min(
-            contentWidth / effectiveImgWidth,
-            contentHeight / effectiveImgHeight,
-            1
-        );
+            const scaleFactor = Math.min(
+                contentWidth / effectiveImgWidth,
+                contentHeight / effectiveImgHeight,
+                1
+            );
 
-        const w = imgWidth * scaleFactor;
-        const h = imgHeight * scaleFactor;
+            const w = imgWidth * scaleFactor;
+            const h = imgHeight * scaleFactor;
 
-        page.drawImage(image, {
-            x: (pageWidth - w) / 2,
-            y: (pageHeight - h) / 2,
-            width: w,
-            height: h,
-            rotate: degrees(-item.rotation)
-        });
+            page.drawImage(image, {
+                x: (pageWidth - w) / 2,
+                y: (pageHeight - h) / 2,
+                width: w,
+                height: h,
+                rotate: degrees(-item.rotation)
+            });
 
-        if (item.rotation !== 0) {
-            page.setRotation(degrees(-item.rotation));
+            if (item.rotation !== 0) {
+                page.setRotation(degrees(-item.rotation));
+            }
         }
     }
 
-    return await pdf.save();
+    if (pdf.getPageCount() === 0) {
+        throw new Error(`None of the images could be read: ${skipped.join(', ')}`);
+    }
+
+    return { pdfBytes: await pdf.save(), skipped };
 };

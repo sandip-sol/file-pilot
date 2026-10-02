@@ -1,4 +1,5 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import { dataUrlToBytes } from '../dataUrl';
 import type { ExtractedDocumentResult } from './types';
 
 export const buildCombinedText = (entries: ExtractedDocumentResult[]) =>
@@ -21,7 +22,7 @@ export const exportSearchablePdfFromOcr = async (entry: ExtractedDocumentResult)
   for (const pageResult of entry.pages) {
     if (!pageResult.previewUrl) continue;
 
-    const imageBytes = await fetch(pageResult.previewUrl).then((response) => response.arrayBuffer());
+    const imageBytes = await dataUrlToBytes(pageResult.previewUrl);
     const image = pageResult.previewUrl.startsWith('data:image/png')
       ? await pdf.embedPng(imageBytes)
       : await pdf.embedJpg(imageBytes);

@@ -12,7 +12,7 @@ import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 async function generateTOC(file: File, title: string): Promise<Uint8Array> {
     GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
-    const pdfJs = await getDocument({ data: new Uint8Array(ab) }).promise;
+    const pdfJs = await getDocument({ data: new Uint8Array(ab.slice(0)) }).promise;
     const src = await PDFDocument.load(ab, { ignoreEncryption: true });
     const numPages = pdfJs.numPages;
 

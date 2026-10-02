@@ -1,4 +1,5 @@
 import { PDFDocument, StandardFonts, degrees, rgb } from 'pdf-lib';
+import { dataUrlToBytes } from '../dataUrl';
 import type { WatermarkConfig } from './types';
 
 const hexToRgb = (value: string) => {
@@ -99,7 +100,7 @@ export const applyWatermarkToPdf = async (file: File, config: WatermarkConfig): 
   const pdf = await PDFDocument.load(inputBytes);
   const font = await pdf.embedFont(StandardFonts.HelveticaBold);
   const imageBytes = config.imageDataUrl
-    ? await fetch(config.imageDataUrl).then((response) => response.arrayBuffer())
+    ? await dataUrlToBytes(config.imageDataUrl)
     : null;
   const embeddedImage = imageBytes
     ? config.imageDataUrl?.startsWith('data:image/png')

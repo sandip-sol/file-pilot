@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
 import { convertImagesToPDF, downloadBlob } from '../utils/pdfHelpers';
 import type { ImageItem } from '../utils/pdfHelpers';
+import { decodeToPngPages, needsSpecialDecoder } from '../utils/image/decodeSpecialFormats';
 import { Image as ImageIcon, Loader2, Download, X, RotateCw, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
@@ -16,7 +17,7 @@ const INDEXABLE_IMAGE_TO_PDF_ROUTES = new Set(['/images-to-pdf', '/jpg-to-pdf'])
 const imageToPdfSeoByRoute: Record<string, { h1: string; intro: string }> = {
     '/images-to-pdf': {
         h1: 'Convert Images to PDF',
-        intro: 'Convert JPG, PNG, WebP, SVG, BMP, and browser-supported HEIC or TIFF images to one PDF with custom page size and orientation.',
+        intro: 'Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images to one PDF with custom page size and orientation.',
     },
     '/jpg-to-pdf': {
         h1: 'JPG to PDF Online',
@@ -56,6 +57,17 @@ export const ImagesToPdf = () => {
         setItems(prev => [...prev, ...newItems]);
         setSuccess(false);
         setError(null);
+
+        // Browsers can't render TIFF/HEIC in <img>, so preview the decoded first frame.
+        newItems.filter(item => needsSpecialDecoder(item.file)).forEach(async (item) => {
+            try {
+                const [png] = await decodeToPngPages(item.file);
+                const previewUrl = URL.createObjectURL(new Blob([png as BlobPart], { type: 'image/png' }));
+                setItems(prev => prev.map(p => (p.id === item.id ? { ...p, previewUrl } : p)));
+            } catch (err) {
+                console.warn(`Could not preview ${item.file.name}`, err);
+            }
+        });
     };
 
     const removeItem = (id: string) => {
@@ -96,13 +108,17 @@ export const ImagesToPdf = () => {
         setError(null);
 
         try {
-            const pdfBytes = await convertImagesToPDF(items, { pageSize, orientation, margin });
+            const { pdfBytes, skipped } = await convertImagesToPDF(items, { pageSize, orientation, margin });
             downloadBlob(pdfBytes, 'images.pdf', 'application/pdf');
-            setSuccess(true);
-            setTimeout(() => setSuccess(false), 3000);
+            if (skipped.length > 0) {
+                setError(`PDF created, but these images could not be read and were left out: ${skipped.join(', ')}`);
+            } else {
+                setSuccess(true);
+                setTimeout(() => setSuccess(false), 3000);
+            }
         } catch (error) {
             console.error(error);
-            setError('Failed to generate PDF. One or more images may be unsupported or corrupted.');
+            setError('Failed to generate PDF. None of the images could be read; they may be unsupported or corrupted.');
         } finally {
             setIsProcessing(false);
         }
@@ -179,7 +195,7 @@ export const ImagesToPdf = () => {
                             )}
 
                             {error && (
-                                <div className="bg-[var(--error-light)] text-[var(--error)] p-3 rounded-xl mt-6 text-sm font-medium">
+                                <div role="alert" className="bg-[var(--error-light)] text-[var(--error)] p-3 rounded-xl mt-6 text-sm font-medium">
                                     {error}
                                 </div>
                             )}

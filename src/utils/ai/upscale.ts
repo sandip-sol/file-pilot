@@ -4,29 +4,31 @@ import { MAX_UPSCALE_INPUT_PIXELS } from './types';
 
 ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.21.0/dist/';
 
-const MODEL_URLS: Record<number, string> = {
-  2: 'https://huggingface.co/nicjagr/realesrgan-onnx/resolve/main/realesrgan_x2.onnx',
-  4: 'https://huggingface.co/nicjagr/realesrgan-onnx/resolve/main/realesrgan_x4.onnx',
-};
+// Self-hosted Real-ESRGAN general x4v3 (BSD-3-Clause, xinntao/Real-ESRGAN).
+// A third-party model URL went dead before, so it ships with the site.
+// 2x output is produced by drawing each 4x tile at half size.
+const MODEL_URL = '/models/realesr-general-x4v3.onnx';
+const MODEL_SCALE = 4;
 
-const sessionCache = new Map<number, ort.InferenceSession>();
+let sessionPromise: Promise<ort.InferenceSession> | null = null;
 
 const TILE_SIZE = 192;
 const TILE_PAD = 16;
 
-async function loadModel(
-  scale: number,
-  onProgress: (p: AiProgress) => void,
-): Promise<ort.InferenceSession> {
-  const cached = sessionCache.get(scale);
-  if (cached) return cached;
+function loadModel(onProgress: (p: AiProgress) => void): Promise<ort.InferenceSession> {
+  if (!sessionPromise) {
+    sessionPromise = downloadModel(onProgress).catch((err) => {
+      sessionPromise = null;
+      throw err;
+    });
+  }
+  return sessionPromise;
+}
 
-  const url = MODEL_URLS[scale];
-  if (!url) throw new Error(`No model available for ${scale}x upscaling`);
+async function downloadModel(onProgress: (p: AiProgress) => void): Promise<ort.InferenceSession> {
+  onProgress({ stage: 'loading-model', progress: 10, message: 'Downloading super-resolution model...' });
 
-  onProgress({ stage: 'loading-model', progress: 10, message: `Downloading ${scale}x super-resolution model...` });
-
-  const response = await fetch(url);
+  const response = await fetch(MODEL_URL);
   if (!response.ok) throw new Error(`Failed to download model: ${response.statusText}. The AI upscaling model could not be loaded. Please try again later.`);
 
   const contentLength = response.headers.get('content-length');
@@ -61,7 +63,6 @@ async function loadModel(
     graphOptimizationLevel: 'all',
   });
 
-  sessionCache.set(scale, session);
   return session;
 }
 
@@ -117,7 +118,7 @@ export async function upscaleImage(
 
   let session: ort.InferenceSession;
   try {
-    session = await loadModel(scale, onProgress);
+    session = await loadModel(onProgress);
   } catch (err) {
     bitmap.close();
     throw new Error(
@@ -138,6 +139,7 @@ export async function upscaleImage(
   outputCanvas.width = outputW;
   outputCanvas.height = outputH;
   const outCtx = outputCanvas.getContext('2d')!;
+  outCtx.imageSmoothingQuality = 'high';
 
   const tilesX = Math.ceil(width / TILE_SIZE);
   const tilesY = Math.ceil(height / TILE_SIZE);
@@ -162,14 +164,16 @@ export async function upscaleImage(
 
       const results = await session.run(feeds);
       const outputTensor = results[session.outputNames[0]];
-      const outTileW = tileW * scale;
-      const outTileH = tileH * scale;
+      const outTileW = tileW * MODEL_SCALE;
+      const outTileH = tileH * MODEL_SCALE;
       const outData = tensorToImageData(outputTensor, outTileW, outTileH);
 
-      const padLeft = (tx * TILE_SIZE - srcX) * scale;
-      const padTop = (ty * TILE_SIZE - srcY) * scale;
-      const copyW = Math.min(TILE_SIZE * scale, outputW - tx * TILE_SIZE * scale);
-      const copyH = Math.min(TILE_SIZE * scale, outputH - ty * TILE_SIZE * scale);
+      // Region of this tile in the final output, excluding the overlap padding.
+      const destX = tx * TILE_SIZE * scale;
+      const destY = ty * TILE_SIZE * scale;
+      const copyW = Math.min(TILE_SIZE * scale, outputW - destX);
+      const copyH = Math.min(TILE_SIZE * scale, outputH - destY);
+      const ratio = MODEL_SCALE / scale;
 
       const tempCanvas = document.createElement('canvas');
       tempCanvas.width = outTileW;
@@ -178,8 +182,8 @@ export async function upscaleImage(
 
       outCtx.drawImage(
         tempCanvas,
-        padLeft, padTop, copyW, copyH,
-        tx * TILE_SIZE * scale, ty * TILE_SIZE * scale, copyW, copyH,
+        (tx * TILE_SIZE - srcX) * MODEL_SCALE, (ty * TILE_SIZE - srcY) * MODEL_SCALE, copyW * ratio, copyH * ratio,
+        destX, destY, copyW, copyH,
       );
 
       processed++;

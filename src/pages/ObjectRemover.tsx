@@ -64,9 +64,12 @@ export const ObjectRemover = () => {
     return () => {
       if (file) revokeImageUrls([file]);
       if (resultUrl) URL.revokeObjectURL(resultUrl);
-      bitmapRef.current?.close();
     };
   }, [file, resultUrl]);
+
+  // Close the bitmap only on unmount: closing it in the effect above would
+  // detach the freshly loaded bitmap every time `file` changes.
+  useEffect(() => () => bitmapRef.current?.close(), []);
 
   const drawCanvas = useCallback(() => {
     const canvas = canvasRef.current;

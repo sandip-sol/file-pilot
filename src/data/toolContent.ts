@@ -983,11 +983,13 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Design order forms or request forms for internal workflows.',
       'Create surveys or questionnaires in PDF format.',
     ],
-      seoTitle: "PDF Form Filler – Fill & Flatten PDF Forms Online",
-    seoDescription: "Detect and fill PDF form fields, then flatten and download. 100% browser-based.",
+      seoTitle: "PDF Form Creator – Make Fillable PDF Forms Online",
+    seoDescription: "Add text fields, checkboxes, dropdowns and radio buttons to any PDF and download a fillable form. Free, private, runs in your browser.",
     faqs: [
-      { question: "What PDF forms are supported?", answer: "Standard AcroForms with text fields and checkboxes." },
-      { question: "What does flatten mean?", answer: "Flatten converts form fields to static text, making the form non-editable." },
+      { question: "What kinds of form fields can I add?", answer: "Text fields, checkboxes, dropdown menus with your own options, and radio buttons. Radio buttons that share a group name act as one either-or choice." },
+      { question: "Will the form work in other PDF readers?", answer: "Yes. Fields are saved as standard AcroForm fields, which Adobe Acrobat Reader, browser PDF viewers, Preview on macOS and most mobile PDF apps can fill in." },
+      { question: "Can I start without an existing PDF?", answer: "Yes. Choose \"Start with a blank A4 page\" to build a form from scratch, or upload a PDF to use as the form background." },
+      { question: "Is my PDF uploaded?", answer: "No. The form is built in your browser and the file never leaves your device." },
     ],
   },
   '/remove-blank-pages': {
@@ -1039,7 +1041,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
     seoDescription: "Convert JPG, PNG, WebP, SVG, BMP, HEIC, and TIFF images to a single PDF with page size, orientation, and margin controls. Free and private.",
     faqs: [
       { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
-      { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP are supported in modern browsers. HEIC/HEIF and TIFF support depends on whether your browser can decode the files." },
+      { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP are supported in modern browsers. HEIC/HEIF photos and TIFF scans (including multi-page TIFFs) are decoded in your browser too, so they work in Chrome, Firefox, Edge and Safari." },
       { question: "Can I choose the page size and orientation?", answer: "Yes. You can select A4 or Letter page size and choose portrait or landscape orientation before converting." },
       { question: "Can I reorder or rotate images before converting?", answer: "Yes. Use the arrow buttons to reorder and the rotate button to adjust each image before generating the PDF." },
     ],
@@ -1063,7 +1065,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
     seoDescription: "Convert JPG and JPEG photos into a PDF in your browser. Arrange images, choose page size, and download privately without uploads.",
     faqs: [
       { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
-      { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP are supported in modern browsers. HEIC/HEIF and TIFF support depends on whether your browser can decode the files." },
+      { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, WebP, SVG, and BMP are supported in modern browsers. HEIC/HEIF photos and TIFF scans (including multi-page TIFFs) are decoded in your browser too, so they work in Chrome, Firefox, Edge and Safari." },
       { question: "Can I choose the page size and orientation?", answer: "Yes. You can select A4 or Letter page size and choose portrait or landscape orientation before converting." },
       { question: "Can I reorder or rotate images before converting?", answer: "Yes. Use the arrow buttons to reorder and the rotate button to adjust each image before generating the PDF." },
     ],
