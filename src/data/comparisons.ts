@@ -55,7 +55,7 @@ export const comparisonContent: Record<string, ComparisonEntry> = {
     route: '/smallpdf-alternative',
     title: 'Smallpdf Alternative That Never Uploads Your Files | FilePilot',
     description:
-      'A free Smallpdf alternative that processes PDFs in your browser instead of on a server. No uploads, no account, no file limits. Compare how the two handle your documents.',
+      'A free Smallpdf alternative that processes PDFs in your browser rather than on a server. No uploads, no account and no limits. See how the two compare.',
     h1: 'A Smallpdf Alternative That Doesn\'t Upload Your Files',
     intro:
       'Smallpdf is a polished, capable PDF suite used by millions of people. If you are looking for an alternative, it is usually for one specific reason: to use PDF tools without sending your document to somebody else\'s server. FilePilot is built for exactly that case — the same everyday PDF operations, performed inside your browser tab, with the file never leaving your device.',
@@ -122,7 +122,7 @@ export const comparisonContent: Record<string, ComparisonEntry> = {
     route: '/ilovepdf-alternative',
     title: 'iLovePDF Alternative With No File Uploads | FilePilot',
     description:
-      'A free iLovePDF alternative that runs entirely in your browser. Merge, split, compress and convert PDFs without uploading them to a server, without an account and without task limits.',
+      'A free iLovePDF alternative that runs in your browser. Merge, split, compress and convert PDFs without uploading files, creating an account or hitting limits.',
     h1: 'An iLovePDF Alternative That Keeps Files on Your Device',
     intro:
       'iLovePDF is one of the most widely used PDF toolkits on the web, and for most everyday jobs it works well. People look for an alternative when the document in question is one they would rather not upload at all. FilePilot covers the same core operations — merging, splitting, compressing, converting, rotating, signing — but performs every one of them inside your browser.',
@@ -188,7 +188,7 @@ export const comparisonContent: Record<string, ComparisonEntry> = {
     route: '/adobe-acrobat-online-alternative',
     title: 'Free Adobe Acrobat Online Alternative, No Upload | FilePilot',
     description:
-      'A free alternative to Adobe Acrobat\'s online PDF tools that needs no Adobe account and never uploads your file. Merge, split, compress, convert and sign PDFs in your browser.',
+      'A free Adobe Acrobat online alternative with no Adobe account. Merge, split, compress, convert and sign PDFs in your browser without uploading your file.',
     h1: 'A Free Alternative to Adobe Acrobat\'s Online PDF Tools',
     intro:
       'Adobe Acrobat is the reference implementation for PDF — it defined the format. Its free online tools are convenient, but they route your document through Adobe\'s cloud and increasingly ask you to sign in. If you want the same everyday operations without an account and without uploading the file, FilePilot does them in your browser.',
@@ -255,7 +255,7 @@ export const comparisonContent: Record<string, ComparisonEntry> = {
     route: '/pdf24-alternative',
     title: 'PDF24 Alternative — Browser-Based, No Upload | FilePilot',
     description:
-      'A free PDF24 alternative that processes files in your browser instead of on a server, with no desktop install. Compare PDF24 Tools, PDF24 Creator and FilePilot on where your file goes.',
+      'A free PDF24 alternative that processes files in your browser, not on a server, with nothing to install. See how PDF24 Tools, Creator and FilePilot compare.',
     h1: 'A PDF24 Alternative That Runs in the Browser, Not on a Server',
     intro:
       'PDF24 is a genuinely generous free toolkit, and it is the fairest comparison on this list — because PDF24 already offers a local option. Its online tools at tools.pdf24.org upload your file to PDF24\'s servers; its Windows desktop application, PDF24 Creator, processes files locally and offline. FilePilot sits between the two: local processing like the desktop app, with nothing to install.',

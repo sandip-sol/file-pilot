@@ -23,18 +23,28 @@ const errors = [];
 const warnings = [];
 
 const EXPECTED_ROBOTS = `User-agent: *
+Disallow: /*?
+Disallow: /index.html
 Allow: /
 
 User-agent: GPTBot
+Disallow: /*?
+Disallow: /index.html
 Allow: /
 
 User-agent: PerplexityBot
+Disallow: /*?
+Disallow: /index.html
 Allow: /
 
 User-agent: ClaudeBot
+Disallow: /*?
+Disallow: /index.html
 Allow: /
 
 User-agent: Google-Extended
+Disallow: /*?
+Disallow: /index.html
 Allow: /
 
 Sitemap: https://www.filepilot.space/sitemap.xml
@@ -294,6 +304,10 @@ function validateRouteHtml(route) {
 
   if (!title || title !== seo.title) fail(`${route} has missing or incorrect <title>.`);
   if (!description || description !== seo.description) fail(`${route} has missing or incorrect meta description.`);
+  // Bing Webmaster Tools flags descriptions outside ~150–160 chars (too short, or truncated in results).
+  if (description && (description.length < 150 || description.length > 160)) {
+    fail(`${route} meta description is ${description.length} characters; keep it between 150 and 160.`);
+  }
   if (canonicalTag !== canonical) fail(`${route} has missing or incorrect canonical tag.`);
   if (robots !== 'index,follow') fail(`${route} does not declare index,follow.`);
   if (ogUrl !== canonical) fail(`${route} has missing or incorrect og:url.`);

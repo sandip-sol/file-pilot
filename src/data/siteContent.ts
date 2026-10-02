@@ -36,7 +36,7 @@ export const siteContent: Record<string, SiteContentEntry> = {
   '/': {
     title: 'FilePilot — Free Private PDF & Image Tools, No Upload',
     description:
-      'FilePilot is a free toolkit of 90+ PDF and image tools that run entirely in your browser. Merge, split, compress, convert and edit files privately — nothing is ever uploaded to a server.',
+      'Free PDF and image tools that run entirely in your browser. Merge, split, compress, convert, sign and edit files privately: nothing is uploaded to a server.',
     h1: 'Free, private PDF and image tools that run in your browser',
     intro:
       'FilePilot is a free collection of 90+ browser-based tools for PDFs, images and everyday file tasks. Every tool processes your file locally on your own device using WebAssembly and the Canvas API, so your documents are never uploaded, queued, stored or scanned on someone else\'s server. No account, no watermark, no ads.',
@@ -77,7 +77,7 @@ export const siteContent: Record<string, SiteContentEntry> = {
   '/pdf-tools': {
     title: 'Free Online PDF Tools — Private, No Upload | FilePilot',
     description:
-      'A complete collection of free, browser-based PDF tools. Merge, split, compress, convert, annotate, redact, sign and organize PDFs — all processed privately on your device with no uploads.',
+      'Free browser-based PDF tools: merge, split, compress, convert, annotate, redact, sign and organize PDFs, all processed privately on your device, never uploaded.',
     h1: 'Free Online PDF Tools',
     intro:
       'Every PDF task in one place, processed locally in your browser. Merge and split documents, compress large files, reorder and delete pages, convert to and from images, add page numbers and watermarks, redact sensitive text, fill and flatten forms, and sign contracts — without uploading a single file.',
@@ -86,7 +86,7 @@ export const siteContent: Record<string, SiteContentEntry> = {
   '/image-tools': {
     title: 'Free Online Image Tools — Private, No Upload | FilePilot',
     description:
-      'A complete suite of free, browser-based image tools. Compress, resize, crop, convert, watermark, strip metadata and remove backgrounds — all processed privately on your device with no uploads.',
+      'Free browser-based image tools: compress, resize, crop, convert, watermark, strip metadata and remove backgrounds, all processed privately on your own device.',
     h1: 'Free Online Image Tools',
     intro:
       'Compress, resize, crop, rotate and convert images between JPG, PNG, WebP, SVG and BMP, strip EXIF and GPS metadata, add watermarks, and run AI background removal — all in your browser, with your photos never leaving your device.',
@@ -95,7 +95,7 @@ export const siteContent: Record<string, SiteContentEntry> = {
   '/image-workflows': {
     title: 'Image Workflow Tools - Format, Validate and Prepare Images | FilePilot',
     description:
-      'Prepare images for social media, ecommerce, passport photos, favicons, QR codes, and PDF workflows with private browser-based tools.',
+      'Ready-made image workflows for social media sizes, product photos, passport photos, favicons, QR codes and PDF conversion. Free, private and browser-based.',
     h1: 'Image Workflow Tools',
     intro:
       'Format, validate, and prepare images for real publishing requirements. These tools help with social media sizes, ecommerce output, passport photo checks, favicons, QR codes, and image-to-PDF workflows without uploading your files.',
@@ -104,7 +104,7 @@ export const siteContent: Record<string, SiteContentEntry> = {
   '/ai-tools': {
     title: 'AI Image Tools - Private Browser-Based Editing | FilePilot',
     description:
-      'Remove backgrounds, enhance images, upscale photos, and clean edits with AI-assisted tools that run in your browser where supported.',
+      'Free AI image tools that run in your browser: remove or change backgrounds, upscale and enhance photos, and erase unwanted objects without uploading images.',
     h1: 'AI Image Tools',
     intro:
       'Use AI-assisted image tools for background removal, cleanup, enhancement, upscaling, and object removal. FilePilot keeps privacy clear by running supported processing in your browser instead of collecting your images on a server.',
@@ -113,7 +113,7 @@ export const siteContent: Record<string, SiteContentEntry> = {
   '/blog': {
     title: 'FilePilot Blog — Privacy, PDFs and Image Tools',
     description:
-      'Articles about privacy-first file processing, browser-based PDF tools, image tools, and why your documents should never leave your device.',
+      'Guides to private file handling: how browser-based PDF and image tools work, the real risks of uploading documents, redaction, EXIF data and practical how-tos.',
     h1: 'FilePilot Blog',
     intro:
       'Practical writing on private, local file processing: how browser-based PDF and image tools actually work, what happens to a document when you upload it to a server, and how to tell whether a tool is genuinely private.',
@@ -122,7 +122,7 @@ export const siteContent: Record<string, SiteContentEntry> = {
   '/support': {
     title: 'Support FilePilot | Keep private file tools free',
     description:
-      'Support FilePilot and help keep private, browser-based file tools free, ad-free and improving.',
+      'Support FilePilot to keep its private, browser-based PDF and image tools free, ad-free and improving. See how contributions are used and other ways to help.',
     h1: 'Support FilePilot',
     intro:
       'Help keep FilePilot free, private and ad-free while funding new tools, performance improvements and maintenance.',
@@ -131,7 +131,7 @@ export const siteContent: Record<string, SiteContentEntry> = {
   '/about': {
     title: 'About FilePilot — Who Builds It and How It Works',
     description:
-      'Who builds FilePilot, why it processes files in your browser instead of on a server, the libraries it uses, how to verify the no-upload claim yourself, and what it deliberately cannot do.',
+      'Who builds FilePilot, why it processes files in your browser instead of a server, the libraries behind it, and how to verify the no-upload claim yourself.',
     h1: 'About FilePilot',
     intro:
       'FilePilot is a free set of 90+ PDF and image tools that run entirely in your browser. This page explains who builds it, how the local processing actually works, how you can verify that claim for yourself, how the site is paid for, and where it falls short.',
@@ -162,14 +162,14 @@ export const siteContent: Record<string, SiteContentEntry> = {
   '/privacy': {
     title: 'Privacy Policy | FilePilot',
     description:
-      'Learn how FilePilot protects files with browser-based processing and no server uploads for supported tools.',
+      'How FilePilot handles your files: they are processed in your browser and never uploaded. No tracking, no ad cookies, and no personal data collected or shared.',
     h1: 'Privacy Policy',
   },
 
   '/terms': {
     title: 'Terms of Service | FilePilot',
     description:
-      'Read the terms for using FilePilot browser-based PDF, image, and file tools.',
+      'Terms for using FilePilot\'s free PDF and image tools: free for personal and commercial use, you keep ownership of your files, and the service is provided as is.',
     h1: 'Terms of Service',
   },
 

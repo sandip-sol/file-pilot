@@ -95,7 +95,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/edit-pdf-without-uploading': {
     route: '/blog/edit-pdf-without-uploading',
     title: 'How to Edit a PDF Without Uploading It Anywhere | FilePilot',
-    description: 'A complete guide to working with PDFs without sending them to a server: what actually happens when you upload, which tasks can run locally in a browser, which still cannot, and how to verify any tool\'s claim yourself.',
+    description: 'How to work with PDFs without sending them to a server: what happens when you upload, which tasks run locally in a browser, and how to verify a tool\'s claims.',
     h1: 'How to Edit a PDF Without Uploading It Anywhere',
     published: '2026-08-22T18:54:59+05:30',
     readTime: '9 min read',
@@ -127,7 +127,7 @@ export const blogPosts: Record<string, BlogPost> = {
         '<strong>Making files smaller</strong> — <a href="/compress">compress a PDF</a>, or <a href="/pdf-to-greyscale">convert it to greyscale</a> when colour is not needed.',
         '<strong>Converting</strong> — <a href="/pdf-to-images">PDF to images</a>, <a href="/images-to-pdf">images to PDF</a>, <a href="/extract-text">extract the text</a>, <a href="/pdf-to-cbz">PDF to CBZ</a>.',
         '<strong>Marking up</strong> — <a href="/annotate-pdf">annotate</a>, <a href="/sign-pdf">sign</a>, <a href="/watermark-pdf">watermark</a>, <a href="/page-numbers">add page numbers</a>, <a href="/add-stamp">stamp</a>.',
-        '<strong>Removing information</strong> — <a href="/redact-pdf">redact text</a>, <a href="/remove-metadata">strip PDF metadata</a>, <a href="/flatten-pdf">flatten forms and annotations</a>.',
+        '<strong>Removing information</strong> — <a href="/redact-pdf">redact text</a>, <a href="/sanitize-pdf/">strip PDF metadata</a>, <a href="/flatten-pdf">flatten forms and annotations</a>.',
         '<strong>Layout and print</strong> — <a href="/n-up-pdf">several pages per sheet</a>, <a href="/pdf-booklet">booklet imposition</a>, <a href="/posterize-pdf">poster tiling</a>, <a href="/fix-page-size">fix page size</a>.',
       ] },
       { type: 'h2', html: 'What still genuinely needs a server' },
@@ -179,7 +179,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/why-files-stay-in-browser': {
     route: '/blog/why-files-stay-in-browser',
     title: 'Why Your Files Should Never Leave Your Browser | FilePilot',
-    description: 'Uploading files to remote servers introduces privacy risks, data breaches, and unclear retention policies. Learn how browser-based processing with WebAssembly and Web Workers keeps your documents private.',
+    description: 'Uploading files risks breaches and unclear retention. How browser-based processing with WebAssembly and Web Workers keeps documents on your own device.',
     h1: 'Why Your Files Should Never Leave Your Browser',
     published: '2026-06-26T18:32:21+05:30',
     updated: '2026-08-22T18:54:59+05:30',
@@ -217,7 +217,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/privacy-risks-online-pdf-tools': {
     route: '/blog/privacy-risks-online-pdf-tools',
     title: 'The Hidden Privacy Risks of Online PDF Tools | FilePilot',
-    description: 'What really happens when you upload a PDF to an online tool: server storage, metadata exposure, third-party processing, and how to evaluate whether a tool is truly private.',
+    description: 'What really happens when you upload a PDF to an online tool: server storage, metadata exposure, third-party processing, and how to judge if a tool is private.',
     h1: 'The Hidden Privacy Risks of Online PDF Tools',
     published: '2026-06-26T18:32:21+05:30',
     updated: '2026-08-22T18:54:59+05:30',
@@ -259,7 +259,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/how-filepilot-keeps-documents-private': {
     route: '/blog/how-filepilot-keeps-documents-private',
     title: 'How FilePilot Keeps Your Documents Private | FilePilot',
-    description: 'A practical look at FilePilot\'s privacy architecture: WebAssembly with pdf-lib, Canvas API rendering, ONNX Runtime for AI features, PWA offline support, and zero server involvement.',
+    description: 'Inside FilePilot\'s privacy architecture: pdf-lib and WebAssembly, Canvas rendering, ONNX Runtime for AI features, offline support and no server processing.',
     h1: 'How FilePilot Keeps Your Documents Private',
     published: '2026-06-26T18:32:21+05:30',
     updated: '2026-08-22T18:54:59+05:30',
@@ -305,7 +305,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/is-it-safe-to-upload-pdf-online': {
     route: '/blog/is-it-safe-to-upload-pdf-online',
     title: 'Is It Safe to Upload a PDF to an Online Tool? | FilePilot',
-    description: 'What happens to your document when you upload it to a free PDF site, what the deletion policies actually promise, when the risk is acceptable, and how to decide for a specific file.',
+    description: 'What happens to a document you upload to a free PDF site, what deletion policies really promise, and how to decide whether uploading a specific file is safe.',
     h1: 'Is It Safe to Upload a PDF to an Online Tool?',
     published: '2026-08-22T18:54:59+05:30',
     readTime: '7 min read',
@@ -362,7 +362,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/redact-pdf-properly': {
     route: '/blog/redact-pdf-properly',
     title: 'Why Blacking Out Text in a PDF Does Not Redact It | FilePilot',
-    description: 'Drawing a black rectangle over text leaves the text in the file, fully selectable and searchable. How PDF redaction actually fails, the cases where it went public, and how to remove text rather than hide it.',
+    description: 'A black box over text leaves the text in the PDF, still selectable and searchable. How redaction fails, real cases where it did, and how to remove text safely.',
     h1: 'Why Blacking Out Text in a PDF Does Not Redact It',
     published: '2026-08-22T18:54:59+05:30',
     readTime: '7 min read',
@@ -428,7 +428,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/resize-image-for-online-forms': {
     route: '/blog/resize-image-for-online-forms',
     title: 'Why Online Forms Reject Your Photo (and How to Fix It) | FilePilot',
-    description: 'Government, exam and visa portals reject photos for size, dimensions, format and aspect ratio. What each error message actually means, why the KB limits exist, and how to hit the exact spec.',
+    description: 'Government, exam and visa portals reject photos over size, dimensions or format. What each error means, why KB limits exist and how to hit the exact spec.',
     h1: 'Why Online Forms Reject Your Photo, and How to Fix It',
     published: '2026-08-22T18:54:59+05:30',
     readTime: '7 min read',
@@ -482,7 +482,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/what-exif-data-reveals': {
     route: '/blog/what-exif-data-reveals',
     title: 'What EXIF Data Reveals About Your Photos | FilePilot',
-    description: 'Photos carry GPS coordinates, timestamps, device serial numbers and more. What is actually stored, which platforms strip it and which do not, and how to remove it before sharing.',
+    description: 'Photos can carry GPS coordinates, timestamps and device serial numbers. What EXIF stores, which platforms strip it, and how to remove it before you share.',
     h1: 'What EXIF Data Reveals About Your Photos',
     published: '2026-08-22T18:54:59+05:30',
     readTime: '6 min read',
@@ -538,7 +538,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/combine-scanned-pages-into-one-pdf': {
     route: '/blog/combine-scanned-pages-into-one-pdf',
     title: 'How to Combine Scanned Pages Into One PDF | FilePilot',
-    description: 'Scanners produce one file per page, in the wrong order, sometimes crooked and always too large. How to get from a folder of scans to a single clean PDF without uploading anything.',
+    description: 'Scanners give you one file per page, out of order and too large. How to turn a folder of scans into one clean, ordered PDF without uploading anything.',
     h1: 'How to Combine Scanned Pages Into One PDF',
     published: '2026-08-22T18:54:59+05:30',
     readTime: '6 min read',
@@ -651,7 +651,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/pdf-comics-to-cbz': {
     route: '/blog/pdf-comics-to-cbz',
     title: 'PDF or CBZ for Comics and Manga? | FilePilot',
-    description: 'Why comic readers prefer CBZ over PDF, what the format actually is, when converting helps and when it does not, and how page order and naming decide whether the result works.',
+    description: 'Why comic readers prefer CBZ over PDF, what the format actually is, when converting helps, and how page naming decides whether the result reads in order.',
     h1: 'PDF or CBZ for Comics and Manga?',
     published: '2026-08-22T18:54:59+05:30',
     readTime: '6 min read',
@@ -710,7 +710,7 @@ export const blogPosts: Record<string, BlogPost> = {
   '/blog/print-multiple-pdf-pages-per-sheet': {
     route: '/blog/print-multiple-pdf-pages-per-sheet',
     title: 'Printing Multiple PDF Pages Per Sheet, Explained | FilePilot',
-    description: 'N-up printing, booklet imposition and poster tiling are three different things that print dialogs handle badly. What each one does, when to use it, and how to get a predictable result.',
+    description: 'N-up printing, booklet imposition and poster tiling explained: what each one does, when to use it, and how to get predictable results from any printer.',
     h1: 'Printing Multiple PDF Pages Per Sheet, Explained',
     published: '2026-08-22T18:54:59+05:30',
     readTime: '6 min read',

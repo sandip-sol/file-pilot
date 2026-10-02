@@ -46,7 +46,7 @@ export const RedactPdf = () => {
         nextPreviews.push(await renderPdfPagePreview(pdf, pageNumber, 0.5));
       }
       setPreviews(nextPreviews);
-      setStatus('Draw boxes over the preview to mark visual redactions.');
+      setStatus('Draw boxes over the preview to mark content for removal.');
     } catch (caughtError) {
       console.error(caughtError);
       setError('Could not load this PDF for redaction.');
@@ -98,12 +98,12 @@ export const RedactPdf = () => {
 
     setIsExporting(true);
     setError(null);
-    setStatus('Burning redactions into the PDF...');
+    setStatus('Removing redacted content...');
 
     try {
-      const bytes = await applyRedactionsToPdf(file, items);
+      const bytes = await applyRedactionsToPdf(file, items, setStatus);
       downloadBytes(bytes, `${file.name.replace(/\.pdf$/i, '')}-redacted.pdf`, 'application/pdf');
-      setStatus('Redacted PDF ready. These redactions are visual burn-ins, not full content-stream removal.');
+      setStatus('Redacted PDF ready. Content under each box has been removed, not just covered.');
     } catch (caughtError) {
       console.error(caughtError);
       setError('Could not export the redacted PDF.');
@@ -125,7 +125,7 @@ export const RedactPdf = () => {
             </div>
           </div>
           <h1>Redact PDF</h1>
-          <p>Draw redaction boxes directly on the page preview and export a visual burn-in copy without uploading your file.</p>
+          <p>Draw boxes over sensitive content and download a PDF where it is permanently removed, not just covered. Your file never leaves your browser.</p>
         </div>
       </div>
 
@@ -138,7 +138,7 @@ export const RedactPdf = () => {
             <div className="mt-6 rounded-2xl border border-border bg-background p-4 text-sm">
               <p className="font-medium text-foreground">Privacy note</p>
               <p className="mt-2 text-muted-foreground">
-                This MVP exports visual burn-in redactions. It masks page appearance, but it does not rewrite every hidden PDF content stream.
+                Pages with redactions are flattened into images, so the text, graphics and comments under each box are destroyed and cannot be copied, searched or recovered. Text on those pages is no longer selectable; pages without redactions stay unchanged. Document metadata and bookmarks are not carried over.
               </p>
             </div>
 
@@ -152,7 +152,7 @@ export const RedactPdf = () => {
             </div>
 
             {status ? <div className="mt-5 rounded-xl bg-muted p-3 text-sm text-muted-foreground">{status}</div> : null}
-            {error ? <div className="mt-5 rounded-xl bg-[var(--error-light)] p-3 text-sm text-[var(--error)]">{error}</div> : null}
+            {error ? <div role="alert" className="mt-5 rounded-xl bg-[var(--error-light)] p-3 text-sm text-[var(--error)]">{error}</div> : null}
 
             <button type="button" className="btn btn-primary mt-6 w-full" onClick={exportPdf} disabled={!file || items.length === 0 || isExporting}>
               {isExporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}

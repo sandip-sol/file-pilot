@@ -115,16 +115,16 @@ const BLOG_ROUTE_SEO = Object.fromEntries(
 const INDEXABLE_ALIAS_ROUTE_SEO = {
   '/jpg-to-pdf': {
     title: 'JPG to PDF Online - Free and Private | FilePilot',
-    description:
-      'Convert JPG and JPEG photos into a PDF in your browser. Arrange images, choose page size, and download privately without uploads.',
+    // Same source as the client's PageSeo, so prerendered and hydrated meta agree.
+    description: toolContent['/jpg-to-pdf'].seoDescription,
     h1: 'JPG to PDF Online',
     changefreq: 'monthly',
     priority: '0.8',
   },
   '/pdf-to-jpg': {
     title: 'PDF to JPG Online - Free and Private | FilePilot',
-    description:
-      'Convert PDF pages to JPG images locally in your browser with DPI and quality controls. Download pages as a private ZIP file.',
+    // Same source as the client's PageSeo, so prerendered and hydrated meta agree.
+    description: toolContent['/pdf-to-jpg'].seoDescription,
     h1: 'PDF to JPG Online',
     changefreq: 'monthly',
     priority: '0.8',

@@ -83,28 +83,56 @@ const pdfColor = (hex: string, alpha = 1) => {
   };
 };
 
-export const applyRedactionsToPdf = async (file: File, items: RedactionItem[]): Promise<Uint8Array> => {
-  const pdf = await PDFDocument.load(await file.arrayBuffer());
+// Redacted pages are rendered to images with the boxes painted in, so the text,
+// vector content and annotations under each box are destroyed rather than
+// covered. Output is a fresh document: pdf-lib saves every object in a loaded
+// file, even unreferenced ones, so replacing pages in the original would leave
+// the hidden content in the bytes. Unredacted pages are copied unchanged.
+const REDACTION_RENDER_SCALE = 2;
 
-  items.forEach((item) => {
-    const page = pdf.getPage(item.pageNumber - 1);
-    if (!page) return;
-    const x = item.rect.x * page.getWidth();
-    const y = item.rect.y * page.getHeight();
-    const width = item.rect.width * page.getWidth();
-    const height = item.rect.height * page.getHeight();
-    page.drawRectangle({
-      x,
-      y: page.getHeight() - y - height,
-      width,
-      height,
-      color: rgb(0, 0, 0),
-      opacity: 1,
-      borderWidth: 0,
-    });
-  });
+export const applyRedactionsToPdf = async (
+  file: File,
+  items: RedactionItem[],
+  onProgress?: (message: string) => void,
+): Promise<Uint8Array> => {
+  const source = await PDFDocument.load(await file.arrayBuffer());
+  const { pdf: renderDoc } = await openPdfDocument(file);
+  const output = await PDFDocument.create();
+  const pageCount = source.getPageCount();
 
-  return pdf.save();
+  for (let pageNumber = 1; pageNumber <= pageCount; pageNumber += 1) {
+    const pageItems = items.filter((item) => item.pageNumber === pageNumber);
+
+    if (pageItems.length === 0) {
+      const [copied] = await output.copyPages(source, [pageNumber - 1]);
+      output.addPage(copied);
+      continue;
+    }
+
+    onProgress?.(`Redacting page ${pageNumber}/${pageCount}...`);
+    // Rects are relative to the displayed (rotated) preview, which is exactly
+    // the space pdf.js renders into, so rotated pages need no extra mapping.
+    const canvas = await renderPdfPageToCanvas(renderDoc, pageNumber, REDACTION_RENDER_SCALE);
+    const context = canvas.getContext('2d');
+    if (!context) throw new Error('Canvas context not available');
+    for (const item of pageItems) {
+      context.fillStyle = item.color || '#000000';
+      context.fillRect(
+        Math.floor(item.rect.x * canvas.width),
+        Math.floor(item.rect.y * canvas.height),
+        Math.ceil(item.rect.width * canvas.width) + 1,
+        Math.ceil(item.rect.height * canvas.height) + 1,
+      );
+    }
+
+    const pngBytes = await (await canvasToBlob(canvas, 'image/png')).arrayBuffer();
+    const image = await output.embedPng(pngBytes);
+    const { width, height } = (await renderDoc.getPage(pageNumber)).getViewport({ scale: 1 });
+    const page = output.addPage([width, height]);
+    page.drawImage(image, { x: 0, y: 0, width, height });
+  }
+
+  return output.save();
 };
 
 export const applyAnnotationsToPdf = async (file: File, items: AnnotationItem[]): Promise<Uint8Array> => {

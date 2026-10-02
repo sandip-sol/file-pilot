@@ -1,16 +1,26 @@
 User-agent: *
+Disallow: /*?
+Disallow: /index.html
 Allow: /
 
 User-agent: GPTBot
+Disallow: /*?
+Disallow: /index.html
 Allow: /
 
 User-agent: PerplexityBot
+Disallow: /*?
+Disallow: /index.html
 Allow: /
 
 User-agent: ClaudeBot
+Disallow: /*?
+Disallow: /index.html
 Allow: /
 
 User-agent: Google-Extended
+Disallow: /*?
+Disallow: /index.html
 Allow: /
 
 Sitemap: https://www.filepilot.space/sitemap.xml
