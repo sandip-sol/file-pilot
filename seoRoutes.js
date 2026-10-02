@@ -99,7 +99,17 @@ const CORE_ROUTE_SEO = {
 };
 
 const BLOG_ROUTE_SEO = Object.fromEntries(
-  allBlogRoutes.map((route) => [route, { ...fromSiteContent(route), changefreq: 'yearly', priority: '0.5' }]),
+  allBlogRoutes.map((route) => [route, {
+    ...fromSiteContent(route),
+    // The author-declared revision date is the same value BlogPosting emits as
+    // dateModified. Both have to read it or the sitemap advertises a change date
+    // the page itself contradicts — which is the one thing lastmod and
+    // dateModified must never do. Posts without `updated` fall through to the
+    // git-derived date in getSitemapEntries, which is what the article node uses too.
+    ...(blogPosts[route].updated ? { lastmod: blogPosts[route].updated } : {}),
+    changefreq: 'yearly',
+    priority: '0.5',
+  }]),
 );
 
 const INDEXABLE_ALIAS_ROUTE_SEO = {
