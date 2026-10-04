@@ -1681,57 +1681,67 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/flatten-pdf': {
     intro:
-      'Flatten PDF converts interactive form fields, annotations, and comments into static page content. The visual appearance is preserved exactly, but the interactive elements become uneditable — like printing the document to a new PDF. This ensures the document looks the same everywhere and prevents further modifications.',
+      'Flatten PDF converts interactive form fields — text boxes, checkboxes, radio buttons and dropdowns — into static page content. The filled-in values look exactly the same, but the fields themselves are gone, so the answers can no longer be changed or cleared. Use it to finalise a completed form before you send, submit or archive it.',
     action: 'flatten a PDF',
     steps: [
-      'Upload the PDF with forms, annotations, or interactive elements.',
-      'The tool flattens all interactive content into static page images.',
-      'Download the flattened, non-editable PDF.',
+      'Upload the PDF form you have filled in.',
+      'The tool merges every form field and its value into the page content.',
+      'Download the flattened PDF, whose answers can no longer be edited.',
     ],
     useCases: [
       'Lock filled-in forms so responses can\'t be altered after submission.',
-      'Flatten annotations to preserve reviewer comments in the final document.',
-      'Prepare PDFs for archival where interactive elements could cause display issues.',
+      'Make sure form answers print and display in viewers that ignore form fields.',
+      'Prepare completed forms for archival where interactive fields could cause display issues.',
       'Ensure consistent rendering across different PDF viewers.',
     ],
-    seoTitle: 'Flatten PDF – Make Forms & Annotations Non-Editable',
+    seoTitle: 'Flatten PDF – Make Form Fields Non-Editable',
     seoDescription:
-      'Flatten PDF form fields, annotations and layers into static page content so nothing can be edited afterwards. Free browser-based tool, no uploads or signup.',
+      'Flatten PDF form fields into static page content so filled-in answers can no longer be edited. Free browser-based tool, no Adobe, uploads or signup needed.',
     faqs: [
       {
-        question: 'What does flattening a PDF actually do?',
+        question: 'What does it mean to flatten a PDF?',
         answer:
-          'Flattening merges interactive layers — form fields, annotations, stamps and comments — into the page content itself. The document looks identical, but the elements become part of the page rather than separate objects that can be clicked or edited.',
+          'Flattening turns interactive form fields into ordinary page content. A normal fillable PDF stores each answer in a separate field you can click and retype; a flattened PDF shows the same answers, but they are part of the page and the fields no longer exist.',
+      },
+      {
+        question: 'How do I flatten a PDF for free without Adobe?',
+        answer:
+          'Open this tool in any browser, select your PDF and click Flatten & Download. It is free, needs no Acrobat licence, account or install, and the file is processed on your device rather than uploaded to a server.',
       },
       {
         question: 'How do I make a filled PDF form non-editable?',
         answer:
-          'Upload the completed form and flatten it. The entered values are painted onto the page and the fields disappear, so the answers can still be read but no longer changed or cleared.',
+          'Flatten it after filling it in. The entered values are drawn onto the page and the fields are removed, so the answers can still be read and printed but no longer changed in a PDF reader. Keep the original if you may need to edit the form again — flattening cannot be undone.',
       },
       {
-        question: 'Is flattening a PDF the same as password-protecting it?',
+        question: 'Does this flatten comments and highlights too?',
         answer:
-          'No, and the distinction matters. Flattening removes editable elements but the file is still open — anyone can view it. A password restricts who can open or modify the document. Use the PDF Security tool for access control, and flatten for locking in content.',
+          'No. This tool flattens form fields only. Comments, sticky notes and highlights stay as separate annotations, exactly as they were in the original file.',
       },
       {
-        question: 'Can a flattened PDF be un-flattened?',
+        question: 'Does flattening a PDF reduce quality?',
         answer:
-          'Not in any practical sense. Once fields and annotations are merged into the page, the interactive structure is gone. Always keep the original if you may need to edit the form again.',
+          'No. Nothing is converted to an image. Page text, vector graphics and embedded images are kept as they are, and field values are drawn as text, so the flattened file stays sharp at any zoom level.',
       },
       {
-        question: 'Does flattening keep text selectable?',
+        question: 'Does flattening a PDF change the file size, and is it the same as compressing?',
         answer:
-          'Existing page text stays selectable and searchable. Content that came from form fields and annotations is rendered into the page, so it may no longer behave as separate selectable text.',
+          'Flattening usually changes the size very little — field definitions are removed while their values become page content. It is not compression. To make a PDF smaller, use the Compress PDF tool; flatten first if the file is a filled form you also want locked.',
       },
       {
-        question: 'Why do my annotations disappear in some PDF readers?',
+        question: 'Should I flatten a PDF resume?',
         answer:
-          'Annotation support varies between viewers, and some mobile or browser readers ignore certain types entirely. Flattening makes comments and highlights part of the page, guaranteeing they render the same way everywhere — a common reason to flatten before sharing.',
+          'Only if it contains fillable form fields, which most resumes do not. Flattening leaves normal page text selectable and searchable, so applicant tracking systems can still read it — but on a resume with no fields it simply has nothing to change.',
+      },
+      {
+        question: 'Is flattening a PDF the same as locking or password-protecting it?',
+        answer:
+          'No. Flattening stops form answers being changed in a reader, but anyone can still open the file and a full PDF editor can still alter page content. A password controls who can open or modify the document. Use the PDF Security tool for that, and flatten to lock in form answers.',
       },
     ],
     comparison: {
       heading: 'When to flatten vs when to password-protect',
-      body: 'These solve different problems and are often confused. Flatten when the content must stay exactly as it is: a signed form heading to a client, an annotated review copy, or an archival document that has to render identically in every reader for years. Password-protect when the issue is who may open or change the file at all. Flattening does not stop anyone reading the document, and a password does not stop someone with access from editing form fields — so for a completed contract that is both confidential and final, do both: flatten first to lock the content, then apply protection with the PDF Security tool.',
+      body: 'These solve different problems and are often confused. Flatten when the content must stay exactly as it is: a signed form heading to a client, a completed application, or an archival document that has to render identically in every reader for years. Password-protect when the issue is who may open or change the file at all. Flattening does not stop anyone reading the document, and a password does not stop someone with access from editing form fields — so for a completed contract that is both confidential and final, do both: flatten first to lock the content, then apply protection with the PDF Security tool.',
     },
   },
   '/remove-metadata': {
@@ -1906,6 +1916,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       { question: 'How do I reduce an image file size to a specific KB limit?', answer: 'Enter your target limit (for example 20KB, 50KB, 100KB or 2MB) in the Max File Size field. The tool compresses towards that size while keeping the best quality it can within the limit.' },
       { question: 'Which format should I choose: JPG, PNG, or WebP?', answer: 'JPG is best for photos and small file sizes. PNG is best for graphics with text or transparent backgrounds. WebP offers the best balance of quality and compression for web use.' },
       { question: 'Is this safe for passport photos and ID documents?', answer: 'Yes. FilePilot processes your image entirely within your browser, so passport photos, signatures and ID scans are never uploaded to a server or seen by anyone else.' },
+      { question: 'How do I make a 50 KB passport size photo?', answer: 'Enter the pixel size your application asks for (or pick a preset), type 50 in the Max File Size field, choose JPG and download. The tool resizes the photo and lowers JPG quality step by step until the file is under 50 KB.' },
+      { question: 'How do I get a passport photo under 100 KB or 240 KB?', answer: 'Use the ID & Passport presets, which set 600×600 px JPG with a 100 KB, 200 KB or 240 KB limit, or enter your own numbers. To check face position and background rules as well, run the result through the Passport Photo Validator.' },
+      { question: 'Why can\'t I get my image under 50 KB?', answer: 'The tool will not drop JPG or WebP quality below 35%, because the photo becomes visibly blocky and is likely to be rejected. If the limit still is not met, reduce the width and height — fewer pixels is the most effective way to cut KB — or use WebP if the form accepts it.' },
+      { question: 'How do I make a photo larger than a minimum KB size?', answer: 'Some portals set a minimum as well as a maximum. Output starts at 90% JPG quality, so if the file comes out too small, increase the pixel dimensions or choose PNG, which stores more data per image.' },
       { question: 'Can I resize images for Instagram, LinkedIn, or X?', answer: 'Yes. Use the Quick Presets to select the correct dimensions for social media posts, profile pictures and banners across the major platforms.' },
     ],
     comparison: {
@@ -2302,14 +2316,24 @@ export const toolContent: Record<string, ToolContentEntry> = {
           'EXIF is information your camera or phone embeds in each photo: GPS coordinates, date and time, device model, and exposure settings. Shared as-is, a holiday photo can reveal your home address and the exact device that took it — which is why stripping it before publishing is worth the few seconds it takes.',
       },
       {
-        question: 'How do I remove GPS location from a photo?',
+        question: 'How do I remove metadata from a photo?',
         answer:
-          'Upload the image and the tool shows the embedded metadata, including any GPS coordinates, then produces a clean copy with those tags removed while leaving the picture itself untouched.',
+          'Select one or more photos, check the metadata the tool finds (GPS, camera, date, software), choose JPG, PNG or WebP and click remove. Each photo is redrawn from its pixels into a new file, so the EXIF, GPS and camera tags are not carried across.',
+      },
+      {
+        question: 'How do I delete metadata from iPhone photos?',
+        answer:
+          'Open this page in Safari on your iPhone, choose the photos from your library and download the cleaned copies. If you only need to drop location, the iOS share sheet also has an Options toggle for Location — but that leaves the date, device and other camera details in place.',
+      },
+      {
+        question: 'Can I completely remove all metadata from a photo?',
+        answer:
+          'Yes. Instead of deleting tags one by one, the tool rebuilds the image from its pixels, so EXIF, GPS, camera, date and software fields are left out of the new file. The embedded colour profile is dropped too, which can shift colours very slightly on some photos.',
       },
       {
         question: 'Does removing metadata change image quality?',
         answer:
-          'No. Metadata is stored in tags alongside the pixels, so removing it leaves the image data bit-for-bit intact. There is no recompression and no visible change — just a slightly smaller file.',
+          'Saving as PNG is lossless. JPG and WebP are re-encoded, at 92% quality by default, which is visually indistinguishable for almost every photo; raise the quality slider to 100% if you want the closest possible copy.',
       },
       {
         question: 'Do social media sites already strip EXIF for me?',
@@ -2317,9 +2341,9 @@ export const toolContent: Record<string, ToolContentEntry> = {
           'Most large platforms strip EXIF on upload, but you cannot rely on it. The photo is still transmitted with its location intact and stored on their servers, and plenty of forums, marketplaces, blog platforms and messaging apps pass the original file straight through.',
       },
       {
-        question: 'Can I clean several photos at once?',
+        question: 'Is there a free tool that can remove image metadata?',
         answer:
-          'Yes. Multiple images can be processed in a single batch, which is the practical way to clean an entire album before publishing it.',
+          'Yes — this one is free with no signup or watermark. You can clean several photos in one batch and download them individually or as a single ZIP.',
       },
       {
         question: 'Is it safe to upload private photos to a metadata remover?',

@@ -77,66 +77,6 @@ export const ImageRequirements = () => {
         return () => revokeUrls();
     }, [revokeUrls]);
 
-    /* ── SEO JSON-LD ── */
-    useEffect(() => {
-        const schema = {
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "WebApplication",
-                    "name": "Image Formatter",
-                    "url": "https://www.filepilot.space/image-requirements",
-                    "description": "Resize image to exact pixels, reduce file size to KB limit, and convert formats locally in browser.",
-                    "applicationCategory": "ImageEditor",
-                    "operatingSystem": "Any",
-                    "offers": {
-                        "@type": "Offer",
-                        "price": "0",
-                        "priceCurrency": "USD"
-                    }
-                },
-                {
-                    "@type": "FAQPage",
-                    "mainEntity": [
-                        {
-                            "@type": "Question",
-                            "name": "How to resize an image to specific pixel dimensions?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Upload your image, enter the exact width and height in pixels (e.g., 600x600), and download. The tool automatically resizes it."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "How to reduce image file size to 100KB?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Set the 'Max File Size' field to 100 KB. The tool will adjust quality to ensure the file stays under this limit."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "Is my image uploaded to a server?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "No. All processing happens locally in your browser. Your photos never leave your device, ensuring 100% privacy."
-                            }
-                        }
-                    ]
-                }
-            ]
-        };
-
-        const script = document.createElement('script');
-        script.type = "application/ld+json";
-        script.text = JSON.stringify(schema);
-        document.head.appendChild(script);
-
-        return () => {
-            document.head.removeChild(script);
-        };
-    }, []);
-
     /* ── preset selected ── */
     const handlePresetSelect = (preset: ImagePreset) => {
         setActivePreset(preset);
