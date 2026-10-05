@@ -52,13 +52,20 @@ export const DotGrid = () => {
     resize();
     window.addEventListener('resize', resize);
 
+    // Assigned once the drawing functions below exist.
+    let scheduleTrail = () => {};
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     function onMouseMove(e: MouseEvent) {
       const pos = { x: e.clientX, y: e.clientY };
 
-      const history = mouseHistory.current;
-      history.push(pos);
-      if (history.length > TRAIL_LENGTH) {
-        history.shift();
+      if (!reduceMotion) {
+        const history = mouseHistory.current;
+        history.push(pos);
+        if (history.length > TRAIL_LENGTH) {
+          history.shift();
+        }
+        scheduleTrail();
       }
 
       cursorEl!.style.transform = `translate(${pos.x - CURSOR_SIZE / 2}px, ${pos.y - CURSOR_SIZE / 2}px)`;
@@ -79,83 +86,149 @@ export const DotGrid = () => {
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
 
-    let dotColor = getCssHsl('--dot-color', '0 0% 48%');
-    let opIdle = getCssFloat('--dot-opacity-idle', 0.10);
-    let opHover = getCssFloat('--dot-opacity-hover', 0.22);
-    let rIdle = getCssFloat('--dot-radius-idle', 1);
-    let rHover = getCssFloat('--dot-radius-hover', 2.2);
-    let frameCount = 0;
+    let dotColor = '';
+    let opIdle = 0;
+    let opHover = 0;
+    let rIdle = 0;
+    let rHover = 0;
 
-    function draw() {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      ctx.clearRect(0, 0, w, h);
+    function readTheme() {
+      dotColor = getCssHsl('--dot-color', '0 0% 48%');
+      opIdle = getCssFloat('--dot-opacity-idle', 0.10);
+      opHover = getCssFloat('--dot-opacity-hover', 0.22);
+      rIdle = getCssFloat('--dot-radius-idle', 1);
+      rHover = getCssFloat('--dot-radius-hover', 2.2);
+    }
 
-      if (frameCount % 60 === 0) {
-        dotColor = getCssHsl('--dot-color', '0 0% 48%');
-        opIdle = getCssFloat('--dot-opacity-idle', 0.10);
-        opHover = getCssFloat('--dot-opacity-hover', 0.22);
-        rIdle = getCssFloat('--dot-radius-idle', 1);
-        rHover = getCssFloat('--dot-radius-hover', 2.2);
-      }
-      frameCount++;
-
+    /**
+     * Redraw only the dots inside [x0, x1] × [y0, y1].
+     *
+     * This used to repaint the whole grid on every animation frame, forever —
+     * ~5,000 arcs per frame on a laptop and 30,000+ on a 4K screen, with the
+     * mouse still or on a phone that has no mouse at all. Measured with the
+     * page untouched, that kept the main thread busy ~80% of the time, which
+     * is what made scrolling and clicks feel sluggish. Now the full grid is
+     * painted once, and pointer movement repaints only the area around the
+     * old and new trail.
+     */
+    function drawRegion(x0: number, y0: number, x1: number, y1: number) {
       const history = mouseHistory.current;
-      const weights: number[] = [];
       const totalPositions = history.length;
-
+      const weights: number[] = [];
       if (totalPositions > 0) {
         let weightSum = 0;
         for (let i = 0; i < totalPositions; i++) {
-          const wt = (i + 1) / totalPositions;
-          weights.push(wt);
-          weightSum += wt;
+          weights.push(i + 1);
+          weightSum += i + 1;
         }
-        for (let i = 0; i < weights.length; i++) {
-          weights[i] /= weightSum;
-        }
+        for (let i = 0; i < totalPositions; i++) weights[i] /= weightSum;
       }
 
-      for (let row = 0; row < rows; row++) {
+      const colStart = Math.max(0, Math.floor(x0 / SPACING));
+      const colEnd = Math.min(cols - 1, Math.ceil(x1 / SPACING));
+      const rowStart = Math.max(0, Math.floor(y0 / SPACING));
+      const rowEnd = Math.min(rows - 1, Math.ceil(y1 / SPACING));
+
+      // Clear to the midpoints between dots so neighbours outside the region
+      // are never clipped.
+      const half = SPACING / 2;
+      ctx.clearRect(colStart * SPACING - half, rowStart * SPACING - half, (colEnd - colStart + 1) * SPACING, (rowEnd - rowStart + 1) * SPACING);
+      ctx.fillStyle = `hsl(${dotColor})`;
+
+      // Unaffected dots share one style, so they go out as a single path.
+      ctx.globalAlpha = opIdle;
+      ctx.beginPath();
+      const highlighted: [number, number, number][] = [];
+      for (let row = rowStart; row <= rowEnd; row++) {
         const dy = row * SPACING;
-        for (let col = 0; col < cols; col++) {
+        for (let col = colStart; col <= colEnd; col++) {
           const dx = col * SPACING;
 
           let influence = 0;
-
           for (let i = 0; i < totalPositions; i++) {
             const p = history[i];
             const distX = dx - p.x;
             const distY = dy - p.y;
             const distSq = distX * distX + distY * distY;
-
             if (distSq < EFFECT_RADIUS_SQ) {
-              const dist = Math.sqrt(distSq);
-              const t = 1 - dist / EFFECT_RADIUS;
-              influence += easeOut(t) * weights[i];
+              influence += easeOut(1 - Math.sqrt(distSq) / EFFECT_RADIUS) * weights[i];
             }
           }
 
-          if (influence > 1) influence = 1;
-
-          const radius = rIdle + (rHover - rIdle) * influence;
-          const opacity = opIdle + (opHover - opIdle) * influence;
-
-          ctx.beginPath();
-          ctx.arc(dx, dy, radius, 0, Math.PI * 2);
-          ctx.fillStyle = `hsl(${dotColor} / ${opacity})`;
-          ctx.fill();
+          if (influence > 0) {
+            highlighted.push([dx, dy, influence > 1 ? 1 : influence]);
+          } else {
+            ctx.moveTo(dx + rIdle, dy);
+            ctx.arc(dx, dy, rIdle, 0, Math.PI * 2);
+          }
         }
       }
+      ctx.fill();
 
-      rafId.current = requestAnimationFrame(draw);
+      for (const [dx, dy, influence] of highlighted) {
+        ctx.globalAlpha = opIdle + (opHover - opIdle) * influence;
+        ctx.beginPath();
+        ctx.arc(dx, dy, rIdle + (rHover - rIdle) * influence, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
     }
 
-    rafId.current = requestAnimationFrame(draw);
+    function drawAll() {
+      drawRegion(0, 0, window.innerWidth, window.innerHeight);
+    }
+
+    // Bounding box of the trail as last painted, so the next frame can erase it.
+    let paintedBox: [number, number, number, number] | null = null;
+
+    function trailBox(): [number, number, number, number] | null {
+      const history = mouseHistory.current;
+      if (history.length === 0) return null;
+      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      for (const p of history) {
+        x0 = Math.min(x0, p.x); y0 = Math.min(y0, p.y);
+        x1 = Math.max(x1, p.x); y1 = Math.max(y1, p.y);
+      }
+      return [x0 - EFFECT_RADIUS, y0 - EFFECT_RADIUS, x1 + EFFECT_RADIUS, y1 + EFFECT_RADIUS];
+    }
+
+    function drawTrail() {
+      rafId.current = 0;
+      const box = trailBox();
+      const parts = [paintedBox, box].filter((b): b is [number, number, number, number] => b !== null);
+      if (parts.length === 0) return;
+      drawRegion(
+        Math.min(...parts.map((b) => b[0])),
+        Math.min(...parts.map((b) => b[1])),
+        Math.max(...parts.map((b) => b[2])),
+        Math.max(...parts.map((b) => b[3])),
+      );
+      paintedBox = box;
+    }
+
+    // At most one repaint per frame, and only after the pointer moved.
+    scheduleTrail = () => {
+      if (!rafId.current) rafId.current = requestAnimationFrame(drawTrail);
+    };
+
+    function redrawEverything() {
+      readTheme();
+      drawAll();
+      paintedBox = trailBox();
+    }
+
+    redrawEverything();
+    window.addEventListener('resize', redrawEverything);
+
+    // Theme variables change with the `dark` class on <html>.
+    const themeObserver = new MutationObserver(redrawEverything);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style'] });
 
     return () => {
       cancelAnimationFrame(rafId.current);
+      themeObserver.disconnect();
       window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', redrawEverything);
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseleave', onMouseLeave);
       document.removeEventListener('mouseenter', onMouseEnter);
