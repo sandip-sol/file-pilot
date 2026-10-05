@@ -30,6 +30,11 @@ export default defineConfig({
    * code. Re-introducing manualChunks needs a measurement, not an intuition —
    * `npm run seo:budget` will fail the build if the homepage regresses.
    */
+  build: {
+    // Read by prerender.js to add <link rel="modulepreload"> for each route's
+    // own chunks, so they download alongside the entry instead of after it.
+    manifest: true,
+  },
   optimizeDeps: {
     exclude: ['onnxruntime-web'],
   },

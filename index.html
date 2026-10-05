@@ -3,13 +3,32 @@
 
 <head>
   <meta charset="UTF-8" />
+  <!-- Google Search needs a square favicon that is a multiple of 48px; it
+       ignores the SVG on its own, so the ICO/PNG come first. -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f0f0f" />
   <meta name="robots" content="index, follow" />
   <meta name="google-site-verification" content="Zn9lK4NilFr0noUhveQ199yS3XWOxf1VUQ7FvYJKzDQ" />
+
+  <!-- The prerendered #root content is on screen until the app mounts. Without
+       this it showed as an unstyled wall of text, which reads as a broken page. -->
+  <style>
+    .static-seo { max-width: 56rem; margin: 0 auto; padding: 2.5rem 1rem 4rem; line-height: 1.65; color: hsl(var(--muted-foreground)); }
+    .static-seo h1 { font-size: 2rem; line-height: 1.2; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 1rem; }
+    .static-seo h2 { font-size: 1.25rem; font-weight: 700; color: hsl(var(--foreground)); margin: 2rem 0 .75rem; }
+    .static-seo p { margin-bottom: .75rem; }
+    .static-seo ul, .static-seo ol { margin: 0 0 1rem 1.25rem; list-style: disc; }
+    .static-seo ol { list-style: decimal; }
+    .static-seo ul:has(> li > a:only-child) { display: flex; flex-wrap: wrap; gap: .5rem; margin-left: 0; list-style: none; }
+    .static-seo ul:has(> li > a:only-child) > li { border: 1px solid hsl(var(--border)); border-radius: .5rem; padding: .25rem .75rem; }
+    .static-seo a { color: hsl(var(--foreground)); text-decoration: none; }
+    .static-seo strong { color: hsl(var(--foreground)); }
+  </style>
 
   <!-- SEO Meta Tags -->
   <title>FilePilot - PDF, Image and File Tools</title>

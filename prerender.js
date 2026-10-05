@@ -62,6 +62,63 @@ const shouldRenderBingVerification =
   Boolean(process.env.BING_SITE_VERIFICATION) &&
   (process.env.CONTEXT === 'production' || process.env.ALLOW_BING_VERIFICATION_IN_NON_PRODUCTION === 'true');
 
+/**
+ * Route → chunk preloads.
+ *
+ * Every page component is `lazy()`-loaded, so without a hint the browser
+ * cannot discover a page's chunk until the entry script has downloaded,
+ * parsed and rendered — a full extra round trip before anything but the
+ * static SEO block is on screen. Measured on the live homepage the route
+ * chunks started ~1.1s after the entry did. A `modulepreload` per chunk lets
+ * them download in parallel with the entry.
+ *
+ * Only static `imports` are followed: engines a tool loads on demand (OCR,
+ * ONNX, HEIC) stay on demand.
+ */
+const VITE_MANIFEST = join(DIST, '.vite', 'manifest.json');
+const viteManifest = existsSync(VITE_MANIFEST) ? JSON.parse(readFileSync(VITE_MANIFEST, 'utf8')) : null;
+
+function routeComponentSources() {
+  const app = readFileSync(join(__dirname, 'src', 'App.tsx'), 'utf8');
+  const componentFile = new Map();
+  for (const [, name, file] of app.matchAll(/const\s+(\w+)\s*=\s*lazy\(\s*\(\)\s*=>\s*import\(\s*'\.\/([^']+)'/g)) {
+    const source = ['.tsx', '.ts'].map((ext) => `src/${file}${ext}`).find((candidate) => viteManifest?.[candidate]);
+    if (source) componentFile.set(name, source);
+  }
+  const routes = new Map();
+  for (const [, path, name] of app.matchAll(/<Route\s+path="([^"]+)"\s+element=\{<(\w+)/g)) {
+    if (componentFile.has(name)) routes.set(path, componentFile.get(name));
+  }
+  return routes;
+}
+
+const ROUTE_SOURCES = viteManifest ? routeComponentSources() : new Map();
+
+function collectChunks(key, seen) {
+  const chunk = viteManifest[key];
+  if (!chunk || seen.has(key)) return;
+  seen.add(key);
+  for (const dep of chunk.imports ?? []) collectChunks(dep, seen);
+}
+
+function routePreloads(route) {
+  if (!viteManifest) return [];
+  const sources = [ROUTE_SOURCES.get(route), isToolRoute(route) ? 'src/components/ToolContentSection.tsx' : null]
+    .filter(Boolean);
+  const chunks = new Set();
+  for (const source of ['index.html', ...sources]) collectChunks(source, chunks);
+  chunks.delete('index.html'); // already loaded by its own <script> tag
+  return [...chunks].map((key) => `/${viteManifest[key].file}`);
+}
+
+function withRoutePreloads(html, route) {
+  const links = routePreloads(route)
+    .map((href) => `<link rel="modulepreload" crossorigin href="${href}">`)
+    .join('\n  ');
+  if (!links) return html;
+  return html.replace(/(<script type="module" crossorigin src="[^"]+"><\/script>)/, `$1\n  ${links}`);
+}
+
 function escapeHtml(value) {
   return value
     .replaceAll('&', '&amp;')
@@ -117,7 +174,8 @@ function withRouteSeo(html, route) {
   // now emits that id itself, so stripping it would delete the only structured
   // data on the page.
   nextHtml = nextHtml
-    .replace(/\n?<link\s+rel="modulepreload"[^>]*>/gi, '');
+    .replace(/\n?\s*<link\s+rel="modulepreload"[^>]*>/gi, '');
+  nextHtml = withRoutePreloads(nextHtml, route);
 
   nextHtml = withArticleMeta(nextHtml, route);
   nextHtml = withBingVerification(nextHtml);

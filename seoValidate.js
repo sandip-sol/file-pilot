@@ -280,7 +280,7 @@ function validateRedirects() {
     if (source === '/*' && target === '/index.html' && status === '200') {
       fail('dist/_redirects contains a catch-all SPA rewrite that can intercept crawler files.');
     }
-    if (['/sitemap.xml', '/robots.txt', '/favicon.svg', '/site.webmanifest'].includes(source)) {
+    if (['/sitemap.xml', '/robots.txt', '/favicon.ico', '/favicon.svg', '/site.webmanifest'].includes(source)) {
       fail(`dist/_redirects contains an unnecessary static-file redirect for ${source}.`);
     }
   }
