@@ -57,13 +57,14 @@ const urlForRoute = (route) => canonicalUrlForRoute(route).replace(SITE_URL.repl
  * the deployed HTML is older than the build that passed.
  */
 function schemaProblems(route, html) {
-  const raw = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+  const raw = html.match(/<script\b[^>]*\btype="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)?.[1];
   if (!raw) return ['no JSON-LD on the page'];
 
   let types;
   try {
     const parsed = JSON.parse(raw);
-    types = new Set((parsed['@graph'] ?? [parsed]).map((node) => node['@type']));
+    // flatMap: a node's @type may be an array, e.g. ['SoftwareApplication', 'WebApplication'].
+    types = new Set((parsed['@graph'] ?? [parsed]).flatMap((node) => node['@type']));
   } catch (error) {
     return [`JSON-LD does not parse: ${error.message}`];
   }

@@ -125,7 +125,7 @@ const ObjectRemover = lazy(() => import('./pages/ObjectRemover').then(m => ({ de
 
 // ─── Loading fallback ────────────────────────────────────────────────────────
 const Loader = () => (
-  <main className="container py-16 text-center text-muted-foreground">
+  <main className="container min-h-screen py-16 text-center text-muted-foreground">
     <div className="inline-block w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mb-4" />
     <p>Loading…</p>
   </main>

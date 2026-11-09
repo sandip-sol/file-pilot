@@ -2474,7 +2474,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Identify exact colors from a screenshot or mockup.',
       'Sample colors from an image to match in CSS or design software.',
     ],
-      seoTitle: "Color Picker -",
+      seoTitle: "Color Picker – Pick Colors from Any Image Online",
     seoDescription: "Pick colors from any image and extract palettes, then copy values as HEX, RGB, HSL, CMYK or CSS variables. Free color picker that runs locally in your browser.",
     faqs: [
       { question: "What color formats does the Color Picker support?", answer: "The tool supports HEX, HEX8, RGB, RGBA, HSL, HSLA, HSV, CMYK, and CSS custom property formats. You can copy any format to your clipboard with a single click." },

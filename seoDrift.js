@@ -41,11 +41,12 @@ function fingerprint(route) {
 
   const html = readFileSync(path, 'utf8');
   let schemaTypes = [];
-  const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+  const jsonLd = html.match(/<script\b[^>]*\btype="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)?.[1];
   if (jsonLd) {
     try {
       const parsed = JSON.parse(jsonLd);
-      schemaTypes = (parsed['@graph'] ?? [parsed]).map((node) => node['@type']).sort();
+      // flatMap: a node's @type may be an array, e.g. ['SoftwareApplication', 'WebApplication'].
+      schemaTypes = (parsed['@graph'] ?? [parsed]).flatMap((node) => node['@type']).sort();
     } catch {
       schemaTypes = ['<unparseable>'];
     }
