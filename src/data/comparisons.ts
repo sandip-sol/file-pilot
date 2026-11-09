@@ -53,7 +53,7 @@ export const comparisonContent: Record<string, ComparisonEntry> = {
   '/smallpdf-alternative': {
     competitor: 'Smallpdf',
     route: '/smallpdf-alternative',
-    title: 'Smallpdf Alternative That Never Uploads Your Files | FilePilot',
+    title: 'Smallpdf Alternative That Never Uploads Files | FilePilot',
     description:
       'A free Smallpdf alternative that processes PDFs in your browser rather than on a server. No uploads, no account and no limits. See how the two compare.',
     h1: 'A Smallpdf Alternative That Doesn\'t Upload Your Files',

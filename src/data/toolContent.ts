@@ -290,7 +290,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "Reverse PDF Pages Order – Free & Private Online Tool",
+      seoTitle: "Reverse PDF Pages Order – Free & Private",
     seoDescription: "Reverse the page order of a PDF so the last page comes first, handy for scans fed in backwards. Free online tool that runs in your browser, with no uploads.",
     faqs: [
       { question: "What does reversing a PDF do?", answer: "It flips the page order so the last page becomes the first page, and vice versa." },
@@ -327,7 +327,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "Add Blank Page to PDF – Insert Empty Page Online Free",
+      seoTitle: "Add Blank Page to PDF – Insert an Empty Page",
     seoDescription: "Insert a blank A4 page at the start, the end or after any page of a PDF. Free online tool that runs in your browser, so your document is never uploaded.",
     faqs: [
       { question: "Can I insert a blank page at any position?", answer: "Yes. You can insert before the first page, after the last page, or specify a page number to insert after." },
@@ -364,7 +364,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "Alternate Merge PDFs – Interleave Pages from Multiple PDFs",
+      seoTitle: "Alternate Merge PDFs – Interleave Two PDFs",
     seoDescription: "Interleave pages from two PDFs in alternating order, ideal for combining separately scanned front and back sides. Free, private, runs entirely in your browser.",
     faqs: [
       { question: "What is alternate merge?", answer: "It interleaves pages from multiple PDFs: page 1 of doc 1, page 1 of doc 2, page 2 of doc 1, etc. — perfect for merging duplex scans." },
@@ -452,7 +452,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "Overlay / Underlay PDFs – Stamp One PDF Over Another",
+      seoTitle: "Overlay / Underlay PDFs – Layer Two PDFs",
     seoDescription: "Overlay one PDF on top of or behind another to apply letterheads, watermarks or background templates to every page. Free, private, runs in your browser.",
     faqs: [
       { question: "What is the difference between overlay and underlay?", answer: "Overlay places the second PDF on top of the base. Underlay places it behind the base content." },
@@ -512,7 +512,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert a multi-page form into a single scrollable page.',
     ],
     h1: "Combine PDF Pages into One",
-    seoTitle: 'Combine PDF Pages Into One Page – Stitch Vertically',
+    seoTitle: 'Combine PDF Pages Into One Long Page',
     seoDescription:
       'Stitch every page of a PDF into one long continuous page for scrolling or web display. Free browser-based tool: no uploads, no signup, no watermark added.',
     faqs: [
@@ -577,7 +577,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "Grid Combine PDFs – Arrange Multiple PDFs in a Grid Layout",
+      seoTitle: "Grid Combine PDFs – Arrange PDFs in a Grid",
     seoDescription: "Arrange the first pages of several PDFs in a grid on one sheet to make comparison or overview pages. Free online tool that runs in your browser with no uploads.",
     faqs: [
       { question: "What does Grid Combine do?", answer: "It takes the first page of each PDF you upload and arranges them in a grid layout on a single page, like a comparison sheet." },
@@ -599,7 +599,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Produce large event signage without a wide-format printer.',
       'Print classroom displays or educational wall charts.',
     ],
-    seoTitle: 'Posterize PDF – Tile Large Pages for Poster Printing',
+    seoTitle: 'Posterize PDF – Tile Pages for Poster Printing',
     seoDescription:
       'Split a large PDF page into printable tiles, then print them on a normal printer and assemble a full-size poster. Free browser-based tool with no file uploads.',
     faqs: [
@@ -650,7 +650,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add consistent labels across merged documents from different sources.',
     ],
     h1: "Add Page Labels to PDF",
-    seoTitle: 'Add Page Labels to PDF – Roman Numerals & Prefixes',
+    seoTitle: 'Add Page Labels to PDF – Roman Numerals & More',
     seoDescription:
       'Add custom PDF page labels such as Roman numerals, letters or prefixes like A-1 so viewers show the right numbering. Free, browser-based, no uploads or signup.',
     faqs: [
@@ -700,7 +700,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Audit metadata before publishing or sharing confidential documents.',
       'Confirm the PDF producer tool used for troubleshooting formatting issues.',
     ],
-      seoTitle: "PDF Metadata Editor - View, Edit and Remove PDF Metadata",
+      seoTitle: "PDF Metadata Editor – View, Edit & Remove",
     seoDescription: "View, edit or remove PDF metadata such as title, author, subject, keywords and dates, then download the updated file. Free and private, runs in your browser.",
     faqs: [
       { question: "What metadata is stored in a PDF?", answer: "PDFs can contain title, author, subject, keywords, creator, producer, and creation/modification dates." },
@@ -723,7 +723,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Package multiple certificates or forms for batch download.',
       'Prepare document sets for archival or backup storage.',
     ],
-    seoTitle: 'PDF to ZIP – Package Multiple PDFs into an Archive',
+    seoTitle: 'PDF to ZIP – Package PDFs into an Archive',
     seoDescription:
       'Bundle several PDF files into one ZIP archive for easier sharing, emailing or backup. Free online tool that runs in your browser; documents are never uploaded.',
     faqs: [
@@ -813,7 +813,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "PDF Booklet – Create Saddle-Stitch Booklet Layout",
+      seoTitle: "PDF Booklet – Create a Saddle-Stitch Layout",
     seoDescription: "Rearrange PDF pages into booklet order so you can print double-sided, fold and staple a proper booklet. Free online PDF booklet maker, files never uploaded.",
     faqs: [
       { question: "What is a booklet layout?", answer: "A booklet layout reorders pages so that when you print double-sided, fold, and staple, the pages appear in the correct reading order." },
@@ -837,7 +837,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Mark up a student paper or manuscript with feedback.',
       'Sign and annotate forms for remote submission.',
     ],
-      seoTitle: "Fill Forms / Annotate PDF – Text, Highlights, Signatures",
+      seoTitle: "Annotate PDF – Text, Highlights, Signatures",
     seoDescription: "Add text boxes, highlights, checkmarks, dates and signatures to a PDF, then download the annotated copy. Free online PDF annotator that never uploads your file.",
     faqs: [
       { question: "Can I add a typed or image signature?", answer: "Yes. Use Typed signature for a quick name placement or Image signature to upload a signature graphic." },
@@ -883,7 +883,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Black out student names on shared academic records.',
       'Remove classified or proprietary information from government documents.',
     ],
-      seoTitle: "Redact PDF – Permanently Remove Sensitive Content",
+      seoTitle: "Redact PDF – Permanently Remove Sensitive Data",
     seoDescription: "Redact PDFs properly: draw boxes over sensitive text or images and the content beneath is permanently removed, not just covered. Free, runs in your browser.",
     faqs: [
       { question: "Is the redacted text really removed?", answer: "Yes. Each page with a redaction is re-rendered as an image with the boxes painted in, so the original text, graphics and comments under them no longer exist in the file and cannot be copied, searched or extracted. Pages you did not redact are kept unchanged." },
@@ -966,18 +966,32 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/bookmark': {
     intro:
-      'PDF Bookmarks lets you view, add, edit, and delete the navigational bookmarks (also called outlines) in a PDF. Bookmarks create a clickable table of contents in the PDF viewer sidebar, making it much easier for readers to jump between sections of long documents.',
+      'PDF Bookmarks adds navigational bookmarks (also called outlines) to a PDF. Enter a title and page number for each one, and they appear as a clickable list in the PDF viewer sidebar, making it much easier for readers to jump between sections of long documents.',
     action: 'manage PDF bookmarks',
     steps: [
       'Upload the PDF you want to edit bookmarks for.',
-      'View existing bookmarks, or add new ones by entering titles and target page numbers.',
-      'Click "Save" to download the PDF with updated bookmarks.',
+      'Enter a title and target page number for each bookmark.',
+      'Click "Add Bookmarks & Download" to save the PDF with its new bookmarks.',
     ],
     useCases: [
       'Add navigational bookmarks to a long report or manual.',
-      'Fix or update broken bookmark links in an existing PDF.',
+      'Add section shortcuts to a scanned book or course pack.',
       'Create a structured outline for a thesis or dissertation.',
-      'Remove unwanted bookmarks from a PDF before distributing.',
+      'Add a list of chapters to a PDF before sharing it.',
+    ],
+    details: [
+      {
+        heading: 'How bookmarks are added',
+        paragraphs: [
+          'Each bookmark opens the start of the page you choose. New bookmarks are added after any the PDF already has, in the order you list them, and titles can be written in any language.',
+        ],
+      },
+      {
+        heading: 'Limits',
+        paragraphs: [
+          'Bookmarks are added as one flat list, so you cannot nest them here, and existing bookmarks cannot be edited or removed. Some tools rebuild a PDF page by page and drop its bookmarks, including Rotate PDF and Reverse PDF, so add bookmarks last.',
+        ],
+      },
     ],
       seoTitle: "Add PDF Bookmarks Online – Free & Private",
     seoDescription: "Add clickable bookmarks to a PDF by entering a title and page number for each entry, so readers can jump between sections. Free, private, runs in your browser.",
@@ -1114,7 +1128,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "Add Background Color to PDF – Change PDF Page Color Online",
+      seoTitle: "Add Background Color to PDF – Free & Private",
     seoDescription: "Add a background color to every page of a PDF. Choose a preset like cream or light blue or pick any custom color. Free, private, processed in your browser.",
     faqs: [
       { question: "Will this cover existing content?", answer: "No. The color is placed behind the page content, so text and images stay visible. On a scanned page, the full-page image covers the color." },
@@ -1151,7 +1165,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "Add Stamp to PDF – DRAFT, CONFIDENTIAL & Custom Stamps Free",
+      seoTitle: "Add Stamp to PDF – DRAFT, CONFIDENTIAL & Custom",
     seoDescription: "Stamp DRAFT, CONFIDENTIAL, APPROVED or your own text onto PDF pages with custom color and opacity. Free online tool that runs locally; files are never uploaded.",
     faqs: [
       { question: "Will my file be uploaded?", answer: "No. All processing happens in your browser." },
@@ -1227,7 +1241,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "Fill PDF Forms – Fill & Flatten PDF Form Fields Online",
+      seoTitle: "Fill PDF Forms – Fill & Flatten Online",
     seoDescription: "Fill in PDF forms online: type into text fields, tick checkboxes and download the completed, flattened PDF. Free and private, your form is never uploaded.",
     faqs: [
       { question: "What types of fields are supported?", answer: "You can fill text fields and checkboxes. Radio buttons and dropdown lists keep whatever value is already set in the PDF." },
@@ -1249,7 +1263,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Design order forms or request forms for internal workflows.',
       'Create surveys or questionnaires in PDF format.',
     ],
-      seoTitle: "PDF Form Creator – Make Fillable PDF Forms Online",
+      seoTitle: "PDF Form Creator – Make Fillable PDF Forms",
     seoDescription: "Create fillable PDF forms: add text fields, checkboxes, dropdowns and radio buttons to any PDF or a blank page. Free, private and built in your browser.",
     faqs: [
       { question: "What kinds of form fields can I add?", answer: "Text fields, checkboxes, dropdown menus with your own options, and radio buttons. Radio buttons that share a group name act as one either-or choice." },
@@ -1318,7 +1332,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'None, small or medium page margins.',
       'Reorder images before building the PDF, and remove any of them.',
     ],
-      seoTitle: "Convert Images to PDF - JPG, PNG, WebP, SVG, BMP to PDF",
+      seoTitle: "Convert Images to PDF – JPG, PNG, WebP, SVG, BMP",
     seoDescription: "Convert JPG, PNG, WebP, SVG, BMP, HEIC and TIFF images into one PDF with page size, orientation and margin controls. Free, private and never uploaded.",
     faqs: [
       { question: "Does converting images to PDF upload my files?", answer: "No. All conversion happens in your browser. Your images never leave your device." },
@@ -1403,7 +1417,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create readable reports from exported JSON data.',
       'Archive data exports as human-readable PDF documents.',
     ],
-    seoTitle: 'JSON to PDF – Convert JSON Data to a PDF Document',
+    seoTitle: 'JSON to PDF – Convert JSON Data to a Document',
     seoDescription:
       'Convert JSON files or pasted JSON into a formatted, syntax-highlighted PDF for sharing and printing. Free and browser-based, so your data is never uploaded.',
     faqs: [
@@ -1516,7 +1530,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Adjustable quality for the lossy formats.',
       'Download every page at once as a single ZIP archive.',
     ],
-      seoTitle: "PDF to Images - Export PDF Pages as PNG, JPG, or WebP",
+      seoTitle: "PDF to Images – Export Pages as PNG, JPG, WebP",
     seoDescription: "Convert PDF pages to PNG, JPG or WebP images with DPI and quality controls, then download them one by one or as a ZIP. Free, private and runs in your browser.",
     faqs: [
       { question: "Does PDF to images upload my file?", answer: "No. PDF rendering and image export happen entirely in your browser." },
@@ -1586,7 +1600,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Reduce file size of scanned color documents.',
       'Prepare documents for black-and-white publishing or photocopying.',
     ],
-    seoTitle: 'PDF to Grayscale – Convert Color PDF to Black & White',
+    seoTitle: 'PDF to Grayscale – Color PDF to Black & White',
     seoDescription:
       'Convert a color PDF to greyscale (black and white) to save toner and shrink scanned files. Free online PDF to grayscale converter that never uploads files.',
     faqs: [
@@ -1725,7 +1739,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Export a searchable PDF built from the recognised text layer.',
       'Download extracted text as TXT, or every page at once as a ZIP.',
     ],
-      seoTitle: "Extract Text from PDF or Images – TXT for Word, Sheets, and Slides",
+      seoTitle: "Extract Text from PDF or Images – TXT Export",
     seoDescription: "Extract text from PDFs, scanned documents and images with built-in OCR, then export TXT or a searchable PDF. Free and private: files never leave your browser.",
     faqs: [
       { question: "Can I extract text from both PDFs and images?", answer: "Yes. Text PDFs are read directly, and scanned pages or images fall back to OCR in the browser." },
@@ -1764,7 +1778,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "Extract Images from PDF – Export PDF Pages as PNG Images",
+      seoTitle: "Extract Images from PDF – Export Pages as PNG",
     seoDescription: "Export every page of a PDF as a high-resolution PNG image and download them together in one ZIP archive. Free, private tool that runs locally in your browser.",
     faqs: [
       { question: "What format are the extracted images?", answer: "Each PDF page is rendered as a PNG image at 2× resolution for high quality, then packed into a ZIP archive." },
@@ -1886,7 +1900,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "Fix PDF Page Size – Resize to A4, Letter, A3, Legal Free",
+      seoTitle: "Fix PDF Page Size – A4, Letter, A3, Legal",
     seoDescription: "Resize every page of a PDF to A4, US Letter, A3 or Legal, scaling content to fit so the document prints consistently. Free, private and runs in your browser.",
     faqs: [
       { question: "Will my page content be cropped?", answer: "No. Content is scaled proportionally to fit the new page size with equal margins." },
@@ -1924,7 +1938,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
         ],
       },
     ],
-      seoTitle: "PDF Page Dimensions – View Page Size and Orientation",
+      seoTitle: "PDF Page Dimensions – Page Size & Orientation",
     seoDescription: "See the exact width, height and orientation of every page in a PDF in points and inches, and spot mixed page sizes. Free PDF size checker that runs locally.",
     faqs: [
       { question: "Can I detect mixed page sizes?", answer: "Yes. The tool shows the dimensions of every individual page, making it easy to spot inconsistencies." },
@@ -2008,7 +2022,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Unlock a PDF to enable printing or text copying.',
       'Change the password on an existing protected document.',
     ],
-      seoTitle: "Protect or Unlock PDF – Browser-Only PDF Security",
+      seoTitle: "Protect or Unlock PDF – Browser-Only Security",
     seoDescription: "Unlock password-protected PDFs when you know the password and manage PDF security locally in your browser. Free, private, and files are never uploaded.",
     faqs: [
       { question: "Does unlocking upload my PDF anywhere?", answer: "No. Password handling, rendering, and export all stay inside your browser." },
@@ -2031,7 +2045,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Strip embedded scripts for security before opening untrusted PDFs.',
       'Prepare documents for public release by removing all non-visible data.',
     ],
-      seoTitle: "Sanitize PDF – Remove Metadata & Hidden Data Free",
+      seoTitle: "Sanitize PDF – Remove Metadata & Hidden Data",
     seoDescription: "Remove metadata and hidden data from a PDF and flatten interactive elements before you share it. Free online PDF sanitizer that runs locally in your browser.",
     faqs: [
       { question: "What does sanitizing a PDF do?", answer: "It removes all metadata (author, creator, keywords), flattens form fields, and re-serializes the PDF structure to remove hidden data." },
@@ -2326,7 +2340,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert and compress images to meet email or form submission size limits.',
       'Format screenshots to exact pixel dimensions for documentation.',
     ],
-      seoTitle: "Image Formatter — Resize, Convert & Optimize Images Online",
+      seoTitle: "Image Formatter — Resize, Convert & Optimize",
     seoDescription: "Format images to exact pixel dimensions and file size targets, convert formats and batch export as ZIP. Free online image formatter that never uploads images.",
     faqs: [
       { question: "Can I format multiple images at once?", answer: "Yes. FilePilot supports batch formatting, allowing you to upload and process multiple images simultaneously. All images are formatted with the same settings and can be downloaded individually or as a ZIP file." },
@@ -2350,7 +2364,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Crop and resize photos to meet specific country photo specifications.',
       'Save money by preparing compliant photos at home instead of at a studio.',
     ],
-      seoTitle: "Passport Photo Validator - Check Photo Requirements",
+      seoTitle: "Passport Photo Validator – Check Requirements",
     seoDescription: "Check a passport or visa photo against official size, dimension and format rules, then crop and export a compliant file. Free, private, runs in your browser.",
     faqs: [
       { question: "Which country requirements are supported?", answer: "FilePilot includes validation profiles for common passport photo standards including US, UK, EU, India, and more. You can also create a custom profile with your own dimensions, background colour, and file size limits." },
@@ -2568,7 +2582,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Produce correctly-sized images for different screen densities (1×, 2×, 3×).',
       'Optimize hero images and banners for fast page loading.',
     ],
-      seoTitle: "Website Image Optimiser - Responsive Images for the Web",
+      seoTitle: "Website Image Optimiser – Responsive Images",
     seoDescription: "Generate responsive WebP, AVIF and JPEG image variants at several sizes with ready-to-paste HTML. Free website image optimizer that runs in your browser.",
     faqs: [
       { question: "What are responsive images and why do they matter?", answer: "Responsive images serve different sizes to different devices so that mobile users download smaller files and desktop users get full-resolution versions. This improves page load speed and Core Web Vitals scores." },
@@ -2592,7 +2606,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Assess whether an image needs optimization before uploading to a website.',
       'Diagnose why an image appears blurry or pixelated.',
     ],
-      seoTitle: "Image Quality Analyzer - Check Image Resolution & Format",
+      seoTitle: "Image Quality Analyzer – Resolution & Format",
     seoDescription: "Check an image's resolution, file size, color depth and format, and whether it suits web, print or social media, with fixes. Free, private, in your browser.",
     faqs: [
       { question: "What quality metrics are analyzed?", answer: "FilePilot checks image dimensions, megapixels, file size, format, aspect ratio, estimated DPI, colour depth, and transparency support. Each metric is evaluated against the requirements of your selected intended use." },
@@ -2616,7 +2630,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Extract a specific area of interest from a larger image.',
       'Create correctly-proportioned thumbnails for video platforms.',
     ],
-      seoTitle: "Crop Image Online - Free Browser-Based Image Cropper",
+      seoTitle: "Crop Image Online – Free Browser-Based Cropper",
     seoDescription: "Crop JPG, PNG and WebP images precisely with an interactive editor and aspect ratio presets like 1:1 and 16:9. Free, private and processed in your browser.",
     faqs: [
       { question: "Can I crop to custom dimensions?", answer: "Yes. You can freely drag the crop area to any size, use aspect ratio presets like 1:1 or 16:9, or enter a custom aspect ratio. Optional output dimensions let you resize the cropped area to exact pixel values." },
@@ -2640,7 +2654,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Flip images for mirror effects or design requirements.',
       'Batch-correct orientation for a folder of camera photos.',
     ],
-      seoTitle: "Rotate & Flip Image Online - Free Browser-Based Tool",
+      seoTitle: "Rotate & Flip Image Online – Free and Private",
     seoDescription: "Rotate images by any angle and flip them horizontally or vertically, one at a time or in batches with ZIP download. Free, private and runs in your browser.",
     faqs: [
       { question: "What rotation angles are supported?", answer: "You can rotate images by 90-degree increments with one click, or enter any custom angle. Non-90-degree rotations expand the canvas and fill corners with a configurable background color." },
@@ -2664,7 +2678,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add "PROOF" or "SAMPLE" overlays to design previews.',
       'Batch-watermark event photos before sharing with clients.',
     ],
-      seoTitle: "Watermark Image Online - Add Text or Logo Watermarks",
+      seoTitle: "Watermark Image Online – Add Text or Logo",
     seoDescription: "Add text or image watermarks to photos with adjustable position, opacity and tiled patterns, in batches. Free online watermark tool that never uploads images.",
     faqs: [
       { question: "What types of watermarks can I add?", answer: "You can add text watermarks with custom font, size, color, and shadow, or image/logo watermarks from an uploaded PNG, JPEG, or WebP file. Both types support adjustable position and opacity." },
@@ -2689,7 +2703,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Batch-strip metadata from an entire photo collection.',
     ],
     h1: "Remove Image Metadata",
-    seoTitle: 'Remove Image Metadata – Strip EXIF, GPS & Camera Data',
+    seoTitle: 'Remove Image Metadata – Strip EXIF & GPS Data',
     seoDescription:
       'Remove EXIF data, GPS location and camera details from photos before you share them. Free EXIF remover that runs locally, so images are never uploaded.',
     faqs: [
@@ -2778,7 +2792,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add text overlays or captions to images.',
       'Perform basic retouching without installing Photoshop or GIMP.',
     ],
-      seoTitle: "Photo Editor Online - Free Browser-Based Image Editor",
+      seoTitle: "Photo Editor Online – Free Browser-Based Editor",
     seoDescription: "Edit photos online: adjust brightness and contrast, apply filters, add text overlays and borders, then download. Free photo editor that never uploads images.",
     faqs: [
       { question: "What editing features are available?", answer: "The editor offers brightness, contrast, saturation, exposure, temperature, tint, highlights, shadows, sharpness, blur, grayscale, sepia, vignette adjustments, plus rotate, flip, text overlay, borders, and preset filters." },
@@ -2802,7 +2816,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create SVG versions of icons for responsive web design.',
       'Convert hand-drawn sketches into clean vector graphics.',
     ],
-    seoTitle: 'Image to SVG – Convert PNG & JPG to Vector Online',
+    seoTitle: 'Image to SVG – Convert PNG & JPG Online',
     seoDescription:
       'Convert PNG, JPG and other raster images into scalable SVG vectors by tracing their shapes. Free online image to SVG converter: no uploads and no signup needed.',
     faqs: [

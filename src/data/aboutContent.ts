@@ -29,34 +29,25 @@ export interface Maintainer {
 }
 
 /**
- * THIS IS DELIBERATELY NULL.
+ * Drives the "Who builds FilePilot" section and the `Person` / `Organization.founder`
+ * schema. Only publish details that are true: a fabricated identity on an E-E-A-T
+ * page is worse than none. Setting this to `null` removes the section and schema.
  *
- * The page renders without a named maintainer rather than inventing one — a
- * fabricated identity on an E-E-A-T page is worse than none. Fill this in and the
- * "Who builds FilePilot" section plus the `Person` / `Organization.founder`
- * schema appear automatically. `seoValidate` warns while it is unset.
- *
- * TO ACTIVATE: replace `null` with the block below, and put your real name in.
- * The bio is a draft in your voice — edit it so it is actually true of you. It
- * contains no biographical claims on purpose; add the ones that are yours
- * (what you do, how long you have been doing it, what prompted this).
- *
- *   export const maintainer: Maintainer | null = {
- *     name: 'YOUR REAL NAME',
- *     role: 'Maintainer',
- *     bio: [
- *       'I build and maintain FilePilot on my own. It started as a tool I wanted for '
- *         + 'myself: somewhere to merge or compress a document without handing a copy '
- *         + 'of it to a company I know nothing about.',
- *       'Everything here runs in your browser, which is a harder way to build these '
- *         + 'tools and the only way I could make the privacy claim something you can '
- *         + 'check rather than something you have to believe.',
- *     ],
- *     email: 'singh101vault@gmail.com',
- *     profiles: [{ label: 'GitHub', url: 'https://github.com/sandip-sol' }],
- *   };
+ * `name` is the GitHub handle for now. A real name would be a stronger signal.
  */
-export const maintainer: Maintainer | null = null;
+export const maintainer: Maintainer | null = {
+  name: 'sandip-sol',
+  role: 'Maintainer',
+  bio: [
+    'I build and maintain FilePilot on my own. It started as a tool I wanted for '
+      + 'myself: somewhere to merge or compress a document without handing a copy '
+      + 'of it to a company I know nothing about.',
+    'Everything here runs in your browser, which is a harder way to build these '
+      + 'tools and the only way I could make the privacy claim something you can '
+      + 'check rather than something you have to believe.',
+  ],
+  profiles: [{ label: 'GitHub', url: 'https://github.com/sandip-sol' }],
+};
 
 export const GITHUB_REPO_URL = 'https://github.com/sandip-sol/file-pilot';
 

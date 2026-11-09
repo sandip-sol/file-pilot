@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
-import { downloadBytes } from '../utils/pdf/pdfOperations';
+import { addBookmarks, downloadBytes } from '../utils/pdf/pdfOperations';
 import { BookMarked, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 import { toolFaqs, toolSeo } from '../data/toolContent';
-import { warmEngine } from '../utils/warmEngine';
-
-warmEngine('pdf-lib');
 
 export const Bookmark = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -23,17 +20,11 @@ export const Bookmark = () => {
 
     const handleProcess = async () => {
         if (!file) return;
+        const entries = bookmarks.filter(b => b.title.trim());
+        if (entries.length === 0) { setError('Enter a title for at least one bookmark.'); return; }
         setIsProcessing(true); setError(null);
         try {
-            const ab = await file.arrayBuffer();
-            const { PDFDocument } = await import('pdf-lib');
-            const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
-            void doc.getPages(); // page access reserved for future outline support
-            for (const bm of bookmarks.filter(b => b.title.trim())) {
-                void bm; // bookmark outline support requires low-level PDF dict editing
-            }
-            // Re-save for now (full outline requires low-level PDF dict editing)
-            const bytes = await doc.save();
+            const bytes = await addBookmarks(file, entries);
             downloadBytes(bytes, file.name.replace('.pdf', '_bookmarked.pdf'));
             setSuccess(true); setTimeout(() => setSuccess(false), 3000);
         } catch (e) { setError('Failed: ' + (e instanceof Error ? e.message : '')); }

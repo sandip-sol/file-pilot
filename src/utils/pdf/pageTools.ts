@@ -145,6 +145,8 @@ export const applyAnnotationsToPdf = async (file: File, items: AnnotationItem[])
   const pdf = await PDFDocument.load(await file.arrayBuffer());
   const font = await pdf.embedFont(StandardFonts.Helvetica);
   const boldFont = await pdf.embedFont(StandardFonts.HelveticaBold);
+  // Helvetica has no check mark glyph, so drawing one with it throws.
+  const symbolFont = await pdf.embedFont(StandardFonts.ZapfDingbats);
 
   for (const item of items) {
     const page = pdf.getPage(item.pageNumber - 1);
@@ -173,7 +175,7 @@ export const applyAnnotationsToPdf = async (file: File, items: AnnotationItem[])
         x,
         y,
         size: item.fontSize ?? 24,
-        font: boldFont,
+        font: symbolFont,
         color: rgb(0.09, 0.51, 0.24),
       });
       continue;

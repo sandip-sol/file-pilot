@@ -122,7 +122,7 @@ export const siteContent: Record<string, SiteContentEntry> = {
   },
 
   '/image-workflows': {
-    title: 'Image Workflow Tools - Format, Validate and Prepare Images | FilePilot',
+    title: 'Image Workflow Tools – Format & Prepare Images | FilePilot',
     description:
       'Ready-made image workflows for social media sizes, product photos, passport photos, favicons, QR codes and PDF conversion. Free, private and browser-based.',
     h1: 'Image Workflow Tools',

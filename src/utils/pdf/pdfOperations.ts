@@ -768,6 +768,45 @@ export async function addBackgroundColor(
     return doc.save();
 }
 
+/** Adds top-level bookmarks after any the PDF already has. */
+export async function addBookmarks(file: File, bookmarks: { title: string; page: number }[]): Promise<Uint8Array> {
+    const ab = await file.arrayBuffer();
+    const { PDFDict, PDFDocument, PDFHexString, PDFName, PDFNumber, PDFRef } = await import('pdf-lib');
+    const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
+    const pages = doc.getPages();
+    for (const { page } of bookmarks) {
+        if (!pages[page - 1]) throw new Error(`Page ${page} does not exist. This PDF has ${pages.length} pages.`);
+    }
+
+    const { context, catalog } = doc;
+    const key = (name: string) => PDFName.of(name);
+    const outlines = catalog.lookupMaybe(key('Outlines'), PDFDict) ?? context.obj({ Type: 'Outlines' });
+    const stored = catalog.get(key('Outlines'));
+    const outlinesRef = stored instanceof PDFRef ? stored : context.register(outlines);
+    const previousLast = outlines.get(key('Last'));
+
+    const refs = bookmarks.map(() => context.nextRef());
+    bookmarks.forEach(({ title, page }, i) => {
+        const prev = i > 0 ? refs[i - 1] : previousLast;
+        const next = refs[i + 1];
+        context.assign(refs[i], context.obj({
+            Title: PDFHexString.fromText(title),
+            Parent: outlinesRef,
+            Dest: [pages[page - 1].ref, 'XYZ', null, null, null],
+            ...(prev ? { Prev: prev } : {}),
+            ...(next ? { Next: next } : {}),
+        }));
+    });
+
+    if (previousLast) context.lookup(previousLast, PDFDict).set(key('Next'), refs[0]);
+    else outlines.set(key('First'), refs[0]);
+    outlines.set(key('Last'), refs[refs.length - 1]);
+    const count = outlines.lookupMaybe(key('Count'), PDFNumber)?.asNumber() ?? 0;
+    outlines.set(key('Count'), PDFNumber.of(Math.abs(count) + refs.length));
+    catalog.set(key('Outlines'), outlinesRef);
+    return doc.save();
+}
+
 /** Removes comments, highlights, links and other annotations, keeping filled-in form values as page content. */
 export async function removeAnnotations(file: File): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();

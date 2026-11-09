@@ -361,7 +361,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
   '/blog/redact-pdf-properly': {
     route: '/blog/redact-pdf-properly',
-    title: 'Why Blacking Out Text in a PDF Does Not Redact It | FilePilot',
+    title: 'Why Blacking Out Text in a PDF Is Not Redaction | FilePilot',
     description: 'A black box over text leaves the text in the PDF, still selectable and searchable. How redaction fails, real cases where it did, and how to remove text safely.',
     h1: 'Why Blacking Out Text in a PDF Does Not Redact It',
     published: '2026-08-22T18:54:59+05:30',
@@ -427,7 +427,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
   '/blog/resize-image-for-online-forms': {
     route: '/blog/resize-image-for-online-forms',
-    title: 'Why Online Forms Reject Your Photo (and How to Fix It) | FilePilot',
+    title: 'Why Online Forms Reject Your Photo, and the Fix | FilePilot',
     description: 'Government, exam and visa portals reject photos over size, dimensions or format. What each error means, why KB limits exist and how to hit the exact spec.',
     h1: 'Why Online Forms Reject Your Photo, and How to Fix It',
     published: '2026-08-22T18:54:59+05:30',
@@ -591,7 +591,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
   '/blog/compress-pdf-without-losing-quality': {
     route: '/blog/compress-pdf-without-losing-quality',
-    title: 'How to Compress a PDF Without Wrecking the Quality | FilePilot',
+    title: 'How to Compress a PDF Without Losing Quality | FilePilot',
     description: 'Why PDFs get large, which part of your file is actually taking the space, and the order of operations that shrinks a document without turning the text to mush.',
     h1: 'How to Compress a PDF Without Wrecking the Quality',
     published: '2026-08-22T18:54:59+05:30',
