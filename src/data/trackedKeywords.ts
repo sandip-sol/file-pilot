@@ -43,14 +43,6 @@ export const trackedKeywords: TrackedKeyword[] = [
     ]
   },
   {
-    "route": "/add-page-labels",
-    "primary": "add page labels to pdf",
-    "secondary": [
-      "pdf roman numeral page numbers",
-      "pdf page labels"
-    ]
-  },
-  {
     "route": "/image-to-svg",
     "primary": "image to svg",
     "secondary": [

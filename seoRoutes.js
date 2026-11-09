@@ -41,7 +41,6 @@ export const PRIORITY_TAIL_ROUTES = [
   '/pdf-to-cbz',
   '/posterize-pdf',
   '/n-up-pdf',
-  '/add-page-labels',
   '/image-to-svg',
   '/combine-single-page',
   '/pdf-to-greyscale',

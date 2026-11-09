@@ -145,7 +145,7 @@ export const Navbar = () => {
                 </Link>
 
                 {/* Desktop Nav */}
-                <div className="hidden lg:flex min-w-0 flex-1 items-center justify-end gap-2 text-sm font-medium text-muted-foreground">
+                <div className="hidden min-[1360px]:flex min-w-0 flex-1 items-center justify-end gap-2 text-sm font-medium text-muted-foreground">
                     <NavigationMenu>
                         <NavigationMenuList className="space-x-0">
                             {NAV_CATEGORIES.map((navCategory) => {
@@ -190,7 +190,7 @@ export const Navbar = () => {
 
                 <Link
                     to={toCanonicalPath('/support')}
-                    className="hidden h-9 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 lg:inline-flex xl:px-3"
+                    className="hidden h-9 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 min-[1360px]:inline-flex min-[1360px]:px-3"
                 >
                     <Heart className="h-4 w-4" aria-hidden="true" />
                     Support
@@ -201,7 +201,7 @@ export const Navbar = () => {
                 {/* Mobile Menu Button */}
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="lg:hidden p-2 text-muted-foreground hover:text-foreground"
+                    className="min-[1360px]:hidden p-2 text-muted-foreground hover:text-foreground"
                     aria-label="Toggle menu"
                 >
                     {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -210,7 +210,7 @@ export const Navbar = () => {
 
             {/* Mobile Nav */}
             {isMenuOpen && (
-                <div className="lg:hidden bg-background border-t border-border animate-fade-in">
+                <div className="min-[1360px]:hidden bg-background border-t border-border animate-fade-in">
                     <div className="container max-h-[calc(100vh-4rem)] overflow-y-auto py-4">
                         <Link
                             to={toCanonicalPath('/support')}

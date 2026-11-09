@@ -616,7 +616,7 @@ export const toolRegistry: ToolDefinition[] = [
 
   // ── SECURE PDF ─────────────────────────────────────────────────────────────
   {
-    slug: '/pdf-security', title: 'Protect / Unlock PDF', shortTitle: 'Security',
+    slug: '/pdf-security', title: 'Unlock PDF', shortTitle: 'Unlock',
     description: 'Unlock password-protected PDFs in your browser.',
     icon: Shield, gradientClassName: 'from-slate-700 to-slate-900',
     category: 'secure-pdf', featured: true,
@@ -956,6 +956,8 @@ const hiddenToolSlugs = new Set([
   '/deskew-pdf',
   // Wraps a PNG in an SVG file, with no vector output. Relist once it produces real vectors.
   '/pdf-to-svg',
+  // Only stamps a prefix and number, which Page Numbers already does. Relist if it writes real PDF page labels.
+  '/add-page-labels',
 ]);
 
 export const getToolStatus = (tool: ToolDefinition): ToolStatus => {

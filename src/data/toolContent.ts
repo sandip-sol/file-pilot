@@ -2211,24 +2211,24 @@ export const toolContent: Record<string, ToolContentEntry> = {
   // ── SECURE PDF ─────────────────────────────────────────────────────────────
   '/pdf-security': {
     intro:
-      'Protect & Unlock PDF handles PDF password operations entirely in your browser. Unlock a password-protected PDF by entering the correct password, or add password protection to secure a document before sharing. The tool supports both user passwords (to open) and owner passwords (to restrict editing/printing).',
-    action: 'manage PDF security',
+      'Unlock PDF removes the password from a PDF you are able to open, entirely in your browser. Enter the correct password and the tool exports a new copy with no password. Each page is rendered into the new file, so the pages look the same, but text can no longer be selected and interactive forms are not kept.',
+    action: 'unlock a PDF',
     steps: [
-      'Upload the password-protected PDF (or the PDF you want to protect).',
-      'To unlock: enter the document password. To protect: set a new password.',
-      'Download the unlocked or newly-protected PDF.',
+      'Upload the password-protected PDF.',
+      'Enter the document password.',
+      'Click "Unlock and Export" to download the unlocked copy.',
     ],
     useCases: [
       'Remove a password from a PDF you have legitimate access to.',
-      'Add password protection before sharing sensitive documents via email.',
-      'Unlock a PDF to enable printing or text copying.',
-      'Change the password on an existing protected document.',
+      'Keep a personal copy that opens without typing the password each time.',
+      'Unlock a PDF so it can be printed without the password.',
+      'Open a PDF in software that cannot handle passwords.',
     ],
     features: [
       'Unlock a password-protected PDF using its current password.',
       'Exports a new copy with no password.',
     ],
-      seoTitle: "Protect or Unlock PDF – Browser-Only Security",
+      seoTitle: "Unlock PDF – Remove a Password You Know",
     seoDescription: "Unlock password-protected PDFs when you know the password and manage PDF security locally in your browser. Free, private, and files are never uploaded.",
     faqs: [
       { question: "Does unlocking upload my PDF anywhere?", answer: "No. Password handling, rendering, and export all stay inside your browser." },

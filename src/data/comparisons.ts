@@ -288,7 +288,7 @@ export const comparisonContent: Record<string, ComparisonEntry> = {
       { task: 'PDF to images', route: '/pdf-to-images' },
       { task: 'Rotate pages', route: '/rotate-pdf' },
       { task: 'Remove pages', route: '/delete-pages' },
-      { task: 'Protect a PDF', route: '/pdf-security' },
+      { task: 'Unlock a PDF', route: '/pdf-security' },
       { task: 'Add page numbers', route: '/page-numbers' },
       { task: 'Extract images', route: '/extract-images' },
     ],

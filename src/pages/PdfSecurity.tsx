@@ -77,7 +77,7 @@ export const PdfSecurity = () => {
               <Shield className="h-6 w-6" />
             </div>
           </div>
-          <h1>Protect / Unlock PDF</h1>
+          <h1>Unlock PDF</h1>
           <p>Keep sensitive documents local. Unlock protected PDFs entirely in-browser and prepare future-proof security settings without server uploads.</p>
         </div>
       </div>
