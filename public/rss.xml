@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>FilePilot Blog</title>
+    <link>https://www.filepilot.space/blog/</link>
+    <description>Guides to working with PDFs and images privately, in your browser.</description>
+    <language>en</language>
+    <lastBuildDate>Sat, 22 Aug 2026 13:24:59 GMT</lastBuildDate>
+    <atom:link href="https://www.filepilot.space/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Edit a PDF Without Uploading It Anywhere</title>
+      <link>https://www.filepilot.space/blog/edit-pdf-without-uploading/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/edit-pdf-without-uploading/</guid>
+      <pubDate>Sat, 22 Aug 2026 13:24:59 GMT</pubDate>
+      <description>How to work with PDFs without sending them to a server: what happens when you upload, which tasks run locally in a browser, and how to verify a tool&apos;s claims.</description>
+    </item>
+    <item>
+      <title>Is It Safe to Upload a PDF to an Online Tool?</title>
+      <link>https://www.filepilot.space/blog/is-it-safe-to-upload-pdf-online/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/is-it-safe-to-upload-pdf-online/</guid>
+      <pubDate>Sat, 22 Aug 2026 13:24:59 GMT</pubDate>
+      <description>What happens to a document you upload to a free PDF site, what deletion policies really promise, and how to decide whether uploading a specific file is safe.</description>
+    </item>
+    <item>
+      <title>Why Blacking Out Text in a PDF Does Not Redact It</title>
+      <link>https://www.filepilot.space/blog/redact-pdf-properly/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/redact-pdf-properly/</guid>
+      <pubDate>Sat, 22 Aug 2026 13:24:59 GMT</pubDate>
+      <description>A black box over text leaves the text in the PDF, still selectable and searchable. How redaction fails, real cases where it did, and how to remove text safely.</description>
+    </item>
+    <item>
+      <title>Why Online Forms Reject Your Photo, and How to Fix It</title>
+      <link>https://www.filepilot.space/blog/resize-image-for-online-forms/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/resize-image-for-online-forms/</guid>
+      <pubDate>Sat, 22 Aug 2026 13:24:59 GMT</pubDate>
+      <description>Government, exam and visa portals reject photos over size, dimensions or format. What each error means, why KB limits exist and how to hit the exact spec.</description>
+    </item>
+    <item>
+      <title>What EXIF Data Reveals About Your Photos</title>
+      <link>https://www.filepilot.space/blog/what-exif-data-reveals/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/what-exif-data-reveals/</guid>
+      <pubDate>Sat, 22 Aug 2026 13:24:59 GMT</pubDate>
+      <description>Photos can carry GPS coordinates, timestamps and device serial numbers. What EXIF stores, which platforms strip it, and how to remove it before you share.</description>
+    </item>
+    <item>
+      <title>How to Combine Scanned Pages Into One PDF</title>
+      <link>https://www.filepilot.space/blog/combine-scanned-pages-into-one-pdf/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/combine-scanned-pages-into-one-pdf/</guid>
+      <pubDate>Sat, 22 Aug 2026 13:24:59 GMT</pubDate>
+      <description>Scanners give you one file per page, out of order and too large. How to turn a folder of scans into one clean, ordered PDF without uploading anything.</description>
+    </item>
+    <item>
+      <title>How to Compress a PDF Without Wrecking the Quality</title>
+      <link>https://www.filepilot.space/blog/compress-pdf-without-losing-quality/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/compress-pdf-without-losing-quality/</guid>
+      <pubDate>Sat, 22 Aug 2026 13:24:59 GMT</pubDate>
+      <description>Why PDFs get large, which part of your file is actually taking the space, and the order of operations that shrinks a document without turning the text to mush.</description>
+    </item>
+    <item>
+      <title>PDF or CBZ for Comics and Manga?</title>
+      <link>https://www.filepilot.space/blog/pdf-comics-to-cbz/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/pdf-comics-to-cbz/</guid>
+      <pubDate>Sat, 22 Aug 2026 13:24:59 GMT</pubDate>
+      <description>Why comic readers prefer CBZ over PDF, what the format actually is, when converting helps, and how page naming decides whether the result reads in order.</description>
+    </item>
+    <item>
+      <title>Printing Multiple PDF Pages Per Sheet, Explained</title>
+      <link>https://www.filepilot.space/blog/print-multiple-pdf-pages-per-sheet/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/print-multiple-pdf-pages-per-sheet/</guid>
+      <pubDate>Sat, 22 Aug 2026 13:24:59 GMT</pubDate>
+      <description>N-up printing, booklet imposition and poster tiling explained: what each one does, when to use it, and how to get predictable results from any printer.</description>
+    </item>
+    <item>
+      <title>Why Your Files Should Never Leave Your Browser</title>
+      <link>https://www.filepilot.space/blog/why-files-stay-in-browser/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/why-files-stay-in-browser/</guid>
+      <pubDate>Fri, 26 Jun 2026 13:02:21 GMT</pubDate>
+      <description>Uploading files risks breaches and unclear retention. How browser-based processing with WebAssembly and Web Workers keeps documents on your own device.</description>
+    </item>
+    <item>
+      <title>The Hidden Privacy Risks of Online PDF Tools</title>
+      <link>https://www.filepilot.space/blog/privacy-risks-online-pdf-tools/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/privacy-risks-online-pdf-tools/</guid>
+      <pubDate>Fri, 26 Jun 2026 13:02:21 GMT</pubDate>
+      <description>What really happens when you upload a PDF to an online tool: server storage, metadata exposure, third-party processing, and how to judge if a tool is private.</description>
+    </item>
+    <item>
+      <title>How FilePilot Keeps Your Documents Private</title>
+      <link>https://www.filepilot.space/blog/how-filepilot-keeps-documents-private/</link>
+      <guid isPermaLink="true">https://www.filepilot.space/blog/how-filepilot-keeps-documents-private/</guid>
+      <pubDate>Fri, 26 Jun 2026 13:02:21 GMT</pubDate>
+      <description>Inside FilePilot&apos;s privacy architecture: pdf-lib and WebAssembly, Canvas rendering, ONNX Runtime for AI features, offline support and no server processing.</description>
+    </item>
+  </channel>
+</rss>

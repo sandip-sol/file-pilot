@@ -154,6 +154,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Remove blank or duplicate pages from a scanned batch.',
       'Rearrange presentation slides before printing handouts.',
     ],
+    features: [
+      'Drag page thumbnails to reorder them.',
+      'Rotate individual pages or all pages.',
+      'Delete single or selected pages.',
+    ],
       seoTitle: "Organize PDF Pages – Reorder, Rotate, Delete",
     seoDescription: "Reorder, rotate and delete PDF pages with drag-and-drop thumbnails, then download the rearranged file. Free online PDF organizer that never uploads documents.",
     faqs: [
@@ -176,6 +181,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Turn a landscape export into the orientation your reader expects.',
       'Prepare PDFs for consistent printing orientation.',
       'Correct a document that was scanned upside down on a phone.',
+    ],
+    features: [
+      'Rotate every page by 90, 180 or 270 degrees.',
+      'Adds to any rotation a page already has.',
+      'Pages are not redrawn, so text stays selectable.',
     ],
     details: [
       {
@@ -215,6 +225,9 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Delete pages with outdated information from a report.',
       'Trim appendices or reference pages you don\'t need.',
     ],
+    features: [
+      'Remove the pages you specify from a PDF.',
+    ],
       seoTitle: "Delete PDF Pages Online – Free & Private",
     seoDescription: "Delete pages from a PDF by entering page numbers or ranges like 2, 5-7, then download the shorter file. Free, fast and private: it runs entirely in the browser.",
     faqs: [
@@ -237,6 +250,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create a summary PDF with only the key pages from a report.',
       'Extract certificates or appendices from a training manual.',
       'Share select pages without exposing the full document.',
+    ],
+    features: [
+      'Choose pages with numbers and ranges such as 1,3,5-8.',
+      'Saves the selected pages as a new PDF.',
     ],
     details: [
       {
@@ -274,6 +291,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Reverse chronological logs to read oldest-first.',
       'Prepare documents for specific binding requirements.',
       'Reorder photo albums or portfolio pages.',
+    ],
+    features: [
+      'Reverses the order of every page in the document.',
+      'Page content, size and rotation are unchanged.',
     ],
     details: [
       {
@@ -313,6 +334,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Ensure chapters start on odd-numbered pages for booklet printing.',
       'Pad a document to meet a minimum page-count requirement.',
     ],
+    features: [
+      'Insert before the first page or after the last page.',
+      'Insert after any page number.',
+      'Adds one blank A4 portrait page.',
+    ],
     details: [
       {
         heading: 'Choosing where it goes',
@@ -348,6 +374,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Interleave question sheets and answer sheets.',
       'Combine two parallel document versions page-by-page.',
       'Alternate translated pages with the original-language pages.',
+    ],
+    features: [
+      'Interleaves the pages of two or more PDFs.',
+      'Extra pages from a longer file are added at the end.',
     ],
     details: [
       {
@@ -385,6 +415,9 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create quick-reference cheat sheets from multi-page documents.',
       'Save paper when printing draft documents for review.',
       'Prepare study materials with multiple pages visible at once.',
+    ],
+    features: [
+      'Place 2, 4, 6 or 9 pages on each sheet.',
     ],
     seoTitle: 'N-Up PDF – Multiple Pages Per Sheet Online Free',
     seoDescription:
@@ -436,6 +469,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Overlay a signature template onto a contract.',
       'Layer grid lines or ruled paper under handwritten notes.',
     ],
+    features: [
+      'Overlay or underlay mode.',
+      'A shorter overlay repeats across the base document.',
+      'Overlay pages are scaled to the size of the base page.',
+    ],
     details: [
       {
         heading: 'How pages are matched',
@@ -473,6 +511,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Divide wide landscape pages into two portrait pages.',
       'Separate two-column layouts into individual pages.',
       'Convert two-up handouts back to full-size pages.',
+    ],
+    features: [
+      'Split pages vertically into left and right halves.',
+      'Split pages horizontally into top and bottom halves.',
+      'Each half becomes its own page.',
     ],
     details: [
       {
@@ -512,6 +555,9 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert a multi-page form into a single scrollable page.',
     ],
     h1: "Combine PDF Pages into One",
+    features: [
+      'Stitches all pages of a PDF into one long page.',
+    ],
     seoTitle: 'Combine PDF Pages Into One Long Page',
     seoDescription:
       'Stitch every page of a PDF into one long continuous page for scrolling or web display. Free browser-based tool: no uploads, no signup, no watermark added.',
@@ -562,6 +608,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Arrange thumbnail previews for a document index.',
       'Combine receipts or small documents onto a single page for filing.',
     ],
+    features: [
+      'Places the first page of each PDF in a grid on one sheet.',
+      'Choose the number of columns.',
+      'Rows are added to fit the number of files.',
+    ],
     details: [
       {
         heading: 'How the grid is built',
@@ -598,6 +649,9 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create wall-sized architectural or engineering drawings.',
       'Produce large event signage without a wide-format printer.',
       'Print classroom displays or educational wall charts.',
+    ],
+    features: [
+      'Split each page into 2 to 4 columns and 2 to 4 rows.',
     ],
     seoTitle: 'Posterize PDF – Tile Pages for Poster Printing',
     seoDescription:
@@ -700,6 +754,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Audit metadata before publishing or sharing confidential documents.',
       'Confirm the PDF producer tool used for troubleshooting formatting issues.',
     ],
+    features: [
+      'View title, author, subject, keywords and creator.',
+      'Edit metadata fields.',
+      'Clear all metadata.',
+    ],
       seoTitle: "PDF Metadata Editor – View, Edit & Remove",
     seoDescription: "View, edit or remove PDF metadata such as title, author, subject, keywords and dates, then download the updated file. Free and private, runs in your browser.",
     faqs: [
@@ -722,6 +781,9 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create a ZIP archive of project documents for team sharing.',
       'Package multiple certificates or forms for batch download.',
       'Prepare document sets for archival or backup storage.',
+    ],
+    features: [
+      'Package several PDFs into one ZIP archive.',
     ],
     seoTitle: 'PDF to ZIP – Package PDFs into an Archive',
     seoDescription:
@@ -773,6 +835,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Proofread by comparing draft and final versions of a report.',
       'Check that redaction or editing didn\'t affect surrounding content.',
     ],
+    features: [
+      'Compares the text of two PDFs.',
+      'Shows a summary of the pages that changed.',
+    ],
       seoTitle: "Compare PDFs – Page Count and Text Differences",
     seoDescription: "Compare two PDFs page by page and see added and removed text highlighted, plus page counts and a list of changed pages. Free and private, nothing is uploaded.",
     faqs: [
@@ -795,6 +861,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create event programs or wedding booklets.',
       'Make compact reference guides that fold into pocket-sized booklets.',
       'Produce church bulletins or meeting agendas in booklet format.',
+    ],
+    features: [
+      'Reorders pages into saddle-stitch booklet order.',
+      'Places two pages on each side of a sheet.',
+      'Adds blank slots to reach a multiple of four pages.',
     ],
     details: [
       {
@@ -837,6 +908,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Mark up a student paper or manuscript with feedback.',
       'Sign and annotate forms for remote submission.',
     ],
+    features: [
+      'Add text boxes, highlights, checkmarks and dates.',
+      'Add typed or image signatures.',
+      'Place items on a zoomable page preview.',
+    ],
       seoTitle: "Annotate PDF – Text, Highlights, Signatures",
     seoDescription: "Add text boxes, highlights, checkmarks, dates and signatures to a PDF, then download the annotated copy. Free online PDF annotator that never uploads your file.",
     faqs: [
@@ -859,6 +935,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add "CONFIDENTIAL" stamps to sensitive internal reports.',
       'Apply company branding or logos across all pages.',
       'Protect creative work with a visible copyright watermark.',
+    ],
+    features: [
+      'Text or image watermarks.',
+      'Adjustable size, color, opacity and rotation.',
+      'Five positions or a tiled pattern.',
+      'Apply to all pages or selected pages.',
     ],
       seoTitle: "Watermark PDF – Add Text or Image Watermarks",
     seoDescription: "Watermark a PDF with text or an image, with control over opacity, size, rotation and which pages. Free online PDF watermark tool that runs in your browser.",
@@ -883,6 +965,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Black out student names on shared academic records.',
       'Remove classified or proprietary information from government documents.',
     ],
+    features: [
+      'Draw redaction boxes on a zoomable page preview.',
+      'Redacted pages are rendered as images so covered content is destroyed.',
+      'Unredacted pages are copied unchanged.',
+    ],
       seoTitle: "Redact PDF – Permanently Remove Sensitive Data",
     seoDescription: "Redact PDFs properly: draw boxes over sensitive text or images and the content beneath is permanently removed, not just covered. Free, runs in your browser.",
     faqs: [
@@ -906,6 +993,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add your signature to permission slips, forms, or applications.',
       'Sign NDAs and legal documents remotely.',
       'Sign a one-page form that has room near the bottom of the page.',
+    ],
+    features: [
+      'Draw a signature with a mouse or finger.',
+      'Choose which page receives the signature.',
     ],
     details: [
       {
@@ -943,6 +1034,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Focus on a specific region of a page for presentation slides.',
       'Trim the same margin from every page of a scanned document.',
     ],
+    features: [
+      'Set top, right, bottom and left margins in points.',
+      'The same crop is applied to every page.',
+    ],
     details: [
       {
         heading: 'Working out the numbers',
@@ -978,6 +1073,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add section shortcuts to a scanned book or course pack.',
       'Create a structured outline for a thesis or dissertation.',
       'Add a list of chapters to a PDF before sharing it.',
+    ],
+    features: [
+      'Add bookmarks with a title and target page.',
+      'Add several bookmarks at once.',
+      'New bookmarks follow any the PDF already has.',
     ],
     details: [
       {
@@ -1015,6 +1115,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Give a printed document a page-number overview.',
       'Add a simple index page to a handout or printed pack.',
     ],
+    features: [
+      'Adds an A4 contents page to the front of the PDF.',
+      'Custom title for the contents page.',
+      'Lists up to 30 pages with dotted leaders.',
+    ],
     details: [
       {
         heading: 'What the contents page shows',
@@ -1051,6 +1156,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Number the pages of a merged document for reference.',
       'Add numbered footers to legal or academic documents.',
       'Create numbered handouts for workshops or classes.',
+    ],
+    features: [
+      'Six positions along the top or bottom edge.',
+      'Custom starting number and font size.',
+      'Optional prefix and suffix text.',
+      'Live preview of the number format.',
     ],
     details: [
       {
@@ -1090,6 +1201,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add company name or project title to all pages of a proposal.',
       'Insert legal disclaimers in the footer of terms and conditions.',
     ],
+    features: [
+      'Add custom header text and footer text.',
+      'Adjustable font size.',
+    ],
       seoTitle: "Add Header & Footer to PDF – Free Online Tool",
     seoDescription: "Add custom header and footer text to every page of a PDF, with adjustable font size. Free online tool that works entirely in your browser; nothing is uploaded.",
     faqs: [
@@ -1112,6 +1227,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Give a handout or presentation a consistent tinted look.',
       'Prepare colored paper simulation for digital distribution.',
       'Add a branded background color to match corporate guidelines.',
+    ],
+    features: [
+      'Choose a preset or any custom color.',
+      'The color is placed behind the page content.',
+      'Applied to every page of the file.',
     ],
     details: [
       {
@@ -1149,6 +1269,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Stamp "APPROVED" on finalized proposals or invoices.',
       'Add "COPY" stamps to distinguish duplicates from originals.',
       'Label documents as "FOR INTERNAL USE ONLY" before distribution.',
+    ],
+    features: [
+      'Preset stamps or your own text.',
+      'Adjustable color, font size and opacity.',
+      'Stamp all pages, the first page or a custom list.',
     ],
     details: [
       {
@@ -1188,6 +1313,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Strip hyperlinks from a PDF before printing.',
       'Prepare a clean copy of a heavily-annotated academic paper.',
     ],
+    features: [
+      'Removes comments, highlights, links and other annotations.',
+      'Flattens form fields, keeping any typed answers.',
+      'Leaves the page content in place.',
+    ],
     details: [
       {
         heading: 'What gets removed',
@@ -1226,6 +1356,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Complete employment onboarding documents remotely.',
       'Submit completed insurance claims or benefits forms.',
     ],
+    features: [
+      'Fill in the text fields of an interactive PDF form.',
+      'Set checkboxes as checked or unchecked.',
+      'Answers are flattened into the page on download.',
+    ],
     details: [
       {
         heading: 'Which PDFs this works on',
@@ -1263,6 +1398,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Design order forms or request forms for internal workflows.',
       'Create surveys or questionnaires in PDF format.',
     ],
+    features: [
+      'Add text fields, checkboxes, dropdowns and radio buttons.',
+      'Start from an existing PDF or a blank A4 page.',
+    ],
       seoTitle: "PDF Form Creator – Make Fillable PDF Forms",
     seoDescription: "Create fillable PDF forms: add text fields, checkboxes, dropdowns and radio buttons to any PDF or a blank page. Free, private and built in your browser.",
     faqs: [
@@ -1286,6 +1425,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Remove accidental blank pages from exported reports.',
       'Trim trailing blank pages before sharing or printing.',
       'Reduce file size by eliminating unnecessary empty pages.',
+    ],
+    features: [
+      'Detects blank pages from their rendered pixels.',
+      'Adjustable blank threshold from 85% to 100%.',
     ],
     details: [
       {
@@ -1356,6 +1499,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create a PDF photo sheet for sharing or printing.',
       'Upload JPEG images to services that require PDF documents.',
     ],
+    features: [
+      'A4 or Letter page size.',
+      'Portrait or landscape orientation.',
+      'None, small or medium margins.',
+    ],
       seoTitle: "JPG to PDF Online - Free and Private",
     seoDescription: "Convert JPG and JPEG photos into a single PDF. Reorder and rotate images, pick a page size and download instantly. Free and private, with no uploads at all.",
     faqs: [
@@ -1379,6 +1527,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Turn a README or changelog into a printable document.',
       'Create a PDF from code snippets or configuration files.',
       'Produce documentation from plain text drafts.',
+    ],
+    features: [
+      'Paste text or upload a .txt file.',
+      'Font size from 8 to 24 points.',
+      'A4 or US Letter pages.',
+      'Long lines wrap and new pages are added automatically.',
     ],
     details: [
       {
@@ -1416,6 +1570,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Share configuration files as formatted PDFs with team members.',
       'Create readable reports from exported JSON data.',
       'Archive data exports as human-readable PDF documents.',
+    ],
+    features: [
+      'Paste JSON or upload a .json file.',
+      'Downloads the content as a PDF.',
     ],
     seoTitle: 'JSON to PDF – Convert JSON Data to a Document',
     seoDescription:
@@ -1466,6 +1624,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Turn documentation written in Markdown into printable manuals.',
       'Create formatted reports from Markdown notes.',
       'Produce professional-looking proposals from Markdown drafts.',
+    ],
+    features: [
+      'Paste Markdown or upload a .md file.',
+      'Choose the page size.',
     ],
     seoTitle: 'Markdown to PDF – Convert .md Files to PDF Free',
     seoDescription:
@@ -1554,6 +1716,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Extract document pages as shareable JPEG files.',
       'Generate lightweight page images for review or annotation.',
     ],
+    features: [
+      'Export pages as PNG, JPG or WebP.',
+      'Adjustable resolution and quality.',
+      'Download every page as a ZIP.',
+    ],
       seoTitle: "PDF to JPG Online - Free and Private",
     seoDescription: "Convert PDF pages to high-quality JPG images with adjustable DPI and quality, and download them as one ZIP. Free online PDF to JPG converter, no file uploads.",
     faqs: [
@@ -1599,6 +1766,9 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create a uniform appearance for documents with mixed color pages.',
       'Reduce file size of scanned color documents.',
       'Prepare documents for black-and-white publishing or photocopying.',
+    ],
+    features: [
+      'Renders every page of a PDF in grayscale.',
     ],
     seoTitle: 'PDF to Grayscale – Color PDF to Black & White',
     seoDescription:
@@ -1655,6 +1825,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Build a searchable index from a collection of PDF documents.',
       'Feed the text of PDF reports into a data pipeline for analysis.',
     ],
+    features: [
+      'Exports document metadata and page count as JSON.',
+      'Includes the number, size and text of each page.',
+      'Preview the JSON output on the page.',
+    ],
     details: [
       {
         heading: 'What is in the JSON file',
@@ -1692,6 +1867,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert a PDF article into a blog post draft.',
       'Extract notes from a PDF for import into Obsidian or Notion.',
       'Convert PDF meeting minutes into editable Markdown for team sharing.',
+    ],
+    features: [
+      'Saves the text of every page as a Markdown file.',
+      'Adds a heading for the document and for each page.',
+      'Preview the Markdown before using it.',
     ],
     details: [
       {
@@ -1764,6 +1944,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Drop pages from a PDF report into a presentation.',
       'Save a page with a chart or diagram from a research paper.',
     ],
+    features: [
+      'Exports every page as a PNG at 2× scale.',
+      'Downloads all pages together in a ZIP archive.',
+    ],
     details: [
       {
         heading: 'What you get',
@@ -1799,6 +1983,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Transform PDF manga into CBZ format for tablet reading.',
       'Convert graphic novels from PDF to CBZ for e-reader compatibility.',
       'Archive digital comics in the standard CBZ format.',
+    ],
+    features: [
+      'Standard or high page image quality.',
+      'Downloads the pages as a CBZ comic archive.',
     ],
     seoTitle: 'PDF to CBZ – Convert PDF Comics & Manga to CBZ',
     seoDescription:
@@ -1886,6 +2074,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Bring mixed page sizes onto one paper size before printing.',
       'Scale a Legal document down to fit A4 or Letter paper.',
     ],
+    features: [
+      'Resize every page to A4, US Letter, A3 or Legal.',
+      'Content is scaled in proportion and centered.',
+    ],
     details: [
       {
         heading: 'How pages are resized',
@@ -1923,6 +2115,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Confirm that a document is A4 or US Letter before printing.',
       'Identify landscape pages in a predominantly portrait document.',
     ],
+    features: [
+      'Width and height of every page in points and inches.',
+      'Portrait or landscape shown for each page.',
+      'Reports whether all pages share one size.',
+    ],
     details: [
       {
         heading: 'How to read the results',
@@ -1959,6 +2156,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Fix PDFs that show "file is damaged" errors in your viewer.',
       'Clean up a PDF that has lost its cross-reference table.',
       'Rewrite a PDF produced by a faulty export tool.',
+    ],
+    features: [
+      'Rewrites a damaged PDF into a new file.',
+      'Can rebuild a missing cross-reference table.',
+      'Can skip stray data before the PDF header.',
     ],
     details: [
       {
@@ -2022,6 +2224,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Unlock a PDF to enable printing or text copying.',
       'Change the password on an existing protected document.',
     ],
+    features: [
+      'Unlock a password-protected PDF using its current password.',
+      'Exports a new copy with no password.',
+    ],
       seoTitle: "Protect or Unlock PDF – Browser-Only Security",
     seoDescription: "Unlock password-protected PDFs when you know the password and manage PDF security locally in your browser. Free, private, and files are never uploaded.",
     faqs: [
@@ -2044,6 +2250,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Remove hidden metadata that could reveal editing history or author details.',
       'Strip embedded scripts for security before opening untrusted PDFs.',
       'Prepare documents for public release by removing all non-visible data.',
+    ],
+    features: [
+      'Removes document metadata.',
+      'Flattens form fields.',
+      'Optimizes the file structure.',
     ],
       seoTitle: "Sanitize PDF – Remove Metadata & Hidden Data",
     seoDescription: "Remove metadata and hidden data from a PDF and flatten interactive elements before you share it. Free online PDF sanitizer that runs locally in your browser.",
@@ -2068,6 +2279,9 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Redact account numbers or SSNs across a multi-page financial report.',
       'Bulk-redact specific terms from legal discovery documents.',
     ],
+    features: [
+      'Enter text and redact it from the PDF.',
+    ],
       seoTitle: "Find & Redact PDF Text – Free Privacy Tool",
     seoDescription: "Search for sensitive text in your PDF and export an image-only redacted copy with redactions burned into the page pixels. 100% private — processed locally.",
     faqs: [
@@ -2090,6 +2304,9 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Make sure form answers print and display in viewers that ignore form fields.',
       'Prepare completed forms for archival where interactive fields could cause display issues.',
       'Ensure consistent rendering across different PDF viewers.',
+    ],
+    features: [
+      'Converts form fields into ordinary page content.',
     ],
     seoTitle: 'Flatten PDF – Make Form Fields Non-Editable',
     seoDescription:
@@ -2181,6 +2398,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Prepare cutout images for graphic design or presentations.',
       'Clean up pet or object photos for e-commerce listings.',
     ],
+    features: [
+      'Transparent PNG or WebP output.',
+      'JPEG output with a chosen background color.',
+      'Adjustable edge feathering.',
+    ],
       seoTitle: "Remove Background — Free AI Background Remover",
     seoDescription: "Remove the background from any photo automatically with AI and download a transparent PNG. Free online background remover that runs entirely in your browser.",
     faqs: [
@@ -2204,6 +2426,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create professional headshots with corporate-colored backgrounds.',
       'Add creative backgrounds to product photos for social media.',
       'Simulate different environments for real estate or interior design previews.',
+    ],
+    features: [
+      'Replace the background with a color, gradient, blur or image.',
+      'Ready-made background presets.',
+      'Optional drop shadow on the foreground.',
+      'Export as PNG, WebP or JPEG.',
     ],
       seoTitle: "Change Background — AI Background Replacer",
     seoDescription: "Replace a photo's background with a solid color, gradient, blur or your own image using AI that runs in your browser. Free, and your images are never uploaded.",
@@ -2229,6 +2457,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Improve the resolution of screenshots or cropped images.',
       'Enhance product photos that were shot at low resolution.',
     ],
+    features: [
+      'Enlarge images by 2× or 4×.',
+      'Accepts images up to 4 megapixels.',
+      'Export as PNG, WebP or JPEG.',
+    ],
       seoTitle: "Upscale Image — AI Super-Resolution",
     seoDescription: "Upscale images 2x or 4x with AI super-resolution that adds detail instead of blur. Free online image upscaler that runs in your browser, nothing is uploaded.",
     faqs: [
@@ -2253,6 +2486,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Clean up noisy images taken in low-light conditions.',
       'Sharpen blurry or slightly out-of-focus photos.',
     ],
+    features: [
+      'Auto, low-light, denoise, sharpen, color correction and restore-faded modes.',
+      'Conservative, balanced or strong intensity.',
+      'Before and after comparison.',
+      'Export as JPEG, PNG or WebP.',
+    ],
       seoTitle: "AI Enhance Image — Smart Image Enhancement",
     seoDescription: "Improve image quality with smart analysis-based enhancement. Fix exposure, reduce noise, sharpen details, and correct colours — all locally in your browser.",
     faqs: [
@@ -2276,6 +2515,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Clean up product photos by removing distracting background objects.',
       'Remove power lines, signs, or other visual clutter from landscape shots.',
       'Erase blemishes or temporary marks from document scans.',
+    ],
+    features: [
+      'Paint over an area, and erase parts of the mask.',
+      'Adjustable brush size.',
+      'Export as JPEG, PNG or WebP.',
     ],
       seoTitle: "Object Remover — Content-Aware Object Removal",
     seoDescription: "Remove unwanted objects, people or text from photos: brush over them and the gap fills from nearby pixels. Free online object remover that runs in your browser.",
@@ -2303,6 +2547,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Getting a photo under a 20 KB, 50 KB or 100 KB upload limit without visible quality loss.',
       'Producing exact pixel dimensions for a job portal, visa application or ID card.',
       'Preparing correctly sized images for social profiles and marketplace listings.',
+    ],
+    features: [
+      'Set exact width and height in pixels.',
+      'Set a maximum file size in KB.',
+      'Crop to fit or fit with padding.',
+      'Export as JPG, PNG or WebP.',
     ],
     seoTitle: 'Resize Image to Exact Size & KB',
     seoDescription:
@@ -2340,6 +2590,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert and compress images to meet email or form submission size limits.',
       'Format screenshots to exact pixel dimensions for documentation.',
     ],
+    features: [
+      'Presets or custom dimensions in pixels or percent.',
+      'Contain, cover or stretch fit modes.',
+      'Format several images and download a ZIP.',
+    ],
       seoTitle: "Image Formatter — Resize, Convert & Optimize",
     seoDescription: "Format images to exact pixel dimensions and file size targets, convert formats and batch export as ZIP. Free online image formatter that never uploads images.",
     faqs: [
@@ -2363,6 +2618,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Validate ID photos for driver\'s license or national ID requirements.',
       'Crop and resize photos to meet specific country photo specifications.',
       'Save money by preparing compliant photos at home instead of at a studio.',
+    ],
+    features: [
+      'Validation profiles or custom dimensions.',
+      'Technical checks on the uploaded photo.',
+      'Crop and position the photo.',
+      'Export as JPEG or PNG.',
     ],
       seoTitle: "Passport Photo Validator – Check Requirements",
     seoDescription: "Check a passport or visa photo against official size, dimension and format rules, then crop and export a compliant file. Free, private, runs in your browser.",
@@ -2388,6 +2649,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Prepare YouTube thumbnails at the recommended 1280×720 resolution.',
       'Batch-resize a brand photo for every social platform at once.',
     ],
+    features: [
+      'Export several platform sizes at once.',
+      'Cover, contain or stretch.',
+      'Custom sizes.',
+      'Download all sizes as a ZIP.',
+    ],
       seoTitle: "Social Media Resizer",
     seoDescription: "Resize images to the right sizes for Instagram, Facebook, LinkedIn, X, YouTube, Pinterest and TikTok in one go. Free, private and runs in your browser.",
     faqs: [
@@ -2411,6 +2678,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Format photos for eBay, Etsy, or Shopify product pages.',
       'Add white backgrounds to product photos for consistent catalog styling.',
       'Batch-process product images when launching a new collection.',
+    ],
+    features: [
+      'Product image presets or custom dimensions.',
+      'Background, shadow and border options.',
+      'Filename templates.',
+      'Format several images and download a ZIP.',
     ],
       seoTitle: "E-commerce Image Formatter",
     seoDescription: "Format product photos for Amazon, Shopify and other marketplaces with clean backgrounds and exact dimensions. Free, batch-ready and processed in your browser.",
@@ -2436,6 +2709,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Scan multi-page paper documents without a physical scanner.',
       'Convert photos of old letters or records into searchable PDFs.',
     ],
+    features: [
+      'A4, Letter, original or custom page size.',
+      'Automatic, portrait or landscape orientation.',
+      'Original, grayscale, black and white or high contrast enhancement.',
+    ],
       seoTitle: "Scan Images to PDF",
     seoDescription: "Turn phone photos of documents into a clean, ordered PDF: reorder, rotate and enhance the pages, then download. Free and private, processed in your browser.",
     faqs: [
@@ -2460,6 +2738,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Update favicons when rebranding a website.',
       'Generate complete icon sets for PWA (Progressive Web App) manifests.',
     ],
+    features: [
+      'Generates favicon files at multiple sizes.',
+      'Browser tab preview.',
+      'HTML snippet to copy into your site.',
+      'Download all files as a ZIP.',
+    ],
       seoTitle: "Favicon Generator",
     seoDescription: "Generate a complete favicon set from one image: PNG favicons, Apple touch icons, Android and PWA icons plus a web manifest. Free and runs in your browser.",
     faqs: [
@@ -2483,6 +2767,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Generate Wi-Fi QR codes for office or guest network access.',
       'Build vCard QR codes for business cards.',
       'Create scannable links for event registration or product pages.',
+    ],
+    features: [
+      'URL, text, email, phone, SMS, Wi-Fi, vCard and event codes.',
+      'Custom colors and dot styles.',
+      'Adjustable error correction.',
+      'Optional logo in the center.',
     ],
       seoTitle: "QR Code Generator",
     seoDescription: "Create custom QR codes for URLs, WiFi, vCards, events, and more. Customize colors, styles, and add logos. Free, private, and runs entirely in your browser.",
@@ -2510,6 +2800,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Batch-optimize images for a portfolio or gallery.',
       'Shrink screenshots for documentation without visible quality loss.',
     ],
+    features: [
+      'High quality, balanced, small file and custom levels.',
+      'Optional target file size in KB.',
+      'Option to strip EXIF and GPS metadata.',
+      'Compress several images and download a ZIP.',
+    ],
       seoTitle: "Compress Image Online - Reduce Image File Size",
     seoDescription: "Compress JPG, PNG and WebP images to smaller file sizes while keeping quality, one at a time or in batches. Free, private and processed entirely in the browser.",
     faqs: [
@@ -2533,6 +2829,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Scale down large camera photos for sharing via email or messaging.',
       'Prepare images at exact sizes for form submissions or profile pictures.',
       'Batch-resize a folder of images to consistent dimensions.',
+    ],
+    features: [
+      'Resize by pixels or percentage.',
+      'Fit, fill and crop, or stretch.',
+      'Presets for common social and web sizes.',
+      'Resize several images and download a ZIP.',
     ],
       seoTitle: "Resize Image Online - Free Browser-Based Tool",
     seoDescription: "Resize images to exact pixel dimensions or by percentage, with fit, fill or stretch modes and batch support. Free online image resizer that never uploads files.",
@@ -2558,6 +2860,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Convert images to WebP or AVIF for modern web performance.',
       'Produce JPEG versions of WebP images for compatibility with older apps.',
     ],
+    features: [
+      'Convert to JPEG, PNG, WebP or AVIF.',
+      'Choose a background color to replace transparency.',
+      'Optional new width and height.',
+      'Convert several images and download a ZIP.',
+    ],
       seoTitle: "Convert Image — JPEG, PNG, WebP, AVIF",
     seoDescription: "Convert images between JPG, PNG, WebP and AVIF in batches with quality control. Free online image converter that runs in your browser, so nothing is uploaded.",
     faqs: [
@@ -2581,6 +2889,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Create WebP and AVIF variants alongside JPEG fallbacks.',
       'Produce correctly-sized images for different screen densities (1×, 2×, 3×).',
       'Optimize hero images and banners for fast page loading.',
+    ],
+    features: [
+      'Presets for hero, blog, product and other images.',
+      'Generates variants at several responsive widths.',
+      'Choose output formats and a quality target.',
+      'Download all variants as a ZIP.',
     ],
       seoTitle: "Website Image Optimiser – Responsive Images",
     seoDescription: "Generate responsive WebP, AVIF and JPEG image variants at several sizes with ready-to-paste HTML. Free website image optimizer that runs in your browser.",
@@ -2606,6 +2920,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Assess whether an image needs optimization before uploading to a website.',
       'Diagnose why an image appears blurry or pixelated.',
     ],
+    features: [
+      'Analyzes an image against an intended use.',
+      'Gives recommendations with links to the right tool.',
+    ],
       seoTitle: "Image Quality Analyzer – Resolution & Format",
     seoDescription: "Check an image's resolution, file size, color depth and format, and whether it suits web, print or social media, with fixes. Free, private, in your browser.",
     faqs: [
@@ -2629,6 +2947,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Remove unwanted borders or background from product photos.',
       'Extract a specific area of interest from a larger image.',
       'Create correctly-proportioned thumbnails for video platforms.',
+    ],
+    features: [
+      'Free crop or preset aspect ratios.',
+      'Custom aspect ratio.',
+      'Optional output size in pixels.',
+      'Export as JPEG, PNG or WebP.',
     ],
       seoTitle: "Crop Image Online – Free Browser-Based Cropper",
     seoDescription: "Crop JPG, PNG and WebP images precisely with an interactive editor and aspect ratio presets like 1:1 and 16:9. Free, private and processed in your browser.",
@@ -2654,6 +2978,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Flip images for mirror effects or design requirements.',
       'Batch-correct orientation for a folder of camera photos.',
     ],
+    features: [
+      'Flip horizontally or vertically.',
+      'Rotate by a custom angle.',
+      'Apply changes to all images.',
+      'Download several images as a ZIP.',
+    ],
       seoTitle: "Rotate & Flip Image Online – Free and Private",
     seoDescription: "Rotate images by any angle and flip them horizontally or vertically, one at a time or in batches with ZIP download. Free, private and runs in your browser.",
     faqs: [
@@ -2677,6 +3007,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Brand images with a company logo before distributing.',
       'Add "PROOF" or "SAMPLE" overlays to design previews.',
       'Batch-watermark event photos before sharing with clients.',
+    ],
+    features: [
+      'Text or logo watermarks.',
+      'Nine positions or a repeated pattern.',
+      'Adjustable font, color and opacity.',
+      'Watermark several images and download a ZIP.',
     ],
       seoTitle: "Watermark Image Online – Add Text or Logo",
     seoDescription: "Add text or image watermarks to photos with adjustable position, opacity and tiled patterns, in batches. Free online watermark tool that never uploads images.",
@@ -2703,6 +3039,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Batch-strip metadata from an entire photo collection.',
     ],
     h1: "Remove Image Metadata",
+    features: [
+      'Inspect the metadata in each image.',
+      'Export as JPEG, PNG or WebP.',
+      'Clean several images and download a ZIP.',
+    ],
     seoTitle: 'Remove Image Metadata – Strip EXIF & GPS Data',
     seoDescription:
       'Remove EXIF data, GPS location and camera details from photos before you share them. Free EXIF remover that runs locally, so images are never uploaded.',
@@ -2768,6 +3109,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Anonymize people in screenshots or documentation images.',
       'Protect children\'s identities in published event photos.',
     ],
+    features: [
+      'Draw blur regions by hand as rectangles or ovals.',
+      'Gaussian, pixelate or black bar styles.',
+      'Export as JPEG, PNG or WebP.',
+    ],
       seoTitle: "Blur Face & Plate Online - Privacy Blur Tool",
     seoDescription: "Blur faces, license plates and sensitive areas in photos with Gaussian blur, pixelation or a solid bar. Free online image blur tool that never uploads images.",
     faqs: [
@@ -2792,6 +3138,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Add text overlays or captions to images.',
       'Perform basic retouching without installing Photoshop or GIMP.',
     ],
+    features: [
+      'Brightness, contrast, saturation, exposure and other adjustments.',
+      'Filters, text overlay and borders.',
+      'Before and after preview.',
+      'Export as JPEG, PNG or WebP.',
+    ],
       seoTitle: "Photo Editor Online – Free Browser-Based Editor",
     seoDescription: "Edit photos online: adjust brightness and contrast, apply filters, add text overlays and borders, then download. Free photo editor that never uploads images.",
     faqs: [
@@ -2815,6 +3167,11 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Vectorize simple illustrations for use in design software.',
       'Create SVG versions of icons for responsive web design.',
       'Convert hand-drawn sketches into clean vector graphics.',
+    ],
+    features: [
+      'Black and white, line art and multi-color modes.',
+      'Adjustable color count.',
+      'Option to output strokes instead of fills.',
     ],
     seoTitle: 'Image to SVG – Convert PNG & JPG Online',
     seoDescription:
@@ -2870,6 +3227,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Build a color palette from a photograph for design inspiration.',
       'Identify exact colors from a screenshot or mockup.',
       'Sample colors from an image to match in CSS or design software.',
+    ],
+    features: [
+      'Pick colors from an image or from the screen.',
+      'Values in HEX, RGB and HSL.',
+      'Extract dominant, vibrant or balanced palettes.',
+      'Export palettes as CSS, JSON or text.',
     ],
       seoTitle: "Color Picker – Pick Colors from Any Image Online",
     seoDescription: "Pick colors from any image and extract palettes, then copy values as HEX, RGB, HSL, CMYK or CSS variables. Free color picker that runs locally in your browser.",

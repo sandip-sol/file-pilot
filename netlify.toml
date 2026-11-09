@@ -8,6 +8,11 @@
     Content-Type = "application/xml; charset=UTF-8"
 
 [[headers]]
+  for = "/rss.xml"
+  [headers.values]
+    Content-Type = "application/rss+xml; charset=UTF-8"
+
+[[headers]]
   for = "/robots.txt"
   [headers.values]
     Content-Type = "text/plain; charset=UTF-8"
