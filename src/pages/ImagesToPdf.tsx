@@ -148,12 +148,12 @@ export const ImagesToPdf = () => {
                     {/* Left: Settings */}
                     <div className="lg:col-span-1">
                         <div className="bg-card border border-border rounded-2xl p-6 shadow-sm sticky top-24">
-                            <h3 className="font-bold text-lg mb-6">Page Settings</h3>
+                            <h2 className="font-bold text-lg mb-6">Page Settings</h2>
 
                             <div className="space-y-5">
                                 <div>
                                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Page Size</label>
-                                    <select
+                                    <select aria-label="Page Size"
                                         value={pageSize}
                                         onChange={(e) => setPageSize(e.target.value as 'A4' | 'Letter')}
                                     >
@@ -164,7 +164,7 @@ export const ImagesToPdf = () => {
 
                                 <div>
                                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Orientation</label>
-                                    <select
+                                    <select aria-label="Orientation"
                                         value={orientation}
                                         onChange={(e) => setOrientation(e.target.value as 'portrait' | 'landscape')}
                                     >
@@ -175,7 +175,7 @@ export const ImagesToPdf = () => {
 
                                 <div>
                                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Margins</label>
-                                    <select
+                                    <select aria-label="Margins"
                                         value={margin}
                                         onChange={(e) => setMargin(e.target.value as 'none' | 'small' | 'medium')}
                                     >
@@ -240,7 +240,7 @@ export const ImagesToPdf = () => {
                             {items.length > 0 && (
                                 <div className="mt-8">
                                     <div className="flex items-center justify-between mb-4">
-                                        <h3 className="font-semibold">Images ({items.length})</h3>
+                                        <h2 className="font-semibold">Images ({items.length})</h2>
                                         <button onClick={() => setItems([])} className="text-sm text-[var(--error)] hover:underline">Clear All</button>
                                     </div>
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 animate-fade-in">

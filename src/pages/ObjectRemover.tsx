@@ -300,7 +300,7 @@ export const ObjectRemover = () => {
   const hasMask = paths.some((p) => !p.isErase);
 
   return (
-    <main className="container max-w-4xl py-8 px-4">
+    <div className="container max-w-4xl py-8 px-4">
       <PageSeo {...toolSeo('/object-remover')} />
 
       <div className="mb-6">
@@ -449,7 +449,7 @@ export const ObjectRemover = () => {
             <div className="grid gap-3 sm:grid-cols-2">
               <div>
                 <label className="block text-sm mb-1">Format</label>
-                <select className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as OutputFormatOption)} disabled={isProcessing}>
+                <select aria-label="Format" className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as OutputFormatOption)} disabled={isProcessing}>
                   <option value="image/jpeg">JPEG</option>
                   <option value="image/png">PNG</option>
                   {supportedFormats?.['image/webp'] && <option value="image/webp">WebP</option>}
@@ -458,7 +458,7 @@ export const ObjectRemover = () => {
               {outputFormat !== 'image/png' && (
                 <div>
                   <label className="block text-sm mb-1">Quality: {Math.round(quality * 100)}%</label>
-                  <input type="range" min="0.1" max="1" step="0.01" value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full" disabled={isProcessing} />
+                  <input aria-label="Quality" type="range" min="0.1" max="1" step="0.01" value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full" disabled={isProcessing} />
                 </div>
               )}
             </div>
@@ -518,6 +518,6 @@ export const ObjectRemover = () => {
       )}
 
       <FAQSection items={toolFaqs('/object-remover')} />
-    </main>
+    </div>
   );
 };

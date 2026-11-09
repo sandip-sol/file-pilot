@@ -76,7 +76,7 @@ export const GridCombine = () => {
 
                         <div>
                             <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Columns</label>
-                            <select value={cols} onChange={e => setCols(parseInt(e.target.value))}>
+                            <select aria-label="Columns" value={cols} onChange={e => setCols(parseInt(e.target.value))}>
                                 <option value="2">2 columns</option>
                                 <option value="3">3 columns</option>
                                 <option value="4">4 columns</option>

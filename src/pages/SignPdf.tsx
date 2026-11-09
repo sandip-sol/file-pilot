@@ -103,7 +103,7 @@ export const SignPdf = () => {
                 <div className="max-w-3xl mx-auto space-y-4">
                     {/* File Upload */}
                     <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
-                        <h3 className="font-semibold mb-4">1. Upload PDF</h3>
+                        <h2 className="font-semibold mb-4">1. Upload PDF</h2>
                         {!file ? (
                             <FileUploader onFilesSelected={handleFileSelected} multiple={false} accept=".pdf" description="Drop a PDF to sign" />
                         ) : (
@@ -123,7 +123,7 @@ export const SignPdf = () => {
                     {/* Signature Pad */}
                     <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
                         <div className="flex items-center justify-between mb-4">
-                            <h3 className="font-semibold">2. Draw Signature</h3>
+                            <h2 className="font-semibold">2. Draw Signature</h2>
                             <button onClick={clearCanvas} className="text-sm text-[var(--error)] hover:underline flex items-center gap-1">
                                 <X className="w-3.5 h-3.5" />Clear
                             </button>
@@ -147,10 +147,10 @@ export const SignPdf = () => {
                     {/* Page Selection & Sign */}
                     {file && signatureData && (
                         <div className="bg-card border border-border rounded-2xl p-6 shadow-sm space-y-4 animate-fade-in">
-                            <h3 className="font-semibold">3. Choose Page & Sign</h3>
+                            <h2 className="font-semibold">3. Choose Page & Sign</h2>
                             <div>
                                 <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Place signature on page</label>
-                                <input type="number" min="1" value={page} onChange={e => setPage(parseInt(e.target.value) || 1)} className="w-32" />
+                                <input aria-label="Place signature on page" type="number" min="1" value={page} onChange={e => setPage(parseInt(e.target.value) || 1)} className="w-32" />
                             </div>
                             {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl text-sm font-medium">{error}</div>}
                             {success && (

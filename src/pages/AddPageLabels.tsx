@@ -42,8 +42,8 @@ export const AddPageLabels = () => {
                         <div className="mt-6 animate-fade-in space-y-4">
                             <p className="text-sm"><strong>{file.name}</strong></p>
                             <div className="grid grid-cols-2 gap-4">
-                                <div><label className="block text-sm font-medium mb-2">Prefix</label><input type="text" value={prefix} onChange={e => setPrefix(e.target.value)} placeholder="Page " className="w-full rounded-xl border border-border bg-muted px-4 py-3 focus:outline-none focus:ring-2 focus:ring-lime-400" /></div>
-                                <div><label className="block text-sm font-medium mb-2">Start Number</label><input type="number" min={1} value={startFrom} onChange={e => setStartFrom(Number(e.target.value))} className="w-full rounded-xl border border-border bg-muted px-4 py-3 focus:outline-none focus:ring-2 focus:ring-lime-400" /></div>
+                                <div><label className="block text-sm font-medium mb-2">Prefix</label><input aria-label="Prefix" type="text" value={prefix} onChange={e => setPrefix(e.target.value)} placeholder="Page " className="w-full rounded-xl border border-border bg-muted px-4 py-3 focus:outline-none focus:ring-2 focus:ring-lime-400" /></div>
+                                <div><label className="block text-sm font-medium mb-2">Start Number</label><input aria-label="Start Number" type="number" min={1} value={startFrom} onChange={e => setStartFrom(Number(e.target.value))} className="w-full rounded-xl border border-border bg-muted px-4 py-3 focus:outline-none focus:ring-2 focus:ring-lime-400" /></div>
                             </div>
                             <div className="rounded-xl bg-muted px-4 py-3 text-sm text-[var(--text-muted)]">Preview: <strong>{prefix}{startFrom}</strong>, {prefix}{startFrom + 1}, {prefix}{startFrom + 2}…</div>
                             {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl text-sm">{error}</div>}

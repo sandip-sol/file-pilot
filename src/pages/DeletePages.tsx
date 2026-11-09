@@ -116,7 +116,7 @@ export const DeletePages = () => {
                                     <label className="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
                                         Pages to Delete {totalPages > 0 && <span className="text-[var(--text-muted)] font-normal">(1–{totalPages})</span>}
                                     </label>
-                                    <input
+                                    <input aria-label="Pages to Delete"
                                         type="text"
                                         value={pageInput}
                                         onChange={e => setPageInput(e.target.value)}

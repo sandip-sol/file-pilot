@@ -666,7 +666,7 @@ export const SocialMediaResizer = () => {
                         <label className="block text-xs font-medium mb-1 text-muted-foreground">
                           Width (px)
                         </label>
-                        <input
+                        <input aria-label="Width (px)"
                           type="number"
                           min={1}
                           max={10000}
@@ -687,7 +687,7 @@ export const SocialMediaResizer = () => {
                         <label className="block text-xs font-medium mb-1 text-muted-foreground">
                           Height (px)
                         </label>
-                        <input
+                        <input aria-label="Height (px)"
                           type="number"
                           min={1}
                           max={10000}
@@ -777,7 +777,7 @@ export const SocialMediaResizer = () => {
                       Background Color
                     </label>
                     <div className="flex items-center gap-3">
-                      <input
+                      <input aria-label="Background Color"
                         type="color"
                         value={bgColor}
                         onChange={(e) => {
@@ -801,7 +801,7 @@ export const SocialMediaResizer = () => {
                   <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                     Output Format
                   </label>
-                  <select
+                  <select aria-label="Output Format"
                     value={outputFormat}
                     onChange={(e) => {
                       setOutputFormat(e.target.value as OutputFormatOption);
@@ -824,7 +824,7 @@ export const SocialMediaResizer = () => {
                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                       Quality: {Math.round(quality * 100)}%
                     </label>
-                    <input
+                    <input aria-label="Quality"
                       type="range"
                       min={10}
                       max={100}

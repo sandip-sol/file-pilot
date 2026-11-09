@@ -158,7 +158,7 @@ export const Split = () => {
                                             <div className="grid grid-cols-2 gap-4">
                                                 <div>
                                                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">From Page</label>
-                                                    <input
+                                                    <input aria-label="From Page"
                                                         type="number"
                                                         min="1"
                                                         max={pageCount}
@@ -168,7 +168,7 @@ export const Split = () => {
                                                 </div>
                                                 <div>
                                                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">To Page</label>
-                                                    <input
+                                                    <input aria-label="To Page"
                                                         type="number"
                                                         min="1"
                                                         max={pageCount}

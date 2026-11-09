@@ -22,7 +22,7 @@ export const Terms = () => {
                                 <FileText className="w-5 h-5" />
                             </div>
                             <div>
-                                <h3 className="font-bold mb-1">Free to Use</h3>
+                                <h2 className="font-bold mb-1">Free to Use</h2>
                                 <p className="text-sm text-[var(--text-muted)]">Use our tools for any personal or commercial purpose</p>
                             </div>
                         </div>
@@ -31,7 +31,7 @@ export const Terms = () => {
                                 <Shield className="w-5 h-5" />
                             </div>
                             <div>
-                                <h3 className="font-bold mb-1">Your Files, Your Property</h3>
+                                <h2 className="font-bold mb-1">Your Files, Your Property</h2>
                                 <p className="text-sm text-[var(--text-muted)]">You own all files you process through FilePilot</p>
                             </div>
                         </div>
@@ -42,7 +42,7 @@ export const Terms = () => {
                         <section>
                             <div className="flex items-center gap-3 mb-3">
                                 <Scale className="w-5 h-5 text-foreground" />
-                                <h3 className="text-xl font-bold text-[var(--text)]">1. Acceptance of Terms</h3>
+                                <h2 className="text-xl font-bold text-[var(--text)]">1. Acceptance of Terms</h2>
                             </div>
                             <p className="text-[var(--text-secondary)] leading-relaxed">
                                 By using FilePilot, you agree to these Terms of Service. If you do not agree, please do not use the service.
@@ -52,7 +52,7 @@ export const Terms = () => {
                         <section>
                             <div className="flex items-center gap-3 mb-3">
                                 <FileText className="w-5 h-5 text-foreground" />
-                                <h3 className="text-xl font-bold text-[var(--text)]">2. Use of Service</h3>
+                                <h2 className="text-xl font-bold text-[var(--text)]">2. Use of Service</h2>
                             </div>
                             <p className="text-[var(--text-secondary)] leading-relaxed">
                                 You are free to use our tools for personal or commercial purposes. You agree not to use the service for any illegal activities or to process illegal content.
@@ -62,7 +62,7 @@ export const Terms = () => {
                         <section>
                             <div className="flex items-center gap-3 mb-3">
                                 <Shield className="w-5 h-5 text-foreground" />
-                                <h3 className="text-xl font-bold text-[var(--text)]">3. Limitation of Liability</h3>
+                                <h2 className="text-xl font-bold text-[var(--text)]">3. Limitation of Liability</h2>
                             </div>
                             <p className="text-[var(--text-secondary)] leading-relaxed">
                                 The service is provided "as is" without any warranty. We are not liable for any damages arising from the use of our tools, including data loss or business interruption.
@@ -72,7 +72,7 @@ export const Terms = () => {
                         <section>
                             <div className="flex items-center gap-3 mb-3">
                                 <Copyright className="w-5 h-5 text-foreground" />
-                                <h3 className="text-xl font-bold text-[var(--text)]">4. Intellectual Property</h3>
+                                <h2 className="text-xl font-bold text-[var(--text)]">4. Intellectual Property</h2>
                             </div>
                             <p className="text-[var(--text-secondary)] leading-relaxed">
                                 The code and design of FilePilot are protected by copyright. Files you process using our tools remain your property.

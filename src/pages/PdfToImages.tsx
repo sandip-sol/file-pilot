@@ -120,7 +120,7 @@ export const PdfToImages = () => {
             <div className="mt-6 space-y-4">
               <div>
                 <label className="mb-2 block text-sm font-medium text-muted-foreground">Format</label>
-                <select value={format} onChange={(event) => setFormat(event.target.value as PdfImageFormat)}>
+                <select aria-label="Format" value={format} onChange={(event) => setFormat(event.target.value as PdfImageFormat)}>
                   <option value="png">PNG</option>
                   <option value="jpg">JPG</option>
                   <option value="webp">WebP</option>
@@ -128,12 +128,12 @@ export const PdfToImages = () => {
               </div>
               <div>
                 <label className="mb-2 block text-sm font-medium text-muted-foreground">Resolution</label>
-                <input type="range" min={72} max={300} step={6} className="w-full" value={dpi} onChange={(event) => setDpi(Number(event.target.value))} />
+                <input aria-label="Resolution" type="range" min={72} max={300} step={6} className="w-full" value={dpi} onChange={(event) => setDpi(Number(event.target.value))} />
                 <p className="mt-1 text-xs text-muted-foreground">{dpi} DPI</p>
               </div>
               <div>
                 <label className="mb-2 block text-sm font-medium text-muted-foreground">Quality</label>
-                <input type="range" min={0.5} max={1} step={0.05} className="w-full" value={quality} onChange={(event) => setQuality(Number(event.target.value))} />
+                <input aria-label="Quality" type="range" min={0.5} max={1} step={0.05} className="w-full" value={quality} onChange={(event) => setQuality(Number(event.target.value))} />
                 <p className="mt-1 text-xs text-muted-foreground">{Math.round(quality * 100)}% quality</p>
               </div>
             </div>

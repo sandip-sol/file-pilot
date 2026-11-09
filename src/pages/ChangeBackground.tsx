@@ -276,7 +276,7 @@ export const ChangeBackground = () => {
   const isProcessing = status === 'loading-model' || status === 'processing';
 
   return (
-    <main className="container max-w-4xl py-8 px-4">
+    <div className="container max-w-4xl py-8 px-4">
       <PageSeo {...toolSeo('/change-background')} />
 
       <div className="mb-6">
@@ -347,7 +347,7 @@ export const ChangeBackground = () => {
 
             {bgMode === 'solid' && (
               <div className="flex items-center gap-3">
-                <input type="color" value={solidColor} onChange={(e) => setSolidColor(e.target.value)} className="h-9 w-12 cursor-pointer rounded border" disabled={isProcessing} />
+                <input aria-label="Solid background color" type="color" value={solidColor} onChange={(e) => setSolidColor(e.target.value)} className="h-9 w-12 cursor-pointer rounded border" disabled={isProcessing} />
                 <span className="text-sm text-muted-foreground">{solidColor}</span>
               </div>
             )}
@@ -356,15 +356,15 @@ export const ChangeBackground = () => {
               <div className="grid gap-3 sm:grid-cols-3">
                 <div>
                   <label className="block text-xs mb-1">Start</label>
-                  <input type="color" value={gradientStart} onChange={(e) => setGradientStart(e.target.value)} className="h-9 w-full cursor-pointer rounded border" disabled={isProcessing} />
+                  <input aria-label="Start" type="color" value={gradientStart} onChange={(e) => setGradientStart(e.target.value)} className="h-9 w-full cursor-pointer rounded border" disabled={isProcessing} />
                 </div>
                 <div>
                   <label className="block text-xs mb-1">End</label>
-                  <input type="color" value={gradientEnd} onChange={(e) => setGradientEnd(e.target.value)} className="h-9 w-full cursor-pointer rounded border" disabled={isProcessing} />
+                  <input aria-label="End" type="color" value={gradientEnd} onChange={(e) => setGradientEnd(e.target.value)} className="h-9 w-full cursor-pointer rounded border" disabled={isProcessing} />
                 </div>
                 <div>
                   <label className="block text-xs mb-1">Angle: {gradientAngle}°</label>
-                  <input type="range" min="0" max="360" value={gradientAngle} onChange={(e) => setGradientAngle(parseInt(e.target.value))} className="w-full" disabled={isProcessing} />
+                  <input aria-label="Angle" type="range" min="0" max="360" value={gradientAngle} onChange={(e) => setGradientAngle(parseInt(e.target.value))} className="w-full" disabled={isProcessing} />
                 </div>
               </div>
             )}
@@ -372,7 +372,7 @@ export const ChangeBackground = () => {
             {bgMode === 'blur' && (
               <div>
                 <label className="block text-sm mb-1">Blur Intensity: {blurIntensity}px</label>
-                <input type="range" min="5" max="50" value={blurIntensity} onChange={(e) => setBlurIntensity(parseInt(e.target.value))} className="w-full" disabled={isProcessing} />
+                <input aria-label="Blur Intensity" type="range" min="5" max="50" value={blurIntensity} onChange={(e) => setBlurIntensity(parseInt(e.target.value))} className="w-full" disabled={isProcessing} />
               </div>
             )}
 
@@ -423,11 +423,11 @@ export const ChangeBackground = () => {
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="block text-sm mb-1">Scale: {fgScale}%</label>
-                <input type="range" min="50" max="150" value={fgScale} onChange={(e) => setFgScale(parseInt(e.target.value))} className="w-full" disabled={isProcessing} />
+                <input aria-label="Scale" type="range" min="50" max="150" value={fgScale} onChange={(e) => setFgScale(parseInt(e.target.value))} className="w-full" disabled={isProcessing} />
               </div>
               <div>
                 <label className="block text-sm mb-1">Edge Feather: {feather}px</label>
-                <input type="range" min="0" max="8" value={feather} onChange={(e) => setFeather(parseInt(e.target.value))} className="w-full" disabled={isProcessing} />
+                <input aria-label="Edge Feather" type="range" min="0" max="8" value={feather} onChange={(e) => setFeather(parseInt(e.target.value))} className="w-full" disabled={isProcessing} />
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -439,11 +439,11 @@ export const ChangeBackground = () => {
                 <>
                   <div className="flex-1">
                     <label className="text-xs text-muted-foreground">Opacity: {Math.round(shadowOpacity * 100)}%</label>
-                    <input type="range" min="0.1" max="0.8" step="0.05" value={shadowOpacity} onChange={(e) => setShadowOpacity(parseFloat(e.target.value))} className="w-full" disabled={isProcessing} />
+                    <input aria-label="Opacity" type="range" min="0.1" max="0.8" step="0.05" value={shadowOpacity} onChange={(e) => setShadowOpacity(parseFloat(e.target.value))} className="w-full" disabled={isProcessing} />
                   </div>
                   <div className="flex-1">
                     <label className="text-xs text-muted-foreground">Blur: {shadowBlur}px</label>
-                    <input type="range" min="5" max="50" value={shadowBlur} onChange={(e) => setShadowBlur(parseInt(e.target.value))} className="w-full" disabled={isProcessing} />
+                    <input aria-label="Blur" type="range" min="5" max="50" value={shadowBlur} onChange={(e) => setShadowBlur(parseInt(e.target.value))} className="w-full" disabled={isProcessing} />
                   </div>
                 </>
               )}
@@ -456,7 +456,7 @@ export const ChangeBackground = () => {
             <div className="grid gap-3 sm:grid-cols-2">
               <div>
                 <label className="block text-sm mb-1">Format</label>
-                <select className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as OutputFormatOption)} disabled={isProcessing}>
+                <select aria-label="Format" className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as OutputFormatOption)} disabled={isProcessing}>
                   <option value="image/png">PNG</option>
                   {supportedFormats?.['image/webp'] && <option value="image/webp">WebP</option>}
                   <option value="image/jpeg">JPEG</option>
@@ -465,7 +465,7 @@ export const ChangeBackground = () => {
               {outputFormat !== 'image/png' && (
                 <div>
                   <label className="block text-sm mb-1">Quality: {Math.round(quality * 100)}%</label>
-                  <input type="range" min="0.1" max="1" step="0.01" value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full" disabled={isProcessing} />
+                  <input aria-label="Quality" type="range" min="0.1" max="1" step="0.01" value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full" disabled={isProcessing} />
                 </div>
               )}
             </div>
@@ -503,6 +503,6 @@ export const ChangeBackground = () => {
       )}
 
       <FAQSection items={toolFaqs('/change-background')} />
-    </main>
+    </div>
   );
 };

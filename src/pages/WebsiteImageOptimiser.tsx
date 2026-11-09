@@ -414,7 +414,7 @@ export const WebsiteImageOptimiser = () => {
                 <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                   Display Width (px)
                 </label>
-                <input
+                <input aria-label="Display Width (px)"
                   type="number"
                   min={1}
                   max={7680}

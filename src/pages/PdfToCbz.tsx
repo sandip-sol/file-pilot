@@ -68,7 +68,7 @@ export const PdfToCbz = () => {
               <p className="text-sm"><strong>{file.name}</strong></p>
               <div>
                 <label className="block text-sm font-medium mb-2">Page image quality</label>
-                <select value={quality} onChange={e => setQuality(e.target.value as QualityKey)}>
+                <select aria-label="Page image quality" value={quality} onChange={e => setQuality(e.target.value as QualityKey)}>
                   {(Object.keys(QUALITY_PRESETS) as QualityKey[]).map(key => <option key={key} value={key}>{QUALITY_PRESETS[key].label}</option>)}
                 </select>
               </div>

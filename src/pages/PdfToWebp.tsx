@@ -38,7 +38,7 @@ export const PdfToWebp = () => {
             <div className="mt-6 animate-fade-in space-y-4">
               <p className="text-sm"><strong>{file.name}</strong></p>
               <div><label className="block text-sm font-medium mb-2">Resolution: {dpi} DPI</label>
-                <input type="range" min={72} max={300} step={10} value={dpi} onChange={e => setDpi(Number(e.target.value))} className="w-full accent-indigo-500" /></div>
+                <input aria-label="Resolution" type="range" min={72} max={300} step={10} value={dpi} onChange={e => setDpi(Number(e.target.value))} className="w-full accent-indigo-500" /></div>
               {isProcessing && <div className="space-y-2"><div className="flex justify-between text-sm"><span>Converting…</span><span>{Math.round(progress)}%</span></div><div className="h-2 rounded-full bg-muted overflow-hidden"><div className="h-full bg-gradient-to-r from-teal-500 to-green-600 transition-all" style={{ width: `${progress}%` }} /></div></div>}
               {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl text-sm">{error}</div>}
               {success && <div className="bg-[var(--success-light)] text-[var(--success)] p-4 rounded-xl text-sm flex items-center gap-2"><CheckCircle className="w-5 h-5" />ZIP downloaded!</div>}

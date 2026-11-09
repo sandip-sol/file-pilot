@@ -87,7 +87,7 @@ export const TableOfContents = () => {
                             <p className="text-sm"><strong>{file.name}</strong></p>
                             <div>
                                 <label className="block text-sm font-medium mb-2">TOC Page Title</label>
-                                <input type="text" value={tocTitle} onChange={e => setTocTitle(e.target.value)} className="w-full rounded-xl border border-border bg-muted px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-400" />
+                                <input aria-label="TOC Page Title" type="text" value={tocTitle} onChange={e => setTocTitle(e.target.value)} className="w-full rounded-xl border border-border bg-muted px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-400" />
                             </div>
                             {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl text-sm">{error}</div>}
                             {success && <div className="bg-[var(--success-light)] text-[var(--success)] p-4 rounded-xl text-sm flex items-center gap-2"><CheckCircle className="w-5 h-5" />PDF with TOC downloaded!</div>}

@@ -485,7 +485,7 @@ export const QrGenerator = () => {
                 value={wifiContent.encryption}
                 onValueChange={(v) => setWifiContent({ ...wifiContent, encryption: v as WiFiContent['encryption'] })}
               >
-                <SelectTrigger>
+                <SelectTrigger aria-label="Encryption">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -617,7 +617,7 @@ export const QrGenerator = () => {
       <PageSeo {...toolSeo('/qr-generator')} />
       <ToolUsageTracker />
 
-      <main className="container max-w-5xl py-8 md:py-12">
+      <div className="container max-w-5xl py-8 md:py-12">
         {/* Header */}
         <div className="mb-8 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -648,7 +648,7 @@ export const QrGenerator = () => {
               <div className="space-y-2">
                 <Label>Content Type</Label>
                 <Select value={contentType} onValueChange={(v) => setContentType(v as QRContentType)}>
-                  <SelectTrigger>
+                  <SelectTrigger aria-label="Content Type">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -701,7 +701,7 @@ export const QrGenerator = () => {
                       </button>
                     </div>
                     {customSize && (
-                      <input
+                      <input aria-label="Custom size in pixels"
                         type="number"
                         min={64}
                         max={4096}
@@ -716,7 +716,7 @@ export const QrGenerator = () => {
                   <div className="space-y-2">
                     <Label>Error Correction</Label>
                     <Select value={errorCorrection} onValueChange={(v) => setErrorCorrection(v as ErrorCorrectionLevel)}>
-                      <SelectTrigger>
+                      <SelectTrigger aria-label="Error Correction">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -741,7 +741,7 @@ export const QrGenerator = () => {
                           onChange={(e) => setFgColor(e.target.value)}
                           className="w-9 h-9 rounded border border-border cursor-pointer p-0.5"
                         />
-                        <input
+                        <input aria-label="Foreground"
                           type="text"
                           value={fgColor}
                           onChange={(e) => {
@@ -763,7 +763,7 @@ export const QrGenerator = () => {
                           disabled={transparentBg}
                           className="w-9 h-9 rounded border border-border cursor-pointer p-0.5 disabled:opacity-40"
                         />
-                        <input
+                        <input aria-label="Background"
                           type="text"
                           value={transparentBg ? '' : bgColor}
                           disabled={transparentBg}
@@ -804,7 +804,7 @@ export const QrGenerator = () => {
                   <div className="space-y-2">
                     <Label>Dot Style</Label>
                     <Select value={dotStyle} onValueChange={(v) => setDotStyle(v as DotType)}>
-                      <SelectTrigger>
+                      <SelectTrigger aria-label="Dot Style">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -819,7 +819,7 @@ export const QrGenerator = () => {
                   <div className="space-y-2">
                     <Label>Corner Square Style</Label>
                     <Select value={cornerSquareStyle} onValueChange={(v) => setCornerSquareStyle(v as CornerSquareType)}>
-                      <SelectTrigger>
+                      <SelectTrigger aria-label="Corner Square Style">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -834,7 +834,7 @@ export const QrGenerator = () => {
                   <div className="space-y-2">
                     <Label>Corner Dot Style</Label>
                     <Select value={cornerDotStyle} onValueChange={(v) => setCornerDotStyle(v as CornerDotType)}>
-                      <SelectTrigger>
+                      <SelectTrigger aria-label="Corner Dot Style">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -1004,7 +1004,7 @@ export const QrGenerator = () => {
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       <FAQSection items={toolFaqs('/qr-generator')} />
       <RelatedTools />

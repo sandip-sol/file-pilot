@@ -75,7 +75,7 @@ export const PosterizePdf = () => {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Columns</label>
-                                        <select value={cols} onChange={e => setCols(parseInt(e.target.value))}>
+                                        <select aria-label="Columns" value={cols} onChange={e => setCols(parseInt(e.target.value))}>
                                             <option value="2">2 columns</option>
                                             <option value="3">3 columns</option>
                                             <option value="4">4 columns</option>
@@ -83,7 +83,7 @@ export const PosterizePdf = () => {
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Rows</label>
-                                        <select value={rows} onChange={e => setRows(parseInt(e.target.value))}>
+                                        <select aria-label="Rows" value={rows} onChange={e => setRows(parseInt(e.target.value))}>
                                             <option value="2">2 rows</option>
                                             <option value="3">3 rows</option>
                                             <option value="4">4 rows</option>

@@ -54,7 +54,7 @@ export const EncryptDecryptPdf = () => {
                             {mode === 'encrypt' && (
                                 <div>
                                     <label className="block text-sm font-medium mb-2">Password</label>
-                                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter password" className="w-full rounded-xl border border-border bg-muted px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-400" />
+                                    <input aria-label="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter password" className="w-full rounded-xl border border-border bg-muted px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-400" />
                                 </div>
                             )}
                             <div className="flex items-start gap-2 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-3 text-sm text-amber-700 dark:text-amber-300">

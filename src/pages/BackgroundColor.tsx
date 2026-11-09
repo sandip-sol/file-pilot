@@ -112,7 +112,7 @@ export const BackgroundColor = () => {
                                 <div className="flex items-center gap-4">
                                     <div className="flex-1">
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Custom Color</label>
-                                        <input type="color" value={hexColor} onChange={e => applyHex(e.target.value)} className="w-full h-10 cursor-pointer rounded-lg border border-border" />
+                                        <input aria-label="Custom Color" type="color" value={hexColor} onChange={e => applyHex(e.target.value)} className="w-full h-10 cursor-pointer rounded-lg border border-border" />
                                     </div>
                                     <div className="w-24 h-24 rounded-xl border-2 border-border flex items-center justify-center text-xs text-[var(--text-muted)]" style={{ backgroundColor: `rgb(${r},${g},${b})` }}>
                                         Preview

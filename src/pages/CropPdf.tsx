@@ -56,7 +56,7 @@ export const CropPdf = () => {
                                 {([['top', top, setTop], ['right', right, setRight], ['bottom', bottom, setBottom], ['left', left, setLeft]] as [string, number, (v: number) => void][]).map(([label, val, setter]) => (
                                     <div key={label}>
                                         <label className="block text-sm font-medium mb-2 capitalize">{label} (pt)</label>
-                                        <input type="number" min={0} value={val} onChange={e => setter(Number(e.target.value))} className="w-full rounded-xl border border-border bg-muted px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                                        <input aria-label={`${label} margin in points`} type="number" min={0} value={val} onChange={e => setter(Number(e.target.value))} className="w-full rounded-xl border border-border bg-muted px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-400" />
                                     </div>
                                 ))}
                             </div>

@@ -217,27 +217,27 @@ export const FormCreator = () => {
                   {selectedField.kind === 'radio' ? (
                     <div>
                       <label className="mb-2 block text-sm font-medium text-muted-foreground">Group name</label>
-                      <input className="w-full" value={selectedField.group} onChange={(event) => updateField(selectedField.id, { group: event.target.value })} />
+                      <input aria-label="Group name" className="w-full" value={selectedField.group} onChange={(event) => updateField(selectedField.id, { group: event.target.value })} />
                       <p className="mt-1 text-xs text-muted-foreground">Radio buttons with the same group name are mutually exclusive.</p>
                     </div>
                   ) : null}
 
                   <div>
                     <label className="mb-2 block text-sm font-medium text-muted-foreground">{selectedField.kind === 'radio' ? 'Option value' : 'Field name'}</label>
-                    <input className="w-full" value={selectedField.name} onChange={(event) => updateField(selectedField.id, { name: event.target.value })} />
+                    <input aria-label={selectedField.kind === 'radio' ? 'Option value' : 'Field name'} className="w-full" value={selectedField.name} onChange={(event) => updateField(selectedField.id, { name: event.target.value })} />
                   </div>
 
                   {selectedField.kind === 'dropdown' ? (
                     <div>
                       <label className="mb-2 block text-sm font-medium text-muted-foreground">Options (comma-separated)</label>
-                      <input className="w-full" value={selectedField.options} onChange={(event) => updateField(selectedField.id, { options: event.target.value })} />
+                      <input aria-label="Options (comma-separated)" className="w-full" value={selectedField.options} onChange={(event) => updateField(selectedField.id, { options: event.target.value })} />
                     </div>
                   ) : null}
 
                   {selectedField.kind === 'text' || selectedField.kind === 'dropdown' ? (
                     <div>
                       <label className="mb-2 block text-sm font-medium text-muted-foreground">Width</label>
-                      <input
+                      <input aria-label="Width"
                         type="range"
                         min={0.08}
                         max={0.9}

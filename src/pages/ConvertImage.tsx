@@ -300,13 +300,13 @@ export const ConvertImage = () => {
                     Background Color (replaces transparency)
                   </label>
                   <div className="flex items-center gap-3">
-                    <input
+                    <input aria-label="Background Color (replaces transparency)"
                       type="color"
                       value={bgColor}
                       onChange={(e) => setBgColor(e.target.value)}
                       className="w-10 h-10 rounded-lg border border-border cursor-pointer"
                     />
-                    <input
+                    <input aria-label="Background Color (replaces transparency)"
                       type="text"
                       value={bgColor}
                       onChange={(e) => setBgColor(e.target.value)}
@@ -329,7 +329,7 @@ export const ConvertImage = () => {
                   <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                     Quality: {Math.round(quality * 100)}%
                   </label>
-                  <input
+                  <input aria-label="Quality"
                     type="range"
                     min="0.1"
                     max="1"
@@ -369,7 +369,7 @@ export const ConvertImage = () => {
                   <div className="grid grid-cols-2 gap-3 mt-3">
                     <div>
                       <label className="block text-xs font-medium mb-1 text-[var(--text-muted)]">Width (px)</label>
-                      <input
+                      <input aria-label="Width (px)"
                         type="number"
                         value={customWidth}
                         onChange={(e) => setCustomWidth(e.target.value)}
@@ -380,7 +380,7 @@ export const ConvertImage = () => {
                     </div>
                     <div>
                       <label className="block text-xs font-medium mb-1 text-[var(--text-muted)]">Height (px)</label>
-                      <input
+                      <input aria-label="Height (px)"
                         type="number"
                         value={customHeight}
                         onChange={(e) => setCustomHeight(e.target.value)}

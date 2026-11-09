@@ -136,7 +136,7 @@ export const AddStamp = () => {
                                 {/* Custom text */}
                                 <div>
                                     <label className="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">Stamp Text</label>
-                                    <input type="text" value={stampText} onChange={e => setStampText(e.target.value.toUpperCase())}
+                                    <input aria-label="Stamp Text" type="text" value={stampText} onChange={e => setStampText(e.target.value.toUpperCase())}
                                         placeholder="CUSTOM STAMP"
                                         className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm font-bold uppercase focus:outline-none focus:ring-2 focus:ring-rose-400" />
                                 </div>
@@ -145,21 +145,21 @@ export const AddStamp = () => {
                                     <div>
                                         <label className="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">Color</label>
                                         <div className="flex items-center gap-3">
-                                            <input type="color" value={color} onChange={e => setColor(e.target.value)}
+                                            <input aria-label="Color" type="color" value={color} onChange={e => setColor(e.target.value)}
                                                 className="w-10 h-10 rounded-lg cursor-pointer border border-border" />
                                             <span className="text-sm font-mono text-[var(--text-muted)]">{color}</span>
                                         </div>
                                     </div>
                                     <div>
                                         <label className="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">Font Size: {fontSize}pt</label>
-                                        <input type="range" min={24} max={96} value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
+                                        <input aria-label="Font Size" type="range" min={24} max={96} value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
                                             className="w-full mt-1 accent-rose-500" />
                                     </div>
                                 </div>
 
                                 <div>
                                     <label className="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">Opacity: {Math.round(opacity * 100)}%</label>
-                                    <input type="range" min={5} max={100} value={Math.round(opacity * 100)} onChange={e => setOpacity(Number(e.target.value) / 100)}
+                                    <input aria-label="Opacity" type="range" min={5} max={100} value={Math.round(opacity * 100)} onChange={e => setOpacity(Number(e.target.value) / 100)}
                                         className="w-full accent-rose-500" />
                                     <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1"><span>5% (ghost)</span><span>100% (solid)</span></div>
                                 </div>

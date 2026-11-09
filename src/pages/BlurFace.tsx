@@ -478,7 +478,7 @@ export const BlurFace = () => {
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">
                         Intensity: {blurIntensity}
                       </label>
-                      <input
+                      <input aria-label="Intensity"
                         type="range"
                         min={3}
                         max={40}
@@ -583,7 +583,7 @@ export const BlurFace = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Output Format</label>
-                      <select value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as ImageFormat)} className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-foreground/20">
+                      <select aria-label="Output Format" value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as ImageFormat)} className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-foreground/20">
                         <option value="image/jpeg">JPEG</option>
                         <option value="image/png">PNG</option>
                         {supportedFormats?.['image/webp'] && <option value="image/webp">WebP</option>}
@@ -592,7 +592,7 @@ export const BlurFace = () => {
                     {outputFormat !== 'image/png' && (
                       <div>
                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Quality: {Math.round(quality * 100)}%</label>
-                        <input type="range" min={0.1} max={1} step={0.05} value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full accent-foreground" />
+                        <input aria-label="Quality" type="range" min={0.1} max={1} step={0.05} value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full accent-foreground" />
                       </div>
                     )}
                   </div>

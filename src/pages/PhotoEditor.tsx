@@ -379,23 +379,23 @@ export const PhotoEditor = () => {
                     <div className="grid grid-cols-2 gap-2 animate-fade-in">
                       <div>
                         <label className="text-xs text-muted-foreground">Size: {state.textSize}px</label>
-                        <input type="range" min={12} max={200} value={state.textSize} onChange={(e) => pushHistory({ ...state, textSize: parseInt(e.target.value) })} className="w-full accent-foreground" />
+                        <input aria-label="Size" type="range" min={12} max={200} value={state.textSize} onChange={(e) => pushHistory({ ...state, textSize: parseInt(e.target.value) })} className="w-full accent-foreground" />
                       </div>
                       <div>
                         <label className="text-xs text-muted-foreground">Color</label>
-                        <input type="color" value={state.textColor} onChange={(e) => pushHistory({ ...state, textColor: e.target.value })} className="w-full h-8 rounded border border-border cursor-pointer" />
+                        <input aria-label="Color" type="color" value={state.textColor} onChange={(e) => pushHistory({ ...state, textColor: e.target.value })} className="w-full h-8 rounded border border-border cursor-pointer" />
                       </div>
                       <div>
                         <label className="text-xs text-muted-foreground">X: {state.textX}</label>
-                        <input type="range" min={0} max={file.width} value={state.textX} onChange={(e) => pushHistory({ ...state, textX: parseInt(e.target.value) })} className="w-full accent-foreground" />
+                        <input aria-label="X" type="range" min={0} max={file.width} value={state.textX} onChange={(e) => pushHistory({ ...state, textX: parseInt(e.target.value) })} className="w-full accent-foreground" />
                       </div>
                       <div>
                         <label className="text-xs text-muted-foreground">Y: {state.textY}</label>
-                        <input type="range" min={0} max={file.height} value={state.textY} onChange={(e) => pushHistory({ ...state, textY: parseInt(e.target.value) })} className="w-full accent-foreground" />
+                        <input aria-label="Y" type="range" min={0} max={file.height} value={state.textY} onChange={(e) => pushHistory({ ...state, textY: parseInt(e.target.value) })} className="w-full accent-foreground" />
                       </div>
                       <div className="col-span-2">
                         <label className="text-xs text-muted-foreground">Opacity: {Math.round(state.textOpacity * 100)}%</label>
-                        <input type="range" min={0.05} max={1} step={0.05} value={state.textOpacity} onChange={(e) => pushHistory({ ...state, textOpacity: parseFloat(e.target.value) })} className="w-full accent-foreground" />
+                        <input aria-label="Opacity" type="range" min={0.05} max={1} step={0.05} value={state.textOpacity} onChange={(e) => pushHistory({ ...state, textOpacity: parseFloat(e.target.value) })} className="w-full accent-foreground" />
                       </div>
                     </div>
                   )}
@@ -407,11 +407,11 @@ export const PhotoEditor = () => {
                   <div className="grid grid-cols-2 gap-2">
                     <div>
                       <label className="text-xs text-muted-foreground">Thickness: {state.borderThickness}px</label>
-                      <input type="range" min={0} max={100} value={state.borderThickness} onChange={(e) => pushHistory({ ...state, borderThickness: parseInt(e.target.value) })} className="w-full accent-foreground" />
+                      <input aria-label="Thickness" type="range" min={0} max={100} value={state.borderThickness} onChange={(e) => pushHistory({ ...state, borderThickness: parseInt(e.target.value) })} className="w-full accent-foreground" />
                     </div>
                     <div>
                       <label className="text-xs text-muted-foreground">Color</label>
-                      <input type="color" value={state.borderColor} onChange={(e) => pushHistory({ ...state, borderColor: e.target.value })} className="w-full h-8 rounded border border-border cursor-pointer" />
+                      <input aria-label="Color" type="color" value={state.borderColor} onChange={(e) => pushHistory({ ...state, borderColor: e.target.value })} className="w-full h-8 rounded border border-border cursor-pointer" />
                     </div>
                   </div>
                 </div>
@@ -447,7 +447,7 @@ export const PhotoEditor = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Output Format</label>
-                      <select value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as ImageFormat)} className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-foreground/20">
+                      <select aria-label="Output Format" value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as ImageFormat)} className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-foreground/20">
                         <option value="image/jpeg">JPEG</option>
                         <option value="image/png">PNG</option>
                         {supportedFormats?.['image/webp'] && <option value="image/webp">WebP</option>}
@@ -456,7 +456,7 @@ export const PhotoEditor = () => {
                     {outputFormat !== 'image/png' && (
                       <div>
                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Quality: {Math.round(quality * 100)}%</label>
-                        <input type="range" min={0.1} max={1.0} step={0.05} value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full accent-foreground" />
+                        <input aria-label="Quality" type="range" min={0.1} max={1.0} step={0.05} value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full accent-foreground" />
                       </div>
                     )}
                   </div>

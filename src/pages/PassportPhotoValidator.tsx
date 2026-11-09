@@ -591,7 +591,7 @@ export const PassportPhotoValidator = () => {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 animate-fade-in p-4 bg-muted/50 rounded-xl border border-border">
                 <div>
                   <label className="block text-xs font-medium mb-1.5 text-muted-foreground">Width (px)</label>
-                  <input
+                  <input aria-label="Width (px)"
                     type="number"
                     min={50}
                     max={10000}
@@ -604,7 +604,7 @@ export const PassportPhotoValidator = () => {
                 </div>
                 <div>
                   <label className="block text-xs font-medium mb-1.5 text-muted-foreground">Height (px)</label>
-                  <input
+                  <input aria-label="Height (px)"
                     type="number"
                     min={50}
                     max={10000}
@@ -618,7 +618,7 @@ export const PassportPhotoValidator = () => {
                 <div>
                   <label className="block text-xs font-medium mb-1.5 text-muted-foreground">Background</label>
                   <div className="flex items-center gap-2">
-                    <input
+                    <input aria-label="Background"
                       type="color"
                       value={customProfile.backgroundColor}
                       onChange={(e) =>
@@ -631,7 +631,7 @@ export const PassportPhotoValidator = () => {
                 </div>
                 <div>
                   <label className="block text-xs font-medium mb-1.5 text-muted-foreground">Max Size (KB)</label>
-                  <input
+                  <input aria-label="Max Size (KB)"
                     type="number"
                     min={1}
                     value={customProfile.maxFileSizeKB}

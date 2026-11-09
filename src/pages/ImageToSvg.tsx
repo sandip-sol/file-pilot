@@ -454,7 +454,7 @@ export const ImageToSvg = () => {
                             <label className="block text-sm font-medium mb-2 text-muted-foreground">
                               Threshold: {threshold}
                             </label>
-                            <input
+                            <input aria-label="Threshold"
                               type="range"
                               min={0}
                               max={255}
@@ -598,7 +598,7 @@ export const ImageToSvg = () => {
                           <label className="block text-sm font-medium mb-2 text-muted-foreground">
                             Path Smoothing: {smoothing}
                           </label>
-                          <input
+                          <input aria-label="Path Smoothing"
                             type="range"
                             min={0}
                             max={10}
@@ -620,7 +620,7 @@ export const ImageToSvg = () => {
                           <label className="block text-sm font-medium mb-2 text-muted-foreground">
                             Path Simplification: {simplifyTolerance}
                           </label>
-                          <input
+                          <input aria-label="Path Simplification"
                             type="range"
                             min={0}
                             max={20}
@@ -643,7 +643,7 @@ export const ImageToSvg = () => {
                             Min Shape Size (speckle removal):{' '}
                             {minShapeSize}
                           </label>
-                          <input
+                          <input aria-label="Min Shape Size (speckle removal)"
                             type="range"
                             min={1}
                             max={100}

@@ -618,7 +618,7 @@ export const ColorPicker = () => {
       <PageSeo {...toolSeo('/color-picker')} />
       <ToolUsageTracker />
 
-      <main className="container max-w-5xl py-8 md:py-12">
+      <div className="container max-w-5xl py-8 md:py-12">
         {/* ---- Header ---- */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
@@ -1277,7 +1277,7 @@ export const ColorPicker = () => {
             Colours may appear differently across displays and browser colour management.
           </p>
         </div>
-      </main>
+      </div>
 
       <div className="container max-w-5xl">
         <FAQSection items={toolFaqs('/color-picker')} />

@@ -165,16 +165,16 @@ export const WatermarkPdf = () => {
                 <>
                   <div>
                     <label className="mb-2 block text-sm font-medium text-muted-foreground">Watermark text</label>
-                    <input className="w-full" value={config.text} onChange={(event) => setConfig((current) => ({ ...current, text: event.target.value }))} />
+                    <input aria-label="Watermark text" className="w-full" value={config.text} onChange={(event) => setConfig((current) => ({ ...current, text: event.target.value }))} />
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="mb-2 block text-sm font-medium text-muted-foreground">Font size</label>
-                      <input type="number" min={12} max={72} className="w-full" value={config.fontSize} onChange={(event) => setConfig((current) => ({ ...current, fontSize: Number(event.target.value) }))} />
+                      <input aria-label="Font size" type="number" min={12} max={72} className="w-full" value={config.fontSize} onChange={(event) => setConfig((current) => ({ ...current, fontSize: Number(event.target.value) }))} />
                     </div>
                     <div>
                       <label className="mb-2 block text-sm font-medium text-muted-foreground">Color</label>
-                      <input type="color" className="h-11 w-full rounded-xl border border-border bg-background p-1" value={config.color} onChange={(event) => setConfig((current) => ({ ...current, color: event.target.value }))} />
+                      <input aria-label="Color" type="color" className="h-11 w-full rounded-xl border border-border bg-background p-1" value={config.color} onChange={(event) => setConfig((current) => ({ ...current, color: event.target.value }))} />
                     </div>
                   </div>
                 </>
@@ -183,7 +183,7 @@ export const WatermarkPdf = () => {
                   <FileUploader onFilesSelected={handleWatermarkImage} accept="image/*" description="Drop a watermark image" />
                   <div>
                     <label className="mb-2 block text-sm font-medium text-muted-foreground">Image scale</label>
-                    <input type="range" min={0.1} max={0.8} step={0.02} className="w-full" value={config.scale} onChange={(event) => setConfig((current) => ({ ...current, scale: Number(event.target.value) }))} />
+                    <input aria-label="Image scale" type="range" min={0.1} max={0.8} step={0.02} className="w-full" value={config.scale} onChange={(event) => setConfig((current) => ({ ...current, scale: Number(event.target.value) }))} />
                   </div>
                 </>
               )}
@@ -191,17 +191,17 @@ export const WatermarkPdf = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="mb-2 block text-sm font-medium text-muted-foreground">Opacity</label>
-                  <input type="range" min={0.05} max={1} step={0.05} className="w-full" value={config.opacity} onChange={(event) => setConfig((current) => ({ ...current, opacity: Number(event.target.value) }))} />
+                  <input aria-label="Opacity" type="range" min={0.05} max={1} step={0.05} className="w-full" value={config.opacity} onChange={(event) => setConfig((current) => ({ ...current, opacity: Number(event.target.value) }))} />
                 </div>
                 <div>
                   <label className="mb-2 block text-sm font-medium text-muted-foreground">Rotation</label>
-                  <input type="number" className="w-full" value={config.rotation} onChange={(event) => setConfig((current) => ({ ...current, rotation: Number(event.target.value) }))} />
+                  <input aria-label="Rotation" type="number" className="w-full" value={config.rotation} onChange={(event) => setConfig((current) => ({ ...current, rotation: Number(event.target.value) }))} />
                 </div>
               </div>
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-muted-foreground">Position</label>
-                <select value={config.position} onChange={(event) => setConfig((current) => ({ ...current, position: event.target.value as WatermarkConfig['position'] }))}>
+                <select aria-label="Position" value={config.position} onChange={(event) => setConfig((current) => ({ ...current, position: event.target.value as WatermarkConfig['position'] }))}>
                   <option value="center">Center</option>
                   <option value="top-left">Top left</option>
                   <option value="top-right">Top right</option>
@@ -219,7 +219,7 @@ export const WatermarkPdf = () => {
               {!config.applyToAllPages ? (
                 <div>
                   <label className="mb-2 block text-sm font-medium text-muted-foreground">Pages</label>
-                  <input
+                  <input aria-label="Pages"
                     className="w-full"
                     placeholder="e.g. 1,3,5-8"
                     value={pageInput}

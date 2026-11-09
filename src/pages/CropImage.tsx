@@ -436,7 +436,7 @@ export const CropImage = () => {
                   <div className="grid grid-cols-2 gap-4 animate-fade-in">
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Custom Width Ratio</label>
-                      <input
+                      <input aria-label="Custom Width Ratio"
                         type="number"
                         min={1}
                         placeholder="e.g. 16"
@@ -447,7 +447,7 @@ export const CropImage = () => {
                     </div>
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Custom Height Ratio</label>
-                      <input
+                      <input aria-label="Custom Height Ratio"
                         type="number"
                         min={1}
                         placeholder="e.g. 9"
@@ -465,7 +465,7 @@ export const CropImage = () => {
                     Output Size (px) <span className="font-normal text-muted-foreground">— optional, defaults to crop size</span>
                   </label>
                   <div className="grid grid-cols-2 gap-4">
-                    <input
+                    <input aria-label="Output width (px)"
                       type="number"
                       min={1}
                       placeholder={`Width (${Math.round(crop.w)})`}
@@ -473,7 +473,7 @@ export const CropImage = () => {
                       onChange={(e) => setOutputW(e.target.value)}
                       className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20"
                     />
-                    <input
+                    <input aria-label="Output height (px)"
                       type="number"
                       min={1}
                       placeholder={`Height (${Math.round(crop.h)})`}
@@ -507,7 +507,7 @@ export const CropImage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Output Format</label>
-                    <select
+                    <select aria-label="Output Format"
                       value={outputFormat}
                       onChange={(e) => setOutputFormat(e.target.value as ImageFormat)}
                       className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-foreground/20"
@@ -522,7 +522,7 @@ export const CropImage = () => {
                       <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                         Quality: {Math.round(quality * 100)}%
                       </label>
-                      <input
+                      <input aria-label="Quality"
                         type="range"
                         min={0.1}
                         max={1.0}

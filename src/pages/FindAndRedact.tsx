@@ -82,7 +82,7 @@ export const FindAndRedactPage = () => {
 
                                 <div>
                                     <label className="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">Text to Redact</label>
-                                    <input
+                                    <input aria-label="Text to Redact"
                                         type="text"
                                         value={searchText}
                                         onChange={e => setSearchText(e.target.value)}

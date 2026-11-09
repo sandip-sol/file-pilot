@@ -212,7 +212,7 @@ export const AnnotatePdf = () => {
 
             <div className="mt-6">
               <label className="mb-2 block text-sm font-medium text-muted-foreground">Zoom</label>
-              <input type="range" min={0.75} max={2.2} step={0.05} className="w-full" value={zoom} onChange={(event) => setZoom(Number(event.target.value))} />
+              <input aria-label="Zoom" type="range" min={0.75} max={2.2} step={0.05} className="w-full" value={zoom} onChange={(event) => setZoom(Number(event.target.value))} />
             </div>
 
             <div className="mt-6 space-y-4 rounded-2xl border border-border bg-background p-4">
@@ -224,7 +224,7 @@ export const AnnotatePdf = () => {
                   {selectedItem.kind !== 'highlight' && selectedItem.kind !== 'checkmark' && selectedItem.kind !== 'signature-image' ? (
                     <div>
                       <label className="mb-2 block text-sm font-medium text-muted-foreground">Value</label>
-                      <input
+                      <input aria-label="Value"
                         className="w-full"
                         value={selectedItem.value}
                         onChange={(event) =>
@@ -262,7 +262,7 @@ export const AnnotatePdf = () => {
                   {selectedItem.kind !== 'highlight' ? (
                     <div>
                       <label className="mb-2 block text-sm font-medium text-muted-foreground">Color</label>
-                      <input
+                      <input aria-label="Color"
                         type="color"
                         className="h-11 w-full rounded-xl border border-border bg-background p-1"
                         value={selectedItem.color}

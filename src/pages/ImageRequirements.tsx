@@ -382,7 +382,7 @@ export const ImageRequirements = () => {
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                                             Required Width (px)
                                         </label>
-                                        <input
+                                        <input aria-label="Required Width (px)"
                                             type="number"
                                             min={1}
                                             max={10000}
@@ -397,7 +397,7 @@ export const ImageRequirements = () => {
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                                             Required Height (px)
                                         </label>
-                                        <input
+                                        <input aria-label="Required Height (px)"
                                             type="number"
                                             min={1}
                                             max={10000}
@@ -412,7 +412,7 @@ export const ImageRequirements = () => {
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                                             Max File Size (KB)
                                         </label>
-                                        <input
+                                        <input aria-label="Max File Size (KB)"
                                             type="number"
                                             min={1}
                                             value={maxKB}
@@ -426,7 +426,7 @@ export const ImageRequirements = () => {
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                                             Output Format
                                         </label>
-                                        <select
+                                        <select aria-label="Output Format"
                                             value={outputFormat}
                                             onChange={(e) => { setOutputFormat(e.target.value as OutputFormat); setActivePreset(null); }}
                                             className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-foreground/20"
@@ -472,7 +472,7 @@ export const ImageRequirements = () => {
                                             Background Color
                                         </label>
                                         <div className="flex items-center gap-3">
-                                            <input
+                                            <input aria-label="Background Color"
                                                 type="color"
                                                 value={bgColor}
                                                 onChange={(e) => setBgColor(e.target.value)}

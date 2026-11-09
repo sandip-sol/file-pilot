@@ -130,7 +130,7 @@ export const UpscaleImage = () => {
   const outputMp = file ? ((file.width * scale * file.height * scale) / 1e6).toFixed(1) : '0';
 
   return (
-    <main className="container max-w-4xl py-8 px-4">
+    <div className="container max-w-4xl py-8 px-4">
       <PageSeo {...toolSeo('/upscale-image')} />
 
       <div className="mb-6">
@@ -265,7 +265,7 @@ export const UpscaleImage = () => {
               <div className="space-y-3">
                 <div>
                   <label className="block text-sm font-medium mb-1">Output Format</label>
-                  <select className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as OutputFormatOption)} disabled={isProcessing}>
+                  <select aria-label="Output Format" className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as OutputFormatOption)} disabled={isProcessing}>
                     <option value="image/png">PNG (lossless)</option>
                     {supportedFormats?.['image/webp'] && <option value="image/webp">WebP</option>}
                     <option value="image/jpeg">JPEG</option>
@@ -274,7 +274,7 @@ export const UpscaleImage = () => {
                 {outputFormat !== 'image/png' && (
                   <div>
                     <label className="block text-sm mb-1">Quality: {Math.round(quality * 100)}%</label>
-                    <input type="range" min="0.1" max="1" step="0.01" value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full" disabled={isProcessing} />
+                    <input aria-label="Quality" type="range" min="0.1" max="1" step="0.01" value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full" disabled={isProcessing} />
                   </div>
                 )}
               </div>
@@ -328,6 +328,6 @@ export const UpscaleImage = () => {
       )}
 
       <FAQSection items={toolFaqs('/upscale-image')} />
-    </main>
+    </div>
   );
 };

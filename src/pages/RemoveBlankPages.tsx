@@ -76,7 +76,7 @@ export const RemoveBlankPages = () => {
                             <p className="text-sm"><strong>{file.name}</strong></p>
                             <div>
                                 <label className="block text-sm font-medium mb-2">Blank threshold: {threshold}% white pixels</label>
-                                <input type="range" min={85} max={100} value={threshold} onChange={e => setThreshold(Number(e.target.value))} className="w-full accent-rose-500" />
+                                <input aria-label="Blank threshold" type="range" min={85} max={100} value={threshold} onChange={e => setThreshold(Number(e.target.value))} className="w-full accent-rose-500" />
                                 <p className="text-xs text-[var(--text-muted)] mt-1">Higher = only remove fully white pages. Lower = also remove near-blank pages.</p>
                             </div>
                             {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl text-sm">{error}</div>}

@@ -78,7 +78,7 @@ export const RasterizePdf = () => {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Output Format</label>
-                                        <select value={format} onChange={e => setFormat(e.target.value as 'png' | 'jpeg' | 'webp')}>
+                                        <select aria-label="Output Format" value={format} onChange={e => setFormat(e.target.value as 'png' | 'jpeg' | 'webp')}>
                                             <option value="png">PNG (lossless)</option>
                                             <option value="jpeg">JPEG (smaller)</option>
                                             <option value="webp">WebP (modern)</option>
@@ -86,7 +86,7 @@ export const RasterizePdf = () => {
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">DPI (Resolution)</label>
-                                        <select value={dpi} onChange={e => setDpi(parseInt(e.target.value))}>
+                                        <select aria-label="DPI (Resolution)" value={dpi} onChange={e => setDpi(parseInt(e.target.value))}>
                                             <option value="72">72 DPI (screen)</option>
                                             <option value="96">96 DPI (default)</option>
                                             <option value="150">150 DPI (good)</option>

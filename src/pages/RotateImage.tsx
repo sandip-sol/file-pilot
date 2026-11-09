@@ -290,7 +290,7 @@ export const RotateImage = () => {
                   Custom Angle (°) <span className="font-normal text-muted-foreground">— apply to all images</span>
                 </label>
                 <div className="flex gap-3">
-                  <input
+                  <input aria-label="Custom angle in degrees"
                     type="number"
                     placeholder="e.g. 45"
                     value={customAngle}
@@ -335,7 +335,7 @@ export const RotateImage = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Output Format</label>
-                  <select
+                  <select aria-label="Output Format"
                     value={outputFormat}
                     onChange={(e) => setOutputFormat(e.target.value as OutputFormatOption)}
                     className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-foreground/20"
@@ -351,7 +351,7 @@ export const RotateImage = () => {
                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                       Quality: {Math.round(quality * 100)}%
                     </label>
-                    <input
+                    <input aria-label="Quality"
                       type="range"
                       min={0.1}
                       max={1.0}

@@ -74,7 +74,7 @@ export const NotFound = () => {
   const isUnavailableTool = requestedTool && requestedStatus === 'hidden';
 
   return (
-    <main className="bg-background">
+    <div className="bg-background">
       <PageSeo
         title={isPlannedTool ? `${requestedTool.title} - Coming Soon` : 'Tool Not Found - FilePilot'}
         description="Find a reliable FilePilot tool for merging, splitting, compressing, converting, extracting, watermarking, or redacting PDF files."
@@ -137,6 +137,6 @@ export const NotFound = () => {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 };

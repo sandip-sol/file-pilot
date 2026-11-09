@@ -73,7 +73,7 @@ export const JsonToPdf = () => {
                         ) : (
                             <div>
                                 <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">JSON Content</label>
-                                <textarea
+                                <textarea aria-label="JSON Content"
                                     value={jsonText}
                                     onChange={e => setJsonText(e.target.value)}
                                     rows={10}

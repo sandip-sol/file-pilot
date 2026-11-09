@@ -192,7 +192,7 @@ export const ImageQualityAnalyzer = () => {
               <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                 Choose intended use
               </label>
-              <select
+              <select aria-label="Choose intended use"
                 value={intendedUse}
                 onChange={(e) => handleUseCaseChange(e.target.value as IntendedUse)}
                 className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-foreground/20"

@@ -132,7 +132,7 @@ export const FileUploader = ({
                         )}
                     </div>
                     <div>
-                        <h3 className="text-lg font-semibold mb-1 text-[var(--text)]">{description}</h3>
+                        <p className="text-lg font-semibold mb-1 text-[var(--text)]">{description}</p>
                         <p className="text-sm text-[var(--text-muted)]">
                             or <span className="text-foreground font-medium">browse files</span> {multiple ? '(multiple allowed)' : ''}
                         </p>

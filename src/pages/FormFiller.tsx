@@ -97,7 +97,7 @@ export const FormFiller = () => {
                                             <div key={field.name}>
                                                 <label className="block text-sm font-medium mb-1 text-[var(--text-secondary)]">{field.name} <span className="text-xs text-[var(--text-muted)]">({field.type})</span></label>
                                                 {field.type.toLowerCase().includes('checkbox') ? (
-                                                    <select value={values[field.name] || 'false'} onChange={e => setValues(prev => ({ ...prev, [field.name]: e.target.value }))}>
+                                                    <select aria-label={field.name} value={values[field.name] || 'false'} onChange={e => setValues(prev => ({ ...prev, [field.name]: e.target.value }))}>
                                                         <option value="false">Unchecked</option>
                                                         <option value="true">Checked</option>
                                                     </select>

@@ -112,13 +112,13 @@ export const PdfSecurity = () => {
                   <label className="mb-2 block text-sm font-medium text-muted-foreground">
                     {mode === 'unlock' ? 'Current password' : 'New password'}
                   </label>
-                  <input type="password" className="w-full" value={password} onChange={(event) => setPassword(event.target.value)} />
+                  <input aria-label={mode === 'unlock' ? 'Current password' : 'New password'} type="password" className="w-full" value={password} onChange={(event) => setPassword(event.target.value)} />
                 </div>
 
                 {mode === 'protect' ? (
                   <div>
                     <label className="mb-2 block text-sm font-medium text-muted-foreground">Confirm password</label>
-                    <input type="password" className="w-full" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
+                    <input aria-label="Confirm password" type="password" className="w-full" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
                   </div>
                 ) : null}
               </div>

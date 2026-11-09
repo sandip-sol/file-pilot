@@ -144,7 +144,7 @@ export const RedactPdf = () => {
 
             <div className="mt-6">
               <label className="mb-2 block text-sm font-medium text-muted-foreground">Zoom</label>
-              <input type="range" min={0.75} max={2.5} step={0.05} className="w-full" value={zoom} onChange={(event) => setZoom(Number(event.target.value))} />
+              <input aria-label="Zoom" type="range" min={0.75} max={2.5} step={0.05} className="w-full" value={zoom} onChange={(event) => setZoom(Number(event.target.value))} />
               <p className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
                 <ZoomIn className="h-3.5 w-3.5" />
                 {(zoom * 100).toFixed(0)}%

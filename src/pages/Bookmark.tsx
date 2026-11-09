@@ -48,7 +48,7 @@ export const Bookmark = () => {
                                 {bookmarks.map((bm, i) => (
                                     <div key={i} className="flex gap-2 items-center">
                                         <input type="text" value={bm.title} onChange={e => updateRow(i, 'title', e.target.value)} placeholder="Bookmark title" className="flex-1 rounded-lg border border-border bg-muted px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400" />
-                                        <input type="number" min={1} value={bm.page} onChange={e => updateRow(i, 'page', Number(e.target.value))} className="w-20 rounded-lg border border-border bg-muted px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                                        <input aria-label="Target page number" type="number" min={1} value={bm.page} onChange={e => updateRow(i, 'page', Number(e.target.value))} className="w-20 rounded-lg border border-border bg-muted px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                                         <button onClick={() => removeRow(i)} className="text-[var(--error)] hover:opacity-70 text-lg px-1">×</button>
                                     </div>
                                 ))}

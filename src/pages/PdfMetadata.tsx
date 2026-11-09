@@ -157,7 +157,7 @@ export const PdfMetadata = () => {
                                         {(['title', 'author', 'subject', 'keywords', 'creator'] as const).map(k => (
                                             <div key={k}>
                                                 <label className="block text-sm font-medium mb-1.5 capitalize text-[var(--text-secondary)]">{k}</label>
-                                                <input type="text" value={editValues[k]} onChange={e => setEditValues(prev => ({ ...prev, [k]: e.target.value }))}
+                                                <input aria-label={k} type="text" value={editValues[k]} onChange={e => setEditValues(prev => ({ ...prev, [k]: e.target.value }))}
                                                     className="w-full px-3 py-2.5 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-fuchsia-400" />
                                             </div>
                                         ))}

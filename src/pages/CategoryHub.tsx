@@ -34,7 +34,7 @@ const ToolCard = ({ tool }: { tool: ToolDefinition }) => {
         <span className="text-sm font-bold text-white">{tool.shortTitle}</span>
       </div>
       <div className="flex flex-1 flex-col p-4">
-        <h3 className="text-sm font-bold text-foreground">{tool.title}</h3>
+        <h2 className="text-sm font-bold text-foreground">{tool.title}</h2>
         <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
           {tool.description}
         </p>

@@ -77,14 +77,14 @@ export const AddBlankPage = () => {
                                 <div className="space-y-4">
                                     <div>
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Insert Position</label>
-                                        <select value={position} onChange={e => { setPosition(e.target.value as 'before' | 'after'); setCustomPage(''); }}>
+                                        <select aria-label="Insert Position" value={position} onChange={e => { setPosition(e.target.value as 'before' | 'after'); setCustomPage(''); }}>
                                             <option value="before">Before first page</option>
                                             <option value="after">After last page</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Or insert after page number</label>
-                                        <input
+                                        <input aria-label="Or insert after page number"
                                             type="number"
                                             min="1"
                                             placeholder="e.g. 3 — inserts after page 3"

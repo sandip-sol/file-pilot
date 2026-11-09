@@ -59,7 +59,7 @@ export const TextColor = () => {
                             <div className="flex items-center gap-4">
                                 <div>
                                     <label className="block text-sm font-medium mb-2">Text Color</label>
-                                    <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-16 h-12 rounded-xl border border-border cursor-pointer" />
+                                    <input aria-label="Text Color" type="color" value={color} onChange={e => setColor(e.target.value)} className="w-16 h-12 rounded-xl border border-border cursor-pointer" />
                                 </div>
                                 <div className="rounded-xl border border-border px-6 py-4 flex items-center gap-3">
                                     <span className="text-base font-medium" style={{ color }}>Sample Text</span>

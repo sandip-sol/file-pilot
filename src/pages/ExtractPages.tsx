@@ -50,7 +50,7 @@ export const ExtractPages = () => {
                         <div className="mt-6 animate-fade-in">
                             <p className="text-sm mb-3"><strong>{file.name}</strong></p>
                             <label className="block text-sm font-medium mb-2">Pages to extract (e.g. 1,3,5-8)</label>
-                            <input type="text" value={pageInput} onChange={e => setPageInput(e.target.value)} placeholder="1,3,5-8" className="w-full rounded-xl border border-border bg-muted px-4 py-3 mb-5 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                            <input aria-label="Pages to extract (e.g. 1,3,5-8)" type="text" value={pageInput} onChange={e => setPageInput(e.target.value)} placeholder="1,3,5-8" className="w-full rounded-xl border border-border bg-muted px-4 py-3 mb-5 focus:outline-none focus:ring-2 focus:ring-amber-400" />
                             {error && <div className="bg-[var(--error-light)] text-[var(--error)] p-4 rounded-xl mb-4 text-sm">{error}</div>}
                             {success && <div className="bg-[var(--success-light)] text-[var(--success)] p-4 rounded-xl mb-4 text-sm flex items-center gap-2"><CheckCircle className="w-5 h-5" />Extracted PDF downloaded!</div>}
                             <button onClick={handleProcess} disabled={isProcessing || !pageInput.trim()} className="btn btn-primary w-full py-4 text-lg disabled:opacity-50">

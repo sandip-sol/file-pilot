@@ -208,7 +208,7 @@ export const FaviconGenerator = () => {
                   </label>
                   {useBg && (
                     <div className="flex items-center gap-2">
-                      <input type="color" value={bgColorValue} onChange={e => setBgColorValue(e.target.value)} className="w-8 h-8 rounded border border-border cursor-pointer" />
+                      <input aria-label="Background color" type="color" value={bgColorValue} onChange={e => setBgColorValue(e.target.value)} className="w-8 h-8 rounded border border-border cursor-pointer" />
                       <span className="text-sm text-muted-foreground">{bgColorValue}</span>
                     </div>
                   )}

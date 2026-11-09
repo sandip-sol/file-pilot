@@ -186,7 +186,7 @@ export const RemoveBackground = () => {
   const isProcessing = status === 'loading-model' || status === 'processing';
 
   return (
-    <main className="container max-w-4xl py-8 px-4">
+    <div className="container max-w-4xl py-8 px-4">
       <PageSeo {...toolSeo('/remove-background')} />
 
       <div className="mb-6">
@@ -323,7 +323,7 @@ export const RemoveBackground = () => {
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="block text-sm font-medium mb-1">Format</label>
-                <select
+                <select aria-label="Format"
                   className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
                   value={outputFormat}
                   onChange={(e) => setOutputFormat(e.target.value as OutputFormatOption)}
@@ -339,7 +339,7 @@ export const RemoveBackground = () => {
                 <div>
                   <label className="block text-sm font-medium mb-1">Background Colour</label>
                   <div className="flex items-center gap-2">
-                    <input
+                    <input aria-label="Background Colour"
                       type="color"
                       value={bgColor}
                       onChange={(e) => setBgColor(e.target.value)}
@@ -354,7 +354,7 @@ export const RemoveBackground = () => {
               {outputFormat !== 'image/png' && (
                 <div>
                   <label className="block text-sm font-medium mb-1">Quality: {Math.round(quality * 100)}%</label>
-                  <input
+                  <input aria-label="Quality"
                     type="range"
                     min="0.1"
                     max="1"
@@ -369,7 +369,7 @@ export const RemoveBackground = () => {
 
               <div>
                 <label className="block text-sm font-medium mb-1">Edge Feather: {feather}px</label>
-                <input
+                <input aria-label="Edge Feather"
                   type="range"
                   min="0"
                   max="10"
@@ -444,6 +444,6 @@ export const RemoveBackground = () => {
       )}
 
       <FAQSection items={toolFaqs('/remove-background')} />
-    </main>
+    </div>
   );
 };

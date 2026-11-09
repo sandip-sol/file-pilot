@@ -37,6 +37,7 @@ export const ToolSearchDialog = () => {
                 onClick={() => openSearch(true)}
                 onPointerEnter={loadPanel}
                 onFocus={loadPanel}
+                aria-label="Search tools"
                 className="flex items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
                 <Search className="h-3.5 w-3.5" />

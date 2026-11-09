@@ -447,7 +447,7 @@ export const ResizeImage = () => {
                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                           Width (px)
                         </label>
-                        <input
+                        <input aria-label="Width (px)"
                           type="number"
                           min={1}
                           max={10000}
@@ -486,7 +486,7 @@ export const ResizeImage = () => {
                         <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                           Height (px)
                         </label>
-                        <input
+                        <input aria-label="Height (px)"
                           type="number"
                           min={1}
                           max={10000}
@@ -513,7 +513,7 @@ export const ResizeImage = () => {
                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                       Scale (%)
                     </label>
-                    <input
+                    <input aria-label="Scale (%)"
                       type="number"
                       min={1}
                       max={1000}
@@ -598,7 +598,7 @@ export const ResizeImage = () => {
                   <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                     Output Format
                   </label>
-                  <select
+                  <select aria-label="Output Format"
                     value={formatOption}
                     onChange={(e) => {
                       setFormatOption(e.target.value as FormatOption);
@@ -627,7 +627,7 @@ export const ResizeImage = () => {
                     <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                       Quality: {Math.round(quality * 100)}%
                     </label>
-                    <input
+                    <input aria-label="Quality"
                       type="range"
                       min={10}
                       max={100}
@@ -655,7 +655,7 @@ export const ResizeImage = () => {
                       </span>
                     </label>
                     <div className="flex items-center gap-3">
-                      <input
+                      <input aria-label="Background Color"
                         type="color"
                         value={bgColor}
                         onChange={(e) => setBgColor(e.target.value)}

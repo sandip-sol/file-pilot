@@ -22,12 +22,12 @@
     --secondary-foreground: 0 0% 4%;
 
     --muted: 30 8% 82%;
-    --muted-foreground: 30 4% 45%;
+    --muted-foreground: 30 4% 35%;
 
     --accent: 30 8% 78%;
     --accent-foreground: 0 0% 4%;
 
-    --destructive: 0 72% 50%;
+    --destructive: 0 72% 42%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 30 6% 78%;
@@ -60,11 +60,11 @@
     --primary-light: hsl(var(--secondary));
     --border-light: hsl(var(--border));
 
-    --success: #10b981;
+    --success: #166534;
     --success-light: #ecfdf5;
-    --error: #ef4444;
+    --error: #b91c1c;
     --error-light: #fef2f2;
-    --warning: #f59e0b;
+    --warning: #92400e;
 
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
@@ -79,6 +79,10 @@
   }
 
   .dark {
+    /* Light mode darkens these for contrast; on dark backgrounds the brighter values read best. */
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
     --background: 0 0% 6%;
     --foreground: 30 12% 87%;
 

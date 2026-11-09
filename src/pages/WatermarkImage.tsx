@@ -326,24 +326,24 @@ export const WatermarkImage = () => {
                   <div className="space-y-4">
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Text</label>
-                      <input type="text" value={text} onChange={(e) => setText(e.target.value)} className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20" placeholder="Your watermark text" />
+                      <input aria-label="Text" type="text" value={text} onChange={(e) => setText(e.target.value)} className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20" placeholder="Your watermark text" />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
                         <label className="block text-xs font-medium mb-1 text-muted-foreground">Font</label>
-                        <select value={fontFamily} onChange={(e) => setFontFamily(e.target.value)} className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20">
+                        <select aria-label="Font" value={fontFamily} onChange={(e) => setFontFamily(e.target.value)} className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20">
                           {FONT_FAMILIES.map((f) => <option key={f} value={f}>{f}</option>)}
                         </select>
                       </div>
                       <div>
                         <label className="block text-xs font-medium mb-1 text-muted-foreground">Size: {fontSize}px</label>
-                        <input type="range" min={12} max={200} value={fontSize} onChange={(e) => setFontSize(parseInt(e.target.value))} className="w-full accent-foreground" />
+                        <input aria-label="Size" type="range" min={12} max={200} value={fontSize} onChange={(e) => setFontSize(parseInt(e.target.value))} className="w-full accent-foreground" />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
                         <label className="block text-xs font-medium mb-1 text-muted-foreground">Weight</label>
-                        <select value={fontWeight} onChange={(e) => setFontWeight(e.target.value)} className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20">
+                        <select aria-label="Weight" value={fontWeight} onChange={(e) => setFontWeight(e.target.value)} className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20">
                           <option value="normal">Normal</option>
                           <option value="bold">Bold</option>
                           <option value="lighter">Light</option>
@@ -352,18 +352,18 @@ export const WatermarkImage = () => {
                       <div>
                         <label className="block text-xs font-medium mb-1 text-muted-foreground">Color</label>
                         <div className="flex items-center gap-2">
-                          <input type="color" value={textColor} onChange={(e) => setTextColor(e.target.value)} className="w-10 h-10 rounded-lg border border-border cursor-pointer" />
+                          <input aria-label="Color" type="color" value={textColor} onChange={(e) => setTextColor(e.target.value)} className="w-10 h-10 rounded-lg border border-border cursor-pointer" />
                           <span className="text-xs">{textColor}</span>
                         </div>
                       </div>
                     </div>
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Opacity: {Math.round(textOpacity * 100)}%</label>
-                      <input type="range" min={0.05} max={1} step={0.05} value={textOpacity} onChange={(e) => setTextOpacity(parseFloat(e.target.value))} className="w-full accent-foreground" />
+                      <input aria-label="Opacity" type="range" min={0.05} max={1} step={0.05} value={textOpacity} onChange={(e) => setTextOpacity(parseFloat(e.target.value))} className="w-full accent-foreground" />
                     </div>
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Letter Spacing: {letterSpacing}px</label>
-                      <input type="range" min={0} max={20} value={letterSpacing} onChange={(e) => setLetterSpacing(parseInt(e.target.value))} className="w-full accent-foreground" />
+                      <input aria-label="Letter Spacing" type="range" min={0} max={20} value={letterSpacing} onChange={(e) => setLetterSpacing(parseInt(e.target.value))} className="w-full accent-foreground" />
                     </div>
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" checked={textShadow} onChange={(e) => setTextShadow(e.target.checked)} className="w-4 h-4 rounded accent-foreground" />
@@ -398,15 +398,15 @@ export const WatermarkImage = () => {
                     </div>
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Size: {logoSizePercent}% of image width</label>
-                      <input type="range" min={5} max={80} value={logoSizePercent} onChange={(e) => setLogoSizePercent(parseInt(e.target.value))} className="w-full accent-foreground" />
+                      <input aria-label="Size" type="range" min={5} max={80} value={logoSizePercent} onChange={(e) => setLogoSizePercent(parseInt(e.target.value))} className="w-full accent-foreground" />
                     </div>
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Opacity: {Math.round(logoOpacity * 100)}%</label>
-                      <input type="range" min={0.05} max={1} step={0.05} value={logoOpacity} onChange={(e) => setLogoOpacity(parseFloat(e.target.value))} className="w-full accent-foreground" />
+                      <input aria-label="Opacity" type="range" min={0.05} max={1} step={0.05} value={logoOpacity} onChange={(e) => setLogoOpacity(parseFloat(e.target.value))} className="w-full accent-foreground" />
                     </div>
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Background Plate</label>
-                      <select value={logoPlate} onChange={(e) => setLogoPlate(e.target.value as 'none' | 'white' | 'black')} className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20">
+                      <select aria-label="Background Plate" value={logoPlate} onChange={(e) => setLogoPlate(e.target.value as 'none' | 'white' | 'black')} className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20">
                         <option value="none">None</option>
                         <option value="white">White</option>
                         <option value="black">Black</option>
@@ -434,11 +434,11 @@ export const WatermarkImage = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-medium mb-1 text-muted-foreground">Margin: {margin}px</label>
-                    <input type="range" min={0} max={200} value={margin} onChange={(e) => setMargin(parseInt(e.target.value))} className="w-full accent-foreground" />
+                    <input aria-label="Margin" type="range" min={0} max={200} value={margin} onChange={(e) => setMargin(parseInt(e.target.value))} className="w-full accent-foreground" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium mb-1 text-muted-foreground">Rotation: {rotation}°</label>
-                    <input type="range" min={-180} max={180} value={rotation} onChange={(e) => setRotation(parseInt(e.target.value))} className="w-full accent-foreground" />
+                    <input aria-label="Rotation" type="range" min={-180} max={180} value={rotation} onChange={(e) => setRotation(parseInt(e.target.value))} className="w-full accent-foreground" />
                   </div>
                 </div>
 
@@ -451,11 +451,11 @@ export const WatermarkImage = () => {
                   <div className="grid grid-cols-2 gap-3 animate-fade-in">
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Spacing: {repeatSpacing}px</label>
-                      <input type="range" min={20} max={400} value={repeatSpacing} onChange={(e) => setRepeatSpacing(parseInt(e.target.value))} className="w-full accent-foreground" />
+                      <input aria-label="Spacing" type="range" min={20} max={400} value={repeatSpacing} onChange={(e) => setRepeatSpacing(parseInt(e.target.value))} className="w-full accent-foreground" />
                     </div>
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Angle: {repeatAngle}°</label>
-                      <input type="range" min={-90} max={90} value={repeatAngle} onChange={(e) => setRepeatAngle(parseInt(e.target.value))} className="w-full accent-foreground" />
+                      <input aria-label="Angle" type="range" min={-90} max={90} value={repeatAngle} onChange={(e) => setRepeatAngle(parseInt(e.target.value))} className="w-full accent-foreground" />
                     </div>
                   </div>
                 )}
@@ -464,7 +464,7 @@ export const WatermarkImage = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-medium mb-1 text-muted-foreground">Format</label>
-                    <select value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as ImageFormat)} className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20">
+                    <select aria-label="Format" value={outputFormat} onChange={(e) => setOutputFormat(e.target.value as ImageFormat)} className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20">
                       <option value="image/jpeg">JPEG</option>
                       <option value="image/png">PNG</option>
                       {supportedFormats?.['image/webp'] && <option value="image/webp">WebP</option>}
@@ -473,7 +473,7 @@ export const WatermarkImage = () => {
                   {outputFormat !== 'image/png' && (
                     <div>
                       <label className="block text-xs font-medium mb-1 text-muted-foreground">Quality: {Math.round(quality * 100)}%</label>
-                      <input type="range" min={0.1} max={1} step={0.05} value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full accent-foreground" />
+                      <input aria-label="Quality" type="range" min={0.1} max={1} step={0.05} value={quality} onChange={(e) => setQuality(parseFloat(e.target.value))} className="w-full accent-foreground" />
                     </div>
                   )}
                 </div>

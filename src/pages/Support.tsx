@@ -76,7 +76,7 @@ export const Support = () => {
         </div>
       </section>
 
-      <main className="container py-10 md:py-12">
+      <div className="container py-10 md:py-12">
         <SupportFilePilot />
 
         <section aria-labelledby="support-helps-heading" className="mt-12">
@@ -116,7 +116,7 @@ export const Support = () => {
             ))}
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 };

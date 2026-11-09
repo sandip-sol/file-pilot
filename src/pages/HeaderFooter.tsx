@@ -84,21 +84,21 @@ export const HeaderFooter = () => {
 
                                 <div>
                                     <label className="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">Header Text</label>
-                                    <input type="text" value={headerText} onChange={e => setHeaderText(e.target.value)}
+                                    <input aria-label="Header Text" type="text" value={headerText} onChange={e => setHeaderText(e.target.value)}
                                         placeholder="e.g. CONFIDENTIAL"
                                         className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-teal-400" />
                                 </div>
 
                                 <div>
                                     <label className="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">Footer Text</label>
-                                    <input type="text" value={footerText} onChange={e => setFooterText(e.target.value)}
+                                    <input aria-label="Footer Text" type="text" value={footerText} onChange={e => setFooterText(e.target.value)}
                                         placeholder="e.g. Company Name · 2024"
                                         className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-teal-400" />
                                 </div>
 
                                 <div>
                                     <label className="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">Font Size: {fontSize}pt</label>
-                                    <input type="range" min={8} max={24} value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
+                                    <input aria-label="Font Size" type="range" min={8} max={24} value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
                                         className="w-full accent-teal-500" />
                                     <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1">
                                         <span>8pt</span><span>24pt</span>

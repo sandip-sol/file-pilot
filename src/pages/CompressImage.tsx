@@ -301,7 +301,7 @@ export const CompressImage = () => {
                   <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                     Quality: {Math.round(customQuality * 100)}%
                   </label>
-                  <input
+                  <input aria-label="Quality"
                     type="range"
                     min={0.1}
                     max={1.0}
@@ -323,7 +323,7 @@ export const CompressImage = () => {
                   Target File Size (KB)
                   <span className="font-normal text-muted-foreground ml-1">- optional</span>
                 </label>
-                <input
+                <input aria-label="Target File Size (KB) - optional"
                   type="number"
                   min={1}
                   placeholder="Leave empty for no target"
@@ -338,7 +338,7 @@ export const CompressImage = () => {
                 <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
                   Output Format
                 </label>
-                <select
+                <select aria-label="Output Format"
                   value={outputFormat}
                   onChange={(e) => setOutputFormat(e.target.value as OutputFormatOption)}
                   className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-foreground/20"
@@ -362,7 +362,7 @@ export const CompressImage = () => {
                       Transparent areas will be filled with the background color below.
                     </p>
                     <div className="flex items-center gap-3 mt-3">
-                      <input
+                      <input aria-label="Background color"
                         type="color"
                         value={bgColor}
                         onChange={(e) => setBgColor(e.target.value)}
