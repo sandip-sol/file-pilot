@@ -6,6 +6,11 @@ export interface SiteFaq {
   answer: string;
 }
 
+export interface SiteSection {
+  heading: string;
+  paragraphs: string[];
+}
+
 interface SiteContentEntry {
   /** Full <title>, brand included. Used verbatim by the prerenderer AND PageSeo. */
   title: string;
@@ -17,6 +22,8 @@ interface SiteContentEntry {
   h1: string;
   /** Lead paragraph for the prerendered shell. */
   intro?: string;
+  /** Long-form guidance on hub pages, rendered by <HubSections> and the prerenderer. */
+  sections?: SiteSection[];
   /** Rendered by the page's <FAQSection> and by the prerendered FAQPage schema. */
   faqs?: SiteFaq[];
 }
@@ -90,6 +97,28 @@ export const siteContent: Record<string, SiteContentEntry> = {
     h1: 'Free Online Image Tools',
     intro:
       'Compress, resize, crop, rotate and convert images between JPG, PNG, WebP, SVG and BMP, strip EXIF and GPS metadata, add watermarks, and run AI background removal — all in your browser, with your photos never leaving your device.',
+    sections: [
+      {
+        heading: 'Which image tool do you need?',
+        paragraphs: [
+          'Compress Image lowers the file size, which is usually the fix when a photo is too heavy for an email or a web page. Resize Image changes the width and height in pixels. Crop Image cuts away part of the picture, and Rotate Image corrects its orientation.',
+          'Convert Image changes the file format. JPG suits photographs and keeps files small. PNG suits screenshots, logos and anything that needs a transparent background. WebP usually produces smaller files for websites, though older software may not open it.',
+        ],
+      },
+      {
+        heading: 'Photos carry more than the picture',
+        paragraphs: [
+          'Photos from phones and cameras often store hidden EXIF data, including when the photo was taken, which device took it and sometimes the exact GPS location. That data can travel with the file when you share it. Remove Image Metadata strips it out first.',
+          'Doing this in your browser matters. A service that removes location data on its own server has to receive the location data before it can delete it. Here, the photo stays on your device the whole time.',
+        ],
+      },
+      {
+        heading: 'When an image has to meet a rule',
+        paragraphs: [
+          'If someone else sets the requirements, such as an application form with a file size limit or a marketplace with fixed dimensions, the workflow tools are a faster starting point than resizing by hand. Resize Image to Exact Size targets precise pixel and KB values, and Passport Photo Validator checks a photo against passport and ID rules.',
+        ],
+      },
+    ],
   },
 
   '/image-workflows': {
@@ -99,6 +128,29 @@ export const siteContent: Record<string, SiteContentEntry> = {
     h1: 'Image Workflow Tools',
     intro:
       'Format, validate, and prepare images for real publishing requirements. These tools help with social media sizes, ecommerce output, passport photo checks, favicons, QR codes, and image-to-PDF workflows without uploading your files.',
+    sections: [
+      {
+        heading: 'Start with the rule you have to meet',
+        paragraphs: [
+          'Most of these tools begin with a requirement rather than an edit. If a form asks for something like a JPG at 200×230 pixels and under 50 KB, Resize Image to Exact Size can hit both numbers. Passport Photo Validator checks a photo’s dimensions, file size, face position and background against passport and ID photo rules.',
+          'Social Media Resizer crops an image for a specific platform and post type, such as an Instagram Story or a LinkedIn banner. E-commerce Image Formatter prepares product photos for marketplaces such as Amazon, eBay, Etsy and Shopify.',
+        ],
+      },
+      {
+        heading: 'Batch jobs and finished files',
+        paragraphs: [
+          'Image Formatter applies one set of dimensions, format, quality and file size limits to many images, then lets you download them one at a time or as a ZIP. Scan Images to PDF turns phone photos of paper documents into a single ordered PDF.',
+          'Favicon Generator builds a complete set of website icons from one image and gives you the HTML to add them. QR Code Generator creates codes for links, Wi-Fi details, contact cards and plain text.',
+        ],
+      },
+      {
+        heading: 'Why these jobs stay on your device',
+        paragraphs: [
+          'The files used here are often personal: ID photos, signatures, certificates and Wi-Fi passwords. All eight tools do their work in your browser, so none of that is sent to a server.',
+          'Government and platform requirements change, so check the current rules on the official site before you submit anything. A photo that passes a technical check here can still be rejected by the authority that issues the document.',
+        ],
+      },
+    ],
   },
 
   '/ai-tools': {
@@ -108,6 +160,30 @@ export const siteContent: Record<string, SiteContentEntry> = {
     h1: 'AI Image Tools',
     intro:
       'Use AI-assisted image tools for background removal, cleanup, enhancement, upscaling, and object removal. FilePilot keeps privacy clear by running supported processing in your browser instead of collecting your images on a server.',
+    sections: [
+      {
+        heading: 'Choosing the right tool',
+        paragraphs: [
+          'Remove Background cuts out the subject and gives you a PNG with a transparent background. Change Background makes the same cut-out, then puts a solid color, gradient, blur or your own image behind the subject.',
+          'Upscale Image enlarges a small image by 2× or 4× using the Real-ESRGAN super-resolution model. AI Enhance Image corrects exposure, noise, sharpness and faded color without changing the image size. Object Remover fills in an area you paint over, which suits wires, signs, blemishes and other small distractions.',
+        ],
+      },
+      {
+        heading: 'What runs on your device',
+        paragraphs: [
+          'With all five tools, your image stays in your browser and is never sent to FilePilot.',
+          'Remove Background, Change Background and Upscale Image use neural network models. They download the model and its runtime when you first use them, so that first run needs a connection and takes longer. Only the software is downloaded, and your image is not part of that request.',
+          'AI Enhance Image and Object Remover need no model download. Enhance measures the brightness, contrast and color of your image and corrects them, while Object Remover rebuilds the painted area from the pixels around it.',
+        ],
+      },
+      {
+        heading: 'Getting good results',
+        paragraphs: [
+          'The work happens on your own device, so large images take longer on phones and older laptops. Upscale Image accepts images up to 4 megapixels, and 4× upscaling on anything above 1 megapixel uses a lot of memory.',
+          'Object Remover accepts images up to 2048 pixels on each side, and you can paint over at most half of the image. It works best on small areas with simple surroundings, such as a wire against the sky. A large object in front of a detailed scene is likely to leave a visible smear. After removing a background, check the edges around hair and transparent objects before you use the result.',
+        ],
+      },
+    ],
   },
 
   '/blog': {

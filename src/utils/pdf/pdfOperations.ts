@@ -755,10 +755,30 @@ export async function addBackgroundColor(
     const targets = pages ? pages.map(p => p - 1) : allPages.map((_, i) => i);
     for (const idx of targets) {
         const page = allPages[idx];
-        const { width, height } = page.getSize();
-        // Draw background behind existing content by inserting at beginning of content stream
-        page.drawRectangle({ x: 0, y: 0, width, height, color: rgb(r / 255, g / 255, b / 255) });
+        const { x, y, width, height } = page.getMediaBox();
+        page.drawRectangle({ x, y, width, height, color: rgb(r / 255, g / 255, b / 255) });
+        // pdf-lib appends drawing to the end of the page, on top of the existing
+        // content. Move the stream holding the rectangle to the front so it is
+        // painted first and everything else stays visible.
+        const contents = page.node.normalizedEntries().Contents!;
+        const background = contents.get(contents.size() - 1);
+        contents.remove(contents.size() - 1);
+        contents.insert(0, background);
     }
+    return doc.save();
+}
+
+/** Removes comments, highlights, links and other annotations, keeping filled-in form values as page content. */
+export async function removeAnnotations(file: File): Promise<Uint8Array> {
+    const ab = await file.arrayBuffer();
+    const { PDFDocument, PDFName } = await import('pdf-lib');
+    const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
+    try {
+        doc.getForm().flatten();
+    } catch {
+        // Not every PDF has a form that can be flattened.
+    }
+    for (const page of doc.getPages()) page.node.delete(PDFName.of('Annots'));
     return doc.save();
 }
 

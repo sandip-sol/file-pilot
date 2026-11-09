@@ -67,7 +67,7 @@ export const curatedRelatedTools: Record<string, string[]> = {
   '/resize-image': ['/compress-image', '/crop-image', '/image-requirements', '/social-media-resizer'],
   '/convert-image': ['/compress-image', '/resize-image', '/image-to-svg', '/image-formatter'],
   '/crop-image': ['/resize-image', '/rotate-image', '/photo-editor', '/image-formatter'],
-  '/image-to-svg': ['/convert-image', '/favicon-generator', '/pdf-to-svg', '/compress-image'],
+  '/image-to-svg': ['/convert-image', '/favicon-generator', '/resize-image', '/compress-image'],
   '/remove-image-metadata': ['/compress-image', '/blur-face', '/photo-editor', '/pdf-metadata'],
   '/blur-face': ['/remove-image-metadata', '/watermark-image', '/crop-image', '/photo-editor'],
 
@@ -77,7 +77,7 @@ export const curatedRelatedTools: Record<string, string[]> = {
   '/passport-photo-validator': ['/image-requirements', '/image-formatter', '/crop-image', '/remove-image-metadata'],
   '/social-media-resizer': ['/image-formatter', '/ecommerce-image-formatter', '/crop-image', '/resize-image'],
   '/ecommerce-image-formatter': ['/image-formatter', '/social-media-resizer', '/remove-background', '/compress-image'],
-  '/scan-images-to-pdf': ['/images-to-pdf', '/compress', '/organize-pdf', '/deskew-pdf'],
+  '/scan-images-to-pdf': ['/images-to-pdf', '/compress', '/organize-pdf', '/merge'],
   '/favicon-generator': ['/image-to-svg', '/resize-image', '/crop-image', '/image-formatter'],
   '/qr-generator': ['/favicon-generator', '/image-to-svg', '/image-formatter', '/color-picker'],
 

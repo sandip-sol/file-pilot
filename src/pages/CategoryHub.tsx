@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Bot, Images, Lock } from 'lucide-react';
+import { HubSections } from '../components/HubSections';
 import { PageSeo } from '../components/PageSeo';
 import { discoverableTools, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
 import { toCanonicalPath, toolPath } from '../lib/routes';
@@ -87,6 +88,8 @@ export const CategoryHub = ({ hubPath }: { hubPath: keyof typeof HUBS }) => {
           ))}
         </div>
       </section>
+
+      <HubSections sections={content.sections} />
 
       <section className="container pb-12 md:pb-16">
         <div className="rounded-xl border border-border bg-card/60 p-6 text-center backdrop-blur-sm">

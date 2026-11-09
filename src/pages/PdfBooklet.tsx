@@ -74,7 +74,7 @@ export const PdfBooklet = () => {
                                     <p><strong>How to use:</strong></p>
                                     <ol className="list-decimal list-inside space-y-1">
                                         <li>Download the booklet PDF</li>
-                                        <li>Print double-sided (flip on long edge)</li>
+                                        <li>Print double-sided (flip on short edge)</li>
                                         <li>Fold the stack in half</li>
                                         <li>Staple in the center</li>
                                     </ol>

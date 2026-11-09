@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Lock, Images } from 'lucide-react';
+import { HubSections } from '../components/HubSections';
 import { PageSeo } from '../components/PageSeo';
 import { siteContent, siteSeo } from '../data/siteContent';
 import { discoverableTools, type ToolCategory, type ToolDefinition } from '../data/toolRegistry';
@@ -113,6 +114,8 @@ export const ImageToolsHub = () => {
           </Link>
         </div>
       </section>
+
+      <HubSections sections={siteContent['/image-tools'].sections} />
 
       {/* Privacy footer */}
       <section className="container pb-12 md:pb-16">

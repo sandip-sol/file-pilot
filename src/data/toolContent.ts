@@ -1,3 +1,5 @@
+import type { SiteSection } from './siteContent';
+
 export interface ToolFaq {
   question: string;
   answer: string;
@@ -21,6 +23,11 @@ interface ToolContentEntry {
    * list is a worse signal than none.
    */
   features?: string[];
+  /**
+   * Tool-specific guidance rendered after the steps by <ToolContentSection> and
+   * the prerenderer. Every statement must match what the tool actually does.
+   */
+  details?: SiteSection[];
   /**
    * Keyword-first SEO title WITHOUT the brand suffix — `toolSeo()` and the
    * prerenderer both append BRAND_SUFFIX, so the client-rendered title and the
@@ -157,18 +164,34 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/rotate-pdf': {
     intro:
-      'Rotate PDF lets you rotate all pages or specific pages by 90°, 180°, or 270°. This is especially useful for scanned documents where pages were fed at the wrong angle, or PDFs exported from mobile devices in the wrong orientation. The rotation is applied to the page content itself, not just the view setting.',
+      'Rotate PDF turns every page of a PDF by 90°, 180°, or 270°. This is especially useful for scanned documents that came out sideways or upside down, or PDFs exported from mobile devices in the wrong orientation. The rotation is saved in the file, so the pages open the right way up in any PDF viewer.',
     action: 'rotate PDF pages',
     steps: [
       'Upload the PDF containing pages that need rotation.',
-      'Select which pages to rotate and choose the rotation angle (90°, 180°, or 270°).',
+      'Choose the rotation angle (90°, 180°, or 270°).',
       'Click "Rotate & Download" to save the corrected PDF.',
     ],
     useCases: [
       'Fix sideways or upside-down scanned pages.',
-      'Correct landscape tables embedded in portrait documents.',
+      'Turn a landscape export into the orientation your reader expects.',
       'Prepare PDFs for consistent printing orientation.',
-      'Fix mobile-scanned documents with mixed orientations.',
+      'Correct a document that was scanned upside down on a phone.',
+    ],
+    details: [
+      {
+        heading: 'Choosing the angle',
+        paragraphs: [
+          'Angles are clockwise. Use 90° when the top of the page is pointing left, 270° when it is pointing right, and 180° when it is upside down.',
+          'The rotation is added to any rotation the page already has, so running the tool twice at 90° gives the same result as running it once at 180°.',
+        ],
+      },
+      {
+        heading: 'What stays the same',
+        paragraphs: [
+          'Only the rotation setting of each page changes. Pages are not redrawn, so text stays selectable, images keep their original quality and the file size barely changes.',
+          'This tool rotates the whole document. To turn individual pages, use Organize PDF, which lets you rotate and reorder page by page. The new file is rebuilt from the original pages, so bookmarks are not carried over.',
+        ],
+      },
     ],
       seoTitle: "Rotate PDF Pages Online – Free & Private",
     seoDescription: "Rotate PDF pages by 90, 180 or 270 degrees and download the corrected file. Fix sideways scans fast with this free online tool: no uploads and no signup needed.",
@@ -215,6 +238,21 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Extract certificates or appendices from a training manual.',
       'Share select pages without exposing the full document.',
     ],
+    details: [
+      {
+        heading: 'Entering page numbers',
+        paragraphs: [
+          'Separate page numbers with commas and use a hyphen for a range. Entering 1,3,5-8 gives you pages 1, 3, 5, 6, 7 and 8.',
+          'Pages always come out in their original order and duplicates are ignored, so entering 8,2 still puts page 2 first. To change the order, use Organize PDF on the result.',
+        ],
+      },
+      {
+        heading: 'What the new file contains',
+        paragraphs: [
+          'Only the pages you choose are copied into a new document, which makes this a good way to share part of a file without sending the rest. Bookmarks are not carried over.',
+        ],
+      },
+    ],
       seoTitle: "Extract PDF Pages Online – Free & Private",
     seoDescription: "Extract specific pages from a PDF into a new document by entering page numbers or ranges like 1,3,5-8. Free online tool that runs in your browser, no uploads.",
     faqs: [
@@ -228,14 +266,29 @@ export const toolContent: Record<string, ToolContentEntry> = {
     action: 'reverse PDF page order',
     steps: [
       'Upload the PDF whose page order you want to reverse.',
-      'The tool automatically reverses all pages.',
-      'Click "Download" to save the reversed document.',
+      'Click "Reverse & Download".',
+      'Open the downloaded file, where the last page now comes first.',
     ],
     useCases: [
       'Fix the order of documents that printed in reverse.',
       'Reverse chronological logs to read oldest-first.',
       'Prepare documents for specific binding requirements.',
       'Reorder photo albums or portfolio pages.',
+    ],
+    details: [
+      {
+        heading: 'When this helps',
+        paragraphs: [
+          'Reversing is mainly useful when pages were scanned or printed in the wrong direction, so the document reads back to front. Running the tool a second time restores the original order.',
+          'It always reverses the whole document. To move only some pages, use Organize PDF.',
+        ],
+      },
+      {
+        heading: 'What stays the same',
+        paragraphs: [
+          'Pages are copied as they are, so text stays selectable and each page keeps its content, size and rotation. Only the order changes. The new file is rebuilt from the original pages, so bookmarks are not carried over.',
+        ],
+      },
     ],
       seoTitle: "Reverse PDF Pages Order – Free & Private Online Tool",
     seoDescription: "Reverse the page order of a PDF so the last page comes first, handy for scans fed in backwards. Free online tool that runs in your browser, with no uploads.",
@@ -247,12 +300,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/add-blank-page': {
     intro:
-      'Add Blank Page inserts one or more blank pages at any position in your PDF. Choose the paper size, orientation, and position, then download the updated file. This is especially useful for adding separator pages between sections, ensuring double-sided printing starts on the right page, or reserving space for handwritten notes.',
+      'Add Blank Page inserts one blank A4 page at the position you choose in your PDF, then gives you the updated file. This is especially useful for adding separator pages between sections, ensuring double-sided printing starts on the right page, or reserving space for handwritten notes.',
     action: 'add blank pages to a PDF',
     steps: [
       'Upload the PDF where you want to insert blank pages.',
-      'Choose the position, paper size, and number of blank pages to add.',
-      'Click "Add & Download" to save the updated PDF.',
+      'Choose to insert before the first page, after the last page, or after a specific page number.',
+      'Click "Add Blank Page & Download" to save the updated PDF.',
     ],
     useCases: [
       'Insert separator pages between report sections.',
@@ -260,8 +313,22 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Ensure chapters start on odd-numbered pages for booklet printing.',
       'Pad a document to meet a minimum page-count requirement.',
     ],
+    details: [
+      {
+        heading: 'Choosing where it goes',
+        paragraphs: [
+          'You can add the page before the first page, after the last page, or after any page number you enter. A number larger than the page count places the page at the end. To add several blank pages, run the tool again on the downloaded file.',
+        ],
+      },
+      {
+        heading: 'Page size',
+        paragraphs: [
+          'The new page is always A4 portrait (595 × 842 points), even if the rest of your document is a different size such as US Letter. If the match matters for printing, check your document with Page Dimensions first.',
+        ],
+      },
+    ],
       seoTitle: "Add Blank Page to PDF – Insert Empty Page Online Free",
-    seoDescription: "Insert one or more blank pages at the start, end or any position in a PDF. Free online tool that runs in your browser, so your document is never uploaded.",
+    seoDescription: "Insert a blank A4 page at the start, the end or after any page of a PDF. Free online tool that runs in your browser, so your document is never uploaded.",
     faqs: [
       { question: "Can I insert a blank page at any position?", answer: "Yes. You can insert before the first page, after the last page, or specify a page number to insert after." },
       { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
@@ -274,13 +341,28 @@ export const toolContent: Record<string, ToolContentEntry> = {
     steps: [
       'Upload the first PDF (e.g., front sides of scanned pages).',
       'Upload the second PDF (e.g., back sides).',
-      'Click "Merge" to interleave the pages and download the result.',
+      'Click "Alternate Merge & Download" to interleave the pages and save the result.',
     ],
     useCases: [
       'Reassemble double-sided scans from a single-sided scanner.',
       'Interleave question sheets and answer sheets.',
       'Combine two parallel document versions page-by-page.',
-      'Merge translated and original-language pages side by side.',
+      'Alternate translated pages with the original-language pages.',
+    ],
+    details: [
+      {
+        heading: 'Reassembling double-sided scans',
+        paragraphs: [
+          'Scan the stack once for the fronts and once for the backs, then add the fronts first, because file order decides which page comes first.',
+          'When you turn a stack over to scan the backs, they often come out in reverse order, with the last back first. If the result is out of sequence, run the backs through Reverse PDF and merge again.',
+        ],
+      },
+      {
+        heading: 'When the files differ in length',
+        paragraphs: [
+          'The tool takes one page from each file in turn until every page is used. If one file is longer, its extra pages are added at the end in their original order. You can also add more than two files. Bookmarks are not carried over.',
+        ],
+      },
     ],
       seoTitle: "Alternate Merge PDFs – Interleave Pages from Multiple PDFs",
     seoDescription: "Interleave pages from two PDFs in alternating order, ideal for combining separately scanned front and back sides. Free, private, runs entirely in your browser.",
@@ -354,6 +436,22 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Overlay a signature template onto a contract.',
       'Layer grid lines or ruled paper under handwritten notes.',
     ],
+    details: [
+      {
+        heading: 'How pages are matched',
+        paragraphs: [
+          'Each page of the base PDF is combined with one page of the overlay PDF. If the overlay has fewer pages, it repeats from its first page, so a one-page letterhead is applied to every page of the document. A three-page overlay on a ten-page base repeats as pages 1, 2, 3, 1, 2, 3 and so on.',
+          'The result always has the same number of pages as the base PDF, and any extra overlay pages are ignored.',
+        ],
+      },
+      {
+        heading: 'Getting the layers right',
+        paragraphs: [
+          'Overlay puts the second file on top, and underlay puts it behind. A solid white background in whichever file is on top hides everything below it, so the top layer needs transparent areas. Most text documents have no background of their own, which makes them a good top layer.',
+          'Every overlay page is stretched to the size of the base page, so use a template with the same page size and shape to avoid distortion.',
+        ],
+      },
+    ],
       seoTitle: "Overlay / Underlay PDFs – Stamp One PDF Over Another",
     seoDescription: "Overlay one PDF on top of or behind another to apply letterheads, watermarks or background templates to every page. Free, private, runs in your browser.",
     faqs: [
@@ -375,6 +473,21 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Divide wide landscape pages into two portrait pages.',
       'Separate two-column layouts into individual pages.',
       'Convert two-up handouts back to full-size pages.',
+    ],
+    details: [
+      {
+        heading: 'Which direction to choose',
+        paragraphs: [
+          'Vertical cuts each page down the middle into a left and a right half, which suits scanned book spreads and two-up handouts. Horizontal cuts each page across into a top and a bottom half.',
+          'Each half becomes its own page in reading order: left then right, or top then bottom. A 10-page PDF becomes 20 pages.',
+        ],
+      },
+      {
+        heading: 'Before you divide',
+        paragraphs: [
+          'The cut is always exactly halfway. If your spreads are off center, part of one page can land on the wrong side, so even out the margins first with Crop PDF. Every page is divided, including a cover or any page that was not a spread, so remove those first with Delete Pages.',
+        ],
+      },
     ],
       seoTitle: "Divide PDF Pages Online – Free & Private",
     seoDescription: "Split each PDF page into two halves horizontally or vertically, ideal for scanned two-page spreads. Free online tool that runs in your browser with no uploads.",
@@ -436,18 +549,33 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/grid-combine': {
     intro:
-      'Grid Combine arranges pages from multiple PDFs into a customizable grid on a single page. Unlike N-Up (which works with a single file), Grid Combine lets you select specific files and page numbers, arrange them in rows and columns, and control spacing — perfect for comparison layouts, portfolio sheets, or proofing grids.',
+      'Grid Combine takes the first page of each PDF you upload and arranges them in a grid on one sheet. Choose the number of columns and the rows follow from the number of files, which suits comparison layouts, portfolio sheets, or proofing grids.',
     action: 'combine PDFs in a grid',
     steps: [
       'Upload multiple PDF files.',
-      'Configure the grid layout (rows, columns, spacing).',
-      'Click "Combine" to generate the grid and download.',
+      'Choose the number of columns.',
+      'Click "Create Grid PDF" to generate the grid and download.',
     ],
     useCases: [
       'Create side-by-side document comparisons on one sheet.',
       'Build portfolio proof sheets from multiple design files.',
       'Arrange thumbnail previews for a document index.',
       'Combine receipts or small documents onto a single page for filing.',
+    ],
+    details: [
+      {
+        heading: 'How the grid is built',
+        paragraphs: [
+          'Only the first page of each PDF is used, in the order of your file list, and the grid fills from left to right and top to bottom. Rows are added as needed, so five files in two columns make three rows.',
+          'To put a different page in the grid, save that page as its own PDF with Extract Pages first. For several pages from a single file, N-Up PDF is a better fit.',
+        ],
+      },
+      {
+        heading: 'Size and scale',
+        paragraphs: [
+          'Every cell is the size of the first page of the first file, and the sheet grows to fit, so four pages in two columns produce a sheet twice as wide and twice as tall as one page. Pages of other sizes are stretched to fit their cell, so use files with the same page shape. There are no gaps between cells.',
+        ],
+      },
     ],
       seoTitle: "Grid Combine PDFs – Arrange Multiple PDFs in a Grid Layout",
     seoDescription: "Arrange the first pages of several PDFs in a grid on one sheet to make comparison or overview pages. Free online tool that runs in your browser with no uploads.",
@@ -659,14 +787,31 @@ export const toolContent: Record<string, ToolContentEntry> = {
     action: 'create a PDF booklet',
     steps: [
       'Upload the PDF you want to convert into a booklet.',
-      'Choose your paper size and booklet settings.',
-      'Download the imposed PDF, print double-sided, fold, and staple.',
+      'Click "Create Booklet & Download" to generate the imposed PDF.',
+      'Print double-sided, flipping on the short edge, then fold and staple.',
     ],
     useCases: [
       'Print a self-published zine or chapbook at home.',
       'Create event programs or wedding booklets.',
       'Make compact reference guides that fold into pocket-sized booklets.',
       'Produce church bulletins or meeting agendas in booklet format.',
+    ],
+    details: [
+      {
+        heading: 'How the pages are arranged',
+        paragraphs: [
+          'Each sheet of paper carries four of your pages, two on each side. The page count is therefore rounded up to a multiple of four, and any extra slots stay blank at the back of the booklet. A 10-page PDF becomes 12 slots on three sheets, with two blank pages at the end.',
+          'Pages are reordered so the stack reads correctly once folded. On the outer sheet, page 1 sits next to the last page slot on one side, and page 2 sits next to the second-to-last slot on the other.',
+        ],
+      },
+      {
+        heading: 'Printing it correctly',
+        paragraphs: [
+          'Set your printer to double-sided and choose flip on the short edge. Each output page is a landscape spread, and flipping on the long edge would leave every back side upside down.',
+          'Each spread is twice as wide as one of your pages. An A5 document fits on A4 paper at actual size. An A4 document produces spreads the size of A3, so choose fit to page if you print on A4 and expect your pages to come out at roughly A5 size.',
+          'All pages are placed at the size of the first page, so pages with a different size get stretched to fit. Run the PDF through Page Dimensions first if it was assembled from several sources.',
+        ],
+      },
     ],
       seoTitle: "PDF Booklet – Create Saddle-Stitch Booklet Layout",
     seoDescription: "Rearrange PDF pages into booklet order so you can print double-sided, fold and staple a proper booklet. Free online PDF booklet maker, files never uploaded.",
@@ -749,18 +894,32 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/sign-pdf': {
     intro:
-      'Sign PDF lets you draw, type, or upload a signature image and place it anywhere on a PDF. You can resize and reposition the signature precisely, then flatten it into the document so it cannot be moved or edited. The entire signing process happens in your browser — your signature never touches a server.',
+      'Sign PDF lets you draw your signature with a mouse or finger and add it to the page you choose. The signature is saved into the document as an image near the bottom-left corner of that page. The entire signing process happens in your browser — your signature never touches a server.',
     action: 'sign a PDF',
     steps: [
       'Upload the PDF you need to sign.',
-      'Draw your signature with the mouse or finger, type it, or upload a signature image.',
-      'Position the signature on the page, then click "Save" to download the signed PDF.',
+      'Draw your signature with the mouse or finger.',
+      'Enter the page number, then click "Sign PDF & Download" to save the signed PDF.',
     ],
     useCases: [
       'Sign contracts and agreements without printing or scanning.',
       'Add your signature to permission slips, forms, or applications.',
       'Sign NDAs and legal documents remotely.',
-      'Initial multiple pages of a multi-page agreement.',
+      'Sign a one-page form that has room near the bottom of the page.',
+    ],
+    details: [
+      {
+        heading: 'Where the signature goes',
+        paragraphs: [
+          'The signature is added to the one page you choose, in a fixed spot near the bottom-left corner, at 200 × 80 points. You cannot move or resize it here, so check that this area of the page is free. To place a typed or image signature in a particular box, use Annotate PDF.',
+        ],
+      },
+      {
+        heading: 'What kind of signature this is',
+        paragraphs: [
+          'This adds a picture of your signature to the page. It is not a certificate-based digital signature, so it does not prove who signed or show whether the file changed afterwards. Some agreements accept a drawn signature and others require a certified one, so check what the recipient needs.',
+        ],
+      },
     ],
       seoTitle: "Sign PDF – Add Signature to PDF Online Free",
     seoDescription: "Sign a PDF online: draw your signature and place it on any page, then download the signed document. Free e-signature tool that never uploads your file.",
@@ -771,18 +930,32 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/crop-pdf': {
     intro:
-      'Crop PDF trims margins or sets a custom crop area on PDF pages. Reduce whitespace, remove headers and footers, or focus on a specific region of each page. The crop is non-destructive in the sense that page content is preserved — the visible area is simply redefined.',
+      'Crop PDF trims margins from every page of a PDF. Set how many points to remove from the top, right, bottom and left to reduce white space or hide headers and footers. The crop redefines the visible area, and the content outside it remains in the file.',
     action: 'crop PDF pages',
     steps: [
       'Upload the PDF you want to crop.',
-      'Draw or enter the crop area dimensions for the pages.',
+      'Enter the top, right, bottom and left margins to trim, in points.',
       'Click "Crop & Download" to save the cropped PDF.',
     ],
     useCases: [
       'Trim excess margins to make a PDF more readable on small screens.',
-      'Remove headers or footers from printed documents.',
+      'Hide headers or footers before printing a document.',
       'Focus on a specific region of a page for presentation slides.',
-      'Standardize page sizes across a merged document with inconsistent margins.',
+      'Trim the same margin from every page of a scanned document.',
+    ],
+    details: [
+      {
+        heading: 'Working out the numbers',
+        paragraphs: [
+          'Values are in points, and 72 points equal one inch, so 36 trims half an inch and about 28 trims one centimeter. Each value is measured in from that edge of the page. The same margins are applied to every page.',
+        ],
+      },
+      {
+        heading: 'Cropping hides content rather than deleting it',
+        paragraphs: [
+          'A crop only changes which part of the page is shown. Everything outside it stays in the file, can be restored with a PDF editor, and may still turn up when someone searches or copies the text. To permanently delete sensitive content, use Redact PDF.',
+        ],
+      },
     ],
       seoTitle: "Crop PDF Pages Online – Free & Private",
     seoDescription: "Crop PDF pages by trimming margins from the top, right, bottom and left to remove white space. Free online PDF cropper that runs locally with no file uploads.",
@@ -815,18 +988,33 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/table-of-contents': {
     intro:
-      'Table of Contents automatically generates a linked table of contents page from the bookmark structure of your PDF. The generated TOC includes page numbers and clickable links, making it easy for readers to navigate the document without manually creating the contents page.',
+      'Table of Contents adds a contents page to the front of your PDF, listing the document by page number with dotted leaders and a title you choose. It is a quick way to add a numbered overview without creating the page by hand.',
     action: 'generate a table of contents',
     steps: [
-      'Upload a PDF that has bookmarks defined.',
-      'The tool reads the bookmark hierarchy and generates a formatted TOC.',
+      'Upload the PDF that needs a contents page.',
+      'Enter a title for the contents page, or keep the default.',
       'Download the PDF with the table of contents inserted at the front.',
     ],
     useCases: [
-      'Add a professional TOC to a report or proposal.',
-      'Generate navigation pages for long technical manuals.',
-      'Create a contents page for a compiled anthology or collection.',
-      'Improve accessibility of documents by adding structured navigation.',
+      'Add a front page listing the pages of a short report.',
+      'Add a numbered front page to a collection of short documents.',
+      'Give a printed document a page-number overview.',
+      'Add a simple index page to a handout or printed pack.',
+    ],
+    details: [
+      {
+        heading: 'What the contents page shows',
+        paragraphs: [
+          'Each line reads "Page 1", "Page 2" and so on, with a dotted leader to the matching number. The tool does not read chapter titles, headings or bookmarks, and the lines are not clickable.',
+          'The new page is added at the front on A4 paper, and the numbers refer to your original pages. Because the contents page comes first, page 1 of your document becomes the second page of the file.',
+        ],
+      },
+      {
+        heading: 'Limits',
+        paragraphs: [
+          'The list fits on one page, which holds 30 entries, so later pages of a longer PDF are not listed. The new file is rebuilt from the original pages, so bookmarks are not carried over.',
+        ],
+      },
     ],
       seoTitle: "Add Table of Contents to PDF – Free & Private",
     seoDescription: "Add a table of contents page to the front of any PDF, listing each page with its page number. Free online tool that runs in your browser; nothing is uploaded.",
@@ -837,18 +1025,34 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/page-numbers': {
     intro:
-      'Add Page Numbers places customizable page numbers on every page (or selected pages) of your PDF. Choose the position (top/bottom, left/center/right), font, size, color, and starting number. You can also add prefix text like "Page" or "-" to match your formatting requirements.',
+      'Add Page Numbers places a number on every page of your PDF. Choose from six positions along the top or bottom edge, set the starting number and font size, and add text before or after the number, such as "Page ", to match your formatting requirements.',
     action: 'add page numbers',
     steps: [
       'Upload the PDF that needs page numbers.',
-      'Choose the position, font, starting number, and any prefix text.',
-      'Click "Apply & Download" to save the numbered PDF.',
+      'Choose the position, starting number, font size, and any prefix or suffix.',
+      'Click "Add Numbers & Download" to save the numbered PDF.',
     ],
     useCases: [
       'Add page numbers to a document that was scanned without them.',
       'Number the pages of a merged document for reference.',
       'Add numbered footers to legal or academic documents.',
       'Create numbered handouts for workshops or classes.',
+    ],
+    details: [
+      {
+        heading: 'Prefixes, suffixes and starting numbers',
+        paragraphs: [
+          'The prefix and suffix are added exactly as you type them, including spaces. A prefix of "Page " and a suffix of " of 12" produces "Page 3 of 12", but the total is fixed text that you have to type yourself.',
+          'The starting number applies to the first page of the file. Starting at 5, for example, is useful when the PDF is one chapter of a longer document.',
+        ],
+      },
+      {
+        heading: 'Placement and limits',
+        paragraphs: [
+          'Numbers are printed in black Helvetica, 20 points from the bottom edge or 30 points from the top, and 30 points in from the side for left and right positions. If your document already has a header or footer in that spot, choose a different position so they do not overlap.',
+          'Every page in the file gets a number, including any cover. To leave a cover unnumbered, number the rest of the document as a separate file and combine them with Merge PDF. Prefixes and suffixes use a standard PDF font, so characters outside Western alphabets are not supported.',
+        ],
+      },
     ],
       seoTitle: "Add Page Numbers to PDF – Free & Private",
     seoDescription: "Add page numbers to a PDF with your choice of position, starting number, font size and prefix or suffix. Free online tool that runs in your browser, no uploads.",
@@ -887,18 +1091,33 @@ export const toolContent: Record<string, ToolContentEntry> = {
     steps: [
       'Upload the PDF you want to color.',
       'Select a background color using the color picker.',
-      'Click "Apply & Download" to save the colored PDF.',
+      'Click "Add Background & Download" to save the colored PDF.',
     ],
     useCases: [
       'Add a subtle tint to make a document easier on the eyes when reading on screen.',
-      'Create visually distinct sections with different background colors.',
+      'Give a handout or presentation a consistent tinted look.',
       'Prepare colored paper simulation for digital distribution.',
       'Add a branded background color to match corporate guidelines.',
+    ],
+    details: [
+      {
+        heading: 'How the color is applied',
+        paragraphs: [
+          'The color goes behind everything on the page, so your text and graphics stay visible and text can still be selected. It fills the whole page, including the margins, and every page in the file gets the same color.',
+          'The background is part of the PDF, so it prints too. A full-page color uses a lot of ink, so choose a light shade if the document will be printed.',
+        ],
+      },
+      {
+        heading: 'When the color will not show',
+        paragraphs: [
+          'If a page is a scanned image, or has its own full-page white background, that layer sits on top of the color and hides it. Scanned PDFs are the usual case.',
+        ],
+      },
     ],
       seoTitle: "Add Background Color to PDF – Change PDF Page Color Online",
     seoDescription: "Add a background color to every page of a PDF. Choose a preset like cream or light blue or pick any custom color. Free, private, processed in your browser.",
     faqs: [
-      { question: "Will this cover existing content?", answer: "The color layer is drawn over existing content. For best results, use light, transparent-friendly colors or use the underlay mode." },
+      { question: "Will this cover existing content?", answer: "No. The color is placed behind the page content, so text and images stay visible. On a scanned page, the full-page image covers the color." },
       { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
     ],
   },
@@ -909,13 +1128,28 @@ export const toolContent: Record<string, ToolContentEntry> = {
     steps: [
       'Upload the PDF you want to stamp.',
       'Select a preset stamp (DRAFT, CONFIDENTIAL, etc.) or enter custom text.',
-      'Adjust position and appearance, then click "Apply & Download".',
+      'Set the color, size, opacity and pages, then click "Add Stamp & Download".',
     ],
     useCases: [
       'Mark documents as DRAFT during the review cycle.',
       'Stamp "APPROVED" on finalized proposals or invoices.',
       'Add "COPY" stamps to distinguish duplicates from originals.',
       'Label documents as "FOR INTERNAL USE ONLY" before distribution.',
+    ],
+    details: [
+      {
+        heading: 'How the stamp looks',
+        paragraphs: [
+          'The stamp is bold text in the center of the page, running horizontally. You can set its color, a font size from 24 to 96 points and an opacity from 5% to 100%. The default of 25% opacity keeps the text underneath readable.',
+          'The position cannot be moved. For angled or tiled marks, or to use a logo image, try Watermark PDF instead.',
+        ],
+      },
+      {
+        heading: 'Which pages get stamped',
+        paragraphs: [
+          'You can apply the stamp to all pages, only the first page, or a custom list of pages. The stamp becomes part of the page in the downloaded file, and your original is not changed. Stamp text uses a standard PDF font, so characters outside Western alphabets are not supported.',
+        ],
+      },
     ],
       seoTitle: "Add Stamp to PDF – DRAFT, CONFIDENTIAL & Custom Stamps Free",
     seoDescription: "Stamp DRAFT, CONFIDENTIAL, APPROVED or your own text onto PDF pages with custom color and opacity. Free online tool that runs locally; files are never uploaded.",
@@ -931,14 +1165,30 @@ export const toolContent: Record<string, ToolContentEntry> = {
     action: 'remove PDF annotations',
     steps: [
       'Upload the PDF with annotations you want to remove.',
-      'Preview the annotations that will be stripped.',
-      'Click "Remove & Download" to save the clean PDF.',
+      'Click "Remove & Download" to save the clean copy.',
+      'Open the downloaded file and confirm the markup is gone.',
     ],
     useCases: [
       'Clean up a reviewed document before sending the final version to clients.',
       'Remove all comments and highlights from a shared draft.',
       'Strip hyperlinks from a PDF before printing.',
       'Prepare a clean copy of a heavily-annotated academic paper.',
+    ],
+    details: [
+      {
+        heading: 'What gets removed',
+        paragraphs: [
+          'Comments, sticky notes, highlights, underlines, drawings, stamps and links are all stored in a PDF as annotations, and this tool removes every one of them from every page.',
+          'Form fields are flattened first, so any answers already typed stay on the page as ordinary content and the fields can no longer be edited. Your original file is not changed.',
+        ],
+      },
+      {
+        heading: 'What this tool cannot remove',
+        paragraphs: [
+          'It only removes markup stored as annotations. If a reviewed document was printed to PDF or flattened, the comments and highlights are now part of the page itself and will stay.',
+          'Removing annotations is not the same as redacting. Text under a highlight remains in the file. To permanently delete sensitive content, use Redact PDF.',
+        ],
+      },
     ],
       seoTitle: "Remove PDF Annotations Online – Free & Private",
     seoDescription: "Remove comments, highlights, sticky notes, form fields and other annotations from a PDF in one click. Free online tool that runs in your browser, no uploads.",
@@ -949,12 +1199,12 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/form-filler': {
     intro:
-      'Form Filler detects and populates interactive form fields in a PDF. Type into text boxes, select checkboxes, and choose dropdown options, then flatten the result into a non-editable PDF. This lets you complete forms digitally and share them as finalized documents.',
+      'Form Filler finds the interactive form fields in a PDF so you can type into text boxes and tick checkboxes, then downloads a completed PDF with the answers flattened into the page. This lets you complete forms digitally and share them as finalized documents.',
     action: 'fill PDF forms',
     steps: [
       'Upload the PDF form you need to complete.',
-      'Click on form fields to enter text, check boxes, or select options.',
-      'Click "Flatten & Download" to save a completed, non-editable version.',
+      'Type into the text fields and set any checkboxes.',
+      'Click "Fill & Download PDF" to save a completed, non-editable version.',
     ],
     useCases: [
       'Complete tax forms, applications, or government paperwork digitally.',
@@ -962,10 +1212,25 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Complete employment onboarding documents remotely.',
       'Submit completed insurance claims or benefits forms.',
     ],
+    details: [
+      {
+        heading: 'Which PDFs this works on',
+        paragraphs: [
+          'The tool reads the fields built into the PDF and lists them by name. If a form was designed as a fillable PDF, its text boxes and checkboxes appear ready to complete. A scanned form, or a PDF that only looks like a form, has no fields to find and the tool will tell you so. For those, Annotate PDF lets you type directly on top of the page.',
+        ],
+      },
+      {
+        heading: 'What flattening means for your answers',
+        paragraphs: [
+          'When you download, every field is converted into ordinary page content. The answers can still be read and printed, but nobody can change them by clicking into a field, and you cannot reopen the file to edit them either. Your original file is not changed, so keep it if you may need to fill the form again.',
+          'Radio buttons and dropdown lists cannot be changed here. They stay as they are in the original and are flattened with the rest of the form, so check those choices before you send the file.',
+        ],
+      },
+    ],
       seoTitle: "Fill PDF Forms – Fill & Flatten PDF Form Fields Online",
     seoDescription: "Fill in PDF forms online: type into text fields, tick checkboxes and download the completed, flattened PDF. Free and private, your form is never uploaded.",
     faqs: [
-      { question: "What types of fields are supported?", answer: "Text fields and checkboxes are supported. Radio buttons and dropdown lists may have limited support." },
+      { question: "What types of fields are supported?", answer: "You can fill text fields and checkboxes. Radio buttons and dropdown lists keep whatever value is already set in the PDF." },
       { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
     ],
   },
@@ -995,18 +1260,33 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/remove-blank-pages': {
     intro:
-      'Remove Blank Pages automatically detects and removes pages that contain little to no content. The tool analyzes each page\'s pixel content and text layer to determine blankness, then strips those pages from the output. Thresholds are configurable so you can define what counts as "blank."',
+      'Remove Blank Pages automatically detects and removes pages that contain little to no content. The tool analyzes each page\'s pixels to determine blankness, then strips those pages from the output. Thresholds are configurable so you can define what counts as "blank."',
     action: 'remove blank pages',
     steps: [
       'Upload the PDF with suspected blank pages.',
-      'The tool scans and identifies blank pages automatically.',
-      'Review which pages will be removed, then click "Download" to save the cleaned PDF.',
+      'Adjust the blank threshold if needed. By default, a page counts as blank when 98% of it is white.',
+      'Click "Remove Blanks & Download" to save the cleaned PDF.',
     ],
     useCases: [
       'Clean up scanned documents that include blank separator pages.',
       'Remove accidental blank pages from exported reports.',
       'Trim trailing blank pages before sharing or printing.',
       'Reduce file size by eliminating unnecessary empty pages.',
+    ],
+    details: [
+      {
+        heading: 'How blank is decided',
+        paragraphs: [
+          'Each page is drawn at low resolution and the tool measures how much of it is white or very nearly white. If that share reaches the threshold, the page is removed. You can set the threshold anywhere from 85% to 100%.',
+          'At 100%, only a completely white page is removed. Lower values also catch scans with specks or shadows, but they can remove pages that hold only a few lines of text. A page with a single sentence on it can be more than 98% white.',
+        ],
+      },
+      {
+        heading: 'Check the result',
+        paragraphs: [
+          'The tool does not list which pages it will remove, so compare the page count of the download with your original. Blank pages scanned from tinted or aged paper may not count as white and can be left in. The new file is rebuilt from the kept pages, so bookmarks are not carried over.',
+        ],
+      },
     ],
       seoTitle: "Remove Blank PDF Pages Online – Free & Private",
     seoDescription: "Automatically detect and remove blank pages from scanned PDFs, with adjustable sensitivity for near-empty pages. Free, private, processed in your browser.",
@@ -1073,18 +1353,32 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/text-to-pdf': {
     intro:
-      'Text to PDF converts plain text files or pasted text into formatted PDF documents. Choose a font, size, margins, and line spacing to create clean, professional-looking PDFs from raw text. Ideal for converting notes, logs, README files, or any text content into a portable document.',
+      'Text to PDF converts plain text files or pasted text into PDF documents. Choose a font size and A4 or US Letter pages, and the text is wrapped and split across pages for you. Ideal for converting notes, logs, README files, or any text content into a portable document.',
     action: 'convert text to PDF',
     steps: [
       'Paste text or upload a .txt file.',
-      'Configure font, size, margins, and page layout.',
-      'Click "Convert & Download" to generate your PDF.',
+      'Choose the font size and page size.',
+      'Click "Convert to PDF & Download" to generate your PDF.',
     ],
     useCases: [
       'Convert meeting notes or logs into a shareable PDF.',
       'Turn a README or changelog into a printable document.',
-      'Create a formatted PDF from code snippets or configuration files.',
+      'Create a PDF from code snippets or configuration files.',
       'Produce documentation from plain text drafts.',
+    ],
+    details: [
+      {
+        heading: 'How your text is laid out',
+        paragraphs: [
+          'Text is set in Courier, a fixed-width font that suits logs and code, at a size from 8 to 24 points with 50-point margins on every side. Your line breaks and blank lines are kept, long lines wrap between words, and new pages are added as needed.',
+        ],
+      },
+      {
+        heading: 'What it cannot do',
+        paragraphs: [
+          'The output is plain text, so markup such as Markdown appears exactly as typed. Use Markdown to PDF when you want formatted headings and lists. Courier is a standard PDF font, so characters outside Western alphabets are not supported, including Hindi, Chinese and Arabic.',
+        ],
+      },
     ],
       seoTitle: "Text to PDF – Convert TXT to PDF Free Online",
     seoDescription: "Convert plain text or .txt files into a PDF with your choice of font size and page size. Free online text to PDF converter that runs in the browser, no uploads.",
@@ -1334,7 +1628,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/pdf-to-json': {
     intro:
-      'PDF to JSON extracts text content and metadata from a PDF and outputs it as a structured JSON file. The JSON includes per-page text, document properties, and structural information. This makes PDF content programmatically accessible for data processing, search indexing, or integration with other tools.',
+      'PDF to JSON extracts text and metadata from a PDF and saves them as a JSON file. The output contains the document properties, the page count, and the number, size and text of each page. This makes PDF content easy to read from scripts, search indexes, or other tools.',
     action: 'extract PDF content as JSON',
     steps: [
       'Upload the PDF you want to extract data from.',
@@ -1342,10 +1636,26 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Download or copy the JSON output.',
     ],
     useCases: [
-      'Extract structured data from PDF invoices or forms for database import.',
+      'Pull the text of PDF invoices into a script that parses the fields you need.',
       'Convert PDF content into a format suitable for API integrations.',
       'Build a searchable index from a collection of PDF documents.',
-      'Parse PDF reports into structured data for analysis.',
+      'Feed the text of PDF reports into a data pipeline for analysis.',
+    ],
+    details: [
+      {
+        heading: 'What is in the JSON file',
+        paragraphs: [
+          'The top level has three keys. metadata holds the document properties stored in the PDF, such as its title, author and producing application, when the file has them. pageCount is the number of pages. pages is an array with one object for each page.',
+          'Each page object has pageNumber, width, height and text. Width and height are in PDF points, where 72 points equal one inch. The text value is a single string containing all the text on that page.',
+        ],
+      },
+      {
+        heading: 'What to expect from the text',
+        paragraphs: [
+          'The tool does not identify tables, form fields or invoice totals. It gives you the raw text of each page, and your own code has to find the values inside it. Text from multi-column layouts can appear in a mixed order.',
+          'A scanned PDF has no stored text, so each text value will be empty. Extract Text can read scanned pages with OCR and export a searchable PDF to use here instead.',
+        ],
+      },
     ],
       seoTitle: "PDF to JSON – Extract PDF Content as JSON Data",
     seoDescription: "Extract text and metadata from a PDF into a structured JSON file for developers, data pipelines and analysis. Free, private and processed in your browser.",
@@ -1356,21 +1666,36 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/pdf-to-markdown': {
     intro:
-      'PDF to Markdown extracts the text content of a PDF and formats it as clean Markdown. Headings, paragraphs, lists, and basic formatting are preserved, making it easy to repurpose PDF content for websites, documentation systems, or note-taking apps that use Markdown.',
+      'PDF to Markdown extracts the text of every page and saves it as a Markdown file, with a heading for the document and one for each page. It is a quick way to move PDF text into websites, documentation systems, or note-taking apps that use Markdown.',
     action: 'convert PDF to Markdown',
     steps: [
       'Upload the PDF you want to convert.',
-      'The tool extracts text and infers Markdown formatting.',
+      'The tool extracts the text from each page and adds Markdown headings.',
       'Download or copy the Markdown output.',
     ],
     useCases: [
       'Repurpose PDF documentation for a wiki or docs site.',
       'Convert a PDF article into a blog post draft.',
-      'Extract formatted notes from a PDF for import into Obsidian or Notion.',
+      'Extract notes from a PDF for import into Obsidian or Notion.',
       'Convert PDF meeting minutes into editable Markdown for team sharing.',
     ],
+    details: [
+      {
+        heading: 'What the Markdown file looks like',
+        paragraphs: [
+          'The file name becomes a top-level heading, each page gets a "Page 1" style second-level heading, and a horizontal rule separates the pages. The text of a page follows its heading as one continuous paragraph.',
+        ],
+      },
+      {
+        heading: 'What does not carry over',
+        paragraphs: [
+          'The tool reads the text stored in the PDF, not its visual layout. Headings, bold text, bullet lists, tables and images inside the page are not converted to Markdown, so expect to add that structure yourself. Text in multi-column layouts can come out in a mixed order.',
+          'A scanned PDF stores pictures of pages rather than text, so it produces empty sections. Extract Text can read scanned pages with OCR and export a searchable PDF to convert here instead.',
+        ],
+      },
+    ],
       seoTitle: "PDF to Markdown – Extract PDF Text as Markdown",
-    seoDescription: "Convert a PDF into a Markdown (.md) file with page structure preserved, ready for docs, notes or GitHub. Free online PDF to Markdown converter, no uploads.",
+    seoDescription: "Convert a PDF into a Markdown (.md) file with a heading for each page, ready for docs, notes or GitHub. Free online PDF to Markdown converter, no uploads.",
     faqs: [
       { question: "Is the formatting preserved?", answer: "Basic text is extracted and wrapped in Markdown syntax with page headings. Complex formatting like tables may not be preserved." },
       { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
@@ -1412,18 +1737,32 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/extract-images': {
     intro:
-      'Extract Images finds and extracts all images embedded within a PDF document, packaging them into a downloadable ZIP file. The images are extracted in their original format and resolution, preserving the quality of photos, graphics, logos, and illustrations contained in the PDF.',
+      'Extract Images saves every page of a PDF as a high-resolution PNG image and packages them into a downloadable ZIP file. Each image shows the whole page, including its text and graphics, which is useful for slides, previews and sharing pages as pictures.',
     action: 'extract images from a PDF',
     steps: [
       'Upload the PDF containing embedded images.',
-      'The tool scans the PDF and identifies all embedded images.',
+      'The tool renders each page as a PNG image at 2× scale.',
       'Download the ZIP file containing all extracted images.',
     ],
     useCases: [
-      'Recover high-resolution photos from a PDF portfolio or brochure.',
-      'Extract logos or graphics from PDF marketing materials.',
-      'Pull images from a PDF report for use in a presentation.',
-      'Save embedded charts or diagrams from a research paper.',
+      'Turn the pages of a PDF portfolio or brochure into images.',
+      'Capture a page of PDF marketing material for a social post.',
+      'Drop pages from a PDF report into a presentation.',
+      'Save a page with a chart or diagram from a research paper.',
+    ],
+    details: [
+      {
+        heading: 'What you get',
+        paragraphs: [
+          'The ZIP contains one PNG for each page, named with the original file name and the page number, such as report_page3.png. Pages are rendered at twice their PDF size, so a 612 × 792 point page becomes an image of 1224 × 1584 pixels.',
+        ],
+      },
+      {
+        heading: 'What this tool does not do',
+        paragraphs: [
+          'It captures whole pages. It does not pull individual photos or logos out of a page at their original resolution, so crop the PNG if you only need part of a page. Because each page becomes a picture, the text in it can no longer be selected or edited.',
+        ],
+      },
     ],
       seoTitle: "Extract Images from PDF – Export PDF Pages as PNG Images",
     seoDescription: "Export every page of a PDF as a high-resolution PNG image and download them together in one ZIP archive. Free, private tool that runs locally in your browser.",
@@ -1520,30 +1859,44 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/fix-page-size': {
     intro:
-      'Fix Page Size standardizes all pages in a PDF to a consistent size — A4, Letter, Legal, or custom dimensions. Pages are scaled or repositioned to fit the target size. This solves common problems with merged documents that have inconsistent page dimensions.',
+      'Fix Page Size standardizes all pages in a PDF to one size: A4, US Letter, A3, or Legal. Each page is scaled to fit and centered on the new page. This solves common problems with merged documents that have inconsistent page dimensions.',
     action: 'fix PDF page sizes',
     steps: [
       'Upload the PDF with inconsistent page sizes.',
-      'Select the target page size (A4, Letter, Legal, or custom).',
-      'Click "Fix & Download" to save the standardized PDF.',
+      'Select the target page size (A4, Letter, A3, or Legal).',
+      'Download the standardized PDF.',
     ],
     useCases: [
       'Standardize merged documents from different sources to one page size.',
       'Convert Letter-sized documents to A4 for international printing.',
-      'Fix PDFs with mixed landscape and portrait pages to a consistent size.',
-      'Prepare documents for professional printing with exact trim sizes.',
+      'Bring mixed page sizes onto one paper size before printing.',
+      'Scale a Legal document down to fit A4 or Letter paper.',
+    ],
+    details: [
+      {
+        heading: 'How pages are resized',
+        paragraphs: [
+          'Each page is scaled as far as it can go while still fitting the target size, keeping its proportions, and is then centered. Nothing is cropped, but a page of a different shape will have empty space on two sides. Pages smaller than the target are scaled up.',
+        ],
+      },
+      {
+        heading: 'Things to check',
+        paragraphs: [
+          'Every output page is portrait, so a landscape page can end up much smaller, with wide space above and below it. Pages are redrawn onto new pages, so links, form fields and bookmarks from the original are not kept.',
+        ],
+      },
     ],
       seoTitle: "Fix PDF Page Size – Resize to A4, Letter, A3, Legal Free",
     seoDescription: "Resize every page of a PDF to A4, US Letter, A3 or Legal, scaling content to fit so the document prints consistently. Free, private and runs in your browser.",
     faqs: [
       { question: "Will my page content be cropped?", answer: "No. Content is scaled proportionally to fit the new page size with equal margins." },
-      { question: "Does this change the orientation?", answer: "No. The tool scales the existing content to fit the target size, preserving orientation." },
+      { question: "Does this change the orientation?", answer: "Every output page is portrait at the size you choose. Landscape content stays upright and is scaled down to fit the page width, leaving space above and below." },
       { question: "Is my file uploaded?", answer: "No. Everything runs locally in your browser." },
     ],
   },
   '/page-dimensions': {
     intro:
-      'Page Dimensions inspects every page of a PDF and reports its width, height, and orientation. It identifies inconsistencies — mixed sizes, unexpected orientations, or non-standard dimensions — giving you the information needed to decide whether to fix, crop, or reformat.',
+      'Page Dimensions inspects every page of a PDF and reports its width, height, and orientation. It tells you whether all pages share one size or the document mixes sizes, giving you the information needed to decide whether to fix, crop, or reformat.',
     action: 'inspect PDF page dimensions',
     steps: [
       'Upload the PDF you want to inspect.',
@@ -1553,8 +1906,23 @@ export const toolContent: Record<string, ToolContentEntry> = {
     useCases: [
       'Audit a merged document for mixed page sizes before printing.',
       'Verify that all pages meet a specific size requirement.',
-      'Check the DPI and dimensions of scanned document pages.',
+      'Confirm that a document is A4 or US Letter before printing.',
       'Identify landscape pages in a predominantly portrait document.',
+    ],
+    details: [
+      {
+        heading: 'How to read the results',
+        paragraphs: [
+          'Sizes are shown in points and inches. A PDF point is 1/72 of an inch, so a page that is 612 × 792 points measures 8.5 × 11 inches. For reference, US Letter is 612 × 792 points and A4 is about 595 × 842 points (8.27 × 11.69 inches).',
+          'A page is marked Landscape when it is wider than it is tall, and Portrait otherwise. The figures are the sizes stored in the file, before any rotation setting is applied, so a page saved with a 90° rotation can look sideways on screen while being reported with its stored width and height.',
+        ],
+      },
+      {
+        heading: 'What to do about mixed sizes',
+        paragraphs: [
+          'Mixed sizes are common after merging files from different sources, and they can cause uneven margins or scaling when printed. Crop PDF can trim pages down. If you plan to make a booklet, check the first page in particular, because the booklet layout applies its size to every page.',
+        ],
+      },
     ],
       seoTitle: "PDF Page Dimensions – View Page Size and Orientation",
     seoDescription: "See the exact width, height and orientation of every page in a PDF in points and inches, and spot mixed page sizes. Free PDF size checker that runs locally.",
@@ -1565,23 +1933,38 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/repair-pdf': {
     intro:
-      'Repair PDF attempts to fix corrupted or damaged PDF files by reconstructing the internal structure, cross-reference tables, and object streams. If your PDF won\'t open, displays errors, or has missing pages, this tool can often recover the content and produce a working file.',
+      'Repair PDF attempts to fix PDF files with structural damage by reading the objects it can find and writing them into a new, clean file. It can help when a file has lost its cross-reference table or has stray data before the PDF header, but it cannot recover content that is no longer in the file.',
     action: 'repair a damaged PDF',
     steps: [
       'Upload the corrupted or damaged PDF file.',
-      'The tool analyzes the file structure and attempts repairs automatically.',
+      'The tool reads the file and rebuilds its structure automatically.',
       'Download the repaired PDF if recovery is successful.',
     ],
     useCases: [
-      'Recover a PDF that was damaged during download or transfer.',
+      'Try to rescue a PDF that a viewer refuses to open.',
       'Fix PDFs that show "file is damaged" errors in your viewer.',
-      'Repair files corrupted by disk errors or incomplete saves.',
-      'Recover content from PDFs produced by faulty export tools.',
+      'Clean up a PDF that has lost its cross-reference table.',
+      'Rewrite a PDF produced by a faulty export tool.',
+    ],
+    details: [
+      {
+        heading: 'What it can and cannot fix',
+        paragraphs: [
+          'In our tests, the tool rebuilt files with a missing cross-reference table and files with stray data before the PDF header, and kept every page.',
+          'It could not open files that were cut off partway, which is what an interrupted download produces, or files with a garbled cross-reference table. In those cases it shows an error, and downloading the file again is the better fix.',
+        ],
+      },
+      {
+        heading: 'After a repair',
+        paragraphs: [
+          'The tool can only keep what it finds, so check every page of the result before relying on it. Your original file is not changed.',
+        ],
+      },
     ],
       seoTitle: "Repair Corrupted PDF – Free Online PDF Fix Tool",
     seoDescription: "Repair broken or corrupted PDF files by rebuilding their internal structure to fix common errors, then download the result. Free and private, runs locally.",
     faqs: [
-      { question: "What kind of PDF errors can this fix?", answer: "It can fix structural issues like cross-reference table errors, invalid objects, and malformed metadata by completely re-serializing the PDF." },
+      { question: "What kind of PDF errors can this fix?", answer: "It can fix some structural issues, such as a missing cross-reference table or stray data before the PDF header, by rewriting the file." },
       { question: "Will it fix encrypted or password-protected PDFs?", answer: "It attempts to open and re-save even encrypted PDFs, which can resolve some structural issues." },
       { question: "Is my file uploaded?", answer: "No. All processing is done in your browser. Your file never leaves your device." },
     ],
@@ -1844,10 +2227,10 @@ export const toolContent: Record<string, ToolContentEntry> = {
   '/ai-enhance-image': {
     intro:
       'AI Enhance Image automatically improves image quality by adjusting exposure, contrast, color balance, and sharpness using intelligent algorithms. The tool analyzes the image content and applies targeted improvements — brightening dark photos, reducing noise, and enhancing details — all in your browser.',
-    action: 'enhance images with AI',
+    action: 'enhance images',
     steps: [
       'Upload the image you want to enhance.',
-      'The AI analyzes and applies automatic improvements.',
+      'The tool measures the image and applies automatic improvements.',
       'Fine-tune adjustments if needed, then download the enhanced image.',
     ],
     useCases: [
@@ -1867,7 +2250,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
   },
   '/object-remover': {
     intro:
-      'Object Remover lets you paint over unwanted elements in an image — people, signs, wires, blemishes — and uses content-aware inpainting to fill the area with a plausible background. The AI model runs locally in your browser using ONNX Runtime, keeping your photos completely private.',
+      'Object Remover lets you paint over unwanted elements in an image — people, signs, wires, blemishes — and uses content-aware inpainting to fill the area with a plausible background. It rebuilds the area from the surrounding pixels, with no AI model to download, and runs locally in your browser, keeping your photos completely private.',
     action: 'remove objects from images',
     steps: [
       'Upload the image containing objects you want to remove.',
@@ -1881,7 +2264,7 @@ export const toolContent: Record<string, ToolContentEntry> = {
       'Erase blemishes or temporary marks from document scans.',
     ],
       seoTitle: "Object Remover — Content-Aware Object Removal",
-    seoDescription: "Remove unwanted objects, people or text from photos: brush over them and AI fills in the background. Free online object remover that runs in your browser.",
+    seoDescription: "Remove unwanted objects, people or text from photos: brush over them and the gap fills from nearby pixels. Free online object remover that runs in your browser.",
     faqs: [
       { question: "How accurate is the inpainting?", answer: "The tool uses the Telea content-aware inpainting algorithm to fill removed areas based on surrounding pixel data. It works best for small to medium objects on relatively uniform backgrounds; complex scenes, detailed textures, or large masked areas may produce imperfect results." },
       { question: "How do I select the object to remove?", answer: "Simply paint over the unwanted object using the brush tool. You can adjust the brush size, switch between paint and erase modes, and use undo/redo to refine your selection before processing." },

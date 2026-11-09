@@ -442,6 +442,15 @@ function comparisonSection(route) {
       </section>`;
 }
 
+function sectionsHtml(sections = []) {
+  return sections
+    .map(({ heading, paragraphs }) => `<section>
+        <h2>${escapeHtml(heading)}</h2>
+        ${paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('\n        ')}
+      </section>`)
+    .join('\n      ');
+}
+
 function categoryToolRoutesForHub(route) {
   const entries = getRouteSeoEntries().filter((entry) => entry.category);
   if (route === '/pdf-tools') return entries.filter((entry) => PDF_CATEGORIES.has(entry.category)).map((entry) => entry.route);
@@ -1294,6 +1303,7 @@ function buildStaticRouteContent(route) {
         <h2>How it works</h2>
         <ol>${stepsList(toolSteps(route))}</ol>
       </section>
+      ${sectionsHtml(toolContent[route]?.details)}
       <section>
         <h2>Frequently asked questions</h2>
         <ul>${faqList(route)}</ul>
@@ -1317,6 +1327,7 @@ function buildStaticRouteContent(route) {
         <h2>All tools in this category</h2>
         <ul>${linkList(categoryToolRoutes, categoryToolRoutes.length)}</ul>
       </section>
+      ${sectionsHtml(getRouteSeo(route)?.sections)}
       ${route === '/pdf-tools' ? `<section>
         <h2>Coming from another PDF tool?</h2>
         <ul>${Object.values(comparisonContent).map((entry) => `<li><a href="${canonicalUrlForRoute(entry.route)}">A ${escapeHtml(entry.competitor)} alternative</a> — ${escapeHtml(entry.description)}</li>`).join('')}</ul>

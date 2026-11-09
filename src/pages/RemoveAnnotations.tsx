@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
-import { flattenPDF, downloadBytes } from '../utils/pdf/pdfOperations';
+import { removeAnnotations, downloadBytes } from '../utils/pdf/pdfOperations';
 import { Eraser, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
@@ -16,8 +16,7 @@ export const RemoveAnnotations = () => {
         if (!file) return;
         setIsProcessing(true); setError(null);
         try {
-            // Flatten removes interactive form elements and flattens annotations into static content
-            const bytes = await flattenPDF(file);
+            const bytes = await removeAnnotations(file);
             downloadBytes(bytes, file.name.replace('.pdf', '_no_annotations.pdf'));
             setSuccess(true); setTimeout(() => setSuccess(false), 3000);
         } catch (e) { setError('Failed: ' + (e instanceof Error ? e.message : '')); }

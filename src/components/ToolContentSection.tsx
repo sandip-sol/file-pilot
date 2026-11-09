@@ -57,6 +57,15 @@ export const ToolContentSection = () => {
           ))}
         </ol>
 
+        {content.details?.map(({ heading, paragraphs }) => (
+          <div key={heading} className="mb-8">
+            <h2 className="text-2xl font-bold text-foreground mb-4">{heading}</h2>
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph} className="text-muted-foreground leading-relaxed mb-3">{paragraph}</p>
+            ))}
+          </div>
+        ))}
+
         <h2 className="text-2xl font-bold text-foreground mb-6">
           Why choose FilePilot?
         </h2>

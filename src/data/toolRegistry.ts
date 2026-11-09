@@ -952,6 +952,10 @@ const hiddenToolSlugs = new Set([
   '/decrypt-pdf',
   '/change-permissions',
   '/timestamp-pdf',
+  // Re-renders pages as images without straightening them. Relist once it detects skew.
+  '/deskew-pdf',
+  // Wraps a PNG in an SVG file, with no vector output. Relist once it produces real vectors.
+  '/pdf-to-svg',
 ]);
 
 export const getToolStatus = (tool: ToolDefinition): ToolStatus => {

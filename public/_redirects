@@ -36,6 +36,14 @@ http://filepilot.space/* https://www.filepilot.space/:splat 301!
 /encrypt-decrypt-pdf /pdf-security/ 301!
 /encrypt-decrypt-pdf/ /pdf-security/ 301!
 
+# Hidden until it actually straightens pages. Remove these when /deskew-pdf is relisted.
+/deskew-pdf /pdf-tools/ 301!
+/deskew-pdf/ /pdf-tools/ 301!
+
+# Hidden until it produces real vector output. Remove these when /pdf-to-svg is relisted.
+/pdf-to-svg /pdf-to-images/ 301!
+/pdf-to-svg/ /pdf-to-images/ 301!
+
 # Static files such as /sitemap.xml, /robots.txt, favicons, the manifest, and /assets/*
 # are served directly by Netlify before this final fallback is evaluated.
 # Unknown routes should return a real 404 status after prerendered pages/assets are checked.

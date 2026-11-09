@@ -74,6 +74,7 @@ const fromSiteContent = (route) => {
     description: entry.description,
     h1: entry.h1,
     ...(entry.intro ? { shortIntro: entry.intro } : {}),
+    ...(entry.sections ? { sections: entry.sections } : {}),
     ...(entry.faqs ? { faqs: entry.faqs } : {}),
   };
 };
