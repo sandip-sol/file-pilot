@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { FileUploader } from '../components/FileUploader';
 import { FileReadinessPanel } from '../components/pdf/FileReadinessPanel';
 import { ToolStateMessage } from '../components/ToolStateMessage';
-import { PDFDocument } from 'pdf-lib';
 import { downloadBlob } from '../utils/pdfHelpers';
 import { getPdfRecoveryMessage } from '../utils/pdf/errorMessages';
 import { Loader2, Download, RefreshCw, FileText, Info, Minimize2 } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 import { toolFaqs, toolSeo } from '../data/toolContent';
+import { warmEngine } from '../utils/warmEngine';
+
+warmEngine('pdf-lib');
 
 export const Compress = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -32,6 +34,7 @@ export const Compress = () => {
 
         try {
             const arrayBuffer = await file.arrayBuffer();
+            const { PDFDocument } = await import('pdf-lib');
             const pdfDoc = await PDFDocument.load(arrayBuffer);
 
             // Clear metadata for smaller file

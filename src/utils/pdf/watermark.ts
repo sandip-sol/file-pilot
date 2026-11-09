@@ -1,17 +1,19 @@
-import { PDFDocument, StandardFonts, degrees, rgb } from 'pdf-lib';
 import { dataUrlToBytes } from '../dataUrl';
 import type { WatermarkConfig } from './types';
+import { warmEngine } from '../warmEngine';
 
-const hexToRgb = (value: string) => {
+warmEngine('pdf-lib');
+
+const hexToRgb = (value: string): [number, number, number] => {
   const normalized = value.replace('#', '');
   const safe = normalized.length === 3 ? normalized.split('').map((char) => `${char}${char}`).join('') : normalized;
   const parsed = Number.parseInt(safe, 16);
 
-  return rgb(
+  return [
     ((parsed >> 16) & 255) / 255,
     ((parsed >> 8) & 255) / 255,
     (parsed & 255) / 255,
-  );
+  ];
 };
 
 const shouldApplyWatermark = (pageNumber: number, config: WatermarkConfig) =>
@@ -77,6 +79,8 @@ const drawTiledText = (
   config: WatermarkConfig,
   width: number,
   height: number,
+  color: import('pdf-lib').Color,
+  rotate: import('pdf-lib').Rotation,
 ) => {
   const stepX = Math.max(config.fontSize * 4, 160);
   const stepY = Math.max(config.fontSize * 3, 140);
@@ -87,9 +91,9 @@ const drawTiledText = (
         x,
         y,
         size: config.fontSize,
-        color: hexToRgb(config.color),
+        color,
         opacity: config.opacity,
-        rotate: degrees(config.rotation),
+        rotate,
       });
     }
   }
@@ -97,6 +101,7 @@ const drawTiledText = (
 
 export const applyWatermarkToPdf = async (file: File, config: WatermarkConfig): Promise<Uint8Array> => {
   const inputBytes = await file.arrayBuffer();
+  const { PDFDocument, StandardFonts, degrees, rgb } = await import('pdf-lib');
   const pdf = await PDFDocument.load(inputBytes);
   const font = await pdf.embedFont(StandardFonts.HelveticaBold);
   const imageBytes = config.imageDataUrl
@@ -117,7 +122,7 @@ export const applyWatermarkToPdf = async (file: File, config: WatermarkConfig): 
 
     if (config.position === 'tiled') {
       if (config.kind === 'text' && config.text.trim()) {
-        drawTiledText(page, config.text.trim(), config, width, height);
+        drawTiledText(page, config.text.trim(), config, width, height, rgb(...hexToRgb(config.color)), degrees(config.rotation));
       } else if (embeddedImage) {
         const imgWidth = embeddedImage.width * config.scale;
         const imgHeight = embeddedImage.height * config.scale;
@@ -148,7 +153,7 @@ export const applyWatermarkToPdf = async (file: File, config: WatermarkConfig): 
         x: center.x - offset.x,
         y: center.y - offset.y,
         size: config.fontSize,
-        color: hexToRgb(config.color),
+        color: rgb(...hexToRgb(config.color)),
         opacity: config.opacity,
         rotate: degrees(config.rotation),
         font,

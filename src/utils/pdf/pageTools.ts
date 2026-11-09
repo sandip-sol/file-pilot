@@ -1,7 +1,9 @@
-import { PDFDocument, degrees, rgb, StandardFonts } from 'pdf-lib';
 import { dataUrlToBytes } from '../dataUrl';
 import { canvasToBlob, openPdfDocument, renderPdfPageToCanvas } from './rendering';
 import type { AnnotationItem, RedactionItem } from './types';
+import { warmEngine } from '../warmEngine';
+
+warmEngine('pdf-lib');
 
 export interface OrganizerPageState {
   pageNumber: number;
@@ -15,6 +17,7 @@ export interface PdfToImagesOptions {
 }
 
 export const exportOrganizedPdf = async (file: File, pages: OrganizerPageState[]): Promise<Uint8Array> => {
+  const { PDFDocument, degrees } = await import('pdf-lib');
   const srcPdf = await PDFDocument.load(await file.arrayBuffer());
   const outPdf = await PDFDocument.create();
   const copiedPages = await outPdf.copyPages(
@@ -59,6 +62,7 @@ export const unlockPdfByRasterizing = async (
   onProgress?: (message: string) => void,
 ): Promise<Uint8Array> => {
   const { pdf } = await openPdfDocument(file, { password });
+  const { PDFDocument } = await import('pdf-lib');
   const outPdf = await PDFDocument.create();
 
   for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
@@ -74,11 +78,11 @@ export const unlockPdfByRasterizing = async (
   return outPdf.save();
 };
 
-const pdfColor = (hex: string, alpha = 1) => {
+const pdfColor = (makeRgb: typeof import('pdf-lib').rgb, hex: string, alpha = 1) => {
   const safe = hex.replace('#', '');
   const value = Number.parseInt(safe.length === 3 ? safe.split('').map((part) => `${part}${part}`).join('') : safe, 16);
   return {
-    color: rgb(((value >> 16) & 255) / 255, ((value >> 8) & 255) / 255, (value & 255) / 255),
+    color: makeRgb(((value >> 16) & 255) / 255, ((value >> 8) & 255) / 255, (value & 255) / 255),
     opacity: alpha,
   };
 };
@@ -95,6 +99,7 @@ export const applyRedactionsToPdf = async (
   items: RedactionItem[],
   onProgress?: (message: string) => void,
 ): Promise<Uint8Array> => {
+  const { PDFDocument } = await import('pdf-lib');
   const source = await PDFDocument.load(await file.arrayBuffer());
   const { pdf: renderDoc } = await openPdfDocument(file);
   const output = await PDFDocument.create();
@@ -136,6 +141,7 @@ export const applyRedactionsToPdf = async (
 };
 
 export const applyAnnotationsToPdf = async (file: File, items: AnnotationItem[]): Promise<Uint8Array> => {
+  const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib');
   const pdf = await PDFDocument.load(await file.arrayBuffer());
   const font = await pdf.embedFont(StandardFonts.Helvetica);
   const boldFont = await pdf.embedFont(StandardFonts.HelveticaBold);
@@ -156,7 +162,7 @@ export const applyAnnotationsToPdf = async (file: File, items: AnnotationItem[])
         y,
         width,
         height,
-        ...pdfColor(item.color || '#facc15', 0.3),
+        ...pdfColor(rgb, item.color || '#facc15', 0.3),
         borderWidth: 0,
       });
       continue;
@@ -190,7 +196,7 @@ export const applyAnnotationsToPdf = async (file: File, items: AnnotationItem[])
       y,
       size: item.fontSize ?? 18,
       font: item.kind === 'signature-text' ? boldFont : font,
-      color: pdfColor(item.color || '#111827').color,
+      color: pdfColor(rgb, item.color || '#111827').color,
       maxWidth: width,
       lineHeight: Math.max(18, (item.fontSize ?? 18) * 1.2),
     });

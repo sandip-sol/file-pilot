@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { FileImage, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
-import { PDFDocument } from 'pdf-lib';
+import { warmEngine } from '../utils/warmEngine';
+
+warmEngine('pdf-lib');
 
 export const SvgToPdf = () => {
   const [files, setFiles] = useState<File[]>([]);
@@ -18,6 +20,7 @@ export const SvgToPdf = () => {
     if (!files.length) return;
     setIsProcessing(true); setError(null);
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const pdf = await PDFDocument.create();
       for (const file of files) {
         const img = new Image();

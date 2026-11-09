@@ -4,7 +4,9 @@ import { downloadBytes } from '../utils/pdf/pdfOperations';
 import { Palette, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
-import { PDFDocument, rgb } from 'pdf-lib';
+import { warmEngine } from '../utils/warmEngine';
+
+warmEngine('pdf-lib');
 
 export const TextColor = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -13,11 +15,11 @@ export const TextColor = () => {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
 
-    const hexToRgb = (hex: string) => {
+    const hexToRgb = (hex: string): [number, number, number] => {
         const r = parseInt(hex.slice(1, 3), 16) / 255;
         const g = parseInt(hex.slice(3, 5), 16) / 255;
         const b = parseInt(hex.slice(5, 7), 16) / 255;
-        return rgb(r, g, b);
+        return [r, g, b];
     };
 
     const handleProcess = async () => {
@@ -25,8 +27,9 @@ export const TextColor = () => {
         setIsProcessing(true); setError(null);
         try {
             const ab = await file.arrayBuffer();
+            const { PDFDocument, rgb } = await import('pdf-lib');
             const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
-            const c = hexToRgb(color);
+            const c = rgb(...hexToRgb(color));
             // Re-serialize with a cover rectangle approach (overlay a colored page)
             // Actual text-color change requires content stream parsing; here we add a colored overlay text box note
             const docPages = doc.getPages();

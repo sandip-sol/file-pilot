@@ -1,4 +1,6 @@
-import { PDFDocument } from 'pdf-lib';
+import { warmEngine } from '../warmEngine';
+
+warmEngine('pdf-lib');
 
 export type PageSizeOption = 'original' | 'a4' | 'letter' | 'custom';
 export type PageOrientation = 'auto' | 'portrait' | 'landscape';
@@ -139,6 +141,7 @@ export async function generatePdfFromImages(
   options: ScanToPdfOptions,
   onProgress?: (current: number, total: number) => void,
 ): Promise<Uint8Array> {
+  const { PDFDocument } = await import('pdf-lib');
   const pdfDoc = await PDFDocument.create();
   const margin = MARGIN_VALUES[options.margins];
 

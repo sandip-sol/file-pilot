@@ -1,6 +1,8 @@
-import JSZip from 'jszip';
 import type { ImageFormat } from './types';
 import { getFormatExtension, formatFileSize, stripBasename } from './support';
+import { warmEngine } from '../warmEngine';
+
+warmEngine('jszip');
 
 export type FitMode = 'contain' | 'cover' | 'stretch';
 
@@ -217,6 +219,7 @@ export async function downloadAsZip(
   items: Array<{ filename: string; blob: Blob }>,
   zipName: string,
 ): Promise<void> {
+  const { default: JSZip } = await import('jszip');
   const zip = new JSZip();
   for (const item of items) {
     zip.file(item.filename, item.blob);

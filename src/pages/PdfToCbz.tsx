@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import JSZip from 'jszip';
 import { FileUploader } from '../components/FileUploader';
 import { downloadBlob2 } from '../utils/pdf/pdfOperations';
 import { canvasToBlob, openPdfDocument, renderPdfPageToCanvas } from '../utils/pdf/rendering';
@@ -7,6 +6,9 @@ import { BookOpen, Loader2, Download, CheckCircle, Info } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 import { toolFaqs, toolSeo } from '../data/toolContent';
+import { warmEngine } from '../utils/warmEngine';
+
+warmEngine('jszip');
 
 const QUALITY_PRESETS = {
   standard: { label: 'Standard (smaller file)', scale: 1.5, jpegQuality: 0.8 },
@@ -28,6 +30,7 @@ export const PdfToCbz = () => {
     try {
       const { scale, jpegQuality } = QUALITY_PRESETS[quality];
       const { pdf } = await openPdfDocument(file);
+      const { default: JSZip } = await import('jszip');
       const zip = new JSZip();
       // Zero-padded names define reading order in a CBZ.
       const digits = String(pdf.numPages).length;

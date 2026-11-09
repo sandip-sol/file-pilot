@@ -1,4 +1,6 @@
-import JSZip from 'jszip';
+import { warmEngine } from '../warmEngine';
+
+warmEngine('jszip');
 
 export const downloadBlobFile = (blob: Blob, filename: string) => {
   const url = URL.createObjectURL(blob);
@@ -24,6 +26,7 @@ export const downloadZipFromEntries = async (
   entries: { filename: string; data: Blob | Uint8Array | string }[],
   zipName: string,
 ) => {
+  const { default: JSZip } = await import('jszip');
   const zip = new JSZip();
   entries.forEach((entry) => {
     zip.file(entry.filename, entry.data);

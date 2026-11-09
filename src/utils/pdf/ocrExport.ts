@@ -1,6 +1,8 @@
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { dataUrlToBytes } from '../dataUrl';
 import type { ExtractedDocumentResult } from './types';
+import { warmEngine } from '../warmEngine';
+
+warmEngine('pdf-lib');
 
 export const buildCombinedText = (entries: ExtractedDocumentResult[]) =>
   entries
@@ -16,6 +18,7 @@ export const buildPerPageTextEntries = (entries: ExtractedDocumentResult[]) =>
   );
 
 export const exportSearchablePdfFromOcr = async (entry: ExtractedDocumentResult): Promise<Uint8Array> => {
+  const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib');
   const pdf = await PDFDocument.create();
   const font = await pdf.embedFont(StandardFonts.Helvetica);
 

@@ -26,10 +26,11 @@ const ASSETS = new URL('./dist/assets/', import.meta.url);
 const ASSETS_PATH = join(process.cwd(), 'dist', 'assets');
 
 /**
- * Engines that must never appear in a content page's static graph. They are
- * legitimate on the tool pages that call them — those load on demand.
+ * Engines that must never appear in a page's static graph. Tool pages call them,
+ * but through `await import()` so they load after the page has rendered. The
+ * pdf.worker `.js` chunk is excluded because it only exports the worker's URL.
  */
-const HEAVY_ENGINES = [/^pdf-/, /^pdfjs/, /^pdf\./, /^ort\./, /onnxruntime/, /^tesseract/, /^index-.*worker/];
+const HEAVY_ENGINES = [/^pdf-/, /^pdfjs/, /^pdf\.(?!worker)/, /^ort\./, /onnxruntime/, /^tesseract/, /^index-.*worker/];
 
 /**
  * Budgets are gzipped kilobytes of transitively-imported JavaScript, set a
@@ -42,6 +43,12 @@ const BUDGETS = [
   { name: 'Comparison page', chunk: /^ComparisonPage-/, maxGzipKb: 280 },
   { name: 'About', chunk: /^About-/, maxGzipKb: 280 },
   { name: 'PDF tools hub', chunk: /^PdfToolsHub-/, maxGzipKb: 300 },
+  // pdf-lib alone is about 175 KB gzipped, so a static import of it breaks these.
+  { name: 'Merge tool', chunk: /^Merge-/, maxGzipKb: 240 },
+  { name: 'Split tool', chunk: /^Split-/, maxGzipKb: 240 },
+  { name: 'Compress tool', chunk: /^Compress-/, maxGzipKb: 240 },
+  { name: 'Rotate tool', chunk: /^RotatePdf-/, maxGzipKb: 240 },
+  { name: 'Contents tool', chunk: /^TableOfContents-/, maxGzipKb: 240 },
 ];
 
 if (!existsSync(ASSETS)) {
@@ -57,7 +64,9 @@ const imports = new Map(
   }),
 );
 
-const entry = files.find((name) => /^index-[A-Za-z0-9_-]+\.js$/.test(name));
+// From the manifest, not a filename pattern: pdf-lib's chunk is also named index-*.
+const manifest = JSON.parse(readFileSync(join(process.cwd(), 'dist', '.vite', 'manifest.json'), 'utf8'));
+const entry = manifest['index.html'].file.replace(/^assets\//, '');
 
 const closure = (roots) => {
   const seen = new Set();

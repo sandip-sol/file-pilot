@@ -1,5 +1,7 @@
-import JSZip from 'jszip';
 import { faviconSizes, generateWebManifest, generateHtmlSnippet, type FaviconSize } from '../../data/faviconConfig';
+import { warmEngine } from '../warmEngine';
+
+warmEngine('jszip');
 
 export interface FaviconAsset {
   size: FaviconSize;
@@ -89,6 +91,7 @@ export async function generateFavicons(
 export async function generateFaviconZip(
   assets: FaviconAsset[],
 ): Promise<Blob> {
+  const { default: JSZip } = await import('jszip');
   const zip = new JSZip();
 
   for (const asset of assets) {

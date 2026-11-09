@@ -1,4 +1,7 @@
-import { PDFDocument, type PDFPage, type PDFRadioGroup } from 'pdf-lib';
+import type { PDFPage, PDFRadioGroup } from 'pdf-lib';
+import { warmEngine } from '../warmEngine';
+
+warmEngine('pdf-lib');
 
 export type FormFieldKind = 'text' | 'checkbox' | 'dropdown' | 'radio';
 
@@ -81,6 +84,7 @@ export const validateFormFields = (fields: FormFieldItem[]): string[] => {
 
 export const createFillablePdf = async (source: File | Uint8Array, fields: FormFieldItem[]): Promise<Uint8Array> => {
   const bytes = source instanceof Uint8Array ? source : new Uint8Array(await source.arrayBuffer());
+  const { PDFDocument } = await import('pdf-lib');
   const pdf = await PDFDocument.load(bytes);
   const form = pdf.getForm();
   const pages = pdf.getPages();
@@ -122,6 +126,7 @@ export const createFillablePdf = async (source: File | Uint8Array, fields: FormF
 };
 
 export const createBlankA4Pdf = async (): Promise<Uint8Array> => {
+  const { PDFDocument } = await import('pdf-lib');
   const pdf = await PDFDocument.create();
   pdf.addPage([595.28, 841.89]);
   return pdf.save();

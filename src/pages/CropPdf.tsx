@@ -5,7 +5,9 @@ import { Crop, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 import { toolFaqs, toolSeo } from '../data/toolContent';
-import { PDFDocument } from 'pdf-lib';
+import { warmEngine } from '../utils/warmEngine';
+
+warmEngine('pdf-lib');
 
 export const CropPdf = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -22,6 +24,7 @@ export const CropPdf = () => {
         setIsProcessing(true); setError(null);
         try {
             const ab = await file.arrayBuffer();
+            const { PDFDocument } = await import('pdf-lib');
             const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
             const pages = doc.getPages();
             for (const page of pages) {

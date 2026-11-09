@@ -5,7 +5,9 @@ import { BookMarked, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 import { toolFaqs, toolSeo } from '../data/toolContent';
-import { PDFDocument } from 'pdf-lib';
+import { warmEngine } from '../utils/warmEngine';
+
+warmEngine('pdf-lib');
 
 export const Bookmark = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -24,6 +26,7 @@ export const Bookmark = () => {
         setIsProcessing(true); setError(null);
         try {
             const ab = await file.arrayBuffer();
+            const { PDFDocument } = await import('pdf-lib');
             const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
             void doc.getPages(); // page access reserved for future outline support
             for (const bm of bookmarks.filter(b => b.title.trim())) {

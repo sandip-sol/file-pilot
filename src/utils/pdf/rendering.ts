@@ -1,8 +1,15 @@
-import { GlobalWorkerOptions, PasswordResponses, getDocument, type PDFDocumentProxy } from 'pdfjs-dist';
+import type { PDFDocumentProxy } from 'pdfjs-dist';
 import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+import { warmEngine } from '../warmEngine';
 import type { PdfPagePreview } from './types';
 
-GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
+warmEngine('pdfjs-dist');
+
+const loadPdfJs = async () => {
+  const pdfjs = await import('pdfjs-dist');
+  pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
+  return pdfjs;
+};
 
 export interface OpenPdfOptions {
   password?: string;
@@ -24,6 +31,7 @@ export class PdfPasswordError extends Error {
 
 export const openPdfDocument = async (file: File, options: OpenPdfOptions = {}): Promise<OpenPdfResult> => {
   const bytes = new Uint8Array(await file.arrayBuffer());
+  const { getDocument, PasswordResponses } = await loadPdfJs();
 
   try {
     const pdf = await getDocument({

@@ -5,11 +5,15 @@ import { List, Loader2, Download, CheckCircle } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 import { toolFaqs, toolSeo } from '../data/toolContent';
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
-import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+import { warmEngine } from '../utils/warmEngine';
+
+warmEngine('pdf-lib');
+warmEngine('pdfjs-dist');
 
 async function generateTOC(file: File, title: string): Promise<Uint8Array> {
+    const { GlobalWorkerOptions, getDocument } = await import('pdfjs-dist');
+    const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib');
     GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfJs = await getDocument({ data: new Uint8Array(ab.slice(0)) }).promise;

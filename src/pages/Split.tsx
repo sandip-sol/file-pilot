@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import JSZip from 'jszip';
 import { FileUploader } from '../components/FileUploader';
 import { FileReadinessPanel } from '../components/pdf/FileReadinessPanel';
 import { ToolStateMessage } from '../components/ToolStateMessage';
@@ -9,6 +8,9 @@ import { FileText, Loader2, Scissors, Download, RefreshCw } from 'lucide-react';
 import { PageSeo } from '../components/PageSeo';
 import { FAQSection } from '../components/FAQSection';
 import { toolFaqs, toolSeo } from '../data/toolContent';
+import { warmEngine } from '../utils/warmEngine';
+
+warmEngine('jszip');
 
 export const Split = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -48,6 +50,7 @@ export const Split = () => {
                 const parts = await splitPDFSeparate(file);
                 if (parts.length === 0) return;
 
+                const { default: JSZip } = await import('jszip');
                 const zip = new JSZip();
                 parts.forEach(part => {
                     zip.file(part.filename, part.data);

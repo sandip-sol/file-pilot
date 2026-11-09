@@ -4,9 +4,11 @@
  * All processing is client-side using pdf-lib and pdfjs-dist.
  */
 
-import { PDFDocument, degrees, rgb, StandardFonts, PageSizes } from 'pdf-lib';
-import JSZip from 'jszip';
 import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+import { warmEngine } from '../warmEngine';
+
+warmEngine('jszip');
+warmEngine('pdf-lib');
 
 export { downloadBlob } from '../pdfHelpers';
 
@@ -44,6 +46,7 @@ export async function rotatePDF(
     pages?: number[] // 1-based, undefined = all
 ): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument, degrees } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     const total = doc.getPageCount();
     const targets = pages ? pages.map(p => p - 1) : Array.from({ length: total }, (_, i) => i);
@@ -63,6 +66,7 @@ export async function rotatePDF(
 
 export async function deletePDFPages(file: File, pageNumbers: number[]): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const src = await PDFDocument.load(ab, { ignoreEncryption: true });
     const total = src.getPageCount();
     const toDelete = new Set(pageNumbers.map(p => p - 1));
@@ -77,6 +81,7 @@ export async function deletePDFPages(file: File, pageNumbers: number[]): Promise
 
 export async function extractPDFPages(file: File, pageNumbers: number[]): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const src = await PDFDocument.load(ab, { ignoreEncryption: true });
     const indices = pageNumbers.map(p => p - 1);
     const result = await PDFDocument.create();
@@ -89,6 +94,7 @@ export async function extractPDFPages(file: File, pageNumbers: number[]): Promis
 
 export async function reversePDF(file: File): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const src = await PDFDocument.load(ab, { ignoreEncryption: true });
     const total = src.getPageCount();
     const result = await PDFDocument.create();
@@ -107,6 +113,7 @@ export async function addBlankPage(
     height = 841.89
 ): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     const total = doc.getPageCount();
     let insertIdx: number;
@@ -121,6 +128,7 @@ export async function addBlankPage(
 
 export async function alternateMerge(files: File[]): Promise<Uint8Array> {
     if (files.length < 2) throw new Error('Need at least 2 PDFs');
+    const { PDFDocument } = await import('pdf-lib');
     const docs = await Promise.all(
         files.map(async f => PDFDocument.load(await f.arrayBuffer(), { ignoreEncryption: true }))
     );
@@ -141,6 +149,7 @@ export async function alternateMerge(files: File[]): Promise<Uint8Array> {
 
 export async function compressPDF(file: File): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     // Strip metadata to reduce size
     doc.setTitle('');
@@ -162,6 +171,7 @@ export async function compressPDF(file: File): Promise<Uint8Array> {
 export async function encryptPDF(file: File, userPassword: string, ownerPassword?: string): Promise<Uint8Array> {
     void userPassword; void ownerPassword;
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     // Inform caller that native web encryption isn't available via pdf-lib
     // Return the document as-is (the UI layer can explain the limitation)
@@ -170,6 +180,7 @@ export async function encryptPDF(file: File, userPassword: string, ownerPassword
 
 export async function decryptPDF(file: File): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     return doc.save();
 }
@@ -178,6 +189,7 @@ export async function decryptPDF(file: File): Promise<Uint8Array> {
 
 export async function removeMetadata(file: File): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     doc.setTitle('');
     doc.setAuthor('');
@@ -200,6 +212,7 @@ export interface PDFMetadata {
 
 export async function editMetadata(file: File, meta: PDFMetadata): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     if (meta.title !== undefined) doc.setTitle(meta.title);
     if (meta.author !== undefined) doc.setAuthor(meta.author);
@@ -211,6 +224,7 @@ export async function editMetadata(file: File, meta: PDFMetadata): Promise<Uint8
 
 export async function extractMetadata(file: File): Promise<Record<string, string | null>> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     return {
         title: doc.getTitle() ?? null,
@@ -230,6 +244,7 @@ export async function extractMetadata(file: File): Promise<Record<string, string
 export async function flattenPDF(file: File): Promise<Uint8Array> {
     // pdf-lib flattens forms by removing form fields
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     const form = doc.getForm();
     try {
@@ -254,6 +269,7 @@ export async function addPageNumbers(
 ): Promise<Uint8Array> {
     const { position = 'bottom-center', startNumber = 1, fontSize = 12, prefix = '', suffix = '' } = opts;
     const ab = await file.arrayBuffer();
+    const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     const font = await doc.embedFont(StandardFonts.Helvetica);
     const total = doc.getPageCount();
@@ -285,6 +301,7 @@ export async function addHeaderFooter(
 ): Promise<Uint8Array> {
     const { headerText, footerText, fontSize = 11 } = opts;
     const ab = await file.arrayBuffer();
+    const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     const font = await doc.embedFont(StandardFonts.Helvetica);
     const total = doc.getPageCount();
@@ -311,6 +328,7 @@ export async function invertPDFColors(file: File): Promise<Uint8Array> {
     // For now: wrap page in a white background with multiply blend (CSS approach not applicable server-side)
     // Return as-is with a note that full inversion requires pdfjs-dist rendering.
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     return doc.save();
 }
@@ -324,6 +342,7 @@ export async function invertPDFColors(file: File): Promise<Uint8Array> {
 
 export async function textToPDF(text: string, opts: { fontSize?: number; pageSize?: 'A4' | 'Letter' } = {}): Promise<Uint8Array> {
     const { fontSize = 12, pageSize = 'A4' } = opts;
+    const { PDFDocument, PageSizes, StandardFonts, rgb } = await import('pdf-lib');
     const doc = await PDFDocument.create();
     const font = await doc.embedFont(StandardFonts.Courier);
     const [pw, ph] = pageSize === 'A4' ? PageSizes.A4 : PageSizes.Letter;
@@ -389,6 +408,7 @@ export async function pdfPagesToGreyscale(file: File, onProgress?: (pct: number)
     const ab = await file.arrayBuffer();
     const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
     const numPages = pdfDoc.numPages;
+    const { PDFDocument } = await import('pdf-lib');
     const result = await PDFDocument.create();
     for (let i = 1; i <= numPages; i++) {
         onProgress?.((i / numPages) * 90);
@@ -487,6 +507,7 @@ export async function extractImagesFromPDF(file: File, onProgress?: (pct: number
     pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
+    const { default: JSZip } = await import('jszip');
     const zip = new JSZip();
     const baseName = nameWithout(file.name);
     const numPages = pdfDoc.numPages;
@@ -519,6 +540,7 @@ export async function rasterizePDF(
     pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
+    const { default: JSZip } = await import('jszip');
     const zip = new JSZip();
     const baseName = nameWithout(file.name);
     const scale = dpi / 96;
@@ -546,6 +568,7 @@ export async function rasterizePDF(
 export async function repairPDF(file: File): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
     // pdf-lib re-serializes the PDF, which repairs many structural issues
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true, throwOnInvalidObject: false });
     return doc.save({ useObjectStreams: true });
 }
@@ -556,6 +579,7 @@ export async function fixPageSize(
     file: File,
     targetSize: 'A4' | 'Letter' | 'A3' | 'Legal' = 'A4'
 ): Promise<Uint8Array> {
+    const { PDFDocument, PageSizes } = await import('pdf-lib');
     const sizeMap: Record<string, [number, number]> = {
         A4: PageSizes.A4,
         Letter: PageSizes.Letter,
@@ -585,6 +609,7 @@ export async function analyzePageDimensions(file: File): Promise<{
     page: number; width: number; height: number; unit: string; orientation: string;
 }[]> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     return doc.getPages().map((p, i) => {
         const { width, height } = p.getSize();
@@ -604,6 +629,7 @@ export async function analyzePageDimensions(file: File): Promise<{
 
 export async function sanitizePDF(file: File): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     // Remove metadata
     doc.setTitle('');
@@ -631,6 +657,7 @@ export async function findAndRedact(file: File, searchText: string): Promise<Uin
         useWorkerFetch: false,
         isEvalSupported: false,
     }).promise;
+    const { PDFDocument } = await import('pdf-lib');
     const result = await PDFDocument.create();
     const renderScale = 2;
     const padding = 4;
@@ -691,6 +718,7 @@ export async function addStamp(
 ): Promise<Uint8Array> {
     const { color = [1, 0, 0], fontSize = 48, opacity = 0.25, pages } = opts;
     const ab = await file.arrayBuffer();
+    const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     const font = await doc.embedFont(StandardFonts.HelveticaBold);
     const allPages = doc.getPages();
@@ -721,6 +749,7 @@ export async function addBackgroundColor(
     pages?: number[]
 ): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument, rgb } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     const allPages = doc.getPages();
     const targets = pages ? pages.map(p => p - 1) : allPages.map((_, i) => i);
@@ -737,6 +766,7 @@ export async function addBackgroundColor(
 
 export async function createNUp(file: File, n: 2 | 4 | 6 | 9 = 4): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const src = await PDFDocument.load(ab, { ignoreEncryption: true });
     const result = await PDFDocument.create();
     const total = src.getPageCount();
@@ -768,6 +798,7 @@ export async function createNUp(file: File, n: 2 | 4 | 6 | 9 = 4): Promise<Uint8
 
 export async function combineSinglePage(file: File): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const src = await PDFDocument.load(ab, { ignoreEncryption: true });
     const result = await PDFDocument.create();
     const pages = src.getPages();
@@ -789,6 +820,7 @@ export async function combineSinglePage(file: File): Promise<Uint8Array> {
 
 export async function createBooklet(file: File): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const src = await PDFDocument.load(ab, { ignoreEncryption: true });
     const total = src.getPageCount();
     const padded = Math.ceil(total / 4) * 4;
@@ -816,6 +848,7 @@ export async function createBooklet(file: File): Promise<Uint8Array> {
 
 export async function overlayPDF(baseFile: File, overlayFile: File, mode: 'overlay' | 'underlay' = 'overlay'): Promise<Uint8Array> {
     const [baseAb, overlayAb] = await Promise.all([baseFile.arrayBuffer(), overlayFile.arrayBuffer()]);
+    const { PDFDocument } = await import('pdf-lib');
     const baseDoc = await PDFDocument.load(baseAb, { ignoreEncryption: true });
     const overlayDoc = await PDFDocument.load(overlayAb, { ignoreEncryption: true });
     const result = await PDFDocument.create();
@@ -842,6 +875,7 @@ export async function overlayPDF(baseFile: File, overlayFile: File, mode: 'overl
 // ─── PDF TO ZIP ───────────────────────────────────────────────────────────────
 
 export async function packagePDFsToZip(files: File[]): Promise<Blob> {
+    const { default: JSZip } = await import('jszip');
     const zip = new JSZip();
     for (const f of files) {
         const ab = await f.arrayBuffer();
@@ -858,6 +892,7 @@ export async function deskewPDF(file: File, onProgress?: (pct: number) => void):
     pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
     const ab = await file.arrayBuffer();
     const pdfJs = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
+    const { PDFDocument } = await import('pdf-lib');
     const result = await PDFDocument.create();
     const numPages = pdfJs.numPages;
     for (let i = 1; i <= numPages; i++) {
@@ -883,6 +918,7 @@ export async function deskewPDF(file: File, onProgress?: (pct: number) => void):
 
 export async function posterizePDF(file: File, cols = 2, rows = 2): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const src = await PDFDocument.load(ab, { ignoreEncryption: true });
     const result = await PDFDocument.create();
     const total = src.getPageCount();
@@ -916,6 +952,7 @@ export async function signPDF(
 ): Promise<Uint8Array> {
     const { page = 1, x = 50, y = 50, width = 200, height = 80 } = opts;
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     const pngBytes = Uint8Array.from(atob(signatureDataUrl.split(',')[1]), c => c.charCodeAt(0));
     const sigImg = await doc.embedPng(pngBytes);
@@ -928,6 +965,7 @@ export async function signPDF(
 
 export async function getFormFields(file: File): Promise<{ name: string; type: string; value: string }[]> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     const form = doc.getForm();
     return form.getFields().map(f => ({
@@ -939,6 +977,7 @@ export async function getFormFields(file: File): Promise<{ name: string; type: s
 
 export async function fillFormFields(file: File, values: Record<string, string>): Promise<Uint8Array> {
     const ab = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const doc = await PDFDocument.load(ab, { ignoreEncryption: true });
     const form = doc.getForm();
     for (const [name, value] of Object.entries(values)) {
@@ -960,6 +999,7 @@ export async function fillFormFields(file: File, values: Record<string, string>)
 // ─── GRID COMBINE ─────────────────────────────────────────────────────────────
 
 export async function gridCombinePDFs(files: File[], cols = 2): Promise<Uint8Array> {
+    const { PDFDocument } = await import('pdf-lib');
     const docs = await Promise.all(files.map(async f => PDFDocument.load(await f.arrayBuffer(), { ignoreEncryption: true })));
     const firstPage = docs[0].getPage(0);
     const { width: sw, height: sh } = firstPage.getSize();

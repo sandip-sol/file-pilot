@@ -1,7 +1,11 @@
-import { PDFDocument, degrees, type PDFImage } from 'pdf-lib';
+import type { PDFDocument, PDFImage } from 'pdf-lib';
 import { decodeToPngPages, needsSpecialDecoder } from './image/decodeSpecialFormats';
+import { warmEngine } from './warmEngine';
+
+warmEngine('pdf-lib');
 
 export const mergePDFs = async (files: File[]): Promise<Uint8Array> => {
+    const { PDFDocument } = await import('pdf-lib');
     const mergedPdf = await PDFDocument.create();
 
     for (const file of files) {
@@ -28,12 +32,14 @@ export const downloadBlob = (data: Uint8Array, filename: string, mimeType: strin
 
 export const countPDFPages = async (file: File): Promise<number> => {
     const arrayBuffer = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const pdf = await PDFDocument.load(arrayBuffer);
     return pdf.getPageCount();
 };
 
 export const splitPDFRange = async (file: File, start: number, end: number): Promise<Uint8Array> => {
     const arrayBuffer = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const srcPdf = await PDFDocument.load(arrayBuffer);
     const destPdf = await PDFDocument.create();
 
@@ -50,6 +56,7 @@ export const splitPDFRange = async (file: File, start: number, end: number): Pro
 
 export const splitPDFSeparate = async (file: File): Promise<{ filename: string; data: Uint8Array }[]> => {
     const arrayBuffer = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const srcPdf = await PDFDocument.load(arrayBuffer);
     const pageCount = srcPdf.getPageCount();
     const result: { filename: string; data: Uint8Array }[] = [];
@@ -159,6 +166,7 @@ export interface ImagesToPdfResult {
 }
 
 export const convertImagesToPDF = async (items: ImageItem[], options: ImageToPdfOptions): Promise<ImagesToPdfResult> => {
+    const { PDFDocument, degrees } = await import('pdf-lib');
     const pdf = await PDFDocument.create();
     const { width: pageWidth, height: pageHeight } = getPageDimensions(options.pageSize, options.orientation);
     const margin = getMargin(options.margin);
